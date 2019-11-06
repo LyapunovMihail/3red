@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="23" viewBox="0 0 26 23">
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#EE4237" d="M1 1h12v21H1z"/>
+        <path fill="#EE4237" d="M3 3h2v2H3zM15 13h2v2h-2zM15 10h2v2h-2zM15 8h2v2h-2zM3 13h2v2H3zM3 5h2v2H3zM15 16h2v2h-2zM3 16h2v2H3zM3 8h2v2H3zM15 18h2v2h-2zM3 18h2v2H3zM3 10h2v2H3zM6 3h2v2H6zM18 13h2v2h-2zM18 10h2v2h-2zM6 10h2v2H6zM6 5h2v2H6zM18 16h2v2h-2zM6 13h2v2H6zM6 8h2v2H6zM18 18h2v2h-2zM6 16h2v2H6zM6 18h2v2H6zM9 3h2v2H9zM21 13h2v2h-2zM21 10h2v2h-2zM21 8h2v2h-2zM18 8h2v2h-2zM9 5h2v2H9zM21 16h2v2h-2zM9 13h2v2H9zM9 8h2v2H9zM21 18h2v2h-2zM9 16h2v2H9zM9 18h2v2H9zM9 10h2v2H9z"/>
+        <path stroke="#EE4237" d="M13 6h12v16H13z"/>
+    </g>
+</svg>

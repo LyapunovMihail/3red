@@ -1,0 +1,167 @@
+@font-face {
+  font-family: 'ProbaPro';
+  src: url(../fonts/MintType-ProbaProRegular.otf);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-decoration: none;
+}
+body {
+  font-family: 'ProbaPro';
+  background: #fafafa;
+}
+.container {
+  max-width: 916px;
+  width: 100%;
+  margin: 64px auto;
+  padding: 48px 70px;
+  background: #fff;
+  position: relative;
+}
+.button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: absolute;
+  right: -72px;
+  top: 0;
+  z-index: 1;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.button--del:hover {
+  background: #ee534a;
+  display: inline-block;
+}
+.button--accept {
+  background: #46b757;
+  top: 56px;
+}
+.button__delete {
+  background: #ee4237;
+  width: 17px;
+  height: 17px;
+  top: -8px;
+  left: -8px;
+  z-index: 2;
+}
+.button__delete:hover {
+  background: #ee534a;
+}
+.preview__title {
+  font-size: 36px;
+  margin-bottom: 24px;
+}
+.preview__info {
+  background: #efefef;
+  padding: 16px 24px 32px;
+}
+.info-title {
+  margin-bottom: 32px;
+  font-size: 24px;
+}
+.info-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  background: transparent;
+  margin-bottom: 4px;
+  outline: none;
+  padding-bottom: 8px;
+  font-size: 18px;
+}
+.info-input::placeholder {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.info-suptitle,
+.info-input {
+  display: block;
+  font-family: inherit;
+}
+.info-suptitle {
+  font-size: 14px;
+  color: #000;
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+.info-suptitle--mt {
+  margin-top: 24px;
+}
+.info-input--mt {
+  margin-top: 46px;
+}
+.btn {
+  margin: 24px 0 16px;
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.56);
+  padding: 10px 16px;
+  font-family: inherit;
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.btn--preview::before {
+  content: url(../img/preview_camera.svg);
+  margin-right: 5px ;
+}
+.btn--preview:hover,
+.snippet__btn:hover {
+  background: #454545;
+}
+.snippet__btn::before {
+  content: url(../img/snippet_plus.svg);
+  margin-right: 5px ;
+}
+.preview__wrap {
+  position: relative;
+}
+.snippet {
+  padding: 40px 0;
+}
+.indicators {
+  background: #efefef;
+  padding: 16px 24px 32px;
+}
+.indicators__wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 46px;
+}
+.indicators__wrap:last-child {
+  margin-bottom: 0px;
+}
+.indicators__title {
+  font-size: 24px;
+}
+.indicators__info-input:first-child {
+  margin-right: 24px;
+}
+.indicators__text {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  margin: 8px 0 54px;
+}
+.btn--save {
+  background: #ee4237;
+  padding: 14px 16px;
+}
+.btn--save:hover {
+  background: #ee534a;
+}
+.btn--cancel {
+  background: transparent;
+  padding: 14px 16px;
+  color: #000;
+}
+.btn--cancel:hover {
+  background: #ee534a;
+}
