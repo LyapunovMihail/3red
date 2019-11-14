@@ -1,0 +1,45 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.dynamic-month__switch {
+    width: $w1600;
+    display: flex;
+
+    &-item {
+        width: 182px;
+        height: 40px;
+        box-sizing: border-box;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        font: 500 16px/20px $font-mus;
+        @include font-smoothing;
+        color: #e7490f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: $transition;
+        cursor: pointer;
+
+        &--disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        &:hover {
+            color: #fff;
+            background: #e7490f;
+        }
+        &:hover svg g {
+            stroke: #fff;
+        }
+        &_prev {
+            margin: 0 30px 0 0;
+
+            span { margin: 0 0 0 12px; }
+        }
+        &_next {
+            span { margin: 0 12px 0 0; }
+            svg  { transform: rotate(180deg); }
+        }
+    }
+}

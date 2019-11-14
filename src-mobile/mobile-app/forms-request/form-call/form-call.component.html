@@ -1,0 +1,120 @@
+<div *ngIf="isOpen" class="form-modal">
+
+    <div (click)="close.emit(false)" class="form_cls-btn"></div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form form--call">
+
+        <h2 class="form_title">Заказать звонок</h2>
+
+        <div class="form_item">
+
+            <span class="form_item_title">Ваше имя</span>
+
+            <input class="form_item_field" [formControl]="form.controls['name']"
+                    type="text">
+
+        </div>
+
+        <div class="form_item">
+                
+            <span class="form_item_title">Телефон</span>
+
+            <input class="form_item_field" 
+                *ngIf="platform.isBrowser" 
+                [formControl]="form.controls['phone']"
+                [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                [textMask]="{mask: phoneMask}" type="text">
+
+        </div>
+
+        <div class="form_item">
+
+            <span class="form_item_title form_item_title--time">Когда вам позвонить?<br>Мы работаем каждый день с 9 до 21 часа.</span>
+
+            <label class="form_item_wrap form_item_wrap--first">
+
+                <input class="form_item_click" 
+                    [formControl]="form.controls['wait_for_call']" 
+                    value="now" 
+                    type="radio" name="time">
+
+                <div class="form_item_visualization"></div>
+
+                <div class="form_item_refinement">
+
+                    <span class="form_item_title form_item_title--refinement">В ближайшее время</span>
+
+                    <span class="form_item_refinement_text">Ожидание может составить до 15 минут.</span>
+
+                </div>
+
+            </label>
+
+            <label class="form_item_wrap"
+                    (click)="timeFocus()">
+
+                <input class="form_item_click" 
+                    [formControl]="form.controls['wait_for_call']"
+                    value="later" 
+                    type="radio" name="time">
+
+                <div class="form_item_visualization"></div>
+
+                <div class="form_item_refinement">
+
+                    <span class="form_item_title">Указать время:</span>
+
+                    <input class="form_item_field form_item_field--time"
+                        *ngIf="platform.isBrowser"
+                        [ngClass]="{'time-input-active' : (form.get('wait_for_call').value === 'later' && isOpen)}"
+                        [textMask]="{mask: timeMask}"
+                        [formControl]="form.controls['time']"
+                        placeholder="__:__" type="text">
+
+                </div>
+
+            </label>
+
+        </div>
+
+        <div class="form_item">
+
+            <label class="form_item_wrap">
+
+                <input class="form_item_click"
+                    [formControl]="form.controls['agreement']" 
+                    type="checkbox">
+                
+                <div class="form_item_visualization form_item_visualization--checkbox" [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }"></div>
+
+                <div class="form_item_refinement">
+
+                    <span class="form_item_agreement">Я соглашаюсь на использование моих персональных данных.</span>
+
+                </div>
+
+            </label>
+
+        </div>
+
+        <div class="form_item form_item--last">
+
+            <button *ngIf="!isSubmited"
+                [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
+                [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+                class="form_item_btn">
+                <span class="form_item_btn_text">Отправить заявку</span>
+            </button>
+    
+            <div *ngIf="isSubmited" class="form_item_btn">
+                <span class="form_item_btn_text">Готово</span>
+                <svg class="form_item_svg" viewBox="0 0 20.6 17.3">
+                    <polyline id="svg-figure" class="form_item_svg_figure" points="1.1,5.5 9.1,14.9 19.3,0.9 "/>
+                </svg>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

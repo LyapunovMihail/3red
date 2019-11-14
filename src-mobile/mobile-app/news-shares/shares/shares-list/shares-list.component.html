@@ -1,0 +1,45 @@
+<div class="news shares-preview">
+
+    <div class="news__head">
+        <h1 class="news__head-title">Новости</h1>
+        <nav class="news__nav">
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <ul class="shares-preview__list">
+        <li *ngFor="let share of shares" class="shares-preview__list-item">
+            <a class="shares-preview__item_link" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + share._id]">
+                <div class="shares-preview__list-img">
+                    <img [src]="uploadsPath + share.mainImage" alt="share">
+                    <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="shares-preview__list-finishing">{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</div>
+                    <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="shares-preview__list-finishing">Акция закончилась</div>
+                </div>
+                <div class="shares-preview__list-descr">
+                    <h1 class="shares-preview__list-descr-title g-stok-ic">{{share.name}}</h1>
+                    <p class="shares-preview__list-descr-text">{{share.text}}</p>
+                    <p class="shares-preview__list-descr-date">{{share.created_at | date: 'dd.MM.yyyy' }}</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <!-- <ul *ngIf="sharesLength > 10" class="shares-preview__paginator">
+        <ng-container *ngFor="let item of paginator; let i = index">
+            <li class="shares-preview__paginator-item"
+                *ngIf="sharesLength > item"
+                (click)="getShares(item); changeRoute(i); scrollTop()"
+                [ngClass]="{'shares-preview__paginator-item_active': activePaginatorItem === i}">{{i + 1}}</li>
+        </ng-container>
+    </ul>     -->
+</div>

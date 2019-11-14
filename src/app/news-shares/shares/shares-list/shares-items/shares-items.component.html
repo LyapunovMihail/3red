@@ -1,0 +1,24 @@
+<div class="shares-list">
+    <ul class="shares-list__content">
+        <li *ngFor="let share of snippetsArray" class="shares-list__item">
+            <a class="shares-list__item-link" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + share._id]">
+                <div class="shares-list__item-img">
+                    <img [src]="uploadsPath + share.mainImage" alt="share">
+                    <div class="shares-list__item-end" *ngIf="share.countdown">
+                        <span *ngIf="countDown(share.finish_date) >= 0">{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</span>
+                        <span *ngIf="countDown(share.finish_date) < 0">Акция закончилась</span>
+                    </div>
+                </div>
+                <div class="shares-list__item-descr">
+                    <h1 class="shares-list__item-descr-title">{{share.name}}</h1>
+                    <p class="shares-list__item-descr-text">{{share.textPreview}}</p>
+                    <p class="shares-list__item-descr-date">{{parseCreatedAtDate(share.created_at)}}</p>
+                </div>
+            </a>
+            <div class="shares-list__item-btn">
+                <a *ngIf="isAuthorizated" class="shares-list__item-edit"  (click)="redactSnippet.emit(share._id)">Редактировать</a>
+                <div *ngIf="isAuthorizated" class="shares-list__item-delete" (click)="deleteSnippet.emit(share._id)">Удалить</div>
+            </div>
+        </li>
+    </ul>
+</div>

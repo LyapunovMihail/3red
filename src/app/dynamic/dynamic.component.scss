@@ -1,0 +1,63 @@
+@import '../../styles/modules/mixins/mixin';
+
+.dynamic {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 60px 0 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    &__header {
+        width: $w1600;
+        margin-bottom: 60px;
+        position: relative;
+
+        &-title {
+            margin-bottom: 72px;
+        }
+    }
+    &__add-obj {
+        width: $w1600;
+        margin: 0 0 40px;
+
+        &-btn {
+            width: 224px;
+            height: 40px;
+            border: 1px solid $col-blue;
+            border-radius: 4px;
+            color: $col-blue;
+            box-sizing: border-box;
+            padding: 10px 20px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            font: 500 16px/20px $font-mus;
+            text-transform: uppercase;
+    
+            span {
+                position: relative;
+                padding-right: 24px;
+    
+                &:before {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 1.5px;
+                    width: 14px;
+                    height: 14px;
+                    background: url('/assets/img/dynamic/add-obj.svg') no-repeat;
+                    background-size: 100%;
+                }
+            }
+        }
+    }
+
+    &__main {
+        width: $w1600;
+        display: flex;
+        justify-content: center;
+
+        &-content { width: 952px; }
+    }
+}

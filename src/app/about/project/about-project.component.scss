@@ -1,0 +1,61 @@
+@import "../../../styles/modules/mixins/mixin";
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.about-project {
+
+    &__head,
+    &__content {
+        width: 604.5px;
+        max-width: $w1600;
+
+        &:not(.about-project__content) {
+            margin: 0 30px 0 0;
+        }
+    }
+
+    &__head {
+        &-title {
+            margin: 120px 0 20px;
+            color: $col-black;
+        }
+        &-subtitle {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+    &__content {
+        &-descr {
+            font: 16px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 134px 0 30px;
+            opacity: .8;
+        }
+        &-info {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        &-item {
+            width: 50%;
+            margin: 0 0 20px;
+        }
+        &-title {
+            font: 500 16px/23px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 6px;
+        }
+        &-subtitle {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            color: #e7490f;
+        }
+    }
+}

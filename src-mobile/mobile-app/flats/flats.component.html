@@ -1,0 +1,33 @@
+<section class="flats">
+
+    <!--
+    <div class="up"
+        [ngClass]="{'up_active': isVisible}"
+        (click)="scrollToTop()">
+        <svg _ngcontent-c7="" height="54" viewBox="0 0 54 54" width="54" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-c7="" fill="#none" fill-rule="evenodd">
+                <circle _ngcontent-c7="" cx="27" cy="27" fill="#FFF" opacity=".899" r="26.5" stroke="#CDA571"></circle>
+                <path _ngcontent-c7="" d="M26.581 22.654l-9.906 8.93a.498.498 0 0 0 0 .758c.233.21.607.21.84 0L27 23.792l9.484 8.55c.234.21.608.21.841 0a.514.514 0 0 0 .176-.377.498.498 0 0 0-.176-.376l-9.906-8.93a.638.638 0 0 0-.837-.005z" fill="#CDA571"></path>
+            </g>
+        </svg>
+    </div>
+    -->
+    <button class="flats__show-filter"
+            (click)="openFilter()"
+            [class.flats__show-filter_active]="showFilter"></button>
+    
+    <h1 class="flats__title">Подбор квартиры <span>по параметрам</span></h1>
+
+    <app-search-sorting class="flats__sorting"
+        [counter]="counter"
+        [(ngModel)]="params.sort"
+        (ngModelChange)="params.skip = 0; getFlats()">
+    </app-search-sorting>
+
+    <app-search-form (formChange)="formChange($event)" [showFilter]="showFilter"></app-search-form>
+    
+    <app-search-output [flatsList]="flatsList"></app-search-output>
+    
+    <div *ngIf="isLoadMoreBtn" (click)="loadMore()" class="more">Показать еще</div>
+    
+</section>

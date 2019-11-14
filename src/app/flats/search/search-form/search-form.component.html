@@ -1,0 +1,115 @@
+<div class="search-form__container" [ngClass]="{'search-form__container--fixed' : !parentPlan,
+                                                'search-form__container--slide' : moreFilter}">
+
+    <form [formGroup]="form" class="search-form">
+
+        <app-search-sorting
+            [(ngModel)]="sort"
+            [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="sortChange.emit(sort)">
+        </app-search-sorting>
+
+        <div class="search-form__wrap">
+
+            <div class="search-form__wrap-item search-form__wrap-item_room">
+                <p class="search-form__subtitle">Количество комнат</p>
+                <ul class="search-form__rooms">
+                    <li formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index"
+                        class="search-form__rooms-item">
+                        <label class="search-form__rooms-checkbox">
+                            <input [formControl]="control" name="rooms" [value]="control" type="checkbox">
+                            <div class="search-form__rooms-checkbox_for-click search-form__text"
+                                 [class.search-form__rooms-checkbox_for-click-first]="i === 0">
+                                {{(i === 4) ? 'С' : i + 1}}
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="search-form__wrap-item search-form__wrap-item_price">
+                <p class="search-form__subtitle">Цена</p>
+
+                <div class="search-form__range search-form__range_price">
+                    <div class="search-form__range-text search-form__text">
+                        <p><span #minPrice></span> млн &#8381;</p>
+                        <p><span #maxPrice></span> млн &#8381;</p>
+                    </div>
+
+                    <ghm-range-number
+                        [formControl]="form.controls['price']"
+                        [min]="config.price.min"
+                        [max]="config.price.max"
+                        [toFixed]="true"
+                        (move)="minPrice.innerHTML = ($event.min / 1000000).toFixed(1); maxPrice.innerHTML = ($event.max / 1000000).toFixed(1)">
+                    </ghm-range-number>
+                </div>
+            </div>
+            <div class="search-form__wrap-item search-form__wrap-item_square">
+                <p class="search-form__subtitle">Площадь м²</p>
+
+                <div class="search-form__range search-form__range_square">
+                    <div class="search-form__range-text search-form__text">
+                        <p><span #minSpace></span></p>
+                        <p><span #maxSpace></span></p>
+                    </div>
+
+                    <ghm-range-number
+                        [formControl]="form.controls['space']"
+                        [min]="config.space.min"
+                        [max]="config.space.max"
+                        (move)="minSpace.innerHTML = $event.min; maxSpace.innerHTML = $event.max">
+                    </ghm-range-number>
+                </div>
+            </div>
+            <div class="search-form__wrap-item search-form__wrap-item_floor">
+                <p class="search-form__subtitle">Этаж</p>
+
+                <div class="search-form__range search-form__range_floor">
+                    <div class="search-form__range-text search-form__text">
+                        <p><span #minFloor></span></p>
+                        <p><span #maxFloor></span></p>
+                    </div>
+
+                    <ghm-range-number
+                        [formControl]="form.controls['floor']"
+                        [min]="config.floor.min"
+                        [max]="config.floor.max"
+                        [toFixed]="true"
+                        (move)="minFloor.innerHTML = $event.min; maxFloor.innerHTML = $event.max">
+                    </ghm-range-number>
+                </div>
+            </div>
+            <div class="search-form__wrap-item search-form__wrap-item_corpus">
+                <p class="search-form__subtitle">Номер корпуса</p>
+
+                <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
+                    <p class="search-form__text">{{form.controls['houses'].value | mySearchFormPipe}}</p>
+                </div>
+
+                <div *ngIf="showCorpus"
+                     class="search-form__corpus"
+                     [class.search-form__corpus--position-top]="!parentPlan">
+                    <app-search-checkbox-list
+                        [btnList]="config.housesList"
+                        [formControl]="form.controls['houses']"
+                        [name]="'houses'">
+                    </app-search-checkbox-list>
+                </div>
+            </div>
+
+            <button class="search-form__btn"
+                    (click)="moreFilter = !moreFilter">{{moreFilter ? 'Свернуть' : 'Еще параметры'}}</button>
+        </div>
+
+        <div class="search-form__wrap search-form__wrap_decoration" [class.search-form__wrap_decoration--show]="moreFilter">
+            <app-search-checkbox-list
+                [btnList]="config.decorationList"
+                [formControl]="form.controls['decoration']"
+                [name]="'decoration'">
+            </app-search-checkbox-list>
+            <button class="search-form__reset-filter" (click)="formReset()">Сбросить фильтры</button>
+        </div>
+
+    </form>
+
+</div>

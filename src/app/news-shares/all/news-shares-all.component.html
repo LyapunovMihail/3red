@@ -1,0 +1,115 @@
+<section class="news">
+    
+    <div class="news__head">
+        <div class="news__head-wrap">
+            <h1 class="news__head-title g-title-path">Новости</h1>
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </div>
+        <div class="news__head-wrap" *ngIf="isAuthorizated">
+            <button (click)="createNewsSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
+            <button (click)="createSharesSnippet()" class="admin-controll admin__add-stock">Добавить акцию</button>
+        </div>
+    </div>
+
+    <div class="news__snippets all__snippets">
+        <ng-container *ngFor="let snippet of allSnippets">
+        
+            <div class="news__snippets-item" *ngIf="snippet.category">
+        
+                <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__snippets-link">
+                    <div class="news__snippets-img">
+                        <img [src]="newsUploadsPath + snippet.image" alt="news">
+                    </div>
+                    
+                    <div class="news__snippets-descr">
+                        <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
+                        <p *ngIf="snippet.descrPreview" class="news__snippets-descr-text" [innerHTML]="snippet.descrPreview | lineBreakPipe"></p>
+                        <p class="news__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
+                    </div>
+                </a>
+
+                <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">
+                    <button class="admin-controll admin__news-btn-edit" (click)="redactNewsSnippet(snippet._id)">Редактировать</button>
+                    <button class="admin-controll admin__news-btn-delete" (click)="deleteNewsSnippet(snippet._id)">Удалить</button>
+                </div>
+        
+            </div>
+        
+            <div class="shares__snippets-item" *ngIf="!snippet.category">
+                <a class="shares__snippets-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
+                    <div class="shares__snippets-img">
+                        <img [src]="sharesUploadsPath + snippet.mainImage" alt="share">
+                        <div class="shares__snippets-end" *ngIf="snippet.countdown">
+                            <span *ngIf="countDown(snippet.finish_date) >= 0">{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</span>
+                            <span *ngIf="countDown(snippet.finish_date) < 0">Акция закончилась</span>
+                        </div>
+                    </div>
+
+                    <div class="shares__snippets-descr">
+                        <h1 class="shares__snippets-descr-title">{{snippet.name}}</h1>
+                        <p class="shares__snippets-descr-text">{{snippet.textPreview}}</p>
+                        <p class="shares__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
+                    </div>
+                </a>
+                <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">
+                    <button class="admin-controll admin__news-btn-edit" (click)="redactSharesSnippet(snippet._id)">Редактировать</button>
+                    <button class="admin-controll admin__news-btn-delete" (click)="deleteSharesSnippet(snippet._id)">Удалить</button>
+                </div>
+            </div>
+        
+        </ng-container>
+    </div>
+</section>
+
+<!-- форма создания новости -->
+<app-news-create-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange()"
+    (close)="isNewsCreateForm = false; windowScrollLocker.unblock()"
+    [isForm]="isNewsCreateForm">
+</app-news-create-form>
+
+<!-- форма редактирования новости -->
+<app-news-redact-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange()"
+    (close)="isNewsRedactForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="allSnippets"
+    [redactId]="redactId" [isForm]="isNewsRedactForm">
+</app-news-redact-form>
+
+<!-- форма удаления новости -->
+<app-news-delete-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange()"
+    (close)="isNewsDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="allSnippets"
+    [redactId]="redactId" [isForm]="isNewsDeleteForm">
+</app-news-delete-form>
+
+<!-- форма редактирования и создания акции -->
+<app-shares-edit class="admin-controll"
+    *ngIf="isAuthorizated && isSharesCreateRedactForm"
+    (snippetsChange)="snippetsChange()"
+    (close)="isSharesCreateRedactForm = false; windowScrollLocker.unblock()"
+    [redactId]="redactId" [isForm]="isSharesCreateRedactForm">
+</app-shares-edit>
+
+<!-- форма удаления акции -->
+<app-shares-delete class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange()"
+    (close)="isSharesDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="snippetsArray"
+    [redactId]="redactId" [isForm]="isSharesDeleteForm">
+</app-shares-delete>

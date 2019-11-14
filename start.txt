@@ -1,0 +1,11 @@
+npm run build:prod
+cd ./serv-files
+npm run build:prod
+scp -rp  ~/Public/novotomilino/dist/* nk:/var/www/novotomilino/dist
+scp -rp  ~/Public/novotomilino/serv-files/dist/* nk:/var/www/novotomilino/dist/server
+cd /var/www/novotomilino.ru/dist/server
+nvm use 10.15.3
+yarn --production --modules-folder '../node_modules'
+cd /var/www/novotomilino/dist
+PORT=8006 BASE_NAME='novotomilino' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid 'novotomilino' server/server.js
+PORT=8304 BASE_NAME='novotomilino_dev' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid 'novotomilino_dev' server/server.js

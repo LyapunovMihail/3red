@@ -1,0 +1,43 @@
+$font-mus: 'Museo Sans Cyrl', sans-serif;
+$font-leksa: 'Leksa', 'sans-serif';
+$col-black: #000105;
+$col-black-8: rgba(0, 1, 5, .8);
+$col-black-6: rgba(0, 1, 5, .6);
+$col-orange: #e7490f;
+$col-32: #323232;
+$col-97: #979797;
+$col-blue: #0070c9;
+$w1600: 1600px - (180px *2);
+$w1280: 1240px;
+$w1279: 708px;
+$w768: calc(100% - 30px);
+$transition: .2s linear;
+$trans-link: .6s ease;
+$trans-img: transform .7s linear;
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -o-font-smoothing: antialiased;
+}
+@mixin fw14-20($color: #000105) {
+    font: 500 14px/20px $font-mus;
+    @include font-smoothing();
+    color: $color;
+}
+@mixin f16-24($color: #000105) {
+    font: 16px/24px $font-mus;
+    @include font-smoothing();
+    color: $color;
+}
+@mixin fw16-20($color: #000105) {
+    font: 500 16px/20px $font-mus;
+    @include font-smoothing();
+    letter-spacing: .5px;
+    color: $color;
+}
+@mixin fw18-24($color: #000105) {
+    font: 500 18px/24px $font-mus;
+    @include font-smoothing();
+    color: $color;
+}

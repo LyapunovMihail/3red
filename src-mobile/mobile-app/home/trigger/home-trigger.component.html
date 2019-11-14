@@ -1,0 +1,15 @@
+<section class="home__snippet">
+
+    <div class="home__snippet-wrap">
+        <div class="home__snippet-item" *ngFor="let trigger of triggersData" routerLink="/flats/search" [queryParams]="{'rooms': trigger.rooms}">
+            <p class="home__snippet-name">{{trigger.rooms === 0 ? 'Студии' : trigger.rooms + ' комнатные'}}</p>
+            <p class="home__snippet-space">({{trigger.space}})</p>
+            <p class="home__snippet-price">
+                от
+                <span class="home__snippet-price home__snippet-price_big">{{trigger.price}}</span>
+                млн Р
+            </p>
+        </div>
+    </div>
+
+</section>

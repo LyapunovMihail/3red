@@ -1,0 +1,41 @@
+<ul class="result">
+
+    <li *ngFor="let flat of flatsList; let i = index" class="result__item">
+
+        <a class="result__item-wrap" (click)="openApartmentModal(i)">
+            <span class="result__wrap result__wrap_scheme">
+                <img class="result__scheme-content" 
+                    [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'"
+                    (error)="img.style.display = 'none'" #img>
+                    
+                <div class="result__scheme-error" *ngIf="img.style.display === 'none'"></div>
+            </span>
+            <div class="result__wrap">
+
+                <div class="result__wrap result__wrap_head">
+                    <span class="result__text result__text_room">{{(flat.rooms < '1') ? 'Студия' : flat.rooms + ' комнатная'}}</span>
+                    <!-- Класс result__text_price-sale когда есть цена со скидкой -->
+                    <p class="result__text" [class.result__text_price-sale]="flat.discount">{{flat.price | myBitNumberPipe}} &#8381;</p>
+                </div>
+                <div class="result__wrap result__wrap_head result__wrap_head-bottom">
+                    <div class="result__wrap result__wrap_info">
+                        <span class="result__text result__text_flat">№{{flat.flat}}</span>
+                        <span class="result__text result__text_floor">Этаж {{flat.floor}}</span>
+                        <span class="result__text result__text_corpus">Дом {{flat.house}}</span>
+                    </div>
+                    <div class="result__wrap result__wrap_space">
+                        <span class="result__text result__text_space">{{flat.space}} м&#178;</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+
+</ul>
+
+<app-modal-apartment *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="flatsList"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-modal-apartment>

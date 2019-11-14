@@ -1,0 +1,14 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.infrastructure {
+    width: 100%;
+    height: calc(100vh - 118px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &_map {
+        width: 100%;
+        height: 100%;
+    }
+}

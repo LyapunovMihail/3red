@@ -1,0 +1,366 @@
+@import "../../styles/modules/mixins/mixin.scss";
+
+.disabled-opacity {
+    opacity: .3;
+    pointer-events: none;
+}
+.span-block { display: block; }
+.span-black { color: $col-black }
+
+.purchase {
+    width: 100%;
+    min-height: calc(100vh - (67px + 50px));
+    box-sizing: border-box;
+    padding: 67px 0 100px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    position: relative;
+
+    &__container {
+        width: calc(100% - 30px);
+        max-width: 768px - 60px;
+    }
+    &__title {
+        font: 30px/34px 'Leksa';
+        @include font-smoothing;
+        color: $col-black;
+        margin: 30px 0 20px;
+    }
+    &__descr {
+        @include fw18-24;
+        margin: 0 0 40px;
+
+        :last-child {
+            @include f16-24;
+            margin-top: 5px;
+            @media(max-width: 767px) {
+                display: none;
+            }
+        }
+    }
+
+    &__links {
+        width: 188px;
+        height: 41px;
+        border-radius: 4px;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        display: flex;
+        @include fw14-20;
+        margin: 0 0 40px;
+
+        &-item {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $col-black;
+
+            &_active {
+                background-color: $col-orange;
+                color: #fff;
+                border-radius: 4px;
+                box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+
+    &_installment {
+
+        @media(min-width: 600px) {
+            margin-bottom: -55px;
+        }
+    }
+}
+.credit {
+    display: flex;
+    justify-content: center;
+
+    /*
+    &__filter {
+        width: calc(100% - 30px);
+        max-width: 768px - 60px;
+        margin: 0 0 50px;
+
+        &-checkbox {
+            margin: 0 0 40px;
+            
+            &-item {
+                display: flex;
+                align-items: center;
+                margin: 0 0 20px;
+                &:last-child { margin: 0; }
+    
+                input {
+                    display: none;
+                    &:checked + .g-checkbox {
+                        background: url('/assets/img/purchase/check.svg') center no-repeat #e7490f;
+                        background-size: 74%;
+                        border-color: $col-orange;
+                    }
+                }
+                .g-checkbox {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+
+        &-result {
+            width: 290px;
+            height: 48px;
+            border-radius: 4px;
+            border: solid 1px #999a9b;
+            background-color: #fff;
+            box-sizing: border-box;
+            padding: 0 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &-img {
+                transform: rotate(180deg);
+            }
+            &-text {
+                @include f16-24;
+                color: rgba(0, 1, 5, 0.8);
+            }
+        }
+    }
+    */
+
+    &__list {
+        display: flex;
+        flex-flow: row wrap;
+        width: calc(100% - 30px);
+
+        @media(min-width: 768px) {
+            width: 708px;
+        }
+
+        /*
+        &-head {
+            width: calc(100% - 30px);
+            max-width: 768px - 60px;
+            position: relative;
+            margin: 30px 0;
+
+            &-title {
+                font: 500 24px/29px $font-mus;
+                @include font-smoothing;
+                color: $col-32;
+                box-sizing: border-box;
+                padding: 0 50px 0 0;
+
+                &_nowrap { white-space: nowrap; }
+            }
+            &-cls {
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                top: 0;
+                right: 15px;
+                background: url('/assets/img/purchase/cls_grey.svg') no-repeat;
+                background-size: 100%;
+            }
+        }
+        */
+
+            /*
+            &_scrll {
+               width: calc(100% + 20px);
+               height: calc(100vh - 118px);
+               overflow-y: scroll;
+               overflow-x: hidden;
+            }
+            */
+            .list-snippet__item {
+                width: 100%;
+                min-height: 157px;
+                box-sizing: border-box;
+                padding: 20px 15px;
+                border-radius: 4px;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: flex-end;
+                color: #fff;
+                margin: 0 0 10px;
+
+                @media(min-width: 768px)  {
+                    width: 349px;
+
+                    &:nth-child(2n - 1) {
+                        margin-right: 10px;
+                    }
+                }
+
+                &_sber       { background: #1a9f29; }
+                &_raif       { background: #ffed00; color: #000000 }
+                &_vtb        { background: #009fdf; }
+                &_ural       { background: #475493; }
+                &_ress       { background: #13366D; }
+                &_open       { background: #00bee8; }
+                &_dom        { background: #2e444e; }
+                &_iron       { background: #00337f; }
+                &_zenit      { background: #008fb4; }
+                &_ross       { background: #34643A; }
+                &_rossBank   { background: #c2002a; }
+                &_capital    { background: #00afa9; }
+                &_psb        { background: #ea5614; }
+                &_absolute   { background: #ff5a01; }
+                &_gasprom    { background: #0c356c; }
+                &_sovcom     { background: #004890; }
+                &_svazBank   { background: #0064a4; }
+                &_bankRussia { background: #012757; }
+
+                &-wrap {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+                &-logo {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: #fff;
+
+                    &-text {
+                        width: calc(100% - 75px);
+                        font: 500 18px/24px $font-mus;
+                        @include font-smoothing;
+                        color: inherit;
+                        margin: 0 0 0 10px;
+                    }
+                }
+                &-descr {
+                    width: 100%;
+                    display: flex;
+                    flex-flow: column nowrap;
+                    margin: 9px 0 0;
+
+                    &_input {
+                        box-sizing: border-box;
+                        padding: 4px 5px;
+                        background-color: #fff;
+                        color: $col-black;
+                    }
+                    &-ante_input,
+                    &-date_input {
+                        position: relative;
+                        color: $col-black;
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            width: 90px;
+                            height: 54px;
+                            left: -15px;
+                            top: -5px;
+                            background-color: #fff;
+                        }
+                    }
+                    &_min-pay-text {
+                        width: 50px;
+                        background-color: #fff;
+                        border: 0;
+                    }
+                    &_ante-input { width: 40px; }
+
+                    &-name { margin: 0 0 21px; }
+                    &-text_s {
+                        font: 500 14px/20px $font-mus;
+                        @include font-smoothing;
+                        color: inherit;
+                        position: relative;
+                    }
+                    &-text_b {
+                        @include fw18-24;
+                        color: inherit;
+                        position: relative;
+                    }
+                    &-info {
+                        width: 100%;
+                        max-width: 411px;
+                        display: flex;
+                        // justify-content: space-between;
+
+                        &-item { margin-right: 50px; }
+                    }
+                }
+            }
+
+    }
+}
+
+.installment {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    @media (min-width: 768px) {
+        width: 768px - 60px;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    &__calculator {
+        width: calc(100% - 30px);
+        max-width: 768px - 60px;
+        @media (min-width: 768px) { width: 290px; }
+
+        &-item {
+            width: 100%;
+            margin: 0 0 40px;
+            box-sizing: border-box;
+
+            &_field {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        &-text {
+            @include fw14-20;
+            color: rgba(0, 1, 5, 0.6);
+        }
+        &-field {
+            width: 100%;
+            @include fw18-24;
+            margin-bottom: 5px;
+            border: none;
+
+            &_percent {
+                text-align: right;
+                color: $col-black-6;
+            }
+        }
+
+        &-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+
+            &_field {
+                height: auto;
+                align-items: flex-start;
+            }
+        }
+        &-type { margin: 0 0 40px; }
+    }
+    &__result {
+        width: 100%;
+        padding: 20px 0 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        @media (min-width: 768px) {
+            width: 369px;
+            border-top: none;
+            border-left: 1px solid #999a9b;
+            padding: 0 0 0 30px;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+<section class="main__news" *ngIf="allSnippets.length">
+
+    <div class="main__container">
+        <h1 class="main__news-title g-title-path">Новости</h1>
+        <div class="main__news-nav">
+            <ul class="main__news-list">
+                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'all'" (click)="changeSnippets(allSnippets, 'all')">Все</li>
+                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'news'" (click)="changeSnippets(newsSnippets, 'news')">Новости</li>
+                <li class="main__news-list-item" [class.main__news-list-item_active]="activeSnippets === 'shares'" (click)="changeSnippets(shareSnippets, 'shares')">Акции</li>
+            </ul>
+            <div class="main__news-btn">
+                <button class="main__news-btn-item main__news-prev" (click)="prevBtn()"></button>
+                <button class="main__news-btn-item main__news-next" (click)="nextBtn()"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main__news-slider">
+
+        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'all'">
+            <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
+                <li class="main__news-slider-item" *ngFor="let item of allSnippets; let i = index" id="slider-item-{{i}}">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id" *ngIf="item.thumbnail">
+                        <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail">
+                    </a>
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id" *ngIf="item.mainThumbnail">
+                        <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
+                    </a>
+                    <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
+                    <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>
+                    <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'news'">
+            <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
+                <li class="main__news-slider-item" *ngFor="let item of newsSnippets; let i = index" id="slider-item-{{i}}">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/news/list/' + item._id">
+                        <img class="main__news-slider-item-img" alt="" [src]="newsUploadsPath + item.thumbnail" *ngIf="item.thumbnail">
+                    </a>
+                    <h1 class="main__news-slider-title" [innerHTML]="item.title | lineBreakPipe" *ngIf="item.title"></h1>
+                    <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main__news-slider-wrap" *ngIf="activeSnippets === 'shares'">
+            <ul class="main__news-slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 393 + 30 ) ) + 'px)') }">
+                <li class="main__news-slider-item" *ngFor="let item of shareSnippets; let i = index" id="slider-item-{{i}}">
+                    <a class="main__news-slider-item-link" [routerLink]="'news-shares/shares/list/1/' + item._id">
+                        <img class="main__news-slider-item-img" alt="" [src]="sharesUploadsPath + item.mainThumbnail" *ngIf="item.mainThumbnail">
+                    </a>
+                    <h1 class="main__news-slider-title g-stok-ic" [innerHTML]="item.name | lineBreakPipe" *ngIf="item.name"></h1>
+                    <p class="main__news-slider-date" [innerHTML]="parseDate(item.created_at) | lineBreakPipe"></p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>

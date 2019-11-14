@@ -1,0 +1,43 @@
+<div class="request-window_modal">
+
+    <div class="request-window_modal-close-bgr" (click)="close.emit(false)" ></div>
+
+    <div class="request-window_container">
+
+        <div class="request-window_form">
+
+            <img src="assets/img/parking/parking.jpg" width="300" height="148"/>
+
+            <div class="request-window_form_columns">
+                <div class="request-window_form_description">
+                    <p>Машиноместо №{{parkingData.flat}}</p>
+                    <p>{{parkingData.space}} м²</p>
+                </div>
+                <div class="request-window_form_price">{{parkingData.price | myBitNumberPipe}} ₽</div>
+            </div>
+
+            <ul  class="request-window_form_list">
+                <li class="request-window_form_list_item"><a href="javascript:(0)" (click)="isReserveFormOpen = true">Забронировать</a></li>
+                <li class="request-window_form_list_item"><a href="javascript:(0)" (click)="isCreditFormOpen = true">Заявка на ипотеку</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-form-credit
+    (close)="isCreditFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isCreditFormOpen"
+    [apartmentPrice]="parkingData.price"
+    [apartmentNumber]="parkingData.flat"
+    [type]="parkingData.type">
+</app-form-credit>
+<app-form-reserve
+    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentPrice]="parkingData.price"
+    [apartmentNumber]="parkingData.flat"
+    [type]="parkingData.type">
+</app-form-reserve>

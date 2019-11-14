@@ -1,0 +1,42 @@
+<button *ngIf="isAuthorizated" (click)='isShowModal = true; windowScrollLocker.block();' class='admin-contacts_open-btn'></button>
+<!--<a *ngIf="isAuthorizated" routerLink="/seo"  class='admin-meta_open-btn'>m</a>-->
+
+<section id="admin-contacts-form" class="formWrapper" *ngIf="isShowModal && isAuthorizated">
+
+    <div class="formWrapper__close-bgr" (click)='isShowModal = false; windowScrollLocker.unblock();'></div>
+
+    <div class="formWrapper_form">
+
+        <h2 class="formWrapper_form__title">Настройки заказа звонка</h2>
+        
+        <button (click)='isShowModal = false; windowScrollLocker.unblock();' class="formWrapper_form__clsBtn"></button>
+        
+        <label class="formWrapper_form__field">
+            <p class="formWrapper_form__field_description">Номер телефона</p>
+            <input (blur)="updatePhone($event)" [value]="phone" type="text" class="formWrapper_form__field_data">
+        </label>
+
+        <p class="formWrapper_form__direction">Ниже показаны адреса эл. почты, на которые по очереди осуществляется расслыка. Вы можете временно отключить рассылку для адреса, убрав галочку в чекбоксе.</p>
+        
+        <ul class="formWrapper_form__list">
+
+            <li *ngFor="let mail of mails" class="formWrapper_form__list_item">
+                
+                <label [ngClass]="{'status--active' : mail.status }"  class="formWrapper_form__list_item__email" (click)='updateMail( mail._id, mail.name, !mail.status )'>
+                    <div class="formWrapper_form__list_item__email_forCheck"></div>
+                    <p class="formWrapper_form__list_item__email_name">Эл. почта</p>
+                </label>
+
+                <input (blur)='updateMail(mail._id, $event.target.value, mail.status)' [value]="mail.name" type="text" class="formWrapper_form__list_item__area">      
+                
+                <button class="formWrapper_form__list_item__remove" (click)="deleteMail(mail._id)"></button>
+            </li>
+
+        </ul>
+            
+        <button (click)="setMail()" class="formWrapper_form__add">Добавить адрес</button>
+        <button (click)='isShowModal = false; windowScrollLocker.unblock();' class="formWrapper_form__ready">Готово</button>
+    
+    </div>
+
+</section>

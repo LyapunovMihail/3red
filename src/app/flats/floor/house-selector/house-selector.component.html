@@ -1,0 +1,72 @@
+<div class="floor__plan">
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="143" height="361" viewBox="0 0 143 361">
+        <g fill="none" fill-rule="evenodd">
+
+            <path class="floor__plan_hover"
+                  [class.floor__plan_active]="houseNumber === 1"
+                  (click)="houseNavigate(1)"
+                  fill="#e6e6e8" d="M45.5 12.5h-20v36h-12V.5h32v12z"></path>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" transform="translate(-20 -113)">
+                <tspan x="21" y="141">1</tspan>
+            </text>
+
+            <path class="floor__plan_hover"
+                  [class.floor__plan_active]="houseNumber === 2"
+                  (click)="houseNavigate(2)"
+                  fill="#e6e6e8" d="M25.5 56.5v48h-12v-48z"></path>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" transform="translate(-76 -57)">
+                <tspan x="76" y="141">2</tspan>
+            </text>
+
+            <path class="floor__plan_hover"
+                  [class.floor__plan_active]="houseNumber === 3"
+                  (click)="houseNavigate(3)"
+                  fill="#e6e6e8" d="M25.5 112.5v48h-12v-48z"></path>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" transform="translate(-131.5 -1.5)">
+                <tspan x="132" y="141">3</tspan>
+            </text>
+
+            <path class="floor__plan_hover"
+                  [class.floor__plan_active]="houseNumber === 9"
+                  (click)="houseNavigate(9)"
+                  fill="#e6e6e8" d="M25.5 320.5v40h-12v-40z"></path>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" transform="translate(-336 203)">
+                <tspan x="336" y="141">9</tspan>
+            </text>
+
+
+
+            <path stroke="#000105" stroke-dasharray="2" d="M98.5 201.5v80h-12v-80h12z" opacity=".4"></path>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" opacity=".4" transform="translate(-130.5 209.5)">
+                <tspan x="233" y="35">10</tspan>
+            </text>
+
+            <path stroke="#000105" stroke-dasharray="2" d="M76.5 330.5v30h-12v-30h12zM13.5 256.5h12v20h45v28h-12v-16h-45v-32zM13.5 208.5h12v20h45v28h-12v-16h-45v-32zM70.5 190.5v18h-12v-18h-21v-6h-24v-12h38v8h19v10z" opacity=".4"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" opacity=".4" transform="translate(-173.5 40.5)">
+                <tspan x="174" y="141">5</tspan>
+            </text>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" opacity=".4" transform="translate(-223 90)">
+                <tspan x="223" y="141">6</tspan>
+            </text>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" opacity=".4" transform="translate(-275.5 142.5)">
+                <tspan x="276" y="141">7</tspan>
+            </text>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" opacity=".4" transform="translate(-289 259)">
+                <tspan x="340.5" y="89.5">8</tspan>
+            </text>
+
+            <path stroke="#000105" stroke-dasharray="2" d="M142.5 148.5v12h-56v-12h56z" opacity=".4"></path>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="14" opacity=".4" transform="translate(-23 111)">
+                <tspan x="133.5" y="30.5">4</tspan>
+            </text>
+
+            <!-- <path fill="#767676" d="M100.55 12.557l10.145 16.299 4.676 18.62-10.2-16.276z"></path>
+            <path fill="#D5210D" d="M115.384 47.506L105.172 31.2l2.788-1.183z"></path>
+            <path fill="#D5210D" d="M115.357 47.518l-4.662-18.662-2.762 1.172z"></path>
+            <text fill="#323232" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" letter-spacing="1" opacity=".6" transform="rotate(157 76.873 43.66)">
+                <tspan x="38.987" y="20.073">С</tspan>
+            </text> -->
+        </g>
+    </svg>
+</div>

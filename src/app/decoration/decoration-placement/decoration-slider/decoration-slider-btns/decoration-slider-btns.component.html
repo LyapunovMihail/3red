@@ -1,0 +1,15 @@
+<div class="slider__btns">
+
+    <p class="slider__btns-counter">
+        <span>{{slideList.length < 10 ? '0' : ''}}{{activeIndex + 1}}</span>/<span>{{slideList.length < 10 ? '0' : ''}}{{slideList.length}}</span>
+    </p>
+
+    <div class="slider__btns-item slider__btns-item_prev"
+        (click)="(activeIndex > 0) ? changeIndex.emit(activeIndex - 1) : changeIndex.emit(slideList.length - 1)">
+    </div>
+
+    <div class="slider__btns-item slider__btns-item_next"
+        (click)="(activeIndex < slideList.length - 1) ? changeIndex.emit(activeIndex + 1) : changeIndex.emit(0)">
+    </div>   
+
+</div>

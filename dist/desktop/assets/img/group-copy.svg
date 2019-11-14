@@ -1,0 +1,1109 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="404" height="740" viewBox="0 0 404 740">
+    <defs>
+        <rect id="b" width="42" height="30" rx="2"/>
+        <filter id="a" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="d" width="42" height="30" rx="2"/>
+        <filter id="c" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="f" width="42" height="30" rx="2"/>
+        <filter id="e" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="h" width="42" height="30" rx="2"/>
+        <filter id="g" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="j" width="42" height="30" rx="2"/>
+        <filter id="i" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="l" width="42" height="30" rx="2"/>
+        <filter id="k" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="n" width="42" height="30" rx="2"/>
+        <filter id="m" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="p" width="42" height="30" rx="2"/>
+        <filter id="o" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="r" width="42" height="30" rx="2"/>
+        <filter id="q" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="t" width="42" height="30" rx="2"/>
+        <filter id="s" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="v" width="42" height="30" rx="2"/>
+        <filter id="u" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="x" width="42" height="30" rx="2"/>
+        <filter id="w" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="z" width="42" height="30" rx="2"/>
+        <filter id="y" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="B" width="42" height="30" rx="2"/>
+        <filter id="A" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="D" width="42" height="30" rx="2"/>
+        <filter id="C" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="F" width="42" height="30" rx="2"/>
+        <filter id="E" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="H" width="42" height="30" rx="2"/>
+        <filter id="G" width="116.7%" height="123.3%" x="-8.3%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" stroke="#999A9B" d="M.5 30.5h349v709H.5z"/>
+        <g fill="#000105" transform="translate(20 410)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 570)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 330)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 210)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 90)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 610)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 370)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 250)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 130)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 650)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 690)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 530)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 290)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 170)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 50)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(20 450)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g stroke="#000105" transform="translate(140 410)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(140 530)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(140 290)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(140 170)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(140 50)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 530)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 290)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 170)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 50)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 610)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 370)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 250)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 130)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(220 610)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(220 370)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(220 250)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(220 130)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(220 650)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(60 650)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(180 690)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(260 530)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(260 290)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(260 170)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(260 50)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(140 450)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(140 490)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(100 490)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(60 490)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g stroke="#000105" transform="translate(20 490)">
+            <rect width="29" height="29" x=".5" y=".5" opacity=".096" rx="2"/>
+            <g transform="translate(8 7)">
+                <rect width="13" height="9" x=".5" y="5.5" rx="2"/>
+                <path d="M3.5 5.5h7V2A1.5 1.5 0 0 0 9 .5H5A1.5 1.5 0 0 0 3.5 2v3.5z"/>
+            </g>
+        </g>
+        <g fill="#000105" transform="translate(60 410)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 570)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 330)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 210)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 90)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 610)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 370)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 250)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 130)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 690)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 530)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 290)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 170)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 50)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(60 450)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 410)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 450)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 490)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 570)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 330)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 210)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 90)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(180 650)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.843" y="22">2</tspan>
+            </text>
+        </g>
+        <g transform="translate(260 410)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" opacity=".1">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 450)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 490)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 570)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 330)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 210)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 90)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 610)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 370)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 250)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 130)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g transform="translate(260 650)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(260 690)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="9.897" y="22">3</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 410)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 570)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 330)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 210)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 90)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g transform="translate(100 610)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g transform="translate(100 370)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g transform="translate(100 250)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g transform="translate(100 130)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 650)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 690)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 570)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 330)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 210)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 90)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 610)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 370)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 250)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 130)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 650)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(140 690)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 530)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 290)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 170)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 50)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(100 450)">
+            <rect width="30" height="30" opacity=".1" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="10.554" y="22">1</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 410)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 530)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 290)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 170)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 50)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 450)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 490)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 570)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 330)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 210)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 90)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(220 690)">
+            <rect width="30" height="30" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(5 5)">
+                <tspan x="3.547" y="17">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 410)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" opacity=".1">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 530)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" opacity=".1">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 290)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" opacity=".1">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 170)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" opacity=".1">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 50)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" opacity=".1">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 450)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 490)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 570)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 330)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 210)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 90)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 610)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 370)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 250)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(300 130)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#E7490F" rx="2"/>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 650)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g fill="#000105" transform="translate(300 690)">
+            <rect width="29" height="29" x=".5" y=".5" stroke="#000105" opacity=".096" rx="2"/>
+            <text font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18">
+                <tspan x="8.547" y="22">С</tspan>
+            </text>
+        </g>
+        <g transform="translate(360 410)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#FFF" xlink:href="#b"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 415)">
+            <tspan x="4.573" y="17">8</tspan>
+        </text>
+        <g transform="translate(360 90)">
+            <use fill="#000" filter="url(#c)" xlink:href="#d"/>
+            <use fill="#FFF" xlink:href="#d"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 95)">
+            <tspan x="1.181" y="17">16</tspan>
+        </text>
+        <g transform="translate(360 50)">
+            <use fill="#000" filter="url(#e)" xlink:href="#f"/>
+            <use fill="#FFF" xlink:href="#f"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 55)">
+            <tspan x="1.721" y="17">17</tspan>
+        </text>
+        <g transform="translate(360 450)">
+            <use fill="#000" filter="url(#g)" xlink:href="#h"/>
+            <use fill="#FFF" xlink:href="#h"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 455)">
+            <tspan x="5.167" y="17">7</tspan>
+        </text>
+        <g transform="translate(360 130)">
+            <use fill="#000" filter="url(#i)" xlink:href="#j"/>
+            <use fill="#FFF" xlink:href="#j"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 135)">
+            <tspan x="1.487" y="17">15</tspan>
+        </text>
+        <g transform="translate(360 490)">
+            <use fill="#000" filter="url(#k)" xlink:href="#l"/>
+            <use fill="#FFF" xlink:href="#l"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 495)">
+            <tspan x="4.627" y="17">6</tspan>
+        </text>
+        <g transform="translate(360 170)">
+            <use fill="#000" filter="url(#m)" xlink:href="#n"/>
+            <use fill="#FFF" xlink:href="#n"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 175)">
+            <tspan x="1.064" y="17">14</tspan>
+        </text>
+        <g transform="translate(360 530)">
+            <use fill="#000" filter="url(#o)" xlink:href="#p"/>
+            <use fill="#FFF" xlink:href="#p"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 535)">
+            <tspan x="4.933" y="17">5</tspan>
+        </text>
+        <g transform="translate(360 210)">
+            <use fill="#000" filter="url(#q)" xlink:href="#r"/>
+            <use fill="#FFF" xlink:href="#r"/>
+        </g>
+        <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 215)">
+            <tspan x="1.451" y="17">13</tspan>
+        </text>
+        <g>
+            <g transform="translate(360 570)">
+                <use fill="#000" filter="url(#s)" xlink:href="#t"/>
+                <use fill="#FFF" xlink:href="#t"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 575)">
+                <tspan x="4.51" y="17">4</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 250)">
+                <use fill="#000" filter="url(#u)" xlink:href="#v"/>
+                <use fill="#FFF" xlink:href="#v"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 255)">
+                <tspan x="1.397" y="17">12</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 610)">
+                <use fill="#000" filter="url(#w)" xlink:href="#x"/>
+                <use fill="#FFF" xlink:href="#x"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 615)">
+                <tspan x="4.897" y="17">3</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 290)">
+                <use fill="#000" filter="url(#y)" xlink:href="#z"/>
+                <use fill="#FFF" xlink:href="#z"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 295)">
+                <tspan x="2.108" y="17">11</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 650)">
+                <use fill="#000" filter="url(#A)" xlink:href="#B"/>
+                <use fill="#FFF" xlink:href="#B"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 655)">
+                <tspan x="4.843" y="17">2</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 330)">
+                <use fill="#000" filter="url(#C)" xlink:href="#D"/>
+                <use fill="#FFF" xlink:href="#D"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(370 335)">
+                <tspan x=".956" y="17">10</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 690)">
+                <use fill="#000" filter="url(#E)" xlink:href="#F"/>
+                <use fill="#FFF" xlink:href="#F"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 695)">
+                <tspan x="5.554" y="17">1</tspan>
+            </text>
+        </g>
+        <g>
+            <g transform="translate(360 370)">
+                <use fill="#000" filter="url(#G)" xlink:href="#H"/>
+                <use fill="#FFF" xlink:href="#H"/>
+            </g>
+            <text fill="#E7490F" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="18" transform="translate(371 375)">
+                <tspan x="4.627" y="17">9</tspan>
+            </text>
+        </g>
+        <text fill="#000105" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="20" transform="translate(0 -4)">
+            <tspan x="0" y="19">Секция 1</tspan>
+        </text>
+    </g>
+</svg>

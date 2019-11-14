@@ -1,0 +1,16 @@
+<section class="purchase-admin__bank-list" *ngIf="snippetArray.length">
+    <div class="purchase-admin__bank-list-contain">
+        <button class="purchase-admin__bank-list-cls" (click)="close.emit()"></button>
+        <h1 class="purchase-admin__bank-list-title g-title-path">Изменить список банков</h1>
+        <div class="purchase-admin__bank-list-grid">
+            <div class="bank-list__item bank-list__item-sber" *ngFor="let snippet of snippetArray; let i = index">
+                <input type="checkbox" name="type" id="bank{{i}}"
+                       [checked]="snippet.active"
+                       (change)=" snippet.active = !snippet.active; updateSnippet(snippet._id, 'active', snippet.active)">
+                <label for="bank{{i}}" class="g-checkbox"></label>
+                <label for="bank{{i}}" class="bank-list__item-text bank-list__item-text_{{snippet.cssclass}}">{{snippet.name}}</label>
+            </div>
+        </div>
+        <button class="purchase-admin__bank-list-success" (click)="close.emit()">Готово</button>
+    </div>
+</section>

@@ -1,0 +1,26 @@
+<section class="storerooms-floor">
+
+    <div class="storerooms-floor_section">
+        <ul class="storerooms-floor_section-list">
+            <li class="storerooms-floor_section-list_item"><a routerLink="/storerooms">Кладовые </a></li>
+            <li class="storerooms-floor_section-list_item"> – Секция {{sectionNumber}}, этаж {{floorNumber}}</li>
+        </ul>
+    </div>
+        
+    <div class="storerooms-floor_description">
+
+        <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="storerooms-floor_description_scheme"></div>
+
+        <app-storeroom-info-window *ngIf="infoWindow"
+            [infoWindow]="infoWindow">
+        </app-storeroom-info-window>
+
+    </div>
+
+</section>
+
+<app-storeroom-request-window *ngIf="isRequestWindowOpen"
+    (close)="isRequestWindowOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isRequestWindowOpen"
+    [storeroomData]="storeroomData">
+</app-storeroom-request-window>

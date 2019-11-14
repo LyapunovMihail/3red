@@ -1,0 +1,43 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.flats__sorting {
+
+    &-find {
+        width: calc(100% - 60px);
+        font: 500 24px/29px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
+        margin: 0 0 20px;
+        @media (max-width: 767px) { width: calc(100% - 30px); }
+    }
+    &-wrap {
+        width: calc(100% - 60px);
+        display: flex;
+        flex-flow: row wrap;
+        @media (max-width: 767px) { width: calc(100% - 30px); }
+    }
+
+    &-item {
+        @include fw18-24($col-black-7);
+        margin: 15px 30px 0 0;
+        cursor: pointer;
+
+        &_active,
+        &_turn {
+            color: $col-black;
+            position: relative;
+            padding: 0 15px 0 0;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 5px;
+                width: 10px;
+                height: 16px;
+                background: url(/assets/img/filter_arrow.svg) no-repeat;
+                background-size: 10px 16px;
+            }
+        }
+        &_turn:before { transform: rotate(180deg); }
+    }
+}

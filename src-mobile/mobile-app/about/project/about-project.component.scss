@@ -1,0 +1,70 @@
+@import "../../../styles/modules/mixins/mixin";
+
+
+.about-project {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 120px 0;
+    @media(max-width: 767px) {
+        margin: 38px 0 120px;
+    }
+    
+    &__container {
+        width: calc(100% - 60px);
+        @media(max-width: 767px) { width: calc(100% - 30px); }
+    }
+    &__head,
+    &__content {
+        width: 100%;
+        max-width: 615px;
+    }
+
+    &__head {
+        &-title {
+            margin: 0 0 20px;
+            color: $col-black;
+            @media(max-width: 767px) {
+                margin: 0 0 30px;
+                font: 42px/48px 'Leksa';
+            }
+        }
+        &-subtitle {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+    &__content {
+        &-descr {
+            font: 16px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 30px;
+            opacity: .8;
+        }
+        &-info {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            @media(max-width: 767px) { flex-flow: column nowrap; }
+        }
+
+        &-item {
+            width: 50%;
+            margin: 0 0 20px;
+            @media(max-width: 767px) { width: 100%; }
+        }
+        &-title {
+            font: 500 16px/23px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 6px;
+        }
+        &-subtitle {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            color: #e7490f;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+.st0{fill:#888BA2;}
+.st1{fill:#ffffff;stroke:#888BA2;stroke-miterlimit:10;}
+.st2{clip-path:url(#SVGID_2_);}
+.st3{fill:none;}
+.st4{font-family:'Abrade-Book';}
+.st5{font-size:16.5922px;}
+
+:host {
+    position: relative;
+    display: flex;
+}
+
+.search_form_img {
+    width: 190px;
+    height: 196px;
+    position: absolute;
+    top: 0;
+    left: 32px;
+}
+
+.search_form_sections {
+    width: 190px;
+    height: 196px;
+    margin: 0 0 0 26px;
+    background-size: 100%;
+    position: relative;
+    z-index: 1;
+
+    &_text {
+        pointer-events: none;
+        transition: .2s linear;
+        user-select: none;
+        font: 15px 'Montserrat', sans-serif;
+        fill: #323232;
+        transition: .2s linear;
+        z-index: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    &_item {
+        cursor: pointer;
+
+        
+        &_content {
+            transition: .2s linear;
+        }
+
+        &.section--active {
+            .search_form_sections_item_content {
+                fill: #cda571;
+                stroke: #cda571;
+            }
+        }
+
+        &:hover {
+            .search_form_sections_item_content {
+                fill: #f2e7d5;
+                stroke: #606060;
+            }
+        }
+    }
+}

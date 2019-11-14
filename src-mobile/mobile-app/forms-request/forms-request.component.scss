@@ -1,0 +1,220 @@
+@import "../../styles/modules/mixins/mixin.scss";
+
+@mixin text($color: #2e2e2e) {
+    font: 15px/18px 'Montserrat';
+    color: $color;
+    @include font-smoothing();
+}
+
+.input-invalid {
+    border: 1px solid red !important;
+}
+
+.disabled-submit-btn {
+    opacity: .5;
+}
+
+.time-input-active {
+    pointer-events: auto !important;
+}
+
+.form-modal {
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+    background-color: #fff;
+    padding: 0 0 34px;
+    z-index: 9999;
+    @media (min-width: 768px) {
+        padding: 30px 0;
+        background: rgba(0, 1, 5, .7);
+    }
+}
+
+
+.form-request {
+    width: calc(100% - 30px);
+    background-color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    @media (min-width: 768px) {
+        width: 583px;
+        border-radius: 5px;
+        padding: 30px;
+    }
+
+    &__cls-btn {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: url(/assets/img/cls_grey.svg) no-repeat;
+        background-size: 20px;
+        z-index: 1;
+        @media (min-width: 768px) {
+            width: 50px;
+            height: 50px;
+            top: 30px;
+            right: calc(50% - 13px - 50px);
+            transform: translateX(291.5px);
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background: url(/assets/img/cls_white.svg) center no-repeat;
+            background-size: 22px;
+        }
+    }
+
+    &__title {
+        font: 30px/34px 'Leksa';
+        @include font-smoothing;
+        margin: 75px 0 30px;
+        color: $col-black;
+    }
+    &__subtitle {
+        font: 500 14px/20px $font-mus;
+        @include font-smoothing;
+        color: $col-black-6;
+        margin: 0 0 10px;
+
+        &_checkbox {
+            width: calc(100% - 40px);
+            margin: 0;
+        }
+    }
+
+    &__wrap {
+        margin: 0 0 20px;
+        &_last { margin: 0 0 30px; }
+    }
+    &__field {
+        width: 100%;
+        height: 44px;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        transition: border-color .2s linear;
+        @include fw18-24;
+        &::-webkit-input-placeholder { color: $col-black; }
+        &::-moz-placeholder { color: $col-black; }      
+        &:-moz-placeholder { color: $col-black; }    
+        &:-ms-input-placeholder { color: $col-black; }
+
+        &_not-valid { border-color: #d8241d; }
+        &_time {
+            width: 78px;
+            position: absolute;
+            bottom: 0;
+            left: 40px;
+            pointer-events: none;
+            padding: 0 15px;
+        }
+
+
+    }
+
+    &__radio {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 1px solid #d9d9d9;
+        cursor: pointer;
+        position: relative;
+        transition: .2s linear;
+        margin-right: 10px;
+
+        &:before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            transition: .2s linear;
+            opacity: 0;
+        }
+
+        &-wrap {
+            display: flex;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+            margin: 0 0 20px;
+            &_time {
+                height: 30px + 44px;
+                margin: 0 0 50px;
+            }
+            
+            input {
+                &:not(.form-request__field) { display: none; }
+                &:checked {
+                    & + .form-request__radio{
+                        background: $col-orange;
+                        border-color: $col-orange;
+                        &:before { opacity: 1; }
+                    }
+                }
+            }
+        }
+        &-text {
+            width: calc(100% - 40px);
+            font: 500 14px/20px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+
+            &_remark {
+                display: block;
+                color: rgba(0, 1, 5, 0.39);
+            }
+        }
+
+    }
+
+    &__checkbox {
+        width: 30px;
+        height: 30px;
+        margin: 0 10px 0 0;
+
+        &-wrap {
+            display: flex;
+            align-items: center;
+            margin: 0 0 30px;
+
+            input {
+                display: none;
+                &:checked + .form-request__checkbox {
+                    background: url(/assets/img/check.svg) center no-repeat $col-orange;
+                    background-size: 80%;
+                    border-color: $col-orange;
+                }
+            }
+        }
+    }
+    
+    &__btn {
+        width: 100%;
+        height: 50px;
+        font: 500 16px/20px $font-mus;
+        @include font-smoothing;
+        color: #fff;
+        background-color: $col-orange;
+        text-transform: uppercase;
+        border-radius: 4px;
+        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+        letter-spacing: .5px;
+    }
+}
+
+.time-input-active {
+    pointer-events: auto !important;
+}

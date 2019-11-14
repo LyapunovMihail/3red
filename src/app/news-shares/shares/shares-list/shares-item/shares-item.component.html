@@ -1,0 +1,62 @@
+<div *ngIf="share" class="client-share">
+
+    <div class="client-share__nav">
+        <a routerLink="/news-shares/shares/list/1" class="client-share__nav-back">Назад</a>
+    </div>
+
+    <div class="client-share__header">
+        <div class="client-share__header-wrap">
+            <a class="client-share__header-btn client-share__header-prev" [class.client-share__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></a>
+            <a class="client-share__header-btn client-share__header-next" [class.client-share__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></a>
+            <div class="client-share__header-img-wrap">
+                <img [src]="uploadsPath + share.mainImage" class="client-share__header-img">
+                <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="client-share__time">
+                    <span>{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</span>
+                </div>
+                <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="client-share__time">
+                    <span>Акция закончилась</span>
+                </div>
+            </div>
+        </div>
+        <div class="client-share__content">
+            <h1 class="client-share__content-name">{{share.name}}</h1>
+            <p class="client-share__content-text">{{share.text}}</p>
+        </div>
+    </div>
+
+    <!--
+        Я думаю дублирование списков не нужно т.к ничего кроме акционных квартир показываться не будет,
+        но если я удаляю "ul.client-share__list" и его "li", то все перестает работать
+     -->
+
+    <ul class="client-share__flats">
+        <li *ngFor="let flat of share.shareFlats; let i = index" class="client-share__flats-wrap">
+            <a (click)="openApartmentModal(i)" class="client-share__flats-item">
+                <div class="client-share__flats-image">
+                    <img class="client-share__flats-image-item" (error)="img.style.display = 'none'"
+                         [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
+                    <div *ngIf="img.style.display === 'none'" class="client-share__flats-image-error">Изображение недоступно</div>
+                </div>
+                <!-- Нужно убрать сокращение у Кол-ва комнат -->
+                <div class="client-share__flats-house client-share__flats-room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
+                <div class="client-share__flats-house client-share__flats-space">{{flat.space}} м²</div>
+                <div class="client-share__flats-house client-share__flats-floor">Этаж {{flat.floor}}</div>
+                <div class="client-share__flats-house client-share__flats-corpus">Корпус {{flat.house}}</div>
+                <div class="client-share__flats-house client-share__flats-decoration">{{flat.decorationName}}</div>
+                <div class="client-share__flats-price">
+                    <p class="client-share__flats-price_new">{{flat.price - getDiscount(flat) | bitNumber}} &#8381;</p>
+                    <p class="client-share__flats-price_old">{{flat.price | bitNumber}} &#8381;</p>
+                </div>
+            </a>
+            <!-- <div class="client-share__flats-favorites"></div> -->
+        </li>
+    </ul>
+
+</div>
+
+<app-flats-apartment-modal *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="share.shareFlats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-flats-apartment-modal>

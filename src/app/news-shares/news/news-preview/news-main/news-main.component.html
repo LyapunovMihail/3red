@@ -1,0 +1,22 @@
+<ng-container *ngFor="let snippet of snippetsArray">
+    <div class="news_aside_container" *ngIf="snippet.show_on_main == true">
+
+        <div class="news_aside_img">
+    
+            <div *ngIf="isAuthorizated" class="admin-controll admin-news_editing-controls admin-news_editing-controls--main-news">
+                <div (click)="redactSnippet.emit(snippet._id)" class="admin-controll admin-news_editing-controls_for-edit">Редактировать</div>
+                <div (click)="deleteSnippet.emit(snippet._id)" class="admin-controll admin-news_editing-controls_for-delete">Удалить</div>
+            </div>
+
+            <img class="news_aside_img_content" [src]="uploadsPath + snippet.image">
+
+        </div>
+
+        <a  [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news_aside_description">
+            <div class="news_aside_description_wrap">
+                <span class="news_aside_description_content" [innerHtml]="snippet.title | lineBreakPipe"></span>
+            </div>
+        </a>
+        
+    </div>
+</ng-container>

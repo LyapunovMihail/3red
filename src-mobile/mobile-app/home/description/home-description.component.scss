@@ -1,0 +1,29 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.home__descr {
+    width: 100%;
+    background: rgba(170, 171, 34, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    &:before {
+        content: '';
+        position: absolute;
+        right: 15px;
+        bottom: 7px;
+        width: 80px;
+        height: 78px;
+        background: url('/assets/img/cat.png') no-repeat;
+        background-size: 100%;
+    }
+    &-paragraf {
+        width: calc(100% - 30px);
+        max-width: 767px;
+        font: 30px/1.47 'Leksa';
+        @include font-smoothing;
+        color: #000105;
+        margin: 100px 0;
+
+        &_link { font: inherit; }
+    }
+}

@@ -1,0 +1,75 @@
+@import "../../../styles/modules/mixins/mixin.scss";
+
+.members {
+    width: 100%;
+    height: 67vw;
+    min-height: 650px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background: url('/assets/img/about/genplan_footer.jpg') bottom no-repeat;
+    background-size: 100% auto;
+    @media(min-width: 767px) { min-height: 750px; }
+
+    &__title {
+        width: calc(100% - 30px);
+        max-width: 1280px;
+        font: 41px/48px 'Leksa';
+        @include font-smoothing;
+        color: $col-black;
+        margin: 120px 0 20px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
+    }
+    &__content {
+        width: calc(100% - 30px);
+        max-width: 1280px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
+    }
+    &__descr {
+        @include f16-24;
+        color: rgba(0, 1, 5, 0.8);
+        margin: 0 0 30px;
+        @media(min-width: 767px) { max-width: 615px; }
+    }
+    &__info {
+        width: 100%;
+        @media(min-width: 767px) {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: flex-end;
+        }
+
+        &-item {
+            width: 100%;
+            max-width: 338px;
+            display: flex;
+            margin: 0 0 8px;
+            @media(min-width: 767px) {
+                width: 338px;
+            }
+        }
+        &-title {
+            width: 50%;
+            font: 500 16px/23px $font-mus;
+            color: $col-black;
+            margin: 0 30px 0 0;
+        }
+        &-subtitle {
+            // width: 50%;
+            font: 500 16px/22px $font-mus;
+            @include font-smoothing;
+            position: relative;
+            text-decoration: none;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                bottom: 1px;
+                width: 100%;
+                height: 1px;
+                background-color: #e7490f;
+            }
+        }
+    }
+}

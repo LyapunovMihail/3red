@@ -1,0 +1,28 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.placement {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .3));
+        pointer-events: none;
+    }
+
+    &__title {
+        font: 500 16px/23px $font-mus;
+        @include font-smoothing;
+        color: #fff;
+        position: absolute;
+        left: 40px;
+        bottom: 31px;
+        z-index: 1;
+    }
+}

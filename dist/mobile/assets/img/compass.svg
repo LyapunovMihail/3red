@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="72" viewBox="0 0 76 72">
+    <g fill="none" fill-rule="evenodd" transform="rotate(118 41.403 41.2)">
+        <circle cx="38" cy="46" r="20" stroke="#FFF"/>
+        <text fill="#FFF" font-family="Montserrat-Regular, Montserrat" font-size="15">
+            <tspan x="33" y="15">С</tspan>
+        </text>
+        <text fill="#FFF" font-family="Montserrat-Regular, Montserrat" font-size="15">
+            <tspan x="30" y="87">Ю</tspan>
+        </text>
+        <text fill="#FFF" font-family="Montserrat-Regular, Montserrat" font-size="15">
+            <tspan x="0" y="52">З</tspan>
+        </text>
+        <text fill="#FFF" font-family="Montserrat-Regular, Montserrat" font-size="15">
+            <tspan x="67" y="52">В</tspan>
+        </text>
+        <path fill="#FFF" fill-rule="nonzero" d="M39 38.5v24h-1v-24h-4l4.5-9 4.5 9h-4z"/>
+    </g>
+</svg>

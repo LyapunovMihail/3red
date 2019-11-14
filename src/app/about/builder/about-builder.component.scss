@@ -1,0 +1,178 @@
+$font: 18px/31px 'Montserrat', sans-serif;
+@import "../../../styles/modules/mixins/mixin";
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.developer {
+
+    &__head,
+    &__content {
+        width: 604.5px;
+        max-width: $w1600;
+
+        &:not(.developer__content) {
+            margin: 0 30px 0 0;
+        }
+    }
+    &__head {
+        &-title {
+            margin: 120px 0 20px;
+            color: $col-black;
+            white-space: nowrap;
+        }
+        &-subtitle {
+            font: 500 18px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+        }
+    }
+    &__content {
+        &-info {
+            font: 16px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0;
+            opacity: .8;
+
+            &:not(:last-child) {
+                margin: 134px 0 30px;
+            }
+        }
+    }
+
+    &__project {
+        width: 100%;
+        max-width: $w1600;
+
+        &-title {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            color: $col-black;
+            margin: 30px 0;
+            width: 100%;
+        }
+        &-link {
+            text-decoration: none;
+            position: relative;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                background-color: $col-orange;
+                right: 0;
+                bottom: 0;
+                transition: width .6s ease;
+            }
+            &:hover {
+                &:before {
+                    width: 0%;
+                }
+            }
+        }
+        &-grid {
+            display: grid;
+            grid-template: repeat(4, 260px)/repeat(2, 605px);
+            gap: 30px;
+
+            &-item {
+                padding: 20px 20px 15px;
+                box-sizing: border-box;
+                width: 100%;
+                position: relative;
+                border-radius: 4px;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: space-between;
+                overflow: hidden;
+                will-change: transform;
+
+                &:hover .grid-item__bg-image {
+                    transform: scale(1.1);
+                }
+                &:hover .grid-item__name-title {
+                    color: #d45a42; // Уточнить размер увеличения
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 4px;
+                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+                }
+
+                .grid-item__bg-image {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    left: 0;
+                    top: 0;
+                    z-index: -1;
+                    transform: scale(1);
+                    transition: $trans-img;
+                    will-change: transform;
+                }
+
+                .grid-item__location {
+                    display: flex;
+
+                    &-city,
+                    &-distance {
+                        padding: 5px 10px;
+                        background: #fff;
+                        position: relative;
+                        font: 500 14px/20px $font-mus;
+                        @include font-smoothing;
+                        color: $col-black;
+                    }
+                    &-city {
+                        border-radius: 4px 0 0 4px;
+                        margin: 0 1px 0 0;
+                    }
+                    &-city_barviha {
+                        border-radius: 4px;
+                    }
+                    &-distance {
+                        border-radius: 0 4px 4px 0;
+                    }
+                }
+                .grid-item__name {
+                    position: relative;
+
+                    &-title {
+                        font: 500 24px/29px $font-mus;
+                        @include font-smoothing;
+                        color: #fff;
+                        transition: $transition;
+                    }
+                    &-subtitle {
+                        font: 500 14px/20px $font-mus;
+                        @include font-smoothing;
+                        color: #fff;
+                    }
+                }
+            }
+            .grid-item_one {
+                grid-row-start: 1;
+                grid-row-end: 3;
+                grid-column-start: 1;
+                grid-column-end: 2;
+            }
+            .grid-item_five {
+                grid-row-start: 3;
+                grid-row-end: 5;
+                grid-column-start: 2;
+                grid-column-end: 3;
+            }
+        }
+    }
+}

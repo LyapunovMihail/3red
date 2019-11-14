@@ -1,0 +1,85 @@
+<div *ngIf="(isForm && isAuthorizated)" class="admin-controll g-modal-bg">
+
+    <div class="admin-news_modal-close-bgr" (click)="close.emit()" ></div>
+
+    <div class="create-form__container">
+
+        <div class='admin-news_progress-loader' *ngIf="isLoad">
+            <div class='admin-news_progress-loader-title'>Загрузка изображения {{imageUploadPercent}}%</div>
+            <div class='admin-news_progress-loader-line'>
+                <div class='admin-news_progress-loader-inner' [style.width.%]="imageUploadPercent"></div>
+            </div>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="admin-news_form create-form__form">
+
+            <div (click)="close.emit()" class="create-form__cls-btn"></div>
+
+            <h1 class="create-form__form-title">Добавить новость</h1>
+            <p class="create-form__form-date">{{dateNow}}</p>
+
+            <div class="create-form__form-wrap">
+                <p class="create-form__form-subtitle">Заголовок</p>
+                <textarea class="create-form__form-area create-form__form-area_title"
+                    name="title"
+                    placeholder="Максимум 60 символов"
+                    [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid && form.controls['title'].touched)}"
+                    [formControl]="form.controls['title']">
+                </textarea>
+            </div>
+            
+            <div class="create-form__form-wrap">    
+                <p class="create-form__form-subtitle">Текст</p>
+                <textarea class="create-form__form-area create-form__form-area_text"
+                    placeholder="Дополнительный текст"
+                    [formControl]="form.controls['description']">
+                </textarea>
+            </div>
+
+            <div class="create-form__form-wrap">
+                <p class="create-form__form-subtitle">Текст для превью</p>
+                <textarea class="create-form__form-area create-form__form-area_text"
+                    placeholder="Максимум 60 символов"
+                    [ngClass]="{'invalid-input-value' : (!form.controls['descrPreview'].valid)}"
+                    [formControl]="form.controls['descrPreview']">
+                </textarea>
+            </div>
+
+            <div class="create-form__form-wrap">
+                <p class="create-form__form-subtitle">Фотография</p>
+
+                <div class="create-form__form-img">
+                    <img class="create-form__form-img-item" *ngIf="loadedImage.length > 0" [src]="uploadsPath + loadedImage">
+
+                    <input [formControl]="form.controls['image']" hidden="true" type="text">
+                    <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
+
+                    <label [ngClass]="{'create-form__form-img-wrap_photo' : loadedImage.length > 0 }" class="create-form__form-img-wrap">
+                        <div class="create-form__form-img-btn">
+                            <span>{{ (loadedImage.length > 0) ? "Изменить" : "Загрузить" }}</span>
+                        </div>
+                        <input style='display: none;' type="file" (change)="imageUpload($event)" placeholder="Upload file" accept=".jpg">
+                    </label>
+                </div>
+            </div>
+
+            <div class="create-form__form-show">
+                <label class="create-form__form-checkbox">
+                    <input class="admin-news_checkbox_content"
+                        [formControl]="form.controls['show_on_main']"
+                        type="checkbox" name="show_on_main">
+                    <div class="create-form__form-box g-checkbox"></div>
+                    <p class="create-form__form-checkbox-text">Показать новость на главной</p>
+                </label>
+            </div>
+
+            <button type="submit" class="create-form__form-submit"
+                [ngClass]="{'create-form__form-submit_disabled' : !form.valid}"
+                [disabled]="!form.valid">Добавить
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

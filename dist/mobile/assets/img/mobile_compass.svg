@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="47px" viewBox="0 0 8 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Group 12</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Квартиры++" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Новотомилино_квартиры_общий-вид_корпус_этаж_1600" transform="translate(-201.000000, -314.000000)">
+            <g id="Group-13-Copy-3" transform="translate(236.000000, 483.500000) rotate(-90.000000) translate(-236.000000, -483.500000) translate(58.500000, 433.500000)">
+                <g id="Group-12" transform="translate(300.048670, 0.238194)">
+                    <g id="Group-11" transform="translate(19.000000, 19.000000) rotate(-270.000000) translate(-19.000000, -19.000000) ">
+                        <polygon id="Rectangle-Copy" fill="#767676" transform="translate(19.000000, 19.000000) rotate(-135.000000) translate(-19.000000, -19.000000) " points="5.58823529 5.58823529 21.1005051 16.8994949 32.4117647 32.4117647 16.8578644 21.1421356"></polygon>
+                        <polygon id="Rectangle" fill="#D5210D" points="19 4.54747351e-13 22.0294373 19 19 19"></polygon>
+                        <polygon id="Rectangle-Copy-5" fill="#D5210D" transform="translate(17.529437, 9.500000) scale(1, -1) rotate(-180.000000) translate(-17.529437, -9.500000) " points="16.0294373 4.54747351e-13 19.0294373 19 16.0294373 19"></polygon>
+                    </g>
+                    <text id="С" opacity="0.6" transform="translate(43.500000, 19.573071) rotate(-270.000000) translate(-43.500000, -19.573071) " font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" font-weight="normal" line-spacing="15" letter-spacing="1" fill="#323232">
+                        <tspan x="38.9872521" y="20.0730712">С</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

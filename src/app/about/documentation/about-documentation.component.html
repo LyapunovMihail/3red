@@ -1,0 +1,83 @@
+<section class="documentation">
+
+    <div class="documentation__wrapper">
+
+        <div class="documentation__header">
+
+            <div class="documentation__title">
+                <h1 class="documentation__title-content">Документация</h1>
+                <div class="documentation__title-text"
+                    *ngIf="!isAuthorizated">{{description}}</div>
+                <ghm-textarea class="documentation__title-text admin-input"
+                    *ngIf="isAuthorizated"
+                    [value]="description"
+                    (change)="updateHeaderDescription($event.target.value)"></ghm-textarea>
+            </div>
+        </div>
+
+        <div class="documentation__adding-btn"
+            *ngIf="isAuthorizated"
+            (click)="createObject()"><p class="documentation__adding-btn-text">Создать новый блок</p>
+        </div>
+
+        <div *ngIf="progressLoaded" class="admin-gallery_progress">
+            <div class="admin-gallery_progress-title">Загрузка</div>
+            <div class="admin-gallery_progress-info">{{progressCurrent}} из {{progressCount}}</div>
+            <div class="admin-gallery_progress-line">
+                <div [style.width.%]="((100 / progressCount) * progressCurrent)" class="admin-gallery_progress-line-inner"></div>
+            </div>
+        </div>
+
+        <ul class="documentation__objects">
+            <li class="documentation__object"
+                *ngFor="let object of objectsList">
+                <div class="documentation__object-header">
+                    <h2 class="documentation__object-title"
+                        *ngIf="!isAuthorizated">{{object.title}}</h2>
+                    <ghm-textarea class="documentation__object-title admin-input"
+                        *ngIf="isAuthorizated"
+                        [value]="object.title"
+                        (change)="updateObjectTitle(object._id, $event.target.value)"></ghm-textarea>
+                    <label class="documentation__object-load-btn"
+                        *ngIf="isAuthorizated">
+                        <input style='display: none;' type="file" (change)="fileUpload(object._id, $event)" placeholder="Upload file" accept=".pdf" multiple>
+                        Загрузить документ
+                    </label>
+                </div>
+                <div class="documentation__object-del-object"
+                    *ngIf="isAuthorizated"
+                    (click)="deleteObject(object._id)">
+                </div>
+                <div class="documentation__object-move-object"
+                    *ngIf="isAuthorizated">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul class="documentation__object-content">
+                    <li class="documentation__object-file"
+                        *ngFor="let file of object.uploads">
+                        <div class="documentation__object-del-file"
+                            *ngIf="isAuthorizated"
+                            (click)="deleteFile(object._id, file)"> Удалить
+                        </div>
+                        <div class="documentation__object-link">
+                            <a class="g-link_red documentation__object-name-file"
+                               [ngClass]="{'documentation__object-link_admin': isAuthorizated}"
+                               target="_blank"
+
+                               [href]="'/' + uploadsPath + file.name"
+                               [attr.download]="file.originName">
+                                {{file.originalName}}
+                            </a>
+                            <p class="documentation__object-date">{{parseDate(file.created_at)}}</p> <!-- Тут должна выставляться дата загрузки документа -->
+                        </div>
+                    </li>
+                </ul>
+                <ul></ul>
+            </li>
+        </ul>
+
+    </div>
+
+</section>

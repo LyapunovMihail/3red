@@ -1,0 +1,28 @@
+<section class="news news-view">
+    
+    <div class="news-view__nav">
+        <a class="news-view__nav-link" routerLink="/news-shares/news/list/">Все новости</a>
+    </div>
+
+    <div class="news-view__content">
+        <div class="news-view__wrap">
+            <div class="news-view__content-btn">
+                <button class="news-view__content-btn-prev" [class.news-view__content-btn-inactive]="!prevId" [routerLink]="['/news-shares/news/list/' + prevId]"></button>
+                <button class="news-view__content-btn-next" [class.news-view__content-btn-inactive]="!nextId" [routerLink]="['/news-shares/news/list/' + nextId]"></button>
+            </div>
+            <div class="news-view__content-img">
+                <img *ngIf="image.length > 0" class="news-view__content-img-item" [src]="image">
+            </div>
+        </div>
+
+        <div class="news-view__wrap">
+            <h1 [innerHTML]="title | myLineBreakPipe"class="news-view__content-title"></h1>
+            <p *ngIf="description && description.length > 0"
+                [innerHTML]="description | myLineBreakPipe"
+                class="news-view__content-text">
+            </p>
+            <p *ngIf="category !== 'SHARE'" class="news-view__content-text news-view__content-text_date">{{createdAt | date: 'd.M.yyyy' }}</p>
+        </div>
+    </div>
+
+</section>

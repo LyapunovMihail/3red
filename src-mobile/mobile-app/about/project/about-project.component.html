@@ -1,0 +1,27 @@
+<section class="about-project">
+    <div class="about-project__container">
+        <div class="about-project__head">
+            <h1 class="about-project__head-title g-title-path">О проекте</h1>
+            <p class="about-project__head-subtitle">
+                ЖК Новотомилино – комплексная жилая застройка из&nbsp;четырех
+                многоэтажных жилых домов переменной этажности <span class="g-text_nowrap">1-17</span> этажей.
+            </p>
+        </div>
+        <div class="about-project__content">
+            <p class="about-project__content-descr">
+                В силу геометрии и расположения участка, затройка предусмотривается
+                по линейной схеме, образующей новую лилинию застройки вдоль трассы
+                Рязанского шоссе (А-102). Сложный многоступенчатый силуэт обсловлен
+                параметрами инсоляции существующей застройки. В отделке комплекса
+                предусмотрено сочетание 2-х цветов керамического кирпича с белой
+                и светло-серой штукатуркой.
+            </p>
+            <div class="about-project__content-info">
+                <div *ngFor="let about of abouts" class="about-project__content-item">
+                    <p class="about-project__content-title">{{about.title}}</p>
+                    <p class="about-project__content-subtitle">{{about.subtitle}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

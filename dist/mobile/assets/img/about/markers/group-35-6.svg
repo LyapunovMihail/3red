@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="46" viewBox="0 0 34 46">
+    <defs>
+        <circle id="b" cx="15" cy="15" r="15"/>
+        <filter id="a" width="123.3%" height="123.3%" x="-11.7%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#CDA571" d="M17 25h12L17 46z"/>
+        <g transform="translate(2 1)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#CDA571" xlink:href="#b"/>
+        </g>
+        <g fill-rule="nonzero">
+            <path fill="#FFF" d="M25.577 15.324h.502l-1.506-5.108-.084-.162C24.154 9.405 23.569 9 22.899 9H11.85c-.753 0-1.506.486-1.674 1.135l-1.506 5.19h.586L8 17.107V21h19v-3.892l-1.423-1.784zM11.85 10.703h11.132s.084 0 .084.08l.837 2.92H10.93l.92-3zM9 21h3v3H9zM23 21h3v3h-3z"/>
+            <path fill="#CDA571" d="M9 17h3v2H9zM22 17h3v2h-3z"/>
+        </g>
+    </g>
+</svg>

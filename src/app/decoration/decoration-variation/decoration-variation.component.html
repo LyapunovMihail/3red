@@ -1,0 +1,13 @@
+<ul class="variation">
+
+    <ng-container *ngFor="let item of decorationList">
+
+        <app-decoration-variation-item
+            [item]="item"
+            [pageType]="pageType"
+            [ngClass]="{'element-active': pageType === item.mod}">
+        </app-decoration-variation-item>
+
+    </ng-container>
+
+</ul>

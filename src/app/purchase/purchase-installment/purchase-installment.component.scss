@@ -1,0 +1,175 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.purchase-installment {
+    width: $w1600;
+
+    &__type {
+        width: 100%;
+        max-width: 922px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 40px;
+    
+        &-item {
+            width: 287px;
+            cursor: pointer;
+        }
+        &-box {
+            display: flex;
+            box-sizing: border-box;
+            input:checked + .purchase-installment__type-radiobox {
+                border-color: $col-orange;
+                background-color: $col-orange;
+            }
+        }
+        &-radiobox {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: solid 1px #999a9b;
+            margin-right: 10px;
+            background-color: #fff;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                top: calc(50% - 4px);
+                left: calc(50% - 4px);
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #fff;
+            }
+        }
+        &-text {
+            width: calc(100% - 30px);
+            font: 500 14px/20px $font-mus;
+            @include font-smoothing;
+            color: $col-black-6;
+            padding: 2px 0 0;
+        }
+    }
+}
+
+.span-block { display: block; }
+.span-black { color: $col-black; }
+.span-nowrap { white-space: nowrap; }
+
+.installment-calculator {
+    width: 100%;
+    max-width: 922px;
+    display: flex;
+    justify-content: space-between;
+    
+    &__item {
+        width: 287px;
+
+        &-wrap {
+            width: 100%;
+            box-sizing: border-box;
+
+            &_field {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        &-text,
+        &-hint {
+            width: 100%;
+            @include fw14-20(rgba(0, 1, 5, .6));
+            margin-bottom: 10px;
+            white-space: nowrap;
+            display: block;
+        }
+        &-text { border-top: 1px solid #fff; }
+        &-hint {
+            margin: 14px 0 0;
+            white-space: normal;
+        }
+        &-field {
+            width: 100%;
+            @include fw18-24;
+            margin-bottom: 5px;
+            border: none;
+
+            &_percent {
+                text-align: right;
+                color: $col-black-6;
+            }
+        }
+
+        &_result {
+            margin-top: 14px;
+
+            div:first-child {
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &__result {
+        width: 100%;
+        max-width: 922px;
+        padding: 20px 0 0;
+        box-sizing: border-box;
+        border-top: 1px solid #999a9b;
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0 0;
+        
+        &-item { width: 287px; }
+        &-title {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            margin: 0 0 10px;
+            white-space: nowrap;
+        }
+        &-result {
+            font: 500 36px/40px $font-mus;
+            @include font-smoothing;
+            color: $col-orange;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+// @media (max-width: 1279px) {
+//     .purchase {
+
+//         &-installment {
+//             width: $w1279;
+//             display: flex;
+
+//             &__calculator,
+//             &__result {
+//                 width: 50%;
+//                 box-sizing: border-box;
+//             }
+//         }
+//     }
+//     .installment-calculator {
+//         display: block;
+//         padding-right: 15px;
+
+//         &__item {
+//             width: 100%;
+//             margin: 0 0 38px;
+//             &:last-child { margin: 0; }
+//         }
+
+//         &__result {
+//             border-top: none;
+//             border-left: 1px solid #999a9b;
+//             padding: 0 0 0 15px;
+//             display: block;
+//             margin: 0;
+
+//             &-item {
+//                 width: 100%;
+//                 margin: 0 0 40px;
+//                 &:last-child { margin: 0; }
+//             }
+//         }
+//     }
+// }

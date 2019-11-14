@@ -1,0 +1,36 @@
+@import "../../../../styles/modules/mixins/mixin.scss";
+
+.search-form__list {
+    &-item {
+        margin-bottom: 20px;
+        &:last-of-type { margin: 0; }
+    }
+
+    &-checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+        user-select: none;
+        outline: none;
+
+        &-content {
+            display: none;
+            &:checked + .search-form__list-checkbox_for-click {
+                background: url(/assets/img/check.svg) center no-repeat $col-orange;
+                background-size: 20px 16px;
+                border-color: $col-orange;
+            }
+        }
+        &_for-click {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+        }
+    }
+
+    &-text {
+        @include fw18-24;
+        white-space: nowrap;
+    }
+}

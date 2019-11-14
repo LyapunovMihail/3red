@@ -1,0 +1,20 @@
+
+
+    <!-- Отображать сниппет только если у него отрицательное значение показа на главной
+        и если выбранная категория равна категории сниппета или 'ALL' -->
+<div class="news__snippets-item" *ngFor="let snippet of snippetsArray">
+    <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__snippets-link">
+        <div class="news__snippets-img">
+            <img class="snippets_list_item_img_content" [src]="uploadsPath + snippet.image">
+        </div>
+        <div class="news__snippets-descr">
+            <h1 class="news__snippets-descr-title" [innerHTML]="snippet.title | lineBreakPipe"></h1>
+            <p *ngIf="snippet.descrPreview" class="news__snippets-descr-text" [innerHTML]="snippet.descrPreview | lineBreakPipe"></p>
+            <p class="news__snippets-descr-date">{{parseCreatedAtDate(snippet.created_at)}}</p>
+        </div>
+    </a>
+    <div *ngIf="isAuthorizated" class="admin-controll admin__news-btn">
+        <button (click)="redactSnippet.emit(snippet._id)" class="admin-controll admin__news-btn-edit">Редактировать</button>     
+        <button (click)="deleteSnippet.emit(snippet._id)" class="admin-controll admin__news-btn-delete">Удалить</button>
+    </div>
+</div>

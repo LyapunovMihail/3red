@@ -1,0 +1,76 @@
+<div *ngIf="isOpen" class="form-modal">
+
+    <div class="wrapper">
+
+        <div (click)="close.emit(false)" class="form-request-close-bgr"></div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-request form-request--call">
+
+            <div (click)="close.emit(false)" class="form-request_cls-btn"></div>
+
+            <h2 class="form-request_title">Заказать звонок</h2>
+
+            <div class="form-request_wrap">
+                <span class="form-request_name">Ваше имя</span>
+                <input [formControl]="form.controls['name']" 
+                    class="form-request_field"
+                    type="text">
+            </div>
+
+            <div class="form-request_wrap">
+                <span class="form-request_name">Телефон</span>
+                <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
+                    [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                    class="form-request_field" [textMask]="{mask: phoneMask}" type="text">
+            </div>
+
+            <div class="form-request_wrap form-request_wrap--time">
+
+                <span class="form-request_time">Когда вам позвонить?<br>Мы работаем каждый день с 9 до 21 часа.</span>
+
+                <label class="form-request_label form-request_label--padding">
+                    <input [formControl]="form.controls['wait_for_call']" value="now" class="form-request_radio" type="radio" name="time">
+                    <div class="form-request_for-radio"></div>
+                    <span class="form-request_radio-text">В ближайшее время</span>
+                    <span class="form-request_remark">Ожидание может составить до 15 минут.</span>
+                </label>
+
+                <label (click)="timeFocus()" class="form-request_label form-request_label--with-field">
+                    <input [formControl]="form.controls['wait_for_call']" value="later" class="form-request_radio" type="radio" name="time">
+                    <div class="form-request_for-radio"></div>
+                    <span class="form-request_radio-text">Указать время:</span>
+                    <input *ngIf="platform.isBrowser"
+                        [ngClass]="{'time-input-active' : (form.get('wait_for_call').value === 'later' && isOpen)}"
+                        [textMask]="{mask: timeMask}"
+                        [formControl]="form.controls['time']"
+                        class="form-request_field form-request_field--time"
+                        placeholder="__:__" type="text">
+                </label>
+
+            </div>
+
+            <label class="form-request_label form-request_label--agreement">
+                <input [formControl]="form.controls['agreement']" class="form-request_checkbox" type="checkbox">
+                <div [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }" class="form-request_for-checkbox"></div>
+                <span class="form-request_checkbox-text">Я соглашаюсь на использование моих персональных данных.</span>
+            </label>
+
+            <button *ngIf="!isSubmited"
+                [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
+                [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+                class="form-request_btn">
+                <span class="form-request_btn_text">Отправить заявку</span>
+            </button>
+
+            <div *ngIf="isSubmited" class="form-request_btn form-request_btn--send">
+                <span class="form-request_btn_text">Готово</span>
+                <svg class="form-request_svg" viewBox="0 0 20.6 17.3">
+                    <polyline id="svg-figure" class="form-request_svg_figure" points="1.1,5.5 9.1,14.9 19.3,0.9 "/>
+                </svg>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

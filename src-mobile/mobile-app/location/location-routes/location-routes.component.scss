@@ -1,0 +1,117 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.routes {
+    width: 100%;
+    height: calc(100vh - 118px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &_map {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__link {
+        width: 290px;
+        height: 50px;
+        position: fixed;
+        left: calc(50% - (290px / 2));
+        bottom: 60px;
+        border-radius: 4px;
+        background: $col-orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+
+        &-text {
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing;
+            color: #fff;
+            text-transform: uppercase;
+            padding-left: 34px;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 24px;
+                height: 20px;
+                background: url(/assets/img/location/how-to-get.svg) no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+}
+
+.office {
+    width: 100%;
+    height: calc(100vh - 118px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &__head {
+        width: 100%;
+        height: 199px;
+        padding: 25px 15px 10px;
+        box-sizing: border-box;
+
+        &-title {
+            font: 30px/34px 'Leksa';
+            @include font-smoothing;
+            color: $col-black;
+            margin: 0 0 10px;
+        }
+        &-text {
+            @include f16-24;
+            color: rgba(0, 1, 5, 0.8);
+    
+            &_bold {
+                font-weight: 500;
+                color: $col-black;
+            }
+            span { white-space: nowrap; }
+        }
+    }
+
+    &_map {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__link {
+        width: 290px;
+        height: 50px;
+        position: fixed;
+        left: calc(50% - (290px / 2));
+        bottom: 60px;
+        border-radius: 4px;
+        background: $col-orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+
+        &-text {
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing;
+            color: #fff;
+            text-transform: uppercase;
+            padding-left: 34px;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 24px;
+                height: 20px;
+                background: url(/assets/img/location/how-to-get.svg) no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+}

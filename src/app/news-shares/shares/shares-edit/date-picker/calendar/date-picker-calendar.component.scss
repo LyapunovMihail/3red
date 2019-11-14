@@ -1,0 +1,55 @@
+@import "../../../../../../styles/modules/mixins/mixin";
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    user-select: none;
+    box-sizing: border-box;
+    padding: 0 15px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.day {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    vertical-align: bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font: 16px/28px "Museo Sans Cyrl", sans-serif;
+    @include font-smoothing;
+    color: #000105;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: $transition;
+    &:not(:nth-child(7n)) { margin-right: 10.5px; }
+}
+
+.disabled-day {
+    background: #fff;
+    border-radius: 0;
+    cursor: default;
+}
+
+.clicked-day {
+    background: #0070c9 !important;
+    color: white;
+}
+
+.coincide-day {
+    background: rgba(50,50,50,.2);
+    color: white;
+}
+
+.today-day {
+    background: #ff8961;
+    color: $col-black;
+}
+
+.calendar-day:hover:not(.disabled-day) {
+    background: rgba(255, 136, 97, 0.2);
+}

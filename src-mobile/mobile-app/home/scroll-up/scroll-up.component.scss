@@ -1,0 +1,37 @@
+.scroll__up {
+
+    position: fixed;
+    display: none;
+    width: 54px;
+    height: 54px;
+    top: 100px;
+    right: 25px;
+    cursor: pointer;
+
+    @media (max-width: 599px) {
+        top: 85px;
+        right: 15px;
+    }
+}
+
+.scroll__up svg path {
+
+    transition-duration: .3s;
+}
+
+.scroll__up svg circle {
+
+    transition-duration: .3s;
+}
+
+.scroll__up:hover svg path {
+
+    fill: #fff;
+    transition-duration: .3s;
+}
+
+.scroll__up:hover svg circle {
+
+    fill: #cda571;
+    transition-duration: .3s;
+}

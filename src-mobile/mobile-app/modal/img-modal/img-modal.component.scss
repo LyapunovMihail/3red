@@ -1,0 +1,37 @@
+.modal-plan {
+
+    position: unset;
+    max-width: 0;
+    width: 0;
+    height: 0;
+    z-index: 0;
+    opacity: 0;
+
+    &--active {
+
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: max-content;
+        max-width: 900px;
+        height: 100vh;
+        z-index: 999;
+        opacity: 1;
+        transition: opacity 0.7s;
+    }
+}
+
+.modal-plan div {
+
+    height: 100%;
+    text-align: center;
+}
+
+.modal-plan img {
+
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}

@@ -1,0 +1,51 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.ghm-range-number {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+    user-select: none;
+    box-sizing: border-box;
+    @media (max-width: 1279px) { width: 100%; }
+
+    &-text {
+        @include fw18-24;
+        display: block;
+        width: 100%;
+    }
+    &-slider {
+        box-sizing: border-box;
+        user-select: none;
+        width: calc(100% - 2px);
+        position: relative;
+        height: 1px;
+        background: #999a9b;
+        margin: 8px 0;
+    }
+
+    &-runner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        transform: translateY(-50%);
+        border-radius: 50%; 
+        width: 15px;
+        height: 15px;
+        background: $col-orange;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 1px;
+            width: 300px;
+            background: $col-orange;
+        }
+    }
+}

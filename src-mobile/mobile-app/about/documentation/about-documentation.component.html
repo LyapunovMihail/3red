@@ -1,0 +1,32 @@
+<section class="documentation">
+
+        <h1 class="documentation__title">Документация</h1>
+        <div class="documentation__descr">
+            <p class="documentation__descr-text">{{description}}</p>
+        </div>
+
+        <ul class="documentation__objects">
+            <li class="documentation__object"
+                *ngFor="let object of objectsList">
+                <div class="documentation__object-header">
+                    <h2 class="documentation__object-title">
+                        {{object.title}}
+                    </h2>
+                </div>
+                <ul class="documentation__object-content">
+                    <li class="documentation__object-file"
+                        *ngFor="let file of object.uploads">
+                        <p class="documentation__object-date">{{parseDate(file.created_at)}}</p>
+                        <a class="documentation__object-link g-link_red"
+                            target="_blank"
+
+                            [href]="'/' + uploadsPath + file.name"
+                            [attr.download]="file.originName">
+                            {{file.originalName}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+</section>

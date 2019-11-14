@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="43px" height="36px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Школа</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M22,0 C30.836556,0 38,7.163444 38,16 C38,24.836556 30.836556,32 22,32 C15.4965513,32 9.89934923,28.1198972 7.39706558,22.5483634 L-7.66951701e-17,17 L6.4661351,12.1504267 C8.18944037,5.17332023 14.4905733,0 22,0 Z" id="path-1"></path>
+        <filter x="-11.0%" y="-7.8%" width="120.2%" height="121.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Расположение++" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Новотомилино_расположение_состояния-элементов" transform="translate(-834.000000, -563.000000)">
+            <g id="Школа" transform="translate(837.000000, 564.000000)">
+                <g>
+                    <g id="Combined-Shape">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#AE6BF8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Group-11" transform="translate(13.000000, 8.000000)">
+                        <path d="M17.28,9.90782836 C17.28,9.90782836 16.7868,10.1528902 15.58944,9.90782836 C14.84568,9.75562473 13.01904,8.79073745 11.6136,8.79073745 C10.20816,8.79073745 9.36,9.90782836 9.36,9.90782836 L9.36,1.11073745 L9.36,1.11702109 C9.36,1.11702109 10.20816,0.000628363636 11.6136,0.000628363636 C13.01904,0.000628363636 14.84568,0.964817455 15.58944,1.11702109 C16.7868,1.36138473 17.28,1.11702109 17.28,1.11702109 L17.28,9.90782836 Z" id="Fill-1" fill="#FFFFFF" fill-rule="nonzero"></path>
+                        <path d="M0,9.90782836 C0,9.90782836 0.4932,10.1528902 1.69056,9.90782836 C2.43432,9.75562473 4.26096,8.79073745 5.6664,8.79073745 C7.07184,8.79073745 7.92,9.90782836 7.92,9.90782836 L7.92,1.11073745 L7.92,1.11702109 C7.92,1.11702109 7.07184,0.000628363636 5.6664,0.000628363636 C4.26096,0.000628363636 2.43432,0.964817455 1.69056,1.11702109 C0.4932,1.36138473 0,1.11702109 0,1.11702109 L0,9.90782836 Z" id="Fill-3" fill="#FFFFFF" fill-rule="nonzero"></path>
+                        <path d="M6.243768,11.5026153 L0.398808,12.0025135" id="Stroke-5" stroke="#FFFFFF" stroke-width="2"></path>
+                        <polyline id="Stroke-7" stroke="#FFFFFF" stroke-width="2" points="17.456832 12.0023738 10.202832 11.4438284 10.202832 12.0023738 6.932592 12.0023738"></polyline>
+                        <path d="M5.615856,10.1873804 C5.528016,10.1873804 5.434416,10.201344 5.343696,10.2076276 L5.343696,15.5626822 L6.495696,14.1663185 L7.647696,15.5626822 L7.647696,11.023104 C7.288416,10.692864 6.587136,10.1873804 5.615856,10.1873804" id="Fill-9" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

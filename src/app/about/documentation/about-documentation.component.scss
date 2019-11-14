@@ -1,0 +1,310 @@
+@import "../../../styles/modules/mixins/mixin";
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.documentation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__wrapper {
+        width: 100%;
+        max-width: $w1600;
+        box-sizing: border-box;
+        padding-top: 120px;
+    }
+
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 27px;
+    }
+
+    &__title {
+        width: 100%;
+        display: flex;
+
+        &-content,
+        &-text {
+            @include font-smoothing();
+        }
+
+        &-content {
+            width: 50%;
+            font: 54px/58px 'Leksa';
+            color: $col-black;
+            margin-bottom: 20px;
+        }
+
+        &-text {
+            width: 50%;
+            font: 16px/24px $font-mus;
+            color: $col-black;
+            max-width: 600px;
+            box-sizing: border-box;
+            padding: 12px;
+        }
+    }
+
+    &__adding-btn {
+        height: 62px;
+        border: 1px solid #0070c9;
+        border-radius: 5px;
+        background: transparent;
+        font: 500 16px/22px $font-mus;
+        color: $col-blue;
+        @include font-smoothing();
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 30px;
+        cursor: pointer;
+        transition: box-shadow .2s linear;
+        margin: 0 0 6px;
+
+        &-text {
+            position: relative;
+            padding-left: 42px;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                left: 0;
+                top: -5px;
+                background: url('../../../assets/img/about/admin/add_doc.svg') center no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+
+    &__objects {
+        width: 100%;
+    }
+
+    &__object {
+        width: 100%;
+        max-width: $w1600;
+        background: rgba(171, 171, 34, 0.06);
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        display: flex;
+        position: relative;
+        margin: 0 0 5px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        &-header {
+            width: calc(50% + 30px);
+            max-width: 520px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        &-title {
+            font: 500 20px/24px $font-mus;
+            color: $col-black;
+            @include font-smoothing();
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            max-width: 413px;
+            margin: 0 0 10px;
+        }
+
+        &-load-btn {
+            // display: block;
+            font: 500 16px/22px $font-mus;
+            @include font-smoothing;
+            color: #0070c9;
+            margin: 10px 0 0;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            margin: 10px 0 0;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 22px;
+                background: url('../../../assets/img/about/admin/dwnld_doc.svg') no-repeat;
+                background-size: 100%;
+                top: 0;
+                left: calc(100% + 10px);
+            }
+        }
+        &-del-object {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #d5210d;
+            position: absolute;
+            left: -30px - 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 14px;
+                height: 2px;
+                background-color: #fff;
+                left: calc(50% - 7px);
+                top: calc(50% - .5px);
+            }
+        }
+        &-move-object {
+            width: 24px;
+            height: 8px;
+            position: absolute;
+            right: -39px;
+            top: calc(50% - 4px);
+            padding: 0;
+            margin: 0;
+            cursor: grab;
+
+            div {
+                width: 24px;
+                height: 1px;
+                background: #d8d8d8;
+
+                &:not(:last-child) {
+                    margin: 0 0 3px;
+                }
+            }
+        }
+
+        &-content {
+            width: calc(100% - 520px);
+        }
+
+        &-file {
+            display: flex;
+            &:not(:last-child) { margin: 0 0 12px; }
+        }
+
+        &-link {
+            width: 100%;
+            position: relative;
+            font: 500 16px/23px $font-mus;
+            padding: 0 0 0 29px;
+            display: flex;
+            justify-content: space-between;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 19px;
+                height: 22px;
+                background: url('../../../assets/img/about/admin/pdf.svg') no-repeat;
+                background-size: 100%;
+            }
+        
+            // &:not(.documentation__object-link_admin) {
+            //     background: url('/assets/img/about/doc.svg') 0 4px no-repeat;
+            //     background-size: 15px 17px; 
+            // }
+        }
+        &-name-file {
+            width: calc(100% - 110px);
+        }
+        &-date {
+            width: 90px;
+            font: 500 16px/23px $font-mus;
+            @include font-smoothing;
+            color: #999a9b;
+        }
+
+        &-del-file {
+            font: 500 16px/22px $font-mus;
+            @include font-smoothing;
+            margin: 0 15px 0 0;
+            padding: 0 19px 0 0;
+            background: transparent;
+            cursor: pointer;
+            color: $col-black;
+            opacity: .5;
+            position: relative;
+
+            &:before {
+                content: '';
+                position: absolute;
+                right: -1px;
+                top: 3px;
+                width: 15px;
+                height: 15px;
+                background: url('../../../assets/img/about/admin/cls.svg') no-repeat;
+                background-size: 100%;
+            }
+        }
+    }
+}
+
+.admin-input {
+    border: 1px dashed #B2B2B2;
+}
+
+.admin-gallery_progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font: 15px/25px Arial, sans-serif;
+    z-index: 100;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    &-title {
+
+    }
+
+    &-info {
+
+    }
+
+    &-line {
+        width: 200px;
+        border: 1px solid white;
+        margin-top: 10px;
+        height: 15px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    &-line-inner {
+        box-sizing: border-box;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        background: white;
+        transition: .2s;
+    }
+}

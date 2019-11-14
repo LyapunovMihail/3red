@@ -1,0 +1,18 @@
+<div class="purchase__credit">
+
+    <!-- <app-purchase-credit-form
+        [isAuthorizated]="isAuthorizated"
+        (formChange)="formChange($event)">
+    </app-purchase-credit-form> -->
+
+    <app-purchase-credit-output
+        [isAuthorizated]="isAuthorizated"
+        [bankList]="snippetArray"
+        (showModalBankList)="showModalBankList = true">
+    </app-purchase-credit-output>
+
+</div>
+
+<app-bank-list-admin class="admin-controll" *ngIf="showModalBankList"
+    (close)="showModalBankList = false; windowScrollLocker.unblock(); getActiveSnippet()">
+</app-bank-list-admin>

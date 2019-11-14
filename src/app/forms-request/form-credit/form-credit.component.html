@@ -1,0 +1,89 @@
+<div *ngIf="isOpen" class="g-modal-bg form-modal form-modal_credit">
+
+    <div (click)="close.emit(false)" class="form-modal__close-area"></div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-request">
+
+        <button (click)="close.emit(false)" class="form-request__cls-btn"></button>
+
+        <h1 class="form-request__title">Заявка на ипотеку для квартиры №{{apartmentNumber}}</h1>
+
+        <input [formControl]="form.controls['price']" type="text" style="display: none;">
+        <input [formControl]="form.controls['number']" type="text" style="display: none;">
+        
+        <div class="form-request__wrap">
+            <p class="form-request__subtitle">Ваше имя</p>
+            <input [formControl]="form.controls['name']" 
+                class="form-request__field"
+                type="text">
+        </div>
+
+        <div class="form-request__wrap">
+            <p class="form-request__subtitle">Первоначальный взнос</p>
+            <input [formControl]="form.controls['first_pay']" class="form-request__field" type="text">
+        </div>
+    
+        <div class="form-request__wrap">
+            <p class="form-request__subtitle">Срок выплат, месяцев</p>
+            <input [formControl]="form.controls['period_pay']" class="form-request__field" type="text">
+        </div>
+
+        <div class="form-request__wrap">
+            <p class="form-request__subtitle">Телефон</p>
+            <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']"
+                [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
+                class="form-request__field" placeholder="+7 (___) ___-__-__" [textMask]="{mask: phoneMask}" type="text">
+        </div>
+
+        <div class="form-request__wrap form-request__wrap_last">
+            <p class="form-request__subtitle">Эл. почта</p>
+            <input [formControl]="form.controls['mail']"
+                   [ngClass]="{'input-invalid': form.controls['mail'].invalid && form.controls['mail'].touched}"
+                   class="form-request__field" type="text">
+        </div>
+
+        <div class="form-request__wrap">
+
+            <p class="form-request__subtitle">Когда вам позвонить?<br>Мы работаем каждый день с 9 до 21 часа.</p>
+
+            <label class="form-request__radio-wrap">
+                <input [formControl]="form.controls['wait_for_call']" value="now" type="radio" name="time">
+                <div class="form-request__radio"></div>
+                <p class="form-request__radio-text">
+                    В ближайшее время
+                    <span class="form-request__radio-text_remark">Ожидание может составить до 15 минут.</span>
+                </p>
+            </label>
+
+            <label (click)="timeFocus()" class="form-request__radio-wrap  form-request__radio-wrap_time">
+                <input [formControl]="form.controls['wait_for_call']" value="later" class="form-request_radio" type="radio" name="time">
+                <div class="form-request__radio"></div>
+                <p class="form-request_radio-text">Указать время:</p>
+                <input *ngIf="platform.isBrowser"
+                    [ngClass]="{'time-input-active' : (form.get('wait_for_call').value === 'later' && isOpen)}"
+                    [textMask]="{mask: timeMask}"
+                    [formControl]="form.controls['time']"
+                    class="form-request__field form-request__field_time"
+                    placeholder="__:__" type="text">
+            </label>
+
+        </div>
+
+        <label class="form-request__checkbox-wrap">
+            <input [formControl]="form.controls['agreement']" type="checkbox">
+            <div [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }" class="g-checkbox form-request__checkbox"></div>
+            <p class="form-request__subtitle form-request__subtitle_checkbox">Я соглашаюсь на использование моих персональных данных.</p>
+        </label>
+
+        <button *ngIf="!isSubmited"
+            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
+            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+            class="form-request__btn">
+            Забронировать
+        </button>
+
+        <!-- <div *ngIf="isSubmited" class="form-request_btn form-request_btn--send">Готово</div> -->
+
+    </form>
+
+</div>

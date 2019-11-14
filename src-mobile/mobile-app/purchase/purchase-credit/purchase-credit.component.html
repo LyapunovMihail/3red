@@ -1,0 +1,73 @@
+<div class="credit purchase__credit">
+
+    <!--
+    <div class="credit__filter">
+        Range input
+
+        <div class="credit__filter-checkbox">
+            <div class="credit__filter-checkbox-item credit__filter-checkbox-war">
+                <input type="checkbox" name="type" id="war">
+                <label for="war" class="g-checkbox"></label>
+                <label for="war" class="credit__filter-checkbox-text">Военная ипотека</label>
+            </div>
+            <div class="credit__filter-checkbox-item credit__filter-checkbox-mom">
+                <input type="checkbox" name="type" id="mom">
+                <label for="mom" class="g-checkbox"></label>
+                <label for="mom" class="credit__filter-checkbox-text">Материнский капитал</label>
+            </div>
+            <div class="credit__filter-checkbox-item credit__filter-checkbox-nation">
+                <input type="checkbox" name="type" id="nation">
+                <label for="nation" class="g-checkbox"></label>
+                <label for="nation" class="credit__filter-checkbox-text">Гражданство РФ</label>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="credit__list">
+        <div *ngFor="let snippet of snippetArray" class="list-snippet__item list-snippet__item_{{snippet.cssclass}}">
+
+            <div class="list-snippet__item-wrap">
+                <div class="list-snippet__item-logo">
+                    <img class="list-snippet__item-logo-img"
+                        *ngIf="snippet.image.length > 0"
+                         [src]="snippet.image"
+                    />
+                </div>
+                <p class="list-snippet__item-logo-text">{{snippet.name}}</p>
+            </div>
+
+            <div class="list-snippet__item-descr">
+                <div class="list-snippet__item-descr-name">
+                    <p class="list-snippet__item-descr-text_b">Минимальный взнос от
+                        <span>{{snippet.initial}} %</span>
+                    </p>
+                </div>
+                <div class="list-snippet__item-descr-info">
+                    <div class="list-snippet__item-descr-info-item list-snippet__item-descr-ante">
+                        <p class="list-snippet__item-descr-text_s">Ставка</p>
+                        <p class="list-snippet__item-descr-text_b">
+                            <span class="list-snippet__item-descr_ante-input">
+                                {{snippet.percent}} %
+                            </span>
+                        </p>
+                    </div>
+                    <div class="list-snippet__item-descr-info-item list-snippet__item-descr-date">
+                        <p class="list-snippet__item-descr-text_s">Срок до</p>
+                        <p class="list-snippet__item-descr-text_b">
+                            <span class="list-snippet__item-descr_date-input">
+                                {{snippet.deadline}} %
+                            </span>
+                        </p>
+                    </div>
+                    <!-- <div class="list-snippet__item-descr-info-item list-snippet__item-descr-payment">
+                        <p class="list-snippet__item-descr-text_s">Платеж в месяц</p>
+                        <p class="list-snippet__item-descr-text_b">—</p>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

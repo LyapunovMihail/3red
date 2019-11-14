@@ -1,0 +1,76 @@
+<div class="purchase__filter">
+    <div class="purchase__filter_disable"
+        *ngIf="isAuthorizated"></div>
+
+    <div class="purchase__filter-range">
+        <div class="purchase__filter-item purchase__filter-price">
+            <p class="purchase__filter-item-text">Стоимость недвижимости, &#8381;</p>
+            <input (change)="formChanges($event.target.value, 'price')"
+                   (input)="bitReplace($event.target.value, 'price')"
+                   (keyup)="keyUpReviuse($event)"
+                   [value]="form.price.val | installmentNumberPipe"
+                   class="field purchase__filter-item-field" type="text">
+            <ghm-range-number
+                (move)="form.price.val = $event"
+                (moveend)="formChanges($event, 'price')"
+                [toFixed]="true"
+                [min]="form.price.min"
+                [max]="form.price.max"
+                [start]="form.price.val">
+            </ghm-range-number>
+        </div>
+        <div class="purchase__filter-item purchase__filter-size">
+            <p class="purchase__filter-item-text">Первоначальный взнос, &#8381;</p>
+            <input (change)="formChanges($event.target.value, 'firstpay')"
+                   (input)="bitReplace($event.target.value, 'firstpay')"
+                   (keyup)="keyUpReviuse($event)"
+                   [value]="form.firstpay.val | installmentNumberPipe"
+                   class="field purchase__filter-item-field" type="text">
+            <ghm-range-number
+                (move)="form.firstpay.val = $event"
+                (moveend)="formChanges($event, 'firstpay')"
+                [toFixed]="true"
+                [min]="form.firstpay.min"
+                [max]="form.firstpay.max"
+                [start]="form.firstpay.val">
+            </ghm-range-number>
+        </div>
+        <div class="purchase__filter-item purchase__filter-term">
+            <p class="purchase__filter-item-text">Срок, лет</p>
+            <input (change)="formChanges($event.target.value, 'deadline')"
+                   (input)="bitReplace($event.target.value, 'deadline')"
+                   (keyup)="keyUpReviuse($event)"
+                   [value]="form.deadline.val | installmentNumberPipe"
+                   class="field purchase__filter-item-field" type="text">
+            <ghm-range-number
+                (move)="form.deadline.val = $event"
+                (moveend)="formChanges($event, 'deadline')"
+                [toFixed]="true"
+                [min]="form.deadline.min"
+                [max]="form.deadline.max"
+                [start]="form.deadline.val">
+            </ghm-range-number>
+        </div>
+    </div>
+    <!-- <div class="purchase__filter-checkbox">
+        <div class="purchase__filter-checkbox-item purchase__filter-checkbox-war">
+            <input type="checkbox" name="type" id="war"
+                   [checked]="form.military" (change)="formChanges(!form.military, 'military')">
+            <label for="war" class="g-checkbox"></label>
+            <label for="war" class="purchase__filter-checkbox-text">Военная ипотека</label>
+        </div>
+        <div class="purchase__filter-checkbox-item purchase__filter-checkbox-mom">
+            <input type="checkbox" name="type" id="mom"
+                   [checked]="form.maternal" (change)="formChanges(!form.maternal, 'maternal')">
+            <label for="mom" class="g-checkbox"></label>
+            <label for="mom" class="purchase__filter-checkbox-text">Материнский капитал</label>
+        </div>
+        <div class="purchase__filter-checkbox-item purchase__filter-checkbox-nation">
+            <input type="checkbox" name="type" id="nation"
+                   [checked]="form.nationality" (change)="formChanges(!form.nationality, 'nationality')">
+            <label for="nation" class="g-checkbox"></label>
+            <label for="nation" class="purchase__filter-checkbox-text">Гражданство РФ</label>
+        </div>
+    </div> -->
+</div>
+

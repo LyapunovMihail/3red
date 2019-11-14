@@ -1,0 +1,26 @@
+<div class="installment__result-item">
+    <p class="installment__result-title">Сумма</p>
+    <p class="installment__result-result">{{ price | installmentNumberPipe }} &#8381;</p>
+</div>
+<div class="installment__result-item" *ngIf="changeType !== typeThree">
+    <p class="installment__result-title">Ставка</p>
+    <p class="installment__result-result">{{ percent }}% годовых</p>
+</div>
+<div class="installment__result-item" *ngIf="changeType !== typeThree">
+    <p class="installment__result-title">Размер ежемесячных выплат</p>
+    <p class="installment__result-result">{{ monthPay | installmentNumberPipe }} &#8381;</p>
+</div>
+
+<div class="installment__result-item" *ngIf="changeType === typeThree">
+    <p class="installment__result-title g-nav-title">Размер скидки</p>
+    <p class="installment__result-result g-title_three">
+        {{ saleFullPay(price) | installmentNumberPipe }} &#8381;
+    </p>
+</div>
+<div class="installment__result-item" *ngIf="changeType === typeThree">
+    <p class="installment__result-title g-nav-title">Итоговая стоимость</p>
+    <p class="installment__result-result g-title_three">
+        {{ (price - saleFullPay(price)) | installmentNumberPipe }}
+    </p>
+</div>
+

@@ -1,0 +1,83 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#plan {
+    pointer-events: none;
+
+    * {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+}
+
+.parking-floor {
+    width: 100%;
+    min-height: calc(100vh - 73px - 50px);
+    padding: 73px 0 50px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_section {
+        position: absolute;
+        top: 93px;
+        left: 40px;
+
+        &-list {
+            display: flex;
+
+            &_item:first-child {
+                margin: 0 3px 0 0;
+            }
+
+            &_item {
+                font: 15px/22px 'Montserrat';
+                color: #606060;
+
+                a {
+                    font: 15px/22px 'Montserrat';
+                    color: #606060;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .floor-plan-error-description {
+        font: 18px/26px 'Montserrat', sans-serif;
+        color: #888ba2;
+        white-space: nowrap;
+        @include font-smoothing();
+    }
+
+    &_description {
+        position: relative;
+
+        &_scheme {
+            display: flex;
+
+            svg {
+                height: 75vh;
+                min-height: 270px;
+            }
+        }
+    }
+}
+
+.flat-mod {
+    cursor: pointer;
+
+    &:hover path, &:hover polygon, &:hover polyline, &:hover rect {
+        fill: #cda571;
+    }
+}
+
+.flat-mod--available path, .flat-mod--available polygon, .flat-mod--available polyline, .flat-mod--available rect {
+    fill: #f2e7d5;
+}
+
+.flat-mod--out-of-stock path, .flat-mod--out-of-stock polygon, .flat-mod--out-of-stock polyline, .flat-mod--out-of-stock rect {
+    fill: #d8d8d8;
+}

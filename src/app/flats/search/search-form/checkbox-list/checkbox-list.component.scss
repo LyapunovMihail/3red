@@ -1,0 +1,52 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.search-form {
+
+    &--row {
+        display: flex;
+        margin: 23px 0 0;
+    }
+
+    &__list {
+
+        &-item {
+
+            &--decoration {
+                display: flex;
+                margin: 0 30px 0 0;
+
+            }
+            &--houses {
+                display: flex;
+                margin: 0 0 14px;
+            }
+
+            &:hover .search-form__list-checkbox,
+            &:hover .search-form__list-text {
+                border-color: $col-orange;
+                color: $col-orange;
+            }
+            input {
+                display: none;
+                &:checked + .search-form__list-checkbox {
+                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
+                    border-color: #e7490f;
+                }
+            }
+        }
+        &-text,
+        &-checkbox {
+            transition: color $transition, border-color $transition;
+            cursor: pointer;
+        }
+        &-text {
+            &--decoration {
+                @include f16-24(rgba(0, 1, 5, 0.8));
+            }
+            &--houses {
+                @include fw18-24();
+            }
+        }
+        &-checkbox { background-color: #fff; }
+    }
+}

@@ -1,0 +1,35 @@
+<section class="developer">
+    <div class="developer__head">
+        <h1 class="developer__head-title g-title-path">О застройщике</h1>
+        <p class="developer__head-subtitle">
+            Тройка РЭД — девелопер, специализирующийся на&nbsp;комплексной 
+            жилой застройке в московском регионе.
+        </p>
+        <p class="developer__head-text">
+            Компания реализует функции застройщика, технического заказчика, 
+            генерального подрядчика и эксплуатации. Это позволяет управлять
+            проектами «под ключ»: от идеи до передачи готовых объектов
+            недвижимости собственникам и их последующей эксплуатации.
+        </p>
+        <p class="developer__head-text">
+            Мы не просто строим красивые жилые дома, мы создаем благоприятную
+            среду обитания, включая школы, детские сады, поликлиники, торговые
+            центры, парковки, благоустроенные дворы и зеленые зоны.
+        </p>
+    </div>
+    <div class="developer__project">
+        <p class="developer__project-title">Другие проекты <a href="https://3-red.com" target="_blank" class="g-link_red">Тройки РЭД</a></p>
+        
+        <a *ngFor="let snippet of snippets" href="{{snippet.link}}" target="_blank" class="developer__project-snippet {{snippet.classIndex}}">
+            <div class="snippet__location">
+                <div class="snippet__location-city {{snippet.mod}}">{{snippet.city}}</div> 
+                <div class="snippet__location-distance" *ngIf="snippet.addDistance === true">{{snippet.distance}}</div>
+            </div>
+            <div class="snippet__name">
+                <p class="snippet__name-title">{{snippet.title}}</p>
+                <p class="snippet__name-subtitle">{{snippet.subtitle}}</p>
+            </div>
+            <img src="{{snippet.background}}" alt="{{snippet.title}}" class="snippet__bg-image">
+        </a>
+    </div>
+</section>

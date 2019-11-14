@@ -1,0 +1,90 @@
+<section class="favorites">
+    <div class="favorites__head" *ngIf="flats.length > 0">
+        <h1 class="favorites__head-title">В избранном {{ flatDeclension(flats.length, ['квартира', 'квартиры', 'квартир']) }}</h1>
+    </div>
+    <div class="favorites__search-form search-form" *ngIf="flats.length > 0">
+        
+        <div class="search-form__wrap search-form__wrap_first">
+
+            <div (click)="sort('space')"
+                [ngClass]="{
+                    'search-form__sorting_active': sortType === 'space',
+                    'search-form__sorting_turn': sortType === 'space' && directionSort
+                }"
+                class="search-form__sorting search-form__sorting_space">
+                По площади
+            </div>
+            <div (click)="sort('floor')"
+                [ngClass]="{
+                    'search-form__sorting_active': sortType === 'floor',
+                    'search-form__sorting_turn': sortType === 'floor' && directionSort
+                }"
+                class="search-form__sorting search-form__sorting_floor">
+                По этажу
+            </div>
+        </div>
+        <div class="search-form__wrap search-form__wrap_second">
+
+            <div class="search-form__sorting search-form__sorting_delivery"
+                [ngClass]="{
+                    'search-form__sorting_active': sortType === 'price',
+                    'search-form__sorting_turn': sortType === 'price' && directionSort
+                }">
+                По сроку сдачи
+            </div>
+            <div (click)="sort('price')"
+                [ngClass]="{
+                    'search-form__sorting_active': sortType === 'price',
+                    'search-form__sorting_turn': sortType === 'price' && directionSort
+                }"
+                class="search-form__sorting search-form__sorting_price">
+                По цене
+            </div>
+        </div>
+    </div>
+    <div class="search-output" *ngIf="flats.length > 0">
+
+        <ul class="search-output__result">
+
+            <li class="search-output__result-wrapper" *ngFor="let flat of flats">
+
+                <div class="search-output__result-item">
+
+                    <div class="search-output__result-image">
+                        <img [src]="'/assets/floor-plans/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'"
+                             (error)="img.style.display = 'none'" #img>
+                        <div *ngIf="img.style.display === 'none'" class="error-image">Изображение недоступно</div>
+                    </div>
+
+                    <p class="search-output__result-text">
+                        <span class="search-output__result-text_room">{{(flat.rooms === '0') ? 'Студия' : flat.rooms + ' комнатная'}},</span>
+                        <span class="search-output__result-text_number">№{{ flat.flat }}</span>
+                    </p>
+                    <p class="search-output__result-text search-output__result-text_space">{{flat.space}} м²</p>
+                    <p class="search-output__result-text search-output__result-text_floor">{{flat.floor}} этаж</p>
+                    <p class="search-output__result-text search-output__result-text_house">Дом {{flat.house}}</p>
+                    <p class="search-output__result-text search-output__result-text_decoration">{{flat.decorationName}}</p>
+                    <p class="search-output__result-text search-output__result-text_delivery">{{flat.deliveryDate}}</p>
+                    <p class="search-output__result-text">
+                        <span class="search-output__result-text_price-not-sale" *ngIf="!flat.discount">{{flat.price | priceNumber}} &#8381;</span>
+                        <span class="search-output__result-text_price-sale" *ngIf="flat.discount">{{+flat.price - flat.discount | priceNumber}} &#8381;</span>
+                    </p>
+                </div>
+
+                <div class="search-output__result-favorite" (click)="removeFromFavorite(flat)"></div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="favorites__more" *ngIf="flats.length > 10">
+        <button class="favorites__more-btn">Еще квартиры</button>
+    </div>
+
+    <div class="favorites__empty" *ngIf="flats.length <= 0">
+        <h1 class="favorites__empty-title">Интересующие вас квартиры вы можете добавлять в этот раздел</h1>
+        <button class="favorites__empty-btn" [routerLink]="['/flats/plan']">Выбрать квартиру</button>
+    </div>
+</section>
+
+<!-- <app-favorites-form [pdfUrls]="pdfUrls" [isOpen]="formIsOpen" (close)="formIsOpen = false">
+</app-favorites-form> -->

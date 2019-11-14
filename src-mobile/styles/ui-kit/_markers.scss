@@ -1,0 +1,209 @@
+@import "../modules/mixins/mixin.scss";
+
+.main_map_marker {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: url(/assets/img/location/main_marker.svg) center no-repeat $col-orange;
+}
+
+.office_map_marker {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: url(/assets/img/location/office_marker.svg) center no-repeat #aaab22;
+}
+
+
+.marker-content {
+    width: 38px;
+    height: 34px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    &:hover {
+        .marker-content__tooltip {
+            &-content {
+                left: 0;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__text { display: none; }
+    &_active,
+    &_hover {
+        .marker-content__tooltip {
+            &-content {
+                left: 0;
+                opacity: 10 !important;
+            }
+        }
+    }
+
+    &__tooltip {
+        min-width: 700px;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        display: flex;
+        justify-content: flex-start;
+
+        &-content {
+            min-height: 100%;
+            box-sizing: border-box;
+            background-color: #fff;
+            position: absolute;
+            left: -25%;
+            top: 0;
+            opacity: 0;
+            transition: .4s ease;
+
+            &-title,
+            &-text {
+                font: 500 16px/23px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+            }
+            &-text { font: 500 14px/20px $font-mus; white-space: nowrap }
+
+            &-hint {}
+            &_main {
+                border-radius: 28px;
+                border: 1px solid $col-orange;
+                padding: 0 30px 0 66px; //
+                display: flex;
+                flex-flow: column;
+                align-items: flex-start;
+                justify-content: center;
+            }
+
+            &_railway,
+            &_metro,
+            &_auto {
+                border-radius: 16px;
+                padding: 0 20px 0 48px;
+                display: flex;
+                align-items: center;
+                border: 1px solid #5a31c5;
+                .marker-content__tooltip-content-title { display: none; }
+            }
+            &_railway { border-color: #cd1f26 }
+            &_metro { border-color: #ff0114 }
+        }
+
+        &_main {
+            min-width: 378px;
+            min-height: 56px;
+            border-radius: 28px;
+            left: 0;
+        }
+    }
+
+    &__main-marker {
+        width: 56px;
+        height: 56px;
+
+        &:after {
+            content: '';
+            width: 56px;
+            height: 56px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            background: url(/assets/img/location/main_marker.svg) center no-repeat $col-orange;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+        }
+    }
+
+    &__office-marker {
+        width: 56px;
+        height: 56px;
+
+        &:after {
+            content: '';
+            width: 56px;
+            height: 56px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            background: url(/assets/img/location/office_marker.svg) center no-repeat #a9aa23;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .marker-content__tooltip-content_main {
+            border: 1px solid #aaab22;
+        }
+    }
+
+    &__shop,
+    &__school,
+    &__kindergarten,
+    &__hospital,
+    &__sport,
+    &__recreation,
+    &__transport,
+    &__pharmacy,
+    &__cafe {
+        &:after {
+            content: '';
+            width: 39px;
+            height: 34px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    // Инфраструктура
+    &__shop:after { background: url(/assets/img/location/infr/market-ic.svg) center no-repeat; }
+    &__school:after { background: url(/assets/img/location/infr/school-ic.svg) center no-repeat; }
+    &__kindergarten:after { background: url(/assets/img/location/infr/children-ic.svg) center no-repeat; }
+    &__hospital:after { background: url(/assets/img/location/infr/hospital-ic.svg) center no-repeat; }
+    &__sport:after { background: url(/assets/img/location/infr/gym-ic.svg) center no-repeat; }
+    &__recreation:after { background: url(/assets/img/location/infr/park-ic.svg) center no-repeat; }
+    &__transport:after { background: url(/assets/img/location/infr/stop-ic.svg) center no-repeat; }
+    &__pharmacy:after { background: url(/assets/img/location/infr/aptek-ic.svg) center no-repeat; }
+    &__cafe:after { background: url(/assets/img/location/infr/eat-ic.svg) center no-repeat; }
+
+    &__shop,
+    &__school,
+    &__kindergarten,
+    &__hospital,
+    &__sport,
+    &__recreation,
+    &__transport,
+    &__pharmacy,
+    &__cafe {
+        .marker-content__tooltip {
+            min-height: 32px;
+            border-radius: 16px;
+            left: 7px;
+
+            .marker-content__tooltip-content {
+                border-radius: 16px;
+                padding: 0 20px 0 48px;
+                display: flex;
+                align-items: center;
+                border: 1px solid #297acc;
+            }
+        }
+    }
+    &__shop .marker-content__tooltip .marker-content__tooltip-content { border-color: #2095d2; }
+    &__school .marker-content__tooltip .marker-content__tooltip-content { border-color: #ae6bf8; }
+    &__kindergarten .marker-content__tooltip .marker-content__tooltip-content { border-color: #ffcb0d; }
+    &__hospital .marker-content__tooltip .marker-content__tooltip-content { border-color: #fa9191; }
+    &__sport .marker-content__tooltip .marker-content__tooltip-content { border-color: #1da600; }
+    &__recreation .marker-content__tooltip .marker-content__tooltip-content { border-color: #aaab22; }
+    &__transport .marker-content__tooltip .marker-content__tooltip-content { border-color: #297acc; }
+    &__pharmacy .marker-content__tooltip .marker-content__tooltip-content { border-color: #ec1f27; }
+    &__cafe .marker-content__tooltip .marker-content__tooltip-content { border-color: #f2883d; }
+}
+

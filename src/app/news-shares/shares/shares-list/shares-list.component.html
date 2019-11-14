@@ -1,0 +1,55 @@
+<div class="news">
+    <div class="news__head">
+        <div class="news__head-wrap">
+            <h1 class="news__head-title g-title-path">Новости</h1>
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </div>
+        <div class="news__head-wrap" *ngIf="isAuth">
+            <button (click)="createSharesSnippet()" class="admin-controll admin__add-stock">Добавить акцию</button>
+        </div>
+    </div>
+
+    <!-- список новостей -->
+    <app-shares-items class="news__snippets-list"
+        (deleteSnippet)="deleteSharesSnippet($event)"
+        (redactSnippet)="redactSharesSnippet($event)"
+        [isAuthorizated]="isAuth"
+        [snippetsArray]="shares"
+        [indexNum]="indexNum">
+    </app-shares-items>
+    <!-- end : список новостей -->
+
+    <ul *ngIf="sharesLength > 10" class="shares-list__paginator">
+        <ng-container *ngFor="let item of paginator; let i = index">
+            <li class="shares-list__paginator-item"
+                *ngIf="sharesLength > item"
+                (click)="getShares(item); changeRoute(i); scrollTop()"
+                [ngClass]="{'shares-list__paginator-item_active': activePaginatorItem === i}">{{i + 1}}</li>
+        </ng-container>
+    </ul>    
+</div>
+
+<app-shares-edit class="admin-controll"
+    *ngIf="isAuth && isCreateRedactForm"
+    (snippetsChange)="snippetsChange($event)"
+    (close)="isCreateRedactForm = false; windowScrollLocker.unblock()"
+    [redactId]="redactId" [isForm]="isCreateRedactForm">
+</app-shares-edit>
+
+<app-shares-delete class="admin-controll"
+    *ngIf="isAuth"
+    (snippetsChange)="snippetsChange()"
+    (close)="isDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="shares"
+    [redactId]="redactId" [isForm]="isDeleteForm">
+</app-shares-delete>

@@ -1,0 +1,236 @@
+@import "../../../styles/modules/mixins/mixin";
+
+:host { width: 100%; }
+
+.search {
+    width: 100%;
+    height: calc(100% - 19px);
+    background: #ffffff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: top .5s ease;
+
+    &_slide-top { top: calc(0% + 70px); }
+
+    &__main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        padding-bottom: 210px;
+
+        &-more {
+            width: 177px;
+            height: 50px;
+            background: #fff;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            margin: -60px auto 60px;
+            border-radius: 2px;
+            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+            border: solid 1px #e7490f;
+            font: 500 18px/24px "Museo Sans Cyrl", sans-serif;
+            @include font-smoothing();
+            color: #e7490f;
+        }
+    }
+}
+
+.search-form {
+    width: $w1600;
+    box-sizing: border-box;
+    position: relative;
+    box-sizing: border-box;
+
+    &__container {
+        width: 100%;
+        height: 127px;
+        box-sizing: border-box;
+        padding: 19px 0 29px;
+        display: flex;
+        justify-content: center;
+        background-color: #fafaf2;
+        z-index: 100;
+        transition: 0.2s linear;
+
+        &--fixed {
+            position: fixed;
+            bottom: 50px;
+        }
+        &--slide {
+            height: 190px;
+        }
+    }
+    &__wrap {
+        display: flex;
+        align-items: flex-end;
+
+        &-item {
+            margin: 0 30px 15px 0;
+            &:last-child { margin: 0; }
+            
+            &_corpus {
+                position: relative;
+                cursor: pointer;
+            }
+        }
+        &_decoration {
+            justify-content: space-between;
+            opacity: 0;
+            transition: 0.2s linear;
+            &--show {
+                opacity: 1;
+            }
+        }
+    }
+    &__subtitle {
+        @include fw14-20(rgba(0, 1, 5, .6));
+        margin: 0 0 10px;
+    }
+    &__text {
+        @include fw18-24;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    &__rooms {
+        display: flex;
+        list-style: none;
+
+        &-item {
+            &:first-child {
+                .search-form__rooms-checkbox_for-click { border-radius: 2px 0 0 2px; }
+            }
+            &:last-child {
+                .search-form__rooms-checkbox_for-click { border-radius: 0 2px 2px 0; }
+            }
+            &:nth-child(2) { transform: translateX(-1px); }
+            &:nth-child(3) { transform: translateX(-2px); }
+            &:nth-child(4) { transform: translateX(-3px); }
+            &:nth-child(5) { transform: translateX(-4px); }
+        }
+        &-checkbox {
+
+            &_for-click {
+                width: 46px;
+                height: 46px;
+                border: 1px solid $col-97;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                position: relative;
+                z-index: 1;
+                transition: background-color $transition;
+                cursor: pointer;
+                &:hover { background-color: #e7490f; }
+            }
+            input { display: none; }
+            input:checked + &_for-click {
+                background-color: $col-orange;
+                border-color: $col-orange;
+                border-left-color: #fff;
+                z-index: 0;
+                color: #fff;
+            }
+            input:checked + &_for-click-first {
+                border-left-color: $col-orange;
+            }
+        }
+    }
+    &__range {
+        height: 46px;
+        border-radius: 2px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        position: relative;
+
+        &-text {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &_price { width: 241px; }
+        &_square { width: 130px; }
+        &_floor { width: 127px; }
+        &_corpus {
+            width: 182px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 38px 0 15px;
+            box-sizing: border-box;
+            overflow: hidden;
+            &:before {
+                content: '';
+                width: 10px;
+                height: 13px;
+                position: absolute;
+                right: 15px;
+                top: auto;
+                background: url(/assets/img/btn_next_grey.svg) no-repeat;
+                background-size: 8px 13px;
+                transform: rotate(-90deg);
+            }
+        }
+    }
+    &__corpus {
+        // opacity: 0;
+        position: absolute;
+        width: 182px;
+        height: 213px;
+        background: #fff;
+        right: 0;
+        top: calc(100% + 10px);
+        border-radius: 2px;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        box-sizing: border-box;
+        padding: 22px 20px 15px;
+        transition: .2s linear;
+        cursor: default;
+
+        &--position-top {
+            top: calc(100% - 269px);
+        }
+    }
+    &__btn {
+        width: 182px;
+        height: 46px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+        border: solid 1px #e7490f;
+        @include fw18-24($col-orange);
+    }
+    &__reset-filter {
+        background: transparent;
+        @include f16-24(rgba(0, 1, 5, 0.8));
+    }
+}
+
+.more {
+    width: 177px;
+    height: 50px;
+    font: bold 18px 'Montserrat';
+    color: #3a3a39;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #cda571;
+    border-radius: 5px;
+    margin: -60px auto 60px;
+    user-select: none;
+}

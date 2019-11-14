@@ -1,0 +1,235 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.purchase-admin__bank-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, .7);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 101;
+
+    &-contain {
+        width: 1088px;
+        padding: 40px;
+        box-sizing: border-box;
+        background: #fff;
+        position: relative;
+    }
+    &-cls {
+        position: absolute;
+        top: 0;
+        right: - 27px - 50px;
+        width: 50px;
+        height: 50px;
+        box-sizing: border-box;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        background: url('/assets/img/cls_white.svg') 50% 49% no-repeat;
+        background-size: 20px;
+        transition: $transition;
+
+        &:hover {
+            border-color: #fff;
+        }
+    }
+    &-title {
+        font-size: 42px;
+        line-height: 46px;
+    }
+    &-grid {
+        display: grid;
+        grid-template: repeat(7, auto)/repeat(2, 504px);
+        gap: 60px 0;
+        margin: 50px 0 0;
+
+        .bank-list__item {
+            display: flex;
+
+            input {
+                display: none;
+            }
+            .g-checkbox {
+                width: 30px;
+                height: 30px;
+            }
+            input:checked + .g-checkbox {
+                background: url('/assets/img/check.svg') center no-repeat #e7490f;
+                background-size: 80%;
+                border-color: #e7490f;
+                user-select: none;
+            }
+            &-text {
+                font: 500 20px/24px $font-mus;
+                @include font-smoothing;
+                color: $col-black;
+                display: flex;
+                align-items: center;
+                padding: 2px 0 0;
+                position: relative;
+                padding-left: 70px;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 50px;
+                    right: calc(100% - 60px);
+                    backface-visibility: hidden;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                &_sber:before {
+                    top: -8px;
+                    height: 46px;
+                    background: url('/assets/img/purchase/credit/sberb_logo.svg') no-repeat;
+                    background-size: 49px 46px;
+                }
+                &_alfa:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/alfa_logo.svg') no-repeat;
+                    background-size: 49px 50px;
+                }
+                &_vtb:before {
+                    height: 31px;
+                    top: 0;
+                    background: url('/assets/img/purchase/credit/vtb_logo.svg') no-repeat;
+                    background-size: 49px 31px;
+                }
+                &_raif:before {
+                    height: 50px;
+                    top: -10px;
+                    background: url('/assets/img/purchase/credit/raif_logo.svg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_ural:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/ural_logo.svg') no-repeat;
+                    background-size: 49px 50px;
+                }
+                &_pocht:before {
+                    height: 24px;
+                    top: 5px;
+                    background: url('/assets/img/purchase/credit/pocht_logo.svg') no-repeat;
+                    background-size: 100%;
+                }
+                &_ress:before {
+                    height: 50px;
+                    top: -8px;
+                    background: url('/assets/img/purchase/credit/ress_logo.svg') no-repeat;
+                    background-size: 50px;
+                }
+                &_tink:before {
+                    height: 45px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/tink_logo.svg') no-repeat;
+                    background-size: 45px 50px;
+                }
+                &_open:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/open_logo.svg') no-repeat;
+                    background-size: 50px;
+                }
+                &_dom:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/dom_logo.svg') no-repeat;
+                    background-size: 49px 50px;
+                }
+                &_iron:before {
+                    height: 49px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/iron_logo.svg') no-repeat;
+                    background-size: 49px 50px;
+                }
+                &_zenit:before {
+                        width: 38px;
+                    height: 58px;
+                    left: 17px;
+                    right: auto;
+                    bottom: -10px;
+                    background: url('/assets/img/purchase/credit/zenit_logo.png') no-repeat;
+                    background-size: 33px 58px;
+                }
+                &_ross:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/ross_logo.svg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_rossBank:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/rossBank_logo.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_capital:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/capital_logo.png') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_psb:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/psb_logo.png') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_absolute:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/absolute_logo.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_gasprom:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/gasprom_logo.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_sovcom:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/sovcom_logo.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_svazBank:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/svazBank_logo.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+                &_bankRussia:before {
+                    height: 50px;
+                    top: -5px;
+                    background: url('/assets/img/purchase/credit/bankRussia_logo.jpg') no-repeat;
+                    background-size: 50px 50px;
+                }
+            }
+        }
+    }
+    &-success {
+        height: 50px;
+        font: 500 16px/20px $font-mus;
+        @include font-smoothing;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: #fff;
+        box-sizing: border-box;
+        padding: 0 35px;
+        background: #0070c9;
+        border-radius: 4px;
+        margin: 60px 0 0;
+    }
+}

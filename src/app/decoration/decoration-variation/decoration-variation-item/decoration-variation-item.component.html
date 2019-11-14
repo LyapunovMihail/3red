@@ -1,0 +1,21 @@
+<li class="variation__item">
+
+    <a class="variation__item-link" [routerLink]="[item.url]" [class.element-hidden]="pageType === item.mod">
+        
+        <div class="variation__item-wrapper">
+            <img class="variation__item-bgr" [src]="[item.preview]">
+        </div>
+
+        <h1 class="variation__item-name variation__item-name_{{item.mod}}"
+            [innerHTML]="[item.name]"></h1>
+    </a>
+
+    <div [ngClass]="{ 'element-hidden': pageType !== item.mod,
+                      'element-show': pageType === item.mod}">
+        <app-placement
+            [slideList]="item.images"
+            [name]="item.name"
+            [pageType]="pageType">
+        </app-placement>
+    </div>
+</li>

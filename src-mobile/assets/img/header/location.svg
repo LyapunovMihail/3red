@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>Icon / Location On / Outlined</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M7,0 C3.13,0 0,3.13 0,7 C0,12.25 7,20 7,20 C7,20 14,12.25 14,7 C14,3.13 10.87,0 7,0 Z M2,7 C2,4.24 4.24,2 7,2 C9.76,2 12,4.24 12,7 C12,9.88 9.12,14.19 7,16.88 C4.92,14.21 2,9.85 2,7 Z M7,4.5 C5.61928813,4.5 4.5,5.61928813 4.5,7 C4.5,8.38071187 5.61928813,9.5 7,9.5 C7.89316399,9.5 8.71848155,9.02350271 9.16506355,8.25000002 C9.61164555,7.47649732 9.61164555,6.52350268 9.16506355,5.74999998 C8.71848155,4.97649729 7.89316399,4.5 7,4.5 L7,4.5 Z" id="path-1"></path>
+    </defs>
+    <g id="Главная++" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Новотомилино_Главная_1600" transform="translate(-40.000000, -40.000000)">
+            <g id="Хедер" transform="translate(-1.000000, -1.000000)">
+                <g id="Отдел-продаж" transform="translate(41.000000, 40.000000)">
+                    <g id="Icon-/-Location-On-/-Outlined" transform="translate(0.000000, 1.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="icon/maps/place_24px" fill="#E7490F" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

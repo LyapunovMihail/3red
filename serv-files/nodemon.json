@@ -1,0 +1,6 @@
+{
+  "watch": ["serv-modules"],
+  "ext": "ts",
+  "ignore": ["serv-modules/**/*.spec.ts"],
+  "exec": "IS_DEVELOPMENT=true ts-node -r tsconfig-paths/register serv-modules/main.ts"
+}

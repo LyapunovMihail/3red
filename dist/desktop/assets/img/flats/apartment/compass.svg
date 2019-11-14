@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="59" height="61" viewBox="0 0 59 61">
+    <g fill="none" fill-rule="evenodd" opacity=".6" transform="rotate(45 53.4 19.1)">
+        <circle cx="43.5" cy="43" r="25" stroke="#000105"/>
+        <path fill="#767676" d="M35.161 34.661l8.53 5.672 8.47-5.672-5.642 8.5 5.642 8.5-8.47-5.671-8.53 5.671 5.701-8.5z"/>
+        <path fill="#000105" d="M35.146 34.676l8.486 5.657v2.828z"/>
+        <path fill="#000105" d="M52.117 34.676L46.46 43.16h-2.828zM52.117 51.646l-8.485-5.656V43.16zM35.146 51.646l5.657-8.485h2.829z"/>
+        <path fill="#767676" d="M43.5 59.97L40.5 46l-13.97-3 13.97-3 3-13.97 3 13.97 13.97 3-13.97 3z"/>
+        <path fill="#000105" d="M43.5 26l3 14-3 3zM60.5 43l-14 3-3-3zM43.5 60l-3-14 3-3zM26.5 43l14-3 3 3z"/>
+        <text fill="#000105" font-family="MuseoSansCyrl-700, Museo Sans Cyrl" font-size="12" font-weight="500">
+            <tspan x="39.5" y="11">С</tspan>
+        </text>
+        <path fill="#000105" d="M42.5 18h2v5h-2zM60.328 25l.708.707-2.829 2.829-.707-.707zM29.035 27.828l-.707.708-2.828-2.829.707-.707zM26.207 61.535l-.707-.707L28.328 58l.708.707zM61.035 60.828l-.707.708-2.828-2.829.707-.707zM42.5 63h2v5h-2zM23.5 42v2h-5v-2zM68.5 42v2h-5v-2z"/>
+        <text fill="#000105" font-family="MuseoSansCyrl-700, Museo Sans Cyrl" font-size="12" font-weight="500" transform="rotate(90 77.5 43)">
+            <tspan x="73.5" y="45">В</tspan>
+        </text>
+        <text fill="#000105" font-family="MuseoSansCyrl-700, Museo Sans Cyrl" font-size="12" font-weight="500" transform="rotate(-180 44 77)">
+            <tspan x="37.5" y="79">Ю</tspan>
+        </text>
+        <text fill="#000105" font-family="MuseoSansCyrl-700, Museo Sans Cyrl" font-size="12" font-weight="500" transform="rotate(-90 9.5 43)">
+            <tspan x="6" y="45">З</tspan>
+        </text>
+    </g>
+</svg>

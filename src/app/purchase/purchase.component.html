@@ -1,0 +1,29 @@
+<section class="purchase">
+    <div class="purchase__head">
+        <div class="purchase__wrap">
+            <div class="purchase__title">
+                <h1 class="g-title-path purchase__title-item">Условия покупки</h1>
+                <p class="purchase__title-subtitle">Продажа в ЖК осуществляется через эскроу-счета.</p>
+            </div>
+            <div class="purchase__description">
+                <p class="purchase__description-text">
+                    Эскроу-счет в долевом строительстве – это специальный счет, открываемый в банке, на 
+                    котором замораживаются деньги дольщика на период строительства дома, и передаются 
+                    Застройщику только после того, как тот исполнит свои обязательства перед дольщиком.
+                    Применение эскроу счетов регламентируется законом в ст. 860.7 ГК РФ.
+                </p>
+            </div>
+        </div>
+        <ul class="purchase__links">
+            <li class="purchase__links-item purchase__links-item--credit">
+                <a class="purchase__links-item-link" [routerLinkActive]="['purchase__links-item-link_active']" routerLink="/purchase/credit">Ипотека</a>
+            </li>
+            <li class="purchase__links-item purchase__links-item--installment">
+                <a class="purchase__links-item-link" [routerLinkActive]="['purchase__links-item-link_active']" routerLink="/purchase/installment">Рассрочка</a>
+            </li>
+        </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+
+</section>

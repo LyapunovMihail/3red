@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="43" height="36" viewBox="0 0 43 36">
+    <defs>
+        <path id="b" d="M22 0c8.837 0 16 7.163 16 16s-7.163 16-16 16c-7.042 0-13.021-4.55-15.16-10.869L0 16l6.84-5.13C8.978 4.55 14.958 0 22 0z"/>
+        <filter id="a" width="120.2%" height="121.9%" x="-11%" y="-7.8%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(3 1)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#CD2026" xlink:href="#b"/>
+        </g>
+        <path fill="#FFF" fill-rule="nonzero" d="M31.908 24.858l-2.6-4.805c.737-.119 1.28-.788 1.28-1.537v-7.09c0-1.89-1.513-3.426-3.376-3.426h-4.424c-1.863 0-3.415 1.536-3.415 3.466v7.05c0 .788.543 1.418 1.28 1.537l-2.56 4.805c-.195.394-.078.866.31 1.063.116.079.232.079.349.079a.75.75 0 0 0 .66-.394l.232-.394h10.711l.233.394a.719.719 0 0 0 .66.394c.116 0 .233-.04.35-.079.387-.197.504-.67.31-1.063zm-3.648-3.545h-6.52l.66-1.221h5.2l.66 1.22zm-.117-2.639c-.62 0-1.125-.512-1.125-1.142 0-.63.505-1.143 1.125-1.143.621 0 1.126.513 1.126 1.143 0 .59-.505 1.142-1.126 1.142zm-7.412-6.775c0-1.22.97-2.205 2.135-2.205h4.23c1.164 0 2.173.984 2.173 2.205v1.89c0 .434-.35.75-.776.75h-6.986a.743.743 0 0 1-.737-.75l-.039-1.89zm1.126 4.451c.62 0 1.125.512 1.125 1.142 0 .63-.505 1.143-1.125 1.143-.621 0-1.126-.512-1.126-1.143 0-.63.505-1.142 1.126-1.142zm-1.592 7.68l.854-1.535h7.762l.854 1.536h-9.47z"/>
+    </g>
+</svg>

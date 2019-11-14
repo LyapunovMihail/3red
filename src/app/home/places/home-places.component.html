@@ -1,0 +1,45 @@
+<section class="main__place">
+    <div class="main__container">
+        <h1 class="main__place-title g-title-path">Места поблизости</h1>
+
+        <div class="main__place__admin-open-btn"
+             *ngIf="isAuthorizated"
+             (click)="isShowModalAdmin = true; windowScrollLocker.block()">
+            Загрузить
+        </div>
+    </div>
+
+    <div class="main__place-slider">
+        <div class="main__place-btn">
+            <button class="main__place-btn-prev" (click)="prevBtn()"></button>
+            <button class="main__place-btn-next" (click)="nextBtn()"></button>
+        </div>
+
+        <div class="main__place-slider-wrap">
+            <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1240 + 30 ) ) + 'px)') }" class="main__place-slider-list">
+                <li *ngFor="let item of gallerySlides; let i = index" class="main__place-slider-item" [ngClass]="{'main__place-slider-item--active' : currentSlide === i}">
+                    <div class="main__place-slider-img">
+                        <img [src]="uploadsPath + item.image" alt="">
+                    </div>
+
+                    <div class="main__place-slider-descr">
+                        <h1 *ngIf="!isAuthorizated" class="main__place-slider-title">{{item.name}}</h1>
+                        <textarea (change)="changeName(item._id, $event.target.value)" *ngIf="isAuthorizated" class="main__place-slider-title main__place-slider-title--edit" [value]="item.name"></textarea>
+                        <p *ngIf="!isAuthorizated" class="main__place-slider-text">{{item.description}}</p>
+                        <textarea (change)="changeDescription(item._id, $event.target.value)" *ngIf="isAuthorizated" class="main__place-slider-text main__place-slider-text--edit" [value]="item.description"></textarea>
+                        <p class="main__place-slider-count">{{i + 1 < 10 ? '0' : ''}}{{i + 1}}/{{i + 1 < 10 ? '0' : ''}}{{gallerySlides.length}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<app-home-gallery-admin class="admin-controll"
+    *ngIf="isAuthorizated"
+    (galleryChange)="gallerySlides = $event"
+    (close)="isShowModalAdmin = false; windowScrollLocker.unblock()"
+    [isShowModal]="isShowModalAdmin"
+    [gallerySlides]="gallerySlides"
+    [type]="'PLACES'">
+</app-home-gallery-admin>

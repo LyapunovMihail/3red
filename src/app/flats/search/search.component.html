@@ -1,0 +1,21 @@
+<div class="search" [ngClass]="{'search_slide-top': parentPlan && showSearchWindow}">
+
+    <app-search-form
+        [parentPlan]="parentPlan"
+        (formChange)="formChange($event)"
+        (sortChange)="sortChange($event)">
+    </app-search-form>
+
+    <div class="search__main">
+
+        <app-search-output
+            [flatsList]="outputFlatsList"
+            [count]="count">
+        </app-search-output>
+
+        <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="search__main-more">Показать еще</button>
+
+    </div>
+
+</div>
+

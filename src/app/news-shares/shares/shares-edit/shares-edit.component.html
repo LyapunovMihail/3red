@@ -1,0 +1,102 @@
+<div class="g-modal-bg" *ngIf="isForm">
+
+    <div class="admin-shares_modal-close-bgr" (click)="close.emit()"></div>
+
+    <form class="shares-edit-form"
+        [formGroup]="form"
+        (ngSubmit)="onSave(form)">
+
+        <div class="admin-shares_modal-close-btn" (click)="close.emit()" ></div>
+
+        <h1 class="shares-edit-form__typografy-title">Добавить акцию</h1>
+        <p class="shares-edit-form__typografy-date">{{dateNow}}</p>
+
+        <div class="shares-edit-form__path-wrap">
+            <p class="shares-edit-form__typografy-subtitle">Заголовок</p>
+            <input type="text"
+                class="shares-edit-form__input shares-edit-form__input_title"
+                [formControlName]="'name'"
+                [ngClass]="{'invalid-value': form.get('name').invalid && form.get('name').touched}"
+                [placeholder]="'Максимум 60 символов'">
+        </div>
+        <div class="shares-edit-form__path-wrap">
+            <p class="shares-edit-form__typografy-subtitle">Текст</p>
+            <ghm-textarea [formControlName]="'text'"
+                class="shares-edit-form__input shares-edit-form__input_text"
+                [ngClass]="{'invalid-value': form.get('text').invalid && form.get('text').dirty}"
+                [placeholder]="'Дополнительный текст'">
+            </ghm-textarea>
+        </div>
+        <div class="shares-edit-form__path-wrap">
+            <p class="shares-edit-form__typografy-subtitle">Текст для превью</p>
+            <ghm-textarea [formControlName]="'textPreview'"
+                class="shares-edit-form__input shares-edit-form__input_text"
+                [ngClass]="{'invalid-value': form.get('textPreview').invalid && form.get('textPreview').dirty}"
+                [placeholder]="'Максимум 60 символов'">
+            </ghm-textarea>
+        </div>
+        <div class="shares-edit-form__path-wrap shares-edit-form__path-wrap_time">
+            <p class="shares-edit-form__typografy-subtitle">Срок акции до:</p>
+            <div class="shares-edit-form__time-wrap">
+                <app-ghm-date-picker [formControlName]="'finish_date'"></app-ghm-date-picker>
+                <div class="shares-edit-form__check">
+                    <input type="checkbox" name="countdown" id="countdown" style="display: none;" [formControlName]="'countdown'">
+                    <label class="shares-edit-form__check-checkbox" for="countdown"></label>
+                    <label class="shares-edit-form__check-text shares-edit-form__check-text" for="countdown">Обратный отсчет</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="shares-edit-form__path-wrap">
+            <p class="shares-edit-form__typografy-subtitle">Квартиры по акции</p>
+            <button class="shares-edit-form__add-flat" (click)="addFlats()">
+                <span>Добавить квартиру</span>
+            </button>
+
+            <div formArrayName="shareFlats">
+                <div *ngFor="let flat of shareFlats.controls; index as i">
+                    <app-shares-edit-flats
+                        [formControlName]="i"
+                        (remove)="removeBlock(i)">
+                    </app-shares-edit-flats>
+                </div>
+            </div>
+        </div>
+
+        <div class="shares-edit-form__path-wrap">
+            <p class="shares-edit-form__typografy-subtitle">Обложка</p>
+
+            <div class="shares-edit-form__add-wrap">
+                <div class="shares-edit-form__cover-wrap" *ngIf="form.get('mainImage').value">
+                    <img class="shares-edit-form__cover"
+                        [src]="uploadsPath + form.get('mainImage').value"
+                        [alt]="form.value.name">
+                </div>
+                    
+                <div class="shares-edit-form__add">
+                    <div class="shares-edit-form__add-cover" (click)="mainImgPicker.click()">
+                        <span>{{ (form.get('mainImage').value <= 0) ? "Загрузить" : "Изменить" }}</span>
+                    </div>
+                    <input [style.display]="'none'"
+                        type="file"
+                        #mainImgPicker
+                        (change)="onImagePicked($event, 'main-image')">
+                </div>
+            </div>
+        </div>
+
+        <div class="shares-edit-form__path-wrap">
+            <div class="shares-edit-form__show-home">
+                <input type="checkbox" name="public" id="public" style="display: none;" [formControlName]="'show_on_main'">
+                <label for="public" class="g-checkbox shares-edit-form__show-home-checkbox"></label>
+                <label for="public" class="shares-edit-form__show-home-text">Показать акцию на главной</label>
+            </div>
+        </div>
+
+        <button type="submit"
+            [disabled]="form.invalid"
+            [ngClass]="{'shares-edit-form__save_disabled': form.invalid}"
+            class="shares-edit-form__save">Сохранить</button>
+        
+    </form>
+</div>

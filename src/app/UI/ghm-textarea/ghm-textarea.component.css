@@ -1,0 +1,41 @@
+:host {
+    box-sizing: initial;
+    overflow: hidden;
+    display: block !important;
+}
+
+.textarea__container, .textarea__fake, .textarea__input {
+    font: inherit;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    background: transparent;
+    overflow: hidden;
+}
+
+.textarea__container {
+    position: relative;
+}
+
+.textarea__fake {
+    min-height: 1rem;
+    color: transparent;
+    position: relative;
+}
+
+.textarea__input {
+    resize: none;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.white-placeholder::placeholder {
+    color: #ffffff !important;
+}

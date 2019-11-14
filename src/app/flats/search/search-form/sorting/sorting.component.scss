@@ -1,0 +1,69 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.search-form__output-sorting {
+    width: $w1600;
+    position: absolute;
+    height: 24px;
+    top: calc(100% + 109px + 40px); // где 40 это padding-bottom;
+    left: 0;
+    right: 0;
+    display: flex;
+    z-index: 1;
+
+    &-control {
+        position: absolute;
+        @include fw18-24(rgba(0, 1, 5, .7));
+        margin: 0 30px 0 0;
+        cursor: pointer;
+        transition: .2s linear;
+        &:hover { color: $col-black; }
+
+        &_active {
+            padding: 0 20px 0 0;
+            color: $col-black;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 5px;
+                width: 10px;
+                height: 16px;
+                background: url(/assets/img/filter_arrow.svg) no-repeat;
+                background-size: 100%;
+                transition: top $transition, transform $transition;
+            }
+            &:hover {
+                &:before { top: 8px; }
+            }
+        }
+        &_turn {
+            padding: 0 20px 0 0;
+            color: $col-black;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 5px;
+                width: 10px;
+                height: 16px;
+                background: url(/assets/img/filter_arrow.svg) no-repeat;
+                background-size: 100%;
+                transition: top $transition, transform $transition;
+                transform: rotate(180deg);
+            }
+        }
+
+        &--price {
+            left: 1084px;
+        }
+        &--space {
+            left: 406px;
+        }
+        &--floor {
+            left: 558px;
+        }
+        &--delivery {
+            left: 895px;
+        }
+    }
+}

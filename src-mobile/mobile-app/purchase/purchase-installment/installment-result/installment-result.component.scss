@@ -1,0 +1,33 @@
+@import "../../../../styles/modules/mixins/mixin.scss";
+
+.installment__result {
+    width: 100%;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    @media (min-width: 768px) {
+        width: 369px;
+        border-top: none;
+        border-left: 1px solid #999a9b;
+        padding: 0 0 0 30px;
+    }
+
+    &-item {
+        width: calc(100% - 30px);
+        max-width: 768px - 60px;
+        margin: 0 0 40px;
+    }
+    &-title {
+        font: 500 20px/24px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
+        margin: 0 0 10px;
+    }
+    &-result {
+        font: 500 36px/40px $font-mus;
+        @include font-smoothing;
+        color: $col-orange;
+    }
+}

@@ -1,0 +1,26 @@
+<section class="news preview">
+
+    <div class="news__head">
+        <h1 class="news__head-title">Новости</h1>
+        <nav class="news__nav">
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="preview__snippet">
+        <app-news-list 
+            [snippetsArray]="snippetsArray">
+        </app-news-list>
+    </div>
+
+</section>

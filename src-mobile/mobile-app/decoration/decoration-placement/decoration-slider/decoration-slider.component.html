@@ -1,0 +1,14 @@
+<div class="slider">
+
+    <app-decoration-slider-list
+        [activeIndex]="activeIndex"
+        [slideList]="slideList">
+    </app-decoration-slider-list>
+
+    <app-decoration-slider-btns
+        (changeIndex)="changeIndex.emit($event)"
+        [activeIndex]="activeIndex"
+        [slideList]="slideList">
+    </app-decoration-slider-btns>
+
+</div>

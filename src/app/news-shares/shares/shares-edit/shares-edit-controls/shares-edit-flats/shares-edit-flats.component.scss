@@ -1,0 +1,132 @@
+@import "../../../../../../styles/modules/mixins/mixin";
+
+:host,
+.form-flats-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0 0;
+}
+
+.form-flats-list__item {
+    width: 760px;
+    box-sizing: border-box;
+    border: 1px solid #999a9b;
+    padding: 20px;
+    &:not(:first-child) { margin: 10px 0 0; }
+}
+
+.share-view {
+    width: 1024px;
+    box-sizing: border-box;
+    padding: 90px 0 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__select {
+        &-wrap {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 0 20px;
+        }
+        &-item {
+            width: 230px;
+            height: 46px;
+            position: relative;
+            box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            @include fw18-24;
+            color: #999a9b;
+            cursor: pointer;
+            overflow: hidden;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 9px;
+                top: auto;
+                width: 20px;
+                height: 30px;
+                background: url(/assets/img/news/btn_next_grey.svg) center no-repeat #fff;
+                background-size: 8px 12px;
+                transform: rotate(-90deg);
+                pointer-events: none;
+            }
+        }
+        &-list {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+            box-sizing: border-box;
+            background: #fff;
+            @include fw18-24;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+    &__sale {
+        &-wrap {
+            width: 166px;
+            height: 41px;
+            border-radius: 4px;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+            margin: 0 0 10px;
+            display: flex;
+        }
+        &-item {
+            width: 50%;
+            cursor: pointer;
+
+            &-input {
+                display: none;
+                
+                &:checked + .share-view__sale-item-check {
+                    background: #0070c9;
+                    border-radius: 4px;
+                    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+                    color: #fff;
+                }
+            }
+            &-check {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font: 500 14px/20px "Museo Sans Cyrl", sans-serif;
+                @include font-smoothing;
+                color: #0070c9;
+            }
+        }
+    }
+    &__footer {
+        &-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        &-result {
+            @include fw18-24;
+            width: 230px;
+            height: 46px;
+            border: 1px solid #979797;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+        &-delete {
+            width: 107px;
+            height: 40px;
+            border: 1px solid #0070c9;
+            font: 500 16px/20px $font-mus;
+            @include font-smoothing;
+            background: #fff;
+            border-radius: 4px;
+            text-transform: uppercase;
+            color: #0070c9;
+        }
+    }
+}

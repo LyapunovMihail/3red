@@ -1,0 +1,14 @@
+<p *ngIf="counter > 0" class="flats__sorting-find">Найдено {{counter}} квартир</p>
+<p *ngIf="counter === 0" class="flats__sorting-find">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</p>
+
+<div class="flats__sorting-wrap">
+    <p *ngFor="let sort of sortList"
+        (click)="sortChange(sort.name, !sort.value)"
+        [ngClass]="{
+            'flats__sorting-item_active': (activeSort === sort.name),
+            'flats__sorting-item_turn': (activeSort === sort.name && !sort.value )
+        }"
+        class="flats__sorting-item">
+        {{sort.text}}
+    </p>
+</div>

@@ -1,0 +1,63 @@
+<section class="news">
+    
+    <div class="news__head">
+        <div class="news__head-wrap">
+            <h1 class="news__head-title g-title-path">Новости</h1>
+            <ul class="news__nav-list">
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/all">Все</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/news">Новости</a>
+                </li>
+                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
+                    <a routerLink="/news-shares/shares">Акции</a>
+                </li>
+            </ul>
+        </div>
+        <div class="news__head-wrap" *ngIf="isAuthorizated">
+            <button (click)="createSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
+        </div>
+    </div>
+
+    <div class="news__snippets">
+
+        <!-- список новостей -->
+        <app-news-list class="news__snippets-list"
+            (deleteSnippet)="deleteSnippet($event)"
+            (redactSnippet)="redactSnippet($event)"
+            [isAuthorizated]="isAuthorizated" 
+            [snippetsArray]="snippetsArray">
+        </app-news-list>
+        <!-- end : список новостей -->
+
+    </div>
+
+</section>
+
+<!-- форма создания новости -->
+<app-news-create-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange($event)" 
+    (close)="isCreateForm = false; windowScrollLocker.unblock()" 
+    [isForm]="isCreateForm">
+</app-news-create-form>
+
+<!-- форма редактирования новости -->
+<app-news-redact-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange($event)" 
+    (close)="isRedactForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="snippetsArray"
+    [redactId]="redactId" [isForm]="isRedactForm">
+</app-news-redact-form>
+
+<!-- форма удаления новости -->
+<app-news-delete-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="snippetsChange($event)"
+    (close)="isDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="snippetsArray"
+    [redactId]="redactId" [isForm]="isDeleteForm">
+</app-news-delete-form>
+

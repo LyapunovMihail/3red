@@ -1,0 +1,44 @@
+<section class="developer">
+    <div class="main__container main__container_row">
+        <div class="developer__head">
+            <h1 class="developer__head-title g-title-path">О застройщике</h1>
+            <p class="developer__head-subtitle">
+                Тройка РЭД — девелопер, специализирующийся на&nbsp;комплексной 
+                жилой застройке в московском регионе.
+            </p>
+        </div>
+        <div class="developer__content">
+            <p class="developer__content-info">
+                Компания реализует функции застройщика, технического заказчика, генерального подрядчика и эксплуатации. Это позволяет управлять
+                проектами «под ключ»: от идеи до передачи готовых объектов
+                недвижимости собственникам и их последующей эксплуатации.
+            </p>
+            <p class="developer__content-info">
+                Мы не просто строим красивые жилые дома, мы создаем благоприятную
+                среду обитания, включая школы, детские сады, поликлиники, торговые
+                центры, парковки, благоустроенные дворы и зеленые зоны.
+            </p>
+        </div>
+    </div>
+    <div class="main__container main__container_col">
+        <div class="developer__project">
+            <p class="developer__project-title">Другие проекты <a href="#" class="developer__project-link g-link_red">Тройки РЭД</a></p>
+
+            <div class="developer__project-grid">
+                
+                <a *ngFor="let project of projects" href="{{project.link}}" target="_blank" class="developer__project-grid-item {{project.classIndex}}">
+                    <div class="grid-item__location">
+                        <div class="grid-item__location-city {{project.mod}}">{{project.city}}</div> 
+                        <div class="grid-item__location-distance" *ngIf="project.addDistance === true">{{project.distance}}</div>
+                    </div>
+                    <div class="grid-item__name">
+                        <p class="grid-item__name-title">{{project.title}}</p>
+                        <p class="grid-item__name-subtitle">{{project.subtitle}}</p>
+                    </div>
+                    <img src="{{project.background}}" alt="Люберцы" class="grid-item__bg-image">
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>

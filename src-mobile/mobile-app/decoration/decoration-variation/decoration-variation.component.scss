@@ -1,0 +1,12 @@
+.variation {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.element-active {
+    min-height: 75%;
+}

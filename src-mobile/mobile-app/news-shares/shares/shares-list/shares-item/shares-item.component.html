@@ -1,0 +1,65 @@
+<div *ngIf="share" class="news shares-view">
+
+    <div class="shares-view__nav">
+        <a routerLink="/news-shares/shares/list/1" class="shares-view__nav-back">Все новости</a>
+    </div>
+
+    <div class="shares-view__header">
+        <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="shares-view__header-finishing">
+            {{countDown(share.finish_date) | sharesDayPipe}} до конца акции
+        </div>
+        <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="shares-view__header-finishing">
+            Акция закончилась
+        </div>
+        <div class="shares-view__header-wrap">
+            <button class="shares-view__header-btn shares-view__header-prev" [class.shares-view__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></button>
+            <button class="shares-view__header-btn shares-view__header-next" [class.shares-view__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></button>
+            <div class="shares-view__header-img">
+                <img [src]="uploadsPath + share.mainImage">
+            </div>
+        </div>
+        <div class="shares-view__content">
+            <h1 class="shares-view__content-title">{{share.name}}</h1>
+            <p class="shares-view__content-text">{{share.text}}</p>
+            <p class="shares-view__content-date">{{share.created_at | date: 'dd.MM.yyyy' }}</p>
+        </div>
+    </div>
+
+
+    <ul class="shares-view__flat flat-list">
+        <li>
+            <ul class="flat-list__item-info">
+                <li *ngFor="let flat of share.shareFlats; let i = index" class="flat-list__item flat-list__item_info">
+                    <a (click)="openApartmentModal(i)" class="flat-list__item_link">
+                        <div class="flat-list__item-img">
+                            <img (error)="img.style.display = 'none'"
+                                 [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
+                            <div *ngIf="img.style.display === 'none'" class="flat-list__item-img-error"></div>
+                        </div>
+    
+                        <div class="flat-list__item-wrap">
+                            <div class="flat-list__item-text flat-list__item-text_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
+                            <div class="flat-list__item-text flat-list__item-text_corpus">Корпус {{flat.house}}</div>
+                            <div class="flat-list__item-text flat-list__item-text_floor">Этаж {{flat.floor}}</div>
+                        </div>
+                        <div class="flat-list__item-wrap">
+                            <div class="flat-list__item-text flat-list__item-text_space">{{flat.space}} м&#178;</div>
+                            <div class="flat-list__item-price">
+                                <div class="flat-list__item-text flat-list__item-text_price-sale">{{flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>
+                                <div class="flat-list__item-text flat-list__item-text_price-not-sale">{{flat.price | bitNumber}} &#8381;</div>
+                            </div>
+                        </div>
+                    </a>
+                   <!-- <div class="flat-list__item-favorite"></div> -->
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<app-modal-apartment *ngIf="showApartmentWindow"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="share.shareFlats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-modal-apartment>

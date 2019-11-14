@@ -1,0 +1,54 @@
+<section class="gallery">
+    <div class="main__container main__container_col">
+        <h1 class="gallery__title g-title-path">Галерея</h1>
+
+        <div class="gallery__admin-open-btn"
+             *ngIf="isAuthorizated"
+             (click)="isShowModalAdmin = true; windowScrollLocker.block()">
+            Загрузить
+        </div>
+
+        <div class="gallery__nav">
+            <ul class="gallery__nav-list">
+                <li class="gallery__nav-list-item" [class.gallery__nav-list-item_active]="activeSnippets === 'ARCHITECTURE'" (click)="toggleSnippets(architectureSnippets, 'ARCHITECTURE')">Архитектура</li>
+                <li class="gallery__nav-list-item" [class.gallery__nav-list-item_active]="activeSnippets === 'LANDSCAPING'" (click)="toggleSnippets(landscapingSnippets, 'LANDSCAPING')">Благоустройство</li>
+                <li class="gallery__nav-list-item" [class.gallery__nav-list-item_active]="activeSnippets === 'PARKING'" (click)="toggleSnippets(parkingSnippets, 'PARKING')">Паркинг</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="gallery__slider">
+        <div class="gallery__btn">
+            <button class="gallery__btn-prev" (click)="prevBtn()"></button>
+            <button class="gallery__btn-next" (click)="nextBtn()"></button>
+        </div>
+
+        <div class="gallery__slider-wrap">
+            <ul [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1240 + 30 ) ) + 'px)') }" class="gallery__slider-list">
+                <li *ngFor="let item of mainSnippets; let i = index" class="gallery__slider-item" [ngClass]="{'gallery__slider-item--active' : currentSlide === i}">
+
+                    <img class="gallery__slider-img" [src]="uploadsPath + item.image" alt="">
+
+                    <div class="gallery__slider-descr">
+                        <h1 class="gallery__slider-title" *ngIf="!isAuthorizated">{{item.name}}</h1>
+                        <textarea (change)="changeName(item._id, $event.target.value)" *ngIf="isAuthorizated" class="gallery__slider-title gallery__slider_title--edit" [value]="item.name"></textarea>
+
+                        <p class="gallery__slider-text" *ngIf="!isAuthorizated">{{item.description}}</p>
+                        <textarea (change)="changeDescription(item._id, $event.target.value)" *ngIf="isAuthorizated" class="gallery__slider-text gallery__slider_text--edit" [value]="item.description"></textarea>
+                        <p class="gallery__slider-count">{{i + 1 < 10 ? '0' : ''}}{{i + 1}}/{{i + 1 < 10 ? '0' : ''}}{{mainSnippets.length}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+
+<app-about-gallery-admin class="admin-controll"
+    *ngIf="isAuthorizated"
+    (galleryChange)="adminGalleryChange($event)"
+    (close)="isShowModalAdmin = false; windowScrollLocker.unblock()"
+    [isShowModal]="isShowModalAdmin"
+    [gallerySlides]="mainSnippets"
+    [type]="activeSnippets">
+</app-about-gallery-admin>

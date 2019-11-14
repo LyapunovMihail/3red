@@ -1,0 +1,40 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.slider__btns {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    bottom: 30px;
+    right: 40px;
+    z-index: 2;
+
+    &-counter {
+        font: 54px/58px $font-mus;
+        @include font-smoothing;
+        color: #fff;
+        margin: 0 30px 0 0;
+
+        span:last-child { font: 18px/21px $font-mus; }
+    }
+
+    &-item {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, .7);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: $transition;
+        &:hover {
+            border-color: #fff;
+            background-position: calc(50% - 3px);
+        }
+        &_prev {
+            background: url(/assets/img/btn_next_white.svg) 50% no-repeat;
+            margin: 0 10px 0 0;
+        }
+        &_next {
+            background: url(/assets/img/btn_next_white.svg) 50% no-repeat;
+            transform: rotate(180deg);
+        }
+    }
+}

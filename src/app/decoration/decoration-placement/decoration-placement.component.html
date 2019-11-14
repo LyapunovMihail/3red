@@ -1,0 +1,11 @@
+<section class="placement">
+
+    <app-decoration-slider
+        (changeIndex)="activeIndex = $event"
+        [activeIndex]="activeIndex"
+        [slideList]="slideList">
+    </app-decoration-slider>
+
+    <p class="placement__title">{{name}}: {{activeIndex === 0 ? 'Классика' : 'Модерн' }}</p>
+
+</section>

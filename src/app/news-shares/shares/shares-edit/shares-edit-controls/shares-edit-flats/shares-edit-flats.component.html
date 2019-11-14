@@ -1,0 +1,57 @@
+<div class="form-flats-list__item">
+    <div class="share-view__select-wrap">
+        <div class="share-view__select-item share-view__select-corpus">
+            <!-- Тут должен быть выбор корпуса -->
+            <select [(ngModel)]="shareFlat.house"
+                    (ngModelChange)="changeSectionAndHouse({section: shareFlat.section, house: $event})"
+                    class="share-view__select-list">
+                <option *ngFor="let house of housesOptions"
+                        [value]="house">Корпус {{house}}</option>
+            </select>
+        </div>
+        <div class="share-view__select-item share-view__select-house">
+            <select [(ngModel)]="shareFlat.section"
+                (ngModelChange)="changeSectionAndHouse({section: $event, house: shareFlat.house})"
+                class="share-view__select-list">
+                <option *ngFor="let section of sectionsOptions"
+                    [value]="section">Секция {{section}}</option>
+            </select>
+        </div>
+        <div class="share-view__select-item share-view__select_flat">
+            <select [(ngModel)]="shareFlat.flat"
+                (ngModelChange)="changeFlat($event)"
+                class="share-view__select-list">
+                <option *ngFor="let flat of flatsOptions"
+                    [value]="flat">Квартира {{flat}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="share-view__sale-wrap">
+        <label class="share-view__sale-item share-view__sale-item_procent">
+            <input [(ngModel)]="shareFlat.discountType"
+                class="share-view__sale-item-input"
+                type="radio"
+                [name]="'discountType' + formControlName"
+                [value]="shareFlatDiscountType.PERCENT">
+            <div class="share-view__sale-item-check">Процент</div>
+        </label>
+        <label class="share-view__sale-item share-view__sale-item_sum">
+            <input [(ngModel)]="shareFlat.discountType"
+                class="share-view__sale-item-input"
+                type="radio"
+                [name]="'discountType' + formControlName"
+                [value]="shareFlatDiscountType.SUM">
+            <div class="share-view__sale-item-check">Сумма</div>
+        </label>
+    </div>
+
+    <div class="share-view__footer-wrap">
+        <input [(ngModel)]="shareFlat.discountValue"
+            (input)="changeText()"
+            type="text"
+            class="share-view__footer-result">
+
+        <button class="share-view__footer-delete" (click)="removeItem()">Удалить</button>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+@import "../../../styles/modules/mixins/mixin.scss";
+
+.documentation {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    &__title {
+        width: calc(100% - 30px);
+        max-width: 1280px;
+        font: 41px/48px 'Leksa';
+        @include font-smoothing;
+        color: $col-black;
+        margin: 120px 0 20px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
+    }
+    &__descr {
+        width: calc(100% - 30px);
+        max-width: 1280px;
+        margin: 0 0 40px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
+
+        &-text {
+            max-width: 615px;
+            @include f16-24;
+            color: rgba(0, 1, 5, 0.8);
+        }
+    }
+    &__objects {
+        width: calc(100% - 30px);
+        max-width: 1280px;
+        @media(min-width: 767px) { width: calc(100% - 60px); }
+    }
+    &__object {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        margin: 0 0 5px;
+        border-radius: 4px;
+        background-color: rgba(171, 171, 34, 0.06);
+
+        &-title {
+            font: 500 20px/24px $font-mus;
+            @include font-smoothing;
+            margin: 0 0 15px;
+        }
+        &-date {
+            font: 500 16px/23px $font-mus;
+            @include font-smoothing;
+            color: #999a9b;
+            margin: 0 0 3px;
+        }
+        &-link {
+            display: block;
+            position: relative;
+            padding-left: 29px;
+            margin: 0 0 15px;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 19px;
+                height: 22px;
+                background: url('/assets/img/about/pdf.svg') no-repeat;
+                background-size: 100%;
+            }
+        }
+        &-file {
+            width: 100%;
+            display: block;
+            @media(min-width: 767px) {
+                display: flex;
+                flex-flow: row-reverse nowrap;
+                justify-content: space-between;
+            }
+        }
+    }
+}

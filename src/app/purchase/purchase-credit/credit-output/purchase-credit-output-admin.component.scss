@@ -1,0 +1,77 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.admin-credit__check {
+    width: calc(100% - 75px);
+    margin: 22px 0 0;
+
+    &-wrap {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 0 0 0 -15px;
+        &:not(:last-child) { margin: 0 0 10px -15px; }
+    }
+    &-checkbox {
+        display: none;
+
+        &:checked + .g-checkbox {
+            background: url('/assets/img/purchase/check.svg') center no-repeat $col-blue;
+            border-color: $col-blue;
+        }
+    }
+    .g-checkbox {
+        background: #fff;
+        border-color: #979797;
+    }
+    &-text {
+        font: 16px/24px $font-mus;
+        @include font-smoothing;
+        color: inherit;
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
+.admin-credit__input-area {
+    position: relative;
+    color: $col-black;
+    &:before {
+        content: '';
+        position: absolute;
+        width: 90px;
+        height: 54px;
+        left: -15px;
+        top: -5px;
+        background-color: #fff;
+    }
+}
+
+.admin-credit__input-text {
+    min-width: 30px;
+    height: 24px;
+    background: #fff;
+    border: none;
+    white-space: nowrap;
+    outline: none;
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: border-box;
+    vertical-align: bottom;
+}
+
+.admin-credit__set-snippet {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #0070c9;
+    font: 500 16px/20px $font-mus;
+    @include font-smoothing;
+    color: #0070c9;
+    margin: 0 0 30px;
+    text-transform: uppercase;
+
+    img { margin: 0 10px 0 0; }
+}
+
+

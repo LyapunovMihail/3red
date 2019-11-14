@@ -1,0 +1,37 @@
+<div *ngIf="isOpen" class="form-modal">
+
+    <div class="wrapper">
+
+        <div (click)="close.emit(true)" class="form-request-close-bgr"></div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-request form-request--call">
+
+            <div (click)="close.emit(true)" class="form-request_cls-btn"></div>
+
+            <h2 class="form-request_title">Получить pdf избранных квартир</h2>
+
+            <div class="form-request_wrap">
+                <span class="form-request_name">Ваш e-mail</span>
+                <input formControlName="mail" 
+                    class="form-request_field"
+                    type="text">
+            </div>
+
+            <label class="form-request_label form-request_label--agreement">
+                <input formControlName="agreement" class="form-request_checkbox" type="checkbox">
+                <div [ngClass]="{'input-invalid': form.get('agreement').value === false }" class="form-request_for-checkbox"></div>
+                <span class="form-request_checkbox-text">Я согласен с правилами <a href="#" class="form-request_checkbox-text_link">обработки персональных данных</a></span>
+            </label>
+
+            <button
+                [ngClass]="{'disabled-submit-btn': disableBtn}" 
+                [disabled]="disableBtn" 
+                class="form-request_btn">
+                <span class="form-request_btn_text">Отправить заявку</span>
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

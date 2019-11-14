@@ -1,0 +1,20 @@
+<main class="main">
+
+    <app-home-preview *ngIf="newsLoaded"
+        [newsSnippets]="mainNews"
+        [shareSnippets]="mainShares">
+    </app-home-preview>
+
+    <app-home-trigger></app-home-trigger>
+
+    <app-home-description></app-home-description>
+
+    <app-home-places></app-home-places>
+
+    <app-home-news *ngIf="newsLoaded"
+        [newsSnippets]="newsSnippets"
+        [shareSnippets]="shareSnippets"
+        [allSnippets]="allSnippets">
+    </app-home-news>
+
+</main>
