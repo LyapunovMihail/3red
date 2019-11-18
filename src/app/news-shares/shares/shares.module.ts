@@ -1,6 +1,8 @@
-import { ApartmentModule } from '../../flats/apartment/apartment.module';
 import { FormsRequestModule } from '../../forms-request/forms-request.module';
 import { SharesEditFlatsComponent } from './shares-edit/shares-edit-controls/shares-edit-flats/shares-edit-flats.component';
+import { SharesEditListComponent } from './shares-edit/shares-edit-controls/shares-edit-list/shares-edit-list.component';
+import { SharesEditImageComponent } from './shares-edit/shares-edit-controls/shares-edit-image/shares-edit-image.component';
+import { SharesEditDescriptionComponent } from './shares-edit/shares-edit-controls/shares-edit-description/shares-edit-description.component';
 import { SharesDayPipe } from './shares-day.pipe';
 import { DatePickerModule } from './shares-edit/date-picker/date-picker.module';
 import { SharesService } from './shares.service';
@@ -27,6 +29,9 @@ const SHARES_COMPONENTS = [
     SharesItemComponent,
     SharesDeleteComponent,
     SharesEditComponent,
+    SharesEditDescriptionComponent,
+    SharesEditImageComponent,
+    SharesEditListComponent,
     SharesEditFlatsComponent,
     SharesDayPipe,
     BitNumberPipe
@@ -41,7 +46,7 @@ const SHARES_COMPONENTS = [
         GHMTextAreaModule,
         DatePickerModule,
         FormsModule,
-        ApartmentModule,
+        FormsRequestModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

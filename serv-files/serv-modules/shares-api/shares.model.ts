@@ -24,7 +24,6 @@ export class SharesModel {
         };
         let length = await this.collection.count();
         let sharesList = await this.collection.find({}, options).sort({ created_at: -1 }).toArray();
-        console.log('sharesList: ', sharesList);
         return ({
             length,
             sharesList

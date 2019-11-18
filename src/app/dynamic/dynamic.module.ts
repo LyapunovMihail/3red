@@ -13,6 +13,10 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DynamicComponent } from './dynamic.component';
 import { NgModule } from '@angular/core';
+// New, for 3red
+import { SettingsDynamicComponent } from './settings/settings.component';
+import { ContentDynamicComponent } from './content/content-dynamic.component';
+import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 
 const DynamicComponents = [
     DynamicComponent,
@@ -24,7 +28,10 @@ const DynamicComponents = [
     LineBreakPipe,
     VideoSanitizerPipe,
     DynamicObjectSlideshowComponent,
-    DynamicObjectVideoComponent
+    DynamicObjectVideoComponent,
+    // New, for 3red
+    SettingsDynamicComponent,
+    ContentDynamicComponent
 ];
 
 @NgModule({
@@ -38,9 +45,13 @@ const DynamicComponents = [
         CommonModule,
         RouterModule,
         FormsModule,
+        GHMTextAreaModule,
         ReactiveFormsModule,
         RouterModule.forChild([
-            { path: 'dynamic/:year/:month', component: DynamicComponent, pathMatch: 'full' }
+            { path: 'dynamic/:year/:month', component: DynamicComponent, pathMatch: 'full' },
+            // New, for 3red
+            { path: 'dynamic/settings', component: SettingsDynamicComponent },
+            { path: 'dynamic/content', component: ContentDynamicComponent }
         ])
     ],
     providers: [

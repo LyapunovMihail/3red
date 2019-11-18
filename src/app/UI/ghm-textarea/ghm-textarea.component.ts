@@ -5,7 +5,6 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     selector: 'ghm-textarea',
     template: `
         <div class="textarea__container">
-
             <div [innerHTML]="value + '\r\n' | ghmTextAreaPipe"
                 class="textarea__fake"
                  [class.white-placeholder]="whitePlaceholder"
@@ -14,11 +13,17 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
             <textarea [(ngModel)]="value"
                 (input)="propagateChange($event.target.value)"
                 spellcheck="false" class="textarea__input"
-                placeholder="{{placeholder}}"
-                [class.white-placeholder]="whitePlaceholder"
+                [ngClass]="{
+                    'invalid-value': invalid,
+                    'white-placeholder': whitePlaceholder
+                }"
+                #area
             >
             </textarea>
-
+            <p class="textarea__placeholder" *ngIf="placeholder.length > 0"
+                [class.textarea__placeholder_top]="area.value.length > 0">{{placeholder}}</p>
+            <p class="textarea__add-link" *ngIf="link"
+                [class.textarea__add-link_show]="area.value.length > 0">Вставить ссылку</p>
         </div>
     `,
     styleUrls: ['./ghm-textarea.component.css'],
@@ -38,6 +43,10 @@ export class GHMTextAreaComponent implements ControlValueAccessor {
     @Input() public placeholder: string = '';
 
     @Input() public whitePlaceholder: boolean;
+
+    @Input() public link: boolean;
+
+    @Input() public invalid: boolean;
 
     // public textAreaValue: string = '';
 

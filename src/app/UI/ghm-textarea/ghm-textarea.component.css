@@ -1,7 +1,11 @@
 :host {
     box-sizing: initial;
-    overflow: hidden;
+    /* overflow: hidden; */
     display: block !important;
+}
+
+.invalid-value {
+    border-color: #ee4237 !important;
 }
 
 .textarea__container, .textarea__fake, .textarea__input {
@@ -15,7 +19,7 @@
     margin: 0 !important;
     border: none;
     background: transparent;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .textarea__container {
@@ -24,18 +28,68 @@
 
 .textarea__fake {
     min-height: 1rem;
+    font: 18px/23px 'ProbaPro', 'sans-serif', 'Arial';
+    padding: 4px 0 8px !important;
     color: transparent;
     position: relative;
 }
 
 .textarea__input {
+    font: 18px/23px 'ProbaPro', 'sans-serif', 'Arial';
+    color: #000;
+    min-height: 36px;
+    box-sizing: border-box;
+    padding: 4px 0 8px !important;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
     resize: none;
     outline: none;
     position: absolute;
+    overflow: hidden;
+    transition: border-bottom .2s linear, border-color .2s linear;
     top: 0;
     left: 0;
 }
 
+.textarea__add-link {
+    display: none;
+    font: 14px/18px 'ProbaPro', 'sans-serif', 'Arial';
+    color: #ee4237;
+    text-decoration: underline;
+    position: absolute;
+    top: -15px;
+    right: 0;
+    cursor: pointer;
+}
+.textarea__add-link_show {
+    display: block;
+}
+
 .white-placeholder::placeholder {
     color: #ffffff !important;
+}
+.textarea__placeholder {
+    font: 18px/23px 'ProbaPro', 'sans-serif', 'Arial';
+    color: rgba(0, 0, 0, .5);
+    position: absolute;
+    top: 4px;
+    left: 0;
+    transition: top .2s linear, font-size .2s linear, line-height .2s linear;
+    pointer-events: none;
+    user-select: none;
+}
+.textarea__placeholder_top {
+    font-size: 14px;
+    line-height: 18px;
+    top: -15px;
+}
+.textarea__input:focus {
+    border-bottom: 2px solid #000;
+}
+.textarea__input:focus + .textarea__placeholder {
+    top: -15px;
+    font-size: 14px;
+    line-height: 18px;
+}
+.textarea__input:focus + .textarea__placeholder + .textarea__add-link {
+    display: block;
 }

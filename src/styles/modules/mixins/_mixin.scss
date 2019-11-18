@@ -1,6 +1,6 @@
 $font-mus: 'Museo Sans Cyrl', sans-serif;
 $font-leksa: 'Leksa', 'sans-serif';
-$col-black: #000105;
+// $col-black: #000105;
 $col-black-8: rgba(0, 1, 5, .8);
 $col-black-6: rgba(0, 1, 5, .6);
 $col-orange: #e7490f;
@@ -41,3 +41,19 @@ $trans-img: transform .7s linear;
     @include font-smoothing();
     color: $color;
 }
+
+
+// New
+
+$col-red: #ee4237;
+$col-red_hover: #ee534a;
+$col-green: #46b757;
+
+$col-white: #fff;
+$col-black: #000;
+$col-black-5: rgba(0, 0, 0, 0.5);
+$col-fa: #fafafa;
+$col-ef: #efefef;
+
+$font-proba: 'ProbaPro', 'sans-serif', 'Arial';
+$font-formular: 'Formular', 'sans-serif', 'Arial';

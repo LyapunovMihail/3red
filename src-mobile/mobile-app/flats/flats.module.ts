@@ -8,9 +8,11 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsRequestModule } from '../forms-request/forms-request.module';
 import { ModalApartamenModule } from './modal-apartament/modal-apartament.module';
 import { SearchSortingComponent } from './search-sorting/search-sorting.component';
 import { SearchOutputModule } from './search-output/search-output.module';
+import { SearchOutputComponent } from './search-output/search-output.component';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -23,13 +25,15 @@ const FlatsComponents = [
 
 @NgModule({
     exports: [
-        ...FlatsComponents
+        ...FlatsComponents,
+        SearchOutputComponent
 
     ],
     declarations: [
         ...FlatsComponents
     ],
     imports: [
+        FormsRequestModule,
         ModalApartamenModule,
         SearchOutputModule,
         CommonModule,

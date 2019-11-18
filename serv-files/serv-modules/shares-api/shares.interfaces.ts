@@ -1,5 +1,3 @@
-import { IAddressItemFlat } from '../addresses-api/addresses.interfaces';
-
 export const SHARES_COLLECTION_NAME = 'shares';
 
 export const SHARES_UPLOADS_PATH = 'uploads/shares/';
@@ -11,9 +9,54 @@ export enum ShareFlatDiscountType {
     SUM = 'sum'
 }
 
-export interface ShareFlat extends IAddressItemFlat {
+export enum ShareBodyEnum {
+    DESCRIPTION = 'description',
+    LIST = 'list',
+    IMAGE = 'image',
+    FLATS = 'flats'
+}
+
+export enum ShareFlatRoomEnum {
+    STUDIO = 'Студия',
+    ONE_ROOM = '1-комн.',
+    TWO_ROOM = '2-комн.',
+    THREE_ROOM = '3-комн.'
+}
+
+export enum ShareFlatDecorationEnum {
+    WITHOUT = 'Без отделки',
+    ROUGHING = 'Черновая отделка',
+    WITHOUT_WITH_WALLS = 'Б/о с перегородками',
+    CLEAN = 'Чистовая',
+    FINISH = 'Финишная отделка',
+    LIGHT = 'Светлая',
+    DARK = 'Темная'
+}
+
+export interface ShareFlat {
+    house: string;
+    number: string;
+    section: string;
+    floor: string;
+    space: string;
+    room: ShareFlatRoomEnum;
+    decoration: ShareFlatDecorationEnum;
+    scheme: string;
+    price: string;
     discountType: ShareFlatDiscountType;
-    discountValue: number;
+    discount: string;
+}
+
+export interface ShareBodyBlock {
+    blockType: ShareBodyEnum;
+    blockOrderNumber: number;
+    blockDescription?: string;
+    blockList?: string[];
+    blockImg?: {
+        image: string;
+        thumbnail: string;
+    };
+    blockFlats?: ShareFlat[];
 }
 
 export interface Share {
@@ -28,5 +71,5 @@ export interface Share {
     finish_date: string;
     requestBtn: boolean;
     show_on_main: boolean;
-    shareFlats: ShareFlat[];
+    body: ShareBodyBlock[];
 }

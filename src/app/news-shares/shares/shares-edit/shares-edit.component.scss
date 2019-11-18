@@ -1,233 +1,309 @@
 @import "../../../../styles/modules/mixins/mixin";
 
-.g-modal-bg {
-    padding: 60px 0;
-    box-sizing: border-box;
+.invalid-value {
+    border-color: $col-red !important;
+    &+ p + .create-shares__typografy-error { display: block; }
+    &+ .create-shares__typografy-error { display: block; }
 }
 
-.admin-shares_modal-close-bgr {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    z-index: 10;
-}
+.create-shares {
 
-.admin-shares_modal-close-btn {
-    position: absolute;
-    right: -60px;
-    top: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    background: url('/assets/img/cls_white.svg') center no-repeat;
-    background-size: 20px;
-    cursor: pointer;
-    z-index: 11;
-}
+    &__cls {
+        &-area {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        &-btn,
+        &-success {
+            position: absolute;
+            right: -60px;
+            top: 0;
+            z-index: 2;
+        }
+        &-success { top: 56px; }
 
-.shares-edit-form {
-    width: 1088px;
-    min-height: 100px;
-    padding: 40px 35px 35px;
-    box-sizing: border-box;
-    background: #fff;
-    border-radius: 5px;
-    position: relative;
-    z-index: 100;
+        &-preview {
+            width: 17px;
+            height: 17px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            top: -8.5px;
+            left: -8.5px;
+            border-radius: 50%;
+            background-color: $col-red;
+
+            span {
+                display: block;
+                width: 7px;
+                height: 1px;
+                position: relative;
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #fff;
+                }
+                &::before { transform: rotate(45deg); }
+                &::after { transform: rotate(-45deg); }
+            }
+        }
+
+    }
+    &__container {
+        width: 916px;
+        box-sizing: border-box;
+        padding: 48px 70px;
+        background-color: $col-white;
+        position: relative;
+    }
 
     &__typografy {
 
         &-title {
-            font: 42px/46px 'Leksa';
-            @include font-smoothing;
-            color: #000105;
-            margin: 0 0 25px;
+            width: 100%;
+            margin: 0 0 24px;
+
+            &_in-path { margin: 0 0 32px; }
+            &_out-path { margin: 0 0 16px; }
         }
-        &-subtitle  {
-            font: 16px/24px "Museo Sans Cyrl", sans-serif;
-            @include font-smoothing;
-            color: rgba(0, 1, 5, .8);
-            margin: 0 0 5px;
+
+        &-subtitle {
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            position: absolute;
+            top: 24px;
+            left: 0;
+            transition: top .2s linear, font-size .2s linear, line-height .2s linear;
+            user-select: none;
+            pointer-events: none;
+
+            &_placeholder {
+                font-size: 14px;
+                line-height: 18px;
+                top: 0;
+            }
+            &_preview { position: static; }
+            &_add-link {
+                font-size: 14px;
+                line-height: 18px;
+                top: 0;
+                right: 0;
+                left: auto;
+                color: $col-red;
+                text-decoration: underline;
+            }
         }
-        &-date {
-            font: 16px/24px "Museo Sans Cyrl", sans-serif;
-            @include font-smoothing;
-            color: rgba(0, 1, 5, .8);
-            margin: 0 0 40px;
+        &-error {
+            display: none;
+            font: 14px/18px $font-proba;
+            color: $col-red;
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
         }
     }
-    &__path-wrap { margin: 0 0 30px; }
+
+    &__wrap {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        position: relative;
+
+        &_path {
+            width: 100%;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            background-color: #efefef;
+            padding: 16px 24px 32px;
+            box-sizing: border-box;
+            position: relative;
+            margin: 0 0 8px;
+        }
+        &_main { margin: 0 0 40px; }
+        &_input {
+            position: relative;
+            padding: 18px 0 0;
+            margin: 0 0 24px;
+        }
+
+        &_full { width: 100%; }
+        &_w2   { width: calc(50% - 12px); }
+        &_w3   { width: calc(33.333% - 8px); }
+
+        &_select {
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: 10px;
+                right: 0;
+                width: 20px;
+                height: 20px;
+                pointer-events: none;
+                background: url(/assets/img/btn_next_grey.svg) center no-repeat;
+                transform: rotate(-90deg) translateY(-50%);
+            }
+        }
+        &_checkbox { padding: 27px 0 0; }
+        &_preview {
+            flex-flow: row nowrap;
+            margin: 0 0 25px;
+        }
+        &_btn {
+            flex-flow: row nowrap;
+            position: absolute;
+            top: 16px;
+            right: 24px;
+        }
+        &_elements {
+            flex-flow: row nowrap;
+            margin: 0 0 48px;
+        }
+        &_upld { flex-flow: row nowrap; }
+    }
 
     &__input {
         width: 100%;
-        height: 82px;
-        border: 1px solid #979797;
+        min-height: 36px;
         box-sizing: border-box;
-        padding: 10px 15px;
-        
-        &_title {
-            font: 500 20px/24px "Museo Sans Cyrl", sans-serif;
-            @include font-smoothing;
-            color: #000105;
+        // padding: 4px 0 8px;
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        border: 0;
+        border-bottom: 1px solid $col-black-5;
+        background-color: transparent;
+        transition: border-bottom .2s linear;
+        &:focus {
+            border-bottom: 2px solid $col-black;
+            &+ p {
+                top: 0;
+                font-size: 14px;
+                line-height: 18px;
+            }
         }
-        &_text {
-            font: 16px/24px "Museo Sans Cyrl", sans-serif;
-            @include font-smoothing;
-            color: rgba(0, 0, 0, 0.8);
+        &_datepicker { padding: 0; }
+        &_status {
+            border-radius: 0;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
-    }
-    &__time-wrap {
-        display: flex;
-        align-items: flex-end;
+        &_disabled { pointer-events: none; }
+        &_area { border: none; }
     }
 
-    &__check {
+    &__btn {
+        height: 35px;
+        padding: 0 16px 0 40px;
         display: flex;
         align-items: center;
-        margin: 0 0 0 10px;
+        font: 18px/23px $font-proba;
+        color: $col-white;
+        cursor: pointer;
 
-        input:checked + &-checkbox {
-            background: #0070c9;
-            &:before {
-                background: #fff;
-                left: calc(100% - 17px);
-            }
+        &_photo-preview {
+            background: url(/assets/img3red/news_shares/camera.svg) 16px 9px no-repeat #454545;
+            margin: 0 8px 16px 0;
         }
-        input:checked + &-checkbox + &-text { color: #999a9b; }
-
-        &-checkbox {
-            width: 32px;
-            height: 18px;
-            background: #efefef;
-            border-radius: 9px;
-            margin: 0 10px 0 0;
-            position: relative;
-            &:before {
-                content: '';
-                position: absolute;
-                width: 16px;
-                height: 16px;
-                background: #0070c9;
-                top: 1px;
-                left: 1px;
-                border-radius: 50%;
-                transition: .2s ease;
-            }
+        &_path-controll {
+            padding: 0;
+            background: transparent;
+            color: $col-black;
+            margin-right: 16px;
+            &:last-child { margin: 0; }
         }
-        &-text {
-            @include fw18-24;
+
+        &_text,
+        &_title,
+        &_image { margin-right: 8px; }
+
+        &_text  { background: url(/assets/img3red/news_shares/text.svg) 16px 50% no-repeat #454545; }
+        &_title { background: url(/assets/img3red/news_shares/title.svg) 16px 50% no-repeat #454545; }
+        &_flats { background: url(/assets/img3red/news_shares/flat.svg) 16px 50% no-repeat #454545; }
+        &_image { background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxN3B4IiB2aWV3Qm94PSIwIDAgMTggMTciIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUwLjIgKDU1MDQ3KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5SZWN0YW5nbGUgMzMgQ29weTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSLQkNC00LzQuNC90LrQsC0yIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTM1LjAwMDAwMCwgLTI0NDYuMDAwMDAwKSIgc3Ryb2tlPSIjRkZGRkZGIj4KICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0zMy1Db3B5IiB4PSI1MzUuNSIgeT0iMjQ0Ni41IiB3aWR0aD0iMTciIGhlaWdodD0iMTYiPjwvcmVjdD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==') 16px 50% no-repeat #454545; }
+
+        &_public {
+            height: 48px;
+            margin-right: 8px;
+            padding: 0 24px;
         }
-    }
-
-    &__add-flat {
-        width: 245px;
-        height: 40px;
-        box-sizing: border-box;
-        border: 1px solid #0070c9;
-        background: #fff;
-        font: 500 16px/20px $font-mus;
-        @include font-smoothing;
-        color: #0070c9;
-        border-radius: 4px;
-        text-transform: uppercase;
-        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-        letter-spacing: .5px;
-
-        span {
-            position: relative;
-            padding: 0 0 0 25px;
-            &:before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 2px;
-                width: 16px;
-                height: 16px;
-                background: url(/assets/img/news/add-ic.svg) no-repeat;
-                background-size: 100%;
-            }
+        &_save {
+            height: 48px;
+            padding: 0 24px 0 8px;
+            color: $col-black;
         }
     }
 
-    &__cover {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    &__image {
+        position: relative;
 
-        &-wrap {
-            width: 220px;
-            height: 160px;
-            margin: 0 20px 0 0;
-        }
-    }
-    &__add {
-        &-cover {
-            width: 166px;
-            height: 40px;
-            border: 1px solid #0070c9;
-            box-sizing: border-box;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-
-            span {
-                position: relative;
-                padding: 0 0 0 33px;
-                font: 500 16px/20px "Museo Sans Cyrl", sans-serif;
-                text-transform: uppercase;
-                @include font-smoothing;
-                color: #0070c9;
-                &:before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    top: -1px;
-                    width: 25px;
-                    height: 20px;
-                    background: url(/assets/img/news/camera.svg) no-repeat;
-                    background-size: 100%;
-                }
-            }
-        }
-        &-wrap { display: flex; }
-    }
-
-    &__show-home {
-        display: flex;
-
-        input:checked + &-checkbox {
-            background: url(/assets/img/check.svg) center no-repeat #e7490f;
-            border-color: #e7490f;
+        &_preview {
+            width: 164px;
+            height: 108px;
         }
 
-        &-text  { @include fw18-24; }
-    }
-
-    &__save {
-        width: 160px;
-        height: 50px;
-        background: #0070c9;
-        font: 500 16px/20px "Museo Sans Cyrl", sans-serif;
-        @include font-smoothing;
-        color: #fff;
-        letter-spacing: .5px;
-        border-radius: 4px;
-        text-transform: uppercase;
-        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, .1);
-        &:not(.shares-edit-form__save_disabled) { cursor: pointer; }
-
-        &_disabled {
-            cursor: not-allowed;
-            color: rgba(255, 255, 255, 0.5);
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 }
-.invalid-value {
-    border: 1px solid red !important;
+
+
+// Модалка вставки ссылки
+
+.paste-link {
+    align-items: center;
+
+    &__container {
+        width: 634px;
+        background-color: $col-white;
+        padding: 48px 82px 40px;
+        position: relative;
+    }
+    &__wrap {
+        width: 100%;
+        margin: 0 0 16px;
+
+        &_for-checkbox { margin: 0 0 40px; }
+        &_for-btn {
+            display: flex;
+            margin: 0;
+        }
+    }
+
+    &__subtitle {
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        margin: 0 0 4px;
+    }
+    &__input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #ccc;
+    }
+
+    &__btn {
+        height: 48px;
+
+        &-close {
+            position: absolute;
+            top: 0;
+            left: calc(100% + 24px);
+        }
+        &-success { margin-right: 8px; }
+        &-cancel {
+            background-color: $col-white;
+            padding: 0 16px 0 8px;
+            color: $col-black;
+        }
+    }
 }

@@ -1,0 +1,37 @@
+
+
+<section id="authorization-form" class="formWrapper" *ngIf="isShowForm">
+
+    <div class="formWrapper_bgr-close" (click)="close()"></div>
+    
+    <form (ngSubmit)="onSubmit(formLogin.value)" [formGroup]='formLogin' class="formWrapper_form">                 
+        
+        <h2 class="formWrapper_form__title">Вход</h2>
+
+        <label class="formWrapper_form__field formWrapper_form__field-formForEntrance">
+            <p class="formWrapper_form__field_description">Логин</p>
+            <input formControlName="login" name='login' type="text" class="formWrapper_form__field_data">
+        </label>
+
+        <label class="formWrapper_form__field formWrapper_form__field-formForEntrance">
+            <p class="formWrapper_form__field_description">Пароль</p>
+            <input formControlName="password" name='password' type="text" class="formWrapper_form__field_data">
+        </label>
+        
+        <button  type="submit" name="submit"  class="formWrapper_form__ready">Готово</button>  
+
+        <button (click)="close()" class="formWrapper_form__clsBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 30.7 30.7" style="enable-background:new 0 0 30.7 30.7;" xml:space="preserve">
+                <g class="close-group">
+                    <line class="close-line" x1="0.4" y1="0.4" x2="12.2" y2="12.2"/>
+                    <line class="close-line" x1="18.5" y1="18.5" x2="30.4" y2="30.4"/>
+                    <line class="close-line" x1="30.4" y1="0.4" x2="18.5" y2="12.2"/>
+                    <line class="close-line" x1="12.2" y1="18.5" x2="0.4" y2="30.4"/>
+                </g>
+            </svg>
+        </button>
+
+    </form>
+
+</section>

@@ -1,5 +1,5 @@
 import { FormsRequestModule } from '../forms-request/forms-request.module';
-import { ApartmentModule } from './apartment/apartment.module';
+import { ApartmentSideBarComponent } from './apartment/side-bar/apartment-side-bar.component';
 import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';
 import { ApartmentComponent } from './apartment/apartment.component';
@@ -23,6 +23,9 @@ const FlatsComponents = [
 
     ...FloorComponents,
 
+    ApartmentComponent,
+    ApartmentSideBarComponent,
+
     ...SearchComponents,
 
     ...PlanComponents
@@ -36,11 +39,10 @@ const FlatsComponents = [
         ...FlatsComponents
     ],
     imports: [
+        FormsRequestModule,
         ReactiveFormsModule,
         FormsModule,
         GHMRangeNumberModule,
-        ApartmentModule,
-
         CommonModule,
         RouterModule,
         RouterModule.forChild([

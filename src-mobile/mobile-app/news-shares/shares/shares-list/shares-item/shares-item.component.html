@@ -27,39 +27,43 @@
 
 
     <ul class="shares-view__flat flat-list">
-        <li>
-            <ul class="flat-list__item-info">
-                <li *ngFor="let flat of share.shareFlats; let i = index" class="flat-list__item flat-list__item_info">
-                    <a (click)="openApartmentModal(i)" class="flat-list__item_link">
+        <li *ngFor="let b of share.body; index as blockIndex"
+            [ngSwitch]="b.blockType">
+            <ul *ngSwitchCase="'flats'"  class="flat-list__item-info">
+                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="flat-list__item flat-list__item_info">
+                    <a href="#" class="flat-list__item_link">
                         <div class="flat-list__item-img">
-                            <img (error)="img.style.display = 'none'"
-                                 [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
-                            <div *ngIf="img.style.display === 'none'" class="flat-list__item-img-error"></div>
+                            <!-- Изображение не работает -->
+                            <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image">
                         </div>
     
                         <div class="flat-list__item-wrap">
-                            <div class="flat-list__item-text flat-list__item-text_room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
-                            <div class="flat-list__item-text flat-list__item-text_corpus">Корпус {{flat.house}}</div>
+                            <div class="flat-list__item-text flat-list__item-text_room">{{flat.room}}</div> <!-- Должна быть "комнатная" а не "комн." -->
+                            <div class="flat-list__item-text flat-list__item-text_corpus">Секция {{flat.section}}</div> <!-- Должен быть корпус -->
                             <div class="flat-list__item-text flat-list__item-text_floor">Этаж {{flat.floor}}</div>
                         </div>
                         <div class="flat-list__item-wrap">
                             <div class="flat-list__item-text flat-list__item-text_space">{{flat.space}} м&#178;</div>
                             <div class="flat-list__item-price">
-                                <div class="flat-list__item-text flat-list__item-text_price-sale">{{flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>
-                                <div class="flat-list__item-text flat-list__item-text_price-not-sale">{{flat.price | bitNumber}} &#8381;</div>
+                                <div class="flat-list__item-text flat-list__item-text_price-not-sale">{{+flat.price - getDiscount(flat)}} &#8381;</div>
+                                <div class="flat-list__item-text flat-list__item-text_price-sale">{{flat.price}} &#8381;</div>
                             </div>
                         </div>
                     </a>
-                   <!-- <div class="flat-list__item-favorite"></div> -->
+                    <div class="flat-list__item-favorite"></div>
                 </li>
             </ul>
         </li>
     </ul>
 </div>
 
-<app-modal-apartment *ngIf="showApartmentWindow"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="share.shareFlats"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-modal-apartment>
+<!-- 
+    TODO: Должны быть модалки квартиры и соответственно ипотека/забронировать (08.08.19)
+ -->
+<app-form-reserve *ngIf="setFlatData"
+    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentNumber]="selectFlat.number"
+    [apartmentPrice]="selectFlat.price"
+    [type]="'КВ'">
+</app-form-reserve>

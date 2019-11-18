@@ -10,77 +10,55 @@
     display: flex;
     justify-content: center;
 
-    &__wrapper {
-        width: 100%;
-        max-width: $w1600;
+    &__container {
+        width: 916px;
         box-sizing: border-box;
-        padding-top: 120px;
-    }
-
-    &__header {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 27px;
+        padding: 48px 70px;
+        background-color: $col-white;
+        position: relative;
     }
 
     &__title {
         width: 100%;
         display: flex;
 
-        &-content,
-        &-text {
-            @include font-smoothing();
-        }
-
-        &-content {
-            width: 50%;
-            font: 54px/58px 'Leksa';
-            color: $col-black;
-            margin-bottom: 20px;
-        }
-
-        &-text {
-            width: 50%;
-            font: 16px/24px $font-mus;
-            color: $col-black;
-            max-width: 600px;
-            box-sizing: border-box;
-            padding: 12px;
+        &_out-path {
+            margin: 0 0 24px;
         }
     }
 
-    &__adding-btn {
-        height: 62px;
-        border: 1px solid #0070c9;
-        border-radius: 5px;
-        background: transparent;
-        font: 500 16px/22px $font-mus;
-        color: $col-blue;
-        @include font-smoothing();
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        padding: 0 30px;
-        cursor: pointer;
-        transition: box-shadow .2s linear;
-        margin: 0 0 6px;
+    &__btn {
+        height: 35px;
+        padding: 0 16px 0 36px;
+        font: 18px/23px $font-proba;
+        color: $col-white;
+        background: 16px 50% no-repeat #454545;
 
-        &-text {
-            position: relative;
-            padding-left: 42px;
+        &_add-block {
+            background-image: url(/assets/img3red/documentation/add.svg);
+            margin: 0 0 48px;
+        }
+    }
+    &__close {
+        position: absolute;
 
-            &:before {
-                content: '';
-                position: absolute;
-                width: 30px;
-                height: 30px;
-                left: 0;
-                top: -5px;
-                background: url('../../../assets/img/about/admin/add_doc.svg') center no-repeat;
-                background-size: 100%;
-            }
+        &_main {
+            top: 0;
+            left: calc(100% + 24px);
+        }
+        &_success {
+            top: 56px;
+            left: calc(100% + 24px);
+        }
+    }
+    &__success-btn {
+        height: 48px;
+
+        &_success { margin-right: 8px; }
+        &_cancel {
+            font: 18px/23px $font-proba;
+            color: $col-black;
+            padding: 0 16px 0 8px;
         }
     }
 
@@ -91,16 +69,30 @@
     &__object {
         width: 100%;
         max-width: $w1600;
-        background: rgba(171, 171, 34, 0.06);
-        padding: 20px;
+        background: $col-ef;
+        padding: 16px 24px 32px;
         box-sizing: border-box;
-        border-radius: 4px;
-        display: flex;
         position: relative;
-        margin: 0 0 5px;
+        margin: 0 0 8px;
 
-        &:last-of-type {
-            margin-bottom: 0;
+        &-wrap {
+            position: relative;
+
+            &_head {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                margin: 0 0 50px;
+            }
+        }
+        &-btn {
+            &_controls {
+                margin: 0 8px;
+                font: 18px/23px $font-proba;
+                color: $col-black;
+                &:last-child { margin: 0 0 0 8px; }
+            }
+            &_load-file { background-image: url(/assets/img3red/documentation/pdf.svg); }
         }
 
         &-header {
@@ -110,39 +102,10 @@
             margin-bottom: 10px;
         }
 
-        &-title {
-            font: 500 20px/24px $font-mus;
-            color: $col-black;
-            @include font-smoothing();
-            width: 100%;
-            box-sizing: border-box;
-            padding: 12px;
-            max-width: 413px;
-            margin: 0 0 10px;
+        &-input {
+            margin: 0 0 36px;
         }
 
-        &-load-btn {
-            // display: block;
-            font: 500 16px/22px $font-mus;
-            @include font-smoothing;
-            color: #0070c9;
-            margin: 10px 0 0;
-            padding: 0;
-            cursor: pointer;
-            position: relative;
-            margin: 10px 0 0;
-
-            &:before {
-                content: '';
-                position: absolute;
-                width: 24px;
-                height: 22px;
-                background: url('../../../assets/img/about/admin/dwnld_doc.svg') no-repeat;
-                background-size: 100%;
-                top: 0;
-                left: calc(100% + 10px);
-            }
-        }
         &-del-object {
             width: 30px;
             height: 30px;
@@ -164,97 +127,64 @@
                 top: calc(50% - .5px);
             }
         }
-        &-move-object {
-            width: 24px;
-            height: 8px;
-            position: absolute;
-            right: -39px;
-            top: calc(50% - 4px);
-            padding: 0;
-            margin: 0;
-            cursor: grab;
-
-            div {
-                width: 24px;
-                height: 1px;
-                background: #d8d8d8;
-
-                &:not(:last-child) {
-                    margin: 0 0 3px;
-                }
-            }
-        }
 
         &-content {
-            width: calc(100% - 520px);
-        }
-
-        &-file {
-            display: flex;
-            &:not(:last-child) { margin: 0 0 12px; }
-        }
-
-        &-link {
             width: 100%;
-            position: relative;
-            font: 500 16px/23px $font-mus;
-            padding: 0 0 0 29px;
-            display: flex;
-            justify-content: space-between;
-
-            &:before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 19px;
-                height: 22px;
-                background: url('../../../assets/img/about/admin/pdf.svg') no-repeat;
-                background-size: 100%;
-            }
-        
-            // &:not(.documentation__object-link_admin) {
-            //     background: url('/assets/img/about/doc.svg') 0 4px no-repeat;
-            //     background-size: 15px 17px; 
-            // }
-        }
-        &-name-file {
-            width: calc(100% - 110px);
-        }
-        &-date {
-            width: 90px;
-            font: 500 16px/23px $font-mus;
-            @include font-smoothing;
-            color: #999a9b;
-        }
-
-        &-del-file {
-            font: 500 16px/22px $font-mus;
-            @include font-smoothing;
-            margin: 0 15px 0 0;
-            padding: 0 19px 0 0;
-            background: transparent;
-            cursor: pointer;
-            color: $col-black;
-            opacity: .5;
-            position: relative;
-
-            &:before {
-                content: '';
-                position: absolute;
-                right: -1px;
-                top: 3px;
-                width: 15px;
-                height: 15px;
-                background: url('../../../assets/img/about/admin/cls.svg') no-repeat;
-                background-size: 100%;
-            }
+            margin: 24px 0 0;
         }
     }
 }
 
-.admin-input {
-    border: 1px dashed #B2B2B2;
+.upload-file {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 0 8px;
+    &:last-child { margin: 0; }
+
+    &__delete-btn {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        position: absolute;
+        left: 0px - (17px / 2);
+        top: 0;
+        background-color: $col-red;
+        display: flex;
+        justify-content: center;
+
+        span {
+            width: 8px;
+            height: 1px;
+            position: relative;
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: $col-white;
+                width: 100%;
+                height: 100%;
+                transform: rotate(45deg);
+            }
+            &::after { transform: rotate(-45deg); }
+        }
+    }
+
+    &__file-name {
+        max-width: 441px;
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        padding-left: 44px;
+        background: url(/assets/img3red/documentation/pdf_black.svg) 16px top no-repeat;
+    }
+
+    &__date {
+        font: 18px/23px $font-proba;
+        color: $col-black-5;
+    }
 }
 
 .admin-gallery_progress {
@@ -279,14 +209,6 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-
-    &-title {
-
-    }
-
-    &-info {
-
-    }
 
     &-line {
         width: 200px;

@@ -153,9 +153,19 @@
         }
     }
 
+    &__list{
+        margin: 40px 0 100px;
+        box-sizing: border-box;
+
+        &-item {
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+        }
+    }
 
     &__flats{
-        margin: 40px 0 100px;
         width: 100%;
         box-sizing: border-box;
         border-top: 1px solid rgba(0, 1, 5, 0.3);
@@ -168,7 +178,6 @@
             border-bottom: 1px solid rgba(0, 1, 5, 0.3);
             display: flex;
             align-items: center;
-            cursor: pointer;
             &:hover { background-color: rgba(231, 73, 15, 0.03); }
         }
         &-item {
@@ -185,19 +194,6 @@
             display: flex;
             align-items: center;
             margin: 0 59px 0 0;
-
-            &-error {
-                display: flex;
-                width: 100%;
-                padding: 20px 12px;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                background-color: #fafafa;
-                font: 500 14px/20px 'Museo Sans Cyrl', sans-serif;
-                color: #000105;
-                opacity: 0.6;
-            }
 
             &-item {
                 height: 100%;

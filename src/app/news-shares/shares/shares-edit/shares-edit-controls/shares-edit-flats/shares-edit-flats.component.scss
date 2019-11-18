@@ -1,19 +1,13 @@
 @import "../../../../../../styles/modules/mixins/mixin";
 
 :host,
-.form-flats-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px 0 0;
-}
+.form-flats-list { width: 100%; }
 
-.form-flats-list__item {
-    width: 760px;
-    box-sizing: border-box;
-    border: 1px solid #999a9b;
-    padding: 20px;
-    &:not(:first-child) { margin: 10px 0 0; }
+.form-flats-list {
+    &__item {
+        display: block;
+        width: 100%;
+    }
 }
 
 .share-view {

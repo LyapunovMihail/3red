@@ -28,10 +28,6 @@ export class AddressesModel {
         };
     }
 
-    public async getObjectsByHousesAndNumbers(body) {
-        return await this.collection.find({house: {$in: body.flatsData.houses}, flat: {$in: body.flatsData.numbers}}).toArray();
-    }
-
     public async getSearchConfig() {
         let config = await this.db.collection('flats-search-config').find({}).toArray();
         return config;

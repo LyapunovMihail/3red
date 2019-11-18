@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ROUTES } from './app.routes';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
+import { AuthorizationObserverService } from './authorization/authorization.observer.service';
 import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
@@ -31,6 +32,7 @@ import { DecorationModule } from './decoration/decoration.module';
 import { LocationModule } from './location/location.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
+import { AuthorizationModule } from './authorization/authorization.module';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
@@ -44,6 +46,7 @@ const APP_PROVIDERS = [
     ImgModalService,
     OverlayService,
     WindowEventsService,
+    AuthorizationObserverService,
     FavoritesService,
     PlatformDetectService,
     FlatsDiscountService
@@ -51,6 +54,7 @@ const APP_PROVIDERS = [
 
 const APP_MODULES = [
     //  ErrorPageModule,
+    AuthorizationModule,
     HomeModule,
     LocationModule,
     FooterModule,

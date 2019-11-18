@@ -9,19 +9,11 @@ export class BitNumberPipe implements PipeTransform  {
 
    constructor(private _sanitizer: DomSanitizer) {}
 
-    toNumber ( val ) {
-        if (String(val) && String(val).length > 0) {
-            return Number(String(val).replace(/[^.0-9]/gim, ''));
+   transform(v: any): SafeHtml {
+        if (String(v) && String(v).length > 0) {
+            return String(v).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
         } else {
-            return val;
+            return v;
         }
-    }
-
-    transform( val: any ): SafeHtml {
-        if (val && String(val).length > 0) {
-            return String(this.toNumber(val).toFixed(2)).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
-        } else {
-            return val;
-        }
-    }
+   }
 }

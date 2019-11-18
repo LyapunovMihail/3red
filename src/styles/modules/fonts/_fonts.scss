@@ -22,3 +22,26 @@
     font-weight: 500;
     font-style: normal;
 }
+
+
+// New -->
+@font-face {
+    font-family: 'Formular';
+    src: url('/assets/fonts/formular/Formular-Bold.eot');
+    src: url('/assets/fonts/formular/Formular-Bold.eot') format('embedded-opentype'),
+         url('/assets/fonts/formular/Formular-Bold.woff2') format('woff2'),
+         url('/assets/fonts/formular/Formular-Bold.woff') format('woff'),
+         url('/assets/fonts/formular/Formular-Bold.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+  }
+  
+  @font-face {
+    font-family: 'ProbaPro';
+    src: url('/assets/fonts/probapro/ProbaPro-Regular.eot');
+    src: url('/assets/fonts/probapro/ProbaPro-Regular.eot') format('embedded-opentype'),
+         url('/assets/fonts/probapro/ProbaPro-Regular.woff') format('woff'),
+         url('/assets/fonts/probapro/ProbaPro-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+  }

@@ -9,6 +9,7 @@ import { NewsComponent } from './news.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { DatePickerModule } from '../shares/shares-edit/date-picker/date-picker.module';
 
 const NewsComponents = [
     NewsComponent,

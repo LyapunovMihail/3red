@@ -154,7 +154,6 @@
                     &--reserved {
                         position: relative;
                         border: solid 1px rgba(0,1,5,0.1);
-                        pointer-events: none;
 
                         &:before {
                             content: '';
@@ -172,10 +171,6 @@
                     &--discount {
                         border: solid 1px #e7490f;
                         color: #e7490f;
-
-                        &:hover {
-                            color: #ffffff;
-                        }
                     }
 
                     &--disabled {

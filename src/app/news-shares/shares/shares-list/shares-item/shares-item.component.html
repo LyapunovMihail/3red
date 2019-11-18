@@ -28,35 +28,31 @@
         Я думаю дублирование списков не нужно т.к ничего кроме акционных квартир показываться не будет,
         но если я удаляю "ul.client-share__list" и его "li", то все перестает работать
      -->
+    <ul class="client-share__list">
+        <li *ngFor="let b of share.body; index as blockIndex"
+            [ngSwitch]="b.blockType" class="client-share__list-item">
 
-    <ul class="client-share__flats">
-        <li *ngFor="let flat of share.shareFlats; let i = index" class="client-share__flats-wrap">
-            <a (click)="openApartmentModal(i)" class="client-share__flats-item">
-                <div class="client-share__flats-image">
-                    <img class="client-share__flats-image-item" (error)="img.style.display = 'none'"
-                         [src]="'/assets/floor-plans/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
-                    <div *ngIf="img.style.display === 'none'" class="client-share__flats-image-error">Изображение недоступно</div>
-                </div>
-                <!-- Нужно убрать сокращение у Кол-ва комнат -->
-                <div class="client-share__flats-house client-share__flats-room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</div>
-                <div class="client-share__flats-house client-share__flats-space">{{flat.space}} м²</div>
-                <div class="client-share__flats-house client-share__flats-floor">Этаж {{flat.floor}}</div>
-                <div class="client-share__flats-house client-share__flats-corpus">Корпус {{flat.house}}</div>
-                <div class="client-share__flats-house client-share__flats-decoration">{{flat.decorationName}}</div>
-                <div class="client-share__flats-price">
-                    <p class="client-share__flats-price_new">{{flat.price - getDiscount(flat) | bitNumber}} &#8381;</p>
-                    <p class="client-share__flats-price_old">{{flat.price | bitNumber}} &#8381;</p>
-                </div>
-            </a>
-            <!-- <div class="client-share__flats-favorites"></div> -->
+            <ul *ngSwitchCase="'flats'" class="client-share__flats">
+                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="client-share__flats-wrap">
+                    <a href="#" class="client-share__flats-item">
+                        <div class="client-share__flats-image">
+                            <img [src]="flat.scheme" class="client-share__flats-image-item">
+                        </div>
+                        <!-- Нужно убрать сокращение у Кол-ва комнат -->
+                        <div class="client-share__flats-house client-share__flats-room">{{flat.room}}</div>
+                        <div class="client-share__flats-house client-share__flats-space">{{flat.space}} м²</div>
+                        <div class="client-share__flats-house client-share__flats-floor">Этаж {{flat.floor}}</div>
+                        <div class="client-share__flats-house client-share__flats-corpus">Корпус {{flat.house}}</div>
+                        <div class="client-share__flats-house client-share__flats-decoration">{{flat.decoration}}</div>
+                        <div class="client-share__flats-price">
+                            <p class="client-share__flats-price_new">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</p>
+                            <!-- flat.price почему-то не делает пробелов после млн, тыс, сот -->
+                            <p class="client-share__flats-price_old">{{flat.price}} &#8381;</p>
+                        </div>
+                    </a>
+                    <div class="client-share__flats-favorites"></div>
+                </li>
+            </ul>
         </li>
     </ul>
-
 </div>
-
-<app-flats-apartment-modal *ngIf="showApartmentWindow"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="share.shareFlats"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal>

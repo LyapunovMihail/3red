@@ -1,6 +1,6 @@
 <div *ngIf="(isForm && isAuthorizated)" class="admin-controll g-modal-bg">
 
-    <div class="admin-news_modal-close-bgr" (click)="close.emit()" ></div>
+    <div class="create-form__cls-area" (click)="close.emit()" ></div>
 
     <div class="create-form__container">
 
@@ -11,71 +11,97 @@
             </div>
         </div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="admin-news_form create-form__form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="create-form__form">
 
-            <div (click)="close.emit()" class="create-form__cls-btn"></div>
+            <div (click)="close.emit()" class="create-form__cls-btn btn-cls"><span></span></div>
+            <div (click)="close.emit()" class="create-form__cls-success btn-success"></div>
 
-            <h1 class="create-form__form-title">Добавить новость</h1>
-            <p class="create-form__form-date">{{dateNow}}</p>
+            <h2 class="create-form__form-title create-form__form-title_out-path">Добавить новость</h2>
 
-            <div class="create-form__form-wrap">
-                <p class="create-form__form-subtitle">Заголовок</p>
-                <textarea class="create-form__form-area create-form__form-area_title"
-                    name="title"
-                    placeholder="Максимум 60 символов"
-                    [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid && form.controls['title'].touched)}"
-                    [formControl]="form.controls['title']">
-                </textarea>
-            </div>
-            
-            <div class="create-form__form-wrap">    
-                <p class="create-form__form-subtitle">Текст</p>
-                <textarea class="create-form__form-area create-form__form-area_text"
-                    placeholder="Дополнительный текст"
-                    [formControl]="form.controls['description']">
-                </textarea>
-            </div>
+            <div class="create-form__form-wrap create-form__form-wrap_path create-form__form-wrap_main">
+                <h3 class="create-form__form-title create-form__form-title_in-path">Основная информация</h3>
+                
+                <div class="create-form__form-wrap create-form__form-wrap_input create-form__form-wrap_full">
+                    <textarea class="create-form__form-area"
+                        name="title"
+                        [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
+                        [formControl]="form.controls['title']" #title>
+                    </textarea>
+                    <p class="create-form__form-title create-form__form-title_for-input"
+                        [ngClass]="{'create-form__form-title_placeholder': title.value.length > 0}">Заголовок</p>
+                    <p class="create-form__form-title create-form__form-title_error g-text_sign">Поле обязательно для заполнения</p>
+                </div>
+                
+                <div class="create-form__form-wrap create-form__form-wrap_input create-form__form-wrap_full">    
+                    <textarea class="create-form__form-area"
+                        [formControl]="form.controls['description']" #text>
+                    </textarea>
+                    <p class="create-form__form-title create-form__form-title_for-input"
+                    [ngClass]="{'create-form__form-title_placeholder': text.value.length > 0}">Краткое описание</p>
+                </div>
 
-            <div class="create-form__form-wrap">
-                <p class="create-form__form-subtitle">Текст для превью</p>
-                <textarea class="create-form__form-area create-form__form-area_text"
-                    placeholder="Максимум 60 символов"
-                    [ngClass]="{'invalid-input-value' : (!form.controls['descrPreview'].valid)}"
-                    [formControl]="form.controls['descrPreview']">
-                </textarea>
-            </div>
+                <div class="create-form__form-wrap create-form__form-wrap_datepicker create-form__form-wrap_w2">
+                    <p class="create-form__form-title create-form__form-title_for-datepicker">Дата публикации</p>
+                    <div class="create-form__form-area create-form__form-area_datepicker">
+                        <app-ghm-date-picker [formControl]="'created_at'"></app-ghm-date-picker>
+                    </div>
+                </div>
+                <div class="create-form__form-wrap create-form__form-wrap_select create-form__form-wrap_w2">
+                    <p class="create-form__form-title create-form__form-title_for-select">Статус</p>
+                    <select name="status" class="create-form__form-select create-form__form-select_type">
+                        <option>Черновик</option>
+                        <option>Чистовик</option>
+                        <option>Шаблон</option>
+                    </select>
+                </div>
 
-            <div class="create-form__form-wrap">
-                <p class="create-form__form-subtitle">Фотография</p>
+                <div class="create-form__form-wrap create-form__form-wrap_photo create-form__form-wrap_full">
+                    <div class="create-form__form-img">
+                        <label class="create-form__form-btn create-form__form-btn_preview-image">
+                            <span>Загрузить фото</span>
+                            <input style='display: none;' type="file" (change)="imageUpload($event)" placeholder="Upload file" accept=".jpg">
+                        </label>
 
-                <div class="create-form__form-img">
-                    <img class="create-form__form-img-item" *ngIf="loadedImage.length > 0" [src]="uploadsPath + loadedImage">
-
-                    <input [formControl]="form.controls['image']" hidden="true" type="text">
-                    <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
-
-                    <label [ngClass]="{'create-form__form-img-wrap_photo' : loadedImage.length > 0 }" class="create-form__form-img-wrap">
-                        <div class="create-form__form-img-btn">
-                            <span>{{ (loadedImage.length > 0) ? "Изменить" : "Загрузить" }}</span>
+                        <div class="create-form__form-wrap create-form__form-wrap_image-preview" *ngIf="loadedImage.length > 0">
+                            <img [src]="uploadsPath + loadedImage">
+                            <button class="create-form__cls-preview"><span></span></button>
                         </div>
-                        <input style='display: none;' type="file" (change)="imageUpload($event)" placeholder="Upload file" accept=".jpg">
+    
+                        <input [formControl]="form.controls['image']" hidden="true" type="text">
+                        <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
+    
+                    </div>
+
+                    <p class="create-form__form-title create-form__form-title_for-photo">Загрузите фото для превью</p>
+                </div>
+    
+                <div class="create-form__form-wrap create-form__form-wrap_full">
+                    <label class="g-checkbox">
+                        <input class="admin-news_checkbox_content"
+                            [formControl]="form.controls['show_on_main']"
+                            type="checkbox" name="show_on_main">
+                        <div></div>
+                        <span>Показать новость на главной</span>
                     </label>
                 </div>
             </div>
 
-            <div class="create-form__form-show">
-                <label class="create-form__form-checkbox">
-                    <input class="admin-news_checkbox_content"
-                        [formControl]="form.controls['show_on_main']"
-                        type="checkbox" name="show_on_main">
-                    <div class="create-form__form-box g-checkbox"></div>
-                    <p class="create-form__form-checkbox-text">Показать новость на главной</p>
-                </label>
+            <h2 class="create-form__form-title create-form__form-title_out-path">Состав новости</h2>
+
+            <div class="create-form__form-wrap create-form__form-wrap_controls">
+                <button class="create-form__form-btn create-form__form-btn_controls-title">Заголовок</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-text">Абзац</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-image">Изображение</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-images">2 изображения</button>
             </div>
 
-            <button type="submit" class="create-form__form-submit"
+
+            <button type="submit" class="create-form__form-submit btn_var-2"
                 [ngClass]="{'create-form__form-submit_disabled' : !form.valid}"
-                [disabled]="!form.valid">Добавить
+                [disabled]="!form.valid">Опубликовать
+            </button>
+            <button class="create-form__form-save btn_var-2" [disabled]="!form.valid">
+                Сохранить и закрыть
             </button>
 
         </form>

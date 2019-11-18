@@ -1,0 +1,18 @@
+:host {
+    width: 100%;
+}
+
+.share-view {
+
+    &__blocks-img-wrap {
+        width: 100%;
+        position: relative;
+        box-sizing: border-box;
+        border: 1px dashed #979797;
+
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+}

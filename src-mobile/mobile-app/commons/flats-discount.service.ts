@@ -1,4 +1,4 @@
-import { Share, ShareFlat, ShareFlatDiscountType } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Share, ShareBodyBlock, ShareFlat, ShareFlatDiscountType } from '../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -14,9 +14,12 @@ export class FlatsDiscountService {
     public getShares() {
         this.http.get<{ length: number, sharesList: Share[] }>(`/api/shares/list?limit=${100}&skip=${0}`)
             .subscribe((data: { length: number, sharesList: Share[] }) => {
-                console.log('data: ', data);
                 data.sharesList.forEach((share: Share) => {
-                    this.shareFLats = [...this.shareFLats, ...share.shareFlats];
+                    share.body.forEach((block: ShareBodyBlock) => {
+                        if (block.blockType === 'flats') {
+                            this.shareFLats = [...this.shareFLats, ...block.blockFlats];
+                        }
+                    });
                 });
             }, (err) => {
                 console.log(err);
@@ -24,14 +27,14 @@ export class FlatsDiscountService {
     }
 
     public getDiscount(flat): number {
-        const shareFlat = this.shareFLats.find((sFlat) => sFlat.flat === flat.flat && sFlat.house === flat.house);
-        console.log('this.shareFlats: ', this.shareFLats);
+        const shareFlat = this.shareFLats.find((sFlat) => +sFlat.number === flat.flat);
+
         if (shareFlat) {
             if (shareFlat.discountType === ShareFlatDiscountType.PERCENT) {
-                const discount = shareFlat.price * (shareFlat.discountValue / 100);
+                const discount = +shareFlat.price * (+shareFlat.discount / 100);
                 return +discount.toFixed(2);
             }
-            return shareFlat.discountValue;
+            return +shareFlat.discount;
         }
         return null;
     }

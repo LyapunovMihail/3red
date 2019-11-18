@@ -4,6 +4,7 @@ import { NewsDeleteFormComponent } from './news-delete-form/news-delete-form.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { DatePickerModule } from '../../shares/shares-edit/date-picker/date-picker.module';
 
 @NgModule({
     exports: [
@@ -19,6 +20,7 @@ import { NgModule } from '@angular/core';
     imports: [
         FormsModule,
         ReactiveFormsModule,
+        DatePickerModule,
         CommonModule
     ]
 })
