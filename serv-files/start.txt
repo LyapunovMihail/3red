@@ -1,7 +1,0 @@
-npm run build:prod
-scp -r  E:/projects/barviha-api/dist nk:/var/www/barvihadom.ru/dist/server/
-cd /var/www/barvihadom.ru/dist/server/dist
-nvm use 10.15.3
-yarn --production --modules-folder '../node_modules'
-cd /var/www/barvihadom.ru
-PORT=8005 BASE_NAME='barviha_api' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid 'barviha' dist/server/dist/main.js

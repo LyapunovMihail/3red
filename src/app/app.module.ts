@@ -40,6 +40,7 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { ParkingModule } from './parking/parking.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
+import {JkObjectsModule} from "./jk-objects/jk-objects.module";
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -81,6 +82,7 @@ const APP_MODULES = [
     ParkingModule,
     StoreroomsModule,
     AdminContactsModule,
+    JkObjectsModule,
 
     BrowserModule,
     BrowserAnimationsModule,
