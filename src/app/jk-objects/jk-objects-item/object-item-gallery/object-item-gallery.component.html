@@ -6,7 +6,7 @@
         <div class="object-gallery__head">
             <input type="checkbox" name="switch" id="gallery" class="switch">
             <label *ngIf="isAuthorizated" for="gallery" class="object-item__title">Галерея</label>
-            <h3 *ngIf="!isAuthorizated">Галерея</h3>
+            <h2 *ngIf="!isAuthorizated">Галерея</h2>
         </div>
 
         <div class="object-gallery__options" *ngIf="isAuthorizated">
