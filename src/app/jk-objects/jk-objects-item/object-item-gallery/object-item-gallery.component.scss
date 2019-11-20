@@ -1,0 +1,48 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.object-gallery {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__head { margin: 0 0 16px; }
+
+    &__options {
+        margin: 0 0 16px;
+        .btn__admin-setting { margin-right: 8px; }
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 16px;
+
+        &-list {
+            display: flex;
+            border-bottom: 1px solid #d8d8d8;
+        }
+        &-item {
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            position: relative;
+            padding: 8px 0;
+            margin-right: 16px;
+            &:last-child { margin-right: 0; }
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: calc(100% - 16px); // где 16px - это величина правого паддинга
+                height: 1px;
+                background-color: #d8d8d8;
+            }
+            &_active {
+                color: $col-red;
+                &::before { background-color: $col-red; }
+            }
+        }
+    }
+
+    &__gallery {}
+}

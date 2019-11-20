@@ -1,0 +1,42 @@
+
+<section class="object-gallery">
+
+    <div class="object-item__container object-gallery__container">
+
+        <div class="object-gallery__head">
+            <input type="checkbox" name="switch" id="gallery" class="switch">
+            <label *ngIf="isAuthorizated" for="gallery" class="object-item__title">Галерея</label>
+            <h3 *ngIf="!isAuthorizated">Галерея</h3>
+        </div>
+
+        <div class="object-gallery__options" *ngIf="isAuthorizated">
+            <button class="btn__admin-setting">Настройки</button>
+            <button class="btn__admin-content btn_var-2">Контент</button>
+        </div>
+
+        <nav class="object-gallery__nav">
+            <ul class="object-gallery__nav-list">
+                <li class="object-gallery__nav-item object-gallery__nav-item_active">Благоустройство</li>
+                <li class="object-gallery__nav-item">Архитектура</li>
+                <li class="object-gallery__nav-item">Места поблизости</li>
+            </ul>
+        </nav>
+
+        <div class="object-gallery__slider">
+
+            <button class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev"><span></span></button>
+            <button class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next"><span></span></button>
+
+            <div class="object-gallery__slider-dots"></div>
+
+            <div class="object-gallery__slider-item gallery-slide">
+
+                <div class="gallery-slide__image"></div>
+                <div class="gallery-slide__content">
+                    <h3 class="gallery-slide__content-title"></h3>
+                    <div class="gallery-slide__content-descr"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

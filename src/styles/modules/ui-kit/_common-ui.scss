@@ -1,12 +1,14 @@
 
 // .btn_var-1 - Первый вариант кнопки (со "срезанным" углом и фиксированной шириной)
-// .btn_var-2 - Второй вариант кнопки (красная прямоугольная)
-// .btn_var-3 - Третий вариант кнопки (прозрачный фон)
+// .btn_var-2 - Второй вариант кнопки (красная прямоугольная, красный фон)
+// .btn_var-3 - Третий вариант кнопки (прозрачный фон, красный border)
 // .btn-empty - кнопка без границ и фона
 // .btn-slider - кнопки для слайдера (пред/след слайд)
 // .btn-admin - кнопка для админки, серый фон, отступ для фоновой картинки (присваивать через background-image)
 // .btn-cls - круглая белая кнопка закрытия модальных окон
 // .btn-success - круглая зеленая кнопка с фоновой галочкой
+// .btn__admin-content - Кнопка админка с надписью "Контент" (использовать совместно с .btn_var-2)
+// .btn__admin-setting - Кнопка админка с надписью "Настройки" (использовать совместно с .btn_var-2)
 
 // .g-checkbox/.g-radiobox - классы для чекбоксов/радиобоксов устанавликать на "label"внутри которого есть input, div, span(именно в таком порядке)
 
@@ -38,13 +40,27 @@
     font: 18px/23px $font-proba;
     color: $col-black;
     border: solid 1px $col-red;
-    transition: background-color .2s linear, border-color .2s linear;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
     &:hover {
         background-color: $col-red_hover;
         border-color: $col-red_hover;
+        color: $col-white;
     }
     &:disabled { color: rgba($color: $col-black, $alpha: 0.5); }
 }
+.btn__admin-content,
+.btn__admin-setting {
+    height: 35px;
+    padding: 0 16px 0 35px;
+}
+.btn__admin-content { background: url(/assets/img/jk-object/content_icon.svg) 16px 8px no-repeat $col-red; }
+.btn__admin-setting {
+    font: 18px/23px $font-proba;
+    color: $col-white;
+    cursor: pointer;
+    background: url(/assets/img/jk-object/settings.svg) 16px 8px no-repeat #454545;
+}
+
 .btn-empty {
     font: 18px/23px $font-proba;
     color: $col-black;
