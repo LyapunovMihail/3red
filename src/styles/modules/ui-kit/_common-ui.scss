@@ -106,14 +106,14 @@
     &_prev {
         span::before,
         span::after {
-            transform-origin: right;
+            transform-origin: left;
             transform: rotate(45deg);
         }
         span::after { transform: rotate(-45deg); }
     }
 
     &_white {
-        background-color: #efefef;
+        background-color: $col-white;
         span::before,
         span::after { background-color: $col-black; }
         
@@ -220,23 +220,22 @@
     }
 }
 .g-radiobox { // Вешать на label внутри которого input, div, span
-    input:checked + div {
-        &::before {
-            content: '';
-            position: absolute;
-            top: calc(50% - 4px);
-            left: calc(50%- 4px);
-            width: 8px;
-            height: 8px;
-            background-color: $col-red;
-            border-radius: 50%;
-        }
+    input:checked + div::before {
+        content: '';
+        position: absolute;
+        top: calc(50% - 4px);
+        left: calc(50% - 4px);
+        width: 8px;
+        height: 8px;
+        background-color: $col-red;
+        border-radius: 50%;
     }
     div {
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        margin: -3px 8px 0 0;
+        margin: 3px 8px 0 0;
+        position: relative;
     }
 }
 // /Чекбокс + Радиобокс

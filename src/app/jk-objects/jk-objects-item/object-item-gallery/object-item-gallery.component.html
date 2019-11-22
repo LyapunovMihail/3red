@@ -24,19 +24,30 @@
 
         <div class="object-gallery__slider">
 
-            <button class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev"><span></span></button>
-            <button class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next"><span></span></button>
+            <button (click)="prevBtn(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
+            <button (click)="nextBtn(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
 
-            <div class="object-gallery__slider-dots"></div>
+            <div class="object-gallery__slider-dots">
+                <span *ngFor="let dots of slideList; let i = index"
+                    [ngClass]="{'current-dots': currentSlide === i}"></span>
+            </div>
 
-            <div class="object-gallery__slider-item gallery-slide">
-
-                <div class="gallery-slide__image"></div>
-                <div class="gallery-slide__content">
-                    <h3 class="gallery-slide__content-title"></h3>
-                    <div class="gallery-slide__content-descr"></div>
+            <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide">
+                <div class="gallery-slide__item" *ngFor="let slide of slideList; let i = index"
+                    [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
+                    
+                    <div class="gallery-slide__image">
+                        <img src="{{slide.img}}" alt="slide">
+                    </div>
+                    <div class="gallery-slide__timeline" *ngIf="showTimeline && !isAuthorizated"></div>
+                    
+                    <div class="gallery-slide__content">
+                        <h3 class="gallery-slide__content-title">{{slide.title}}</h3>
+                        <div class="gallery-slide__content-descr">{{slide.descr}}</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+

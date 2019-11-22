@@ -4,6 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin: 0 0 96px;
 
     &__head { margin: 0 0 16px; }
 
@@ -33,7 +34,7 @@
                 position: absolute;
                 bottom: -1px;
                 left: 0;
-                width: calc(100% - 16px); // где 16px - это величина правого паддинга
+                width: 100%;
                 height: 1px;
                 background-color: #d8d8d8;
             }
@@ -44,5 +45,98 @@
         }
     }
 
-    &__gallery {}
+    &__slider {
+        position: relative;
+        overflow: hidden;
+        &-btn {
+            position: absolute;
+            top: calc(581px - 50%);
+            transform: translateY(50%);
+            z-index: 1;
+            &_prev { left: 24px; }
+            &_next { right: 24px; }
+        }
+        &-dots {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: calc(581px - 22px);
+            left: 0;
+            z-index: 1;
+
+            span {
+                display: block;
+                width: 6px;
+                height: 6px;
+                background-color: $col-white;
+                border-radius: 50%;
+                margin: 0 8px;
+            }
+        }
+    }
+}
+
+.current-dots { background-color: $col-red !important; }
+
+@keyframes slideTimeline {
+    0%   { width: 0%; }
+    100% { width: 100%; }
+}
+
+.gallery-slide {
+    width: 100%;
+    display: flex;
+    position: relative;
+
+    &__item {
+        min-width: 100%;
+        opacity: 0;
+        transition: opacity .4s linear;
+
+        &_current {
+            opacity: 1;
+            .gallery-slide__timeline::before {
+                animation: slideTimeline 5s linear;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 581px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &__timeline {
+        width: 100%;
+        height: 8px;
+        background-color: #d8d8d8;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            background-color: $col-red;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 16px 0 0;
+
+        &-title { max-width: 352px;}
+        &-descr {
+            width: 728px;
+            font: 18px/26px $font-proba;
+            color: $col-black-5;
+        }
+    }
 }
