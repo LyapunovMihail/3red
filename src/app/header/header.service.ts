@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NAVANCHORS } from './navAnchors';
 
 export interface IHeaderLink {
     name: string;
@@ -9,6 +10,8 @@ export interface IHeaderLink {
 @Injectable( )
 
 export class HeaderService {
+
+    public navAnchors = NAVANCHORS;
 
     constructor(
         private http: HttpClient
@@ -24,30 +27,31 @@ export class HeaderService {
         let month = (data.month) ? data.month : ( date.getMonth() + 1 );
         return [
             {
-                name: 'О ЖК',
+                name: 'О компании',
                 url: '/about'
             }, {
-                name: 'Расположение',
-                url: `/location`
+                name: 'Объекты',
+                url: `/objects`
             }, {
                 name: 'Квартиры',
                 url: `/flats`
             }, {
-                name: 'Отделка',
-                url: '/decoration'
-            }, {
-                name: 'Ход строительства',
-                url: `/dynamic/${year}/${month}`
-            }, {
-                name: 'Условия покупки',
-                url: '/purchase'
+                name: 'Контакты',
+                url: '/contacts'
             }, {
                 name: 'Новости',
                 url: '/news-shares'
-            } /*, {
+            }, {
+                name: '3-Red Сервис',
+                url: '/service'
+            }, {
                 name: 'Избранное',
                 url: '/favorites'
-            }, */
+            }
         ];
+    }
+
+    public getNavAnchors(page): IHeaderLink[] {
+        return this.navAnchors[page];
     }
 }

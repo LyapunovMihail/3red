@@ -2,10 +2,8 @@ import { WindowEventsService } from '../commons/window-events.observer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { HeaderService } from './header.service';
-
-declare let $: any;
 
 @Component({
     selector : 'app-header',
@@ -16,39 +14,37 @@ declare let $: any;
 
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    public isFixed: boolean;
-    public isHidden: boolean;
+    public isFixed = false;
+    public isHidden = false;
+    public navFixed = false;
+    public navSided = false;
     public links = [];
-
+    public navAnchors = [];
+    public hoveredLink = -1;
+    public pageName;
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
-    private subscriptions: Subscription[] = [];
 
     constructor(
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
         private router: Router
     ) {
-        this.isFixed = true;
     }
 
     public ngOnInit() {
+        this.fixedHeader();
 
         this.router.events
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
-
-                    if (this.router.url === '/' || this.router.url === '/about') {
-                        this.fixedHeader();
-                        this.isFixed = false;
+                    this.pageName = this.router.url.split('/')[1];
+                    if (this.pageName === 'about' || this.pageName === 'objects') {
+                        this.navAnchors = this.headerService.getNavAnchors(this.pageName);
                     } else {
-                        this.subscriptions.forEach((sub) => {
-                            sub.unsubscribe();
-                        });
-                        this.isFixed = false;
-                        this.isHidden = false;
+                        this.navAnchors = [];
                     }
                 }
             });
@@ -70,36 +66,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-        this.subscriptions.forEach((sub) => {
-            sub.unsubscribe();
-        });
     }
 
-    // если расстояние скрлла больше высоты хедера
+    // если расстояние скролла больше высоты хедера
     // хедер фиксируется
     public fixedHeader() {
 
-        let winScrollTopPrev = 0;
+        let prevScrollTop = 0;
 
-        this.subscriptions.push(this.windowEventsService.onScroll.subscribe(() => {
+        this.windowEventsService.onScroll.subscribe(() => {
 
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const headerHeight = document.querySelector('.header').clientHeight;
-            const winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const headerScrollTop = winScrollTop + document.querySelector('.header__nav').getBoundingClientRect().top;
 
-            if (winScrollTop > headerScrollTop + 46) { // 46 - высота header__nav
-                this.isFixed = true;
-            } else if (winScrollTop < headerHeight - 46) { // 46 - высота header__nav
+            if (scrollTop === 0) {
                 this.isFixed = false;
+                this.isHidden = false;
+                this.navFixed = false;
+                this.navSided = false;
+            } else if (scrollTop > prevScrollTop && scrollTop > headerHeight) {
+                this.isHidden = true;
+                this.navFixed = true;
+                this.navSided = false;
+            } else if (scrollTop < prevScrollTop && scrollTop > headerHeight) {
+                this.isFixed = true;
+                this.isHidden = false;
+                this.navSided = true;
             }
 
-            this.isHidden = winScrollTopPrev < winScrollTop;
-
-            winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        }));
+            prevScrollTop = scrollTop;
+        });
     }
 
     public checkLink(linkUrl) {
-        return this.router.url.split('/')[1] === linkUrl.split('/')[1];
+        return this.pageName === linkUrl.split('/')[1];
     }
 }

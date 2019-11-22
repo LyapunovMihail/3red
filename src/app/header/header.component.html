@@ -1,58 +1,33 @@
-<header class="header">
-    <div class="header__container">
-        <section class="header__head">
-            <div class="header__head-sell">
-                <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>
-            </div>
-            <a routerLink="/"><div class="header__head-logo"></div></a>
-            <div class="header__head-phone">
-                <p class="head-phone__paragraf">+7 (495) 120-00-80</p>
-                <a href="#" class="g-link_red">Заказать звонок</a>
-            </div>
-            <div class="header__head-menu">
-                <div class="header__head-menu-item"></div>
-                <div class="header__head-menu-item"></div>
-                <div class="header__head-menu-item"></div>
-            </div>
-        </section>
-        <nav class="header__nav" [ngClass]="{'header__nav--fixed': isFixed, 'header__nav--hidden': isHidden}">
-            <a routerLink="/" class="header__nav-img" *ngIf="isFixed">
-                <img src="/assets/img/header/fixed-logo.svg" alt="logo">
-            </a>
-            <ul class="header__nav-list">
-                <li [class.header__nav-list-item_active]="checkLink(link.url)"
-                    class="header__nav-list-item" *ngFor="let link of links">
-                    <a [routerLink]="link.url">{{link.name}}</a>
-                </li>
-            </ul>
-            <p class="header__nav-tel" *ngIf="isFixed">+7 (495) 120-00-80</p>
+<header class="header"
+        [ngClass]="{
+            'header-fixed' : isFixed,
+            'header-fixed--hide' : isHidden}">
 
-            <div class="header__nav-footer">
-                <div class="header__nav-footer-sell">
-                    <a href="#" class="g-link_red">Отдел продаж</a>
-                    <p class="header__nav-footer-phone">+7 (495) 120-00-80</p>
-                </div>
-                <div class="header__nav-footer-link">
-                    <ul class="header__nav-footer-list">
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/insta_media.svg" alt="i">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/vk_media.svg" alt="vk">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/fb_media.svg" alt="f">
-                            </a>
-                        </li>
-                    </ul>
-                    <a href="#" class="header__nav-footer-descr">Полная версия сайта</a>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <nav class="nav">
+        <ul class="nav__bar">
+            <a class="header__logo" routerLink="/">
+                <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
+            </a>
+            <li
+                *ngFor="let link of links; let i = index">
+                <a *ngIf="link.name !== 'Избранное'"
+                   class="nav__link"
+                   [ngClass]="{
+                        'active' : checkLink(link.url),
+                        'hover' : hoveredLink !== -1 && hoveredLink !== i}"
+                    (mouseenter)="hoveredLink = i"
+                    (mouseout)="hoveredLink = -1"
+                    [routerLink]="link.url">{{link.name}}</a>
+                <a *ngIf="link.name === 'Избранное'" class="nav__link-heart" [routerLink]="link.url"><img src="/assets/img/jk-object/header_heart.svg" alt="heart"><sup>12</sup></a>
+            </li>
+        </ul>
+    </nav>
+    <div class="header__phone">+7 (499) 211 22 33</div>
 </header>
+
+<app-header-nav *ngIf="navAnchors.length"
+    [isFixed]="navFixed"
+    [isSided]="navSided"
+    [anchors]="navAnchors"
+    [pageName]="pageName">
+</app-header-nav>

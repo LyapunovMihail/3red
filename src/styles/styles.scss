@@ -4,6 +4,10 @@
 @import './modules/ui-kit/marker';
 @import './modules/ui-kit/common-ui';
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     width: 100%;
     margin: 0;
