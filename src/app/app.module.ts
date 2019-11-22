@@ -89,8 +89,12 @@ const APP_MODULES = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
-    useHash: Boolean(history.pushState) === false,
-    preloadingStrategy: PreloadAllModules
+        useHash: Boolean(history.pushState) === false,
+        preloadingStrategy: PreloadAllModules,
+        anchorScrolling: 'enabled',
+        onSameUrlNavigation: 'reload',
+        scrollPositionRestoration: 'enabled',
+        scrollOffset: [0, 64]
     })
 ];
 
