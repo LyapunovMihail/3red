@@ -2,9 +2,12 @@
      [ngClass]="{
             'project__nav-fixed' : isFixed,
             'project__nav-fixed--side' : isSided}">
-  <ul class="project__nav-bar">
-    <li *ngFor="let anchor of anchors"><a [routerLink]="router.url" [fragment]="anchor.url" [skipLocationChange]="true" class="project__nav-link" >{{anchor.name}}</a></li>
-  </ul>
+    <ul class="project__nav-bar" #list>
+        <li *ngFor="let anchor of anchors"><a [routerLink]="router.url" [fragment]="anchor.url" [skipLocationChange]="true" class="project__nav-link" [class.active-link]="anchor.url === activeAnchor">{{anchor.name}}</a></li>
+    </ul>
 
-  <a *ngIf="pageName === 'objects'" class="photo__btn" href="#">Фотоотчет</a>
+
+    <a *ngIf="pageName === 'objects'" class="photo__btn" href="#">Фотоотчет</a>
+    <div class="project__nav-progress"
+        [ngStyle]="{'max-width' : list.style.width, 'width' : progressWidth}"></div>
 </div>

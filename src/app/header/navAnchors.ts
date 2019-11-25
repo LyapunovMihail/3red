@@ -11,7 +11,7 @@ export const NAVANCHORS = {
         {
             name: 'Галерея',
             url: 'gallery'
-        },
+        }/*,
         {
             name: 'Отделка',
             url: 'decoration'
@@ -31,7 +31,7 @@ export const NAVANCHORS = {
         {
             name: 'Документация',
             url: '#'
-        }
+        }*/
     ],
 
     about: [

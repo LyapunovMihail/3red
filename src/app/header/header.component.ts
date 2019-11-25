@@ -1,5 +1,5 @@
 import { WindowEventsService } from '../commons/window-events.observer.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -70,14 +70,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // если расстояние скролла больше высоты хедера
     // хедер фиксируется
+
+    @ViewChild('header')
+    public header: ElementRef;
+
     public fixedHeader() {
 
         let prevScrollTop = 0;
+        const headerHeight = this.header.nativeElement.clientHeight;
 
         this.windowEventsService.onScroll.subscribe(() => {
 
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const headerHeight = document.querySelector('.header').clientHeight;
 
             if (scrollTop === 0) {
                 this.isFixed = false;
