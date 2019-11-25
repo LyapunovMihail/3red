@@ -1,0 +1,58 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.object-documentation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 96px;
+
+    &__head { margin: 0 0 16px; }
+
+    &__options {
+        margin: 0 0 16px;
+        .btn__admin-setting { margin-right: 8px; }
+    }
+
+    &__list {
+        width: 100%;
+
+        &-item {
+            display: flex;
+            padding: 16px 0;
+            border-bottom: 1px solid #d8d8d8;
+            &:last-child { border-bottom: 0; }
+        }
+
+        &-title { width: 446px; }
+
+        &-wrap {
+            width: calc(100% - (446px + 24px));
+            display: flex;
+
+            &_file {
+                width: 100%;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin: 0 0 12px;
+                &:last-child { margin: 0; }
+            }
+        }
+
+        &-file {
+            display: block;
+            width: 441px + 9px + 19px;
+            font: 18px/23px $font-proba;
+            color: $col-red;
+            padding-left: 19px + 9px;
+            position: relative;
+            background: url(/assets/img/pdf.svg) left center no-repeat;
+            background-size: 19px 23px;
+        }
+        &-date {
+            max-width: 85px;
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            text-align: right;
+        }
+    }
+}

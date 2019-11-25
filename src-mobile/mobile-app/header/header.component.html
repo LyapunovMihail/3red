@@ -1,52 +1,42 @@
-<header class="header">
-    <div class="header__container" [ngClass]="{'header__container--fixed': isFixed, 'header__container--hidden': isHidden}">
-        <section class="header__head">
-            <div class="header__head-sell">
-                <a routerLink="/location/office" class="g-link_red">Отдел продаж</a>
-            </div>
-            <div class="header__head-logo" routerLink="/" (click)="closeNav()"></div>
-            <div class="header__head-phone">
-                <a href="tel: +74951374012" class="head-phone__paragraf">+7 (495) 137-40-12</a>
-                <a href="#" class="g-link_red">Заказать звонок</a>
-            </div>
-            <div class="header__head-menu" [class.header__head-menu--active]="active"
-                (click)="toggleNav()">
-                <span></span>
-            </div>
-        </section>
-        <nav class="header__nav" [class.header__nav--active]="active">
-            <ul class="header__nav-list">
-                <li class="header__nav-list-item" *ngFor="let link of links">
-                    <a class="header__nav-list-item-link" [routerLink]="link.url" (click)="closeNav()">{{link.name}}</a>
-                </li>
-            </ul>
+<header class="header"
+        [ngClass]="{
+            'header-fixed' : isFixed,
+            'header-fixed--hide' : isHidden,
+            'header_open' : openMenu}">
 
-            <div class="header__nav-footer">
-                <div class="header__nav-footer-sell">
-                    <a routerLink="/location/office" (click)="closeNav()" class="g-link_red">Отдел продаж</a>
-                    <a href="tel: +74951374012" class="header__nav-footer-phone">+7 (495) 137-40-12</a>
+    <a class="header__phone">
+        <img src="/assets/img/header/phone.svg" alt="">
+    </a>
+
+    <a class="header__logo" routerLink="/">
+        <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
+    </a>
+    
+    <button class="header__burger" [ngClass]="{'header__burger_open': openMenu}"
+        (click)="openMenu = !openMenu">
+        <span></span>
+    </button>
+
+    <div class="header__menu" *ngIf="openMenu">
+        <ul class="header__menu-list">
+            <li class="header__menu-item" *ngFor="let link of links">
+                <a [routerLink]="link.url">
+                    {{link.name}}
+                    <span *ngIf="link.name === 'Избранное'">(12)</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="header__menu-info">
+            <p class="header__menu-address">г. Люберцы, Новорязанское ш., д 7 Торгово-офисный центр Гренада</p>
+            <div class="header__menu-wrap">
+                <div class="header__menu-social">
+                    <a class="header__menu-link header__menu-link_insta"></a>
+                    <a class="header__menu-link header__menu-link_fb"></a>
                 </div>
-                <div class="header__nav-footer-link">
-                    <ul class="header__nav-footer-list">
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/insta_media.svg" alt="i">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/vk_media.svg" alt="vk">
-                            </a>
-                        </li>
-                        <li class="header__nav-footer-list-item">
-                            <a href="#">
-                                <img src="/assets/img/header/fb_media.svg" alt="f">
-                            </a>
-                        </li>
-                    </ul>
-                    <a (click)="showFullVersion()" class="header__nav-footer-descr">Полная версия сайта</a>
-                </div>
+                <a href="+74992112233" class="header__menu-number">+7 (499) 211 22 33</a>
             </div>
-        </nav>
+        </div>
     </div>
 </header>
+

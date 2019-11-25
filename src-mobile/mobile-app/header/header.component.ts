@@ -1,43 +1,55 @@
 import { WindowEventsService } from '../commons/window-events.observer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
-import { WindowScrollLocker } from '../commons/window-scroll-block';
+import { Subject } from 'rxjs';
 import { HeaderService } from './header.service';
-
 
 @Component({
     selector : 'app-header',
     templateUrl : './header.component.html',
     styleUrls : ['./header.component.scss'],
-    providers : [
-        HeaderService,
-        WindowScrollLocker
-    ]
+    providers : [HeaderService]
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
 
+    public isFixed = false;
+    public isHidden = false;
+    public navFixed = false;
+    public navSided = false;
     public links = [];
-    public active = false;
-    public isFixed: boolean;
-    public isHidden: boolean;
-
+    public navAnchors = [];
+    public hoveredLink = -1;
+    public pageName;
+    public openMenu = false;
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
-    private subscriptions: Subscription[] = [];
 
     constructor(
         private windowEventsService: WindowEventsService,
-        public  windowScrollLocker: WindowScrollLocker,
-        private headerService: HeaderService
+        private headerService: HeaderService,
+        private router: Router
     ) {
     }
 
     public ngOnInit() {
-
         this.fixedHeader();
+
+        this.router.events
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    this.pageName = this.router.url.split('/')[1];
+                    if (this.pageName === 'about' || this.pageName === 'objects') {
+                        this.navAnchors = this.headerService.getNavAnchors(this.pageName);
+                    } else {
+                        this.navAnchors = [];
+                    }
+                }
+            });
+
         this.headerService.getDynamicLink()
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(
@@ -46,7 +58,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 },
                 (err) => {
                     console.error(err);
-                    let date = new Date();
+                    const date = new Date();
                     this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
                 }
             );
@@ -55,51 +67,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-
     }
 
-    public toggleNav() {
-        this.active = !this.active;
-        if (this.active) { this.windowScrollLocker.block(); }
-        if (!this.active) { this.windowScrollLocker.unblock(); }
-    }
-
-    public closeNav() {
-      this.active = false;
-      this.windowScrollLocker.unblock();
-    }
-
-    public showFullVersion() {
-        this.headerService.writeSessionForFullVersion().pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-          (data) => document.location.reload(true),
-          (error) => console.log(error)
-        );
-    }
-
-    // если расстояние скрлла больше высоты хедера
+    // если расстояние скролла больше высоты хедера
     // хедер фиксируется
     public fixedHeader() {
 
-        let winScrollTopPrev = 0;
+        let prevScrollTop = 0;
 
-        this.subscriptions.push(this.windowEventsService.onScroll.subscribe(() => {
+        this.windowEventsService.onScroll.subscribe(() => {
 
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const headerHeight = document.querySelector('.header').clientHeight;
-            const winScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-            if (winScrollTop > headerHeight || this.active) {
-                this.isFixed = true;
-            } else if (winScrollTop < headerHeight) {
+            if (scrollTop === 0) {
                 this.isFixed = false;
-            }
-
-            if (winScrollTop < headerHeight || winScrollTopPrev > winScrollTop) {
                 this.isHidden = false;
-            } else if (winScrollTopPrev < winScrollTop) {
+                this.navFixed = false;
+                this.navSided = false;
+            } else if (scrollTop > prevScrollTop && scrollTop > headerHeight) {
                 this.isHidden = true;
+                this.navFixed = true;
+                this.navSided = false;
+            } else if (scrollTop < prevScrollTop && scrollTop > headerHeight) {
+                this.isFixed = true;
+                this.isHidden = false;
+                this.navSided = true;
             }
 
-            winScrollTopPrev = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        }));
+            prevScrollTop = scrollTop;
+        });
+    }
+
+    public checkLink(linkUrl) {
+        return this.pageName === linkUrl.split('/')[1];
     }
 }

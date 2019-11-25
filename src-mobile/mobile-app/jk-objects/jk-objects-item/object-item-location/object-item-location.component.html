@@ -1,0 +1,90 @@
+
+<section class="object-location">
+
+    <div class="object-item__container object-location__container">
+
+        <div class="object-location__head">
+            <input type="checkbox" name="switch" id="location" class="switch">
+            <label *ngIf="isAuthorizated" for="location" class="object-item__title">Местоположение</label>
+            <h2 *ngIf="!isAuthorizated">Местоположение</h2>
+        </div>
+
+        <div class="object-location__options" *ngIf="isAuthorizated">
+            <button class="btn__admin-setting">Настройки</button>
+            <button class="btn__admin-content btn_var-2">Контент</button>
+        </div>
+
+        <nav class="object-location__nav">
+            <ul class="object-location__nav-list">
+                <li class="object-location__nav-item" *ngFor="let nav of navPoint"
+                    [ngClass]="{'object-location__nav-item_active': nav.mod === openPath}"
+                    (click)="openPath = nav.mod">{{nav.name}}</li>
+            </ul>
+
+            <div class="object-location__address">
+                <p class="object-location__address-title">ЖК распологается по адресу</p>
+                <p class="object-location__address-name">Горки Ленинские, Московская обл.,142712</p>
+            </div>
+        </nav>
+
+        <div class="object-location__infrastructure" *ngIf="openPath === 'infrastructure'">
+
+            <div class="object-location__infrastructure-check" *ngFor="let checkbox of infrastructure">
+                <input type="checkbox" id="{{checkbox.type}}" style="display: none;">
+                <label class="object-location__infrastructure-item object-location__infrastructure-item_{{checkbox.type}}" 
+                    for="{{checkbox.type}}">{{checkbox.name}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="object-location__map">
+
+        <div class="object-location__way location-way" *ngIf="openPath === 'object'">
+            <!-- Пути для автомобиля -->
+            <div class="location-way__type location-way__type_auto">
+                <p class="location-way__title" (click)="asideTypeActive = asideTypeActive === 'auto' ? '' : 'auto'"
+                    [ngClass]="{'location-way__title_open': asideTypeActive === 'auto'}">Автомобиль</p>
+
+                <ol class="location-way__list">
+                    <ng-container *ngFor="let link of mockMarkerRoutes">
+                        <li *ngIf="link.type == 'auto'" class="location-way__list-item">
+                            {{link.aside.text}} <br>
+                            <span class="location-way__list-item location-way__list-item_time">{{link.aside.hint}}</span>
+                        </li>
+                    </ng-container>
+                </ol>
+            </div>
+            <!-- Пути для общественного транспорта -->
+            <div class="location-way__type location-way__type_social">
+                <p class="location-way__title" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'"
+                    [ngClass]="{'location-way__title_open': asideTypeActive === 'metro'}">Общественный транспорт</p>
+
+                <ol class="location-way__list">
+                    <ng-container *ngFor="let link of mockMarkerRoutes">
+                        <li *ngIf="link.type == 'metro'" class="location-way__list-item">
+                            {{link.aside.text}} <br>
+                            <span class="location-way__list-item location-way__list-item_time">{{link.aside.hint}}</span>
+                        </li>
+                    </ng-container>
+                </ol>
+            </div>
+            <!-- Пути для электричек -->
+            <div class="location-way__type location-way__type_social">
+                <p class="location-way__title" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'"
+                    [ngClass]="{'location-way__title_open': asideTypeActive === 'railway'}">Электричка</p>
+
+                <ol class="location-way__list">
+                    <ng-container *ngFor="let link of mockMarkerRoutes">
+                        <li *ngIf="link.type == 'railway'" class="location-way__list-item">
+                            {{link.aside.text}} <br>
+                            <span class="location-way__list-item location-way__list-item_time">{{link.aside.hint}}</span>
+                        </li>
+                    </ng-container>
+                </ol>
+            </div>
+        </div>
+
+        <div id="map" class="object-location__map-item">
+        </div>
+    </div>
+</section>

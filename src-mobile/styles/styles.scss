@@ -4,11 +4,14 @@
 @import './ui-kit/markers';
 
 body {
-    margin: 0;
-    padding: 0 0 51px;
-    font-family: 'Museo Sans Cyrl';
+    min-height: 100vh;
+    font-family: $font-proba;
+    color: $col-black;
     position: relative;
-    min-height: calc(100vh - 51px);
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 86px 0 51px;
+    overflow: hidden;
 }
 
 a {
@@ -46,97 +49,40 @@ label {
     -webkit-tap-highlight-color: transparent;
 }
 
-// Глобальные классы
-.g-link_red {
-    font: 500 16px/22px $font-mus;
-    @include font-smoothing;
-    color: $col-orange;
-    text-decoration: underline;
-}
-.g-link_white {
-    font: 500 16px/22px $font-mus;
-    @include font-smoothing;
-    color: #fff;
-    text-decoration: underline;
-    transition: $transition;
-}
-
-.g-title-path {
-    font: 54px/58px 'Leksa';
-    @include font-smoothing;
-}
-.g-title_h2 {
-    font: 500 36px/40px $font-mus;
-    @include font-smoothing;
-    color: #323232;
-}
-.g-active-nav-point {
-    position: relative;
-
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -13px;
-        width: 100%;
-        height: 2px;
-        background: #e7490f;
-    }
-}
-.g-modal-bg {
-    position: fixed;
-    left: 0;
-    top: 0;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 1, 5, .7);
-    box-sizing: border-box;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-.g-text_nowrap {
-    white-space: nowrap;
-}
-.g-checkbox {
-    display: block;
-    box-sizing: border-box;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #979797;
-    border-radius: 2px;
-    margin: 2px 10px 0 0;
-    cursor: pointer;
-}
-.g-stok-ic {
-    position: relative;
-    padding-left: 33px;
-
-    &:before {
-        content: '';
-        position: absolute;
-        width: 27px;
-        height: 15px;
-        top: 5px;
-        left: 0;
-        background: url('/assets/img/stock-ic.svg') no-repeat;
-    }
+p,
+a,
+li,
+h1,
+h2,
+h3,
+div,
+span,
+label,
+input,
+button,
+textarea {
+	@include font-smoothing();
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
 }
 
-// Стили контейнера
-.main__container {
-    width: 100%;
-    display: flex;
+h1 {
+    font: 500 48px/48px $font-formular;
+    margin: 0;
+    padding: 0;
 }
-.main__container_row {
-    flex-flow: row nowrap;
-    justify-content: center;
+h2 {
+    font: 36px/43px $font-proba;
+    margin: 0;
+    padding: 0;
 }
-.main__container_col {
-    flex-flow: column nowrap;
-    align-items: center;
+h3 {
+    font: 24px/29px $font-proba;
+    margin: 0;
+    padding: 0;
 }
-
+p {
+    font: 18px/23px $font-proba;
+    margin: 0;
+    padding: 0;
+}
