@@ -4,7 +4,10 @@ import { IHeaderLink } from '../header.service';
 import { Router } from '@angular/router';
 
 interface INavLink extends IHeaderLink {
-    blockOffset: number;
+    blockOffsetTop: number;
+    blockHeight: number;
+    linkWidth: number;
+    linkOffsetLeft: number;
 }
 
 @Component({
@@ -22,7 +25,7 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
 
     public progressWidth = '0px';
 
-    public activeAnchor = '';
+    public activeAnchor: any = {};
 
     public windowEvent;
 
@@ -37,43 +40,76 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     ngAfterViewInit() {
         const navWidth = this.list.nativeElement.clientWidth;
         const bodyHeight = document.body.clientHeight;
+        this.getLinksOffsets();
 
         this.windowEvent = this.windowEventsService.onScroll.subscribe(() => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-            this.setActiveAnchor(scrollTop);
-            this.calculateProgressWidth(navWidth, bodyHeight, scrollTop);
+            const activeBlockScroll = this.setActiveAnchor(scrollTop);
+            this.calculateProgressWidth(navWidth, bodyHeight, activeBlockScroll, scrollTop);
         });
     }
 
     private setActiveAnchor(scrollTop) {
-        const distances = this.anchors.map((a) => Math.abs(a.blockOffset - scrollTop + 200));
+        const distances = this.anchors.map((a) => Math.abs(a.blockOffsetTop - scrollTop));
         const minDistance = Math.min.apply(Math, distances);
         const anchorIndex = distances.indexOf(minDistance);
-        this.activeAnchor = this.anchors[anchorIndex].url;
+        if (minDistance > 700) {
+            this.activeAnchor = {};
+        } else {
+            this.activeAnchor = this.anchors[anchorIndex];
+        }
         console.log('distances: ', distances);
         console.log('minDistance: ', minDistance);
         console.log('anchorIndex: ', anchorIndex);
         console.log('this.activeAnchor: ', this.activeAnchor);
+        return minDistance;
     }
 
-    private calculateProgressWidth(navWidth, bodyHeight, scrollTop) {
-        const scrollPercent = scrollTop / bodyHeight;
-        this.progressWidth = (navWidth * scrollPercent) + 'px';
-        console.log('scrollPercent: ', scrollPercent);
-        console.log('progressWidth: ', this.progressWidth);
+    private calculateProgressWidth(navWidth, bodyHeight, blockScroll, scrollTop) {
+        if (Object.keys(this.activeAnchor).length) {
+            const scrollPercent = blockScroll / this.activeAnchor.blockHeight;
+            this.progressWidth = this.activeAnchor.linkOffsetLeft + (this.activeAnchor.linkWidth * scrollPercent) + 'px';
+            console.log('scrollPercent: ', scrollPercent);
+            console.log('progressWidth: ', this.progressWidth);
+        }
+        // else {
+        //     const scrollPercent = (scrollTop) / (bodyHeight - window.innerHeight - 430);
+        //     this.progressWidth = (navWidth * scrollPercent) + 'px';
+        //     console.log('scrollPercent: ', scrollPercent);
+        //     console.log('progressWidth: ', this.progressWidth);
+        // }
+        // const scrollPercent = (scrollTop) / (bodyHeight - window.innerHeight - 430);
+        // this.progressWidth = (navWidth * scrollPercent) + 'px';
+        // console.log('scrollPercent: ', scrollPercent);
+        // console.log('progressWidth: ', this.progressWidth);
+
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if ('anchors' in changes) {
             this.getBlocksOffsets();
+            // добавить вызов changeDetectorRef.detectChanges;
         }
+    }
+
+    getLinksOffsets() {
+        console.log('anchors: ', this.anchors);
+        this.anchors.forEach((a) => {
+            const link = document.getElementById(`a-${a.url}`);
+            console.log('link: ', link);
+            a.linkWidth = link.clientWidth;
+            a.linkOffsetLeft = link.offsetLeft;
+        });
     }
 
     getBlocksOffsets() {
         console.log('anchors: ', this.anchors);
         this.anchors.forEach((a) => {
-            a.blockOffset = (document.querySelector(`#${a.url}`) as HTMLElement).offsetTop;
+            const block = document.getElementById(`${a.url}`);
+            console.log('block: ', block);
+            a.blockOffsetTop = block.offsetTop;
+            a.blockHeight = Number((block.firstElementChild as HTMLElement).clientHeight);
         });
     }
 

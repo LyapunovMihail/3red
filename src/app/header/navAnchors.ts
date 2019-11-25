@@ -11,27 +11,27 @@ export const NAVANCHORS = {
         {
             name: 'Галерея',
             url: 'gallery'
-        }/*,
+        },
         {
             name: 'Отделка',
             url: 'decoration'
         },
         {
             name: 'Местоположение',
-            url: '#'
+            url: 'location'
         },
         {
             name: 'Условия покупки',
-            url: '#'
+            url: 'purchase'
         },
         {
             name: 'Новости',
-            url: '#'
+            url: 'news'
         },
         {
             name: 'Документация',
-            url: '#'
-        }*/
+            url: 'documentation'
+        }
     ],
 
     about: [

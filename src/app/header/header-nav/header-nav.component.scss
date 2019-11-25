@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     height: 55px;
-    background: #fafafa;
+    background: transparent;
     box-sizing: border-box;
     // margin-bottom: 1px;
 
@@ -22,6 +22,7 @@
         z-index: 50;
         transition: transform 0.2s linear;
         box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+        background: #fafafa;
 
         &--side {
             transform: translateY(77px);
