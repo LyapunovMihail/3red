@@ -14,6 +14,20 @@
 
     <app-object-item-gallery id="gallery"></app-object-item-gallery>
 
+    <app-object-item-decoration></app-object-item-decoration>
+
+    <app-object-item-location></app-object-item-location>
+
+    <app-object-item-purchase></app-object-item-purchase>
+
+    <app-object-item-news></app-object-item-news>
+
+    <app-object-item-documentation></app-object-item-documentation>
+
+    <app-object-item-members></app-object-item-members>
+
+    <app-object-item-project *ngIf="!isAuthorizated"></app-object-item-project>
+
     <div class="utilities" *ngIf="isAuthorizated">
         <div class="utilities__item">
             <a href="#" class="utilities__path">Админ</a> 

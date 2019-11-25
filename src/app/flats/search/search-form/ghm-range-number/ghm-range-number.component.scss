@@ -27,7 +27,7 @@
 .ghm-fill {
     left: 0;
     width: 318px;
-    background: $col-orange;
+    background: $col-red;
     width: 100%;
     height: 1px;
     position: absolute;
@@ -35,10 +35,10 @@
 
 .ghm-runner {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: $col-orange;
+    background: $col-red;
     top: 0;
     bottom: 0;
     margin: auto 0;

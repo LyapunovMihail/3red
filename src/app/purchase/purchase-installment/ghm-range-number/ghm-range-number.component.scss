@@ -32,9 +32,9 @@
         margin: 0;
         transform: translateY(-50%);
         border-radius: 50%; 
-        width: 15px;
-        height: 15px;
-        background: $col-orange;
+        width: 16px;
+        height: 16px;
+        background: $col-red; 
         cursor: pointer;
 
         &:before {
@@ -45,7 +45,7 @@
             transform: translateY(-50%);
             height: 1px;
             width: 300px;
-            background: $col-orange;
+            background: $col-red;
         }
     }
 }
