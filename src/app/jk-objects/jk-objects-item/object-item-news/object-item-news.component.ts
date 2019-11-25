@@ -13,6 +13,7 @@ import { news } from './mockNews';
 export class ObjectItemNewsComponent implements OnInit {
 
     public mockNews = news;
+    public newsArr = [];
 
     public showSnippetType = 'all';
 
@@ -24,7 +25,10 @@ export class ObjectItemNewsComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+
+        this.changeType('all');
+    }
 
     public nextBtn() {
         this.currentSlide = (this.currentSlide < this.mockNews.length - 3 ) ? this.currentSlide + 1 : 0;
@@ -37,5 +41,12 @@ export class ObjectItemNewsComponent implements OnInit {
     public onSelectItem(item: string): void {
 
         this.activeTooltip === item ? this.activeTooltip = '' : this.activeTooltip = item;
+    }
+
+    public changeType(type) {
+
+        this.currentSlide = 0;
+        type === 'all' ? this.newsArr = this.mockNews : this.newsArr = this.mockNews.filter(news => news.type === type);
+        console.log(this.newsArr);
     }
 }

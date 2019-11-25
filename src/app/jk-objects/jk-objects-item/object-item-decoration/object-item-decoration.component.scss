@@ -39,6 +39,7 @@
                 height: 1px;
                 background-color: #d8d8d8;
             }
+            &:hover { color: $col-red_hover; }
             &_active {
                 color: $col-red;
                 &::before { background-color: $col-red; }

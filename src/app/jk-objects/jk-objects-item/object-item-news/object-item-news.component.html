@@ -16,11 +16,11 @@
 
         <nav class="object-news__nav">
             <ul class="object-news__nav-list">
-                <li class="object-news__nav-item" (click)="showSnippetType = 'all'"
+                <li class="object-news__nav-item" (click)="showSnippetType = 'all'; changeType('all')"
                     [ngClass]="{'object-news__nav-item_active': showSnippetType === 'all'}">Все</li>
-                <li class="object-news__nav-item" (click)="showSnippetType = 'news'"
+                <li class="object-news__nav-item" (click)="showSnippetType = 'news'; changeType('news')"
                     [ngClass]="{'object-news__nav-item_active': showSnippetType === 'news'}">Новости</li>
-                <li class="object-news__nav-item" (click)="showSnippetType = 'shares'"
+                <li class="object-news__nav-item" (click)="showSnippetType = 'shares'; changeType('shares')"
                     [ngClass]="{'object-news__nav-item_active': showSnippetType === 'shares'}">Акции</li>
             </ul>
         </nav>
@@ -32,14 +32,14 @@
                 class="object-news__slider-btn object-news__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
                 <span></span>
             </button>
-            <button (click)="nextBtn()" *ngIf="currentSlide + 3 < mockNews.length"
+            <button (click)="nextBtn()" *ngIf="currentSlide + 3 < newsArr.length"
                 class="object-news__slider-btn object-news__slider-btn_next btn-slider btn-slider_next btn-slider_white">
                 <span></span>
             </button>
 
             <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 376 ) ) + 'px)') }">
                 
-                <ng-container *ngFor="let snippet of mockNews; let i = index">
+                <ng-container *ngFor="let snippet of newsArr; let i = index">
 
                     <div class="slider-list__item" *ngIf="snippet.type === showSnippetType || showSnippetType === 'all'"
                         [ngClass]="{'current-slide': currentSlide === i }">
