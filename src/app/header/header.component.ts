@@ -26,6 +26,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
+    @ViewChild('header')
+    public header: ElementRef;
+
     constructor(
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
@@ -70,10 +73,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // если расстояние скролла больше высоты хедера
     // хедер фиксируется
-
-    @ViewChild('header')
-    public header: ElementRef;
-
     public fixedHeader() {
 
         let prevScrollTop = 0;

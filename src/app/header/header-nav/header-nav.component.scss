@@ -39,13 +39,10 @@
 }
 
 .project__nav-bar {
+    position: relative;
     display: flex;
 
-    li:last-child {
-        .project__nav-link {
-            margin-right: 0;
-        }
-    }
+
 
 }
 .project__nav-link {
