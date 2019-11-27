@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { mockTap } from './mockTaps';
 
 @Component({
@@ -12,9 +12,14 @@ import { mockTap } from './mockTaps';
 
 export class ObjectItemBuilderComponent implements OnInit {
 
+    @Input()
+    public isAuthorizated = false;
+
     public tempTap = mockTap;
 
-    constructor() { }
+    constructor(
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 }

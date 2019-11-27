@@ -17,7 +17,7 @@ async function bootstrap() {
     const db = await MongoConnectionService.connect();
     const app = await NestFactory.create(AppModule, appExpress);
     app.use(session({
-        secret: 'novotomilino',
+        secret: '3red',
         resave: false,
         saveUninitialized: true
     }));

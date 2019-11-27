@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { placement, mockHouse } from './object-flat.config';
 
 @Component({
@@ -12,10 +12,14 @@ import { placement, mockHouse } from './object-flat.config';
 
 export class ObjectItemFlatComponent implements OnInit {
 
+    @Input()
+    public isAuthorizated = false;
+
     public genplanPlacement = placement;
     public tempHouse = mockHouse;
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 }

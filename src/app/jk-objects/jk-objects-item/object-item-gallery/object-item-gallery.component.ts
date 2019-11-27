@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { mockSlider } from './mockSlide';
 
 @Component({
@@ -11,6 +11,9 @@ import { mockSlider } from './mockSlide';
 })
 
 export class ObjectItemGalleryComponent implements OnInit {
+
+    @Input()
+    public isAuthorizated = false;
 
     public slideList = mockSlider;
 

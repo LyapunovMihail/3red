@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { mockDocuments } from './mockDoc'
+import { Component, Input, OnInit } from '@angular/core';
+import { mockDocuments } from './mockDoc';
 
 @Component({
     selector: 'app-object-item-documentation',
@@ -12,8 +12,11 @@ import { mockDocuments } from './mockDoc'
 
 export class ObjectItemDocumentationComponent implements OnInit {
 
+    @Input()
+    public isAuthorizated = false;
+
     public mockDoc = mockDocuments;
-    
+
     constructor() { }
 
     ngOnInit() { }

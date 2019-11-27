@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PlatformDetectService } from './../../../platform-detect.service';
 
 import { navInfrastructure, mockNav } from './config/mockContent';
@@ -16,6 +16,9 @@ declare let $: any;
 })
 
 export class ObjectItemLocationComponent implements OnInit {
+
+    @Input()
+    public isAuthorizated = false;
 
     // Переменные которые я  создал что бы сделать верстку
     public infrastructure = navInfrastructure;

@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestro
 import { WindowEventsService } from '../../commons/window-events.observer.service';
 import { HeaderService, IHeaderLink } from '../header.service';
 import { Router } from '@angular/router';
+import { EventsService } from '../../commons/events.service';
 
 interface INavLink extends IHeaderLink {
     blockOffsetTop: number;
@@ -28,10 +29,12 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     public activeAnchor: any = {};
     public prevActiveAnchor: any = {};
 
-    public windowEvent;
+    public windowScrollEvent;
+    public pageResizeEvent;
 
     constructor(
         private windowEventsService: WindowEventsService,
+        private eventsService: EventsService,
         private headerService: HeaderService,
         public router: Router,
         private changeDetectorRef: ChangeDetectorRef
@@ -41,11 +44,18 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
         let prevScrollTop = 0;
         this.getLinksSizes();
 
-        this.windowEvent = this.windowEventsService.onScroll.subscribe(() => {
+        this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const activeBlockScroll = this.headerService.processScrollForNav(scrollTop, this);
             this.headerService.calculateNavProgressWidth(activeBlockScroll, scrollTop, prevScrollTop, this);
             prevScrollTop = scrollTop;
+        });
+
+        this.pageResizeEvent = this.eventsService.getResizeEventEmitter().subscribe(() => {
+            console.log('CHECKKKKKKKKK');
+            setTimeout(() => {
+                this.getBlocksSizes();
+            });
         });
     }
 
@@ -73,6 +83,7 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.windowEvent.unsubscribe();
+        this.windowScrollEvent.unsubscribe();
+        this.pageResizeEvent.unsubscribe();
     }
 }

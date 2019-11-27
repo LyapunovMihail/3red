@@ -20,7 +20,7 @@ import { ObjectItemLocationComponent } from './jk-objects-item/object-item-locat
 import { ObjectItemPurchaseComponent } from './jk-objects-item/object-item-purchase/object-item-purchase.component';
 import { ObjectItemNewsComponent } from './jk-objects-item/object-item-news/object-item-news.component';
 import { ObjectItemDocumentationComponent } from './jk-objects-item/object-item-documentation/object-item-documentation.component';
-import { ObjectItemMembersComponent } from './jk-objects-item/object-item-members/object-item-members';
+import { ObjectItemMembersComponent } from './jk-objects-item/object-item-members/object-item-members.component';
 import { ObjectItemProjectComponent } from './jk-objects-item/object-item-project/object-item-project.component';
 import { ObjectItemInstallmentComponent } from './jk-objects-item/object-item-purchase/installment/object-item-installment.component';
 import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-item-purchase/installment/object-item-installment.pipe';
@@ -70,7 +70,6 @@ const JkObjectsComponents = [
     ])
   ],
   providers: [
-    ObjectPurchaseInstallmentNumberPipe,
     ObjectPurchaseInstallmentService
   ]
 })

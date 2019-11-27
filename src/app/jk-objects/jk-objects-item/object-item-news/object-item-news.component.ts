@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { news } from './mockNews';
+import { Component, Input, OnInit } from '@angular/core';
+import { newsArr } from './mockNews';
 
 @Component({
     selector: 'app-object-item-news',
@@ -12,7 +12,10 @@ import { news } from './mockNews';
 
 export class ObjectItemNewsComponent implements OnInit {
 
-    public mockNews = news;
+    @Input()
+    public isAuthorizated = false;
+
+    public mockNews = newsArr;
     public newsArr = [];
 
     public showSnippetType = 'all';
@@ -40,13 +43,13 @@ export class ObjectItemNewsComponent implements OnInit {
 
     public onSelectItem(item: string): void {
 
-        this.activeTooltip === item ? this.activeTooltip = '' : this.activeTooltip = item;
+        this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
     public changeType(type) {
 
         this.currentSlide = 0;
-        type === 'all' ? this.newsArr = this.mockNews : this.newsArr = this.mockNews.filter(news => news.type === type);
+        this.newsArr = type === 'all' ? this.mockNews : this.mockNews.filter((news) => news.type === type);
         console.log(this.newsArr);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { mockInfo, mockCorpus } from './mock-info';
 
 @Component({
@@ -9,10 +9,15 @@ import { mockInfo, mockCorpus } from './mock-info';
 
 export class ObjectItemPreviewComponent implements OnInit {
 
+    @Input()
+    public isAuthorizated = false;
+
     public mockSnippet = mockInfo;
     public mockDate = mockCorpus;
 
-    constructor() { }
+    constructor(
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 }

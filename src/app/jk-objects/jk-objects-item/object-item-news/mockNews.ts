@@ -1,4 +1,4 @@
-export const news = [
+export const newsArr = [
     {
         houseName: 'Сердце Ярославля',
         image: '/assets/img/p1.jpg',
