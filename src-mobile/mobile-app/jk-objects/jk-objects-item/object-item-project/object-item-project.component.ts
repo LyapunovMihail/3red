@@ -21,7 +21,7 @@ export class ObjectItemProjectComponent implements OnInit {
     ngOnInit() { }
 
     public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.mockProject.length - 4 ) ? this.currentSlide + 1 : 0;
+        this.currentSlide = (this.currentSlide < this.mockProject.length - 3 ) ? this.currentSlide + 1 : 0;
     }
 
     public prevBtn() {

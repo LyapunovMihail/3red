@@ -2,39 +2,31 @@
 <section class="object-flat">
 
     <div class="object-item__container object-flat__container">
-        <div class="project__wrap">
-            <input type="checkbox" name="switch" id="chooseHouse" class="switch">
-            <label *ngIf="isAuthorizated" for="chooseHouse" class="object-item__title">Выберите дом</label>
+        <div class="object-flat__wrap">
             <h2 *ngIf="!isAuthorizated">Выберите дом</h2>
-        </div>
-        <p *ngIf="isAuthorizated" class='object-flat__text'>Данный блок не настраивается и не заполняется с помощью админки</p>
-    </div>
 
-    <div class="object-flat__plan">
+            <div class="object-flat__scheme">
+                <p class="object-flat__scheme-icon" (click)="openSchema = !openSchema">Схема</p>
 
-        <img class="object-flat__plan-img" src="/assets/img/jk-object/temp_bg.jpg" alt="">
-<!-- Места поблизсти -->
-        <div class="object-flat__placement">
-            <div class="object-flat__placement-item object-flat__placement-item_{{item.mod}}" *ngFor="let item of genplanPlacement">
-                {{ item.title }}
+                <div class="object-flat__scheme-tooltip" *ngIf="openSchema">
+                    <button class="object-flat__scheme-cls" (click)="openSchema = !openSchema"></button>
+
+                    <img src="/assets/img/jk-object/flat-preview-schema.svg" alt="schema">
+                </div>
             </div>
         </div>
-<!-- Генплан квартир -->
+        <p *ngIf="isAuthorizated" class='object-flat__text'>Данный блок не настраивается и не заполняется с помощью админки</p>
+        
         <div class="object-flat__house">
-            <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
-                <a class="object-flat__house-item">
-                    <span>№{{house.houseNumber}}</span> 
-                    <span>{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</span>
-                </a>
-                <div class="object-flat__house-tooltip object-flat__house-tooltip_house-{{house.houseNumber}}">
-                    <h3>Дом №{{house.houseNumber}}</h3>
-                    <ul>
-                        <li *ngFor="let room of house.rooms" class="object-flat__house-room">
-                            <span>{{room.name === 0 ? 'Студии' : room.name + '-комнатные'}}</span>
-                            <span>{{room.minPrice ? 'от ' + room.minPrice + ' млн Р' : 'не в продаже'}}</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
+                <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
+                <p class="object-flat__house-flats">{{house.freeFlats}} квартир</p>
+                <ul>
+                    <li *ngFor="let room of house.rooms" class="object-flat__house-room">
+                        <span>{{room.name === '0' ? 'Ст' : room.name + 'к'}}{{room.name === '3' ? '+' : ''}}</span>
+                        <span>{{room.minPrice ? 'от ' + room.minPrice + ' млн Р' : 'Продано'}}</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

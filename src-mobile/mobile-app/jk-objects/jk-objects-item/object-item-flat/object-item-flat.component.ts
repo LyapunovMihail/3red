@@ -12,6 +12,8 @@ import { placement, mockHouse } from './object-flat.config';
 
 export class ObjectItemFlatComponent implements OnInit {
 
+    public openSchema = false;
+
     public genplanPlacement = placement;
     public tempHouse = mockHouse;
 

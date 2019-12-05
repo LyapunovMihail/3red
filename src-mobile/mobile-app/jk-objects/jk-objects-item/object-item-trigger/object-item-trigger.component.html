@@ -3,39 +3,12 @@
 
     <div class="object-item__container object-trigger__container">
 
-        <div class="object-trigger__item object-trigger__item_stud">
-            <p class="object-trigger__item-text">Студии</p>
-            <p class="object-trigger__item-text object-trigger__item-text_for-space">(18-30 м²)</p>
+        <div class="object-trigger__item object-trigger__item_stud" *ngFor="let item of triggers; let i = index">
+            <p class="object-trigger__item-text">{{i === 0 ? 'Студии' : i + ' комнатные'}}</p>
+            <p class="object-trigger__item-text object-trigger__item-text_for-space">({{item.space}})</p>
             <p class="object-trigger__item-text object-trigger__item-text_price">
                 от 
-                <span>1,46</span> 
-                млн &#8381;
-            </p>
-        </div>
-        <div class="object-trigger__item object-trigger__item_room-1">
-            <p class="object-trigger__item-text">1 комнатные</p>
-            <p class="object-trigger__item-text object-trigger__item-text_for-space">(33-40 м²)</p>
-            <p class="object-trigger__item-text object-trigger__item-text_price">
-                от 
-                <span>2,47</span> 
-                млн &#8381;
-            </p>
-        </div>
-        <div class="object-trigger__item object-trigger__item_room-2">
-            <p class="object-trigger__item-text">2 комнатные</p>
-            <p class="object-trigger__item-text object-trigger__item-text_for-space">(33-69 м²)</p>
-            <p class="object-trigger__item-text object-trigger__item-text_price">
-                от 
-                <span>3,01</span> 
-                млн &#8381;
-            </p>
-        </div>
-        <div class="object-trigger__item object-trigger__item_room-3">
-            <p class="object-trigger__item-text">3 комнатные</p>
-            <p class="object-trigger__item-text object-trigger__item-text_for-space">(58-141 м²)</p>
-            <p class="object-trigger__item-text object-trigger__item-text_price">
-                от 
-                <span>4,86</span> 
+                <span>{{item.price}}</span> 
                 млн &#8381;
             </p>
         </div>

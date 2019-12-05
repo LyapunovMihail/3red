@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger } from './mockTrigger';
 
 @Component({
     selector: 'app-object-item-trigger',
@@ -10,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ObjectItemTriggerComponent implements OnInit {
+
+    public triggers = trigger;
+    
     constructor() { }
 
     ngOnInit() { }

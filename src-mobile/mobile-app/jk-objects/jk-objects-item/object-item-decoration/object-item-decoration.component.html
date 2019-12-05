@@ -26,14 +26,16 @@
 
             <div class="object-decoration__slider-wrap object-decoration__slider-wrap_slides">
 
-                <div class="object-decoration__slider-item decoration-slider">
+                <div class="object-decoration__slider-item decoration-slider" id="sliderWrap">
+                    <div class="decoration-slider__edge decoration-slider__edge-left" [style.width.px]="leftEdge"></div>
+                    <div class="decoration-slider__edge decoration-slider__edge-right" [style.width.px]="rightEdge"></div>
 
                     <button (click)="prevBtn()" class="decoration-slider__btn decoration-slider__btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
                     <button (click)="nextBtn()" class="decoration-slider__btn decoration-slider__btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
 
                     <div class="decoration-slider__dots">
                         <span *ngFor="let dots of sliderContent.img; let i = index"
-                            [ngClass]="{'current-dots': currentSlide === i}"></span>
+                            [ngClass]="{'current-dots': currentSlide === i && mediaCurrentSlide === 0 || mediaCurrentSlide === i }"></span>
                     </div>
 
                     <div class="decoration-slider__path">
@@ -44,9 +46,12 @@
                         </p>
                     </div>
 
-                    <div class="decoration-slider__slide" *ngFor="let slide of sliderContent.img; let i = index"
-                        [ngClass]="{'current-slide': currentSlide === i}">
-                        <img src="{{slide}}" alt="image-slider">
+                    <div class="decoration-slider__wrap" id="slider">
+
+                        <div class="decoration-slider__slide" *ngFor="let slide of sliderContent.img; let i = index"
+                            [ngClass]="{'current-slide': currentSlide === i}">
+                            <img src="{{slide}}" alt="image-slider">
+                        </div>
                     </div>
                 </div>
             </div>

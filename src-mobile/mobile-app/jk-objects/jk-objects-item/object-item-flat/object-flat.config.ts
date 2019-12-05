@@ -51,8 +51,7 @@ export const mockHouse = [
                 minPrice: '5,4'
             }
         ]
-    },
-    {
+    }, {
         houseNumber: '3',
         freeFlats: '545',
         rooms: [
@@ -73,8 +72,7 @@ export const mockHouse = [
                 minPrice: '7,4'
             }
         ]
-    },
-    {
+    }, {
         houseNumber: '4',
         freeFlats: '367',
         rooms: [
@@ -93,6 +91,48 @@ export const mockHouse = [
             {
                 name: '3',
                 minPrice: '5,4'
+            }
+        ]
+    }, {
+        houseNumber: '5',
+        freeFlats: '1367',
+        rooms: [
+            {
+                name: '0',
+                minPrice: '4,4'
+            },
+            {
+                name: '1',
+                minPrice: '6,4'
+            },
+            {
+                name: '2',
+                minPrice: '10,4'
+            },
+            {
+                name: '3',
+                minPrice: '15,4'
+            }
+        ]
+    }, {
+        houseNumber: '6',
+        freeFlats: '2367',
+        rooms: [
+            {
+                name: '0',
+                minPrice: '4,4'
+            },
+            {
+                name: '1',
+                minPrice: '6,4'
+            },
+            {
+                name: '2',
+                minPrice: '10,4'
+            },
+            {
+                name: '3',
+                minPrice: '15,4'
             }
         ]
     }

@@ -37,39 +37,42 @@
                 <span></span>
             </button>
 
-            <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 376 ) ) + 'px)') }">
-                
-                <ng-container *ngFor="let snippet of newsArr; let i = index">
+            <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 364 ) ) + 'px)') }">
 
-                    <div class="slider-list__item" *ngIf="snippet.type === showSnippetType || showSnippetType === 'all'"
-                        [ngClass]="{'current-slide': currentSlide === i }">
-                        
-                        <a href="#" class="slider-list__item-link">
-                            <p class="slider-list__house-name">{{snippet.houseName}}</p>
-                            <div class="slider-list__image">
-                                <img src="{{snippet.image}}" alt="news-image">
-                            </div>
-                            <p class="slider-list__title">{{snippet.title}}</p>
-                            <p class="slider-list__date">{{snippet.date}}</p>
+                <div class="slider-list__wrap">
 
-                            <div class="slider-list__type" *ngIf="snippet.type === 'shares'">Акция</div>
-                        </a>
-
-
-                        <div class="slider-list__edit" *ngIf="isAuthorizated">
-
-                            <button class="slider-list__edit-item" (click)="onSelectItem(snippet)"
-                                [class.slider-list__edit-item_active]="snippet == activeTooltip"><span></span></button>
+                    <ng-container *ngFor="let snippet of newsArr; let i = index">
+    
+                        <div class="slider-list__item" *ngIf="snippet.type === showSnippetType || showSnippetType === 'all'"
+                            [ngClass]="{'current-slide': currentSlide === i }">
                             
-                            <div class="slider-list__tooltip">
-                                <div class="slider-list__tooltip-item">Редактировать</div>
-                                <div class="slider-list__tooltip-item">Убрать с главной</div>
-                                <div class="slider-list__tooltip-item">В черновик</div>
-                                <div class="slider-list__tooltip-item">Удалить</div>
+                            <a href="#" class="slider-list__item-link">
+                                <p class="slider-list__house-name">{{snippet.houseName}}</p>
+                                <div class="slider-list__image">
+                                    <img src="{{snippet.image}}" alt="news-image">
+                                </div>
+                                <p class="slider-list__title">{{snippet.title}}</p>
+                                <p class="slider-list__date">{{snippet.date}}</p>
+    
+                                <div class="slider-list__type" *ngIf="snippet.type === 'shares'">Акция</div>
+                            </a>
+    
+    
+                            <div class="slider-list__edit" *ngIf="isAuthorizated">
+    
+                                <button class="slider-list__edit-item" (click)="onSelectItem(snippet)"
+                                    [class.slider-list__edit-item_active]="snippet == activeTooltip"><span></span></button>
+                                
+                                <div class="slider-list__tooltip">
+                                    <div class="slider-list__tooltip-item">Редактировать</div>
+                                    <div class="slider-list__tooltip-item">Убрать с главной</div>
+                                    <div class="slider-list__tooltip-item">В черновик</div>
+                                    <div class="slider-list__tooltip-item">Удалить</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </ng-container>
+                    </ng-container>
+                </div>
             </div>
         </div>
     </div>

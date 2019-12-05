@@ -51,6 +51,9 @@
     column-gap: 30px;
     justify-content: flex-start;
 }
+.indicators__grid-item {
+    width: 258px;
+}
 .project-indicators__key {
     font: 16px/19px $font-proba;
     color: $col-black-5;
@@ -59,4 +62,23 @@
 .project-indicators__value {
     font: 24px/29px $font-proba;
     color: #000;
+}
+
+@media (max-width: 760px) {
+    .object-builder { margin: 0 0 64px; }
+    .indicators__grid-container { display: block; }
+    .indicators__grid-item { margin: 0 0 24px; }
+    
+    .project__description {
+        font-size: 16px;
+        line-height: 16px * 1.38;
+    }
+    .project-indicators__title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+    .project__wrap h2 {
+        font-size: 28px;
+        line-height: 24px;
+    }
 }

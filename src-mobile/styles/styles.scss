@@ -2,6 +2,7 @@
 @import './modules/reset/reset';
 @import './modules/mixins/mixin.scss';
 @import './ui-kit/markers';
+@import './ui-kit/common-ui';
 
 body {
     min-height: 100vh;
@@ -11,7 +12,7 @@ body {
     background-color: #F5F5F5;
     margin: 0;
     padding: 86px 0 51px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 a {
@@ -85,4 +86,22 @@ p {
     font: 18px/23px $font-proba;
     margin: 0;
     padding: 0;
+}
+@media (max-width: 760px) {
+    h1 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+    h2 {
+        font-size: 24px;
+        line-height: 29px;
+    }
+    h3 {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    p {
+        font-size: 16px;
+        line-height: 19px;
+    }
 }

@@ -7,7 +7,6 @@ import { JkObjectsComponent } from './jk-objects.component';
 import { JkObjectsListComponent } from './jk-objects-list/jk-objects-list.component';
 import { JkObjectsItemComponent } from './jk-objects-item/jk-objects-item.component';
 import { ObjectItemPreviewComponent } from './jk-objects-item/object-item-preview/object-item-preview.component';
-import { ObjectItemFilterComponent } from './jk-objects-item/object-item-filter/object-item-filter.component';
 // import { GHMRangeNumberModule } from '../flats/search/search-form/ghm-range-number/ghm-range-number.module';
 // import { GHMRangeNumberComponent } from '../flats/search/search-form/ghm-range-number/ghm-range-number.component';
 import { ObjectItemTriggerComponent } from './jk-objects-item/object-item-trigger/object-item-trigger.component';
@@ -31,7 +30,6 @@ const JkObjectsComponents = [
   JkObjectsListComponent,
   JkObjectsItemComponent,
   ObjectItemPreviewComponent,
-  ObjectItemFilterComponent,
   ObjectItemTriggerComponent,
   ObjectItemStorageComponent,
   ObjectItemBuilderComponent,

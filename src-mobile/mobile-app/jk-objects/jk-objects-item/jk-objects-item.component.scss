@@ -5,7 +5,10 @@
 
     &__container {
         width: 100%;
-        max-width: $container;
+        max-width: $tabletContainer; // 704px
+        @media (max-width: 760px) {
+            max-width: $mobileContainer; // calc(100% - 40px)
+        }
     }
 }
 

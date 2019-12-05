@@ -9,6 +9,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 24px 32px 48px;
+    margin: 0 0 64px;
     &::after {
         content:'';
         width: 100%;
@@ -52,6 +53,15 @@
         }
     }
     &__admin-btn { margin: 0 0 16px; }
+    &__change-dynamic {
+        height: 48px;
+        padding: 0 57px 0 32px;
+        font: 18px/23px $font-proba;
+        color: $col-white;
+        background: url(/assets/img/jk-object/dynamic_white.svg) 124px 18px no-repeat;
+        margin-right: 12px;
+        border : 1px solid $col-red;
+    }
 
     &__wrapper {
         width: 100%;
@@ -60,8 +70,8 @@
 
         &_top {
             display: flex;
-            flex-flow: column nowrap;
-            align-items: flex-start;
+            flex-flow: row wrap;
+            justify-content: space-between;
         }
         &_bottom {
             display: flex;
@@ -74,8 +84,11 @@
     &__wrap {
         width: 100%;
         display: flex;
+        flex-flow: row wrap;
         align-items: center;
         justify-content: space-between;
+
+        &_btns { width: auto; }
     }
     &__info {
         display: inline-block;
@@ -84,7 +97,7 @@
         padding: 5px 16px;
         background: #6a6a6a;
         border-radius: 20px;
-        margin-right: 8px;
+        margin: 0 8px 8px 0;
         
         &_success { background: $col-red; }
 
@@ -134,11 +147,10 @@
     color: #fff;
     overflow: hidden;
     white-space: nowrap;
-    
+
     &__item {
         margin-right: 48px;
         margin-bottom: 16px;
-        
     }
     &__value {
         font-size: 24px;
@@ -146,5 +158,52 @@
     &__key {
         font-size: 14px;
         margin-top: 8px;
+    }
+}
+
+@media (max-width: 760px) {
+    .object-preview {
+        padding: 16px 20px 20px;
+
+        &__back-btn span,
+        &__info--icon span,
+        &__change-flats,
+        &__wrap { display: none; }
+
+        &__wrapper { position: static; }
+        &__wrap_btns { display: block; }
+
+        &__info--icon {
+            display: block;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            &::after { top: 0; }
+        }
+        &__title {
+            font-size: 28px;
+            line-height: 28px;
+            margin: 0 0 4px;
+        }
+        &__text {
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0 0 16px;
+        }
+        &__change-dynamic {
+            width: 113px;
+            height: 28px;
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            padding: 0 37px 0 12px;
+            font-size: 14px;
+            background: url(/assets/img/home-icon_white.svg) calc(100% - 12px) 50% no-repeat $col-red;
+            color: $col-white;
+        }
     }
 }

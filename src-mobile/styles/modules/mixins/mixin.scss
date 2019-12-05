@@ -14,6 +14,8 @@ $col-ef: #efefef;
 $font-proba: 'ProbaPro', 'sans-serif', 'Arial';
 $font-formular: 'Formular', 'sans-serif', 'Arial';
 $container: 1104px;
+$tabletContainer: 704px;
+$mobileContainer: calc(100% - 40px);
 
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;

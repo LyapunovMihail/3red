@@ -6,8 +6,9 @@
         <div class="object-project__head">
             <h2>Посмотрите другие проекты</h2>
         </div>
+    </div>
 
-
+    <div class="object-item__container object-members__container object-members__container_disabled">
         <div class="object-project__slider">
 
             <button class="object-project__slider-all btn-empty">Все проекты</button>
@@ -15,25 +16,28 @@
                 class="object-project__slider-btn object-project__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
                 <span></span>
             </button>
-            <button (click)="nextBtn()" *ngIf="currentSlide + 4 < mockProject.length"
+            <button (click)="nextBtn()" *ngIf="currentSlide + 3 < mockProject.length"
                 class="object-project__slider-btn object-project__slider-btn_next btn-slider btn-slider_next btn-slider_white">
                 <span></span>
             </button>
 
             <div class="object-project__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 282 ) ) + 'px)') }">
                 
-                <ng-container *ngFor="let snippet of mockProject; let i = index">
+                <div class="slider-list__wrap">
 
-                    <div class="slider-list__item"
-                        [ngClass]="{'current-slide': currentSlide === i }">
+                    <ng-container *ngFor="let snippet of mockProject; let i = index">
     
-                        <div class="slider-list__image">
-                            <img src="{{snippet.image}}" alt="news-image">
+                        <div class="slider-list__item"
+                            [ngClass]="{'current-slide': currentSlide === i }">
+        
+                            <div class="slider-list__image">
+                                <img src="{{snippet.image}}" alt="news-image">
+                            </div>
+                            <p class="slider-list__title">{{snippet.title}}</p>
+                            <p class="slider-list__info">{{snippet.info}}</p>
                         </div>
-                        <p class="slider-list__title">{{snippet.title}}</p>
-                        <p class="slider-list__info">{{snippet.info}}</p>
-                    </div>
-                </ng-container>
+                    </ng-container>
+                </div>
             </div>
         </div>
     </div>

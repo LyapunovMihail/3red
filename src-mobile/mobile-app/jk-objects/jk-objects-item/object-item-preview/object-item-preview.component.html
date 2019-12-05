@@ -4,8 +4,10 @@
     <img src="/assets/img/jk-object/temp_bg.jpg" class="object-preview__background-image" alt="background-image">
 
     <div class="object-preview__wrapper object-preview__wrapper_top">
-        <a *ngIf="!isAuthorizated" [routerLink]="['/objects/list']" class="object-preview__back-btn">Назад к списку объектов</a>
-        <button class="object-preview__admin-btn btn__admin-content btn_var-2" *ngIf="isAuthorizated">Контент</button>
+        <a [routerLink]="['/objects/list']" class="object-preview__back-btn">Назад <span>к списку объектов</span></a>
+        <div class="object-preview__item">
+            <a href="#" class="object-preview__info object-preview__info--icon"><span>Трансляция с веб-камер</span></a>
+        </div>
 
         <div class="object-preview__wrap">
             <div class="object-preview__item">
@@ -13,9 +15,6 @@
                     [ngClass]="{'object-preview__info_success': limit.success}" *ngFor="let limit of mockDate">
                     {{ limit.corpus + ' — ' + limit.date }}
                 </p>
-            </div>
-            <div class="object-preview__item">
-                <a href="#" class="object-preview__info object-preview__info--icon">Трансляция с веб-камер</a>
             </div>
         </div>
     </div>
@@ -25,12 +24,18 @@
         <p class="object-preview__text">г. Ярославль, ул. Городской Вал 15</p>
 
         <div class="indicators">
-            <div class="indicators__item" *ngFor="let item of mockSnippet">
-                <div class="indicators__value">{{item.val}}</div>
-                <div class="indicators__key">{{item.text}}</div>
-            </div>
-        </div>
 
-        <button *ngIf="!isAuthorizated" class="object-preview__change-flats btn_var-1">Выбрать квартиру</button>
+            <ng-container *ngFor="let item of mockSnippet">
+                
+                <div class="indicators__item" *ngIf="item.text === 'Цена квартиры'">
+                    <div class="indicators__value">{{item.val}}</div>
+                    <div class="indicators__key">{{item.text}}</div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="object-preview__wrap object-preview__wrap_btns">
+            <button class="object-preview__change-dynamic">Фотоотчет</button>
+            <button class="object-preview__change-flats btn_var-1">Выбрать квартиру</button>
+        </div>
     </div>
 </section>
