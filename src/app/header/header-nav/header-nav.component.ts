@@ -27,7 +27,7 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     public progressWidth = '0px';
 
     public activeAnchor: any = {};
-    public prevActiveAnchor: any = {};
+    public backNearestAnchor: any = {};
 
     public windowScrollEvent;
     public pageResizeEvent;
@@ -41,14 +41,12 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     ) { }
 
     ngAfterViewInit() {
-        let prevScrollTop = 0;
         this.getLinksSizes();
 
         this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const activeBlockScroll = this.headerService.processScrollForNav(scrollTop, this);
-            this.headerService.calculateNavProgressWidth(activeBlockScroll, scrollTop, prevScrollTop, this);
-            prevScrollTop = scrollTop;
+            this.headerService.calculateNavProgressWidth(activeBlockScroll, this);
         });
 
         this.pageResizeEvent = this.eventsService.getResizeEventEmitter().subscribe(() => {

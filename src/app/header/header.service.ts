@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NAVANCHORS } from './navAnchors';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
@@ -16,7 +16,8 @@ export class HeaderService {
     public nav: HeaderNavComponent;
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private ref: ChangeDetectorRef
     ) { }
 
     public getDynamicLink() {
@@ -61,21 +62,26 @@ export class HeaderService {
     public processScrollForNav(scrollTop, nav) {
         this.nav = nav;
         const activationInterval = (document.documentElement.clientHeight || window.innerHeight || 0) / 3;
-        this.setActiveAndPrevAnchor(scrollTop, activationInterval);
+        this.findActiveOrNearestAnchor(scrollTop, activationInterval);
         return this.findActiveBlockScrollInterval(scrollTop, activationInterval);
     }
 
-    private setActiveAndPrevAnchor(scrollTop, activationInterval) {
+    private findActiveOrNearestAnchor(scrollTop, activationInterval) {
         let hasActiveAnchor = false;
+        let hasBackNearestAnchor = false;
         this.nav.anchors.forEach((a) => {
             if ((a.blockOffsetTop - scrollTop) < (activationInterval) && (a.blockOffsetTop + a.blockHeight - scrollTop > activationInterval)) {
                 this.nav.activeAnchor = a;
-                this.nav.prevActiveAnchor = this.nav.activeAnchor;
                 hasActiveAnchor = true;
+                return;
+            } else if ((a.blockOffsetTop - scrollTop) < (activationInterval) && (a.blockOffsetTop + a.blockHeight - scrollTop < activationInterval)) {
+                this.nav.backNearestAnchor = a;
+                hasBackNearestAnchor = true;
             }
         });
 
         this.nav.activeAnchor = hasActiveAnchor ? this.nav.activeAnchor : {};
+        this.nav.backNearestAnchor = hasBackNearestAnchor ? this.nav.backNearestAnchor : {};
     }
 
     private findActiveBlockScrollInterval(scrollTop, activationInterval) {
@@ -84,17 +90,18 @@ export class HeaderService {
     }
 
     // Расчет ширины прогресс бара навигации
-    public calculateNavProgressWidth(blockScroll, scrollTop, prevScrollTop, nav) {
+    public calculateNavProgressWidth(blockScroll, nav) {
         this.nav = nav;
         if (Object.keys(this.nav.activeAnchor).length) {
             const scrollPercent = blockScroll / this.nav.activeAnchor.blockHeight;
             this.nav.progressWidth = this.nav.activeAnchor.linkOffsetLeft + (this.nav.activeAnchor.linkWidth * scrollPercent) + 'px';
         } else {
-            if (prevScrollTop > scrollTop) {
-                this.nav.progressWidth = this.nav.prevActiveAnchor.linkOffsetLeft;
+            if (Object.keys(this.nav.backNearestAnchor).length) {
+                this.nav.progressWidth = this.nav.backNearestAnchor.linkOffsetLeft + this.nav.backNearestAnchor.linkWidth;
             } else {
-                this.nav.progressWidth = this.nav.prevActiveAnchor.linkOffsetLeft + this.nav.prevActiveAnchor.linkWidth;
+                this.nav.progressWidth = 0 + 'px';
             }
         }
+        this.ref.detectChanges();
     }
 }

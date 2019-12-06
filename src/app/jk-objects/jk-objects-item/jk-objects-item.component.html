@@ -8,7 +8,7 @@
 
     <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
 
-    <app-object-item-builder [isAuthorizated]="isAuthorizated" id="project"></app-object-item-builder>
+    <app-object-item-project [isAuthorizated]="isAuthorizated" id="project"></app-object-item-project>
 
     <app-object-item-flat [isAuthorizated]="isAuthorizated" id="choose"></app-object-item-flat>
 
@@ -26,7 +26,7 @@
 
     <app-object-item-members [isAuthorizated]="isAuthorizated"></app-object-item-members>
 
-    <app-object-item-project *ngIf="!isAuthorizated"></app-object-item-project>
+    <app-object-item-projects *ngIf="!isAuthorizated"></app-object-item-projects>
 
     <div class="utilities" *ngIf="isAuthorizated">
         <div class="utilities__item">

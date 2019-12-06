@@ -1,5 +1,10 @@
 @import "../../../styles/modules/mixins/mixin";
 
+.project__wrap {
+    width: 100%;
+    max-width: $container;
+}
+
 .object-item {
     width: 100%;
     padding-top: 132px;
@@ -7,6 +12,17 @@
     &__container {
         width: 100%;
         max-width: $container;
+    }
+
+    &__wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0 0 96px;
+    }
+
+    &--margin {
+        margin: 0 0 96px;
     }
 }
 
@@ -98,4 +114,34 @@
         cursor: pointer;
         transition: .3s;
     }
+}
+
+
+// админка
+.form__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-item {
+    display: block;
+    position: relative;
+    margin-top: 46px;
+}
+.form-item--inline {
+    width: 48%;
+
+    &:nth-of-type(odd) {
+        margin-right: 24px;
+    }
+}
+.form-label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    transition: .3s;
 }

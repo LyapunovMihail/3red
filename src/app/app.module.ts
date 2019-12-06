@@ -18,6 +18,7 @@ import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
 import { PhoneObserverService } from './admin-contacts/phone.observer.service';
+import { WindowScrollLocker } from './commons/window-scroll-block';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -64,7 +65,8 @@ const APP_PROVIDERS = [
     PlatformDetectService,
     FlatsDiscountService,
     SearchFlatsLinkHandlerService,
-    PhoneObserverService
+    PhoneObserverService,
+    WindowScrollLocker
 ];
 
 const APP_MODULES = [

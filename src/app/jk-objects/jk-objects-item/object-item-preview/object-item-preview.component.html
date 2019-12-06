@@ -1,32 +1,31 @@
-
 <section class="object-preview">
 
-    <img src="/assets/img/jk-object/temp_bg.jpg" class="object-preview__background-image" alt="background-image">
+    <img [src]="uploadsPath + snippet.mainInfo.image" class="object-preview__background-image" alt="background-image" *ngIf="snippet">
 
     <div class="object-preview__wrapper object-preview__wrapper_top">
         <a *ngIf="!isAuthorizated" [routerLink]="['/objects/list']" class="object-preview__back-btn">Назад к списку объектов</a>
-        <button class="object-preview__admin-btn btn__admin-content btn_var-2" *ngIf="isAuthorizated">Контент</button>
+        <button class="object-preview__admin-btn btn__admin-content btn_var-2" *ngIf="isAuthorizated" (click)="closeModal = false">Контент</button>
 
-        <div class="object-preview__wrap">
+        <div class="object-preview__wrap" *ngIf="snippet">
             <div class="object-preview__item">
                 <p class="object-preview__info"
-                    [ngClass]="{'object-preview__info_success': limit.success}" *ngFor="let limit of mockDate">
-                    {{ limit.corpus + ' — ' + limit.date }}
+                    [ngClass]="{'object-preview__info_success': limit.realized}" *ngFor="let limit of snippet.deadlines">
+                    {{ limit.corpusId + ' — ' + limit.deadline }}
                 </p>
             </div>
-            <div class="object-preview__item">
-                <a href="#" class="object-preview__info object-preview__info--icon">Трансляция с веб-камер</a>
+            <div class="object-preview__item" *ngIf="snippet.mainInfo.webcamLink">
+                <a [href]="snippet.mainInfo.webcamLink" class="object-preview__info object-preview__info--icon">Трансляция с веб-камер</a>
             </div>
         </div>
     </div>
 
-    <div class="object-preview__wrapper object-preview__wrapper_bottom">
-        <h1 class="object-preview__title">Сердце Ярославля</h1>
-        <p class="object-preview__text">г. Ярославль, ул. Городской Вал 15</p>
+    <div class="object-preview__wrapper object-preview__wrapper_bottom" *ngIf="snippet">
+        <h1 class="object-preview__title">{{snippet.mainInfo.title}}</h1>
+        <p class="object-preview__text">{{snippet.mainInfo.address}}</p>
 
         <div class="indicators">
-            <div class="indicators__item" *ngFor="let item of mockSnippet">
-                <div class="indicators__value">{{item.val}}</div>
+            <div class="indicators__item" *ngFor="let item of snippet.indicators">
+                <div class="indicators__value">{{item.value}}</div>
                 <div class="indicators__key">{{item.text}}</div>
             </div>
         </div>
@@ -34,3 +33,9 @@
         <button *ngIf="!isAuthorizated" class="object-preview__change-flats btn_var-1">Выбрать квартиру</button>
     </div>
 </section>
+
+<app-objects-item-preview-admin *ngIf="!closeModal"
+    [id]="objectId"
+    [(snippet)]="snippet"
+    (closeModal)="closeModal = $event">
+</app-objects-item-preview-admin>
