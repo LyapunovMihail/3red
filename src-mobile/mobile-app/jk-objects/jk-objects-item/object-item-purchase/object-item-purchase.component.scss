@@ -6,6 +6,7 @@
     flex-flow: column nowrap;
     align-items: center;
     margin: 0 0 96px;
+    &_media { display: none; }
 
     &__head { margin: 0 0 16px; }
 
@@ -101,5 +102,45 @@
         &-rate { width: 75px + 67px; }
         &-date { width: 41px + 74px; }
         &-payment { width: 90px; }
+    }
+}
+
+@media (max-width: 760px) {
+
+    .object-purchase {
+        display: none;
+        background-color: $col-white;
+        padding: 48px 0 40px;
+        margin: 0 0 64px;
+
+        &_media { display: flex; }
+
+        &__title {
+            font-size: 28px;
+            line-height: 34px;
+            margin: 0 0 24px;
+        }
+        &__nav { margin: 0 0 24px; }
+
+        &__info {
+            margin: 0 0 24px;
+            &-item { margin: 0 0 12px; }
+            
+            &-name,
+            &-val {
+                font: 18px/23px $font-proba;
+                color: $col-black;
+            }
+            &-val { color: $col-black-5; }
+        }
+
+        &__bank {
+            width: 280px;
+            height: 48px;
+            background-color: $col-white;
+            border: 1px solid $col-red;
+            font: 18px/23px $font-proba;
+            color: $col-black;
+        }
     }
 }

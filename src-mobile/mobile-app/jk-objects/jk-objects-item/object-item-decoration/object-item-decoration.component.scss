@@ -28,18 +28,19 @@
             color: $col-black-5;
             position: relative;
             padding: 8px 0;
-            margin-right: 16px;
+            padding-right: 16px;
             cursor: pointer;
-            &:last-child { margin-right: 0; }
+            white-space: nowrap;
             &::before {
                 content: '';
                 position: absolute;
                 bottom: -1px;
                 left: 0;
-                width: 100%;
+                width: calc(100% - 16px);
                 height: 1px;
                 background-color: #d8d8d8;
             }
+            &:last-child::before {width: calc(100% - 20px); }
             &:hover { color: $col-red_hover; }
             &_active {
                 color: $col-red;
@@ -55,7 +56,7 @@
             &_slides {
                 width: 100%;
                 position: relative;
-                margin: 0 0 16px;
+                margin: 0 0 20px;
             }
             &_info { width: 100%; }
         }
@@ -176,7 +177,7 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
+            top: -4px;
         }
         
         &_roof::before     { content: url(/assets/img/jk-object/decoration-icon/invalid-name-28.svg); }
@@ -195,10 +196,56 @@
 }
 
 @media (max-width: 760px) {
+    .object-decoration {
+        margin: 0 0 64px;
+        
+        &__nav {
+            height: 40px;
+            position: relative;
+
+            &-wrap {
+                width: calc(100% + 40px);
+                height: 40px;
+                position: absolute;
+                top: 0;
+                left: -20px;
+                overflow: hidden;
+                
+                &_for-scroll {
+                    height: calc(100% + 20px);
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                    padding: 0 20px;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+            }
+            &-list {
+                position: relative;
+                border: 0;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    width: calc(100% - 20px);
+                    height: 1px;
+                    background: #d8d8d8;
+                }
+            }
+        }
+        &__slider {
+            overflow: hidden;
+            &-wrap_slides { margin: 0 0 40px; }
+        }
+    }
     .decoration-slider {
+        height: 52.632vw;
+        min-height: 155px;
         display: flex;
         justify-content: flex-start;
-        overflow: hidden;
 
         &__wrap {
             width: auto;
@@ -211,5 +258,20 @@
             position: static;
             opacity: 1;
         }
+
+        &__btn { display: none; }
+        &__path {
+            top: 8px;
+            right: 8px;
+        }
+        &__dots {
+            top: calc(100% + 4px);
+            span { background-color: #d8d8d8; }
+        }
+    }
+}
+@media (max-width: 425px) {
+    .decoration-slider {
+        height: 47.632vw;
     }
 }

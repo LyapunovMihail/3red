@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { banks } from './mockBank';
 
 @Component({
@@ -13,6 +13,11 @@ import { banks } from './mockBank';
 export class ObjectItemPurchaseComponent implements OnInit {
 
     public mockBank = banks;
+    public OpenBankList = false;
+    close(increased: any) {
+        this.OpenBankList = increased;
+        console.log(this.OpenBankList);
+    }
 
     public showType = 'credit';
 

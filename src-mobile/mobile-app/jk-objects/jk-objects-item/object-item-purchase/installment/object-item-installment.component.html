@@ -42,6 +42,12 @@
             </li>
     
         </ul>
+
+        <div class="object-installment__select">
+            <app-object-item-installment-type
+                (typeChanges)="typeInstallment = $event">
+            </app-object-item-installment-type>
+        </div>
     
         <ul class="object-installment__calculator installment-calculator">
         

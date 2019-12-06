@@ -23,10 +23,9 @@ export class SwipeSlides {
          public platform: PlatformDetectService
      ) { }
 
-     public startPosition ( val, elem, size, px, activeSlide ) {
+     public startPosition ( val, elem, size, px ) {
          this.counter = val;
          elem.style.left = - (size * val) + px;
-         activeSlide = val;
          this.ref.detectChanges();
      }
      /*
@@ -35,7 +34,7 @@ export class SwipeSlides {
           slideWidth - Ширина одного слайда
           units - Единица измерения
      */
-     public sliderInit ( sliderListParent, sliderList, egLeft, egRight, slideWidth, units, activeSlide ) {
+     public sliderInit ( sliderListParent, sliderList, egLeft, egRight, slideWidth, units ) {
           let blockSlider = sliderListParent;
           let sliderInner = sliderList;
           let that = this;
@@ -92,9 +91,9 @@ export class SwipeSlides {
                                    || direction === 'RIGHT'
                                    && item.getBoundingClientRect().left > blockSlider.getBoundingClientRect().left + blockSlider.offsetWidth - blockSlider.offsetWidth / 2
                               ) {
-                                   that.startPosition( i - 1, sliderInner, slideWidth, units, activeSlide );
+                                   that.startPosition( i - 1, sliderInner, slideWidth, units );
                               } else {
-                                   that.startPosition( i, sliderInner, slideWidth, units, activeSlide );
+                                   that.startPosition( i, sliderInner, slideWidth, units );
                               }
                               setTimeout(() => {
                                    sliderInner.style.transition = '0s';

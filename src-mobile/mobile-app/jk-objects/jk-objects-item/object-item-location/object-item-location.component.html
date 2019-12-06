@@ -6,18 +6,22 @@
         <div class="object-location__head">
             <h2>Местоположение</h2>
         </div>
-
+        
+        <div class="object-location__address">
+            <p class="object-location__address-title">ЖК распологается по адресу</p>
+            <p class="object-location__address-name">Горки Ленинские, Московская обл.,142712</p>
+        </div>
         <nav class="object-location__nav">
-            <div class="object-location__address">
-                <p class="object-location__address-title">ЖК распологается по адресу</p>
-                <p class="object-location__address-name">Горки Ленинские, Московская обл.,142712</p>
-            </div>
 
-            <ul class="object-location__nav-list">
-                <li class="object-location__nav-item" *ngFor="let nav of navPoint"
-                    [ngClass]="{'object-location__nav-item_active': nav.mod === openPath}"
-                    (click)="openPath = nav.mod">{{nav.name}}</li>
-            </ul>
+            <div class="object-location__nav-wrap">
+                <div class="object-location__nav-wrap_for-scroll">
+                    <ul class="object-location__nav-list">
+                        <li class="object-location__nav-item" *ngFor="let nav of navPoint"
+                            [ngClass]="{'object-location__nav-item_active': nav.mod === openPath}"
+                            (click)="openPath = nav.mod">{{nav.name}}</li>
+                    </ul>
+                </div>
+            </div>
         </nav>
 
         <div class="object-location__infrastructure" *ngIf="openPath === 'infrastructure'">

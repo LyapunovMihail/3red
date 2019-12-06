@@ -1,5 +1,7 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
+:host { width: 100%; }
+
 .object-installment {
     width: 100%;
     display: flex;
@@ -9,19 +11,22 @@
     padding: 56px 0;
 
     &__container {
-        width: calc(100% - 140px);
+        width: calc(100% - 64px);
+        max-width: 704px;
+        display: flex;
+        flex-flow: row wrap;
     }
 
     &__type {
-        width: 100%;
+        width: 364px;
         max-width: 922px;
-        display: flex;
-        justify-content: space-between;
-        margin: 0 0 40px;
+        margin-right: 57px;
     
         &-item {
-            width: 287px;
+            width: 100%;
             cursor: pointer;
+            margin: 0 0 24px;
+            &:last-child { margin: 0; }
         }
         &-box {
             display: flex;
@@ -64,13 +69,13 @@
 .span-nowrap { padding: 0; }
 
 .installment-calculator {
-    width: 100%;
+    width: 273px;
     max-width: 922px;
-    display: flex;
-    justify-content: space-between;
     
     &__item {
-        width: 287px;
+        width: 100%;
+        margin: 0 0 48px;
+        &:last-child { margin: 0; }
 
         &-wrap {
             width: 100%;
@@ -137,6 +142,40 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .object-installment {
+        padding: 0;
+        
+        &__container { width: $mobileContainer; }
+        &__type { display: none; }
+        &__select {
+            width: 100%;
+            margin: 0 0 24px;
+        }
+    }
+    .installment-calculator {
+        width: 100%;
+        max-width: 580px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        &__item {
+            width: 280px;
+        }
+
+        &__result {
+            max-width: 580px;
+            flex-flow: row wrap;
+            &-item {
+                width: 280px;
+                margin: 0 0 16px;
+                &:last-child { margin: 0; }
+            }
         }
     }
 }

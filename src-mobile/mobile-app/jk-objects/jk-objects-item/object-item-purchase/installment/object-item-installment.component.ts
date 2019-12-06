@@ -19,11 +19,10 @@ export class ObjectItemInstallmentComponent implements OnInit {
 
     public isFullPay = false;
 
-    public typeInstallment: string = '';
-
     public freeInstallment: string = 'Бесплатная рассрочка';
     public payInstallment: string = 'Платная рассрочка';
     public fullPay: string = '100% оплата';
+    public typeInstallment: string = this.freeInstallment;
 
     public form: FormParams = {
         price: {

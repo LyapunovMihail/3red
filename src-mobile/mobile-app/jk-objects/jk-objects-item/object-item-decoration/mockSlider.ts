@@ -62,8 +62,7 @@ export const slider = [
                 mod: 'sink'
             },
         ]
-    },
-    {
+    }, {
         navTitle: 'Кухня',
         type: [
             'Модерн',
@@ -125,8 +124,7 @@ export const slider = [
                     mod: 'sink'
                 },
         ]
-    },
-    {
+    }, {
         navTitle: 'Санузел',
         type: [
             'Модерн',
@@ -137,6 +135,68 @@ export const slider = [
             '/assets/img/decoration/bathroom/san_classic.jpg',
             '/assets/img/decoration/bathroom/san_modern.jpg',
             '/assets/img/dynamic/gallery/april/IMG_20190411_082906.jpg'
+        ],
+        info: [
+            {
+                name: '',
+                mod: 'roof'
+            },
+            {
+                name: '',
+                mod: 'laminate'
+            },
+            {
+                name: '',
+                mod: 'tile'
+            },
+            {
+                name: '',
+                mod: 'plinth'
+            },
+            {
+                name: 'Двери el PORTA. Цвет Cappuccino Veralinga',
+                mod: 'door'
+            },
+            {
+                name: 'Стены - плитка',
+                mod: 'wall'
+            },
+            {
+                name: '',
+                mod: 'air'
+            },
+            {
+                name: 'Туалет',
+                mod: 'toilet'
+            },
+            {
+                name: '',
+                mod: 'socket'
+            },
+            {
+                name: 'Ванная',
+                mod: 'bathroom'
+            },
+            {
+                name: '',
+                mod: 'dry'
+            },
+            {
+                name: 'Раковина из золота',
+                mod: 'sink'
+            }
+        ]
+    }, {
+        navTitle: 'Трансляция с веб-камер',
+        type: [
+            'Модерн',
+            'Классик',
+            'Удивиться',
+        ],
+        img: [
+            '/assets/img/decoration/bathroom/san_modern.jpg',
+            '/assets/img/dynamic/gallery/april/IMG_20190411_082906.jpg',
+            '/assets/img/decoration/bathroom/san_classic.jpg',
         ],
         info: [
             {

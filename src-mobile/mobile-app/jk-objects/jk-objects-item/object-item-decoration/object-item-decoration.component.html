@@ -15,11 +15,15 @@
         </div>
 
         <nav class="object-decoration__nav">
-            <ul class="object-decoration__nav-list">
-                <li class="object-decoration__nav-item" *ngFor="let nav of mockSlider; let i = index"
-                    [ngClass]="{'object-decoration__nav-item_active': nav.navTitle === sliderContent.navTitle }"
-                    (click)="changeNav(i)">{{nav.navTitle}}</li>
-            </ul>
+            <div class="object-decoration__nav-wrap">
+                <div class="object-decoration__nav-wrap_for-scroll">
+                    <ul class="object-decoration__nav-list">
+                        <li class="object-decoration__nav-item" *ngFor="let nav of mockSlider; let i = index"
+                            [ngClass]="{'object-decoration__nav-item_active': nav.navTitle === sliderContent.navTitle }"
+                            (click)="changeNav(i)">{{nav.navTitle}}</li>
+                    </ul>
+                </div>
+            </div>
         </nav>
 
         <div class="object-decoration__slider">

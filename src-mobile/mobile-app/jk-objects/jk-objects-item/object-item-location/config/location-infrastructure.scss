@@ -3,6 +3,7 @@
     width: 100%;
     display: flex;
     margin: 0 0 24px;
+    @media (max-width: 760px) { display: none; }
 
     &-check {
         margin-right: 4px;

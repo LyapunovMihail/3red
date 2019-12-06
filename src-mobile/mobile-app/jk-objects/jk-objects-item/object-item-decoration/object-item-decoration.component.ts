@@ -29,11 +29,11 @@ export class ObjectItemDecorationComponent implements OnInit {
     constructor(
         public swipeSlider: SwipeSlides,
         private elRef: ElementRef
-    ) {  }
+    ) { }
 
     ngOnInit() {
         this.swipeInit();
-        this.swipeSlider.startPosition(1, this.elRef.nativeElement.querySelector('#slider'), 0, '%', this.mediaCurrentSlide);
+        this.swipeSlider.startPosition(1, this.elRef.nativeElement.querySelector('#slider'), 0, '%');
     }
 
     public nextBtn() {
@@ -55,6 +55,7 @@ export class ObjectItemDecorationComponent implements OnInit {
         let egLeft = this.elRef.nativeElement.querySelector('.gallery-slide__edge-left');
         let egRight = this.elRef.nativeElement.querySelector('.gallery-slide__edge-right');
 
-        this.swipeSlider.sliderInit( sliderWrap, slider, egLeft, egRight, sliderWrap.offsetWidth, 'px', this.mediaCurrentSlide );
+        this.swipeSlider.sliderInit( sliderWrap, slider, egLeft, egRight, sliderWrap.offsetWidth, 'px' );
+        this.mediaCurrentSlide = this.swipeSlider.counter;
     }
 }

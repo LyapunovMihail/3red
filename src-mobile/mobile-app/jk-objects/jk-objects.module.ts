@@ -24,6 +24,8 @@ import { ObjectItemProjectComponent } from './jk-objects-item/object-item-projec
 import { ObjectItemInstallmentComponent } from './jk-objects-item/object-item-purchase/installment/object-item-installment.component';
 import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-item-purchase/installment/object-item-installment.pipe';
 import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-item-purchase/installment/object-item-installment.service';
+import { ObjectItemPurchaseModalComponent } from './jk-objects-item/object-item-purchase/bank-modal/object-item-purchase-modal.component';
+import { ObjectItemInstallmentTypeComponent } from './jk-objects-item/object-item-purchase/installment/installment-type/object-item-installment-type.component';
 
 const JkObjectsComponents = [
   JkObjectsComponent,
@@ -43,7 +45,9 @@ const JkObjectsComponents = [
   ObjectItemMembersComponent,
   ObjectItemProjectComponent,
   ObjectItemInstallmentComponent,
-  ObjectPurchaseInstallmentNumberPipe
+  ObjectPurchaseInstallmentNumberPipe,
+  ObjectItemPurchaseModalComponent,
+  ObjectItemInstallmentTypeComponent
 ];
 
 @NgModule({

@@ -25,8 +25,10 @@
     font: 18px/23px $font-proba;
     color: $col-white;
     transition: background-color .2s linear;
-    &:hover { background-color: $col-red_hover; }
     &:disabled { color: rgba($color: $col-white, $alpha: 0.5); }
+    @media (min-width: 1020px) {
+        &:hover { background-color: $col-red_hover; }
+    }
 }
 .btn_var-1 {
     width: 200px;
@@ -41,10 +43,12 @@
     color: $col-black;
     border: solid 1px $col-red;
     transition: background-color .2s linear, border-color .2s linear, color .2s linear;
-    &:hover {
-        background-color: $col-red_hover;
-        border-color: $col-red_hover;
-        color: $col-white;
+    @media (min-width: 1020px) {
+        &:hover {
+            background-color: $col-red_hover;
+            border-color: $col-red_hover;
+            color: $col-white;
+        }
     }
     &:disabled { color: rgba($color: $col-black, $alpha: 0.5); }
 }
@@ -67,7 +71,9 @@
     transition: color .2s linear;
     background-color: rgba($color: #000000, $alpha: 0);
     background-color: transparent;
-    &:hover { color: rgba($color: $col-black, $alpha: 0.5); }
+    @media (min-width: 1020px) {
+        &:hover { color: rgba($color: $col-black, $alpha: 0.5); }
+    }
 }
 
 .btn-slider {
@@ -117,17 +123,21 @@
         span::before,
         span::after { background-color: $col-black; }
         
-        &:hover {
-            background-color: $col-red_hover;
-            span::before,
-            span::after { background-color: $col-white; }
+        @media (min-width: 1020px) {
+            &:hover {
+                background-color: $col-red_hover;
+                span::before,
+                span::after { background-color: $col-white; }
+            }
         }
     }
     &_black {
         background-color: rgba($color: $col-black, $alpha: 0.56);
         span::before,
         span::after { background-color: $col-white; }
-        &:hover { background-color: rgba($color: $col-black, $alpha: 0.7); }
+        @media (min-width: 1020px) {
+            &:hover { background-color: rgba($color: $col-black, $alpha: 0.7); }
+        }
     }
 }
 .btn-admin {
@@ -168,11 +178,13 @@
         }
         &::after { transform: rotate(-45deg); }
     }
-    &:hover {
-        background-color: $col-red_hover;
-        span {
-            &::before,
-            &::after { background-color: $col-white; }
+    @media (min-width: 1020px) {
+        &:hover {
+            background-color: $col-red_hover;
+            span {
+                &::before,
+                &::after { background-color: $col-white; }
+            }
         }
     }
 }
@@ -182,7 +194,9 @@
     border-radius: 50%;
     background: url(/assets/img3red/check_white.svg) center no-repeat $col-green;
     transition: background-color .2s linear;
-    &:hover { background-color: $col-red_hover; }
+    @media (min-width: 1020px) {
+        &:hover { background-color: $col-red_hover; }
+    }
 }
 
 
@@ -191,9 +205,11 @@
 .g-radiobox {
     display: flex;
     cursor: pointer;
-    &:hover {
-        div  { border-color: $col-red_hover; }
-        span { color: $col-red_hover; }
+    @media (min-width: 1020px) {
+        &:hover {
+            div  { border-color: $col-red_hover; }
+            span { color: $col-red_hover; }
+        }
     }
     input { display: none; }
     span {

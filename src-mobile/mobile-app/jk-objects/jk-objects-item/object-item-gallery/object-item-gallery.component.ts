@@ -42,7 +42,7 @@ export class ObjectItemGalleryComponent implements OnInit {
         this.navName = this.navList[0].name;
         this.getWidth();
         // this.swipeInit();
-        // this.swipeSlider.startPosition(1, this.elRef.nativeElement.querySelector('#slider'), 0, '%', 0);
+        // this.swipeSlider.startPosition(1, this.elRef.nativeElement.querySelector('#slider'), 0, '%');
     }
 
     public nextBtn() {
@@ -80,6 +80,6 @@ export class ObjectItemGalleryComponent implements OnInit {
         let egLeft = this.elRef.nativeElement.querySelector('.gallery-slide__edge-left');
         let egRight = this.elRef.nativeElement.querySelector('.gallery-slide__edge-right');
 
-        this.swipeSlider.sliderInit( sliderWrap, slider, egLeft, egRight, sliderWrap.offsetWidth, 'px', this.currentSlide );
+        this.swipeSlider.sliderInit( sliderWrap, slider, egLeft, egRight, sliderWrap.offsetWidth, 'px' );
     }
 }
