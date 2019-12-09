@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { banks } from './mockBank';
 
 @Component({
@@ -12,11 +12,15 @@ import { banks } from './mockBank';
 
 export class ObjectItemPurchaseComponent implements OnInit {
 
+    @Input()
+    public isAuthorizated = false;
+
     public mockBank = banks;
 
     public showType = 'credit';
 
-    constructor() { }
+    constructor(
+    ) { }
 
     ngOnInit() { }
 }

@@ -4,7 +4,7 @@ import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';
 import { ApartmentComponent } from './apartment/apartment.component';
 import { SearchComponent } from './search/search.component';
-import { GHMRangeNumberModule } from './search/search-form/ghm-range-number/ghm-range-number.module';
+import { GHMRangeNumberModule } from '../UI/ghm-range-number/ghm-range-number.module';
 import { FlatsComponent } from './flats.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -39,10 +39,10 @@ const FlatsComponents = [
         ...FlatsComponents
     ],
     imports: [
+        GHMRangeNumberModule,
         FormsRequestModule,
         ReactiveFormsModule,
         FormsModule,
-        GHMRangeNumberModule,
         CommonModule,
         RouterModule,
         RouterModule.forChild([

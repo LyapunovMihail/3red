@@ -183,8 +183,14 @@
     background: url(/assets/img3red/check_white.svg) center no-repeat $col-green;
     transition: background-color .2s linear;
     &:hover { background-color: $col-red_hover; }
+
 }
 
+.btn-disabled {
+    background-color: grey;
+
+    &:hover { background-color: grey; }
+}
 
 // Чекбокс + Радиобокс
 .g-checkbox,

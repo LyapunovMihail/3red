@@ -1,6 +1,6 @@
-<div class="object-item">
+<div class="object-item" #container>
 
-    <app-object-item-preview></app-object-item-preview>
+    <app-object-item-preview [isAuthorizated]="isAuthorizated"></app-object-item-preview>
     
     <app-object-item-filter *ngIf="!isAuthorizated"></app-object-item-filter>
     
@@ -8,25 +8,25 @@
 
     <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
 
-    <app-object-item-builder id="project"></app-object-item-builder>
+    <app-object-item-project [isAuthorizated]="isAuthorizated" id="project"></app-object-item-project>
 
-    <app-object-item-flat></app-object-item-flat>
+    <app-object-item-flat [isAuthorizated]="isAuthorizated" id="choose"></app-object-item-flat>
 
-    <app-object-item-gallery></app-object-item-gallery>
+    <app-object-item-gallery [isAuthorizated]="isAuthorizated" id="gallery"></app-object-item-gallery>
 
-    <app-object-item-decoration></app-object-item-decoration>
+    <app-object-item-decoration [isAuthorizated]="isAuthorizated" id="decoration"></app-object-item-decoration>
 
-    <app-object-item-location></app-object-item-location>
+    <app-object-item-location [isAuthorizated]="isAuthorizated" id="location"></app-object-item-location>
 
-    <app-object-item-purchase></app-object-item-purchase>
+    <app-object-item-purchase [isAuthorizated]="isAuthorizated" id="purchase"></app-object-item-purchase>
 
-    <app-object-item-news></app-object-item-news>
+    <app-object-item-news [isAuthorizated]="isAuthorizated" id="news"></app-object-item-news>
 
-    <app-object-item-documentation></app-object-item-documentation>
+    <app-object-item-documentation [isAuthorizated]="isAuthorizated" id="documentation"></app-object-item-documentation>
 
-    <app-object-item-members></app-object-item-members>
+    <app-object-item-members [isAuthorizated]="isAuthorizated"></app-object-item-members>
 
-    <app-object-item-project *ngIf="!isAuthorizated"></app-object-item-project>
+    <app-object-item-projects *ngIf="!isAuthorizated"></app-object-item-projects>
 
     <div class="utilities" *ngIf="isAuthorizated">
         <div class="utilities__item">

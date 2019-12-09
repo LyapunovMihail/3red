@@ -1,5 +1,5 @@
 import { WindowEventsService } from '../commons/window-events.observer.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -26,6 +26,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
+    @ViewChild('header')
+    public header: ElementRef;
+
     constructor(
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
@@ -41,8 +44,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
                     this.pageName = this.router.url.split('/')[1];
-                    if (this.pageName === 'about' || this.pageName === 'objects') {
-                        this.navAnchors = this.headerService.getNavAnchors(this.pageName);
+                    if (this.pageName === 'about' || (this.pageName === 'objects' && this.router.url.split('/')[3])) { // если страница о компании или кокретного объекта,
+                        this.navAnchors = this.headerService.getNavAnchors(this.pageName);                                      // устанавливаем массив якорей для панели навигации
                     } else {
                         this.navAnchors = [];
                     }
@@ -73,11 +76,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public fixedHeader() {
 
         let prevScrollTop = 0;
+        const headerHeight = this.header.nativeElement.clientHeight;
 
         this.windowEventsService.onScroll.subscribe(() => {
 
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const headerHeight = document.querySelector('.header').clientHeight;
 
             if (scrollTop === 0) {
                 this.isFixed = false;

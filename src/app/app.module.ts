@@ -11,12 +11,14 @@ import { environment } from 'environments/environment';
 import { ROUTES } from './app.routes';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
+import { EventsService } from './commons/events.service';
 import { AuthorizationObserverService } from './authorization/authorization.observer.service';
 import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
 import { PhoneObserverService } from './admin-contacts/phone.observer.service';
+import { WindowScrollLocker } from './commons/window-scroll-block';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -40,7 +42,7 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { ParkingModule } from './parking/parking.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
-import {JkObjectsModule} from "./jk-objects/jk-objects.module";
+import { JkObjectsModule } from './jk-objects/jk-objects.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -57,12 +59,14 @@ const APP_PROVIDERS = [
     ImgModalService,
     OverlayService,
     WindowEventsService,
+    EventsService,
     AuthorizationObserverService,
     FavoritesService,
     PlatformDetectService,
     FlatsDiscountService,
     SearchFlatsLinkHandlerService,
-    PhoneObserverService
+    PhoneObserverService,
+    WindowScrollLocker
 ];
 
 const APP_MODULES = [

@@ -1,18 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { mockInfo, mockCorpus } from './mock-info';
+import { Component, Input, OnInit } from '@angular/core';
+import { ObjectsItemPreviewAdminService } from './objects-item-preview-admin/objects-item-preview-admin.service';
+import { ActivatedRoute } from '@angular/router';
+import { IObjectPreviewSnippet, OBJECTS_PREVIEW_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/preview-api/objects-preview.interfaces';
 
 @Component({
     selector: 'app-object-item-preview',
     templateUrl: 'object-item-preview.component.html',
-    styleUrls: ['object-item-preview.component.scss']
+    styleUrls: ['object-item-preview.component.scss'],
+    providers: [ObjectsItemPreviewAdminService]
 })
 
 export class ObjectItemPreviewComponent implements OnInit {
 
-    public mockSnippet = mockInfo;
-    public mockDate = mockCorpus;
+    @Input()
+    public isAuthorizated = false;
 
-    constructor() { }
+    public closeModal = true;
+    public objectId: string;
+    public snippet: IObjectPreviewSnippet;
 
-    ngOnInit() { }
+    uploadsPath = `/${OBJECTS_PREVIEW_UPLOADS_PATH}`;
+
+    constructor(
+        private previewService: ObjectsItemPreviewAdminService,
+        private activatedRoute: ActivatedRoute
+    ) { }
+
+    ngOnInit() {
+        this.objectId = this.activatedRoute.snapshot.params.id;
+        this.previewService.getSnippetById(this.objectId).subscribe((data) => {
+            this.snippet = data;
+        }, (error) => {
+            console.error(error);
+        });
+    }
 }

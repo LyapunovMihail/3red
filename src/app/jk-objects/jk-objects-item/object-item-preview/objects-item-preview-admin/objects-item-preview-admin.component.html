@@ -1,0 +1,82 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
+
+    <h1 class="preview__title">Настройка контента «Превью объекта»</h1>
+
+    <form [formGroup]="form">
+        <div class="preview__info">
+            <h2 class="info-title">Основная информация</h2>
+            <div class="form" formGroupName="mainInfo">
+                <div class="form-item">
+                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="title">
+                    <label class="form-label info-suptitle">Заголовок</label>
+                </div>
+                <div class="form-item">
+                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="address">
+                    <label class="form-label info-suptitle">Адрес</label>
+                </div>
+                <div class="form-item">
+                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="webcamLink">
+                    <label class="form-label info-suptitle">Ссылка на трансляцию с веб-камер</label>
+                </div>
+
+                <label class="btn btn--preview">Загрузить фото
+                    <input style='display: none;' type="file" placeholder="Upload file" accept=".jpg" (change)="imageUpload($event)">
+                </label>
+                <div class="preview__wrap" *ngIf="loadedImage.length > 0">
+                    <button class="button__delete" (click)="delImg()"><img class="preiew__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                    <img class='bg-img' [src]="uploadsPath + loadedImage" alt="image" width="164" height="108">
+                </div>
+                <input hidden="true" type="text" formControlName="image">
+                <input hidden="true" type="text" formControlName="thumbnail">
+            </div>
+        </div>
+
+        <div class="snippet">
+            <h2 class="snippet__title">Снипеты сроков сдачи</h2>
+            <ng-container formArrayName="deadlines" *ngFor="let deadline of form.controls['deadlines']['controls']; let i = index">
+                <div class="snippet__info" formGroupName="{{i}}">
+                    <div class="snippet__wrapper">
+                        <h2 class="snippet__info-title">Снипет 1</h2>
+                        <button class="snippet__delete" (click)="popDeadlineSnippet(i)">Удалить</button>
+                    </div>
+                    <div class="form">
+                        <div class="form__wrap">
+                            <div class="form-item form-item--inline" >
+                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="corpusId">
+                                <label class="form-label info-suptitle">№ корпуса</label>
+                            </div>
+                            <div class="form-item form-item--inline">
+                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="deadline">
+                                <label class="form-label info-suptitle">Срок сдачи</label>
+                            </div>
+                        </div>
+
+                        <input class="snippet__checkbox" type="checkbox" name="snippet" id="snippet-{{i}}" formControlName="realized">
+                        <label class="snippet__label" for="snippet-{{i}}">Красный цвет сниппета</label>
+                    </div>
+                    <p class="snippet__text">Пример использования — корпуса сданы</p>
+                </div>
+            </ng-container>
+            <button class="btn snippet__btn" (click)="pushDeadlineSnippet()">Добавить снипет</button>
+        </div>
+
+        <div class="indicators">
+            <h1 class="indicators__title">Технико-экономические показатели</h1>
+            <p class="indicators__text">Не рекомендуется указывать более 5 ТЭПов для превью</p>
+            <div class="indicators__info">
+                <div class="form">
+                    <div class="form__wrap">
+                        <ng-container formArrayName="indicators" *ngFor="let indicator of indicators; let i = index">
+                            <div class="form-item form-item--inline" formGroupName="{{i}}">
+                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="{{indicator}}">
+                                <label class="form-label info-suptitle">{{indicator}}</label>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</app-admin-modal>

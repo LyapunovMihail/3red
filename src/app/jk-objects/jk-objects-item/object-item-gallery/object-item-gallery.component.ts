@@ -12,6 +12,9 @@ import { mockSlider, nav } from './mockSlide';
 
 export class ObjectItemGalleryComponent implements OnInit {
 
+    // @Input()
+    public isAuthorizated = false;
+
     public slideList = mockSlider;
     public navList = nav;
     public navName = '';

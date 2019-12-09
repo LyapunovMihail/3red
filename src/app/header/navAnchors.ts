@@ -18,19 +18,19 @@ export const NAVANCHORS = {
         },
         {
             name: 'Местоположение',
-            url: '#'
+            url: 'location'
         },
         {
             name: 'Условия покупки',
-            url: '#'
+            url: 'purchase'
         },
         {
             name: 'Новости',
-            url: '#'
+            url: 'news'
         },
         {
             name: 'Документация',
-            url: '#'
+            url: 'documentation'
         }
     ],
 

@@ -15,6 +15,7 @@ import { FileUploadsController } from './fileuploads-api/fileuploads.controller'
 import { SharesController } from './shares-api/shares.controller';
 import { TriggerController } from './trigger-api/trigger.controller';
 import { GalleryController } from './gallery-api/gallery.controller';
+import { objectControllers } from './jk-objects/object-controllers';
 
 @Module({
     imports: [],
@@ -32,7 +33,9 @@ import { GalleryController } from './gallery-api/gallery.controller';
         SharesController,
         TriggerController,
         GalleryController,
-        ContactsController
+        ContactsController,
+
+        ...objectControllers
     ],
     providers: [
         MongoConnectionService,
