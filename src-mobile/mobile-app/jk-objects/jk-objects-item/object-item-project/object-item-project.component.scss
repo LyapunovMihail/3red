@@ -117,3 +117,39 @@
         }
     }
 }
+
+@media (max-width: 760px) {
+    .object-project {
+        overflow: visible;
+
+        &__head-title {
+            font-size: 28px;
+            line-height: 34px;
+        }
+        &__slider-all {
+            width: 280px;
+            height: 48px;
+            border: 1px solid $col-red;
+            top: 275px;
+            background: url(/assets/img/arrow-next_black.svg) calc(100% - 74px) 49% no-repeat;
+            background-size: 16px;
+            left: calc(50% - 140px);
+            color: $col-black;
+        }
+    }
+    .slider-list {
+        &__wrap {
+            padding-left: 20px;
+        }
+        &__item:last-child {
+            padding-right: 20px;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .slider-list {
+        &__item { width: 206px; }
+        &__image { height: 154px; }
+    }
+}

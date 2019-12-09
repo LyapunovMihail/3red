@@ -236,6 +236,10 @@
                 }
             }
         }
+        &__head-title {
+            font-size: 28px;
+            line-height: 34px;
+        }
         &__slider {
             overflow: hidden;
             &-wrap_slides { margin: 0 0 40px; }

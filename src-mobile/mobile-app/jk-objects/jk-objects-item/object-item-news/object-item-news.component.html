@@ -4,9 +4,7 @@
     <div class="object-item__container object-news__container">
 
         <div class="object-news__head">
-            <input type="checkbox" name="switch" id="news" class="switch">
-            <label *ngIf="isAuthorizated" for="news" class="object-item__title">Новости</label>
-            <h2 *ngIf="!isAuthorizated">Новости</h2>
+            <h2 class="object-news__head-title">Новости</h2>
         </div>
 
         <div class="object-news__options" *ngIf="isAuthorizated">
@@ -56,20 +54,6 @@
     
                                 <div class="slider-list__type" *ngIf="snippet.type === 'shares'">Акция</div>
                             </a>
-    
-    
-                            <div class="slider-list__edit" *ngIf="isAuthorizated">
-    
-                                <button class="slider-list__edit-item" (click)="onSelectItem(snippet)"
-                                    [class.slider-list__edit-item_active]="snippet == activeTooltip"><span></span></button>
-                                
-                                <div class="slider-list__tooltip">
-                                    <div class="slider-list__tooltip-item">Редактировать</div>
-                                    <div class="slider-list__tooltip-item">Убрать с главной</div>
-                                    <div class="slider-list__tooltip-item">В черновик</div>
-                                    <div class="slider-list__tooltip-item">Удалить</div>
-                                </div>
-                            </div>
                         </div>
                     </ng-container>
                 </div>

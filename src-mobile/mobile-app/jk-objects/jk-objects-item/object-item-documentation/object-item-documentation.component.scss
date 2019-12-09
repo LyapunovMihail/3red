@@ -60,3 +60,31 @@
         }
     }
 }
+
+@media (max-width: 760px) {
+    .object-documentation__list-wrap_file {
+        flex-flow: column-reverse nowrap;
+    }
+    .object-documentation__list-file {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px;
+        line-height: 23px;
+    }
+    .object-documentation__list-date {
+        font-size: 12px;
+        line-height: 14px;
+        margin: 0 0 8px;
+    }
+
+    .object-documentation__btn-more {
+        padding-right: 23px;
+        background: url(/assets/img/jk-object/more-bank.svg) right center no-repeat;
+        font: 16px/22px $font-proba;
+        color: $col-red;
+    }
+    .object-documentation__head-title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+}

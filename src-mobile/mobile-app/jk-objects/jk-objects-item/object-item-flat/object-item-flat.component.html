@@ -3,13 +3,13 @@
 
     <div class="object-item__container object-flat__container">
         <div class="object-flat__wrap">
-            <h2 *ngIf="!isAuthorizated">Выберите дом</h2>
+            <h2 class="object-flat__head-title">Выберите дом</h2>
 
             <div class="object-flat__scheme">
-                <p class="object-flat__scheme-icon" (click)="openSchema = !openSchema">Схема</p>
+                <p class="object-flat__scheme-icon" (click)="openTooltipSchema()">Схема</p>
 
                 <div class="object-flat__scheme-tooltip" *ngIf="openSchema">
-                    <button class="object-flat__scheme-cls" (click)="openSchema = !openSchema"></button>
+                    <button class="object-flat__scheme-cls" (click)="openTooltipSchema()"></button>
 
                     <img src="/assets/img/jk-object/flat-preview-schema.svg" alt="schema">
                 </div>

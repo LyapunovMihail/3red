@@ -4,9 +4,7 @@
     <div class="object-item__container object-purchase__container">
 
         <div class="object-purchase__head">
-            <input type="checkbox" name="switch" id="location" class="switch">
-            <label *ngIf="isAuthorizated" for="location" class="object-item__title">Условия покупки</label>
-            <h2 *ngIf="!isAuthorizated">Условия покупки</h2>
+            <h2 class="object-purchase__head-title">Условия покупки</h2>
         </div>
 
         <div class="object-purchase__options" *ngIf="isAuthorizated">

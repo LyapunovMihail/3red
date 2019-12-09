@@ -4,9 +4,7 @@
     <div class="object-item__container object-members__container">
 
         <div class="object-members__head">
-            <input type="checkbox" name="switch" id="documentation" class="switch">
-            <label *ngIf="isAuthorizated" for="documentation" class="object-item__title">Участники проекта</label>
-            <h2 *ngIf="!isAuthorizated">Участники проекта</h2>
+            <h2 class="object-members__head-title">Участники проекта</h2>
         </div>
 
         <div class="object-members__options" *ngIf="isAuthorizated">

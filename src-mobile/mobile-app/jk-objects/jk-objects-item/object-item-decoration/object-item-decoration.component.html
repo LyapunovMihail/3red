@@ -4,9 +4,7 @@
     <div class="object-item__container object-decoration__container">
 
         <div class="object-decoration__head">
-            <input type="checkbox" name="switch" id="gallery" class="switch">
-            <label *ngIf="isAuthorizated" for="gallery" class="object-item__title">Отделка квартир</label>
-            <h2 *ngIf="!isAuthorizated">Отделка квартир</h2>
+            <h2 class="object-decoration__head-title">Отделка квартир</h2>
         </div>
 
         <div class="object-decoration__options" *ngIf="isAuthorizated">

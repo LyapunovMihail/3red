@@ -41,3 +41,12 @@
         }
     }
 }
+@media (max-width: 760px) {
+    .object-members__wrap_members {
+        &:nth-last-child(2) { margin: 0 0 24px; }
+    }
+    .object-members__head-title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+}

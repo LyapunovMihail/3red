@@ -65,7 +65,14 @@
 }
 
 @media (max-width: 760px) {
-    .object-builder { margin: 0 0 64px; }
+    .object-builder {
+        margin: 0 0 64px;
+
+        &__head-title {
+            font-size: 28px;
+            line-height: 34px;
+        }
+    }
     .indicators__grid-container { display: block; }
     .indicators__grid-item { margin: 0 0 24px; }
     

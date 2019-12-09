@@ -11,8 +11,11 @@ body {
     position: relative;
     background-color: #F5F5F5;
     margin: 0;
-    padding: 86px 0 51px;
+    padding: 86px 0 93px;
     overflow-x: hidden;
+    @media (max-width: 564px) {
+        padding-bottom: 104px;
+    }
 }
 
 a {

@@ -4,9 +4,7 @@
     <div class="object-item__container object-documentation__container">
 
         <div class="object-documentation__head">
-            <input type="checkbox" name="switch" id="documentation" class="switch">
-            <label *ngIf="isAuthorizated" for="documentation" class="object-item__title">Документация</label>
-            <h2 *ngIf="!isAuthorizated">Документация</h2>
+            <h2 class="object-documentation__head-title">Документация</h2>
         </div>
 
         <div class="object-documentation__options" *ngIf="isAuthorizated">
@@ -25,5 +23,7 @@
                 </div>
             </li>
         </ul>
+
+        <button class="object-documentation__btn-more btn-empty">Все документы</button>
     </div>
 </section>
