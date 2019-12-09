@@ -16,16 +16,15 @@
 
         <nav class="object-gallery__nav">
             <ul class="object-gallery__nav-list">
-                <li class="object-gallery__nav-item object-gallery__nav-item_active">Благоустройство</li>
-                <li class="object-gallery__nav-item">Архитектура</li>
-                <li class="object-gallery__nav-item">Места поблизости</li>
+                <li class="object-gallery__nav-item " [class.object-gallery__nav-item_active]="navName === navItem.name"
+                    (click)="navName = navItem.name" *ngFor="let navItem of navList">{{navItem.name}}</li>
             </ul>
         </nav>
 
         <div class="object-gallery__slider">
 
-            <button (click)="prevBtn(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
-            <button (click)="nextBtn(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
+            <button (click)="prevBtn()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
+            <button (click)="nextBtn()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
 
             <div class="object-gallery__slider-dots">
                 <span *ngFor="let dots of slideList; let i = index"

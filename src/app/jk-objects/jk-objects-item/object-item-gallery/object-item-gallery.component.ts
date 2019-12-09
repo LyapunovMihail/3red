@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { mockSlider } from './mockSlide';
+import { Component, OnInit, Input } from '@angular/core';
+import { mockSlider, nav } from './mockSlide';
 
 @Component({
     selector: 'app-object-item-gallery',
@@ -16,6 +16,8 @@ export class ObjectItemGalleryComponent implements OnInit {
     public isAuthorizated = false;
 
     public slideList = mockSlider;
+    public navList = nav;
+    public navName = '';
 
     public currentSlide: number = 0;
 
@@ -27,14 +29,19 @@ export class ObjectItemGalleryComponent implements OnInit {
 
     ngOnInit() {
         this.slideShow();
+        this.navName = this.navList[0].name;
     }
 
     public nextBtn() {
         this.currentSlide = (this.currentSlide < this.slideList.length - 1 ) ? this.currentSlide + 1 : 0;
+        this.clearInt();
+        this.slideShow();
     }
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.slideList.length - 1 ;
+        this.clearInt();
+        this.slideShow();
     }
 
     public slideShow() {
@@ -47,6 +54,6 @@ export class ObjectItemGalleryComponent implements OnInit {
 
     public clearInt() {
         clearInterval(this.interval);
-        this.showTimeline = false;
+        // this.showTimeline = false;
     }
 }

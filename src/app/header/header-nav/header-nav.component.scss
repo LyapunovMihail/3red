@@ -2,8 +2,7 @@
 .project__nav {
     position: absolute;
     top: 77px;
-    padding: 0 32px 4px;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     margin: auto;
     display: flex;
@@ -12,6 +11,14 @@
     background: transparent;
     box-sizing: border-box;
     // margin-bottom: 1px;
+
+    &-container {
+        width: 100%;
+        max-width: calc(1280px - 64px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     &-fixed {
         position: fixed;
@@ -61,7 +68,8 @@
 }
 
 .photo__btn {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     color: #000;
     &::after {
         content: url(/assets/img/jk-object/photo_rep_icon.svg);

@@ -1,0 +1,96 @@
+
+<section class="object-purchase">
+
+    <div class="object-item__container object-purchase__container">
+
+        <div class="object-purchase__head">
+            <h2 class="object-purchase__head-title">Условия покупки</h2>
+        </div>
+
+        <div class="object-purchase__options" *ngIf="isAuthorizated">
+            <button class="btn__admin-setting">Настройки</button>
+        </div>
+        
+        <nav class="object-purchase__nav">
+            <ul class="object-purchase__nav-list" *ngIf="!isAuthorizated">
+                <li class="object-purchase__nav-item" (click)="showType = 'credit'"
+                    [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
+                <li class="object-purchase__nav-item" (click)="showType = 'installment'"
+                    [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
+            </ul>
+        </nav>
+
+        <div class="object-purchase__list" *ngIf="showType === 'credit'">
+    
+            <div class="object-purchase__list-container">
+    
+                <div class="object-purchase__list-head">
+                    <p class="object-purchase__list-text object-purchase__list-text_head">Банк</p>
+                    <p class="object-purchase__list-text object-purchase__list-text_head">Ставка от</p>
+                    <p class="object-purchase__list-text object-purchase__list-text_head">Срок</p>
+                    <p class="object-purchase__list-text object-purchase__list-text_head">Мин. взнос</p>
+                </div>
+                <div class="object-purchase__list-item" *ngFor="let bank of mockBank | slice:0:6">
+                    <div class="object-purchase__list-text object-purchase__list-image">
+                        <img src="{{bank.image}}" alt="bank-logo">
+                    </div>
+                    <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
+                    <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-rate">{{bank.rate}}</p>
+                    <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-date">до {{bank.date}} лет</p>
+                    <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-payment">от {{bank.payment}}%</p>
+                </div>
+            </div>
+
+            <button class="object-purchase__list-btn btn-empty">Показать все банки</button>
+        </div>
+    </div>
+    
+    <app-object-item-installment 
+        *ngIf="showType === 'installment'">
+    </app-object-item-installment>
+</section>
+
+<section class="object-purchase object-purchase_media">
+    
+    <div class="object-item__container object-purchase__container">
+
+        <h2 class="object-purchase__title">Условия покупки</h2>
+        <nav class="object-purchase__nav">
+            <ul class="object-purchase__nav-list" *ngIf="!isAuthorizated">
+                <li class="object-purchase__nav-item" (click)="showType = 'credit'"
+                    [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
+                <li class="object-purchase__nav-item" (click)="showType = 'installment'"
+                    [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
+            </ul>
+        </nav>
+
+        <ng-container *ngIf="showType === 'credit'">
+            
+            <div class="object-purchase__info">
+                <div class="object-purchase__info-item">
+                    <p class="object-purchase__info-name">Ставка от</p>
+                    <p class="object-purchase__info-val">9,2%</p>
+                </div>
+                <div class="object-purchase__info-item">
+                    <p class="object-purchase__info-name">Срок</p>
+                    <p class="object-purchase__info-val">До 30 лет</p>
+                </div>
+                <div class="object-purchase__info-item">
+                    <p class="object-purchase__info-name">Минимальный взнос</p>
+                    <p class="object-purchase__info-val">от 10%</p>
+                </div>
+            </div>
+    
+            <button class="object-purchase__bank"
+                (click)="OpenBankList = !OpenBankList">Предложения банков</button>
+        </ng-container>
+    </div>
+    <app-object-item-installment 
+        *ngIf="showType === 'installment'">
+    </app-object-item-installment>
+</section>
+
+<app-object-item-purchase-modal *ngIf="OpenBankList"
+    [bankList]="mockBank"
+    (OpenBankList)="close($event)">
+</app-object-item-purchase-modal>

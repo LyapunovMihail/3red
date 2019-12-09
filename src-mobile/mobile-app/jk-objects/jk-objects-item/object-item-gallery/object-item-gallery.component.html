@@ -1,0 +1,54 @@
+
+<section class="object-gallery">
+
+    <div class="object-item__container object-gallery__container">
+
+        <div class="object-gallery__head">
+            <h2 class="object-gallery__head-title">Галерея</h2>
+        </div>
+
+        <nav class="object-gallery__nav">
+            <div class="object-gallery__nav-wrap">
+                <div class="object-gallery__nav-wrap_for-scroll">
+                    <ul class="object-gallery__nav-list">
+                        <li class="object-gallery__nav-item " [class.object-gallery__nav-item_active]="navName === navItem.name"
+                            (click)="navName = navItem.name" *ngFor="let navItem of navList">{{navItem.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="object-gallery__slider">
+
+            <button (click)="prevBtn()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
+            <button (click)="nextBtn()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
+
+            <div class="object-gallery__slider-dots">
+                <span *ngFor="let dots of slideList; let i = index"
+                    [ngClass]="{'current-dots': currentSlide === i && scrollLeft === 0 ||
+                                                scrollLeft >= widthElem * i && scrollLeft < widthElem * (i + 1)}"></span>
+            </div>
+            <div class="object-gallery__slider-wrap" id="sliderWrap" (scroll)="scroll($event)">
+                <div class="gallery-slide__edge gallery-slide__edge-left" [style.width.px]="leftEdge"></div>
+                <div class="gallery-slide__edge gallery-slide__edge-right" [style.width.px]="rightEdge"></div>
+
+                <div id="slider" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 100 ) ) + '%)') }" class="object-gallery__slider-list gallery-slide">
+                    <div class="gallery-slide__item" *ngFor="let slide of slideList; let i = index"
+                        [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
+                        
+                        <div class="gallery-slide__image">
+                            <img src="{{slide.img}}" alt="slide">
+                        </div>
+                        <!-- <div class="gallery-slide__timeline" *ngIf="showTimeline && !isAuthorizated"></div> -->
+                        
+                        <div class="gallery-slide__content">
+                            <h3 class="gallery-slide__content-title">{{slide.title}}</h3>
+                            <div class="gallery-slide__content-descr">{{slide.descr}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

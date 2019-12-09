@@ -1,0 +1,103 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.object-item {
+    width: 100%;
+
+    &__container {
+        width: 100%;
+        max-width: $tabletContainer; // 704px
+        @media (max-width: 760px) {
+            max-width: $mobileContainer; // calc(100% - 40px)
+        }
+    }
+}
+
+.switch {
+    display: none;
+
+    &:checked + .object-item__title {
+        &::before { left: 13px; }
+        &::after { background: #ee4237; }
+    }
+}
+
+.utilities {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #efefef;
+    height: 32px;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    padding:0 30px;
+    box-sizing: border-box;
+    
+    &__nav {
+        width: 331px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__link,
+    &__path {
+        font: 14px/18px $font-proba;
+        color: $col-black;
+        transition: color .2s linear;
+        &:hover { color: rgba(0, 0, 0, 0.5); }
+    }
+    &__path {
+        margin-right: 24px;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            left: calc(100% + 9px);
+            background: url(/assets/img/jk-object/down-arrow.svg) center no-repeat;
+            width: 8px;
+            height: 8px;
+            top: calc(50% - 4px)
+        }
+        &:last-child {
+            &::after { display: none; }
+            margin-right: 0;
+            color: $col-black-5;
+            pointer-events: none;
+        }
+    }
+}
+
+.object-item__title {
+    display: block;
+    font: 36px/43px $font-proba;
+    color: $col-black;
+    position: relative;
+    padding-left: 40px;
+    transform: translateX(-40px);
+    &::after {
+        content: '';
+        width: 32px;
+        height: 20px;
+        background: #787878 ;
+        position: absolute;
+        border-radius: 20px;
+        top: 7px;
+        left: 0;
+        z-index: 1;
+        
+    }
+    &::before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        background: #fff ;
+        position: absolute;
+        border-radius: 50%;
+        top: 9px;
+        left: 3px;
+        z-index: 2;
+        cursor: pointer;
+        transition: .3s;
+    }
+}

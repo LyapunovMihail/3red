@@ -61,7 +61,13 @@
             color: $col-red;
         }
 
-        &-container {width: 916px; }
+        &-container {
+            width: 916px;
+            height: (98px * 5) + 39px;
+            overflow: hidden;
+            transition: height .4s ease;
+            &_more { height: (98px * 10) + 39px; }
+        }
         &-head { display: flex; }
         &-text {
             font: 18px/23px $font-proba;

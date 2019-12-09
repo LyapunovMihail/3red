@@ -1,0 +1,45 @@
+<div class="object-item">
+
+    <app-object-item-preview></app-object-item-preview>
+    
+    <app-object-item-trigger *ngIf="!isAuthorizated"></app-object-item-trigger>
+
+    <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
+
+    <app-object-item-builder id="project"></app-object-item-builder>
+
+    <app-object-item-flat></app-object-item-flat>
+
+    <app-object-item-gallery></app-object-item-gallery>
+
+    <app-object-item-decoration></app-object-item-decoration>
+
+    <app-object-item-location></app-object-item-location>
+
+    <app-object-item-purchase></app-object-item-purchase>
+
+    <app-object-item-news></app-object-item-news>
+
+    <app-object-item-documentation></app-object-item-documentation>
+
+    <app-object-item-members></app-object-item-members>
+
+    <app-object-item-project *ngIf="!isAuthorizated"></app-object-item-project>
+
+    <div class="utilities" *ngIf="isAuthorizated">
+        <div class="utilities__item">
+            <a href="#" class="utilities__path">Админ</a> 
+            <a href="#" class="utilities__path">Объкты</a> 
+            <a href="#" class="utilities__path">Сердце Ярославля</a> 
+        </div>
+
+        <div class="utilities__item">
+            <ul class="utilities__nav">
+                <li><a href="#" class="utilities__link">Предпросмотр</a></li>
+                <li><a href="#" class="utilities__link">Опубликовать</a></li>
+                <li><a href="#" class="utilities__link">Показать на главной</a></li>
+            </ul>
+        </div>
+    </div>
+    
+</div>

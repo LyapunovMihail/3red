@@ -1,0 +1,41 @@
+<div class="installment__calculator-select">
+    <div class="installment__calculator-wrap" (click)="acceptChange()">
+        <input type="text"
+               placeholder="Выберите тип рассрочки"
+               value="{{ changeType }}">
+    </div>
+
+    <div class="installment__calculator-tooltip" *ngIf="showTypeInstallment">
+        <div class="installment__calculator-tooltip_cls-area" (click)="acceptChange()"></div>
+        <p [class.installment__calculator-tooltip_active]="changeType === typeOne"
+           (click)="changeType = typeOne; acceptChange()">
+            Бесплатная рассрочка
+        </p>
+        <p [class.installment__calculator-tooltip_active]="changeType === typeTwo"
+           (click)="changeType = typeTwo; acceptChange()">
+            Платная рассрочка
+        </p>
+        <p [class.installment__calculator-tooltip_active]="changeType === typeThree"
+           (click)="changeType = typeThree; acceptChange()">
+            100% оплата
+        </p>
+    </div>
+</div>
+
+<p class="installment__calculator-hint " *ngIf="changeType === typeOne">
+    <span class="span-block span-black">Бесплатная рассрочка сроком <span class="g-text_nowrap">до 6 месяцев</span></span>
+    Первоначальный взнос — не менее 50% от прайсовой цены.
+    Погашение задолжности по рассрочке осуществляется
+    <span class="span-black">равными</span> ежемесячными платежами.
+</p>
+<p class="installment__calculator-hint " *ngIf="changeType === typeTwo">
+    <span class="span-block span-black">Платная рассрочка сроком от 7 до 24 месяцев</span>
+    Первоначальный взнос — не менее 50% от прайсовой цены.
+    Погашение задолжности по рассрочке осуществляется ежемесячными
+    <span class="span-black">аннуительными</span> платежами
+</p>
+<p class="installment__calculator-hint " *ngIf="changeType === typeThree">
+    <span class="span-block span-black">100% оплата</span>
+    При 100% оплате предоставляется скидка в размере 3%
+    от стоимости квартиры, указанной в прайс-листе
+</p>

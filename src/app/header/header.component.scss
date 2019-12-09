@@ -1,13 +1,23 @@
+@import '../../styles/modules/mixins/mixin';
+
+
 .header {
     position: absolute;
     top: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 24px 32px;
     height: 77px;
     background: transparent;
     box-sizing: border-box;
+
+    &__container {
+        width: 100%;
+        max-width: calc(1280px - 64px);
+        display: flex;
+        justify-content: space-between;
+    }
 
     &-fixed {
         position: fixed !important;
@@ -34,60 +44,60 @@
     }
 }
 
-.nav__bar {
+.nav {
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    li {
-        padding-right: 24px;
-
-
+    
+    &__bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            .nav__link { color: $col-black-5; }
+            .active { color: rgba($color: $col-red, $alpha: .5); }
+        }
+    
+        li { padding-right: 24px; }
+        li:last-child { padding-right: 0; }
     }
-    li:last-child {
-        padding-right: 0;
-    }
-}
-
-.nav__link {
-    font-size: 24px;
-    color: #000;
-
-    &:hover {
-        color: #ee4237;
-
-    }
-
-    &-heart {
-        position: relative;
+    
+    &__link {
         font-size: 24px;
         color: #000;
-
-        sup {
-            font-size: 14px;
-            position: absolute;
-            top: -8px;
-            right: -14px;
-        }
-
-        &:before {
-            content: url(/assets/img/jk-object/header_hearthover.svg);
-            font-size: 14px;
-            position: absolute;
-            top: 1px;
-            right: 0;
-            display: none;
-
-        }
-
-        &:hover:before {
-            display: block;
+        transition: color .2s linear, opacity .2s linear;
+        &:hover { color: $col-red_hover !important; }
+    
+        &-heart {
+            position: relative;
+            font-size: 24px;
+            color: #000;
+    
+            sup {
+                font-size: 14px;
+                position: absolute;
+                top: -8px;
+                right: -14px;
+            }
+    
+            &:before {
+                content: url(/assets/img/jk-object/header_hearthover.svg);
+                font-size: 14px;
+                position: absolute;
+                top: 1px;
+                right: 0;
+                display: none;
+            }
+    
+            &:hover:before {
+                display: block;
+            }
         }
     }
 }
 
+
 .active {
-    color: #ee4237 !important;
+    color: $col-red ;
+    &:hover { color: $col-red; }
 }
 
 .hover {

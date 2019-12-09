@@ -24,7 +24,8 @@
 
         <div class="object-purchase__list" *ngIf="showType === 'credit'">
     
-            <div class="object-purchase__list-container">
+            <div class="object-purchase__list-container"
+                [ngClass]="{'object-purchase__list-container_more': moreBanks }">
     
                 <div class="object-purchase__list-head">
                     <p class="object-purchase__list-text object-purchase__list-text_head">Банк</p>
@@ -43,7 +44,7 @@
                 </div>
             </div>
 
-            <button class="object-purchase__list-btn btn-empty">Показать все банки</button>
+            <button class="object-purchase__list-btn btn-empty" (click)="moreBanks = !moreBanks">Показать все банки</button>
         </div>
         
         <app-object-item-installment 
