@@ -2,23 +2,26 @@
         [ngClass]="{
             'header-fixed' : isFixed,
             'header-fixed--hide' : isHidden}">
+    
+    <div class="header__container">
+        <nav class="nav">
+            <a class="header__logo" routerLink="/">
+                <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
+            </a>
+            <ul class="nav__bar">
+                <li
+                    *ngFor="let link of links; let i = index">
+                    <a *ngIf="link.name !== 'Избранное'"
+                       class="nav__link"
+                       [ngClass]="{ 'active' : checkLink(link.url) }"
+                        [routerLink]="link.url">{{link.name}}</a>
+                    <a *ngIf="link.name === 'Избранное'" class="nav__link-heart" [routerLink]="link.url"><img src="/assets/img/jk-object/header_heart.svg" alt="heart"><sup>12</sup></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header__phone">+7 (499) 211 22 33</div>
+    </div>
 
-    <nav class="nav">
-        <a class="header__logo" routerLink="/">
-            <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
-        </a>
-        <ul class="nav__bar">
-            <li
-                *ngFor="let link of links; let i = index">
-                <a *ngIf="link.name !== 'Избранное'"
-                   class="nav__link"
-                   [ngClass]="{ 'active' : checkLink(link.url) }"
-                    [routerLink]="link.url">{{link.name}}</a>
-                <a *ngIf="link.name === 'Избранное'" class="nav__link-heart" [routerLink]="link.url"><img src="/assets/img/jk-object/header_heart.svg" alt="heart"><sup>12</sup></a>
-            </li>
-        </ul>
-    </nav>
-    <div class="header__phone">+7 (499) 211 22 33</div>
 </header>
 
 <app-header-nav *ngIf="navAnchors.length"

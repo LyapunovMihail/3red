@@ -6,11 +6,18 @@
     top: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 24px 32px;
     height: 77px;
     background: transparent;
     box-sizing: border-box;
+
+    &__container {
+        width: 100%;
+        max-width: calc(1280px - 64px);
+        display: flex;
+        justify-content: space-between;
+    }
 
     &-fixed {
         position: fixed !important;
