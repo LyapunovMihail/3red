@@ -6,7 +6,7 @@
     justify-content: center;
     margin: 0 0 96px;
 
-    &__head { margin: 0 0 16px; }
+    &__head { margin: 0 0 40px; }
 
     &__options {
         margin: 0 0 16px;
@@ -27,10 +27,10 @@
 
         &-wrap {
             width: calc(100% - (446px + 24px));
-            display: flex;
 
             &_file {
                 width: 100%;
+                display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
                 margin: 0 0 12px;
