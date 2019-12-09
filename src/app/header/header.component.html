@@ -4,19 +4,15 @@
             'header-fixed--hide' : isHidden}">
 
     <nav class="nav">
+        <a class="header__logo" routerLink="/">
+            <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
+        </a>
         <ul class="nav__bar">
-            <a class="header__logo" routerLink="/">
-                <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
-            </a>
             <li
                 *ngFor="let link of links; let i = index">
                 <a *ngIf="link.name !== 'Избранное'"
                    class="nav__link"
-                   [ngClass]="{
-                        'active' : checkLink(link.url),
-                        'hover' : hoveredLink !== -1 && hoveredLink !== i}"
-                    (mouseenter)="hoveredLink = i"
-                    (mouseout)="hoveredLink = -1"
+                   [ngClass]="{ 'active' : checkLink(link.url) }"
                     [routerLink]="link.url">{{link.name}}</a>
                 <a *ngIf="link.name === 'Избранное'" class="nav__link-heart" [routerLink]="link.url"><img src="/assets/img/jk-object/header_heart.svg" alt="heart"><sup>12</sup></a>
             </li>

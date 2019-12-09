@@ -88,16 +88,19 @@
     width: 100%;
     display: flex;
     position: relative;
+    transition: transform .6s ease;
 
     &__item {
         min-width: 100%;
-        opacity: 0;
-        transition: opacity .4s linear;
 
         &_current {
             opacity: 1;
             .gallery-slide__timeline::before {
                 animation: slideTimeline 5s linear;
+            }
+            .gallery-slide__content {
+                opacity: 1;
+                transition: opacity .2s ease .3s;
             }
         }
     }
@@ -131,6 +134,8 @@
         display: flex;
         justify-content: space-between;
         margin: 16px 0 0;
+        transition: opacity .2s ease;
+        opacity: 0;
 
         &-title { max-width: 352px;}
         &-descr {

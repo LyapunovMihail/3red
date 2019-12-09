@@ -48,9 +48,10 @@
     display: grid;
     grid-template-columns: auto auto;
     row-gap: 24px;
-    column-gap: 30px;
+    column-gap: 24px;
     justify-content: flex-start;
 }
+.indicators__grid-item { width: 258px; }
 .project-indicators__key {
     font: 16px/19px $font-proba;
     color: $col-black-5;
