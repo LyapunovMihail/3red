@@ -27,7 +27,7 @@ export class AboutDocumentationComponent implements OnInit {
     public progressLoaded: boolean = false;
     public uploadsPath: string = FILEUPLOADS_UPLOADS_PATH;
     public description: string;
-
+    public close = true;
     constructor(
         private authorization: AuthorizationObserverService,
         private docsService: AboutDocumentationService

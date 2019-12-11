@@ -40,11 +40,6 @@
         border-radius: 4px;
         background-color: rgba(171, 171, 34, 0.06);
 
-        &-title {
-            font: 500 20px/24px $font-mus;
-            @include font-smoothing;
-            margin: 0 0 15px;
-        }
         &-date {
             font: 500 16px/23px $font-mus;
             @include font-smoothing;

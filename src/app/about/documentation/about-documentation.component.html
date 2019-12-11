@@ -1,4 +1,4 @@
-<section class="g-modal-bg documentation">
+<section class="g-modal-bg documentation" *ngIf="!close">
 
     <div class="documentation__container">
         
@@ -25,8 +25,8 @@
 
                     <div class="documentation__object-wrap documentation__object-wrap_btn-head">
                         <button class="documentation__object-btn documentation__object-btn_controls btn-empty"
-                            *ngIf="isAuthorizated"
-                            (click)="deleteObject(object._id)">Удалить</button>
+                            (click)="deleteObject(object._id)">Удалить
+                        </button>
                         <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="i > 0">Вверх</button>
                         <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="!last">Вниз</button>
                     </div>
@@ -35,34 +35,24 @@
                 <div class="documentation__object-wrap documentation__object-wrap_title">
 
                     <ghm-textarea class="documentation__object-input"
-                        *ngIf="isAuthorizated"
                         [value]="object.title"
                         [placeholder]="'Заголовок'"
                         (change)="updateObjectTitle(object._id, $event.target.value)"></ghm-textarea>
 
-                    <label class="btn-admin documentation__object-btn_load-file"
-                        *ngIf="isAuthorizated">
+                    <label class="btn-admin documentation__object-btn_load-file">
                         <input style='display: none;' type="file" (change)="fileUpload(object._id, $event)" placeholder="Upload file" accept=".pdf" multiple>
                         Загрузить документ
                     </label>
                 </div>
 
-                <div class="documentation__object-header">
-                    <h2 class="documentation__object-title"
-                        *ngIf="!isAuthorizated">{{object.title}}</h2>
-                </div>
-
                 <ul class="documentation__object-content">
                     <li class="documentation__object-file upload-file"
                         *ngFor="let file of object.uploads">
-                        <button class="upload-file__delete-btn"
-                            *ngIf="isAuthorizated" (click)="deleteFile(object._id, file)">
+                        <button class="upload-file__delete-btn" (click)="deleteFile(object._id, file)">
                             <span></span>
                         </button>
-                        <a class="upload-file__file-name"
-                           [ngClass]="{'upload-file__file-name_admin': isAuthorizated}"
+                        <a class="upload-file__file-name upload-file__file-name_admin"
                            target="_blank"
-
                            [href]="'/' + uploadsPath + file.name"
                            [attr.download]="file.originName">
                             {{file.originalName}}
@@ -74,7 +64,6 @@
         </ul>
 
         <button class="documentation__btn documentation__btn_add-block"
-            *ngIf="isAuthorizated"
             (click)="createObject()">Создать новый блок
         </button>
 
