@@ -29,6 +29,9 @@ import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-it
 import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-item-purchase/installment/object-item-installment.service';
 import { ObjectsItemPreviewAdminComponent } from './jk-objects-item/object-item-preview/objects-item-preview-admin/objects-item-preview-admin.component';
 import { ObjectsItemProjectAdminComponent } from './jk-objects-item/object-item-project/objects-item-project-admin/objects-item-project-admin.component';
+import { ObjectsItemGalleryTabsAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-tabs-admin/objects-item-gallery-tabs-admin.component';
+import { ObjectsItemGalleryAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-content-admin/objects-item-gallery-admin.component';
+
 
 
 const jkObjectsComponents = [
@@ -52,7 +55,9 @@ const jkObjectsComponents = [
     ObjectItemInstallmentComponent,
     ObjectPurchaseInstallmentNumberPipe,
     ObjectsItemPreviewAdminComponent,
-    ObjectsItemProjectAdminComponent
+    ObjectsItemProjectAdminComponent,
+    ObjectsItemGalleryTabsAdminComponent,
+    ObjectsItemGalleryAdminComponent
 
 ];
 
