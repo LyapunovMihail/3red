@@ -24,6 +24,15 @@ export class ObjectDynamicComponent implements OnInit {
     public isAuthorizated: boolean = false;
     public showModalAdmin: boolean = false;
 
+    public showSettingsAdmin = false;
+    public showContentAdmin = false;
+    closeSetting(increased: any) {
+        this.showSettingsAdmin = increased;
+    }
+    closeContent(increased: any) {
+        this.showContentAdmin = increased;
+    }
+
     constructor(
         private router: Router,
         private authorization: AuthorizationObserverService,

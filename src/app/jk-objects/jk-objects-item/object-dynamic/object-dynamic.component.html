@@ -8,7 +8,7 @@
     <div class="object-dynamic__container">
 
         <h2 class="object-dynamic__title">Фотоотчет ЖК Новокрасково</h2>
-        <button *ngIf="isAuthorizated" class="btn__admin-setting">Настройки</button>
+        <button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="showSettingsAdmin = true">Настройки</button>
 
         <nav class="object-dynamic__nav">
             <ul class="object-dynamic__nav-list">
@@ -32,6 +32,10 @@
         <div class="object-dynamic__content">
 
             <div class="object-dynamic__content-gallery">
+
+                <button *ngIf="isAuthorizated" class="btn__admin-content btn_var-2"
+                    (click)="showContentAdmin = true">Контент</button>
+
                 <!-- Раздел с изображениями динамики -->
                 <app-object-dynamic-gallery
                     [isAuthorizated]="isAuthorizated">
@@ -56,3 +60,13 @@
         </div>
     </div>
 </section>
+
+<app-dynamic-admin-settings 
+    *ngIf="isAuthorizated && showSettingsAdmin"
+    (showSettingsAdmin)="closeSetting($event)">
+</app-dynamic-admin-settings>
+
+<app-dynamic-admin-content
+    *ngIf="isAuthorizated && showContentAdmin"
+    (showContentAdmin)="closeContent($event)">
+</app-dynamic-admin-content>

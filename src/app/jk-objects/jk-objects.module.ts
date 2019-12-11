@@ -35,6 +35,9 @@ import { ObjectDynamicGalleryComponent } from './jk-objects-item/object-dynamic/
 import { ObjectDynamicSchemaComponent } from './jk-objects-item/object-dynamic/object-dynamic-schema/object-dynamic-schema.component';
 import { ObjectDynamicSlideshowComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/dynamic-object-slideshow/dynamic-object-slideshow.component';
 import { ObjectDynamicMonthSwitcherComponent } from './jk-objects-item/object-dynamic/object-dynamic-month-switcher/object-dynamic-month-switcher.component';
+import { DynamicAdminSettingsComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-settings/dynamic-admin-settings.component';
+import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
+import { DynamicAdminContentComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-content/dynamic-admin-content.component';
 
 
 const jkObjectsComponents = [
@@ -64,7 +67,9 @@ const jkObjectsComponents = [
     ObjectDynamicGalleryComponent,
     ObjectDynamicSchemaComponent,
     ObjectDynamicSlideshowComponent,
-    ObjectDynamicMonthSwitcherComponent
+    ObjectDynamicMonthSwitcherComponent,
+    DynamicAdminSettingsComponent,
+    DynamicAdminContentComponent
 
 ];
 
@@ -78,6 +83,7 @@ const jkObjectsComponents = [
         SlideTopLabelModule,
         AutoResizeTextareaModule,
         GHMRangeNumberModule,
+        GHMTextAreaModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,

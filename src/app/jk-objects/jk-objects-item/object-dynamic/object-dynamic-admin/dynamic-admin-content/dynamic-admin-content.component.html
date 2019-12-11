@@ -1,0 +1,65 @@
+
+<section class="g-modal-bg dynamic-content">
+
+    <div class="dynamic-content__container">
+
+        <h2 class="dynamic-content__title dynamic-content__title_out-path">Настройка контента, октябрь 2019</h2>
+
+        <button class="dynamic-content__btn dynamic-content__btn_close-main btn-cls"
+            (click)="closeContent(false); scrollLock.block()"><span></span></button>
+        <button class="dynamic-content__btn dynamic-content__btn_success-main btn-success"></button>
+
+        <div class="dynamic-content__wrap dynamic-content__wrap_path">
+            
+            <div class="dynamic-content__wrap dynamic-content__wrap_head">
+
+                <h3 class="dynamic-content__title dynamic-content__title_in-path">Дом №1</h3>
+
+                <button class="dynamic-content__btn dynamic-content_switch btn-empty">Включить</button>
+            </div>
+            <div class="dynamic-content__wrap dynamic-content__wrap_area">
+
+                <ghm-textarea class="dynamic-content__input dynamic-content__input_descr"
+                    [placeholder]="'Описание работ'"></ghm-textarea>
+                <ghm-textarea class="dynamic-content__input dynamic-content__input_complite"
+                    [placeholder]="'Готовность объекта, %'"></ghm-textarea>
+            </div>
+
+            <button class="dynamic-content__btn dynamic-content__btn_upload-image btn-admin">Загрузить фото</button>
+
+            <ul class="dynamic-content__image">
+                <li class="dynamic-content__image-item">
+                    <img src="/assets/img3red/temp.jpg" alt="dynamic image">
+                    <button class="dynamic-content__btn dynamic-content__btn_del-image"><span></span></button>
+                </li>
+            </ul>
+        </div>
+        <div class="dynamic-content__wrap dynamic-content__wrap_disabled dynamic-content__wrap_path">
+            
+            <div class="dynamic-content__wrap dynamic-content__wrap_head">
+
+                <h3 class="dynamic-content__title dynamic-content__title_in-path">Дом №2</h3>
+
+                <button class="dynamic-content__btn dynamic-content_switch btn-empty">Включить</button>
+            </div>
+            <div class="dynamic-content__wrap dynamic-content__wrap_area">
+
+                <ghm-textarea class="dynamic-content__input dynamic-content__input_descr"
+                    [placeholder]="'Описание работ'"></ghm-textarea>
+                <ghm-textarea class="dynamic-content__input dynamic-content__input_complite"
+                    [placeholder]="'Готовность объекта, %'"></ghm-textarea>
+            </div>
+
+            <button class="dynamic-content__btn dynamic-content__btn_upload-image btn-admin">Загрузить фото</button>
+
+            <!-- <ul class="dynamic-content__image">
+            </ul> -->
+        </div>
+
+        <div class="dynamic-content__wrap dynamic-content__wrap_btn-main">
+
+            <button class="dynamic-content__btn dynamic-content__btn_save btn_var-2">Сохранить и закрыть</button>
+            <button class="dynamic-content__btn dynamic-content__btn_cancel btn-empty">Отменить</button>
+        </div>
+    </div>
+</section>

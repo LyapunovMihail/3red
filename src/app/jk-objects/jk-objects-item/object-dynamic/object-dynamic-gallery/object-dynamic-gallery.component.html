@@ -1,8 +1,6 @@
 
 <section class="dynamic-gallery">
 
-    <button *ngIf="isAuthorizated" class="btn__admin-content btn_var-2">Контент</button>
-
     <ng-container *ngFor="let object of tempArray">
         <!-- [id]="object._id" *ngIf="(object.year === year && object.month === month)" -->
         <div class="dynamic-gallery__object">

@@ -1,6 +1,7 @@
 @import '../../../../styles/modules/mixins/mixin';
 
 .btn__admin-setting { margin: 16px 0 0; }
+.btn__admin-content { margin: 0 0 24px; }
 
 .object-dynamic {
     width: 100%;
@@ -16,8 +17,8 @@
         padding: 79px 0 0;
     }
     &__back {
-        width: 100%;
-        max-width: calc(1280px - 64px);
+        width: calc(100% - 64px);
+        max-width: 1280px - 64px;
         position: absolute;
         top: 91px;
         left: 50%;
