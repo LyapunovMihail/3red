@@ -16,7 +16,6 @@ export class ObjectItemPurchaseComponent implements OnInit {
     public OpenBankList = false;
     close(increased: any) {
         this.OpenBankList = increased;
-        console.log(this.OpenBankList);
     }
 
     public showType = 'credit';

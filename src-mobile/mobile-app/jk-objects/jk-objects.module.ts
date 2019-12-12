@@ -26,6 +26,11 @@ import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-it
 import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-item-purchase/installment/object-item-installment.service';
 import { ObjectItemPurchaseModalComponent } from './jk-objects-item/object-item-purchase/bank-modal/object-item-purchase-modal.component';
 import { ObjectItemInstallmentTypeComponent } from './jk-objects-item/object-item-purchase/installment/installment-type/object-item-installment-type.component';
+import { ObjectDynamicMonthSwitcherComponent } from './jk-objects-item/object-dynamic/object-dynamic-month-switcher/object-dynamic-month-switcher.component';
+import { ObjectDynamicSlideshowComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/dynamic-object-slideshow/dynamic-object-slideshow.component';
+import { ObjectDynamicGalleryComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/object-dynamic-gallery.component';
+import { ObjectDynamicDateComponent } from './jk-objects-item/object-dynamic/object-dynamic-date/object-dynamic-date.component';
+import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
 
 const JkObjectsComponents = [
   JkObjectsComponent,
@@ -47,7 +52,12 @@ const JkObjectsComponents = [
   ObjectItemInstallmentComponent,
   ObjectPurchaseInstallmentNumberPipe,
   ObjectItemPurchaseModalComponent,
-  ObjectItemInstallmentTypeComponent
+  ObjectItemInstallmentTypeComponent,
+  ObjectDynamicComponent,
+  ObjectDynamicDateComponent,
+  ObjectDynamicGalleryComponent,
+  ObjectDynamicSlideshowComponent,
+  ObjectDynamicMonthSwitcherComponent
 ];
 
 @NgModule({
@@ -66,7 +76,8 @@ const JkObjectsComponents = [
         , children : [
           { path: '', redirectTo: 'list', pathMatch: 'full' },
           { path: 'list', component: JkObjectsListComponent },
-          { path: 'list/:id', component: JkObjectsItemComponent }
+          { path: 'list/:id', component: JkObjectsItemComponent },
+          { path: 'list/:id/dynamic', component: ObjectDynamicComponent }
         ]
       }
     ])
