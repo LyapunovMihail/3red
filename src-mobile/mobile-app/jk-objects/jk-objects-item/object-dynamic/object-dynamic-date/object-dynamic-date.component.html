@@ -1,0 +1,21 @@
+<section class="dynamic-header">
+    <div class="dynamic-header__active" (click)="tooltipOpen = true">Декабрь, 2019</div>
+
+    <div class="dynamic-header__tooltip" *ngIf="tooltipOpen">
+
+        <div class="dynamic-header__tooltip-cls" (click)="tooltipOpen = false"></div>
+
+        <ul class="dynamic-header__tooltip-list">
+        
+            <li *ngFor="let item of monthArray; let i = index; let last = last"
+                [ngClass]="{
+                    'dynamic-header__tooltip-item_disabled': item.disabled,
+                    'dynamic-header__tooltip-item_current': (i + 1) == month || last
+                }"
+                (click)="monthChange.emit(i + 1)"
+                class="dynamic-header__tooltip-item">
+                {{item.name}}, 2019
+            </li>
+        </ul>
+    </div>
+</section>

@@ -16,6 +16,7 @@ export class ObjectItemPurchaseComponent implements OnInit {
     public isAuthorizated = false;
 
     public mockBank = banks;
+    public moreBanks = false;
 
     public showType = 'credit';
 

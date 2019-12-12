@@ -1,0 +1,33 @@
+
+<section class="object-flat">
+
+    <div class="object-item__container object-flat__container">
+        <div class="object-flat__wrap">
+            <h2 class="object-flat__head-title">Выберите дом</h2>
+
+            <div class="object-flat__scheme">
+                <p class="object-flat__scheme-icon" (click)="openTooltipSchema()">Схема</p>
+
+                <div class="object-flat__scheme-tooltip" *ngIf="openSchema">
+                    <button class="object-flat__scheme-cls" (click)="openTooltipSchema()"></button>
+
+                    <img src="/assets/img/jk-object/flat-preview-schema.svg" alt="schema">
+                </div>
+            </div>
+        </div>
+        <p *ngIf="isAuthorizated" class='object-flat__text'>Данный блок не настраивается и не заполняется с помощью админки</p>
+        
+        <div class="object-flat__house">
+            <div class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
+                <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
+                <p class="object-flat__house-flats">{{house.freeFlats}} квартир</p>
+                <ul>
+                    <li *ngFor="let room of house.rooms" class="object-flat__house-room">
+                        <span>{{room.name === '0' ? 'Ст' : room.name + 'к'}}{{room.name === '3' ? '+' : ''}}</span>
+                        <span>{{room.minPrice ? 'от ' + room.minPrice + ' млн Р' : 'Продано'}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

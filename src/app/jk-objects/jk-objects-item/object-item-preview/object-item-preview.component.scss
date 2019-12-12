@@ -7,6 +7,7 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    align-items: center;
     box-sizing: border-box;
     padding: 24px 32px 48px;
     &::after {
@@ -55,6 +56,7 @@
 
     &__wrapper {
         width: 100%;
+        max-width: calc(1280px - 64px);
         position: relative;
         z-index: 2;
 
