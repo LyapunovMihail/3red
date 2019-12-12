@@ -1,0 +1,77 @@
+@import '../../../../../../styles/modules/mixins/mixin';
+
+.dynamic-slider-current {
+    opacity: 1 !important;
+}
+
+.dynamic-modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #F5F5F5;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_active { display: flex; }
+    &__cls-btn {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        background-color: #F5F5F5;
+        span { width: 25px; }
+    }
+
+    &__wrap {
+        width: calc(100% - 64px);
+        max-width: 704px;
+        height: 400px;
+        position: relative;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+        @media (max-width: 760px) {
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            margin-right: 32px;
+            &:last-child { margin-right: 0; }
+            @media (max-width: 425px) { margin-right: 20px; }
+        }
+    }
+    &__btn {
+        position: absolute;
+        top: calc(50% - 20px);
+        border-radius: 50%;
+        z-index: 50;
+
+        &_left { left: -40px - 35px; }
+        &_right { right: -40px - 35px; }
+        @media (max-width: 1020px) { display: none; }
+    }
+    &__text {
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        position: absolute;
+        bottom: -44px;
+
+        &-title { left: 0; }
+        &-month { right: 0; }
+    }
+}

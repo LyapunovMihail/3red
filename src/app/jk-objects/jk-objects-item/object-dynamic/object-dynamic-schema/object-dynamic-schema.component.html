@@ -1,0 +1,11 @@
+
+<section class="dynamic-schema">
+
+    <div class="dynamic-schema__item" *ngFor="let item of objectProgress">
+        <p class="dynamic-schema__item-name">{{item.title}}</p>
+        <p class="dynamic-schema__item-progress">{{item.ready}}%</p>
+
+        <div class="dynamic-schema__item-bar" [style.width.%]="item.ready"
+            [class.dynamic-schema__item-bar_complete]="item.ready >= 100"></div>
+    </div>
+</section>

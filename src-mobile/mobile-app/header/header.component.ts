@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HeaderService } from './header.service';
+import { WindowScrollLocker } from '../commons/window-scroll-block';
 
 @Component({
     selector : 'app-header',
@@ -30,7 +31,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
-        private router: Router
+        private router: Router,
+        private scrollLocker: WindowScrollLocker
     ) {
     }
 
@@ -67,6 +69,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    public openBurger() {
+        if (this.openMenu) {
+            this.openMenu = !this.openMenu;
+            this.scrollLocker.unblock();
+        } else {
+            this.openMenu = !this.openMenu;
+            this.scrollLocker.block();
+        }
     }
 
     // если расстояние скролла больше высоты хедера

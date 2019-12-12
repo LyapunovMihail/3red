@@ -29,8 +29,8 @@ export class SwipeSlides {
          this.ref.detectChanges();
      }
      /*
-          sliderListParent - Контейнер слайдера
-          sliderList - Сам слайдер
+          sliderListParent - Контейнер слайдера (id)
+          sliderList - Сам слайдер (id)
           slideWidth - Ширина одного слайда
           units - Единица измерения
      */

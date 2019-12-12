@@ -1,0 +1,71 @@
+@import '../../../../../../styles/modules/mixins/mixin';
+
+.dynamic-slider-current {
+    opacity: 1 !important;
+}
+
+.dynamic-modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #F5F5F5;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_active {
+        display: flex;
+    }
+
+    &__cls-btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 0;
+        right: -25px - 50px;
+        z-index: 100;
+    }
+
+    &__wrap {
+        height: 80%;
+        position: relative;
+        width: 1090px;
+        margin: 0 auto;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        opacity: 0;
+        transition: .3s linear;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        z-index: 10;
+    }
+
+    &__btn {
+        position: absolute;
+        top: calc(50% - 20px);
+        border-radius: 50%;
+        z-index: 50;
+
+        &_left { left: -40px - 35px; }
+        &_right { right: -40px - 35px; }
+    }
+    &__text {
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        position: absolute;
+        bottom: -44px;
+
+        &-title { left: 0; }
+        &-month { right: 0; }
+    }
+}

@@ -42,6 +42,7 @@ export class ObjectsItemProjectAdminComponent implements OnInit {
     private setNewForm() {
         this.form = this.formBuilder.group({
             objectId: this.id,
+            switchOn: true,
             created_at : new Date(),
             last_modifyed : new Date(),
             socials: this.formBuilder.group({
@@ -58,6 +59,7 @@ export class ObjectsItemProjectAdminComponent implements OnInit {
     private setFormFromSnippet() {
         this.form = this.formBuilder.group({
             objectId: this.snippet.objectId,
+            switchOn: this.snippet.switchOn,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
             socials: this.formBuilder.group({

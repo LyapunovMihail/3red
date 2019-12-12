@@ -1,0 +1,74 @@
+
+<section class="object-dynamic">
+
+    <div class="object-dynamic__back">
+        <a class="object-dynamic__back-btn btn-empty">ЖК Новокрасково</a>
+    </div>
+
+    <div class="object-dynamic__container">
+
+        <h2 class="object-dynamic__title">Фотоотчет ЖК Новокрасково</h2>
+        <button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="showSettingsAdmin = true">Настройки</button>
+
+        <nav class="object-dynamic__nav">
+            <ul class="object-dynamic__nav-list">
+                <li class="object-dynamic__nav-item" (click)="active = 'process'"
+                    [class.object-dynamic__nav-item_active]="active === 'process'">Ход строительства</li>
+                <li class="object-dynamic__nav-item" (click)="active = 'ready'"
+                    [class.object-dynamic__nav-item_active]="active === 'ready'">Готовые дома</li>
+            </ul>
+        </nav>
+
+        <div class="object-dynamic__date">
+            <!-- Раздел с выбором месяца и года -->
+            <app-object-dynamic-date *ngIf="active === 'process'"
+                (monthChange)="monthChange($event)"
+                (yearChange)="yearChange($event)"
+                [month]="currentMonth"
+                [year]="currentYear">
+            </app-object-dynamic-date>
+        </div>
+
+        <div class="object-dynamic__content">
+
+            <div class="object-dynamic__content-gallery">
+
+                <button *ngIf="isAuthorizated" class="btn__admin-content btn_var-2"
+                    (click)="showContentAdmin = true">Контент</button>
+
+                <!-- Раздел с изображениями динамики -->
+                <app-object-dynamic-gallery
+                    [isAuthorizated]="isAuthorizated"
+                    [tempArray]="ObjectArray">
+                </app-object-dynamic-gallery>
+
+                <div class="object-dynamic__month-switcher">
+                    <!-- *ngIf="objectsArray.length" [objectsArray]="objectsArray" -->
+                    <app-object-dynamic-month-switcher 
+                        (monthChange)="monthChange($event)"
+                        [month]="currentMonth"
+                        [year]="currentYear">
+                    </app-object-dynamic-month-switcher>
+                </div>
+            </div>
+
+            <div class="object-dynamic__content-schema">
+                <!-- Раздел схемы корпусов(навигация) -->
+                <app-object-dynamic-schema
+                    [isAuthorizated]="isAuthorizated"
+                    [objectProgress]="ObjectArray">
+                </app-object-dynamic-schema>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-dynamic-admin-settings 
+    *ngIf="isAuthorizated && showSettingsAdmin"
+    (showSettingsAdmin)="closeSetting($event)">
+</app-dynamic-admin-settings>
+
+<app-dynamic-admin-content
+    *ngIf="isAuthorizated && showContentAdmin"
+    (showContentAdmin)="closeContent($event)">
+</app-dynamic-admin-content>

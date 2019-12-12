@@ -29,6 +29,18 @@ import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-it
 import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-item-purchase/installment/object-item-installment.service';
 import { ObjectsItemPreviewAdminComponent } from './jk-objects-item/object-item-preview/objects-item-preview-admin/objects-item-preview-admin.component';
 import { ObjectsItemProjectAdminComponent } from './jk-objects-item/object-item-project/objects-item-project-admin/objects-item-project-admin.component';
+import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
+import { ObjectDynamicDateComponent } from './jk-objects-item/object-dynamic/object-dynamic-date/object-dynamic-date.component';
+import { ObjectDynamicGalleryComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/object-dynamic-gallery.component';
+import { ObjectDynamicSchemaComponent } from './jk-objects-item/object-dynamic/object-dynamic-schema/object-dynamic-schema.component';
+import { ObjectDynamicSlideshowComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/dynamic-object-slideshow/dynamic-object-slideshow.component';
+import { ObjectDynamicMonthSwitcherComponent } from './jk-objects-item/object-dynamic/object-dynamic-month-switcher/object-dynamic-month-switcher.component';
+import { DynamicAdminSettingsComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-settings/dynamic-admin-settings.component';
+import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
+import { DynamicAdminContentComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-content/dynamic-admin-content.component';
+import { ObjectsItemGalleryTabsAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-tabs-admin/objects-item-gallery-tabs-admin.component';
+import { ObjectsItemGalleryAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-content-admin/objects-item-gallery-admin.component';
+
 
 
 const jkObjectsComponents = [
@@ -52,7 +64,17 @@ const jkObjectsComponents = [
     ObjectItemInstallmentComponent,
     ObjectPurchaseInstallmentNumberPipe,
     ObjectsItemPreviewAdminComponent,
-    ObjectsItemProjectAdminComponent
+    ObjectsItemProjectAdminComponent,
+    ObjectDynamicComponent,
+    ObjectDynamicDateComponent,
+    ObjectDynamicGalleryComponent,
+    ObjectDynamicSchemaComponent,
+    ObjectDynamicSlideshowComponent,
+    ObjectDynamicMonthSwitcherComponent,
+    DynamicAdminSettingsComponent,
+    DynamicAdminContentComponent,
+    ObjectsItemGalleryTabsAdminComponent,
+    ObjectsItemGalleryAdminComponent
 
 ];
 
@@ -66,6 +88,7 @@ const jkObjectsComponents = [
         SlideTopLabelModule,
         AutoResizeTextareaModule,
         GHMRangeNumberModule,
+        GHMTextAreaModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
@@ -74,7 +97,8 @@ const jkObjectsComponents = [
                 , children : [
                     { path: '', redirectTo: 'list', pathMatch: 'full' },
                     { path: 'list', component: JkObjectsListComponent },
-                    { path: 'list/:id', component: JkObjectsItemComponent }
+                    { path: 'list/:id', component: JkObjectsItemComponent },
+                    { path: 'list/:id/dynamic', component: ObjectDynamicComponent }
                 ]
             }
         ])

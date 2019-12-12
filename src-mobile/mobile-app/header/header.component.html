@@ -3,36 +3,44 @@
             'header-fixed' : isFixed,
             'header-fixed--hide' : isHidden,
             'header_open' : openMenu}">
-
-    <a class="header__phone">
-        <img src="/assets/img/header/phone.svg" alt="">
-    </a>
-
-    <a class="header__logo" routerLink="/">
-        <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
-    </a>
     
-    <button class="header__burger" [ngClass]="{'header__burger_open': openMenu}"
-        (click)="openMenu = !openMenu">
-        <span></span>
-    </button>
+    <div class="header__container">
 
-    <div class="header__menu" *ngIf="openMenu">
-        <ul class="header__menu-list">
-            <li class="header__menu-item" *ngFor="let link of links">
-                <a [routerLink]="link.url">
-                    {{link.name}}
-                    <span *ngIf="link.name === 'Избранное'">(12)</span>
-                </a>
-            </li>
-        </ul>
+        <a class="header__phone">
+            <img src="/assets/img/header/phone.svg" alt="">
+        </a>
+    
+        <a class="header__logo" routerLink="/">
+            <img src="/assets/img/jk-object/header_logo.svg" alt="logo" >
+        </a>
+        
+        <button class="header__burger" [ngClass]="{'header__burger_open': openMenu }"
+            (click)="openBurger()">
+            <span></span>
+        </button>
+    
+        <div class="header__menu" *ngIf="openMenu">
+            
+            <div class="header__menu-container">
 
-        <div class="header__menu-info">
-            <p class="header__menu-address">г. Люберцы, Новорязанское ш., д 7 Торгово-офисный центр Гренада</p>
-            <div class="header__menu-wrap">
-                <div class="header__menu-social">
-                    <a class="header__menu-link header__menu-link_insta"></a>
-                    <a class="header__menu-link header__menu-link_fb"></a>
+                <ul class="header__menu-list">
+                    <li class="header__menu-item" *ngFor="let link of links">
+                        <a [routerLink]="link.url">
+                            {{link.name}}
+                            <span *ngIf="link.name === 'Избранное'">(12)</span>
+                        </a>
+                    </li>
+                </ul>
+        
+                <div class="header__menu-info">
+                    <p class="header__menu-address">г. Люберцы, Новорязанское ш., д 7 Торгово-офисный центр Гренада</p>
+                    <div class="header__menu-wrap">
+                        <div class="header__menu-social">
+                            <a class="header__menu-link header__menu-link_insta"></a>
+                            <a class="header__menu-link header__menu-link_fb"></a>
+                        </div>
+                        <a href="+74992112233" class="header__menu-number">+7 (499) 211 22 33</a>
+                    </div>
                 </div>
                 <a href="+74992112233" class="header__menu-number">+7 (499) 211 22 33</a>
             </div>

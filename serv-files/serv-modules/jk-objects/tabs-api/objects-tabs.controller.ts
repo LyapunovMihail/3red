@@ -20,19 +20,19 @@ export class ObjectsTabsController extends ObjectsTabsModel {
     }
 
     routing() {
-        this.router.get('/jk-object/tabs/id/:id/gallery', responseHandler(async(req) => {
+        this.router.get('/jk-object/tabs/id/:id/gallery', responseHandler(async (req) => {
             return await this.getGalleryTabs(req.params.id);
         }));
 
-        this.router.post('/admin/jk-object/tabs/gallery/create-update', responseHandler(async(req) => {
+        this.router.post('/admin/jk-object/tabs/gallery/create-update', responseHandler(async (req) => {
             return await this.updateGalleryTabs(req.body);
         }));
 
-        this.router.get('/jk-object/tabs/id/:id/decoration', responseHandler(async(req) => {
+        this.router.get('/jk-object/tabs/id/:id/decoration', responseHandler(async (req) => {
             return await this.getDecorationTabs(req.params.id);
         }));
 
-        this.router.post('/admin/jk-object/tabs/decoration/create-update', responseHandler(async(req) => {
+        this.router.post('/admin/jk-object/tabs/decoration/create-update', responseHandler(async (req) => {
             return await this.updateDecorationTabs(req.body);
         }));
 

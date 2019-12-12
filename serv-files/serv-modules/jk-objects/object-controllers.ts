@@ -2,10 +2,12 @@ import { ObjectsPreviewController } from './preview-api/objects-preview.controll
 import { ObjectsProjectController } from './project-api/objects-project.controller';
 import { ObjectsFlatController } from './flat-api/objects-flat.controller';
 import { ObjectsTabsController } from './tabs-api/objects-tabs.controller';
+import { ObjectsGalleryController } from './gallery-api/objects-gallery.controller';
 
 export const objectControllers = [
     ObjectsPreviewController,
     ObjectsProjectController,
     ObjectsFlatController,
-    ObjectsTabsController
+    ObjectsTabsController,
+    ObjectsGalleryController
 ]
