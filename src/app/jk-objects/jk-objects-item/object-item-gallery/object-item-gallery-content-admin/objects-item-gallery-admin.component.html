@@ -1,0 +1,48 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)" *ngIf="!isLoad">
+
+    <h2 class="gallery-settings__title">Настройка контента «Галереи»</h2>
+
+    <form class="tabs" [formGroup]="form">
+        <div class="tabs__wrap" formArrayName="image_data" *ngFor="let data of form.controls['image_data'].controls; let i = index">
+
+            <ng-container formGroupName="{{i}}">
+                <h2 class="tabs__title">Изображение {{i + 1}}</h2>
+
+                <label class="btn btn--camera">Загрузить фото
+                    <input style='display: none;' type="file" placeholder="Upload file" accept=".jpg" (change)="imageUpload($event, i)">
+                </label>
+
+                <div class="wrap" *ngIf="data.controls.image.value">
+                    <button class="button__delete" (click)="delImg(i)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                    <img class='bg-img' [src]="uploadsPath + data.controls.image.value" alt="image" width="164" height="108">
+                </div>
+                <input hidden="true" type="text" formControlName="image">
+                <input hidden="true" type="text" formControlName="thumbnail">
+
+                <div class="form">
+                    <div class="form-item form-item--option" *ngIf="tabSnippet && tabSnippet.gallery.length">
+                        <select type="text" class="form-input info-input" appSlideTopLabel formControlName="tab">
+                            <option [value]="tab.name" *ngFor="let tab of tabSnippet.gallery">{{tab.name}}</option>
+                        </select>
+                        <label class="form-label info-suptitle">Вкладка</label>
+                    </div>
+                    <div class="form-item">
+                        <input type="text" class="form-input info-input" appSlideTopLabel formControlName="title">
+                        <label class="form-label info-suptitle">Заголовок</label>
+                    </div>
+                    <div class="form-item">
+                        <textarea type="text" class="form-input info-input textarea" appSlideTopLabel appAutoResizeTextarea formControlName="description"></textarea>
+                        <label class="form-label info-suptitle">Описание</label>
+                    </div>
+                </div>
+
+                <h2 class="tabs__title" style="margin-top: 20px; cursor: pointer" (click)="popImageData(i)">Удалить изображение</h2>
+
+            </ng-container>
+
+        </div>
+
+        <button class="btn btn--settings" (click)="pushImageData()">Добавить изображение</button>
+    </form>
+
+</app-admin-modal>

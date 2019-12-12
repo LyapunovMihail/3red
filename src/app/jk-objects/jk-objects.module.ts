@@ -38,6 +38,9 @@ import { ObjectDynamicMonthSwitcherComponent } from './jk-objects-item/object-dy
 import { DynamicAdminSettingsComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-settings/dynamic-admin-settings.component';
 import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 import { DynamicAdminContentComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-content/dynamic-admin-content.component';
+import { ObjectsItemGalleryTabsAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-tabs-admin/objects-item-gallery-tabs-admin.component';
+import { ObjectsItemGalleryAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-content-admin/objects-item-gallery-admin.component';
+
 
 
 const jkObjectsComponents = [
@@ -69,7 +72,9 @@ const jkObjectsComponents = [
     ObjectDynamicSlideshowComponent,
     ObjectDynamicMonthSwitcherComponent,
     DynamicAdminSettingsComponent,
-    DynamicAdminContentComponent
+    DynamicAdminContentComponent,
+    ObjectsItemGalleryTabsAdminComponent,
+    ObjectsItemGalleryAdminComponent
 
 ];
 

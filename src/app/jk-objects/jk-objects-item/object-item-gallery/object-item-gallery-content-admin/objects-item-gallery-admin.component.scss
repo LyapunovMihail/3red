@@ -1,0 +1,124 @@
+.gallery-settings__title {
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 24px;
+}
+
+.wrap {
+    position: relative;
+    margin-top: 16px;
+}
+
+.tab__img {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.tabs__wrap {
+    background: #efefef;
+    padding: 20px 24px 32px;
+    margin-bottom: 8px;
+}
+
+.tabs__title {
+    font-weight: normal;
+    font-size: 24px;
+
+}
+.tabs__nav-link {
+    color: #000;
+    margin-left: 16px;
+    font-size: 18px;
+    &:hover {
+        color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: #000;
+    opacity: .5;
+}
+.textarea {
+    overflow: hidden;
+    resize: none;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    background-image: url(/assets/img/jk-object/admin-modal/arrow.svg)  !important;
+    background-repeat: no-repeat !important;
+    background-position: center right !important;
+}
+option {
+    width: 400px;
+}
+
+.btn {
+    margin: 24px 0 ;
+    display: inline-block;
+    background:  #454545;
+    padding:10px 16px;
+    font-family: inherit;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.button__delete {
+    position: absolute;
+    border-radius: 50%;
+    background: #ee4237;
+    width: 17px;
+    height: 17px;
+    top: -8px;
+    left: -8px;
+    z-index: 2;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        background: #ee534a;
+    }
+}
+.btn--settings {
+    background: #454545;
+    margin-top: 0;
+    &:hover {
+        background: rgba(0, 0, 0, .7);
+    }
+    &::before {
+        content:url(/assets/img/jk-object/admin-modal/plus.svg);
+        margin-right:5px ;
+    }
+}
+.btn--camera {
+    margin-bottom: 0;
+    &::before {
+        content: url(/assets/img/jk-object/admin-modal/camera.svg) ;
+        vertical-align: center;
+        margin-right:5px ;
+
+    }
+}
+.btn--camera:hover  {
+    background:   rgba(0, 0, 0, 0.7);
+}

@@ -1,52 +1,74 @@
-
-<section class="object-gallery">
+<section class="object-gallery" [class.object-item--margin]="switchOn || isAuthorizated">
 
     <div class="object-item__container object-gallery__container">
 
         <div class="object-gallery__head">
-            <input type="checkbox" name="switch" id="gallery-switch" class="switch">
+            <input type="checkbox" name="switch" id="gallery-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="gallery-switch" class="object-item__title">Галерея</label>
+        </div>
+
+        <ng-container *ngIf="switchOn">
+
             <h2 *ngIf="!isAuthorizated">Галерея</h2>
-        </div>
 
-        <div class="object-gallery__options" *ngIf="isAuthorizated">
-            <button class="btn__admin-setting">Настройки</button>
-            <button class="btn__admin-content btn_var-2">Контент</button>
-        </div>
-
-        <nav class="object-gallery__nav">
-            <ul class="object-gallery__nav-list">
-                <li class="object-gallery__nav-item " [class.object-gallery__nav-item_active]="navName === navItem.name"
-                    (click)="navName = navItem.name" *ngFor="let navItem of navList">{{navItem.name}}</li>
-            </ul>
-        </nav>
-
-        <div class="object-gallery__slider">
-
-            <button (click)="prevBtn()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
-            <button (click)="nextBtn()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
-
-            <div class="object-gallery__slider-dots">
-                <span *ngFor="let dots of slideList; let i = index"
-                    [ngClass]="{'current-dots': currentSlide === i}"></span>
+            <div class="object-gallery__options" *ngIf="isAuthorizated">
+                <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
+                <button class="btn__admin-content btn_var-2" (click)="closeContentModal = false">Контент</button>
             </div>
 
-            <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide">
-                <div class="gallery-slide__item" *ngFor="let slide of slideList; let i = index"
-                    [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
-                    
-                    <div class="gallery-slide__image">
-                        <img src="{{slide.img}}" alt="slide">
-                    </div>
-                    <div class="gallery-slide__timeline" *ngIf="showTimeline && !isAuthorizated"></div>
-                    
-                    <div class="gallery-slide__content">
-                        <h3 class="gallery-slide__content-title">{{slide.title}}</h3>
-                        <div class="gallery-slide__content-descr">{{slide.descr}}</div>
+            <nav class="object-gallery__nav" *ngIf="tabSnippet">
+                <ul class="object-gallery__nav-list">
+                    <ng-container *ngFor="let tab of this.tabSnippet.gallery">
+                        <li class="object-gallery__nav-item"
+                            [class.object-gallery__nav-item_active]="currentTab === tab.name"
+                            (click)="changeTab(tab.name)"
+                            *ngIf="tab.show">{{tab.name}}</li>
+                    </ng-container>
+                </ul>
+            </nav>
+
+            <div class="object-gallery__slider">
+
+                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data.length > 1"><span></span></button>
+                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data.length > 1"><span></span></button>
+
+                <div class="object-gallery__slider-dots" *ngIf="contentSnippet?.image_data.length > 1">
+                    <span *ngFor="let dots of contentSnippet.image_data; let i = index"
+                        [ngClass]="{'current-dots': currentSlide === i}"></span>
+                </div>
+
+                <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide" *ngIf="contentSnippet?.image_data.length">
+                    <div class="gallery-slide__item" *ngFor="let slide of contentSnippet.image_data; let i = index"
+                        [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
+
+                        <div class="gallery-slide__image">
+                            <img [src]="uploadsPath + slide.image" alt="slide">
+                        </div>
+                        <div class="gallery-slide__timeline" *ngIf="!isAuthorizated && contentSnippet?.image_data.length > 1"></div>
+
+                        <div class="gallery-slide__content">
+                            <h3 class="gallery-slide__content-title">{{slide.title}}</h3>
+                            <div class="gallery-slide__content-descr">{{slide.description}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </ng-container>
+
     </div>
 </section>
 
+<app-objects-item-gallery-tabs-admin *ngIf="!closeTabsModal"
+    [id]="objectId"
+    [snippet]="tabSnippet"
+    (snippetChange)="refreshTabs($event)"
+    (closeModal)="closeTabsModal = $event">
+</app-objects-item-gallery-tabs-admin>
+
+<app-objects-item-gallery-content-admin *ngIf="!closeContentModal"
+    [id]="objectId"
+    [tabSnippet]="tabSnippet"
+    (snippetChange)="getContent()"
+    (closeModal)="closeContentModal = $event">
+</app-objects-item-gallery-content-admin>

@@ -17,11 +17,12 @@ export class ObjectsTabsModel {
     }
 
     async updateGalleryTabs(parameters) {
+        console.log('updateGalleryTabs');
         const options: IObjectTabsSnippet = parameters;
-        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
+        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'gallery', async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
-            const created = await this.collection.update({ objectId : options.objectId }, { $set : {gallery: options.gallery} }, {upsert: true});
+            const created = await this.collection.update({ objectId : options.objectId }, { $set : {gallery: options.gallery, created_at: options.created_at, last_modifyed: options.last_modifyed} }, {upsert: true});
         });
     }
 
@@ -32,10 +33,10 @@ export class ObjectsTabsModel {
 
     async updateDecorationTabs(parameters) {
         const options: IObjectTabsSnippet = parameters;
-        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
+        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'decoration', async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
-            const created = await this.collection.update({ objectId : options.objectId }, { $set : {decoration: options.decoration} }, {upsert: true});
+            const created = await this.collection.update({ objectId : options.objectId }, { $set : {decoration: options.decoration, created_at: options.created_at, last_modifyed: options.last_modifyed} }, {upsert: true});
         });
     }
 
@@ -44,10 +45,14 @@ export class ObjectsTabsModel {
     }
 
     // обертка для возврата ошибки о неверно переданных параметрах
-    async errorParamsCatcher(val, objectId, fn) {
+    async errorParamsCatcher(val, objectId, type, fn) {
         if ( val ) {
             await fn();
-            // return await this.getSnippet(objectId);
+            if (type === 'gallery') {
+                return this.getGalleryTabs(objectId);
+            } else if (type === 'decoration') {
+                return await this.getDecorationTabs(objectId);
+            }
         } else {
             throw new Error(ErrorNotCorrectArguments);
         }
@@ -56,7 +61,7 @@ export class ObjectsTabsModel {
     private valuesReview(options) {
         // если есть все параметры
         console.log('options: ', options);
-        return ( 'gallery' in options || 'decoration' in options  ? true : false );
+        return ( 'objectId' in options && ('gallery' in options || 'decoration' in options)  ? true : false );
     }
 
 }

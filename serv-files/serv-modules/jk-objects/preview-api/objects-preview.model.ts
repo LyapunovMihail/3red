@@ -60,7 +60,7 @@ export class ObjectsPreviewModel {
     private valuesReview(options) {
         // если есть все параметры
         console.log('options: ', options);
-        return ( ( 'created_at' in options && 'last_modifyed' in options && 'mainInfo' in options
+        return ( ( 'objectId' in options && 'created_at' in options && 'last_modifyed' in options && 'mainInfo' in options
             && 'deadlines' in options && 'indicators' in options )  ? true : false );
     }
 

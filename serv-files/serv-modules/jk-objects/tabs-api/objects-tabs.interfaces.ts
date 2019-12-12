@@ -5,18 +5,18 @@ export const ErrorNotCorrectArguments = 'Параметры переданы н�
 export interface IObjectTabsSnippet {
     _id?: any;
     objectId: string;
-    gallery?: IObjectGalleryTabs;
-    decoration?: IObjectDecorationTabs;
+    gallery?: IObjectGalleryTabs[];
+    decoration?: IObjectDecorationTabs[];
+    created_at: any;
+    last_modifyed: any;
 }
 
 export interface IObjectGalleryTabs {
-    objectId: string;
     name: string;
     show: boolean;
 }
 
 export interface IObjectDecorationTabs {
-    objectId: string;
     name: string;
     show: boolean;
 }
