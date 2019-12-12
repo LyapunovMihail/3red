@@ -10,6 +10,7 @@ export class ObjectDynamicSchemaComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
+    @Input() public objectProgress;
 
     constructor() { }
 

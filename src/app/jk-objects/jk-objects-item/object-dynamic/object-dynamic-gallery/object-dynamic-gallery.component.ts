@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { fakeObject } from './mockObject';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
 
 @Component({
@@ -16,7 +15,7 @@ export class ObjectDynamicGalleryComponent implements OnInit {
     @Input()
     public isAuthorizated = false;
 
-    public tempArray = fakeObject;
+    @Input() public tempArray;
 
     public isVideoShow: boolean = false;
     public videoUrl: string = '';

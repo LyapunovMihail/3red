@@ -38,7 +38,8 @@
 
                 <!-- Раздел с изображениями динамики -->
                 <app-object-dynamic-gallery
-                    [isAuthorizated]="isAuthorizated">
+                    [isAuthorizated]="isAuthorizated"
+                    [tempArray]="ObjectArray">
                 </app-object-dynamic-gallery>
 
                 <div class="object-dynamic__month-switcher">
@@ -54,7 +55,8 @@
             <div class="object-dynamic__content-schema">
                 <!-- Раздел схемы корпусов(навигация) -->
                 <app-object-dynamic-schema
-                    [isAuthorizated]="isAuthorizated">
+                    [isAuthorizated]="isAuthorizated"
+                    [objectProgress]="ObjectArray">
                 </app-object-dynamic-schema>
             </div>
         </div>

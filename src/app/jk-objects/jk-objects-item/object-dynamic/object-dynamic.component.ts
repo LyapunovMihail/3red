@@ -4,6 +4,7 @@ import { AuthorizationObserverService } from './../../../authorization/authoriza
 // import { DynamicService } from './dynamic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { fakeObject } from './mockObject';
 
 @Component({
     selector: 'app-object-dynamic',
@@ -23,6 +24,8 @@ export class ObjectDynamicComponent implements OnInit {
     public AuthorizationEvent;
     public isAuthorizated: boolean = false;
     public showModalAdmin: boolean = false;
+
+    public ObjectArray = fakeObject;
 
     public showSettingsAdmin = false;
     public showContentAdmin = false;

@@ -16,7 +16,42 @@
             font: 18px/23px $font-proba;
             color: $col-black-5;
         }
-        &-progress { width: 40px; }
+        &-progress {
+            width: 56px;
+            height: 32px;
+            background-color: $col-white;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0 2px;
+            transform: translateY(-5px);
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: $col-border;
+            }
+            &-text {
+                font: 14px/18px $font-proba;
+                transition: opacity .2s linear;
+                position: absolute;
+            }
+            &-bar {
+                width: 0;
+                max-width: 100%;
+                height: 2px;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                background-color: $col-red;
+                &_complete { background-color: $col-green; }
+            }
+        }
     }
 
     &__gallery {

@@ -1,6 +1,6 @@
 // import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { fakeObject } from '../mockObject';
+import { fakeObject } from '../../mockObject';
 
 @Component({
     selector: 'app-object-dynamic-slideshow',

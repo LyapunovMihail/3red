@@ -3,7 +3,7 @@ export const fakeObject = [
         _id: '1',
         title: 'Дом 1',
         descr: 'Ведутся кладочные работы по возведению межквартирных перегородок на 12-17-ом этажах. Ведутся работы по устройству неэксплуатируемой кровли.',
-        ready: '35',
+        ready: 35,
         images: [
             {
                 type: 'IMAGE',
@@ -28,7 +28,7 @@ export const fakeObject = [
     }, {
         _id: '2',
         title: 'Дом 2',
-        ready: '10',
+        ready: 10,
         images: [
             {
                 type: 'IMAGE',
