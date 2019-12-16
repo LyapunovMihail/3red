@@ -44,10 +44,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .subscribe((event) => {
                 if (event instanceof NavigationEnd) {
                     this.pageName = this.router.url.split('/')[1];
-                    if (this.pageName === 'objects' && this.router.url.split('/')[4]) {   // Если открыта страница "фотоотчет" объекта, не заполняем массив навигации
+                    console.log('this.pageName: ', this.pageName);
+                    console.log('this.router.url: ', this.router);
+                    if (this.pageName === 'about' || (this.pageName === 'objects' && this.router.url.split('/')[3])) { // если страница о компании или конкретного объекта,
+                        this.navAnchors = this.headerService.getNavAnchors(this.pageName);                                      // устанавливаем массив якорей для панели навигации
+                    } else if (this.pageName === 'objects' && this.router.url.split('/')[4]) { // Если открыта страница "фотоотчет" объекта, не заполняем массив навигации
                         this.navAnchors = [];
-                    } else if (this.pageName === 'about' || (this.pageName === 'objects' && this.router.url.split('/')[3])) { // если страница о компании или конкретного объекта,
-                        this.navAnchors = this.headerService.getNavAnchors(this.pageName);                             // устанавливаем массив якорей для панели навигации
                     } else {
                         this.navAnchors = [];
                     }

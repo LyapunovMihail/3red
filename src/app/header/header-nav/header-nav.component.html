@@ -6,16 +6,15 @@
     <div class="project__nav-container">
         <ul class="project__nav-bar" #list>
             <li *ngFor="let anchor of anchors" id="a-{{anchor.url}}">
-                <a [routerLink]="router.url" [fragment]="anchor.url" 
+                <a  [routerLink]="router.url" [fragment]="anchor.url"
                     [skipLocationChange]="true" class="project__nav-link" 
                     [class.active-link]="anchor.url === activeAnchor.url">
                         {{anchor.name}}
                 </a>
             </li>
         </ul>
-    
-    
-        <a *ngIf="pageName === 'objects'" class="photo__btn" href="#">Фотоотчет</a>
+
+        <a *ngIf="pageName === 'objects'" class="photo__btn" [routerLink]="router.url + '/dynamic'">Фотоотчет</a>
         <div class="project__nav-progress"
             [ngStyle]="{'max-width' : list.style.width, 'width' : progressWidth}"></div>
     </div>

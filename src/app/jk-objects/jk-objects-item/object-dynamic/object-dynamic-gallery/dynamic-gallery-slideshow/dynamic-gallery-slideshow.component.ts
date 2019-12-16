@@ -4,8 +4,8 @@ import { fakeObject } from '../../mockObject';
 
 @Component({
     selector: 'app-object-dynamic-slideshow',
-    templateUrl: './dynamic-object-slideshow.component.html',
-    styleUrls: ['./dynamic-object-slideshow.component.scss']
+    templateUrl: './dynamic-gallery-slideshow.component.html',
+    styleUrls: ['./dynamic-gallery-slideshow.component.scss']
 })
 
 export class ObjectDynamicSlideshowComponent implements OnChanges {
