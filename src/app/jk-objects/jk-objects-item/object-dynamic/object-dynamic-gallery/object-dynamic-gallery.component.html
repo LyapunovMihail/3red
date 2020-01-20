@@ -1,0 +1,61 @@
+
+<section class="dynamic-gallery">
+
+    <ng-container *ngFor="let object of tempArray">
+        <!-- [id]="object._id" *ngIf="(object.year === year && object.month === month)" -->
+        <div class="dynamic-gallery__object">
+            
+            <div class="dynamic-gallery__head">
+                <h3 class="dynamic-gallery__head-title">{{object.title}}</h3>
+
+                <div class="dynamic-gallery__head-progress">
+                    <p class="dynamic-gallery__head-progress-text">{{object.ready}}%</p>
+
+                    <div class="dynamic-gallery__head-progress-bar" [style.width.%]="object.ready"
+                        [class.dynamic-gallery__head-progress-bar_complete]="object.ready >= 100"></div>
+                </div>
+
+                <p class="dynamic-gallery__head-descr">{{object.descr}}</p>
+            </div>
+
+            <!-- Удалить объект / Заголовок / Прогресс / Добавить фото -->
+            <div class="dynamic-gallery__content">
+        
+                <!-- End: Удалить объект / Заголовок / Прогресс / Добавить фото -->
+        
+                <!-- блок с изображениями -->
+                <ul class="dynamic-gallery__gallery">
+                    <!-- (click)="image.type == 'VIDEO' ? startVideoShow(image.origin) : startSlideShow(object._id, item)" -->
+                    <li  (click)="startSlideShow(object._id, item)" *ngFor="let image of object.images; let item = index"
+                        class="dynamic-gallery__gallery-item"
+                        [ngClass]="{
+                            'dynamic-gallery__gallery-item_img': image.type === 'IMAGE',
+                            'dynamic-gallery__gallery-item_video': image.type === 'VIDEO'
+                        }">
+                        
+                        <div class="dynamic-gallery__gallery-item-image">
+                            <!-- [src]="uploadsPath + image.thumbnail" -->
+                            <img *ngIf='image.type == "IMAGE"' class="dynamic-gallery__gallery-item-content" [src]="image.thumbnail">
+                        </div>
+        
+                        <!-- <iframe *ngIf='image.type == "VIDEO"' class="dynamic-gallery__gallery-item-content"
+                            [src]="image.thumbnail | videoSanitizerPipe">
+                        </iframe> -->
+                    </li>
+        
+                </ul>
+            </div>
+
+        </div>
+
+    </ng-container>
+    
+</section>
+
+<!-- [objectsArray]="objectsArray" -->
+<app-object-dynamic-slideshow
+    [isSlideShow]="isSlideShow"
+    [slideShowCurrent]="slideShowCurrent"
+    [slideShowId]="slideShowId"
+    (close)="windowScrollLocker.unblock(); isSlideShow = false">
+</app-object-dynamic-slideshow>

@@ -1,0 +1,74 @@
+@import '../../../../../styles/modules/mixins/mixin.scss';
+
+.bank-modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: $col-white;
+    box-sizing: border-box;
+    padding: 57px 20px 0;
+    z-index: 30;
+
+    &__head {
+        width: 100%;
+        height: 57px;
+        background-color: $col-white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: flex-end;
+        
+        &-btn {
+            width: 57px;
+            height: 57px;
+        }
+    }
+    &__list { width: 100%; }
+}
+
+.bank {
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 1px solid #d8d8d8;
+
+    &__head {
+        display: flex;
+        align-items: center;
+
+        &-name { font: 18px/22px $font-proba; }
+        &-logo {
+            width: 64px;
+            height: 64px;
+            margin-right: 12px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+    &__info {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+
+        &-item {
+            min-width: 100px;
+            margin: 8px 48px 0 0;
+            @media (max-width: 425px) {
+                &:nth-child(2) { margin-right: 0; }
+            }
+        }
+        &-name,
+        &-val {
+            font: 18px/22px $font-proba;
+        }
+        &-val { color: $col-black-5; }
+    }
+}

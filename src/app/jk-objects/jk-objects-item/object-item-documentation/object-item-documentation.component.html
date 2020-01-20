@@ -18,9 +18,10 @@
             <li class="object-documentation__list-item" *ngFor="let item of mockDoc">
                 <h3 class="object-documentation__list-title">{{item.title}}</h3>
                 <div class="object-documentation__list-wrap">
-                    <div class="object-documentation__list-wrap object-documentation__list-wrap_file">
-                        <a href="#" class="object-documentation__list-file">{{item.fileName}}</a>
-                        <p class="object-documentation__list-date">{{item.date}}</p>
+                    <div class="object-documentation__list-wrap object-documentation__list-wrap_file"
+                        *ngFor="let file of item.file">
+                        <a href="#" class="object-documentation__list-file">{{file.fileName}}</a>
+                        <p class="object-documentation__list-date">{{file.date}}</p>
                     </div>
                 </div>
             </li>
