@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IObjectDocSnippet } from '../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
+import { FILEUPLOADS_UPLOADS_PATH, IObjectDocSnippet } from '../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
 import { ObjectItemDocumentationAdminService } from './object-item-documentation-admin/object-item-documentation-admin.service';
 import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
 
@@ -22,6 +22,7 @@ export class ObjectItemDocumentationComponent implements OnInit {
     @Input()
     public isAuthorizated = false;
 
+    public uploadsPath = FILEUPLOADS_UPLOADS_PATH;
     public closeModal = true;
     public objectId: string;
     public snippet: IObjectDocSnippet;
