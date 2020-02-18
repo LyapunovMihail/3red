@@ -7,6 +7,7 @@ import { AdminModalModule } from '../admin-modal/admin-modal.module';
 import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.module';
 import { AutoResizeTextareaModule } from '../UI/auto-resize-textarea/auto-resize-textarea.module';
 import { GHMRangeNumberModule } from '../UI/ghm-range-number/ghm-range-number.module';
+import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 import { JkObjectsComponent } from './jk-objects.component';
 import { JkObjectsListComponent } from './jk-objects-list/jk-objects-list.component';
 import { JkObjectsItemComponent } from './jk-objects-item/jk-objects-item.component';
@@ -31,8 +32,7 @@ import { ObjectsItemPreviewAdminComponent } from './jk-objects-item/object-item-
 import { ObjectsItemProjectAdminComponent } from './jk-objects-item/object-item-project/objects-item-project-admin/objects-item-project-admin.component';
 import { ObjectsItemGalleryTabsAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-tabs-admin/objects-item-gallery-tabs-admin.component';
 import { ObjectsItemGalleryAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-content-admin/objects-item-gallery-admin.component';
-
-
+import { ObjectItemDocumentationAdminComponent } from './jk-objects-item/object-item-documentation/object-item-documentation-admin/object-item-documentation-admin.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -57,7 +57,8 @@ const jkObjectsComponents = [
     ObjectsItemPreviewAdminComponent,
     ObjectsItemProjectAdminComponent,
     ObjectsItemGalleryTabsAdminComponent,
-    ObjectsItemGalleryAdminComponent
+    ObjectsItemGalleryAdminComponent,
+    ObjectItemDocumentationAdminComponent
 
 ];
 
@@ -71,6 +72,7 @@ const jkObjectsComponents = [
         SlideTopLabelModule,
         AutoResizeTextareaModule,
         GHMRangeNumberModule,
+        GHMTextAreaModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,

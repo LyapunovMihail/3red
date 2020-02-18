@@ -3,9 +3,8 @@
             'project__nav-fixed' : isFixed,
             'project__nav-fixed--side' : isSided}">
     <ul class="project__nav-bar" #list>
-        <li *ngFor="let anchor of anchors" id="a-{{anchor.url}}"><a [routerLink]="router.url" [fragment]="anchor.url" [skipLocationChange]="true" class="project__nav-link" [class.active-link]="anchor.url === activeAnchor.url">{{anchor.name}}</a></li>
+        <li *ngFor="let anchor of anchors" id="a-{{anchor.url}}"><a *ngIf="anchor.blockOffsetTop" [routerLink]="router.url" [fragment]="anchor.url" [skipLocationChange]="true" class="project__nav-link" [class.active-link]="anchor.url === activeAnchor.url">{{anchor.name}}</a></li>
     </ul>
-
 
     <a *ngIf="pageName === 'objects'" class="photo__btn" href="#">Фотоотчет</a>
     <div class="project__nav-progress"

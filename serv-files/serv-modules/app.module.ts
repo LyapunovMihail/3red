@@ -10,7 +10,6 @@ import { PagesController } from './pages/pages.controller';
 import { UploadsController } from './uploads/uploads.controller';
 import { CreditController } from './credit-api/credit.controller';
 import { DynamicController } from './dynamic-api/dynamic.controller';
-import { DocumentaionController } from './documentation-api/documentation.controller';
 import { FileUploadsController } from './fileuploads-api/fileuploads.controller';
 import { SharesController } from './shares-api/shares.controller';
 import { TriggerController } from './trigger-api/trigger.controller';
@@ -29,7 +28,6 @@ import { objectControllers } from './jk-objects/object-controllers';
         CreditController,
         DynamicController,
         FileUploadsController,
-        DocumentaionController,
         SharesController,
         TriggerController,
         GalleryController,

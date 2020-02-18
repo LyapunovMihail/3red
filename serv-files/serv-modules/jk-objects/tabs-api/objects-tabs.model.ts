@@ -17,7 +17,6 @@ export class ObjectsTabsModel {
     }
 
     async updateGalleryTabs(parameters) {
-        console.log('updateGalleryTabs');
         const options: IObjectTabsSnippet = parameters;
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'gallery', async () => {
             // удаление _id из параметров если он там есть

@@ -9,6 +9,7 @@ interface INavLink extends IHeaderLink {
     blockHeight: number;
     linkWidth: number;
     linkOffsetLeft: number;
+    show: true;
 }
 
 @Component({
@@ -41,26 +42,28 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     ) { }
 
     ngAfterViewInit() {
-        this.getLinksSizes();
+        setTimeout(() => {
+            this.getLinksSizes();
 
-        this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const activeBlockScroll = this.headerService.processScrollForNav(scrollTop, this);
-            this.headerService.calculateNavProgressWidth(activeBlockScroll, this);
-        });
-
+            this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                const activeBlockScroll = this.headerService.processScrollForNav(scrollTop, this);
+                this.headerService.calculateNavProgressWidth(activeBlockScroll, this);
+            });
+        }, 200);
         this.pageResizeEvent = this.eventsService.getResizeEventEmitter().subscribe(() => {
-            console.log('CHECKKKKKKKKK');
             setTimeout(() => {
                 this.getBlocksSizes();
-            });
+            }, 200);
         });
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if ('anchors' in changes) {
-            this.getBlocksSizes();
-            this.changeDetectorRef.detectChanges();
+            setTimeout(() => {
+                this.getBlocksSizes();
+                this.changeDetectorRef.detectChanges();
+            }, 200);
         }
     }
 
@@ -73,10 +76,17 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     private getBlocksSizes() {
-        this.anchors.forEach((a) => {
+        this.anchors.forEach((a, i, mas) => {
             const block = document.getElementById(`${a.url}`);
+            if (!block) { // Если блок = undefined, обнуляю offsetTop для скрытия пунктов чьи компоненты отстутствуют
+                return;
+            }
             a.blockOffsetTop = block.offsetTop;
             a.blockHeight = Number((block.firstElementChild as HTMLElement).clientHeight);
+            if (a.blockHeight < 50) { // Если у блока слишком маленькая высота, значит он не виден и его надо убрать из навпанели
+                a.blockOffsetTop = 0;
+                return;
+            }
         });
     }
 
