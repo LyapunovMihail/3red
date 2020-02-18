@@ -50,7 +50,8 @@ export class ObjectItemLocationComponent implements OnInit {
             let myMap = new ymaps.Map('map', {
                 center: [55.673638, 37.861333],
                 zoom: 12,
-                controls: ['zoomControl']
+                controls: ['zoomControl'],
+                behaviors: ['']
             }, {
                 minZoom: 11,
                 maxZoom: 18

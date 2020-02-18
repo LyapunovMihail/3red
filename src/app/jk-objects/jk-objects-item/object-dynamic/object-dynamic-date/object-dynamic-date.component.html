@@ -1,0 +1,36 @@
+<section class="dynamic-header">
+
+    <p class="dynamic-header__start">Начало строительства — 29 ноября 2018 года</p>
+
+    <ul class="dynamic-header__months">
+    
+        <li *ngFor="let item of monthArray; let i = index; let last = last"
+            [ngClass]="{
+                'dynamic-header__months-item_disabled': item.disabled,
+                'dynamic-header__months-item_current': (i + 1) == month || last
+            }"
+            (click)="monthChange.emit(i + 1)"
+            class="dynamic-header__months-item">
+            {{item.name}}
+        </li>
+    
+    </ul>
+
+    <div class="dynamic-header__years">
+        <div class="dynamic-header__years-active" (click)="tooltipYear = true">2019</div>
+        
+        <ul class="dynamic-header__years-list" *ngIf="tooltipYear">
+            <li class="dynamic-header__years-cls" (click)="tooltipYear = false"></li>
+
+            <li *ngFor="let item of yearsArray"
+                [ngClass]="{
+                    'dynamic-header__years-item_active': item == year
+                }"
+                (click)="yearChange.emit(item); monthParser(item)"
+                class="dynamic-header__years-item">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    
+</section>

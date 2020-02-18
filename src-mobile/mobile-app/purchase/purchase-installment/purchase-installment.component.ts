@@ -157,9 +157,6 @@ export class PurchaseInstallmentComponent implements OnInit {
         }
     }
 
-
-
-
     public firstpayPercent(payment, price) {
         const percentPayment = (payment / price) * 100;
         return percentPayment;

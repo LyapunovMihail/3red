@@ -88,6 +88,7 @@ export class HeaderService {
         return scrollTop + activationInterval - this.nav.activeAnchor.blockOffsetTop;
 
     }
+    // Методы для определения активного якоря навигации и подсчета скролла блока;
 
     // Расчет ширины прогресс бара навигации
     public calculateNavProgressWidth(blockScroll, nav) {
@@ -104,4 +105,5 @@ export class HeaderService {
         }
         this.ref.detectChanges();
     }
+    // Расчет ширины прогресс бара навигации
 }

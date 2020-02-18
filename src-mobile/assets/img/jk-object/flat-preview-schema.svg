@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="375" viewBox="0 0 150 375">
+    <g fill="none" fill-rule="evenodd">
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-19 -119)">
+            <tspan x="21" y="149">1</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-79.5 -58.5)">
+            <tspan x="79" y="149">2</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-136.5 -1.5)">
+            <tspan x="136" y="149">3</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-27.5 115.5)">
+            <tspan x="140" y="36">4</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-181 43)">
+            <tspan x="180.5" y="149">5</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-228 90)">
+            <tspan x="227.5" y="149">6</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-278 140)">
+            <tspan x="277.5" y="149">7</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-307 260)">
+            <tspan x="352" y="103.5">8</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-343 205)">
+            <tspan x="342.5" y="149">9</tspan>
+        </text>
+        <text fill="#000" font-family="ProbaPro-Regular, Proba Pro" font-size="14" transform="translate(-144 229)">
+            <tspan x="250.5" y="37.5">10</tspan>
+        </text>
+
+        <path fill="#D8D8D8" d="M102 214v94H89v-94h13zM26 323v52H13v-52z"/>
+        <path fill="#D8D8D8" d="M71 341v34H58v-34h13zM13 214h15.171l.001 20H72v30H58.514l.001-16.667H13V214zM13 264h15.171l.001 20H72v30H58.514l.001-16.667H13V264z"/>
+        <path fill="#D8D8D8" d="M149.5 154.5v13h-61v-13h61zM26 118v50H13v-50zM71.5 213.5H58.014l.001-16.819h-20.23l.001-6.727H12.5V176.5h40.457l.001 6.727H71.5V213.5z"/>
+        <path fill="#D8D8D8" d="M26 59v50H13V59zM13 0h37v13.333H26.455V50H13V0z"/>
+
+        <text fill="#323232" font-family="MuseoSansCyrl-500, Museo Sans Cyrl" font-size="9" letter-spacing="1" opacity=".5" transform="rotate(160 67.89 45.648)">
+            <tspan x="15.135" y="8.106">С</tspan>
+        </text>
+        <path fill="#767676" d="M107.227 15.506l9.852 17.842 3.922 20-9.91-17.82z"/>
+        <path fill="#D5210D" d="M117.079 33.348l3.865 19.842.069.191-.049-.09.02.1-.07-.188-9.823-17.675 5.988-2.18z"/>
+    </g>
+</svg>
