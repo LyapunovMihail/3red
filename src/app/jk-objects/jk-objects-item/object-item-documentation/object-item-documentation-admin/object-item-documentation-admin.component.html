@@ -13,7 +13,7 @@
     <form [formGroup]="form">
         <ul class="documentation__objects">
             <li class="documentation__object" formArrayName="block"
-                *ngFor="let block of form.get('block').controls; let i = index; let last = last">
+                *ngFor="let block of form.get('block')['controls']; let i = index; let last = last">
                 <ng-container formGroupName="{{i}}">
                     <div class="documentation__object-wrap documentation__object-wrap_head">
                         <h3 class="documentation__object-title">Блок {{i + 1}}</h3>

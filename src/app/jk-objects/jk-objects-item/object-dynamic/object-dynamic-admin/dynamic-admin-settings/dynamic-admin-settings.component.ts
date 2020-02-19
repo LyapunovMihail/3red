@@ -17,7 +17,7 @@ export class DynamicAdminSettingsComponent implements OnInit {
         this.showSettingsAdmin.emit(incrased);
     }
 
-    constructor( private scrollLock: WindowScrollLocker ) { }
+    constructor( public scrollLock: WindowScrollLocker ) { }
 
     ngOnInit() { this.scrollLock.block(); }
 }

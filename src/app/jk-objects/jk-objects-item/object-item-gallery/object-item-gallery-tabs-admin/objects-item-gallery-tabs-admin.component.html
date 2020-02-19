@@ -3,7 +3,7 @@
     <h2 class="gallery-settings__title">Настройка вкладок «Галереи»</h2>
     <section class="tabs">
         <form [formGroup]="form">
-            <div class="tabs__wrap" formArrayName="gallery" *ngFor="let tab of form.controls['gallery'].controls; let i = index">
+            <div class="tabs__wrap" formArrayName="gallery" *ngFor="let tab of form.controls['gallery']['controls']; let i = index">
                 <ng-container formGroupName="{{i}}">
                     <div class="tabs__container">
                         <h2 class="tabs__title">Вкладка {{i + 1}}</h2>

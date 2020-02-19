@@ -15,7 +15,7 @@ export class DynamicAdminContentComponent implements OnInit {
         this.showContentAdmin.emit(incrased);
     }
 
-    constructor( private scrollLock: WindowScrollLocker ) { }
+    constructor( public scrollLock: WindowScrollLocker ) { }
 
     ngOnInit() { this.scrollLock.block(); }
 }
