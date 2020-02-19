@@ -1,0 +1,232 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.documentation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__container {
+        width: 916px;
+        box-sizing: border-box;
+        padding: 48px 70px;
+        background-color: $col-white;
+        position: relative;
+    }
+
+    &__title {
+        width: 100%;
+        display: flex;
+
+        &_out-path {
+            margin: 0 0 24px;
+        }
+    }
+
+    &__btn {
+        height: 35px;
+        padding: 0 16px 0 36px;
+        font: 18px/23px $font-proba;
+        color: $col-white;
+        background: 16px 50% no-repeat #454545;
+
+        &_add-block {
+            background-image: url(/assets/img3red/documentation/add.svg);
+            margin: 0 0 48px;
+        }
+    }
+    &__close {
+        position: absolute;
+
+        &_main {
+            top: 0;
+            left: calc(100% + 24px);
+        }
+        &_success {
+            top: 56px;
+            left: calc(100% + 24px);
+        }
+    }
+    &__success-btn {
+        height: 48px;
+
+        &_success { margin-right: 8px; }
+        &_cancel {
+            font: 18px/23px $font-proba;
+            color: $col-black;
+            padding: 0 16px 0 8px;
+        }
+    }
+
+    &__objects {
+        width: 100%;
+    }
+
+    &__object {
+        width: 100%;
+        max-width: $w1600;
+        background: $col-ef;
+        padding: 16px 24px 32px;
+        box-sizing: border-box;
+        position: relative;
+        margin: 0 0 8px;
+
+        &-wrap {
+            position: relative;
+
+            &_head {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                margin: 0 0 50px;
+            }
+        }
+        &-btn {
+            &_controls {
+                margin: 0 8px;
+                font: 18px/23px $font-proba;
+                color: $col-black;
+                &:last-child { margin: 0 0 0 8px; }
+            }
+            &_load-file { background-image: url(/assets/img3red/documentation/pdf.svg); }
+        }
+
+        &-header {
+            width: calc(50% + 30px);
+            max-width: 520px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        &-input {
+            margin: 0 0 36px;
+        }
+
+        &-del-object {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #d5210d;
+            position: absolute;
+            left: -30px - 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 14px;
+                height: 2px;
+                background-color: #fff;
+                left: calc(50% - 7px);
+                top: calc(50% - .5px);
+            }
+        }
+
+        &-content {
+            width: 100%;
+            margin: 24px 0 0;
+        }
+    }
+}
+
+.upload-file {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 0 0 8px;
+    &:last-child { margin: 0; }
+
+    &__delete-btn {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        position: absolute;
+        left: 0px - (17px / 2);
+        top: 0;
+        background-color: $col-red;
+        display: flex;
+        justify-content: center;
+
+        span {
+            width: 8px;
+            height: 1px;
+            position: relative;
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: $col-white;
+                width: 100%;
+                height: 100%;
+                transform: rotate(45deg);
+            }
+            &::after { transform: rotate(-45deg); }
+        }
+    }
+
+    &__file-name {
+        max-width: 441px;
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        padding-left: 44px;
+        background: url(/assets/img3red/documentation/pdf_black.svg) 16px top no-repeat;
+    }
+
+    &__date {
+        font: 18px/23px $font-proba;
+        color: $col-black-5;
+    }
+}
+
+.admin-gallery_progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font: 15px/25px Arial, sans-serif;
+    z-index: 100;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    &-line {
+        width: 200px;
+        border: 1px solid white;
+        margin-top: 10px;
+        height: 15px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    &-line-inner {
+        box-sizing: border-box;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        background: white;
+        transition: .2s;
+    }
+}

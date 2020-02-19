@@ -9,6 +9,7 @@ export const ROUTES: Routes = [
     { path: 'location', loadChildren: './location/location.module#LocationModule' },
     { path: 'flats/search', loadChildren : './flats/flats.module#FlatsModule' },
     { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
+    { path: 'objects', loadChildren: './jk-objects/jk-objects.module#JkObjectsModule' },
 
     { path: 'error-404', loadChildren: './error-page/error-page.module#ErrorPageModule' },
     { path: '**', loadChildren: './error-page/error-page.module#ErrorPageModule' }

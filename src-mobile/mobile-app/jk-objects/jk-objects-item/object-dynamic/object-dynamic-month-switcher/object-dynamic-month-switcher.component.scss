@@ -1,0 +1,48 @@
+@import '../../../../../styles/modules/mixins/mixin';
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.month-switcher__btn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &-text {
+        font: 24px/29px $font-proba;
+        color: $col-black;
+    }
+    &_prev .month-switcher__btn-text { margin-left: 24px; }
+    &_next .month-switcher__btn-text { margin-right: 24px; }
+
+    @media (min-width: 1020px) {
+        &:hover {
+            .btn-slider {
+                background-color: $col-red_hover;
+                span::before,
+                span::after { background-color: $col-white; }
+            }
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .month-switcher__btn {
+
+        &-text {
+            font-size: 16px;
+            line-height: 19px;
+        }
+        &_prev .month-switcher__btn-text { margin-left: 8px; }
+        &_next .month-switcher__btn-text { margin-right: 8px; }
+
+        .btn-slider {
+            width: 40px;
+            height: 40px;
+            span { width: 12px; }
+        }
+    }
+}

@@ -1,0 +1,145 @@
+
+<div class="object-installment">
+
+    <div class="object-installment__container">
+
+        <ul class="object-installment__type">
+    
+            <li class="object-installment__type-item">
+                <label class="g-radiobox" (click)="typeInstallment = freeInstallment; formConvert()">
+                    <input type="radio" name="typeInstallment" [style.display]=" 'none' " checked>
+                    <div></div>
+                    <span class="object-installment__type-text">
+                        <span class="span-black span-block">Бесплатная рассрочка сроком до 6 месяцев</span>
+                        Первоначальный взнос — не менее 50% от прайсовой цены. 
+                        Погашение задолженности по рассрочке осуществляется 
+                        равными ежемесячными платежами.
+                    </span>
+                </label>
+            </li>
+            <li class="object-installment__type-item">
+                <label class="g-radiobox" (click)="typeInstallment = payInstallment; formConvert()">
+                    <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
+                    <div ></div>
+                    <span class="object-installment__type-text">
+                        <span class="span-block span-black">Платная рассрочка сроком от 7 до 24 месяцев</span>
+                        Первоначальный взнос — не менее 50% от прайсовой цены. 
+                        Погашение задолженности по рассрочке осуществляется 
+                        аннуитетными ежемесячными платежами.
+                    </span>
+                </label>
+            </li>
+            <li class="object-installment__type-item">
+                <label class="g-radiobox" (click)="typeInstallment = fullPay; formConvert()">
+                    <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
+                    <div></div>
+                    <span class="object-installment__type-text">
+                        <span class="span-block span-black">100% оплата</span>
+                        При 100% оплате предоставляется скидка в размере 3% 
+                        от стоимости квартиры, указанной в прайс-листе.
+                    </span>
+                </label>
+            </li>
+    
+        </ul>
+
+        <div class="object-installment__select">
+            <app-object-item-installment-type
+                (typeChanges)="typeInstallment = $event">
+            </app-object-item-installment-type>
+        </div>
+    
+        <ul class="object-installment__calculator installment-calculator">
+        
+            <li class="installment-calculator__item">
+                <span class="installment-calculator__item-text">Стоимость квартиры, &#8381;</span>
+                <input (change)="formChanges($event.target.value, 'price')"
+                       (input)="bitReplace($event.target.value, 'price')"
+                       (keyup)="keyUpReviuse($event)"
+                       [value]="form.price.val | objectInstallmentNumberPipe"
+                       class="field installment-calculator__item-field" type="text">
+                <div class="installment-calculator__item-wrap">
+                    <!-- <ghm-range-number 
+                        (move)="form.price.val = $event"
+                        (moveend)="formChanges($event, 'price')"
+                        [toFixed]="true"
+                        [min]="form.price.min"
+                        [max]="form.price.max"
+                        [start]="form.price.val">
+                    </ghm-range-number> -->
+                </div>
+            </li>
+            <li class="installment-calculator__item" *ngIf="typeInstallment !== fullPay">
+                <span class="installment-calculator__item-text">Первоначальный взнос, &#8381;</span>
+                <div class="installment-calculator__item-wrap installment-calculator__item-wrap_field">
+                    <input (change)="formChanges($event.target.value, 'firstpay')"
+                           (input)="bitReplace($event.target.value, 'firstpay')"
+                           (keyup)="keyUpReviuse($event);"
+                           [value]="form.firstpay.val | objectInstallmentNumberPipe"
+                           class="field installment-calculator__item-field" type="text">
+                    <p class="installment-calculator__item-field installment-calculator__item-field_percent">
+                        {{ firstpayPercent(form.firstpay.val, form.price.val) | objectInstallmentNumberPipe }}%
+                    </p>
+                </div>
+                <div class="installment-calculator__item-wrap ">
+                    <!-- <ghm-range-number 
+                        (move)="form.firstpay.val = $event"
+                        (moveend)="formChanges($event, 'firstpay')"
+                        [toFixed]="true"
+                        [min]="form.firstpay.min"
+                        [max]="form.firstpay.max"
+                        [start]="form.firstpay.val">
+                    </ghm-range-number> -->
+                </div>
+            </li>
+            <li class="installment-calculator__item" *ngIf="typeInstallment !== fullPay">
+                <span class="installment-calculator__item-text">Срок выплат, месяцев</span>
+                <input (change)="formChanges($event.target.value, 'month')"
+                       (input)="bitReplace($event.target.value, 'month')"
+                       (keyup)="keyUpReviuse($event);"
+                       [value]="form.month.val"
+                       class="field installment-calculator__item-field" type="text">
+                <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__item-wrap">
+                    <!-- <ghm-range-number
+                        (move)="form.month.val = $event"
+                        (moveend)="formChanges($event, 'month')"
+                        [toFixed]="true"
+                        [min]="typeInstallment === freeInstallment ? form.month.min : 7"
+                        [max]="typeInstallment === freeInstallment ? form.month.max : 24"
+                        [start]="typeInstallment === freeInstallment ? form.month.val : 7">
+                    </ghm-range-number> -->
+                </div>
+            </li>
+        </ul>
+    
+        <div class="object-installment__result installment-calculator__result">
+    
+            <div class="installment-calculator__result-item">
+                <p class="installment-calculator__result-title">Сумма</p>
+                <p class="installment-calculator__result-result">{{form.price.val | objectInstallmentNumberPipe }} &#8381;</p>
+            </div>
+    
+            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item" *ngIf="typeInstallment !== fullPay">
+                <p class="installment-calculator__result-title">Ставка</p>
+                <p class="installment-calculator__result-result">{{percent}}% годовых</p>
+            </div>
+    
+            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item" *ngIf="typeInstallment !== fullPay">
+                <p class="installment-calculator__result-title">Размер ежемесячных выплат</p>
+                <p class="installment-calculator__result-result">{{ monthPay | objectInstallmentNumberPipe }} &#8381;</p>
+            </div>
+    
+            <div class="installment-calculator__result-item" *ngIf="typeInstallment === fullPay">
+                <p class="installment-calculator__result-title">Размер скидки</p>
+                <p class="installment-calculator__result-result">{{ fullPaySale(form.price.val) | objectInstallmentNumberPipe }} &#8381;</p>
+            </div>
+    
+            <div class="installment-calculator__result-item" *ngIf="typeInstallment === fullPay">
+                <p class="installment-calculator__result-title">Итоговая стоимость квартиры</p>
+                <p class="installment-calculator__result-result">{{ fullPayPrice(form.price.val) | objectInstallmentNumberPipe }} &#8381;</p>
+            </div>
+    
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,111 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.object-purchase {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin: 0 0 96px;
+
+    &__head { margin: 0 0 16px; }
+
+    &__options {
+        margin: 0 0 16px;
+        .btn__admin-setting { margin-right: 8px; }
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 16px;
+
+        &-list {
+            display: flex;
+            border-bottom: 1px solid #d8d8d8;
+        }
+        &-item {
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            position: relative;
+            padding: 8px 0;
+            margin-right: 16px;
+            cursor: pointer;
+            &:last-child { margin-right: 0; }
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: #d8d8d8;
+            }
+            &_active {
+                color: $col-red;
+                &::before { background-color: $col-red; }
+            }
+        }
+    }
+
+    &__list {
+        width: 100%;
+        background-color: $col-white;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding: 56px 0 (54px - 16px);
+
+        &-btn {
+            padding-right: 8px + 16px;
+            background: url(/assets/img/jk-object/more-bank.svg) right center no-repeat;
+            color: $col-red;
+        }
+
+        &-container {
+            width: 916px;
+            height: (98px * 5) + 39px;
+            overflow: hidden;
+            transition: height .4s ease;
+            &_more { height: (98px * 10) + 39px; }
+        }
+        &-head { display: flex; }
+        &-text {
+            font: 18px/23px $font-proba;
+            color: $col-black;
+
+            &_head {
+                color: $col-black-5;
+                padding: 8px 0;
+                &:nth-child(1) { width: 36px + 246px; }
+                &:nth-child(2) { width: 75px + 88px; }
+                &:nth-child(3) { width: 41px + 172px; }
+                &:nth-child(4) { width: 170px; }
+            }
+            &_grey { color: $col-black-5; }
+        }
+
+        &-item {
+            width: 100%;
+            height: 98px;
+            box-sizing: border-box;
+            border-top: 1px solid #d8d8d8;
+            display: flex;
+            align-items: center;
+        }
+
+        &-image { 
+            width: 64px;
+            height: 64px;
+            margin-right: 16px;
+
+            img {
+                width: 100%;
+                max-height: 100%;
+            }
+        }
+        &-name { width: 164px + 38px; }
+        &-rate { width: 32px + 131px; }
+        &-date { width: 74px + 139px; }
+        &-payment { width: 170px; }
+    }
+}

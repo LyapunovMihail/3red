@@ -37,11 +37,8 @@
 }
 
 @font-face {
-    font-family: 'ProbaPro';
-    src: url('/assets/fonts/probapro/ProbaPro-Regular.eot');
-    src: url('/assets/fonts/probapro/ProbaPro-Regular.eot') format('embedded-opentype'),
-         url('/assets/fonts/probapro/ProbaPro-Regular.woff') format('woff'),
-         url('/assets/fonts/probapro/ProbaPro-Regular.ttf') format('truetype');
-    font-style: normal;
-    font-weight: normal;
+  font-family: 'ProbaPro';
+  src: url('/assets/fonts/probapro/ProbaProRegular.otf');
+  font-style: normal;
+  font-weight: normal;
 }

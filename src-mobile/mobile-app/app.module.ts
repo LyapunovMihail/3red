@@ -30,6 +30,7 @@ import { FlatsModule } from './flats/flats.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
 import { DecorationModule } from './decoration/decoration.module';
 import { LocationModule } from './location/location.module';
+import { JkObjectsModule } from './jk-objects/jk-objects.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -65,6 +66,7 @@ const APP_MODULES = [
     FavoritesModule,
     FlatsModule,
     DecorationModule,
+    JkObjectsModule,
 
     BrowserModule,
     BrowserAnimationsModule,

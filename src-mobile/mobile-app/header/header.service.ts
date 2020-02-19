@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NAVANCHORS } from './navAnchors';
 
 export interface IHeaderLink {
     name: string;
@@ -10,45 +11,47 @@ export interface IHeaderLink {
 
 export class HeaderService {
 
+    public navAnchors = NAVANCHORS;
+
     constructor(
         private http: HttpClient
     ) { }
-
-    public writeSessionForFullVersion() {
-        return this.http.get('/api/agent/desktop');
-    }
 
     public getDynamicLink() {
         return this.http.get('/api/dynamic/last/link');
     }
 
-    public links(data) {
+    public links(data): IHeaderLink[] {
         let date = new Date();
         let year = (data.year) ? data.year : date.getFullYear();
         let month = (data.month) ? data.month : ( date.getMonth() + 1 );
         return [
             {
-                name: 'О ЖК',
+                name: 'О компании',
                 url: '/about'
             }, {
-                name: 'Расположение',
-                url: `/location/routes`
-            }, {
-                name: 'Инфраструктура',
-                url: `/location/infrastructure`
+                name: 'Объекты',
+                url: `/objects`
             }, {
                 name: 'Квартиры',
                 url: `/flats`
             }, {
-                name: 'Отделка',
-                url: '/decoration'
-            }, {
-                name: 'Условия покупки',
-                url: '/purchase'
+                name: 'Контакты',
+                url: '/contacts'
             }, {
                 name: 'Новости',
                 url: '/news-shares'
+            }, {
+                name: '3-Red Сервис',
+                url: '/service'
+            }, {
+                name: 'Избранное',
+                url: '/favorites'
             }
         ];
+    }
+
+    public getNavAnchors(page): IHeaderLink[] {
+        return this.navAnchors[page];
     }
 }

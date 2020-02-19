@@ -1,0 +1,63 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.object-builder {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__admin-btn {
+        margin: 16px 0 0;
+    }
+
+    &__social {
+        margin: 24px 0 16px;
+
+        &-item {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            margin-right: 13px;
+            background-color: rgba(216, 216, 216, .3);
+            transition: background-color .2s linear;
+            &:last-child { margin-right: 0; }
+            &:hover {
+                background-color: $col-red_hover;
+                .object-builder__social-item_for-hover {
+                    fill: $col-white;
+                }
+            }
+
+            &_for-hover { transition: fill .2s linear; }
+        }
+    }
+}
+
+.project__description {
+    width: 100%;
+    max-width: 710px;
+    font: 24px/29px $font-proba;
+    color: $col-black;
+    margin: 0 0 40px;
+    
+}
+.project-indicators__title {
+    margin: 0 0 24px;
+}
+.indicators__grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 24px;
+    column-gap: 30px;
+    justify-content: flex-start;
+}
+.project-indicators__key {
+    font: 16px/19px $font-proba;
+    color: $col-black-5;
+    margin-bottom: 12px;
+}
+.project-indicators__value {
+    font: 24px/29px $font-proba;
+    color: #000;
+}

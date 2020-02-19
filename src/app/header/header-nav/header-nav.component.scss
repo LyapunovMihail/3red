@@ -1,0 +1,77 @@
+.project__nav {
+    position: absolute;
+    top: 77px;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    height: 55px;
+    background: transparent;
+    box-sizing: border-box;
+    // margin-bottom: 1px;
+
+    &-container {
+        width: 100%;
+        max-width: calc(1280px - 64px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-fixed {
+        position: fixed;
+        top: 0;
+        transform: translateY(0);
+        left: 0;
+        width: 100%;
+        z-index: 50;
+        transition: transform 0.2s linear;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+        background: #f5f5f5;
+
+        &--side {
+            transform: translateY(77px);
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    &-progress {
+        position: absolute;
+        top: 54px;
+        height: 1px;
+        background-color: red;
+    }
+}
+
+.project__nav-bar {
+    position: relative;
+    display: flex;
+
+
+
+}
+.project__nav-link {
+    color:rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    margin-right: 16px;
+    padding-bottom: 17px;
+    transition: color .4s linear
+;
+    &:hover {
+        color: #ee4237;
+    }
+}
+.active-link{
+    color: #ee4237;
+}
+
+.photo__btn {
+    display: flex;
+    align-items: center;
+    color: #000;
+    &::after {
+        content: url(/assets/img/jk-object/photo_rep_icon.svg);
+        padding-left: 8px;
+    }
+}

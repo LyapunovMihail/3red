@@ -1,0 +1,38 @@
+@import "../../styles/modules/mixins/mixin";
+
+.modal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__container {
+        width: 916px;
+        box-sizing: border-box;
+        padding: 48px 70px;
+        background-color: $col-white;
+        position: relative;
+    }
+
+    &__close {
+        position: absolute;
+
+        &_main {
+            top: 0;
+            left: calc(100% + 24px);
+        }
+        &_success {
+            top: 56px;
+            left: calc(100% + 24px);
+        }
+    }
+    &__success-btn {
+        height: 48px;
+
+        &_success { margin-right: 8px; }
+        &_cancel {
+            font: 18px/23px $font-proba;
+            color: $col-black;
+            padding: 0 16px 0 8px;
+        }
+    }
+}

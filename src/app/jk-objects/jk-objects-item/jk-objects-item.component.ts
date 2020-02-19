@@ -1,15 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
+import { EventsService } from '../../commons/events.service';
 
 @Component({
-  selector: 'app-jk-objects-item',
-  templateUrl: './jk-objects-item.component.html',
-  styleUrls: ['./jk-objects-item.component.scss']
+    selector: 'app-jk-objects-item',
+    templateUrl: './jk-objects-item.component.html',
+    styleUrls: ['./jk-objects-item.component.scss']
 })
-export class JkObjectsItemComponent implements OnInit {
+export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  constructor() { }
+    public authorizationEvent;
+    public isAuthorizated = false;
+    public intervalTimer;
 
-  ngOnInit() {
-  }
+    @ViewChild('container')
+    public container: ElementRef;
+
+    constructor(
+        private authorization: AuthorizationObserverService,
+        private eventsService: EventsService
+    ) { }
+
+    ngOnInit() {
+        this.authorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
+            this.isAuthorizated = val;
+        });
+    }
+
+    ngAfterViewInit() {
+        this.eventsService.checkHeightResize(this, this.container);
+    }
+
+    ngOnDestroy() {
+        this.authorizationEvent.unsubscribe();
+        clearInterval(this.intervalTimer);
+    }
 
 }

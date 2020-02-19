@@ -1,0 +1,103 @@
+@import '../../../../styles/modules/mixins/mixin';
+
+.btn__admin-setting { margin: 16px 0 0; }
+.btn__admin-content { margin: 0 0 24px; }
+
+.object-dynamic {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 77px 0 128px;
+    position: relative;
+
+    &__container {
+        width: 100%;
+        max-width: $container;
+        padding: 79px 0 0;
+    }
+    &__back {
+        width: calc(100% - 64px);
+        max-width: 1280px - 64px;
+        position: absolute;
+        top: 91px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &-btn {
+            font: 24px/29px $font-proba;
+            color: $col-black;
+            padding-left: 8px + 28px;
+            position: relative;
+            cursor: pointer;
+            &::before {
+                content: '';
+                position: absolute;
+                top: -4px;
+                left: 0;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: url(/assets/img/arrrow.svg) center no-repeat rgba($color: $col-black, $alpha: .3);
+                transition: background-color .2s linear;
+            }
+            &:hover::before {
+                background-color: rgba($color: $col-black, $alpha: .5);
+            }
+        }
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: flex-start;
+        margin: 24px 0;
+
+        &-list {
+            display: flex;
+            border-bottom: 1px solid #d8d8d8;
+        }
+        &-item {
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            position: relative;
+            padding: 8px 0;
+            margin-right: 16px;
+            cursor: pointer;
+            &:last-child { margin-right: 0; }
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: #d8d8d8;
+            }
+            &_active {
+                color: $col-red;
+                &::before { background-color: $col-red; }
+            }
+        }
+    }
+
+    &__date { margin: 0 0 24px; }
+    &__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        &-gallery {
+            width: 822px;
+            margin: 0 0 40px;
+        }
+        &-schema {
+            width: 182px;
+            position: -webkit-sticky;
+            position: sticky;
+            padding: 45px 0 0;
+            top: 100px;
+        }
+    }
+    &__month-switcher { width: 100%; }
+}

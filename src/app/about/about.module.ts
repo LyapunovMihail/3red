@@ -1,4 +1,3 @@
-import { AboutDocumentationComponent } from './documentation/about-documentation.component';
 import { AboutMembersComponent } from './members/about-members.component';
 import { AboutBuilderComponent } from './builder/about-builder.component';
 import { CommonModule } from '@angular/common';
@@ -19,8 +18,7 @@ const AboutComponents = [
     AboutGalleryComponent,
     AboutGalleryAdminComponent,
     AboutBuilderComponent,
-    AboutMembersComponent,
-    AboutDocumentationComponent
+    AboutMembersComponent
 ];
 
 @NgModule({

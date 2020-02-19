@@ -1,0 +1,33 @@
+
+<section class="bank-modal">
+
+    <div class="bank-modal__head">
+        <button class="bank-modal__head-btn btn-cls"
+            (click)="close(false); this.scrollLocker.unblock()"><span></span></button>
+    </div>
+
+    <ul class="bank-modal__list">
+
+        <li class="bank-modal__list-item bank" *ngFor="let bank of bankList">
+
+            <div class="bank__head">
+                <div class="bank__head-logo"><img src="{{bank.image}}" alt="{{bank.name}}"></div>
+                <div class="bank__head-name">{{bank.name}}</div>
+            </div>
+            <div class="bank__info">
+                <div class="bank__info-item">
+                    <div class="bank__info-name">Ставка от</div>
+                    <div class="bank__info-val">{{bank.rate}}</div>
+                </div>
+                <div class="bank__info-item">
+                    <div class="bank__info-name">Срок</div>
+                    <div class="bank__info-val">{{bank.date}}</div>
+                </div>
+                <div class="bank__info-item">
+                    <div class="bank__info-name">Минимальный взнос</div>
+                    <div class="bank__info-val">{{bank.payment}}</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
