@@ -4,6 +4,7 @@ import { ObjectsFlatController } from './flat-api/objects-flat.controller';
 import { ObjectsTabsController } from './tabs-api/objects-tabs.controller';
 import { ObjectsGalleryController } from './gallery-api/objects-gallery.controller';
 import { ObjectsDocumentaionController } from './documentation-api/objects-documentation.controller';
+import { ObjectsDecorationController } from './decoration-api/objects-decoration.controller';
 
 export const objectControllers = [
     ObjectsPreviewController,
@@ -11,5 +12,6 @@ export const objectControllers = [
     ObjectsFlatController,
     ObjectsTabsController,
     ObjectsGalleryController,
-    ObjectsDocumentaionController
+    ObjectsDocumentaionController,
+    ObjectsDecorationController
 ]

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Иконка_унитаз</title>
+    <desc>Created with Sketch.</desc>
+    <g id="overflow_отделка" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-169.000000, -85.000000)" stroke="#ee4237">
+            <g id="Иконка_унитаз" transform="translate(169.000000, 85.000000)">
+                <g id="Group">
+                    <rect id="Rectangle" x="10.5" y="0.5" width="1" height="17"></rect>
+                    <rect id="Rectangle-Copy" x="0.5" y="0.5" width="1" height="31"></rect>
+                    <rect id="Rectangle-Copy-4" x="25.5" y="18.5" width="1" height="13"></rect>
+                    <rect id="Rectangle-Copy-2" x="1.5" y="0.5" width="8" height="1"></rect>
+                    <rect id="Rectangle-Copy-3" x="1.5" y="31.5" width="30" height="1"></rect>
+                    <path d="M31.3937495,18.5002219 L10.6062505,18.5002219 C11.3371785,23.6179235 15.741618,27.5 21,27.5 C26.258382,27.5 30.6628215,23.6179235 31.3937495,18.5002219 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                    <rect id="Rectangle" x="10.5" y="16.5" width="21" height="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

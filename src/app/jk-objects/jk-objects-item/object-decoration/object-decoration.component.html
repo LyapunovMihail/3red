@@ -1,0 +1,88 @@
+<section class="object-decoration"  [class.object-item--margin]="switchOn || isAuthorizated">
+    <div class="object-item__container object-decoration__container">
+        <div class="object-decoration__head">
+            <input type="checkbox" name="switch" id="decoration-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
+            <label *ngIf="isAuthorizated" for="decoration-switch" class="object-item__title">Отделка квартир</label>
+        </div>
+
+        <ng-container *ngIf="switchOn">
+
+            <h2 *ngIf="!isAuthorizated">Отделка квартир</h2>
+
+            <div class="object-decoration__options" *ngIf="isAuthorizated">
+                <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
+                <button class="btn__admin-content btn_var-2" (click)="closeContentModal = false">Контент</button>
+            </div>
+
+            <nav class="object-decoration__nav" *ngIf="contentSnippet?.data?.length && this.currentTab">
+                <ul class="object-decoration__nav-list">
+                    <ng-container *ngFor="let data of contentSnippet.data">
+                        <li class="object-decoration__nav-item" *ngIf="data.tab.show && !data.tab.decorationType"
+                            [ngClass]="{'object-decoration__nav-item_active': data.tab.name === currentTab.tab.name}"
+                            (click)="changeTab(data)">{{data.tab.name}}</li>
+                    </ng-container>
+                </ul>
+            </nav>
+
+            <div class="object-decoration__slider">
+                <div class="object-decoration__slider-wrap object-decoration__slider-wrap_slides">
+
+                    <div class="object-decoration__slider-item decoration-slider">
+
+                        <button (click)="prevBtn()" class="decoration-slider__btn decoration-slider__btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
+                        <button (click)="nextBtn()" class="decoration-slider__btn decoration-slider__btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
+
+                        <div class="decoration-slider__dots" *ngIf="currentTab">
+                            <span *ngFor="let dots of currentTab.images; let i = index"
+                                 [ngClass]="{'current-dots': currentSlide === i}"></span>
+                        </div>
+
+                        <div class="decoration-slider__path" *ngIf="currentType">
+                            <!-- decoration-slider__path-name_active - активный класс -->
+                            <p class="decoration-slider__path-name"
+                                [class.decoration-slider__path-name_active]="type === currentType"
+                                (click)="changeType(type)"
+                                *ngFor="let type of typesSnippet.decorationType">
+                                <ng-container *ngIf="checkTabImages(type)">{{type}}</ng-container>
+                            </p>
+                        </div>
+
+                        <ng-container *ngIf="currentTab">
+                            <div class="decoration-slider__slide" *ngFor="let slide of currentTab.images; let i = index"
+                                [ngClass]="{'current-slide': currentSlide === i}">
+                                <ng-container *ngIf="slide">
+                                    <img [src]="uploadsPath + slide.image" alt="image-slider">
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="object-decoration__slider-wrap object-decoration__slider-wrap_info">
+                    <ng-container *ngIf="currentTab">
+                        <ng-container *ngFor="let info of currentTab.info">
+                            <p class="decoration-slider__info decoration-slider__info_{{info.mod}}"
+                               *ngIf="info.name">{{info.name}}</p>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+</section>
+
+<app-objects-item-decoration-tabs-admin *ngIf="!closeTabsModal"
+    (closeModal)="closeTabsModal = $event"
+    [id]="objectId"
+    [contentSnippet]="contentSnippet"
+    (contentSnippetChange)="contentSnippet = $event; setCurrentTab()"
+    [(typesSnippet)]="typesSnippet">
+</app-objects-item-decoration-tabs-admin>
+
+<app-objects-item-decoration-content-admin *ngIf="!closeContentModal"
+    [id]="objectId"
+    [contentSnippet]="contentSnippet"
+    (contentSnippetChange)="contentSnippet = $event; setCurrentTab()"
+    (closeModal)="closeContentModal = $event">
+</app-objects-item-decoration-content-admin>

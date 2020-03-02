@@ -13,7 +13,7 @@ export class ObjectsTabsModel {
 
     async getGalleryTabs(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria, {decoration: 0});
+        return await this.collection.findOne(findCriteria, {decorationType: 0});
     }
 
     async updateGalleryTabs(parameters) {
@@ -35,7 +35,7 @@ export class ObjectsTabsModel {
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'decoration', async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
-            const created = await this.collection.update({ objectId : options.objectId }, { $set : {decoration: options.decoration, created_at: options.created_at, last_modifyed: options.last_modifyed} }, {upsert: true});
+            const created = await this.collection.update({ objectId : options.objectId }, { $set : {decorationType: options.decorationType, created_at: options.created_at, last_modifyed: options.last_modifyed} }, {upsert: true});
         });
     }
 
@@ -60,7 +60,7 @@ export class ObjectsTabsModel {
     private valuesReview(options) {
         // если есть все параметры
         console.log('options: ', options);
-        return ( 'objectId' in options && ('gallery' in options || 'decoration' in options)  ? true : false );
+        return 'objectId' in options && ('gallery' in options || 'decorationType' in options);
     }
 
 }

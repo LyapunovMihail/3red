@@ -1,0 +1,106 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
+
+    <!--<h2 class="gallery-settings__title">Настройка вкладок «Галереи»</h2>-->
+    <!--<section class="tabs">-->
+        <!--<form [formGroup]="form">-->
+            <!--<div class="tabs__wrap" formArrayName="gallery" *ngFor="let tab of form.controls['gallery']['controls']; let i = index">-->
+                <!--<ng-container formGroupName="{{i}}">-->
+                    <!--<div class="tabs__container">-->
+                        <!--<h2 class="tabs__title">Вкладка {{i + 1}}</h2>-->
+                        <!--<div class="tabs__nav">-->
+                            <!--<label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{tab.controls.show.value ? 'Выключить' : 'Включить'}}</label>-->
+                            <!--<a class="tabs__nav-link" (click)="popTab(i)">Удалить</a>-->
+                            <!--<a class="tabs__nav-link">Вверх</a>-->
+                            <!--<a class="tabs__nav-link">Вниз</a>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                    <!--<div class="form">-->
+                        <!--<div class="form-item">-->
+                            <!--<input type="text" class="form-input info-input" appSlideTopLabel formControlName="name">-->
+                            <!--<label class="form-label info-suptitle">Название вкладки</label>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</ng-container>-->
+            <!--</div>-->
+        <!--</form>-->
+        <!--<button class="btn btn&#45;&#45;settings" (click)="pushTab()">Добавить вкладку</button>-->
+
+    <!--</section>-->
+
+    <div class="hint">
+        <h4 class="hint__title">Как работает:</h4>
+        <a href="javascript:void(0)" class="hint__link" (click)="showHint = true">Показать подсказку</a>
+        <div class="hint__content" *ngIf="showHint">
+            <div class="hint__wrap">
+                <p class="hint__text">1) Настройка видов отделки</p>
+                <p class="hint__text hint__text--opacity">Если для данного ЖК есть деление на виды отделки, то создайте карточки видов отделки.
+                    Для этого нажмите кнопку «Добавить вид отделки», затем задайте имя виду отделки. Необходимо создать минимум два вида отделки. Если отделка только одного вида, то можно приступать
+                    к редактированию общих вкладок (п. 2). </p>
+            </div>
+            <div class="hint__wrap">
+                <p class="hint__text">2) Настройка вкладок отделки</p>
+                <p class="hint__text hint__text--opacity ">Основные вкладки созданы автоматически. При необходимости можно добавить больше вкладок, для этого нажмите кнопку «Добавить вкладку», затем задайте имя вкладке.</p>
+            </div>
+            <div class="hint__wrap">
+                <p class="hint__text">3) Подключение видов отделки к вкладкам отделки</p>
+                <p class="hint__text hint__text--opacity ">После создания видов отделки и всех вкладок необходимо проставить галочки на чекбоксах «Подключить виды отделки» для тех вкладок, на которых есть деление на виды отделки.</p>
+            </div>
+            <div class="hint__wrap">
+                <p class="hint__text">4) Сохраните изменения</p>
+            </div>
+            <a href="javascript:void(0)" class="hint__link btn-hide" (click)="showHint = false">Скрыть подсказку</a>
+        </div>
+    </div>
+
+    <h2 class="decoration__title">Настройка видов отделки</h2>
+    <form class="tabs" [formGroup]="typesForm">
+        <div class="tabs__wrap" formArrayName="decorationType" *ngFor="let type of typesForm.get('decorationType')['controls']; let i = index">
+            <div class="tabs__container">
+                <h2 class="tabs__title">Вид отделки {{i + 1}}</h2>
+                <div class="tabs__nav">
+                    <a href="javascript:void(0)" (click)="popType(i)" class="tabs__nav-link">Удалить</a>
+                </div>
+            </div>
+            <div class="form">
+                <div class="form-item">
+                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="{{i}}" required>
+                    <label class="form-label info-suptitle">Название вида отделки</label>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn--settings" (click)="pushType()">Добавить вид отделки</button>
+    </form>
+
+    <h2 class="decoration-tabs__title">Настройка вкладок отделки</h2>
+    <form class="tabs" [formGroup]="form">
+        <ng-container formArrayName="data" *ngFor="let data of form.get('data')['controls']; let i = index">
+            <ng-container formGroupName="{{i}}">
+                <!--<div class="tabs__wrap" formGroupName="tab">-->
+                <div class="tabs__wrap" formGroupName="tab" *ngIf="!data.get('tab')['controls'].decorationType?.value">
+                    <div class="tabs__container">
+                        <h2 class="tabs__title">Вкладка {{getTabIndex(i)}}</h2>
+                        <!--<h2 class="tabs__title">Вкладка {{i + 1}}</h2>-->
+                        <div class="tabs__nav">
+                            <!--<a href="#" class="tabs__nav-link">Выключить</a>-->
+                            <label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{data.get('tab')['controls'].show.value ? 'Выключить' : 'Включить'}}</label>
+                            <a href="javascript:void(0)" class="tabs__nav-link" (click)="popTab(i)">Удалить</a>
+                            <a href="#" class="tabs__nav-link">Вверх</a>
+                            <a href="#" class="tabs__nav-link">Вниз</a>
+                        </div>
+                    </div>
+                    <div class="form">
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="name" required>
+                            <label class="form-label info-suptitle">Название вкладки</label>
+                        </div>
+                    </div>
+                    <input class="decoration__checkbox" type="checkbox" formControlName="turnOnDecorationTypes" id="decoration{{i}}">
+                    <label class="decoration__label" for="decoration{{i}}">Подключить виды отделки</label>
+                </div>
+            </ng-container>
+        </ng-container>
+        <button class="btn btn--settings" (click)="pushTab()">Добавить вкладку</button>
+    </form>
+
+</app-admin-modal>

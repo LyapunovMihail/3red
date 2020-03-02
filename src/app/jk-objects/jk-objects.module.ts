@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from "@angular/router";
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AdminModalModule } from '../admin-modal/admin-modal.module';
@@ -11,25 +11,25 @@ import { GHMTextAreaModule } from '../UI/ghm-textarea/ghm-textarea.module';
 import { JkObjectsComponent } from './jk-objects.component';
 import { JkObjectsListComponent } from './jk-objects-list/jk-objects-list.component';
 import { JkObjectsItemComponent } from './jk-objects-item/jk-objects-item.component';
-import { ObjectItemPreviewComponent } from './jk-objects-item/object-item-preview/object-item-preview.component';
-import { ObjectItemFilterComponent } from './jk-objects-item/object-item-filter/object-item-filter.component';
-import { ObjectItemTriggerComponent } from './jk-objects-item/object-item-trigger/object-item-trigger.component';
-import { ObjectItemStorageComponent } from './jk-objects-item/object-item-storage/object-item-storage.component';
-import { ObjectItemProjectComponent } from './jk-objects-item/object-item-project/object-item-project.component';
-import { ObjectItemFlatComponent } from './jk-objects-item/object-item-flat/object-item-flat.component';
-import { ObjectItemGalleryComponent } from './jk-objects-item/object-item-gallery/object-item-gallery.component';
-import { ObjectItemDecorationComponent } from './jk-objects-item/object-item-decoration/object-item-decoration.component';
-import { ObjectItemLocationComponent } from './jk-objects-item/object-item-location/object-item-location.component';
-import { ObjectItemPurchaseComponent } from './jk-objects-item/object-item-purchase/object-item-purchase.component';
-import { ObjectItemNewsComponent } from './jk-objects-item/object-item-news/object-item-news.component';
-import { ObjectItemDocumentationComponent } from './jk-objects-item/object-item-documentation/object-item-documentation.component';
-import { ObjectItemMembersComponent } from './jk-objects-item/object-item-members/object-item-members.component';
-import { ObjectItemProjectsComponent } from './jk-objects-item/object-item-projects/object-item-projects.component';
-import { ObjectItemInstallmentComponent } from './jk-objects-item/object-item-purchase/installment/object-item-installment.component';
-import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-item-purchase/installment/object-item-installment.pipe';
-import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-item-purchase/installment/object-item-installment.service';
-import { ObjectsItemPreviewAdminComponent } from './jk-objects-item/object-item-preview/objects-item-preview-admin/objects-item-preview-admin.component';
-import { ObjectsItemProjectAdminComponent } from './jk-objects-item/object-item-project/objects-item-project-admin/objects-item-project-admin.component';
+import { ObjectPreviewComponent } from './jk-objects-item/object-preview/object-preview.component';
+import { ObjectFilterComponent } from './jk-objects-item/object-filter/object-filter.component';
+import { ObjectTriggerComponent } from './jk-objects-item/object-trigger/object-trigger.component';
+import { ObjectStorageComponent } from './jk-objects-item/object-storage/object-storage.component';
+import { ObjectProjectComponent } from './jk-objects-item/object-project/object-project.component';
+import { ObjectFlatComponent } from './jk-objects-item/object-flat/object-flat.component';
+import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-gallery.component';
+import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
+import { ObjectLocationComponent } from './jk-objects-item/object-location/object-location.component';
+import { ObjectPurchaseComponent } from './jk-objects-item/object-purchase/object-purchase.component';
+import { ObjectNewsComponent } from './jk-objects-item/object-news/object-news.component';
+import { ObjectDocumentationComponent } from './jk-objects-item/object-documentation/object-documentation.component';
+import { ObjectMembersComponent } from './jk-objects-item/object-members/object-members.component';
+import { ObjectProjectsComponent } from './jk-objects-item/object-projects/object-projects.component';
+import { ObjectInstallmentComponent } from './jk-objects-item/object-purchase/installment/object-installment.component';
+import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-purchase/installment/object-installment.pipe';
+import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-purchase/installment/object-installment.service';
+import { ObjectPreviewAdminComponent } from './jk-objects-item/object-preview/object-preview-admin/object-preview-admin.component';
+import { ObjectProjectAdminComponent } from './jk-objects-item/object-project/object-project-admin/object-project-admin.component';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
 import { ObjectDynamicDateComponent } from './jk-objects-item/object-dynamic/object-dynamic-date/object-dynamic-date.component';
 import { ObjectDynamicGalleryComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/object-dynamic-gallery.component';
@@ -38,32 +38,34 @@ import { ObjectDynamicSlideshowComponent } from './jk-objects-item/object-dynami
 import { ObjectDynamicMonthSwitcherComponent } from './jk-objects-item/object-dynamic/object-dynamic-month-switcher/object-dynamic-month-switcher.component';
 import { DynamicAdminSettingsComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-settings/dynamic-admin-settings.component';
 import { DynamicAdminContentComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-content/dynamic-admin-content.component';
-import { ObjectsItemGalleryTabsAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-tabs-admin/objects-item-gallery-tabs-admin.component';
-import { ObjectsItemGalleryAdminComponent } from './jk-objects-item/object-item-gallery/object-item-gallery-content-admin/objects-item-gallery-admin.component';
-import { ObjectItemDocumentationAdminComponent } from './jk-objects-item/object-item-documentation/object-item-documentation-admin/object-item-documentation-admin.component';
+import { ObjectGalleryTabsAdminComponent } from './jk-objects-item/object-gallery/object-gallery-tabs-admin/object-gallery-tabs-admin.component';
+import { ObjectGalleryAdminComponent } from './jk-objects-item/object-gallery/object-gallery-content-admin/object-gallery-admin.component';
+import { ObjectDocumentationAdminComponent } from './jk-objects-item/object-documentation/object-documentation-admin/object-documentation-admin.component';
+import { ObjectDecorationTabsAdminComponent } from './jk-objects-item/object-decoration/object-decoration-tabs-admin/object-decoration-tabs-admin.component';
+import { ObjectDecorationAdminComponent } from './jk-objects-item/object-decoration/object-decoration-content-admin/object-decoration-admin.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
     JkObjectsListComponent,
     JkObjectsItemComponent,
-    ObjectItemPreviewComponent,
-    ObjectItemFilterComponent,
-    ObjectItemTriggerComponent,
-    ObjectItemStorageComponent,
-    ObjectItemProjectComponent,
-    ObjectItemFlatComponent,
-    ObjectItemGalleryComponent,
-    ObjectItemDecorationComponent,
-    ObjectItemLocationComponent,
-    ObjectItemPurchaseComponent,
-    ObjectItemNewsComponent,
-    ObjectItemDocumentationComponent,
-    ObjectItemMembersComponent,
-    ObjectItemProjectsComponent,
-    ObjectItemInstallmentComponent,
+    ObjectPreviewComponent,
+    ObjectFilterComponent,
+    ObjectTriggerComponent,
+    ObjectStorageComponent,
+    ObjectProjectComponent,
+    ObjectFlatComponent,
+    ObjectGalleryComponent,
+    ObjectDecorationComponent,
+    ObjectLocationComponent,
+    ObjectPurchaseComponent,
+    ObjectNewsComponent,
+    ObjectDocumentationComponent,
+    ObjectMembersComponent,
+    ObjectProjectsComponent,
+    ObjectInstallmentComponent,
     ObjectPurchaseInstallmentNumberPipe,
-    ObjectsItemPreviewAdminComponent,
-    ObjectsItemProjectAdminComponent,
+    ObjectPreviewAdminComponent,
+    ObjectProjectAdminComponent,
     ObjectDynamicComponent,
     ObjectDynamicDateComponent,
     ObjectDynamicGalleryComponent,
@@ -72,10 +74,11 @@ const jkObjectsComponents = [
     ObjectDynamicMonthSwitcherComponent,
     DynamicAdminSettingsComponent,
     DynamicAdminContentComponent,
-    ObjectsItemGalleryTabsAdminComponent,
-    ObjectsItemGalleryAdminComponent,
-    ObjectItemDocumentationAdminComponent
-
+    ObjectGalleryTabsAdminComponent,
+    ObjectGalleryAdminComponent,
+    ObjectDocumentationAdminComponent,
+    ObjectDecorationTabsAdminComponent,
+    ObjectDecorationAdminComponent
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import { AuthorizationObserverService } from './../../../authorization/authoriza
 // import { DynamicService } from './dynamic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
 import { fakeObject } from './mockObject';
 
 @Component({
@@ -37,6 +38,7 @@ export class ObjectDynamicComponent implements OnInit {
     }
 
     constructor(
+        public location: Location,
         private router: Router,
         private authorization: AuthorizationObserverService,
         public activatedRoute: ActivatedRoute,
@@ -54,7 +56,6 @@ export class ObjectDynamicComponent implements OnInit {
             this.routerEvent = this.activatedRoute.params.subscribe((params) => {
                 // this.reviseUrlParams(params);
             });
-
             // this.dynamicService.getObjects().subscribe(
             //     (data: IDynamicObject[]) => this.objectsArray = data,
             //     (err) => console.error(err)

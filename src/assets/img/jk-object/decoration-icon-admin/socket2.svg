@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Иконка_розетка</title>
+    <desc>Created with Sketch.</desc>
+    <g id="overflow_отделка" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-169.000000, -141.000000)">
+            <g id="Иконка_розетка" transform="translate(169.000000, 141.000000)">
+                <g id="Group">
+                    <rect id="Rectangle" stroke="#ee4237" x="0.5" y="0.5" width="31" height="31"></rect>
+                    <circle id="Oval" stroke="#ee4237" cx="16" cy="16" r="10"></circle>
+                    <rect id="Rectangle" stroke="#ee4237" fill="#D8D8D8" x="12.5" y="12.5" width="1" height="3"></rect>
+                    <rect id="Rectangle-Copy" stroke="#ee4237" fill="#D8D8D8" x="19.5" y="12.5" width="1" height="3"></rect>
+                    <rect id="Rectangle-Copy-2" stroke="#ee4237" fill="#D8D8D8" x="14.5" y="19.5" width="3" height="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

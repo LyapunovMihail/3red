@@ -1,0 +1,126 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
+
+    <h2 class="decoration-settings__title">Настройка контента</h2>
+    <form [formGroup]="form">
+        <div class="decoration-settings__item" formArrayName="data" *ngFor="let data of form.get('data')['controls']; let i = index">
+            <div class="item__wrap" formGroupName="{{i}}">
+                <div class="title__wrap">
+                    <h2 class="decoration-settings__item-title">{{data.get('tab')['controls'].name.value}}</h2>
+                    <h2 class="decoration-settings__item-title decoration-settings__item-title--gray" *ngIf="data.get('tab')['controls'].decorationType?.value">{{data.get('tab')['controls'].decorationType.value}}</h2>
+                </div>
+                <label class="btn btn--camera">Загрузить фото
+                    <input style="display: none;" type="file" accept=".jpg" (change)="imageUpload($event, i)">
+                </label>
+                <div class="wrap">
+                    <div class="decoration-settings__wrapper" formArrayName="images" *ngFor="let image of data.get('images')['controls']; let j = index">
+                        <ng-container formGroupName="{{j}}">
+                            <button class="button__delete" (click)="deleteImage(i, j)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                            <img class="bg-img" [src]="uploadsPath + image.get('thumbnail').value" alt="image" width="94" height="62">
+                        </ng-container>
+                    </div>
+                </div>
+                <button class="btn btn--settings" (click)="addInfo(i)">Добавить описание</button>
+                <div class="form">
+
+                    <div class="form__item-wrapper" formArrayName="info" *ngFor="let info of data.get('info')['controls']; let j = index">
+                        <ng-container formGroupName="{{j}}">
+                            <div class="decoration-settings__img-wrap" *ngIf="info.get('mod').value">
+                                <img src="/assets/img/jk-object/decoration-icon-admin/{{info.get('mod').value}}.svg" alt="baseboard">
+                                <a class="decoration-settings__text" href="javascript:void(0)" (click)="showModalIcon(info)">Заменить</a>
+                            </div>
+                            <div class="decoration-settings__wrap-empty" *ngIf="!info.get('mod').value">
+                                <a class="decoration-settings__text" href="javascript:void(0)" (click)="showModalIcon(info)">Выбрать иконку</a>
+                            </div>
+                            <div class="form-item">
+                                <button *ngIf="info.get('mod').value" class="button__delete button__delete--textarea" (click)="delInfoIcon()"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                                <input type="text" class="form-input info-input textarea" appSlideTopLabel formControlName="name">
+                                <label class="form-label info-suptitle">Описание</label>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <!--<div class="form">-->
+                        <!--<div class="form__item-wrapper">-->
+                            <!--<div class="decoration-settings__wrap-empty">-->
+                                <!--<a class="decoration-settings__text" href="#">Выбрать иконку</a>-->
+                            <!--</div>-->
+                            <!--<div class="form-item">-->
+                                <!--<button class="button__delete button__delete&#45;&#45;textarea"><img class="tab__img " src="../assets/img/decorationContent/tab_delete.svg" alt="delete"></button>-->
+                                <!--<textarea type="text" class="form-input info-input textarea" required></textarea>-->
+                                <!--<label class="form-label info-suptitle">Описание</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </form>
+
+</app-admin-modal>
+
+<div class="g-modal-bg modal" *ngIf="showModal">
+    <div class="flex__wrap">
+        <div class="modal__wrap">
+            <button class="button button--del button--modal" (click)="showModal = false"><img src="/assets/img/jk-object/admin-modal/deleteWhite.svg" alt="cancel"></button>
+            <div class="modal__wrapper">
+                <div class="modal__items-wrap">
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration1" (change)="selectedIcon = 'roof'">
+                        <label class="decoration__label decoration__label--roof" for="decoration1">Потолок</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration2" (change)="selectedIcon = 'laminate'">
+                        <label class="decoration__label decoration__label--laminate" for="decoration2">Пол — ламинат</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration3" (change)="selectedIcon = 'tile'">
+                        <label class="decoration__label decoration__label--tile" for="decoration3">Пол — плитка</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration4" (change)="selectedIcon = 'plinth'">
+                        <label class="decoration__label decoration__label--plinth" for="decoration4">Плинтус</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration5" (change)="selectedIcon = 'door'">
+                        <label class="decoration__label decoration__label--door" for="decoration5">Двери</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration6" (change)="selectedIcon = 'wall'">
+                        <label class="decoration__label decoration__label--wall" for="decoration6">Стены</label>
+                    </div>
+                </div>
+
+                <div class="modal__items-wrap">
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration7" [value]="air" (change)="selectedIcon = 'air'">
+                        <label class="decoration__label decoration__label--air" for="decoration7">Кондиционер</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration8" [value]="toilet" (change)="selectedIcon = 'toilet'">
+                        <label class="decoration__label decoration__label--toilet" for="decoration8">Унитаз</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox " type="radio" name="decoration" id="decoration9" [value]="socket" (change)="selectedIcon = 'socket'">
+                        <label class="decoration__label decoration__label--socket" for="decoration9">Розетки</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration10" [value]="bathroom" (change)="selectedIcon = 'bathroom'">
+                        <label class="decoration__label decoration__label--bathroom" for="decoration10">Ванна</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration11" [value]="dry" (change)="selectedIcon = 'dry'">
+                        <label class="decoration__label decoration__label--dry" for="decoration11">Полотенцесушитель</label>
+                    </div>
+                    <div class="modal__items">
+                        <input class="decoration__checkbox" type="radio" name="decoration" id="decoration12" [value]="sink" (change)="selectedIcon = 'sink'">
+                        <label class="decoration__label decoration__label--sink" for="decoration12">Раковина</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrapper" >
+                <button class="btn  btn--save" (click)="setInfoIcon(); showModal = false">Добавить иконку</button><button class="btn  btn--cancel" (click)="showModal = false">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>

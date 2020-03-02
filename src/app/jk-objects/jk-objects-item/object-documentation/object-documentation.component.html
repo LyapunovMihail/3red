@@ -1,0 +1,41 @@
+<section class="object-documentation" [class.object-item--margin]="switchOn || isAuthorizated">
+
+    <div class="object-item__container object-documentation__container">
+
+        <div class="object-documentation__head">
+            <input type="checkbox" name="switch" id="documentation-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
+            <label *ngIf="isAuthorizated" for="documentation-switch" class="object-item__title">Документация</label>
+        </div>
+
+        <ng-container *ngIf="switchOn">
+            <h2 *ngIf="!isAuthorizated">Документация</h2>
+
+            <div class="object-documentation__options" *ngIf="isAuthorizated">
+                <button class="btn__admin-setting" (click)="closeModal = false">Настройки</button>
+            </div>
+
+            <ul class="object-documentation__list">
+
+                <li class="object-documentation__list-item" *ngFor="let item of snippet?.block">
+                    <h3 class="object-documentation__list-title">{{item.blockTitle}}</h3>
+                    <div class="object-documentation__list-wrap">
+                        <div class="object-documentation__list-wrap object-documentation__list-wrap_file" *ngFor="let doc of item.uploads">
+                            <a [href]="'/' + uploadsPath + doc.name"
+                                [attr.download]="doc.originalName"
+                                class="object-documentation__list-file">
+                                    {{doc.originalName}}
+                            </a>
+                            <p class="object-documentation__list-date">{{doc.date}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+    </div>
+</section>
+
+<app-objects-item-documentation-admin *ngIf="!closeModal"
+    [id]="objectId"
+    [(snippet)]="snippet"
+    (closeModal)="closeModal = $event">
+</app-objects-item-documentation-admin>

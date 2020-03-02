@@ -11,7 +11,6 @@ export interface IObjectGallerySnippet {
     image_data: IImageData[];
     created_at: any;
     last_modifyed: any;
-
 }
 
 export interface IImageData {

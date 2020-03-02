@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Иконка_ванна</title>
+    <desc>Created with Sketch.</desc>
+    <g id="overflow_отделка" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-113.000000, -36.000000)">
+            <g id="Иконка_ванна" transform="translate(113.000000, 36.000000)">
+                <g id="Group">
+                    <path d="M2.59023021,20.5 L4.35393013,31.0821995 C4.39411246,31.3232935 4.60270751,31.5 4.84712709,31.5 L25.2792408,31.5 C25.494456,31.5 25.6855254,31.362285 25.7535824,31.1581139 L29.3062871,20.5 L2.59023021,20.5 Z" id="Rectangle" stroke="#ee4237"></path>
+                    <rect id="Rectangle" stroke="#ee4237" x="0.5" y="18.5" width="31" height="2" rx="1"></rect>
+                    <path d="M5.5,18.5 L13.5,18.5 L13.5,4.5 C13.5,2.290861 11.709139,0.5 9.5,0.5 C7.290861,0.5 5.5,2.290861 5.5,4.5 L5.5,18.5 Z" id="Rectangle" stroke="#ee4237"></path>
+                    <rect id="Rectangle" fill="#FFFFFF" x="8" y="6" width="12" height="12"></rect>
+                    <rect id="Rectangle" stroke="#ee4237" x="11.5" y="5.5" width="4" height="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

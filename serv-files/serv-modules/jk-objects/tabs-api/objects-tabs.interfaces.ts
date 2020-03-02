@@ -6,7 +6,7 @@ export interface IObjectTabsSnippet {
     _id?: any;
     objectId: string;
     gallery?: IObjectGalleryTabs[];
-    decoration?: IObjectDecorationTabs[];
+    decorationType?: string[];
     created_at: any;
     last_modifyed: any;
 }
@@ -16,7 +16,9 @@ export interface IObjectGalleryTabs {
     show: boolean;
 }
 
-export interface IObjectDecorationTabs {
+export interface IObjectDecorationTab {
     name: string;
     show: boolean;
+    turnOnDecorationTypes?: boolean; // когда жмешь галку добавить на табе декорации
+    decorationType?: string;
 }

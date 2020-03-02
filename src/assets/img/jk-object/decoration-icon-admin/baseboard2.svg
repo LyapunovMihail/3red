@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="22px" viewBox="0 0 32 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Иконка_плинтус</title>
+    <desc>Created with Sketch.</desc>
+    <g id="overflow_отделка" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-57.000000, -145.000000)" stroke="#ee4237">
+            <g id="Иконка_плинтус" transform="translate(57.000000, 145.000000)">
+                <g id="Group">
+                    <path d="M4.38413916,7.5 L0.650805823,21.5 L31.3491942,21.5 L27.6158608,7.5 L4.38413916,7.5 Z" id="Rectangle"></path>
+                    <rect id="Rectangle" x="4.5" y="0.5" width="23" height="5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
