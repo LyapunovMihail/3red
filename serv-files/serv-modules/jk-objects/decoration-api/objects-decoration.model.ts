@@ -17,22 +17,14 @@ export class ObjectsDecorationModel {
         this.collection = db.collection(this.collectionName);
     }
 
-    async getSnippet(objectId?, tab?, type?) {
-        let findCriteria: any = objectId ? {objectId} : {};
-
-        // if (tab && tab !== 'null') { // при передаче в строку запросов параметров, на выходе они конвертируются в строку. Не стал менять метод на пост, и так понятно что имеется в виду присутствие вкладки в параметрах
-        //     findCriteria = {...findCriteria, tab};
-        // }
-        // if (type && type !== 'null') {
-        //     findCriteria = {...findCriteria, type};
-        // }
+    async getSnippet(objectId) {
+        const findCriteria: any = objectId ? {objectId} : {};
 
         return await this.collection.findOne(findCriteria);
     }
 
     async updateSnippet(parameters) {
         const options: IObjectDecorationSnippet = parameters;
-        console.log('form: ', options);
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
@@ -44,41 +36,7 @@ export class ObjectsDecorationModel {
         const options: IObjectTabsSnippet = parameters;
         const tabs = parameters.decoration;
         tabs.push('no-tab');
-        // let mas = [];
-        // mas.push(
-        //     {
-        //         images: [],
-        //         info: [],
-        //         tab: {
-        //             name: 'name',
-        //             show: true,
-        //             turnOnDecorationTypes: true,
-        //             decorationType: 'dec'
-        //         }
-        //
-        //     },
-        //     {
-        //         images: [],
-        //         info: [],
-        //         tab: {
-        //             name: 'name',
-        //             show: true,
-        //             turnOnDecorationTypes: true,
-        //             decorationType: 'duc'
-        //         }
-        //
-        //     },
-        //     {
-        //         images: [],
-        //         info: [],
-        //         tab: {
-        //             name: 'name',
-        //             show: true,
-        //             turnOnDecorationTypes: false
-        //         }
-        //
-        //     }
-        //     );
+
         return await this.errorParamsCatcher('objectId' in options, options.objectId, async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }

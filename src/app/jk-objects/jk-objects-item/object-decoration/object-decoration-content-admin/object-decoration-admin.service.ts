@@ -19,8 +19,8 @@ export class ObjectDecorationAdminService {
     ) {
     }
 
-    public getContentSnippetByIdAndTab(objectID, tab?, type?): Observable<IObjectDecorationSnippet> {
-        return this.http.get<IObjectDecorationSnippet>(`/api/jk-object/decoration/id/${objectID}/tab/${tab}/type/${type}`);
+    public getContentSnippetByIdAndTab(objectID): Observable<IObjectDecorationSnippet> {
+        return this.http.get<IObjectDecorationSnippet>(`/api/jk-object/decoration/id/${objectID}`);
     }
 
     public setContentSnippetData(form) {

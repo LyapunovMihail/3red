@@ -47,13 +47,6 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
         } else {
             this.setNewTypesForm();
         }
-        // if (this.typesSnippet) {
-        //     this.setFormFromSnippet();
-        // } else {
-        //     this.setNewForm();
-        // }
-        console.log('this.form: ', this.form);
-        console.log('this.typesForm: ', this.typesForm);
     }
 
     private setNewForm() {
@@ -141,7 +134,6 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
         (this.form.get('data') as FormArray).push(this.formBuilder.group( {
             images: this.formBuilder.array([]), info: this.formBuilder.array([]), tab: this.formBuilder.group({name: '', show: true, turnOnDecorationTypes: false})
         }));
-        console.log('this.form: ', this.form);
     }
 
     public popTab(i) {
@@ -159,7 +151,6 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
     }
 
     private setTypesFormFromSnippet() {
-        console.log('this.typesSnippet: ', this.typesSnippet);
         let decorationTypes;
         if (this.typesSnippet.decorationType && this.typesSnippet.decorationType.length) {
             decorationTypes = this.formBuilder.array(this.typesSnippet.decorationType);

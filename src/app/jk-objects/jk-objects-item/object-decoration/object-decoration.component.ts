@@ -81,7 +81,6 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     // }
 
     public getContent() {
-        console.log('this.currentTab getContent: ', this.currentTab)
         this.decorationService.getContentSnippetByIdAndTab(this.objectId).subscribe((data) => {
             this.contentSnippet = data;
             if (this.contentSnippet) {
@@ -94,7 +93,6 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges() {
-        console.log('ngOnChanges');
         this.setCurrentTab();
     }
 

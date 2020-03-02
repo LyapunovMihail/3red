@@ -22,8 +22,8 @@ export class ObjectsDecorationController extends ObjectsDecorationModel {
     }
 
     routing() {
-        this.router.get('/jk-object/decoration/id/:id/tab/:tab/type/:type', responseHandler(async(req) => {
-            return await this.getSnippet(req.params.id, req.params.tab, req.params.type);
+        this.router.get('/jk-object/decoration/id/:id', responseHandler(async(req) => {
+            return await this.getSnippet(req.params.id);
         }));
 
         this.router.post('/admin/jk-object/decoration/create-update', responseHandler(async(req) => {

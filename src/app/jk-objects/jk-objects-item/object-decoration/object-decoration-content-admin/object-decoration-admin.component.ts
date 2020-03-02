@@ -83,11 +83,8 @@ export class ObjectDecorationAdminComponent implements OnInit {
             last_modifyed : new Date(),
             data: decorationData
         });
-        console.log('this.contentSnippet: ', this.contentSnippet);
-        console.log('form: ', this.form);
     }
     private parseImagesArray(images) {
-        console.log('images: ', images);
         return this.formBuilder.array(images.map((data) => {
                 return this.formBuilder.group({
                     image: data.image,
@@ -176,7 +173,6 @@ export class ObjectDecorationAdminComponent implements OnInit {
 
     setInfoIcon() {
         this.selectedInfo.get('mod').setValue(this.selectedIcon);
-        console.log('this.form: ', this.form);
     }
     delInfoIcon() {
         this.selectedInfo.get('mod').setValue('');
@@ -188,7 +184,6 @@ export class ObjectDecorationAdminComponent implements OnInit {
     }
 
     public save() {
-        console.log('this.form.value: ', this.form.value);
         this.decorationService.setContentSnippetData(this.form.value).subscribe(
             (content) => {
                 this.contentSnippetChange.emit(content);
