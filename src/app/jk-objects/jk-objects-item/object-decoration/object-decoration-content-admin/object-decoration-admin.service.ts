@@ -71,28 +71,25 @@ export class ObjectDecorationAdminService {
         });
     }
 
-    public setTabsWithTypes(formValue: IObjectDecorationSnippet, typesFormValue: IObjectTabsSnippet) {
-        console.log('formValue: ', formValue);
-
+    public setTabsWithTypes(formValue: IObjectDecorationSnippet, typesFormValue: IObjectTabsSnippet, prevTypes: string[]) {
         const newFormValue = {...formValue, data: []};
-        console.log('formValue: ', formValue);
         formValue.data.forEach((item) => {
             if (!item.tab.decorationType) {
-                console.log('кухня с decorationType: ', item);
                 newFormValue.data.push(item);
             }
             if (item.tab.turnOnDecorationTypes) {
                 const masTabsWithTypes = [];
-                typesFormValue.decorationType.forEach((type) => {
+                prevTypes.forEach((type, i) => {
                     const tabWithType = formValue.data.find((data) => data.tab.name === item.tab.name && data.tab.decorationType === type);
                     if (tabWithType) {
+                        tabWithType.tab.decorationType = typesFormValue.decorationType[i];
                         masTabsWithTypes.push(tabWithType);
                     }
                     if (!formValue.data.some((data) => data.tab.name === item.tab.name && data.tab.decorationType === type)) {
                         masTabsWithTypes.push({
                             images: [],
                             info: [],
-                            tab: {name: item.tab.name, show: item.tab.show, decorationType: type}
+                            tab: {name: item.tab.name, show: item.tab.show, decorationType: typesFormValue.decorationType[i]}
                         });
                     }
                 });

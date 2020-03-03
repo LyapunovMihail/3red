@@ -29,6 +29,7 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
     public showHint = false;
     public form: FormGroup;
     public typesForm: FormGroup;
+    public prevTypes: string[];
 
     constructor(
         public formBuilder: FormBuilder,
@@ -47,6 +48,7 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
         } else {
             this.setNewTypesForm();
         }
+        this.prevTypes = this.typesSnippet.decorationType;
     }
 
     private setNewForm() {
@@ -168,10 +170,12 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
 
     public pushType() {
         (this.typesForm.get('decorationType') as FormArray).push(new FormControl('', Validators.required));
+        this.prevTypes.push('');
     }
 
     public popType(i) {
         (this.typesForm.get('decorationType') as FormArray).removeAt(i);
+        this.prevTypes.splice(i, 1);
     }
 
     public getTabIndex(i) {
@@ -187,8 +191,12 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
         }, 0);
     }
 
+    public changeType(e, i) {
+        this.prevTypes[i] = e.target.value; // Сохраняем типы отделки в отдельный массив чтобы потом изменить в контенте табы со старыми названиями типов отделки
+    }
+
     public save() {
-        const formValue = this.decorationService.setTabsWithTypes(this.form.value, this.typesForm.value);
+        const formValue = this.decorationService.setTabsWithTypes(this.form.value, this.typesForm.value, this.prevTypes);
 
         this.decorationService.setTypesSnippetData(this.typesForm.value).subscribe(
             (types) => {
