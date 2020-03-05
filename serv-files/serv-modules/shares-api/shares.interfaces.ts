@@ -72,4 +72,6 @@ export interface Share {
     requestBtn: boolean;
     show_on_main: boolean;
     body: ShareBodyBlock[];
+    objectId?: string;
+    objectName?: string;
 }

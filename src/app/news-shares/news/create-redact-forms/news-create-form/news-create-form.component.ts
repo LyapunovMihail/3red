@@ -4,7 +4,7 @@ import { NewsCreateFormService } from './news-create-form.service';
 import { Uploader } from 'angular2-http-file-upload';
 import { EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
@@ -34,7 +34,7 @@ import * as moment from 'moment';
 
 export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
 
-    @Input() isForm: boolean = false ;
+    @Input() isForm = false ;
 
     // вызывается при создании сниппета, и передает в общий компонент
     // новый массив из ответа сервера
@@ -55,24 +55,27 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     // кнопки выбора показа на главной
     showOnMainModifycators = ShowOnMainRadioBtns;
 
-    // превью загруженного изображения
-    loadedImage: string = '';
-
     // путь для загрузки изображений
-    uploadsPath: string = `/${NEWS_UPLOADS_PATH}`;
+    uploadsPath = `/${NEWS_UPLOADS_PATH}`;
 
     // инициализация формы
     form: FormGroup;
 
     // подписка на авторизацию
-    isAuthorizated: boolean = false ;
+    isAuthorizated = false ;
     AuthorizationEvent;
 
     public imageUploadEvent;
     public imageUploadPercent: number;
-    public isLoad: boolean = false;
+    public isLoad = false;
 
     public dateNow: string;
+    public doubleImg = {
+        image: '',
+        thumbnail: '',
+        image2: '',
+        thumbnail2: ''
+    };
 
     constructor(
         private formBuilder: FormBuilder,
@@ -80,41 +83,6 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         private newsCreateService: NewsCreateFormService,
         public ref: ChangeDetectorRef
     ) { }
-
-    // добавление картинок в форму
-    imageUpload(e) {
-        if ( this.isAuthorizated ) {
-            this.isLoad = true;
-            this.imageUploadEvent = this.newsCreateService.getPercentLoadedImage().subscribe(
-                (val) => {
-                    this.imageUploadPercent = val;
-                    this.ref.detectChanges();
-                },
-                (err) => {
-                    this.isLoad = false;
-                    this.imageUploadEvent.unsubscribe();
-                }
-            );
-
-            this.newsCreateService.imageUpload(e)
-            .then( (data: any) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                // сразу сохраняется на сервере
-                // значение подставляется в превью
-                this.loadedImage = data.thumbnail;
-                // и в текстовые (скрытые) инпуты формы
-                this.form.controls['image'].setValue(data.image);
-                this.form.controls['thumbnail'].setValue(data.thumbnail);
-            })
-            .catch((err) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                alert('Что-то пошло не так!');
-                console.error(err);
-            });
-        }
-    }
 
     ngOnInit() {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
@@ -134,12 +102,77 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             show_on_main : [false],
             image : ['', Validators.required],
             thumbnail : ['', Validators.required],
-            icon_mod : ''
+            icon_mod : '',
+            objectId: '',
+            objectName: '',
+            body: this.formBuilder.array([])
         });
     }
 
     ngOnDestroy() {
         this.AuthorizationEvent.unsubscribe();
+    }
+
+    public get body(): FormArray { return this.form.get('body') as FormArray; }
+
+    public addDescription(order?: number, value?: string) {
+        this.body.push(new FormControl({
+            blockType: 'description',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockDescription: value ? value : ''
+        }));
+    }
+
+    public addImage(order?: number, obj?: object) {
+        this.body.push(new FormControl({
+            blockType: 'image',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockImg: obj ? obj : {
+                image: '',
+                thumbnail: ''
+            }
+        }));
+    }
+
+    public addImage2(order?: number, obj?: object) {
+        this.body.push(new FormControl({
+            blockType: 'image2',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockImg2: obj ? obj : {
+                image: '',
+                thumbnail: '',
+                image2: '',
+                thumbnail2: ''
+            }
+        }));
+    }
+
+    public changeBlockImage(data, i) {
+        console.log('data: ', data);
+        console.log('i: ', i);
+        console.log('this.body.at(i): ', this.body.at(i));
+        this.body.at(i).setValue({
+            blockType: 'image',
+            blockOrderNumber: this.body.at(i).value.blockOrderNumber,
+            blockImg: {
+                image: data.image,
+                thumbnail: data.thumbnail
+            }
+        });
+    }
+
+    public addList(order?: number, value?: string[]) {
+        this.body.push(new FormControl({
+            blockType: 'header',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockList: value ? value : ['']
+        }));
+    }
+
+    public removeBlock(cnt) {
+        if (confirm('Удалить секцию?')) {
+            this.body.removeAt(cnt);
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -148,14 +181,79 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             // сбрасываются значения
             this.form.reset();
             // и добавляются дефолтные поля
-            let date = new Date();
+            const date = new Date();
             // дата создания и последнего редактирования равны
-            this.loadedImage = '';
-            this.form.controls['category'].setValue(this.enumCategory.NEW);
-            this.form.controls['created_at'].setValue(date);
-            this.form.controls['last_modifyed'].setValue(date);
-            this.form.controls['icon_mod'].setValue('1');
+            this.form.controls.category.setValue(this.enumCategory.NEW);
+            this.form.controls.created_at.setValue(date);
+            this.form.controls.last_modifyed.setValue(date);
+            this.form.controls.icon_mod.setValue('1');
         }
+    }
+
+    // добавление картинок в форму
+    imageUpload(e: Event, type: string,  i?: number, isFirst?: number) {
+        if ( this.isAuthorizated ) {
+            this.isLoad = true;
+            this.imageUploadEvent = this.newsCreateService.getPercentLoadedImage().subscribe(
+                (val) => {
+                    this.imageUploadPercent = val;
+                    this.ref.detectChanges();
+                },
+                (err) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                }
+            );
+
+
+            this.newsCreateService.imageUpload(e)
+                .then( (data: any) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                    // }
+
+                    if (type === 'main-image') {
+                        this.form.patchValue({image: data.image});
+                        this.form.patchValue({thumbnail: data.thumbnail});
+                    } else if (type === 'single-image') {
+                        this.addImage(this.body.controls.length, {
+                            image: data.image,
+                            thumbnail: data.thumbnail
+                        });
+                    } else if (type === 'double-image') {
+                        if (isFirst) {
+
+                        } else {
+
+                        }
+                        // if (Object.keys(this.doubleImg).some((key) => this.doubleImg[key] === '')) {
+                        //     this.
+                        //     this.addImage2(this.body.controls.length, {
+                        //         image: data.image,
+                        //         thumbnail: data.thumbnail,
+                        //         image2: data.image,
+                        //         thumbnail2: data.thumbnail
+                        //     });
+
+                    } else if (type === 'change-image' && i !== undefined) {
+                        console.log('type: ', type);
+                        console.log('i: ', i);
+                        console.log('data: ', data);
+                        this.changeBlockImage(data, i);
+                    }
+                })
+                .catch((err) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                    alert('Что-то пошло не так!');
+                    console.error(err);
+                });
+        }
+    }
+
+    deleteImage() {
+        this.form.patchValue({image: ''});
+        this.form.patchValue({thumbnail: ''});
     }
 
     onSubmit(form) {

@@ -6,8 +6,8 @@
         [formGroup]="form"
         (ngSubmit)="onSave(form)">
 
-        <button class="create-shares__cls-btn btn-cls" (click)="close.emit()" ><span></span></button>
-        <button class="create-shares__cls-success btn-success" (click)="close.emit()" ><span></span></button>
+        <button class="create-shares__cls-btn btn-cls" (click)="close.emit()"><span></span></button>
+        <button class="create-shares__cls-success btn-success" (click)="close.emit()"><span></span></button>
 
         <h2 class="create-shares__typografy-title">Добавить акцию</h2>
         <!-- <p class="shares-edit-form__typografy-date">{{dateNow}}</p> -->
@@ -76,9 +76,9 @@
                             (change)="onImagePicked($event, 'main-image')">
                     </div>
 
-                    <div class="create-shares__image create-shares__image_preview" *ngIf="form.get('mainImage').value">
+                    <div class="create-shares__image create-shares__image_preview" *ngIf="form.get('mainThumbnail').value">
                         <img class="shares-edit-form__cover"
-                            [src]="uploadsPath + form.get('mainImage').value"
+                            [src]="uploadsPath + form.get('mainThumbnail').value"
                             [alt]="form.value.name">
 
                         <button class="create-shares__cls-preview">
@@ -126,7 +126,7 @@
                         (remove)="removeBlock(i)">
                     </app-shares-edit-list>
 
-                   <app-shares-edit-flats
+                    <app-shares-edit-flats
                         [formControlName]="i"
                         *ngSwitchCase="'flats'"
                         (remove)="removeBlock(i)">

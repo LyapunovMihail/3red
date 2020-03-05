@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="create-form__form">
+        <form [formGroup]="form" class="create-form__form">
 
             <div (click)="close.emit()" class="create-form__cls-btn btn-cls"><span></span></div>
             <div (click)="close.emit()" class="create-form__cls-success btn-success"></div>
@@ -31,7 +31,7 @@
                         [ngClass]="{'create-form__form-title_placeholder': title.value.length > 0}">Заголовок</p>
                     <p class="create-form__form-title create-form__form-title_error g-text_sign">Поле обязательно для заполнения</p>
                 </div>
-                
+
                 <div class="create-form__form-wrap create-form__form-wrap_input create-form__form-wrap_full">    
                     <textarea class="create-form__form-area"
                         [formControl]="form.controls['description']" #text>
@@ -43,7 +43,7 @@
                 <div class="create-form__form-wrap create-form__form-wrap_datepicker create-form__form-wrap_w2">
                     <p class="create-form__form-title create-form__form-title_for-datepicker">Дата публикации</p>
                     <div class="create-form__form-area create-form__form-area_datepicker">
-                        <app-ghm-date-picker [formControl]="'created_at'"></app-ghm-date-picker>
+                        <app-ghm-date-picker [formControl]="form.controls['created_at']"></app-ghm-date-picker>
                     </div>
                 </div>
                 <div class="create-form__form-wrap create-form__form-wrap_select create-form__form-wrap_w2">
@@ -59,17 +59,17 @@
                     <div class="create-form__form-img">
                         <label class="create-form__form-btn create-form__form-btn_preview-image">
                             <span>Загрузить фото</span>
-                            <input style='display: none;' type="file" (change)="imageUpload($event)" placeholder="Upload file" accept=".jpg">
+                            <input style='display: none;' type="file" (change)="imageUpload($event, 'main-image')" placeholder="Upload file" accept=".jpg">
                         </label>
 
-                        <div class="create-form__form-wrap create-form__form-wrap_image-preview" *ngIf="loadedImage.length > 0">
-                            <img [src]="uploadsPath + loadedImage">
-                            <button class="create-form__cls-preview"><span></span></button>
+                        <div class="create-form__form-wrap create-form__form-wrap_image-preview" *ngIf="form.get('thumbnail').value">
+                            <img [src]="uploadsPath + form.get('thumbnail').value">
+                            <button class="create-form__cls-preview" (click)="deleteImage()"><span></span></button>
                         </div>
-    
-                        <input [formControl]="form.controls['image']" hidden="true" type="text">
-                        <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
-    
+
+                        <input [formControl]="form.controls['image']" hidden type="text">
+                        <input [formControl]="form.controls['thumbnail']" hidden type="text">
+
                     </div>
 
                     <p class="create-form__form-title create-form__form-title_for-photo">Загрузите фото для превью</p>
@@ -88,13 +88,64 @@
 
             <h2 class="create-form__form-title create-form__form-title_out-path">Состав новости</h2>
 
-            <div class="create-form__form-wrap create-form__form-wrap_controls">
-                <button class="create-form__form-btn create-form__form-btn_controls-title">Заголовок</button>
-                <button class="create-form__form-btn create-form__form-btn_controls-text">Абзац</button>
-                <button class="create-form__form-btn create-form__form-btn_controls-image">Изображение</button>
-                <button class="create-form__form-btn create-form__form-btn_controls-images">2 изображения</button>
+            <div class="shares-edit-form__path-wrap">
+
+                <div formArrayName="body">
+                    <div *ngFor="let block of body.controls; index as i"
+                         [ngSwitch]="block.value.blockType">
+
+                        <app-news-edit-text
+                            [formControlName]="i"
+                            [type]="'description'"
+                            *ngSwitchCase="'description'"
+                            (remove)="removeBlock(i)">
+                        </app-news-edit-text>
+
+                        <app-news-edit-image
+                            [formControlName]="i"
+                            *ngSwitchCase="'image'"
+                            (remove)="removeBlock(i)">
+                            <label class="create-form__form-btn create-form__form-btn_preview-image">
+                                <span>Загрузить фото</span>
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image', i)" placeholder="Upload file" accept=".jpg">
+                            </label>
+                        </app-news-edit-image>
+
+                        <app-news-edit-image2
+                            [formControlName]="i"
+                            *ngSwitchCase="'image2'"
+                            (remove)="removeBlock(i)">
+                            <label class="create-form__form-btn create-form__form-btn_preview-image">
+                                <span>Загрузить фото</span>
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image', i)" placeholder="Upload file" accept=".jpg">
+                            </label>
+                        </app-news-edit-image2>
+
+                        <app-news-edit-text
+                            [formControlName]="i"
+                            [type]="'header'"
+                            *ngSwitchCase="'header'"
+                            (remove)="removeBlock(i)">
+                        </app-news-edit-text>
+
+                    </div>
+                </div>
             </div>
 
+            <div class="create-form__form-wrap create-form__form-wrap_controls">
+                <button class="create-form__form-btn create-form__form-btn_controls-title" (click)="addList()">Заголовок</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-text" (click)="addDescription()">Абзац</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-image" (click)="singleImgPicker.click()">
+                    <input #singleImgPicker
+                        [style.display]="'none'"
+                        type="file"
+                        accept=".jpg"
+                        (change)="imageUpload($event, 'single-image')">
+                    Изображение
+                </button>
+
+                <button class="create-form__form-btn create-form__form-btn_controls-images" (click)="addImage2()">2 изображения</button>
+            </div>
 
             <button type="submit" class="create-form__form-submit btn_var-2"
                 [ngClass]="{'create-form__form-submit_disabled' : !form.valid}"

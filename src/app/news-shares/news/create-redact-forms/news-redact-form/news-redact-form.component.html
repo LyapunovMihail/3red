@@ -51,7 +51,7 @@
                     <p class="create-form__form-subtitle">Фотография</p>
     
                     <div class="create-form__form-img">
-                        <img class="create-form__form-img-item" *ngIf="loadedImage.length > 0" [src]="uploadsPath + loadedImage">
+                        <img class="create-form__form-img-item" *ngIf="loadedImage?.length > 0" [src]="uploadsPath + loadedImage">
     
                         <input [formControl]="form.controls['image']" hidden="true" type="text">
                         <input [formControl]="form.controls['thumbnail']" hidden="true" type="text">
@@ -68,8 +68,8 @@
                 <div class="create-form__form-show">
                     <label class="create-form__form-checkbox">
                         <input class="admin-news_checkbox_content"
-                               [formControl]="form.controls['show_on_main']"
-                               type="checkbox" name="show_on_main">
+                            [formControl]="form.controls['show_on_main']"
+                            type="checkbox" name="show_on_main">
                         <div class="create-form__form-box g-checkbox"></div>
                         <p class="create-form__form-checkbox-text">Показать новость на главной</p>
                     </label>

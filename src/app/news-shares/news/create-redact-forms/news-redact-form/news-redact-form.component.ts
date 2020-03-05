@@ -2,9 +2,9 @@ import { AuthorizationObserverService } from '../../../../authorization/authoriz
 import { IconModifycatorsRadioBtns, ShowOnMainRadioBtns } from './../resources';
 import { NewsRedactFormService } from './news-redact-form.service';
 import { Uploader } from 'angular2-http-file-upload';
-import { INewsSnippet, EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { INewsSnippet, EnumNewsSnippet, NEWS_UPLOADS_PATH, NewsBodyBlock, NewsBodyEnum } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
@@ -137,7 +137,10 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
             show_on_main : '',
             image : '',
             thumbnail : '',
-            icon_mod : ''
+            icon_mod : '',
+            objectId: '',
+            objectName: '',
+            body: this.formBuilder.array([])
         });
     }
 
@@ -145,18 +148,67 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
         this.AuthorizationEvent.unsubscribe();
     }
 
+    public get body(): FormArray { return this.form.get('body') as FormArray; }
+
+    public addDescription(order?: number, value?: string) {
+        this.body.push(new FormControl({
+            blockType: 'description',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockDescription: value ? value : ''
+        }));
+    }
+
+    public addImage(order?: number, obj?: object) {
+        this.body.push(new FormControl({
+            blockType: 'image',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockImg: obj ? obj : {
+                image: '',
+                thumbnail: ''
+            }
+        }));
+    }
+
+    public addImage2(order?: number, obj?: object) {
+        this.body.push(new FormControl({
+            blockType: 'image',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockImg2: obj ? obj : {
+                image: '',
+                thumbnail: '',
+                image2: '',
+                thumbnail2: ''
+            }
+        }));
+    }
+
+    public addList(order?: number, value?: string[]) {
+        this.body.push(new FormControl({
+            blockType: 'list',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockList: value ? value : ['']
+        }));
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         if ( this.isForm ) {
             // при открытии формы расставляются значения редактируемого сниппета
             this.snippet = this.snippetsArray.filter((item) => item._id === this.redactId)[0];
             if ( this.snippet ) {
-                this.form.reset();
+                this.form.reset(this.snippet);
+                this.form.get('last_modifyed').setValue(new Date().toISOString());
                 this.loadedImage = this.snippet.thumbnail;
-                for (let key in this.snippet ) {
-                    if ( key !== '_id') {
-                        this.form.controls[key].setValue((key === 'last_modifyed') ? new Date() : this.snippet[key]);
+                (this.snippet.body as NewsBodyBlock[]).forEach((body: NewsBodyBlock) => {
+                    if (body.blockType === NewsBodyEnum.IMAGE) {
+                        this.addImage(body.blockOrderNumber, body.blockImg);
+                    } else if (body.blockType === NewsBodyEnum.IMAGE2) {
+                        this.addImage2(body.blockOrderNumber, body.blockImg2);
+                    } else if (body.blockType === NewsBodyEnum.HEADER) {
+                        this.addList(body.blockOrderNumber, body.blockList);
+                    } else if (body.blockType === NewsBodyEnum.DESCRIPTION) {
+                        this.addDescription(body.blockOrderNumber, body.blockDescription);
                     }
-                }
+                });
             } else {
                 alert('Что-то пошло не так!');
                 this.isForm = false;
@@ -177,4 +229,29 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
             }
         );
     }
+
+    // public save() {
+    //     this.galleryService.setTabsSnippetData(this.form.value).subscribe(
+    //         (data) => {
+    //             this.galleryService.removeTabSlidesFromGallery(data).subscribe(
+    //                 () => {
+    //                     this.snippetChange.emit(data);
+    //                     this.closeModal.emit(true);
+    //                 },
+    //                 (err) => console.error(err)
+    //             );
+    //         },
+    //         (err) => {
+    //             alert('Что-то пошло не так!');
+    //             console.error(err);
+    //         });
+    // }
+    //
+    // public close(isSave) {
+    //     if (isSave) {
+    //         this.save();
+    //     } else {
+    //         this.closeModal.emit(true);
+    //     }
+    // }
 }

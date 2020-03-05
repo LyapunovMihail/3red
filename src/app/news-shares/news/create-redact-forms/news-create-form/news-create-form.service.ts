@@ -25,17 +25,17 @@ export class NewsCreateFormService {
     }
 
     public formSubmit(form) {
-        let message = JSON.stringify({ form });
+        const message = JSON.stringify({ form });
         return this.http.post('/api/admin/news/create', message, adminHeaders());
     }
 
     public imageUpload(e) {
         return new Promise((resolve, reject) => {
 
-            let fileList: FileList = e.target.files;
-            let uploadFile: File = fileList[0];
+            const fileList: FileList = e.target.files;
+            const uploadFile: File = fileList[0];
 
-            let myUploadItem = new NewsCreateFormUpload(uploadFile);
+            const myUploadItem = new NewsCreateFormUpload(uploadFile);
             myUploadItem.formData = { FormDataKey: 'Form Data Value' };
 
             this.uploaderService.onSuccessUpload = (item, response, status, headers) => {

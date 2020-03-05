@@ -11,7 +11,7 @@ import {
     ShareFlat,
     ShareFlatDiscountType
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { SharesObserverService } from '../shares-observer.service';
 import { Router } from '@angular/router';
@@ -29,7 +29,9 @@ export function createDynamicNewsObj(): Share {
         created_at: new Date().toISOString(),
         finish_date: new Date().toISOString(),
         body: [],
-        requestBtn: false
+        requestBtn: false,
+        objectId: '',
+        objectName: ''
     });
 }
 
@@ -86,6 +88,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             countdown: new FormControl(false, Validators.required),
             requestBtn: new FormControl(false, Validators.required),
             finish_date: new FormControl('', Validators.required),
+            objectId: new FormControl(''),
+            objectName: new FormControl(''),
             body: new FormArray([])
         });
 
@@ -219,6 +223,12 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
                 if (body.blockType === 'flats') {
                     this.addFlats(body.blockOrderNumber, body.blockFlats);
+                } else if (body.blockType === 'list') {
+                    this.addList(body.blockOrderNumber, body.blockList);
+                } else if (body.blockType === 'image') {
+                    this.addImage(body.blockOrderNumber, body.blockImg);
+                } else if (body.blockType === 'description') {
+                    this.addDescription(body.blockOrderNumber, body.blockDescription);
                 }
             });
             this.countDown();

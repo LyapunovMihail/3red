@@ -17,7 +17,7 @@ const NewsComponents = [
     NewsMainComponent,
     NewsViewComponent,
     NewsListComponent,
-    NewsPreviewComponent
+    NewsPreviewComponent,
 ];
 
 @NgModule({
