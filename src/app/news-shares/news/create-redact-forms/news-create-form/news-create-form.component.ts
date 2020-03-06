@@ -145,12 +145,10 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                 thumbnail2: ''
             }
         }));
+        console.log('this.body: ', this.body);
     }
 
     public changeBlockImage(data, i) {
-        console.log('data: ', data);
-        console.log('i: ', i);
-        console.log('this.body.at(i): ', this.body.at(i));
         this.body.at(i).setValue({
             blockType: 'image',
             blockOrderNumber: this.body.at(i).value.blockOrderNumber,
@@ -159,6 +157,32 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                 thumbnail: data.thumbnail
             }
         });
+    }
+
+    public changeBlockImage2(data, i, isFirst) {
+        if (isFirst) {
+            this.body.at(i).setValue({
+                blockType: 'image2',
+                blockOrderNumber: this.body.at(i).value.blockOrderNumber,
+                blockImg2: {
+                    image: data.image,
+                    thumbnail: data.thumbnail,
+                    image2: this.body.at(i).value.image2 ? this.body.at(i).value.image2 : '',
+                    thumbnail2: this.body.at(i).value.thumbnail2 ? this.body.at(i).value.thumbnail2 : ''
+                }
+            });
+        } else {
+            this.body.at(i).setValue({
+                blockType: 'image2',
+                blockOrderNumber: this.body.at(i).value.blockOrderNumber,
+                blockImg2: {
+                    image: this.body.at(i).value.image ? this.body.at(i).value.image : '',
+                    thumbnail: this.body.at(i).value.thumbnail ? this.body.at(i).value.thumbnail : '',
+                    image2: data.image,
+                    thumbnail2: data.thumbnail
+                }
+            });
+        }
     }
 
     public addList(order?: number, value?: string[]) {
@@ -205,12 +229,10 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                 }
             );
 
-
             this.newsCreateService.imageUpload(e)
                 .then( (data: any) => {
                     this.isLoad = false;
                     this.imageUploadEvent.unsubscribe();
-                    // }
 
                     if (type === 'main-image') {
                         this.form.patchValue({image: data.image});
@@ -220,26 +242,14 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                             image: data.image,
                             thumbnail: data.thumbnail
                         });
-                    } else if (type === 'double-image') {
-                        if (isFirst) {
-
-                        } else {
-
-                        }
-                        // if (Object.keys(this.doubleImg).some((key) => this.doubleImg[key] === '')) {
-                        //     this.
-                        //     this.addImage2(this.body.controls.length, {
-                        //         image: data.image,
-                        //         thumbnail: data.thumbnail,
-                        //         image2: data.image,
-                        //         thumbnail2: data.thumbnail
-                        //     });
-
                     } else if (type === 'change-image' && i !== undefined) {
                         console.log('type: ', type);
                         console.log('i: ', i);
                         console.log('data: ', data);
                         this.changeBlockImage(data, i);
+                    } else if (type === 'change-image2') {
+                        this.changeBlockImage2(data, i, isFirst);
+
                     }
                 })
                 .catch((err) => {
@@ -257,8 +267,6 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     onSubmit(form) {
-        // если форма вылидна, то при отправке
-        // вызывается событие закрытия формы
 
         this.close.emit();
         this.newsCreateService.formSubmit(form).subscribe(

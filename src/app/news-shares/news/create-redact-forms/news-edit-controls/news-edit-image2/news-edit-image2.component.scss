@@ -10,9 +10,11 @@
         padding-right: 24px;
     }
 
-    &__btn-wrap {
+    &__btn2-wrap {
         position: absolute;
-        width: 190px;
+        display: flex;
+        justify-content: space-between;
+        width: 557px;
         top: 90px;
         left: 39px;
         z-index: 1;

@@ -117,7 +117,11 @@
                             (remove)="removeBlock(i)">
                             <label class="create-form__form-btn create-form__form-btn_preview-image">
                                 <span>Загрузить фото</span>
-                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image', i)" placeholder="Upload file" accept=".jpg">
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image2', i, true)" placeholder="Upload file" accept=".jpg">
+                            </label>
+                            <label class="create-form__form-btn create-form__form-btn_preview-image">
+                                <span>Загрузить фото</span>
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image2', i)" placeholder="Upload file" accept=".jpg">
                             </label>
                         </app-news-edit-image2>
 

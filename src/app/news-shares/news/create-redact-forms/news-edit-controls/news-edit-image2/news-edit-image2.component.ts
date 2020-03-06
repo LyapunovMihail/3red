@@ -5,7 +5,7 @@ import { NEWS_UPLOADS_PATH, NewsBodyBlock } from '../../../../../../../serv-file
 @Component({
     selector: 'app-news-edit-image2',
     template: `
-        <div class="share-view__btn-wrap">
+        <div class="share-view__btn2-wrap">
             <ng-content></ng-content>
         </div>
         <div class="create-shares__wrap create-shares__wrap_path">
@@ -17,8 +17,10 @@ import { NEWS_UPLOADS_PATH, NewsBodyBlock } from '../../../../../../../serv-file
                 <button class="create-shares__btn create-shares__btn_path-controll">Вниз</button>
             </div>
             <div class="create-shares__wrap_path-img2">
-                <img class="share-view__blocks-img" width="352" height="264" [src]="'/uploads/news/thumbnail-date2020-03-05-11-07-07-37_random1063.jpg'">
-                <img class="share-view__blocks-img" width="352" height="264" [src]="'/uploads/news/thumbnail-date2020-03-05-11-07-07-37_random1063.jpg'">
+                <img class="share-view__blocks-img" width="352" height="264" [src]="uploadsPath + conf.blockImg2.thumbnail" *ngIf="conf.blockImg2.thumbnail">
+                <img class="share-view__blocks-img" width="352" height="264" [src]="'/uploads/news/thumbnail-date2020-03-05-11-07-07-37_random1063.jpg'" *ngIf="!conf.blockImg2.thumbnail">
+                <img class="share-view__blocks-img" width="352" height="264" [src]="uploadsPath + conf.blockImg2.thumbnail2" *ngIf="conf.blockImg2.thumbnail2">
+                <img class="share-view__blocks-img" width="352" height="264" [src]="'/uploads/news/thumbnail-date2020-03-05-11-07-07-37_random1063.jpg'"  *ngIf="!conf.blockImg2.thumbnail2">
             </div>
         </div>
     `,
