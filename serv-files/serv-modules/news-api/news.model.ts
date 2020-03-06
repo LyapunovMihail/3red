@@ -1,5 +1,5 @@
 import { imageSaver, thumbnailSaver, fileExtension } from './../utilits/image-saver.utilits';
-import { INewsSnippet, EnumNewsSnippet, NEWS_UPLOADS_PATH, NEWS_COLLECTION_NAME, ErrorNotCorrectArguments } from './news.interfaces';
+import { INewsSnippet, NEWS_UPLOADS_PATH, NEWS_COLLECTION_NAME, ErrorNotCorrectArguments } from './news.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class NewsModel {
@@ -14,13 +14,13 @@ export class NewsModel {
 
     // поиск новостей
     async getSnippet(id?) {
-        const findCriteria = id ? {_id: ObjectId(id)} : {category: EnumNewsSnippet.NEW};
+        const findCriteria = id ? {_id: ObjectId(id)} : {};
         return await this.collection.find(findCriteria).sort({ created_at: -1 }).toArray();
     }
 
     // новость для главной страницы
     async getMainSnippet() {
-        return await this.collection.find({ show_on_main: true, category: EnumNewsSnippet.NEW }).toArray();
+        return await this.collection.find({ show_on_main: true }).toArray();
     }
 
     // создание новости
@@ -77,8 +77,7 @@ export class NewsModel {
         // а так же если 'category' равна одному из значений EnumNewsSnippet
         return ( ( 'created_at' in options && 'last_modifyed' in options && 'title' in options
         && 'description' in options && 'image' in options && 'thumbnail' in options
-        && 'category' in options && 'show_on_main' in options && 'icon_mod' in options
-        && ( options.category === EnumNewsSnippet.NEW || options.category === EnumNewsSnippet.SHARE ) )  ? true : false );
+        && 'category' in options && 'show_on_main' in options && 'icon_mod' in options )  ? true : false );
     }
 
 }

@@ -19,6 +19,8 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
                     (input)="changeText()"
                     [placeholder]="type === 'header' ? 'Заголовок' : 'Текст'"
                     [link]="type === 'description'"
+                    [bodyBlockIndex]="conf.blockOrderNumber"
+                    (addLink)="addLink.emit($event)"
                     class="create-shares__input create-shares__input_area">
                 </ghm-textarea>
             </div>
@@ -39,6 +41,7 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
 export class NewsEditTextComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
+    @Output() public addLink: EventEmitter<any> = new EventEmitter();
     @Input() public type: string;
 
     public conf: NewsBodyBlock;

@@ -1,8 +1,7 @@
 import { AuthorizationObserverService } from '../../../../authorization/authorization.observer.service';
-import { IconModifycatorsRadioBtns, ShowOnMainRadioBtns } from './../resources';
 import { NewsCreateFormService } from './news-create-form.service';
 import { Uploader } from 'angular2-http-file-upload';
-import { EnumNewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
@@ -18,7 +17,6 @@ import * as moment from 'moment';
 })
 
 /*
-
     При открытии формы ее значения сбрасываются, устанавливаются дефолтные значения : created_at, last_modifyed, icon_mod.
 
     Кнопка "Добавить" будет иметь атрибут disable, до тех пор пока не заполнены обязательные поля :
@@ -42,19 +40,6 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
 
     @Output() close = new EventEmitter();
 
-    enumCategory = EnumNewsSnippet ;
-
-    // если не выбрано поле "показать на главной странице"
-    // то иконки-модификаторы отображаться не будут
-    iconDisplay = 'none';
-
-    // массив с иконками-модификаторами ( radiobuttons )
-    // для выбора иконки с которой будет отображение на главной странице
-    iconModifycators = IconModifycatorsRadioBtns;
-
-    // кнопки выбора показа на главной
-    showOnMainModifycators = ShowOnMainRadioBtns;
-
     // путь для загрузки изображений
     uploadsPath = `/${NEWS_UPLOADS_PATH}`;
 
@@ -70,12 +55,11 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     public isLoad = false;
 
     public dateNow: string;
-    public doubleImg = {
-        image: '',
-        thumbnail: '',
-        image2: '',
-        thumbnail2: ''
-    };
+
+    public showModal = false;
+    public textEditIndex: number;
+    public textAreaForLinkAdd: HTMLTextAreaElement;
+    public fakeTextAreaForLinkAdd: HTMLDivElement;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -95,14 +79,12 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         this.form = this.formBuilder.group({
             created_at : '',
             last_modifyed : '',
-            category : this.enumCategory.NEW,
             title : ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
             description : '',
-            descrPreview: ['', Validators.maxLength(60)],
-            show_on_main : [false],
+            show_on_main : false,
+            status: 'dirty',
             image : ['', Validators.required],
             thumbnail : ['', Validators.required],
-            icon_mod : '',
             objectId: '',
             objectName: '',
             body: this.formBuilder.array([])
@@ -113,6 +95,12 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         this.AuthorizationEvent.unsubscribe();
     }
 
+    showModalFunc(obj) {
+        console.log('obj: ', obj);
+        this.showModal = true;
+        this.textAreaForLinkAdd = obj.textArea;
+        this.fakeTextAreaForLinkAdd = obj.fakeTextArea;
+    }
     public get body(): FormArray { return this.form.get('body') as FormArray; }
 
     public addDescription(order?: number, value?: string) {
@@ -207,10 +195,8 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             // и добавляются дефолтные поля
             const date = new Date();
             // дата создания и последнего редактирования равны
-            this.form.controls.category.setValue(this.enumCategory.NEW);
             this.form.controls.created_at.setValue(date);
             this.form.controls.last_modifyed.setValue(date);
-            this.form.controls.icon_mod.setValue('1');
         }
     }
 
@@ -243,9 +229,6 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                             thumbnail: data.thumbnail
                         });
                     } else if (type === 'change-image' && i !== undefined) {
-                        console.log('type: ', type);
-                        console.log('i: ', i);
-                        console.log('data: ', data);
                         this.changeBlockImage(data, i);
                     } else if (type === 'change-image2') {
                         this.changeBlockImage2(data, i, isFirst);

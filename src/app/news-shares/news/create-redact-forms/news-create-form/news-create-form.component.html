@@ -48,10 +48,10 @@
                 </div>
                 <div class="create-form__form-wrap create-form__form-wrap_select create-form__form-wrap_w2">
                     <p class="create-form__form-title create-form__form-title_for-select">Статус</p>
-                    <select name="status" class="create-form__form-select create-form__form-select_type">
-                        <option>Черновик</option>
-                        <option>Чистовик</option>
-                        <option>Шаблон</option>
+                    <select name="status" class="create-form__form-select create-form__form-select_type" [formControl]="form.controls['status']" [value]="'dirty'">
+                        <option value="dirty">Черновик</option>
+                        <option value="pristine">Чистовик</option>
+                        <option value="template">Шаблон</option>
                     </select>
                 </div>
 
@@ -98,7 +98,8 @@
                             [formControlName]="i"
                             [type]="'description'"
                             *ngSwitchCase="'description'"
-                            (remove)="removeBlock(i)">
+                            (remove)="removeBlock(i)"
+                            (addLink)="showModalFunc($event)">
                         </app-news-edit-text>
 
                         <app-news-edit-image
@@ -164,3 +165,9 @@
     </div>
 
 </div>
+
+<app-news-edit-anchor *ngIf="showModal"
+    [textArea]="textAreaForLinkAdd"
+    [fakeTextArea]="fakeTextAreaForLinkAdd"
+    (close)="showModal = false">
+</app-news-edit-anchor>

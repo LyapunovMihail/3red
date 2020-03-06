@@ -2,7 +2,7 @@ import { AuthorizationObserverService } from '../../../../authorization/authoriz
 import { IconModifycatorsRadioBtns, ShowOnMainRadioBtns } from './../resources';
 import { NewsRedactFormService } from './news-redact-form.service';
 import { Uploader } from 'angular2-http-file-upload';
-import { INewsSnippet, EnumNewsSnippet, NEWS_UPLOADS_PATH, NewsBodyBlock, NewsBodyEnum } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { INewsSnippet, NEWS_UPLOADS_PATH, NewsBodyBlock, NewsBodyEnum } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
@@ -47,8 +47,6 @@ export class NewsRedactFormComponent implements OnInit, OnChanges, OnDestroy {
     @Output() snippetsChange = new EventEmitter();
 
     @Output() close = new EventEmitter();
-
-    enumCategory = EnumNewsSnippet;
 
     // если не выбрано поле "показать на главной странице"
     // то иконки-модификаторы отображаться не будут

@@ -9,6 +9,7 @@ import { NewsEditTextComponent } from './news-edit-controls/news-edit-text/news-
 import { NewsEditImageComponent } from './news-edit-controls/news-edit-image/news-edit-image.component';
 import { GHMTextAreaModule } from '../../../UI/ghm-textarea/ghm-textarea.module';
 import { NewsEditImage2Component } from './news-edit-controls/news-edit-image2/news-edit-image2.component';
+import { NewsEditAnchorComponent } from './news-edit-controls/news-edit-anchor/news-edit-anchor.component';
 
 @NgModule({
     exports: [
@@ -17,7 +18,8 @@ import { NewsEditImage2Component } from './news-edit-controls/news-edit-image2/n
         NewsDeleteFormComponent,
         NewsEditTextComponent,
         NewsEditImageComponent,
-        NewsEditImage2Component
+        NewsEditImage2Component,
+        NewsEditAnchorComponent
     ],
     declarations: [
         NewsCreateFormComponent,
@@ -25,7 +27,8 @@ import { NewsEditImage2Component } from './news-edit-controls/news-edit-image2/n
         NewsDeleteFormComponent,
         NewsEditTextComponent,
         NewsEditImageComponent,
-        NewsEditImage2Component
+        NewsEditImage2Component,
+        NewsEditAnchorComponent
     ],
     imports: [
         FormsModule,
