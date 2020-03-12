@@ -1,76 +1,141 @@
+<section class="object-news" [class.object-item--margin]="switchOn || isAuthorizated">
 
-<section class="object-news">
-
-    <div class="object-item__container object-news__container">
+    <div class="object-item__container">
 
         <div class="object-news__head">
-            <input type="checkbox" name="switch" id="news-switch" class="switch">
+            <input type="checkbox" name="switch" id="news-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="news-switch" class="object-item__title">Новости</label>
+        </div>
+
+        <ng-container *ngIf="switchOn">
+
             <h2 *ngIf="!isAuthorizated">Новости</h2>
-        </div>
 
-        <div class="object-news__options" *ngIf="isAuthorizated">
-            <button class="object-news__options-btn btn-admin">Добавить новость</button>
-            <button class="object-news__options-btn btn-admin">Добавить акцию</button>
-        </div>
+            <div class="object-news__options" *ngIf="isAuthorizated">
+                <button class="object-news__options-btn btn-admin" (click)="createNewsSnippet()">Добавить новость</button>
+                <button class="object-news__options-btn btn-admin" (click)="createSharesSnippet()">Добавить акцию</button>
+            </div>
 
-        <nav class="object-news__nav">
-            <ul class="object-news__nav-list">
-                <li class="object-news__nav-item" (click)="showSnippetType = 'all'; changeType('all')"
-                    [ngClass]="{'object-news__nav-item_active': showSnippetType === 'all'}">Все</li>
-                <li class="object-news__nav-item" (click)="showSnippetType = 'news'; changeType('news')"
-                    [ngClass]="{'object-news__nav-item_active': showSnippetType === 'news'}">Новости</li>
-                <li class="object-news__nav-item" (click)="showSnippetType = 'shares'; changeType('shares')"
-                    [ngClass]="{'object-news__nav-item_active': showSnippetType === 'shares'}">Акции</li>
-            </ul>
-        </nav>
+            <nav class="object-news__nav">
+                <ul class="object-news__nav-list">
+                    <li class="object-news__nav-item" (click)="changeType(allSnippets, 'all')"
+                        [ngClass]="{'object-news__nav-item_active': showSnippetType === 'all'}">Все</li>
+                    <li class="object-news__nav-item" (click)="changeType(newsSnippets, 'news')"
+                        [ngClass]="{'object-news__nav-item_active': showSnippetType === 'news'}">Новости</li>
+                    <li class="object-news__nav-item" (click)="changeType(shareSnippets, 'shares')"
+                        [ngClass]="{'object-news__nav-item_active': showSnippetType === 'shares'}">Акции</li>
+                </ul>
+            </nav>
 
-        <div class="object-news__slider">
+            <div class="object-news__slider">
 
-            <button class="object-news__slider-all btn-empty">Все новости</button>
-            <button (click)="prevBtn()" *ngIf="currentSlide > 0"
-                class="object-news__slider-btn object-news__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
-                <span></span>
-            </button>
-            <button (click)="nextBtn()" *ngIf="currentSlide + 3 < newsArr.length"
-                class="object-news__slider-btn object-news__slider-btn_next btn-slider btn-slider_next btn-slider_white">
-                <span></span>
-            </button>
+                <a class="object-news__slider-all btn-empty" routerLink="/news-shares/all">Все новости</a>
+                <button (click)="prevBtn()" *ngIf="currentSlide > 0"
+                    class="object-news__slider-btn object-news__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
+                    <span></span>
+                </button>
+                <button (click)="nextBtn()" *ngIf="currentSlide + 3 < this.currentSnippets.length"
+                    class="object-news__slider-btn object-news__slider-btn_next btn-slider btn-slider_next btn-slider_white">
+                    <span></span>
+                </button>
 
-            <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 376 ) ) + 'px)') }">
-                
-                <ng-container *ngFor="let snippet of newsArr; let i = index">
+                <!--<ng-container *ngIf="showSnippetType === 'news'">-->
+                <ng-container>
+                    <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 376 ) ) + 'px)') }">
 
-                    <div class="slider-list__item" *ngIf="snippet.type === showSnippetType || showSnippetType === 'all'"
-                        [ngClass]="{'current-slide': currentSlide === i }">
-                        
-                        <a href="#" class="slider-list__item-link">
-                            <p class="slider-list__house-name">{{snippet.houseName}}</p>
-                            <div class="slider-list__image">
-                                <img src="{{snippet.image}}" alt="news-image">
-                            </div>
-                            <p class="slider-list__title">{{snippet.title}}</p>
-                            <p class="slider-list__date">{{snippet.date}}</p>
+                        <div class="slider-list__item" *ngFor="let snippet of currentSnippets; let i = index"
+                            [ngClass]="{'current-slide': currentSlide === i }" id="slider-item-{{i}}">
 
-                            <div class="slider-list__type" *ngIf="snippet.type === 'shares'">Акция</div>
-                        </a>
+                            <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.title">
+                                <p class="slider-list__house-name">{{snippet.objectName}}</p>
+                                <div class="slider-list__image">
+                                    <img [src]="newsUploadsPath + snippet.thumbnail" alt="news-image" *ngIf="snippet.thumbnail">
+                                </div>
+                                <p class="slider-list__title" *ngIf="snippet.title">{{snippet.title}}</p>
+                                <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
 
+                            </a>
 
-                        <div class="slider-list__edit" *ngIf="isAuthorizated">
+                            <a [routerLink]="['/news-shares/shares/list/1/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.name">
+                                <p class="slider-list__house-name">{{snippet.objectName}}</p>
+                                <div class="slider-list__image">
+                                    <img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">
+                                </div>
+                                <p class="slider-list__title" *ngIf="snippet.text">{{snippet.text}}</p>
+                                <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
 
-                            <button class="slider-list__edit-item" (click)="onSelectItem(snippet)"
-                                [class.slider-list__edit-item_active]="snippet == activeTooltip"><span></span></button>
-                            
-                            <div class="slider-list__tooltip">
-                                <div class="slider-list__tooltip-item">Редактировать</div>
-                                <div class="slider-list__tooltip-item">Убрать с главной</div>
-                                <div class="slider-list__tooltip-item">В черновик</div>
-                                <div class="slider-list__tooltip-item">Удалить</div>
+                                <div class="slider-list__type" *ngIf="snippet.name">Акция</div>
+                            </a>
+
+                            <div class="slider-list__edit" *ngIf="isAuthorizated">
+
+                                <button class="slider-list__edit-item" (click)="onSelectItem(snippet._id)"
+                                    [class.slider-list__edit-item_active]="snippet._id == activeTooltip"><span></span></button>
+
+                                <div class="slider-list__tooltip" *ngIf="snippet.title">
+                                    <div class="slider-list__tooltip-item" (click)="redactNewsSnippet(snippet._id)" *ngIf="snippet.title">Редактировать</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = false; updateNewsSnippet(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = true; updateNewsSnippet(snippet)" *ngIf="!snippet.show_on_main">На главную</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = false; updateNewsSnippet(snippet)" *ngIf="snippet.publish">В черновик</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = true; updateNewsSnippet(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
+                                    <div class="slider-list__tooltip-item" (click)="deleteNewsSnippet(snippet._id)" *ngIf="snippet.title">Удалить</div>
+                                </div>
+                                <div class="slider-list__tooltip" *ngIf="snippet.name">
+                                    <div class="slider-list__tooltip-item" (click)="redactShareSnippet(snippet._id)" *ngIf="snippet.name">Редактировать</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = false; updateShareSnippet(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = true; updateShareSnippet(snippet)" *ngIf="!snippet.show_on_main">На главную</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = false; updateShareSnippet(snippet)" *ngIf="snippet.publish">В черновик</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = true; updateShareSnippet(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
+                                    <div class="slider-list__tooltip-item" (click)="deleteShareSnippet(snippet._id)" *ngIf="snippet.name">Удалить</div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </ng-container>
             </div>
-        </div>
+
+        </ng-container>
+
     </div>
 </section>
+
+<!-- форма создания новости -->
+<app-news-create-redact-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="getAllSnippets()"
+    [snippetsArray]="allSnippets"
+    [redactId]="redactId"
+    [objectId]="objectId"
+    [objectName]="objectName"
+    (close)="isNewsCreateRedactForm = false; windowScrollLocker.unblock()"
+    [isForm]="isNewsCreateRedactForm">
+</app-news-create-redact-form>
+
+<!-- форма удаления новости -->
+<app-news-delete-form class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="getAllSnippets()"
+    (close)="isNewsDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="allSnippets"
+    [redactId]="redactId" [isForm]="isNewsDeleteForm">
+</app-news-delete-form>
+
+<!-- форма редактирования и создания акции -->
+<app-shares-edit class="admin-controll"
+    *ngIf="isAuthorizated && isSharesCreateRedactForm"
+    (snippetsChange)="getAllSnippets()"
+    [objectId]="objectId"
+    [objectName]="objectName"
+    (close)="isSharesCreateRedactForm = false; windowScrollLocker.unblock()"
+    [redactId]="redactId" [isForm]="isSharesCreateRedactForm">
+</app-shares-edit>
+
+<!-- форма удаления акции -->
+<app-shares-delete class="admin-controll"
+    *ngIf="isAuthorizated"
+    (snippetsChange)="getAllSnippets()"
+    (close)="isSharesDeleteForm = false; windowScrollLocker.unblock()"
+    [snippetsArray]="allSnippets"
+    [redactId]="redactId" [isForm]="isSharesDeleteForm">
+</app-shares-delete>

@@ -8,7 +8,7 @@
 
     <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
 
-    <app-object-item-project [isAuthorizated]="isAuthorizated" id="project"></app-object-item-project>
+    <app-object-item-project [isAuthorizated]="isAuthorizated" id="project" [objectName]="jkObject.name"></app-object-item-project>
 
     <app-object-item-flat [isAuthorizated]="isAuthorizated" id="choose"></app-object-item-flat>
 
@@ -20,7 +20,7 @@
 
     <app-object-item-purchase [isAuthorizated]="isAuthorizated" id="purchase"></app-object-item-purchase>
 
-    <app-object-item-news [isAuthorizated]="isAuthorizated" id="news"></app-object-item-news>
+    <app-object-item-news [isAuthorizated]="isAuthorizated" id="news" [objectName]="jkObject.name"></app-object-item-news>
 
     <app-object-item-documentation [isAuthorizated]="isAuthorizated" id="documentation"></app-object-item-documentation>
 

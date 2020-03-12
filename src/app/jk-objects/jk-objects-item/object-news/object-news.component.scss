@@ -5,7 +5,6 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    margin: 0 0 96px;
     overflow: hidden;
 
     &__head { margin: 0 0 16px; }
@@ -60,6 +59,7 @@
 
         &-all {
             position: absolute;
+            display: block;
             top: -44px - 23px;
             right: 0;
             font: 18px/23px $font-proba;

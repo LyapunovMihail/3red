@@ -1,6 +1,6 @@
 import { UploadItem } from 'angular2-http-file-upload';
 
-export class NewsRedactFormUpload extends UploadItem {
+export class NewsCreateRedactFormUpload extends UploadItem {
    constructor(file: any) {
        super();
        this.url = '/api/admin/news/image';

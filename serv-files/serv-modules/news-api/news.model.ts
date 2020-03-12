@@ -23,6 +23,11 @@ export class NewsModel {
         return await this.collection.find({ show_on_main: true }).toArray();
     }
 
+    // новости жилищного комплекса
+    async getObjectSnippet(objectId) {
+        return await this.collection.find({ objectId }).toArray();
+    }
+
     // создание новости
     async setSnippet(parameters) {
         const options: INewsSnippet = parameters;
@@ -73,11 +78,11 @@ export class NewsModel {
     }
 
     private valuesReview(options) {
+        console.log('options: ', options);
         // если есть все параметры : 'created_at', 'last_modifyed', 'title', 'description', 'image', 'thumbnail', 'category', 'show_on_main'
-        // а так же если 'category' равна одному из значений EnumNewsSnippet
         return ( ( 'created_at' in options && 'last_modifyed' in options && 'title' in options
         && 'description' in options && 'image' in options && 'thumbnail' in options
-        && 'category' in options && 'show_on_main' in options && 'icon_mod' in options )  ? true : false );
+        && 'publish' in options && 'show_on_main' in options && 'body' in options)  ? true : false );
     }
 
 }

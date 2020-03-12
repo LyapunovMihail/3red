@@ -1,12 +1,12 @@
-import { Component, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Output, EventEmitter, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ShareBodyBlock } from '../../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 
 @Component({
-    selector: 'app-shares-edit-description',
+    selector: 'app-shares-edit-text',
     template: `
         <div class="create-shares__wrap create-shares__wrap_path">
-            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">Абзац</h3>
+            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">{{type === 'header' ? 'Заголовок' : 'Абзац'}}</h3>
 
             <div class="create-shares__wrap create-shares__wrap_btn">
                 <button class="create-shares__btn create-shares__btn_path-controll" (click)="remove.next()">Удалить</button>
@@ -17,28 +17,32 @@ import { ShareBodyBlock } from '../../../../../../../serv-files/serv-modules/sha
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_full">
                 <ghm-textarea *ngIf="conf" [(ngModel)]="conf.blockDescription"
                     (input)="changeText()"
-                    [placeholder]="'Текст'"
-                    [link]="true"
+                    [placeholder]="type === 'header' ? 'Заголовок' : 'Текст'"
+                    [link]="type === 'description'"
+                    [bodyBlockIndex]="conf.blockOrderNumber"
+                    (addLink)="addLink.emit($event)"
                     class="create-shares__input create-shares__input_area">
                 </ghm-textarea>
             </div>
         </div>
     `,
     styleUrls: [
-        './shares-edit-description.component.scss',
+        './shares-edit-text.component.scss',
         './../../shares-edit.component.scss'
     ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => SharesEditDescriptionComponent),
+            useExisting: forwardRef(() => SharesEditTextComponent),
             multi: true
         }
     ]
 })
-export class SharesEditDescriptionComponent implements ControlValueAccessor {
+export class SharesEditTextComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
+    @Output() public addLink: EventEmitter<any> = new EventEmitter();
+    @Input() public type: string;
 
     public conf: ShareBodyBlock;
 

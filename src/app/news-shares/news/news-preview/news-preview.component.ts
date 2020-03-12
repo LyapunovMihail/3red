@@ -2,7 +2,7 @@ import { NewsService } from '../news.service';
 import { AuthorizationObserverService } from '../../../authorization/authorization.observer.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
-import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-news-preview',
@@ -14,39 +14,46 @@ import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 
 export class NewsPreviewComponent implements OnInit, OnDestroy {
 
-    public uploadsPath: string = `/${NEWS_UPLOADS_PATH}`;
+    public uploadsPath = `/${NEWS_UPLOADS_PATH}`;
 
     public snippetsArray: INewsSnippet[] = [];
 
-    public isAuthorizated: boolean = false ;
+    public isAuthorizated = false ;
 
     // подписка на авторизацию
     public AuthorizationEvent;
 
-    // открытие формы создания
-    public isCreateForm: boolean = false ;
-
-    // открытие формы редактирования
+    // открытие формы редактирования-создания
     public redactId: any ;
-    public isRedactForm: boolean = false ;
-    public isDeleteForm: boolean = false ;
+    public isCreateRedactForm = false;
+    public isDeleteForm = false;
 
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,
-        private newsService: NewsService,
-        private ref: ChangeDetectorRef
+        private newsService: NewsService
     ) { }
 
     public ngOnInit(): void {
+        this.getSnippets();
+    }
+
+    public subscribeAuth() {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
+            if (this.isAuthorizated) {
+                this.getSnippets();
+            } else {
+                this.snippetsArray = this.snippetsArray.filter((item) => item.publish);
+            }
         });
+    }
 
+    public getSnippets() {
         this.newsService.getSnippet().subscribe(
             (data) => {
                 this.snippetsArray = data;
-                this.ref.detectChanges();
+                this.subscribeAuth();
             },
             (err) => console.error(err)
         );
@@ -58,7 +65,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
 
     public createSnippet() {
         if ( this.isAuthorizated ) {
-            this.isCreateForm = true ;
+            this.isCreateRedactForm = true ;
             this.windowScrollLocker.block();
         }
     }
@@ -66,7 +73,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     public redactSnippet(id) {
         if ( this.isAuthorizated ) {
             this.redactId = id;
-            this.isRedactForm = true ;
+            this.isCreateRedactForm = true ;
             this.windowScrollLocker.block();
         }
     }
@@ -81,6 +88,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
 
     // вызывается после создания, удаления, редактирования
     public snippetsChange(data: INewsSnippet[]) {
+        console.log('data: ', data);
         this.snippetsArray = data;
     }
 

@@ -1,18 +1,18 @@
 import { AuthorizationObserverService } from '../../../../authorization/authorization.observer.service';
-import { NewsCreateFormService } from './news-create-form.service';
+import { NewsCreateRedactFormService } from './news-create-redact-form.service';
 import { Uploader } from 'angular2-http-file-upload';
-import { NEWS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { INewsSnippet, NEWS_UPLOADS_PATH, NewsBodyBlock } from '../../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
-    selector : 'app-news-create-form',
-    templateUrl : './news-create-form.component.html',
+    selector : 'app-news-create-redact-form',
+    templateUrl : './news-create-redact-form.component.html',
     styleUrls : [ './../news-form.component.scss' ],
     providers : [
         Uploader,
-        NewsCreateFormService
+        NewsCreateRedactFormService
     ]
 })
 
@@ -30,15 +30,20 @@ import * as moment from 'moment';
 
 */
 
-export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
+export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() isForm = false ;
-
+    @Input() objectId = '';
+    @Input() objectName = '';
+    @Input() snippetsArray: INewsSnippet[] = [];
+    @Input() redactId: any;
     // вызывается при создании сниппета, и передает в общий компонент
     // новый массив из ответа сервера
     @Output() snippetsChange = new EventEmitter();
 
     @Output() close = new EventEmitter();
+
+    snippet: INewsSnippet;
 
     // путь для загрузки изображений
     uploadsPath = `/${NEWS_UPLOADS_PATH}`;
@@ -57,14 +62,12 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     public dateNow: string;
 
     public showModal = false;
-    public textEditIndex: number;
-    public textAreaForLinkAdd: HTMLTextAreaElement;
-    public fakeTextAreaForLinkAdd: HTMLDivElement;
+    public modalAnchorData;
 
     constructor(
         private formBuilder: FormBuilder,
         private authorization: AuthorizationObserverService,
-        private newsCreateService: NewsCreateFormService,
+        private newsCreateService: NewsCreateRedactFormService,
         public ref: ChangeDetectorRef
     ) { }
 
@@ -76,17 +79,37 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         moment.locale('ru');
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
 
+        this.setNewForm();
+    }
+
+    public setNewForm() {
         this.form = this.formBuilder.group({
             created_at : '',
             last_modifyed : '',
             title : ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
             description : '',
             show_on_main : false,
-            status: 'dirty',
+            publish: false,
             image : ['', Validators.required],
             thumbnail : ['', Validators.required],
-            objectId: '',
-            objectName: '',
+            objectId: this.objectId,
+            objectName: this.objectName,
+            body: this.formBuilder.array([])
+        });
+    }
+
+    public setFormFromSnippet() {
+        this.form = this.formBuilder.group({
+            created_at : this.snippet.created_at,
+            last_modifyed : this.snippet.last_modifyed,
+            title : [this.snippet.title, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
+            description : this.snippet.description,
+            show_on_main : this.snippet.show_on_main,
+            publish: this.snippet.publish,
+            image : [this.snippet.image, Validators.required],
+            thumbnail : [this.snippet.thumbnail, Validators.required],
+            objectId: this.snippet.objectId,
+            objectName: this.snippet.objectName,
             body: this.formBuilder.array([])
         });
     }
@@ -95,12 +118,12 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
         this.AuthorizationEvent.unsubscribe();
     }
 
-    showModalFunc(obj) {
-        console.log('obj: ', obj);
+    showModalFunc(obj, i) {
         this.showModal = true;
-        this.textAreaForLinkAdd = obj.textArea;
-        this.fakeTextAreaForLinkAdd = obj.fakeTextArea;
+        obj.formControl = this.body.at(i);
+        this.modalAnchorData = obj;
     }
+
     public get body(): FormArray { return this.form.get('body') as FormArray; }
 
     public addDescription(order?: number, value?: string) {
@@ -108,6 +131,14 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
             blockType: 'description',
             blockOrderNumber: order ? order : this.body.controls.length,
             blockDescription: value ? value : ''
+        }));
+    }
+
+    public addHeader(order?: number, value?: string) {
+        this.body.push(new FormControl({
+            blockType: 'header',
+            blockOrderNumber: order ? order : this.body.controls.length,
+            blockHeader: value ? value : ''
         }));
     }
 
@@ -133,7 +164,6 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                 thumbnail2: ''
             }
         }));
-        console.log('this.body: ', this.body);
     }
 
     public changeBlockImage(data, i) {
@@ -155,8 +185,8 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                 blockImg2: {
                     image: data.image,
                     thumbnail: data.thumbnail,
-                    image2: this.body.at(i).value.image2 ? this.body.at(i).value.image2 : '',
-                    thumbnail2: this.body.at(i).value.thumbnail2 ? this.body.at(i).value.thumbnail2 : ''
+                    image2: this.body.at(i).value.blockImg2.image2 ? this.body.at(i).value.blockImg2.image2 : '',
+                    thumbnail2: this.body.at(i).value.blockImg2.thumbnail2 ? this.body.at(i).value.blockImg2.thumbnail2 : ''
                 }
             });
         } else {
@@ -164,21 +194,13 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
                 blockType: 'image2',
                 blockOrderNumber: this.body.at(i).value.blockOrderNumber,
                 blockImg2: {
-                    image: this.body.at(i).value.image ? this.body.at(i).value.image : '',
-                    thumbnail: this.body.at(i).value.thumbnail ? this.body.at(i).value.thumbnail : '',
+                    image: this.body.at(i).value.blockImg2.image ? this.body.at(i).value.blockImg2.image : '',
+                    thumbnail: this.body.at(i).value.blockImg2.thumbnail ? this.body.at(i).value.blockImg2.thumbnail : '',
                     image2: data.image,
                     thumbnail2: data.thumbnail
                 }
             });
         }
-    }
-
-    public addList(order?: number, value?: string[]) {
-        this.body.push(new FormControl({
-            blockType: 'header',
-            blockOrderNumber: order ? order : this.body.controls.length,
-            blockList: value ? value : ['']
-        }));
     }
 
     public removeBlock(cnt) {
@@ -190,13 +212,34 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         // при открытии формы
         if ( this.isForm ) {
-            // сбрасываются значения
-            this.form.reset();
-            // и добавляются дефолтные поля
-            const date = new Date();
-            // дата создания и последнего редактирования равны
-            this.form.controls.created_at.setValue(date);
-            this.form.controls.last_modifyed.setValue(date);
+            // при открытии формы расставляются значения редактируемого сниппета
+            this.snippet = this.snippetsArray.find((item) => item._id === this.redactId);
+            if ( this.snippet ) {
+                this.setFormFromSnippet();
+                this.form.get('last_modifyed').setValue(new Date().toISOString());
+                if (this.snippet.body.length) {
+                    (this.snippet.body as NewsBodyBlock[]).forEach((body: NewsBodyBlock) => {
+                        if (body.blockType === 'header') {
+                            this.addHeader(body.blockOrderNumber, body.blockHeader);
+                        } else if (body.blockType === 'image') {
+                            this.addImage(body.blockOrderNumber, body.blockImg);
+                        } else if (body.blockType === 'image2') {
+                            this.addImage2(body.blockOrderNumber, body.blockImg2);
+                        } else if (body.blockType === 'description') {
+                            this.addDescription(body.blockOrderNumber, body.blockDescription);
+                        }
+                    });
+                }
+            } else {
+                // сбрасываются значения
+                this.setNewForm();
+                const date = new Date();
+                // дата создания и последнего редактирования равны
+                this.form.controls.created_at.setValue(date);
+                this.form.controls.last_modifyed.setValue(date);
+                this.form.controls.objectId.setValue(this.objectId);
+                this.form.controls.objectName.setValue(this.objectName);
+            }
         }
     }
 
@@ -250,16 +293,27 @@ export class NewsCreateFormComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     onSubmit(form) {
+        form.publish = !(form.publish === 'false' || form.publish === false);
 
-        this.close.emit();
-        this.newsCreateService.formSubmit(form).subscribe(
-            // а в общий компонент передается новый массив сниппетов
-            (data) => this.snippetsChange.emit(data),
-            (err) => {
-                alert('Что-то пошло не так!');
-                console.error(err);
-            }
-        );
+        if (!this.redactId) {
+            this.newsCreateService.createSnippet(form).subscribe(
+                // а в общий компонент передается новый массив сниппетов
+                (data) => { this.snippetsChange.emit(data); this.close.emit(); },
+                (err) => {
+                    alert('Что-то пошло не так!');
+                    console.error(err);
+                }
+            );
+        } else {
+            this.newsCreateService.updateSnippet(this.redactId, form).subscribe(
+                // а в общий компонент передается новый массив сниппетов
+                (data) => { this.snippetsChange.emit(data); this.close.emit(); },
+                (err) => {
+                    alert('Что-то пошло не так!');
+                    console.error(err);
+                }
+            );
+        }
     }
 
 }

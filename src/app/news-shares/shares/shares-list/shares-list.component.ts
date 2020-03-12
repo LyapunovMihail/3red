@@ -58,19 +58,13 @@ export class SharesListComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-
         this.subs.push(this.activatedRoute.params
             .pipe(takeUntil(this._ngUnsubscribe))
             .subscribe((params: Params) => {
                 this.indexNum = params['index'];
             })
         );
-        this.subs.push(this.authorization.getAuthorization()
-            .pipe(takeUntil(this._ngUnsubscribe))
-            .subscribe((state: boolean) => {
-                this.isAuth = state;
-            })
-        );
+
         this.getShares((this.indexNum === 1) ? 0 : Number(this.indexNum - 1 + '0'));
         this.activePaginatorItem = this.indexNum - 1;
     }
@@ -85,9 +79,27 @@ export class SharesListComponent implements OnInit, OnDestroy {
             this.shares = data.sharesList;
             this.sharesLength = data.length;
             this.createPaginator(data.length);
+            this.subscribeAuth();
         }, (err) => {
             console.log(err);
         });
+    }
+
+    subscribeAuth() {
+        this.subs.push(this.authorization.getAuthorization()
+            .pipe(takeUntil(this._ngUnsubscribe))
+            .subscribe((state: boolean) => {
+                this.isAuth = state;
+                if (this.isAuth) {
+                    this.getShares((this.indexNum === 1) ? 0 : Number(this.indexNum - 1 + '0'));
+                    this.activePaginatorItem = this.indexNum - 1;
+                } else {
+                    this.shares = this.shares.filter((item) => item.publish);
+                    this.sharesLength = this.shares.length;
+                    this.createPaginator(this.shares.length);
+                }
+            })
+        );
     }
 
     public createPaginator(count) {

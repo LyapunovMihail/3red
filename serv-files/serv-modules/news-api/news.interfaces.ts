@@ -1,5 +1,3 @@
-import { ShareBodyBlock, ShareBodyEnum, ShareFlat } from '../shares-api/shares.interfaces';
-
 export const NEWS_COLLECTION_NAME = 'news';
 
 export const NEWS_UPLOADS_PATH = 'uploads/news/';
@@ -13,10 +11,9 @@ export interface INewsSnippet {
     title: string ;
     description: string ;
     show_on_main: boolean ;
-    status: string;
+    publish: boolean;
     image: string ;
     thumbnail: string ;
-    show_large: boolean;
     objectId?: string;
     objectName?: string;
     body: NewsBodyBlock[];
@@ -33,7 +30,7 @@ export interface NewsBodyBlock {
     blockType: NewsBodyEnum;
     blockOrderNumber: number;
     blockDescription?: string;
-    blockList?: string[];
+    blockHeader?: string;
     blockImg?: {
         image: string;
         thumbnail: string;

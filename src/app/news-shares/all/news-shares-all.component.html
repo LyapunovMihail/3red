@@ -24,7 +24,7 @@
     <div class="news__snippets all__snippets">
         <ng-container *ngFor="let snippet of allSnippets">
         
-            <div class="news__snippets-item" *ngIf="snippet.category">
+            <div class="news__snippets-item" *ngIf="snippet.title">
         
                 <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__snippets-link">
                     <div class="news__snippets-img">
@@ -45,7 +45,7 @@
         
             </div>
         
-            <div class="shares__snippets-item" *ngIf="!snippet.category">
+            <div class="shares__snippets-item" *ngIf="snippet.name">
                 <a class="shares__snippets-link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
                     <div class="shares__snippets-img">
                         <img [src]="sharesUploadsPath + snippet.mainImage" alt="share">
@@ -72,21 +72,14 @@
 </section>
 
 <!-- форма создания новости -->
-<app-news-create-form class="admin-controll"
+<app-news-create-redact-form class="admin-controll"
     *ngIf="isAuthorizated"
-    (snippetsChange)="snippetsChange()"
-    (close)="isNewsCreateForm = false; windowScrollLocker.unblock()"
-    [isForm]="isNewsCreateForm">
-</app-news-create-form>
-
-<!-- форма редактирования новости -->
-<app-news-redact-form class="admin-controll"
-    *ngIf="isAuthorizated"
-    (snippetsChange)="snippetsChange()"
-    (close)="isNewsRedactForm = false; windowScrollLocker.unblock()"
+    (snippetsChange)="snippetsChange($event)"
     [snippetsArray]="allSnippets"
-    [redactId]="redactId" [isForm]="isNewsRedactForm">
-</app-news-redact-form>
+    [redactId]="redactId"
+    (close)="isNewsCreateRedactForm = false; windowScrollLocker.unblock()"
+    [isForm]="isNewsCreateRedactForm">
+</app-news-create-redact-form>
 
 <!-- форма удаления новости -->
 <app-news-delete-form class="admin-controll"
@@ -110,6 +103,6 @@
     *ngIf="isAuthorizated"
     (snippetsChange)="snippetsChange()"
     (close)="isSharesDeleteForm = false; windowScrollLocker.unblock()"
-    [snippetsArray]="snippetsArray"
+    [snippetsArray]="allSnippets"
     [redactId]="redactId" [isForm]="isSharesDeleteForm">
 </app-shares-delete>

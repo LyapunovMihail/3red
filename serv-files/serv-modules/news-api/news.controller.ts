@@ -35,6 +35,10 @@ export class NewsController extends NewsModel {
             return await this.getMainSnippet();
         }));
 
+        this.router.get('/news/object/:id', responseHandler(async (req) => {
+            return await this.getObjectSnippet(req.params.id);
+        }));
+
         this.router.post('/admin/news/create', responseHandler(async (req) => {
             return await this.setSnippet(req.body.form);
         }));

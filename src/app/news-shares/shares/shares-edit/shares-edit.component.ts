@@ -17,24 +17,6 @@ import { SharesObserverService } from '../shares-observer.service';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 
-export function createDynamicNewsObj(): Share {
-    return ({
-        name: '',
-        text: '',
-        textPreview: '',
-        mainImage: null,
-        mainThumbnail: null,
-        countdown: false,
-        show_on_main: false,
-        created_at: new Date().toISOString(),
-        finish_date: new Date().toISOString(),
-        body: [],
-        requestBtn: false,
-        objectId: '',
-        objectName: ''
-    });
-}
-
 @Component({
     selector: 'app-shares-edit',
     templateUrl: './shares-edit.component.html',
@@ -59,6 +41,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     @Input() redactId: any ;
 
+    @Input() objectId = '';
+    @Input() objectName = '';
+
     // вызывается при изменении сниппета
     @Output() snippetsChange = new EventEmitter();
 
@@ -68,6 +53,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     private _ngUnsubscribe: Subject<any> = new Subject();
 
     public formLoading: boolean = true;
+
+    public showModal = false;
+    public modalAnchorData;
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -80,13 +68,12 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.form  = new FormGroup({
             name: new FormControl('', Validators.compose([Validators.required])),
             text: new FormControl('', Validators.required),
-            textPreview: new FormControl('', Validators.compose([Validators.required])),
             mainImage: new FormControl(null, Validators.required),
             mainThumbnail: new FormControl(null, Validators.required),
             show_on_main: new FormControl(false, Validators.required),
+            publish: new FormControl(false),
             created_at: new FormControl('', Validators.required),
             countdown: new FormControl(false, Validators.required),
-            requestBtn: new FormControl(false, Validators.required),
             finish_date: new FormControl('', Validators.required),
             objectId: new FormControl(''),
             objectName: new FormControl(''),
@@ -100,11 +87,29 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         moment.locale('ru');
     }
 
+
+    public createDynamicNewsObj(): Share {
+        return ({
+            name: '',
+            text: '',
+            mainImage: null,
+            mainThumbnail: null,
+            countdown: false,
+            show_on_main: false,
+            publish: false,
+            created_at: new Date().toISOString(),
+            finish_date: new Date().toISOString(),
+            body: [],
+            objectId: this.objectId,
+            objectName: this.objectName,
+        });
+    }
+
     // tslint:disable-next-line:member-access
 
     ngOnInit() {
         if (this.redactId === SHARES_CREATE_ID) {
-            this.form.reset(createDynamicNewsObj());
+            this.form.reset(this.createDynamicNewsObj());
         } else {
             this.getObjectById();
         }
@@ -124,10 +129,20 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
     }
 
-
     // tslint:disable-next-line:member-access
     ngOnDestroy() {
         this.unsubscribe();
+    }
+
+    showModalFunc(obj, i) {
+        this.showModal = true;
+        obj.formControl = this.body.at(i);
+        this.modalAnchorData = obj;
+    }
+
+    public changePublish(event) {
+        console.log('value: ', event.target.value);
+        this.form.get('publish').setValue(Boolean(event.target.value));
     }
 
     public get body(): FormArray { return this.form.get('body') as FormArray; }
@@ -151,11 +166,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         }));
     }
 
-    public addList(order?: number, value?: string[]) {
+    public addHeader(order?: number, value?: string) {
         this.body.push(new FormControl({
-            blockType: 'list',
+            blockType: 'header',
             blockOrderNumber: order ? order : this.body.controls.length,
-            blockList: value ? value : ['']
+            blockHeader: value ? value : ''
         }));
     }
 
@@ -183,20 +198,51 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         }));
     }
 
+    public changeBlockImage(data, i) {
+        this.body.at(i).setValue({
+            blockType: 'image',
+            blockOrderNumber: this.body.at(i).value.blockOrderNumber,
+            blockImg: {
+                image: data.image,
+                thumbnail: data.thumbnail
+            }
+        });
+    }
+
     public removeBlock(cnt) {
         if (confirm('Удалить секцию?')) {
             this.body.removeAt(cnt);
         }
     }
 
-    public onImagePicked(e: Event, type: string): void {
+    public getObjectById() {
+        this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
+            this.form.reset(data[0]);
+            this.finishDate = data[0].finish_date;
+            (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
+                if (body.blockType === 'flats') {
+                    this.addFlats(body.blockOrderNumber, body.blockFlats);
+                } else if (body.blockType === 'header') {
+                    this.addHeader(body.blockOrderNumber, body.blockHeader);
+                } else if (body.blockType === 'image') {
+                    this.addImage(body.blockOrderNumber, body.blockImg);
+                } else if (body.blockType === 'description') {
+                    this.addDescription(body.blockOrderNumber, body.blockDescription);
+                }
+            });
+            this.countDown();
+        });
+    }
+
+    public onImagePicked(e: Event, type: string, i): void {
         const file = (e.target as HTMLInputElement).files[0];
-        let results = [];
         this.sharesService.imageUpload(file)
             .then((data: any) => {
                 if (type === 'main-image') {
                     this.form.patchValue({mainImage: data.image});
                     this.form.patchValue({mainThumbnail: data.thumbnail});
+                } else if (type === 'change-image' && i !== undefined) {
+                    this.changeBlockImage(data, i);
                 } else {
                     this.addImage(this.body.controls.length, {
                         image: data.image,
@@ -209,6 +255,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         });
     }
 
+    deleteImage() {
+        this.form.patchValue({mainImage: ''});
+        this.form.patchValue({mainThumbnail: ''});
+    }
+
     public countDown() {
         const createdDateVal = moment(Date.now());
         const finishDateVal = moment(this.finishDate);
@@ -216,30 +267,22 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.days = Math.ceil(duration.asDays() * -1);
     }
 
-    public getObjectById() {
-        this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
-            this.form.reset(data[0]);
-            this.finishDate = data[0].finish_date;
-            (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
-                if (body.blockType === 'flats') {
-                    this.addFlats(body.blockOrderNumber, body.blockFlats);
-                } else if (body.blockType === 'list') {
-                    this.addList(body.blockOrderNumber, body.blockList);
-                } else if (body.blockType === 'image') {
-                    this.addImage(body.blockOrderNumber, body.blockImg);
-                } else if (body.blockType === 'description') {
-                    this.addDescription(body.blockOrderNumber, body.blockDescription);
-                }
-            });
-            this.countDown();
-        });
-    }
-
     public onSave(form): void {
+        form.publish = !(form.publish === 'false' || form.publish === false);
 
-        if (form.valid) {
-            if (this.redactId === SHARES_CREATE_ID) {
-                this.sharesService.createShare(form.value).subscribe(
+        if (this.redactId === SHARES_CREATE_ID) {
+            this.sharesService.createShare(form).subscribe(
+                (response) => {
+                    this.close.emit();
+                    this.snippetsChange.emit(response);
+                    this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
+                },
+                (err) => {
+                    alert('Что-то пошло не так!');
+                });
+        } else {
+            this.sharesService.updateShare(this.redactId, form as Share)
+                .subscribe(
                     (response) => {
                         this.close.emit();
                         this.snippetsChange.emit(response);
@@ -247,20 +290,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     },
                     (err) => {
                         alert('Что-то пошло не так!');
-                    });
-            } else {
-                this.sharesService.updateShare(this.redactId, form.value as Share)
-                    .subscribe(
-                        (response) => {
-                            this.close.emit();
-                            this.snippetsChange.emit(response);
-                            this.flatsDiscountService.getShares(); // обновляем список акций в сервисе для определения скидки на квартиры по акциям
-                        },
-                        (err) => {
-                            alert('Что-то пошло не так!');
-                        }
-                    );
-            }
+                    }
+                );
         }
     }
 

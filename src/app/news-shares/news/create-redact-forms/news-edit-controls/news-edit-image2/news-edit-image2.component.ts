@@ -18,9 +18,9 @@ import { NEWS_UPLOADS_PATH, NewsBodyBlock } from '../../../../../../../serv-file
             </div>
             <div class="create-shares__wrap_path-img2">
                 <img class="share-view__blocks-img" width="352" height="264" [src]="uploadsPath + conf.blockImg2.thumbnail" *ngIf="conf.blockImg2.thumbnail">
-                <img class="share-view__blocks-img" width="352" height="264" [src]="'/uploads/news/thumbnail-date2020-03-05-11-07-07-37_random1063.jpg'" *ngIf="!conf.blockImg2.thumbnail">
+                <img class="share-view__blocks-img" width="352" height="264" src="/assets/img/news/default.svg" *ngIf="!conf.blockImg2.thumbnail">
                 <img class="share-view__blocks-img" width="352" height="264" [src]="uploadsPath + conf.blockImg2.thumbnail2" *ngIf="conf.blockImg2.thumbnail2">
-                <img class="share-view__blocks-img" width="352" height="264" [src]="'/uploads/news/thumbnail-date2020-03-05-11-07-07-37_random1063.jpg'"  *ngIf="!conf.blockImg2.thumbnail2">
+                <img class="share-view__blocks-img" width="352" height="264" src="/assets/img/news/default.svg" *ngIf="!conf.blockImg2.thumbnail2">
             </div>
         </div>
     `,

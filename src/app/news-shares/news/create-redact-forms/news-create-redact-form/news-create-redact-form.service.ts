@@ -1,5 +1,5 @@
 import { adminHeaders } from '../../../../commons/admin-headers.utilit';
-import { NewsCreateFormUpload } from './news-create-form.upload';
+import { NewsCreateRedactFormUpload } from './news-create-redact-form.upload';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
@@ -7,7 +7,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 
-export class NewsCreateFormService {
+export class NewsCreateRedactFormService {
 
     public subject = new BehaviorSubject<number>(0);
 
@@ -24,9 +24,14 @@ export class NewsCreateFormService {
         return this.subject.asObservable();
     }
 
-    public formSubmit(form) {
+    public createSnippet(form) {
         const message = JSON.stringify({ form });
         return this.http.post('/api/admin/news/create', message, adminHeaders());
+    }
+
+    public updateSnippet(id, form) {
+        let message = JSON.stringify({ id, form });
+        return this.http.post('/api/admin/news/update', message, adminHeaders());
     }
 
     public imageUpload(e) {
@@ -35,7 +40,7 @@ export class NewsCreateFormService {
             const fileList: FileList = e.target.files;
             const uploadFile: File = fileList[0];
 
-            const myUploadItem = new NewsCreateFormUpload(uploadFile);
+            const myUploadItem = new NewsCreateRedactFormUpload(uploadFile);
             myUploadItem.formData = { FormDataKey: 'Form Data Value' };
 
             this.uploaderService.onSuccessUpload = (item, response, status, headers) => {

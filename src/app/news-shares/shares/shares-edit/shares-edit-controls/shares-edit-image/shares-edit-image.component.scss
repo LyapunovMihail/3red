@@ -1,18 +1,19 @@
 :host {
     width: 100%;
+    position: relative;
 }
 
 .share-view {
-
-    &__blocks-img-wrap {
+    &__blocks-img {
         width: 100%;
-        position: relative;
-        box-sizing: border-box;
-        border: 1px dashed #979797;
+        object-fit: contain;
+    }
 
-        img {
-            width: 100%;
-            object-fit: contain;
-        }
+    &__btn-wrap {
+        position: absolute;
+        width: 190px;
+        top: 90px;
+        left: 39px;
+        z-index: 1;
     }
 }

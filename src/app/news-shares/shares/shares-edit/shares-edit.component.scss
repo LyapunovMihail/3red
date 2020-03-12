@@ -233,6 +233,7 @@
             height: 48px;
             margin-right: 8px;
             padding: 0 24px;
+            &:disabled { color: rgba(255, 255, 255, 0.5) }
         }
         &_save {
             height: 48px;

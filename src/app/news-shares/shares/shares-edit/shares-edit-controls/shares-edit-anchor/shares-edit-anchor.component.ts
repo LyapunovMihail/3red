@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-news-edit-anchor',
+    selector: 'app-shares-edit-anchor',
     template: `
         <section class="g-modal-bg g-modal-bg_for-link paste-link">
             <div class="paste-link__container">
@@ -31,11 +31,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
         </section>
     `,
     styleUrls: [
-        './news-edit-anchor.component.scss',
-        './../../news-form.component.scss'
+        './shares-edit-anchor.component.scss',
+        './../../shares-edit.component.scss'
     ],
 })
-export class NewsEditAnchorComponent implements OnInit {
+export class SharesEditAnchorComponent implements OnInit {
 
     @Input() public data;
     public textArea;

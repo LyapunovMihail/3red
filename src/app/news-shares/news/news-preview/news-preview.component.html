@@ -36,21 +36,14 @@
 </section>
 
 <!-- форма создания новости -->
-<app-news-create-form class="admin-controll"
+<app-news-create-redact-form class="admin-controll"
     *ngIf="isAuthorizated"
-    (snippetsChange)="snippetsChange($event)" 
-    (close)="isCreateForm = false; windowScrollLocker.unblock()" 
-    [isForm]="isCreateForm">
-</app-news-create-form>
-
-<!-- форма редактирования новости -->
-<app-news-redact-form class="admin-controll"
-    *ngIf="isAuthorizated"
-    (snippetsChange)="snippetsChange($event)" 
-    (close)="isRedactForm = false; windowScrollLocker.unblock()"
+    (snippetsChange)="snippetsChange($event)"
     [snippetsArray]="snippetsArray"
-    [redactId]="redactId" [isForm]="isRedactForm">
-</app-news-redact-form>
+    [redactId]="redactId"
+    (close)="isCreateRedactForm  = false; windowScrollLocker.unblock()"
+    [isForm]="isCreateRedactForm">
+</app-news-create-redact-form>
 
 <!-- форма удаления новости -->
 <app-news-delete-form class="admin-controll"

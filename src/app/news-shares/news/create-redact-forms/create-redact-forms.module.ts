@@ -1,5 +1,4 @@
-import { NewsCreateFormComponent } from './news-create-form/news-create-form.component';
-import { NewsRedactFormComponent } from './news-redact-form/news-redact-form.component';
+import { NewsCreateRedactFormComponent } from './news-create-redact-form/news-create-redact-form.component';
 import { NewsDeleteFormComponent } from './news-delete-form/news-delete-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,20 +9,19 @@ import { NewsEditImageComponent } from './news-edit-controls/news-edit-image/new
 import { GHMTextAreaModule } from '../../../UI/ghm-textarea/ghm-textarea.module';
 import { NewsEditImage2Component } from './news-edit-controls/news-edit-image2/news-edit-image2.component';
 import { NewsEditAnchorComponent } from './news-edit-controls/news-edit-anchor/news-edit-anchor.component';
+import { AdminModalModule } from '../../../admin-modal/admin-modal.module';
 
 @NgModule({
     exports: [
-        NewsCreateFormComponent,
-        NewsRedactFormComponent,
+        NewsCreateRedactFormComponent,
         NewsDeleteFormComponent,
         NewsEditTextComponent,
         NewsEditImageComponent,
         NewsEditImage2Component,
-        NewsEditAnchorComponent
+        NewsEditAnchorComponent,
     ],
     declarations: [
-        NewsCreateFormComponent,
-        NewsRedactFormComponent,
+        NewsCreateRedactFormComponent,
         NewsDeleteFormComponent,
         NewsEditTextComponent,
         NewsEditImageComponent,
@@ -35,7 +33,8 @@ import { NewsEditAnchorComponent } from './news-edit-controls/news-edit-anchor/n
         GHMTextAreaModule,
         ReactiveFormsModule,
         DatePickerModule,
-        CommonModule
+        CommonModule,
+        AdminModalModule
     ]
 })
 

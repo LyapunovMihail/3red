@@ -4,7 +4,7 @@ import { SharesService } from '../shares/shares.service';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlatformDetectService } from '../../platform-detect.service';
-import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { NEWS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { SHARES_UPLOADS_PATH } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import * as moment from 'moment';
@@ -30,13 +30,10 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
-    // открытие формы создания
-    public isNewsCreateForm = false ;
-
     // открытие форм редактирования
-    public redactId: any ;
-    public isNewsRedactForm = false ;
+    public redactId: any;
     public isNewsDeleteForm = false ;
+    public isNewsCreateRedactForm = false ;
     public isSharesCreateRedactForm = false ;
     public isSharesDeleteForm = false ;
 
@@ -53,11 +50,18 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
         moment.locale('ru');
 
+        this.getAllSnippets();
+    }
+
+    public subscribeAuth() {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
+            if (this.isAuthorizated) {
+                this.getAllSnippets();
+            } else {
+                this.allSnippets = this.allSnippets.filter((item) => item.publish);
+            }
         });
-
-        this.getAllSnippets();
     }
 
     public ngOnDestroy() {
@@ -77,7 +81,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
                 this.allSnippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });
-
+                this.subscribeAuth();
             },
             (err) => console.log(err)
         );
@@ -92,7 +96,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
     public createNewsSnippet() {
         if ( this.isAuthorizated ) {
-            this.isNewsCreateForm = true ;
+            this.isNewsCreateRedactForm = true;
             this.windowScrollLocker.block();
         }
     }
@@ -100,7 +104,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     public redactNewsSnippet(id) {
         if ( this.isAuthorizated ) {
             this.redactId = id;
-            this.isNewsRedactForm = true ;
+            this.isNewsCreateRedactForm = true;
             this.windowScrollLocker.block();
         }
     }

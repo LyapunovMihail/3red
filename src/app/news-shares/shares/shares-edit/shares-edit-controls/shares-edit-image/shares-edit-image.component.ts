@@ -5,9 +5,18 @@ import { Component, forwardRef, Output, EventEmitter } from '@angular/core';
 @Component({
     selector: 'app-shares-edit-image',
     template: `
-        <div class="share-view__blocks-img-wrap">
+        <div class="share-view__btn-wrap">
+            <ng-content></ng-content>
+        </div>
+        <div class="create-shares__wrap create-shares__wrap_path">
+            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">Изображение</h3>
+
+            <div class="create-shares__wrap create-shares__wrap_btn">
+                <button class="create-shares__btn create-shares__btn_path-controll" (click)="remove.next()">Удалить</button>
+                <button class="create-shares__btn create-shares__btn_path-controll">Вверх</button>
+                <button class="create-shares__btn create-shares__btn_path-controll">Вниз</button>
+            </div>
             <img class="share-view__blocks-img" [src]="uploadsPath + conf.blockImg.image">
-            <div class="share-block-remove-btn share-block-remove-btn_for-text" (click)="remove.next()"></div>
         </div>
     `,
     styleUrls: [
@@ -44,8 +53,4 @@ export class SharesEditImageComponent implements ControlValueAccessor {
     }
 
     registerOnTouched() {}
-
-    changeText() {
-        this.propagateChange(this.conf);
-    }
 }

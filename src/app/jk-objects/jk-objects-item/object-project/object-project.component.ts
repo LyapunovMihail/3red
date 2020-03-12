@@ -18,6 +18,9 @@ export class ObjectProjectComponent implements OnInit {
     @Input()
     public isAuthorizated = false;
 
+    @Input()
+    public objectName: string;
+
     public closeModal = true;
     public objectId: string;
     public snippet: IObjectProjectSnippet;

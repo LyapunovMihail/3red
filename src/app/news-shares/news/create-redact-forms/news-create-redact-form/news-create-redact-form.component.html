@@ -14,7 +14,7 @@
         <form [formGroup]="form" class="create-form__form">
 
             <div (click)="close.emit()" class="create-form__cls-btn btn-cls"><span></span></div>
-            <div (click)="close.emit()" class="create-form__cls-success btn-success"></div>
+            <button (click)="onSubmit(form.value)" [disabled]="!form.valid" class="create-form__cls-success btn-success" [class.btn-disabled]="!form.valid"></button>
 
             <h2 class="create-form__form-title create-form__form-title_out-path">Добавить новость</h2>
 
@@ -48,10 +48,9 @@
                 </div>
                 <div class="create-form__form-wrap create-form__form-wrap_select create-form__form-wrap_w2">
                     <p class="create-form__form-title create-form__form-title_for-select">Статус</p>
-                    <select name="status" class="create-form__form-select create-form__form-select_type" [formControl]="form.controls['status']" [value]="'dirty'">
-                        <option value="dirty">Черновик</option>
-                        <option value="pristine">Чистовик</option>
-                        <option value="template">Шаблон</option>
+                    <select name="status" class="create-form__form-select create-form__form-select_type" [formControl]="form.controls['publish']">
+                        <option [value]="false">Черновик</option>
+                        <option [value]="true">Чистовик</option>
                     </select>
                 </div>
 
@@ -90,8 +89,8 @@
 
             <div class="shares-edit-form__path-wrap">
 
-                <div formArrayName="body">
-                    <div *ngFor="let block of body.controls; index as i"
+                <div formArrayName="body" *ngIf="body['controls'].length">
+                    <div *ngFor="let block of body['controls']; index as i"
                          [ngSwitch]="block.value.blockType">
 
                         <app-news-edit-text
@@ -99,7 +98,7 @@
                             [type]="'description'"
                             *ngSwitchCase="'description'"
                             (remove)="removeBlock(i)"
-                            (addLink)="showModalFunc($event)">
+                            (addLink)="showModalFunc($event, i)">
                         </app-news-edit-text>
 
                         <app-news-edit-image
@@ -138,7 +137,7 @@
             </div>
 
             <div class="create-form__form-wrap create-form__form-wrap_controls">
-                <button class="create-form__form-btn create-form__form-btn_controls-title" (click)="addList()">Заголовок</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-title" (click)="addHeader()">Заголовок</button>
                 <button class="create-form__form-btn create-form__form-btn_controls-text" (click)="addDescription()">Абзац</button>
                 <button class="create-form__form-btn create-form__form-btn_controls-image" (click)="singleImgPicker.click()">
                     <input #singleImgPicker
@@ -154,10 +153,11 @@
 
             <button type="submit" class="create-form__form-submit btn_var-2"
                 [ngClass]="{'create-form__form-submit_disabled' : !form.valid}"
-                [disabled]="!form.valid">Опубликовать
+                [disabled]="!form.valid"
+                (click)="onSubmit(form.value)">Сохранить и закрыть
             </button>
-            <button class="create-form__form-save btn_var-2" [disabled]="!form.valid">
-                Сохранить и закрыть
+            <button class="create-form__form-save btn_var-2" (click)="close.emit()">
+                Отменить
             </button>
 
         </form>
@@ -167,7 +167,6 @@
 </div>
 
 <app-news-edit-anchor *ngIf="showModal"
-    [textArea]="textAreaForLinkAdd"
-    [fakeTextArea]="fakeTextAreaForLinkAdd"
+    [data]="modalAnchorData"
     (close)="showModal = false">
 </app-news-edit-anchor>

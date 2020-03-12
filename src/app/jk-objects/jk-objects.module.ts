@@ -21,7 +21,6 @@ import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-
 import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
 import { ObjectLocationComponent } from './jk-objects-item/object-location/object-location.component';
 import { ObjectPurchaseComponent } from './jk-objects-item/object-purchase/object-purchase.component';
-import { ObjectNewsComponent } from './jk-objects-item/object-news/object-news.component';
 import { ObjectDocumentationComponent } from './jk-objects-item/object-documentation/object-documentation.component';
 import { ObjectMembersComponent } from './jk-objects-item/object-members/object-members.component';
 import { ObjectProjectsComponent } from './jk-objects-item/object-projects/object-projects.component';
@@ -43,6 +42,7 @@ import { ObjectGalleryAdminComponent } from './jk-objects-item/object-gallery/ob
 import { ObjectDocumentationAdminComponent } from './jk-objects-item/object-documentation/object-documentation-admin/object-documentation-admin.component';
 import { ObjectDecorationTabsAdminComponent } from './jk-objects-item/object-decoration/object-decoration-tabs-admin/object-decoration-tabs-admin.component';
 import { ObjectDecorationAdminComponent } from './jk-objects-item/object-decoration/object-decoration-content-admin/object-decoration-admin.component';
+import { ObjectNewsModule } from './jk-objects-item/object-news/object-news.module';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -58,7 +58,6 @@ const jkObjectsComponents = [
     ObjectDecorationComponent,
     ObjectLocationComponent,
     ObjectPurchaseComponent,
-    ObjectNewsComponent,
     ObjectDocumentationComponent,
     ObjectMembersComponent,
     ObjectProjectsComponent,
@@ -95,6 +94,7 @@ const jkObjectsComponents = [
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
+        ObjectNewsModule,
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent
                 , children : [

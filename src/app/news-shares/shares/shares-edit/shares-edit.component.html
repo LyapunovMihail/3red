@@ -2,12 +2,10 @@
 
     <div class="create-shares__cls-area" (click)="close.emit()"></div>
 
-    <form class="create-shares__container"
-        [formGroup]="form"
-        (ngSubmit)="onSave(form)">
+    <form class="create-shares__container" [formGroup]="form">
 
         <button class="create-shares__cls-btn btn-cls" (click)="close.emit()"><span></span></button>
-        <button class="create-shares__cls-success btn-success" (click)="close.emit()"><span></span></button>
+        <button class="create-shares__cls-success btn-success" [disabled]="!form.valid" [class.btn-disabled]="!form.valid" (click)="onSave(form.value)"><span></span></button>
 
         <h2 class="create-shares__typografy-title">Добавить акцию</h2>
         <!-- <p class="shares-edit-form__typografy-date">{{dateNow}}</p> -->
@@ -31,7 +29,7 @@
                     class="create-shares__input create-shares__input_area"
                     [ngClass]="{'invalid-value': form.get('text').invalid && form.get('text').dirty}"
                     [placeholder]="'Краткое описание'"
-                    [link]="true"
+                    [link]="false"
                     [invalid]="form.get('text').invalid && form.get('text').dirty ? true : false">
                 </ghm-textarea>
                 <p class="create-shares__typografy-error">Поле обязательно для заполнения</p>
@@ -45,10 +43,9 @@
             </div>
             <div class="create-shares__wrap create-shares__wrap_select create-shares__wrap_input create-shares__wrap_w2">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Статус</p>
-                <select name="status" class="create-shares__input create-shares__input_status">
-                    <option>Черновик</option>
-                    <option>Чистовик</option>
-                    <option>Шаблон</option>
+                <select name="publish" class="create-shares__input create-shares__input_status" [formControlName]="'publish'">
+                    <option [value]="false">Черновик</option>
+                    <option [value]="true">Чистовик</option>
                 </select>
             </div>
             
@@ -72,6 +69,7 @@
                         <span>Загрузить фото</span>
                         <input [style.display]="'none'"
                             type="file"
+                            accept=".jpg"
                             #mainImgPicker
                             (change)="onImagePicked($event, 'main-image')">
                     </div>
@@ -81,9 +79,7 @@
                             [src]="uploadsPath + form.get('mainThumbnail').value"
                             [alt]="form.value.name">
 
-                        <button class="create-shares__cls-preview">
-                            <span></span>
-                        </button>
+                        <button class="create-shares__cls-preview" (click)="deleteImage()"><span></span></button>
                     </div>
                         
                 </div>
@@ -108,23 +104,34 @@
                 <div *ngFor="let block of body.controls; index as i"
                      [ngSwitch]="block.value.blockType">
 
-                    <app-shares-edit-description
+                    <app-shares-edit-text
                         [formControlName]="i"
+                        [type]="'description'"
                         *ngSwitchCase="'description'"
-                        (remove)="removeBlock(i)">
-                    </app-shares-edit-description>
+                        (remove)="removeBlock(i)"
+                        (addLink)="showModalFunc($event, i)">
+                    </app-shares-edit-text>
 
                     <app-shares-edit-image
                         [formControlName]="i"
                         *ngSwitchCase="'image'"
                         (remove)="removeBlock(i)">
+                        <div class="create-shares__btn create-shares__btn_photo-preview" (click)="mainImgPicker.click()">
+                            <span>Загрузить фото</span>
+                            <input [style.display]="'none'"
+                                type="file"
+                                accept=".jpg"
+                                (change)="onImagePicked($event, 'change-image', i)"
+                                #mainImgPicker>
+                        </div>
                     </app-shares-edit-image>
 
-                    <app-shares-edit-list
+                    <app-shares-edit-text
                         [formControlName]="i"
-                        *ngSwitchCase="'list'"
+                        [type]="'header'"
+                        *ngSwitchCase="'header'"
                         (remove)="removeBlock(i)">
-                    </app-shares-edit-list>
+                    </app-shares-edit-text>
 
                     <app-shares-edit-flats
                         [formControlName]="i"
@@ -137,56 +144,30 @@
         </div>
 
         <ul class="create-shares__wrap create-shares__wrap_elements">
-            <li class="create-shares__btn create-shares__btn_title" (click)="addList()">Заголовок</li>
+            <li class="create-shares__btn create-shares__btn_title" (click)="addHeader()">Заголовок</li>
             <li class="create-shares__btn create-shares__btn_text" (click)="addDescription()">Текст</li>
             <li class="create-shares__btn create-shares__btn_image" (click)="singleImgPicker.click()">Изображение
                 <input #singleImgPicker
                        [style.display]="'none'"
                        type="file"
+                       accept=".jpg"
                        (change)="onImagePicked($event, 'single-image')">
             </li>
             <li class="create-shares__btn create-shares__btn_flats" (click)="addFlats()">Квартиры по акции</li>
         </ul>
 
         <div class="create-shares__wrap create-shares__wrap_upld">
-            <button class="create-shares__btn create-shares__btn_public btn_var-2">Опубликовать</button>
-            <button type="submit" 
-                [disabled]="form.invalid"
+            <button class="create-shares__btn create-shares__btn_public btn_var-2"
                 [ngClass]="{ 'shares-edit-form__save_disabled': form.invalid }"
-                class="create-shares__btn create-shares__btn_save">Сохранить и закрыть</button>
+                [disabled]="form.invalid"
+                (click)="onSave(form.value)">Сохранить и закрыть
+            </button>
+            <button class="create-shares__btn create-shares__btn_save" (click)="close.emit()">Отменить</button>
         </div>
     </form>
 </div>
 
-
-<!-- Модалка вставки ссылки -->
-
-<!-- <section class="g-modal-bg g-modal-bg_for-link paste-link">
-
-    <div class="paste-link__container">
-
-        <button class="paste-link__btn paste-link__btn-close btn-cls"><span></span></button>
-
-        <div class="paste-link__wrap">
-            <p class="paste-link__subtitle">URL</p>
-            <input type="text" class="paste-link__input">
-        </div>
-        <div class="paste-link__wrap">
-            <p class="paste-link__subtitle">Текст</p>
-            <input type="text" class="paste-link__input">
-        </div>
-        <div class="paste-link__wrap paste-link__wrap_for-checkbox">
-            <label class="g-checkbox">
-                <input type="checkbox">
-                <div></div>
-                <span>Открыть ссылку в новом табе</span>
-            </label>
-        </div>
-        <div class="paste-link__wrap paste-link__wrap_for-btn">
-            <button class="paste-link__btn paste-link__btn-success btn_var-2">Вставить ссылку</button>
-            <button class="paste-link__btn paste-link__btn-cancel btn_var-2">Отменить</button>
-        </div>
-    </div>
-</section> -->
-
-<!-- /Модалка вставки ссылки -->
+<app-shares-edit-anchor *ngIf="showModal"
+    [data]="modalAnchorData"
+    (close)="showModal = false">
+</app-shares-edit-anchor>

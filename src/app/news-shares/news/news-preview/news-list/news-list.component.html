@@ -1,7 +1,3 @@
-
-
-    <!-- Отображать сниппет только если у него отрицательное значение показа на главной
-        и если выбранная категория равна категории сниппета или 'ALL' -->
 <div class="news__snippets-item" *ngFor="let snippet of snippetsArray">
     <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__snippets-link">
         <div class="news__snippets-img">

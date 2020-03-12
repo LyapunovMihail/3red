@@ -38,7 +38,16 @@ export class SharesModel {
         }
     }
 
+    public async getMainSnippet() {
+        return await this.collection.find({ show_on_main: true }).toArray();
+    }
+
+    public async getObjectSnippet(objectId) {
+        return await this.collection.find({ objectId }).toArray();
+    }
+
     public async updateShare(_id, obj: Share) {
+        if ( '_id' in obj ) { delete obj._id; }
         return await this.collection.updateOne({ _id: ObjectId(_id) }, { $set: obj });
     }
 

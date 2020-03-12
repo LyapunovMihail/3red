@@ -2,7 +2,7 @@
 
     <div class="project__wrap">
         <input type="checkbox" name="switch" id="builder-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
-        <label *ngIf="isAuthorizated" for="builder-switch" class="object-item__title">ЖК Сердце Ярославля</label>
+        <label *ngIf="isAuthorizated" for="builder-switch" class="object-item__title">{{objectName}}</label>
     </div>
 
     <ng-container *ngIf="switchOn">
