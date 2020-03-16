@@ -11,7 +11,7 @@ export enum ShareFlatDiscountType {
 
 export enum ShareBodyEnum {
     DESCRIPTION = 'description',
-    HEADER = 'header',
+    HEADER = 'title',
     IMAGE = 'image',
     FLATS = 'flats'
 }
@@ -51,7 +51,7 @@ export interface ShareBodyBlock {
     blockType: ShareBodyEnum;
     blockOrderNumber: number;
     blockDescription?: string;
-    blockHeader?: string;
+    blockTitle?: string;
     blockImg?: {
         image: string;
         thumbnail: string;
@@ -73,4 +73,11 @@ export interface Share {
     body: ShareBodyBlock[];
     objectId?: string;
     objectName?: string;
+    shareCount: ShareCount;
+}
+
+export interface ShareCount {
+    vk: number;
+    fb: number;
+    ok: number;
 }

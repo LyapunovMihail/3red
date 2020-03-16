@@ -1,24 +1,37 @@
-<div class="shares-list">
-    <ul class="shares-list__content">
-        <li *ngFor="let share of snippetsArray" class="shares-list__item">
-            <a class="shares-list__item-link" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + share._id]">
-                <div class="shares-list__item-img">
-                    <img [src]="uploadsPath + share.mainImage" alt="share">
-                    <div class="shares-list__item-end" *ngIf="share.countdown">
-                        <span *ngIf="countDown(share.finish_date) >= 0">{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</span>
-                        <span *ngIf="countDown(share.finish_date) < 0">Акция закончилась</span>
+<div class="news__list">
+    <ng-container *ngFor="let snippet of snippets">
+        <div  class="news__list-item">
+
+            <a [routerLink]="['/news-shares/shares/list/' + snippet._id]" class="news__item">
+                <div class="news__category" [class.news__category--exist]="snippet.objectName">{{snippet.objectName}}</div>
+                <div class="news__img-wrap--stock">
+                    <p class="news__stock">Акция</p>
+                    <div class="news__timing" *ngIf="countDown(snippet.finish_date) >= 0">
+                        <img src="/assets/img/news/clock.svg" alt="clock">
+                        <p>{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</p>
                     </div>
+                    <p class="news__propose" *ngIf="countDown(snippet.finish_date) < 0"> Акция закончилась</p>
+                    <img [src]="uploadsPath + snippet.mainThumbnail" height="264" alt="news" class="news__image">
                 </div>
-                <div class="shares-list__item-descr">
-                    <h1 class="shares-list__item-descr-title">{{share.name}}</h1>
-                    <p class="shares-list__item-descr-text">{{share.textPreview}}</p>
-                    <p class="shares-list__item-descr-date">{{parseCreatedAtDate(share.created_at)}}</p>
-                </div>
+                <p class="news__list-title">{{snippet.name}}</p>
+                <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
             </a>
-            <div class="shares-list__item-btn">
-                <a *ngIf="isAuthorizated" class="shares-list__item-edit"  (click)="redactSnippet.emit(share._id)">Редактировать</a>
-                <div *ngIf="isAuthorizated" class="shares-list__item-delete" (click)="deleteSnippet.emit(share._id)">Удалить</div>
+
+            <div class="news__list__edit" *ngIf="isAuthorizated">
+
+                <button class="news__list__edit-item" (click)="onSelectItem(snippet._id)"
+                        [class.news__list__edit-item_active]="snippet._id == activeTooltip"><span></span></button>
+
+                <div class="news__list__tooltip">
+                    <div class="news__list__tooltip-item" (click)="redactSnippet.emit(snippet._id)">Редактировать</div>
+                    <div class="news__list__tooltip-item" (click)="snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
+                    <div class="news__list__tooltip-item" (click)="snippet.show_on_main = true; updateSnippet.emit(snippet)" *ngIf="!snippet.show_on_main">На главную</div>
+                    <div class="news__list__tooltip-item" (click)="snippet.publish = false; updateSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
+                    <div class="news__list__tooltip-item" (click)="snippet.publish = true; updateSnippet.emit(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
+                    <div class="news__list__tooltip-item" (click)="deleteSnippet.emit(snippet._id)">Удалить</div>
+                </div>
             </div>
-        </li>
-    </ul>
+        </div>
+    </ng-container>
+
 </div>

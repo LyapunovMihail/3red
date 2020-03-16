@@ -36,8 +36,6 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
 
     public currentSlide = 0;
 
-    public openTooltip = false;
-
     public activeTooltip: string;
 
     public newsSnippets: INewsSnippet[] = [];
@@ -110,36 +108,21 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
 
     public nextBtn() {
         this.currentSlide = (this.currentSlide < this.currentSnippets.length - 3 ) ? this.currentSlide + 1 : this.currentSnippets.length - 3;
-        const snippets = this.showSnippetType === 'all' ? this.allSnippets : this.showSnippetType === 'news' ? this.newsSnippets : this.shareSnippets;
-        // this.setSlidesOpacity(this.currentSnippets);
     }
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
-        const snippets = this.showSnippetType === 'all' ? this.allSnippets : this.showSnippetType === 'news' ? this.newsSnippets : this.shareSnippets;
-        // this.setSlidesOpacity(this.currentSnippets);
     }
 
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    private setSlidesOpacity(snippets) {
-        snippets.forEach((item, index) => {
-            if (index < this.currentSlide || index > this.currentSlide + 2) {
-                $(`#slider-item-${index}`).css({opacity: 0, ['pointer-events'] : 'none'});
-            } else {
-                $(`#slider-item-${index}`).css({opacity: 1, ['pointer-events'] : 'unset'});
-            }
-        });
-    }
-
     public changeType(snippets, type) {
         this.currentSlide = 0;
         this.showSnippetType = type;
 
-        this.currentSnippets = this.isAuthorizated ? snippets : snippets.filter((item) => item.publish); // mainSnippets нужны только для изъятия кол-ва элементов в массиве для кнопок слайд вперёд - слайд назад
-        // this.setSlidesOpacity(snippets);
+        this.currentSnippets = this.isAuthorizated ? snippets : snippets.filter((item) => item.publish);
     }
 
     public switchBlock($event) {

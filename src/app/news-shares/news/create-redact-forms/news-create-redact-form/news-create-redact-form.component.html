@@ -127,8 +127,8 @@
 
                         <app-news-edit-text
                             [formControlName]="i"
-                            [type]="'header'"
-                            *ngSwitchCase="'header'"
+                            [type]="'title'"
+                            *ngSwitchCase="'title'"
                             (remove)="removeBlock(i)">
                         </app-news-edit-text>
 
@@ -137,7 +137,7 @@
             </div>
 
             <div class="create-form__form-wrap create-form__form-wrap_controls">
-                <button class="create-form__form-btn create-form__form-btn_controls-title" (click)="addHeader()">Заголовок</button>
+                <button class="create-form__form-btn create-form__form-btn_controls-title" (click)="addTitle()">Заголовок</button>
                 <button class="create-form__form-btn create-form__form-btn_controls-text" (click)="addDescription()">Абзац</button>
                 <button class="create-form__form-btn create-form__form-btn_controls-image" (click)="singleImgPicker.click()">
                     <input #singleImgPicker

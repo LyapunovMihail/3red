@@ -1,17 +1,57 @@
 @import "../../../../styles/modules/mixins/mixin";
 
-.admin {
-    &__add-news,
-    &__add-stock {
-        display: block;
-        width: 217px;
-        height: 40px;
-        background: #0070c9;
-        font: 500 16px/20px $font-mus;
-        @include font-smoothing;
-        color: #fff;
-        text-transform: uppercase;
-        border-radius: 4px;
+.btn-admin--settings {
+    background-image: url(/assets/img/add.svg);
+    margin-right: 8px;
+    margin-bottom: 24px;
+}
+
+.news__container {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 157px 88px 96px;
+    box-sizing: border-box;
+
+}
+.news__title {
+    font-size: 48px;
+    line-height: 1.35;
+}
+
+.tabs__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.tabs {
+    margin-bottom: 16px ;
+    display: flex;
+
+    li {
+        border-bottom: 1px solid #d8d8d8;
+        padding: 4px 0 8px;
+        padding-left: 16px;
+        &:first-child {
+            margin-left: 0;
+            padding-left: 0;
+        }
     }
-    &__add-news { margin: 0 0 10px; }
+}
+.tab {
+    color: rgba(0, 0, 0, 0.5);
+    padding: 4px 0 8px 16px;
+
+    font-size: 18px;
+    // margin-left: 16px;
+    position: relative;
+    &:first-child {
+        margin-left: 0;
+        padding-left: 0;
+    }
+    &--active {
+        color:  #ee4237 !important;
+        border-bottom: 1px solid #ee4237;
+    }
+
 }

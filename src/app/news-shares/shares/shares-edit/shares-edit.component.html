@@ -128,8 +128,8 @@
 
                     <app-shares-edit-text
                         [formControlName]="i"
-                        [type]="'header'"
-                        *ngSwitchCase="'header'"
+                        [type]="'title'"
+                        *ngSwitchCase="'title'"
                         (remove)="removeBlock(i)">
                     </app-shares-edit-text>
 
@@ -144,7 +144,7 @@
         </div>
 
         <ul class="create-shares__wrap create-shares__wrap_elements">
-            <li class="create-shares__btn create-shares__btn_title" (click)="addHeader()">Заголовок</li>
+            <li class="create-shares__btn create-shares__btn_title" (click)="addTitle()">Заголовок</li>
             <li class="create-shares__btn create-shares__btn_text" (click)="addDescription()">Текст</li>
             <li class="create-shares__btn create-shares__btn_image" (click)="singleImgPicker.click()">Изображение
                 <input #singleImgPicker
@@ -153,7 +153,7 @@
                        accept=".jpg"
                        (change)="onImagePicked($event, 'single-image')">
             </li>
-            <li class="create-shares__btn create-shares__btn_flats" (click)="addFlats()">Квартиры по акции</li>
+            <!--<li class="create-shares__btn create-shares__btn_flats" (click)="addFlats()">Квартиры по акции</li>-->
         </ul>
 
         <div class="create-shares__wrap create-shares__wrap_upld">

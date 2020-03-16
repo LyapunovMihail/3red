@@ -1,38 +1,26 @@
 <section class="news">
-    
-    <div class="news__head">
-        <div class="news__head-wrap">
-            <h1 class="news__head-title g-title-path">Новости</h1>
-            <ul class="news__nav-list">
-                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
-                    <a routerLink="/news-shares/all">Все</a>
-                </li>
-                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
-                    <a routerLink="/news-shares/news">Новости</a>
-                </li>
-                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
-                    <a routerLink="/news-shares/shares">Акции</a>
-                </li>
+    <div class="news__container">
+        <h2 class="news__title">Новости</h2>
+
+        <button class="btn-admin-2 btn-admin-2--settings" (click)="createSnippet()" *ngIf="isAuthorizated">Добавить новость</button>
+
+        <div class="tabs__wrap">
+            <ul class="tabs">
+                <li><a routerLink="/news-shares/all" [routerLinkActive]="['tab--active']" class="tab">Все</a></li>
+                <li><a routerLink="/news-shares/news" [routerLinkActive]="['tab--active']" class="tab">Новости</a></li>
+                <li><a routerLink="/news-shares/shares" [routerLinkActive]="['tab--active']" class="tab">Акции</a></li>
             </ul>
         </div>
-        <div class="news__head-wrap" *ngIf="isAuthorizated">
-            <button (click)="createSnippet()" class="admin-controll admin__add-news">Добавить новость</button>
-        </div>
-    </div>
 
-    <div class="news__snippets">
-
-        <!-- список новостей -->
         <app-news-list class="news__snippets-list"
             (deleteSnippet)="deleteSnippet($event)"
             (redactSnippet)="redactSnippet($event)"
-            [isAuthorizated]="isAuthorizated" 
+            (updateSnippet)="updateSnippet($event)"
+            [isAuthorizated]="isAuthorizated"
             [snippetsArray]="snippetsArray">
         </app-news-list>
-        <!-- end : список новостей -->
 
     </div>
-
 </section>
 
 <!-- форма создания новости -->

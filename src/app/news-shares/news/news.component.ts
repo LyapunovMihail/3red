@@ -5,7 +5,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
     template: `
         <router-outlet></router-outlet>
     `,
-    styleUrls: ['./news.component.scss', './news.admin.scss'],
     encapsulation : ViewEncapsulation.None
 })
 

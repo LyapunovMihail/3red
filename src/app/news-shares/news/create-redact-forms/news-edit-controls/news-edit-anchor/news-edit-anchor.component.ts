@@ -65,7 +65,7 @@ export class NewsEditAnchorComponent implements OnInit {
         // ищем последнее положение выделенного символа
         const end = txtarea.selectionEnd;
         // текст до + вставка + текст после (если этот код не работает, значит у вас несколько id)
-        const anchor = `<a href="${this.link}"${this.isTargetBlank ? ' target=\'_blank\'' : ''}>` + this.text + '</a>';
+        const anchor = `<a href="${this.link}"${this.isTargetBlank ? ' target=\'_blank\'' : ''} class="news__text-link">` + this.text + '</a>';
         const finText = txtarea.value.slice(0, start) + anchor + txtarea.value.slice(end);
 
         // подмена значения

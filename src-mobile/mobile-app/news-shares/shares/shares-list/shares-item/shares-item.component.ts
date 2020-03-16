@@ -24,8 +24,6 @@ export class SharesItemComponent implements OnInit {
 
     public shareFlatDiscountType = ShareFlatDiscountType;
 
-    public indexNum: number;
-
     public sharesList: Share[];
 
     public prevId = '';
@@ -48,14 +46,12 @@ export class SharesItemComponent implements OnInit {
 
     public ngOnInit() {
         const id = this.activatedRoute.snapshot.params.id;
-        this.indexNum = Number(this.activatedRoute.snapshot.params.index);
         this.getSnippets(id);
     }
 
     public changeIdSubscribe() {
         this.activatedRoute.params.subscribe((params) => {
             const newId = params.id;
-            this.indexNum = params.index;
             this.getSnippet(newId);
         });
     }

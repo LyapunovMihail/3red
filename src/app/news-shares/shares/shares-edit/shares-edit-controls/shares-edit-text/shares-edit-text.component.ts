@@ -6,7 +6,7 @@ import { ShareBodyBlock } from '../../../../../../../serv-files/serv-modules/sha
     selector: 'app-shares-edit-text',
     template: `
         <div class="create-shares__wrap create-shares__wrap_path">
-            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">{{type === 'header' ? 'Заголовок' : 'Абзац'}}</h3>
+            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">{{type === 'title' ? 'Заголовок' : 'Абзац'}}</h3>
 
             <div class="create-shares__wrap create-shares__wrap_btn">
                 <button class="create-shares__btn create-shares__btn_path-controll" (click)="remove.next()">Удалить</button>
@@ -17,7 +17,7 @@ import { ShareBodyBlock } from '../../../../../../../serv-files/serv-modules/sha
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_full">
                 <ghm-textarea *ngIf="conf" [(ngModel)]="conf.blockDescription"
                     (input)="changeText()"
-                    [placeholder]="type === 'header' ? 'Заголовок' : 'Текст'"
+                    [placeholder]="type === 'title' ? 'Заголовок' : 'Текст'"
                     [link]="type === 'description'"
                     [bodyBlockIndex]="conf.blockOrderNumber"
                     (addLink)="addLink.emit($event)"
@@ -27,8 +27,8 @@ import { ShareBodyBlock } from '../../../../../../../serv-files/serv-modules/sha
         </div>
     `,
     styleUrls: [
-        './shares-edit-text.component.scss',
-        './../../shares-edit.component.scss'
+        './../../shares-edit.component.scss',
+        './shares-edit-text.component.scss'
     ],
     providers: [
         {

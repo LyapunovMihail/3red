@@ -13,14 +13,15 @@ import * as session from 'express-session';
 async function bootstrap() {
     const appExpress: Express = express();
     appExpress.use(bodyParser.json());
-    ExpressAppService.app = appExpress;
-    const db = await MongoConnectionService.connect();
-    const app = await NestFactory.create(AppModule, appExpress);
-    app.use(session({
+    appExpress.use(session({
         secret: '3red',
         resave: false,
         saveUninitialized: true
     }));
+    ExpressAppService.app = appExpress;
+    const db = await MongoConnectionService.connect();
+    const app = await NestFactory.create(AppModule, appExpress);
+
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile'), { index: false });
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop'), { index: false });
     setTimeout(() => {

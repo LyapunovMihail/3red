@@ -27,8 +27,12 @@ export class SharesController extends SharesModel {
             return await this.createShare(req.body);
         }));
 
+        // this.router.get('/shares/list', responseHandler(async(req) => {
+        //     return await this.getShares(Number(req.query.limit), Number(req.query.skip));
+        // }));
+
         this.router.get('/shares/list', responseHandler(async(req) => {
-            return await this.getShares(Number(req.query.limit), Number(req.query.skip));
+            return await this.getShares();
         }));
 
         this.router.get('/shares/id/:id', responseHandler(async(req) => {
@@ -44,8 +48,11 @@ export class SharesController extends SharesModel {
         }));
 
         this.router.post('/admin/shares/update', responseHandler(async(req) => {
-            console.log(req.body.id);
             return await this.updateShare(req.body.id, req.body.obj);
+        }));
+
+        this.router.post('/shares/update/shareCount', responseHandler(async (req) => {
+            return await this.updateShareCount(req.body.id, req.body.form, req.body.item, req.session);
         }));
 
         this.router.post('/admin/shares/delete', responseHandler(async(req) => {

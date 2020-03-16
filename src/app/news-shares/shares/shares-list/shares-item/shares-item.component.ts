@@ -1,9 +1,11 @@
 import { ActivatedRoute } from '@angular/router';
 import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../../shares.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
+import { Location } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-shares-item',
@@ -13,23 +15,22 @@ import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
         WindowScrollLocker
     ]
 })
-export class SharesItemComponent implements OnInit {
+export class SharesItemComponent implements OnInit, OnDestroy {
 
-    public isReserveFormOpen = false;
-    public isCallFormOpen = false;
+    public sharesList: Share[];
 
-    public share: Share;
+    public snippet: Share;
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     public shareFlatDiscountType = ShareFlatDiscountType;
 
-    public indexNum: number;
-
-    public sharesList: Share[];
-
     public prevId = '';
     public nextId = '';
+
+    public id: string;
+
+    public routerEvent;
 
     public selectFlat = {
         house: '0',
@@ -42,28 +43,29 @@ export class SharesItemComponent implements OnInit {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private sharesService: SharesService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        public location: Location,
+        public meta: Meta
     ) {}
 
     public ngOnInit() {
-        const id = this.activatedRoute.snapshot.params.id;
-        this.indexNum = Number(this.activatedRoute.snapshot.params.index);
-        this.getSnippets(id);
+        moment.locale('ru');
+        this.id = this.activatedRoute.snapshot.params.id;
+        this.getSnippets(this.id);
     }
 
 
     public changeIdSubscribe() {
-        this.activatedRoute.params.subscribe((params) => {
+        this.routerEvent = this.activatedRoute.params.subscribe((params) => {
             const newId = params.id;
-            this.indexNum = params.index;
             this.getSnippet(newId);
         });
     }
 
     public getSnippets(id) {
-        this.sharesService.getShares(1000, 0).subscribe(
+        this.sharesService.getShares().subscribe(
             (data) => {
-                this.sharesList = data.sharesList;
+                this.sharesList = data;
                 this.getSnippet(id);
                 this.changeIdSubscribe();
             },
@@ -74,8 +76,9 @@ export class SharesItemComponent implements OnInit {
     public getSnippet(id) {
         this.sharesService.getShareById(id)
             .subscribe((share: Share[]) => {
-                this.share = share[0];
+                this.snippet = share[0];
                 this.checkPrevAndNext(id);
+                this.setMetaTags();
             }, (err) => {
                 console.error(err);
             });
@@ -113,5 +116,52 @@ export class SharesItemComponent implements OnInit {
             return +discount.toFixed(2);
         }
         return +flat.discount;
+    }
+
+    public parseCreatedAtDate(date) {
+        return moment(date).format('LL').slice(0, -3);
+    }
+
+    public clickShare(item) {
+        console.log('item: ', item);
+        this.sharesService.updateShareCount(this.id, this.snippet, item)
+            .subscribe(
+                (data) => this.snippet = data[0],
+                (err) => console.error(err)
+            );
+
+        if (item === 'vk') {
+            let url  = 'http://vkontakte.ru/share.php?';
+            url += 'url='          + encodeURIComponent(window.location.href);
+            url += '&title='       + encodeURIComponent(this.snippet.name);
+            url += '&description=' + encodeURIComponent(this.snippet.text);
+            url += '&image='       + encodeURIComponent(this.snippet.mainImage);
+            url += '&noparse=true';
+
+            window.open(url,'','toolbar=0,status=0,width=626,height=436');
+        } else if (item === 'fb') {
+            let url  = 'http://www.facebook.com/sharer.php?';
+            url += 'u='       + encodeURIComponent(window.location.href);
+            window.open(url,'','toolbar=0,status=0,width=626,height=436');
+        } else if (item === 'ok') {
+            let url  = 'https://connect.ok.ru/offer?';
+            // url += '&st.comments=' + encodeURIComponent('Text');
+            url += 'url='    + encodeURIComponent(window.location.href);
+            url += '&title='       + encodeURIComponent(this.snippet.name);
+            url += '&description=' + encodeURIComponent(this.snippet.text);
+            url += '&imageUrl='       + encodeURIComponent(this.snippet.mainImage);
+            window.open(url,'','toolbar=0,status=0,width=626,height=436');
+        }
+    }
+
+    private setMetaTags() {
+        this.meta.updateTag({property : 'og:type', content: 'website'});
+        this.meta.updateTag({property : 'og:title', content: this.snippet.name});
+        this.meta.updateTag({property : 'og:description', content: this.snippet.text});
+        this.meta.updateTag({property : 'og:image', content: this.snippet.mainImage});
+    }
+
+    public ngOnDestroy() {
+        this.routerEvent.unsubscribe();
     }
 }

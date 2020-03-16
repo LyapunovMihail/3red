@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharesComponent } from './shares.component';
 import { NgModule } from '@angular/core';
-import { SharesObserverService } from './shares-observer.service';
 import { AuthorizationGuard } from '../../authorization/authorization-guard.service';
 import { Uploader } from 'angular2-http-file-upload';
 import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
@@ -32,16 +31,15 @@ const SHARES_COMPONENTS = [
             {
                 path: '', component: SharesComponent,
                 children: [
-                    { path: '', redirectTo: 'list/1', pathMatch: 'full' },
-                    { path: 'list/:index', component: SharesListComponent, pathMatch: 'full' },
-                    { path: 'list/:index/:id', component: SharesItemComponent, pathMatch: 'full' }
+                    { path: '', redirectTo: 'list', pathMatch: 'full' },
+                    { path: 'list', component: SharesListComponent, pathMatch: 'full' },
+                    { path: 'list/:id', component: SharesItemComponent, pathMatch: 'full' }
                 ]
             }
         ])
     ],
     providers: [
         SharesService,
-        SharesObserverService,
         Uploader,
         AuthorizationGuard
     ]

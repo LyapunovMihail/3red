@@ -7,15 +7,18 @@ import { NewsSharesAllComponent } from './all/news-shares-all.component';
 import { NewsModule } from './news/news.module';
 import { SharesModule } from './shares/shares.module';
 import { SharesEditFormsModule } from './shares/shares-edit/shares-edit-forms.module';
+import { NewsSharesAllItemsComponent } from './all/news-shares-all-items/news-shares-all-items.component';
 
 @NgModule({
     exports: [
         NewsSharesComponent,
         NewsSharesAllComponent,
+        NewsSharesAllItemsComponent
     ],
     declarations: [
         NewsSharesComponent,
-        NewsSharesAllComponent
+        NewsSharesAllComponent,
+        NewsSharesAllItemsComponent
     ],
     providers: [
     ],

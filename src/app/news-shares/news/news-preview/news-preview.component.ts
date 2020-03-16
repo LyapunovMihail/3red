@@ -7,6 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 @Component({
     selector: 'app-news-preview',
     templateUrl: './news-preview.component.html',
+    styleUrls: ['./news-preview.component.scss'],
     providers: [
         WindowScrollLocker
     ]
@@ -17,6 +18,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     public uploadsPath = `/${NEWS_UPLOADS_PATH}`;
 
     public snippetsArray: INewsSnippet[] = [];
+    public allSnippets: INewsSnippet[] = [];
 
     public isAuthorizated = false ;
 
@@ -42,17 +44,19 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
             if (this.isAuthorizated) {
-                this.getSnippets();
+                this.snippetsArray = this.allSnippets;
             } else {
-                this.snippetsArray = this.snippetsArray.filter((item) => item.publish);
+                this.snippetsArray = this.allSnippets.filter((item) => item.publish);
             }
         });
+
     }
 
     public getSnippets() {
         this.newsService.getSnippet().subscribe(
             (data) => {
                 this.snippetsArray = data;
+                this.allSnippets = data;
                 this.subscribeAuth();
             },
             (err) => console.error(err)
@@ -84,6 +88,14 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
             this.isDeleteForm = true ;
             this.windowScrollLocker.block();
         }
+    }
+
+    public updateSnippet(snippet) {
+        this.newsService.updateSnippet(snippet._id, snippet)
+            .subscribe(
+                () => console.log('success'),
+                (err) => console.error(err)
+            );
     }
 
     // вызывается после создания, удаления, редактирования

@@ -419,55 +419,6 @@ $required-input : #ffb3b3;
     }
 }
 
-.paste-link {
-    align-items: center;
-
-    &__container {
-        width: 634px;
-        background-color: $col-white;
-        padding: 48px 82px 40px;
-        position: relative;
-    }
-    &__wrap {
-        width: 100%;
-        margin: 0 0 16px;
-
-        &_for-checkbox { margin: 0 0 40px; }
-        &_for-btn {
-            display: flex;
-            margin: 0;
-        }
-    }
-
-    &__subtitle {
-        font: 18px/23px $font-proba;
-        color: $col-black;
-        margin: 0 0 4px;
-    }
-    &__input {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ccc;
-    }
-
-    &__btn {
-        height: 48px;
-
-        &-close {
-            position: absolute;
-            top: 0;
-            left: calc(100% + 24px);
-        }
-        &-success { margin-right: 8px; }
-        &-cancel {
-            background-color: $col-white;
-            padding: 0 16px 0 8px;
-            color: $col-black;
-        }
-    }
-}
-
-
 .create-shares {
 
     &__cls {
@@ -640,7 +591,6 @@ $required-input : #ffb3b3;
         width: 100%;
         min-height: 36px;
         box-sizing: border-box;
-        // padding: 4px 0 8px;
         font: 18px/23px $font-proba;
         color: $col-black;
         border: 0;

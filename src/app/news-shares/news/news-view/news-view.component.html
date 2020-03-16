@@ -1,28 +1,54 @@
-<section class="news news__view">
+<div class="btn__container">
+    <a class="news__btn" href="javascript:void(0)" (click)="location.back()">Все новости</a>
+</div>
 
-    <div class="news__view-nav">
-        <a routerLink="/news-shares/news" class="news__view-nav-link">Все новости</a>
-    </div>
-    
-    <div class="news__view-content">
-        <div class="news__view-wrap">
-            <div class="news__view-content-btn">
-                <a class="news__view-content-btn-prev" [class.news__view-content-btn-inactive]="!prevId" [routerLink]="['/news-shares/news/list/' + prevId]"></a>
-                <a class="news__view-content-btn-next" [class.news__view-content-btn-inactive]="!nextId" [routerLink]="['/news-shares/news/list/' + nextId]"></a>
+<section class="news" *ngIf="snippet">
+    <div class="news__container">
+        <div class="helper">
+            <div class="news__intro">
+                <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+                <div class="news__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
             </div>
-            <div class="news__view-content-img">
-                <img *ngIf="image.length > 0" class="news__view-content-img-item" [src]="image">
+            <h2 class="news__title">{{snippet.title}}</h2>
+            <p class="news__text">{{snippet.description}}</p>
+            <img [src]="uploadsPath + snippet.image" alt="image" class="news__img">
+
+            <ul class="news__wrapper">
+                <li *ngFor="let b of snippet.body"
+                    [ngSwitch]="b.blockType">
+
+                    <article *ngSwitchCase="'title'" class="news__subtitle">{{b.blockTitle}}</article>
+
+                    <article *ngSwitchCase="'description'" class="news__text" [innerHTML]="b.blockDescription | lineBreakPipe"></article>
+
+                    <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image" alt="image" class="image">
+
+                    <div *ngSwitchCase="'image2'" class="img__wrap">
+                        <img [src]="uploadsPath + b.blockImg2.thumbnail" alt="image" class="news__image">
+                        <img [src]="uploadsPath + b.blockImg2.thumbnail2" alt="image" class="news__image">
+                    </div>
+
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="news__share">
+            <div class="news__share-wrap">
+                <p class="share">Поделиться:</p>
+                <!--<script type="text/javascript">-->
+                    <!--document.write(VK.Share.button(false,{type: "round", text: "Сохранить"}));-->
+                <!--</script>-->
+                <!--<script type="text/javascript">-->
+                    <!--VK.Share.count = function(index, count) {-->
+                        <!--console.log('VK count: ', count);-->
+                    <!--};-->
+                <!--</script>-->
+                <div class="share__count share__count-vk" (click)="clickShare('vk')">{{snippet.shareCount.vk}}</div>
+                <div class="share__count share__count-fb" (click)="clickShare('fb')">{{snippet.shareCount.fb}}</div>
+                <div class="share__count share__count-odnoclass" (click)="clickShare('ok')">{{snippet.shareCount.ok}}</div>
             </div>
         </div>
-        <div class="news__view-wrap">
-            <h1 class="news__view-title" [innerHTML]="title | lineBreakPipe"></h1>
-            <div class="news__view-text-wrap">
-                <p class="news__view-text" [innerHTML]="description | lineBreakPipe"></p>
-                <p class="news__view-text news__view-text_date">{{created_at | date: 'd.M.yyyy' }}</p>
-            </div>
-        </div>
     </div>
 
-    <!-- <div class="news__view-content" [innerHTML]="description | lineBreakPipe"></div> -->
-    
 </section>

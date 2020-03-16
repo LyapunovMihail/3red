@@ -37,7 +37,7 @@
 .textarea__input {
     font: 18px/23px 'ProbaPro', 'sans-serif', 'Arial';
     color: #000;
-    min-height: 36px;
+    min-height: 23px;
     box-sizing: border-box;
     padding: 4px 0 8px !important;
     border-bottom: 1px solid rgba(0, 0, 0, .5);

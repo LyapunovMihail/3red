@@ -6,7 +6,7 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
     selector: 'app-news-edit-text',
     template: `
         <div class="create-shares__wrap create-shares__wrap_path">
-            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">{{type === 'header' ? 'Заголовок' : 'Абзац'}}</h3>
+            <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">{{type === 'title' ? 'Заголовок' : 'Абзац'}}</h3>
 
             <div class="create-shares__wrap create-shares__wrap_btn">
                 <button class="create-shares__btn create-shares__btn_path-controll" (click)="remove.next()">Удалить</button>
@@ -17,7 +17,7 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_full">
                 <ghm-textarea *ngIf="conf" [(ngModel)]="conf.blockDescription"
                     (input)="changeText()"
-                    [placeholder]="type === 'header' ? 'Заголовок' : 'Текст'"
+                    [placeholder]="type === 'title' ? 'Заголовок' : 'Текст'"
                     [link]="type === 'description'"
                     [bodyBlockIndex]="conf.blockOrderNumber"
                     (addLink)="addLink.emit($event)"
@@ -27,8 +27,8 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
         </div>
     `,
     styleUrls: [
-        './news-edit-text.component.scss',
-        './../../news-form.component.scss'
+        './../../news-form.component.scss',
+        './news-edit-text.component.scss'
     ],
     providers: [
         {

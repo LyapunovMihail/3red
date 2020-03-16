@@ -1,24 +1,27 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
     selector: 'ghm-textarea',
     template: `
         <div class="textarea__container">
-            <div [innerHTML]="value + '\r\n' | ghmTextAreaPipe"
+            <!--<div [innerHTML]="value + '\r\n' | ghmTextAreaPipe"-->
+            <div
                 class="textarea__fake"
                  [class.white-placeholder]="whitePlaceholder"
                  #fakeTextArea
             >
             </div>
             <textarea [(ngModel)]="value"
-                (input)="propagateChange($event.target.value)"
+                (input)="input($event.target.value)"
                 (focus)="showLink = true"
                 spellcheck="false" class="textarea__input"
                 [ngClass]="{
                     'invalid-value': invalid,
                     'white-placeholder': whitePlaceholder
                 }"
+                rows="1"
+                appAutoResizeTextarea
                 #area
             >
             </textarea>
@@ -38,7 +41,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     ]
 })
 
-export class GHMTextAreaComponent implements ControlValueAccessor, OnInit {
+export class GHMTextAreaComponent implements ControlValueAccessor, AfterViewInit {
 
     @Input() public value = '';
 
@@ -54,13 +57,18 @@ export class GHMTextAreaComponent implements ControlValueAccessor, OnInit {
 
     @Output() public addLink: EventEmitter<any> = new EventEmitter();
 
-    // public textAreaValue: string = '';
+    @ViewChild('fakeTextArea') public fakeTextArea: ElementRef;
+    @ViewChild('area') public area: ElementRef;
+
     public showLink = false;
 
     constructor(
     ) {}
 
-    ngOnInit() {
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.fakeTextArea.nativeElement.style.height = this.area.nativeElement.style.height;
+        });
     }
 
     public writeValue(control) {
@@ -79,6 +87,10 @@ export class GHMTextAreaComponent implements ControlValueAccessor, OnInit {
         this.propagateChange = fn;
     }
 
+    public input(val) {
+        this.fakeTextArea.nativeElement.style.height = this.area.nativeElement.style.height;
+        this.propagateChange(val);
+    }
     public registerOnTouched() {}
 
 

@@ -1,4 +1,3 @@
-import { Request } from 'express-serve-static-core';
 import * as fs from 'fs';
 import * as graphicsmagic from 'gm';
 import * as writeFile from 'write';

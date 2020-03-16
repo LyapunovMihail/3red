@@ -94,6 +94,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
             thumbnail : ['', Validators.required],
             objectId: this.objectId,
             objectName: this.objectName,
+            shareCount: {vk: 0, fb: 0, ok: 0},
             body: this.formBuilder.array([])
         });
     }
@@ -110,6 +111,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
             thumbnail : [this.snippet.thumbnail, Validators.required],
             objectId: this.snippet.objectId,
             objectName: this.snippet.objectName,
+            shareCount: this.snippet.shareCount,
             body: this.formBuilder.array([])
         });
     }
@@ -134,11 +136,11 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         }));
     }
 
-    public addHeader(order?: number, value?: string) {
+    public addTitle(order?: number, value?: string) {
         this.body.push(new FormControl({
-            blockType: 'header',
+            blockType: 'title',
             blockOrderNumber: order ? order : this.body.controls.length,
-            blockHeader: value ? value : ''
+            blockTitle: value ? value : ''
         }));
     }
 
@@ -219,8 +221,8 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
                 this.form.get('last_modifyed').setValue(new Date().toISOString());
                 if (this.snippet.body.length) {
                     (this.snippet.body as NewsBodyBlock[]).forEach((body: NewsBodyBlock) => {
-                        if (body.blockType === 'header') {
-                            this.addHeader(body.blockOrderNumber, body.blockHeader);
+                        if (body.blockType === 'title') {
+                            this.addTitle(body.blockOrderNumber, body.blockTitle);
                         } else if (body.blockType === 'image') {
                             this.addImage(body.blockOrderNumber, body.blockImg);
                         } else if (body.blockType === 'image2') {
@@ -240,6 +242,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
                 this.form.controls.objectId.setValue(this.objectId);
                 this.form.controls.objectName.setValue(this.objectName);
             }
+            console.log('this.form: ', this.form);
         }
     }
 

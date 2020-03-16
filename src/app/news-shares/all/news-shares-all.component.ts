@@ -24,18 +24,19 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
-    public isAuthorizated = false ;
+    public isAuthorizated = false;
     public AuthorizationEvent;
+    public snippets: any[] = [];
     public allSnippets: any[] = [];
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     // открытие форм редактирования
     public redactId: any;
-    public isNewsDeleteForm = false ;
-    public isNewsCreateRedactForm = false ;
-    public isSharesCreateRedactForm = false ;
-    public isSharesDeleteForm = false ;
+    public isNewsDeleteForm = false;
+    public isNewsCreateRedactForm = false;
+    public isSharesCreateRedactForm = false;
+    public isSharesDeleteForm = false;
 
     constructor(
         private authorization: AuthorizationObserverService,
@@ -57,9 +58,9 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
             if (this.isAuthorizated) {
-                this.getAllSnippets();
+                this.snippets = this.allSnippets;
             } else {
-                this.allSnippets = this.allSnippets.filter((item) => item.publish);
+                this.snippets = this.allSnippets.filter((item) => item.publish);
             }
         });
     }
@@ -70,17 +71,18 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
     public getAllSnippets() {
         combineLatest(
-            this.sharesService.getShares(1000, 0),
+            this.sharesService.getShares(),
             this.newsService.getSnippet()
         ).pipe(map(([shares, news]) => {
-                return [...shares.sharesList, ...news];
+                return [...shares, ...news];
             })
         ).subscribe(
             (data: any[]) => {
-                this.allSnippets = data;
-                this.allSnippets.sort((a, b) => {
+                this.snippets = data;
+                this.snippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });
+                this.allSnippets = this.snippets;
                 this.subscribeAuth();
             },
             (err) => console.log(err)
@@ -125,7 +127,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
         }
     }
 
-    public redactSharesSnippet(id) {
+    public redactShareSnippet(id) {
         if ( this.isAuthorizated ) {
             this.redactId = id;
             this.isSharesCreateRedactForm = true;
@@ -133,7 +135,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
         }
     }
 
-    public deleteSharesSnippet(id) {
+    public deleteShareSnippet(id) {
         if ( this.isAuthorizated ) {
             this.redactId = id;
             this.isSharesDeleteForm = true ;
@@ -141,12 +143,24 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
         }
     }
 
+    public updateNewsSnippet(snippet) {
+        this.newsService.updateSnippet(snippet._id, snippet)
+            .subscribe(
+                () => console.log('success'),
+                (err) => console.error(err)
+            );
+    }
+
+    public updateShareSnippet(snippet) {
+        this.sharesService.updateShare(snippet._id, snippet)
+            .subscribe(
+                () => console.log('success'),
+                (err) => console.error(err)
+            );
+    }
+
     // вызывается после создания, удаления, редактирования
     public snippetsChange() {
         this.getAllSnippets();
-    }
-
-    public parseCreatedAtDate(date) {
-        return moment(date).format('LL').slice(0, -3);
     }
 }

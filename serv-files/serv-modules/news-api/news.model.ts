@@ -39,11 +39,34 @@ export class NewsModel {
     // обновление новости
     async updateSnippet(id, parameters) {
         const options: INewsSnippet = parameters;
-        return await this.errorParamsCatcher( ( this.valuesReview(options) && ObjectId.isValid(id) ), async () => {
+        return await this.errorParamsCatcher( ( this.valuesReview(options) && ObjectId.isValid(id) ),async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
             const created = await this.collection.updateOne({ _id : ObjectId(id) }, { $set : options });
-        });
+        }, id);
+    }
+
+    async updateShareCount(id, parameters, item, session) {
+        const options: INewsSnippet = parameters;
+        session.shareCount = session.shareCount ? session.shareCount : {vk: false, fb: false, ok: false}; // добавляем в сессию счетчики кликов соцсестей
+        if (item === 'vk') {
+            if (!session.shareCount.vk) {
+                session.shareCount.vk = true;
+                options.shareCount.vk = Number(options.shareCount.vk) + 1;
+            }
+        } else if (item === 'fb') {
+            if (!session.shareCount.fb) {
+                session.shareCount.fb = true;
+                options.shareCount.fb = Number(options.shareCount.fb) + 1;
+            }
+        } else if (item === 'ok') {
+            if (!session.shareCount.ok) {
+                session.shareCount.ok = true;
+                options.shareCount.ok = Number(options.shareCount.ok) + 1;
+            }
+        }
+
+        return await this.updateSnippet(id, parameters);
     }
 
     // удаление новости
@@ -68,17 +91,20 @@ export class NewsModel {
     }
 
     // обертка для возврата ошибки о неверно переданных параметрах
-    async errorParamsCatcher(val, fn) {
+    async errorParamsCatcher(val, fn, id?) {
         if ( val ) {
             await fn();
-            return await this.getSnippet();
+            if (id) {
+                return await this.getSnippet(id);
+            } else {
+                return await this.getSnippet();
+            }
         } else {
             throw new Error(ErrorNotCorrectArguments);
         }
     }
 
     private valuesReview(options) {
-        console.log('options: ', options);
         // если есть все параметры : 'created_at', 'last_modifyed', 'title', 'description', 'image', 'thumbnail', 'category', 'show_on_main'
         return ( ( 'created_at' in options && 'last_modifyed' in options && 'title' in options
         && 'description' in options && 'image' in options && 'thumbnail' in options

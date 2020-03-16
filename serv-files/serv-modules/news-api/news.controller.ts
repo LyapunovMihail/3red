@@ -47,6 +47,11 @@ export class NewsController extends NewsModel {
             return await this.updateSnippet(req.body.id, req.body.form);
         }));
 
+        this.router.post('/news/update/shareCount', responseHandler(async (req) => {
+            console.log('req.session: ', req.session);
+            return await this.updateShareCount(req.body.id, req.body.form, req.body.item, req.session);
+        }));
+
         this.router.post('/admin/news/delete', responseHandler(async (req) => {
             return await this.deleteSnippet(req.body.id);
         }));

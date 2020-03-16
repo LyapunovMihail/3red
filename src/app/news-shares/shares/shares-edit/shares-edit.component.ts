@@ -13,8 +13,6 @@ import {
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
-import { SharesObserverService } from '../shares-observer.service';
-import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -35,8 +33,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public dateNow: string;
 
-    public paginatorCount;
-
     @Input() isForm: boolean = false ;
 
     @Input() redactId: any ;
@@ -52,17 +48,13 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     private subs: Subscription[] = [];
     private _ngUnsubscribe: Subject<any> = new Subject();
 
-    public formLoading: boolean = true;
-
     public showModal = false;
     public modalAnchorData;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private sharesService: SharesService,
-        private sharesObserverService: SharesObserverService,
-        private flatsDiscountService: FlatsDiscountService,
-        private router: Router
+        private flatsDiscountService: FlatsDiscountService
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
         this.form  = new FormGroup({
@@ -77,12 +69,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             finish_date: new FormControl('', Validators.required),
             objectId: new FormControl(''),
             objectName: new FormControl(''),
+            shareCount: new FormControl({vk: 0, fb: 0, ok: 0}),
             body: new FormArray([])
         });
 
         this.days = 0;
-
-        this.paginatorCount = 1;
 
         moment.locale('ru');
     }
@@ -102,6 +93,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             body: [],
             objectId: this.objectId,
             objectName: this.objectName,
+            shareCount: {vk: 0, fb: 0, ok: 0}
         });
     }
 
@@ -124,8 +116,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 this.countDown();
             }));
 
-        this.identifyPaginatorCount();
-
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
     }
 
@@ -138,11 +128,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.showModal = true;
         obj.formControl = this.body.at(i);
         this.modalAnchorData = obj;
-    }
-
-    public changePublish(event) {
-        console.log('value: ', event.target.value);
-        this.form.get('publish').setValue(Boolean(event.target.value));
     }
 
     public get body(): FormArray { return this.form.get('body') as FormArray; }
@@ -166,11 +151,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         }));
     }
 
-    public addHeader(order?: number, value?: string) {
+    public addTitle(order?: number, value?: string) {
         this.body.push(new FormControl({
-            blockType: 'header',
+            blockType: 'title',
             blockOrderNumber: order ? order : this.body.controls.length,
-            blockHeader: value ? value : ''
+            blockTitle: value ? value : ''
         }));
     }
 
@@ -222,8 +207,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
                 if (body.blockType === 'flats') {
                     this.addFlats(body.blockOrderNumber, body.blockFlats);
-                } else if (body.blockType === 'header') {
-                    this.addHeader(body.blockOrderNumber, body.blockHeader);
+                } else if (body.blockType === 'title') {
+                    this.addTitle(body.blockOrderNumber, body.blockTitle);
                 } else if (body.blockType === 'image') {
                     this.addImage(body.blockOrderNumber, body.blockImg);
                 } else if (body.blockType === 'description') {
@@ -231,6 +216,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 }
             });
             this.countDown();
+            console.log('this.form: ', this.form);
         });
     }
 
@@ -293,17 +279,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     }
                 );
         }
-    }
-
-    public identifyPaginatorCount() {
-        this.subs.push(this.sharesObserverService.getPageCount
-            .pipe(takeUntil(this._ngUnsubscribe))
-            .subscribe((event) => {
-                if (event) {
-                    this.paginatorCount = event;
-                }
-            })
-        );
     }
 
     private unsubscribe() {

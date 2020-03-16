@@ -10,17 +10,17 @@ import * as moment from 'moment';
 
 export class SharesItemsComponent {
 
-    @Input() public isAuthorizated: boolean = false;
+    @Input() public isAuthorizated = false;
 
-    @Input() public snippetsArray: Share[] = [];
-
-    @Input() public indexNum: number;
+    @Input() public snippets: Share[] = [];
 
     @Output() public deleteSnippet = new EventEmitter();
-
     @Output() public redactSnippet = new EventEmitter();
+    @Output() public updateSnippet = new EventEmitter();
 
-    public uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
+
+    public activeTooltip: string;
 
     constructor() {
         moment.locale('ru');
@@ -35,5 +35,9 @@ export class SharesItemsComponent {
 
     public parseCreatedAtDate(date) {
         return moment(date).format('LL').slice(0, -3);
+    }
+
+    public onSelectItem(item: string): void {
+        this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 }

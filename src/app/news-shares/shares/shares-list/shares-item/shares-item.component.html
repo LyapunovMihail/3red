@@ -1,58 +1,71 @@
-<div *ngIf="share" class="client-share">
+<div class="btn__container">
+    <a class="news__btn" href="javascript:void(0)" (click)="location.back()">Все новости</a>
+</div>
 
-    <div class="client-share__nav">
-        <a routerLink="/news-shares/shares/list/1" class="client-share__nav-back">Назад</a>
-    </div>
-
-    <div class="client-share__header">
-        <div class="client-share__header-wrap">
-            <a class="client-share__header-btn client-share__header-prev" [class.client-share__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></a>
-            <a class="client-share__header-btn client-share__header-next" [class.client-share__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></a>
-            <div class="client-share__header-img-wrap">
-                <img [src]="uploadsPath + share.mainImage" class="client-share__header-img">
-                <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="client-share__time">
-                    <span>{{countDown(share.finish_date) | sharesDayPipe}} до конца акции</span>
-                </div>
-                <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="client-share__time">
-                    <span>Акция закончилась</span>
-                </div>
+<section class="news" *ngIf="snippet">
+    <div class="news__container">
+        <div class="helper">
+            <div class="news__intro">
+                <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+                <div class="news__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
             </div>
-        </div>
-        <div class="client-share__content">
-            <h1 class="client-share__content-name">{{share.name}}</h1>
-            <p class="client-share__content-text">{{share.text}}</p>
-        </div>
-    </div>
+            <h2 class="news__title">{{snippet.name}}</h2>
+            <p class="news__text">{{snippet.text}}</p>
+            <img [src]="uploadsPath + snippet.mainImage" alt="image" class="news__img">
 
-    <!--
-        Я думаю дублирование списков не нужно т.к ничего кроме акционных квартир показываться не будет,
-        но если я удаляю "ul.client-share__list" и его "li", то все перестает работать
-     -->
-    <ul class="client-share__list">
-        <li *ngFor="let b of share.body; index as blockIndex"
-            [ngSwitch]="b.blockType" class="client-share__list-item">
+            <ul class="news__wrapper">
+                <li *ngFor="let b of snippet.body"
+                    [ngSwitch]="b.blockType">
 
-            <ul *ngSwitchCase="'flats'" class="client-share__flats">
-                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="client-share__flats-wrap">
-                    <a href="#" class="client-share__flats-item">
-                        <div class="client-share__flats-image">
-                            <img [src]="flat.scheme" class="client-share__flats-image-item">
-                        </div>
-                        <!-- Нужно убрать сокращение у Кол-ва комнат -->
-                        <div class="client-share__flats-house client-share__flats-room">{{flat.room}}</div>
-                        <div class="client-share__flats-house client-share__flats-space">{{flat.space}} м²</div>
-                        <div class="client-share__flats-house client-share__flats-floor">Этаж {{flat.floor}}</div>
-                        <div class="client-share__flats-house client-share__flats-corpus">Корпус {{flat.house}}</div>
-                        <div class="client-share__flats-house client-share__flats-decoration">{{flat.decoration}}</div>
-                        <div class="client-share__flats-price">
-                            <p class="client-share__flats-price_new">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</p>
-                            <!-- flat.price почему-то не делает пробелов после млн, тыс, сот -->
-                            <p class="client-share__flats-price_old">{{flat.price}} &#8381;</p>
-                        </div>
-                    </a>
-                    <div class="client-share__flats-favorites"></div>
+                    <article *ngSwitchCase="'title'" class="news__subtitle">{{b.blockTitle}}</article>
+
+                    <article *ngSwitchCase="'description'" class="news__text" [innerHTML]="b.blockDescription"></article>
+
+                    <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image" alt="image" class="image">
+
+                    <!--<div *ngSwitchCase="'flats'" class="client-share__flats">-->
+                        <!--<div class="client-share__flats-wrap">-->
+
+                            <!--<div *ngFor="let flat of b.blockFlats; index as flatIndex" class="client-share__flats__item">-->
+                                <!--<div class="client-share__flats-header">-->
+                                    <!--&lt;!&ndash; <div class="client-share__flats__house">Корпус {{flat.house}}</div> &ndash;&gt;-->
+                                    <!--<div class="client-share__flats__house">Секция {{flat.section}}</div>-->
+                                    <!--<div class="client-share__flats__house">Этаж {{flat.floor}}</div>-->
+                                <!--</div>-->
+                                <!--<div class="client-share__number">№ {{flat.number}}</div>-->
+                                <!--<div class="client-share__room">{{flat.room}}, {{flat.space}} м&#178;</div>-->
+                                <!--<div class="client-share__decoration">{{flat.decoration}}</div>-->
+                                <!--<img [src]="flat.scheme" class="client-share__image">-->
+                                <!--<div class="client-share__total">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>-->
+                                <!--<div class="client-share__price-wrap">-->
+                                    <!--<div class="client-share__price">{{flat.price | bitNumber}} &#8381;</div>-->
+                                    <!--<div class="client-share__discount">− {{+flat.discount | bitNumber}} {{flat.discountType === shareFlatDiscountType.PERCENT ? '%' : '&#8381;'}}</div>-->
+                                <!--</div>-->
+                                <!--<div (click)="isReserveFormOpen = true; setFlatData(flat)" class="client-share__reserve">Забронировать</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
                 </li>
             </ul>
-        </li>
-    </ul>
-</div>
+
+        </div>
+
+        <div class="news__share">
+            <div class="news__share-wrap">
+                <p class="share">Поделиться:</p>
+                <div class="share__count share__count-vk" (click)="clickShare('vk')">{{snippet.shareCount.vk}}</div>
+                <div class="share__count share__count-fb" (click)="clickShare('fb')">{{snippet.shareCount.fb}}</div>
+                <div class="share__count share__count-odnoclass" (click)="clickShare('ok')">{{snippet.shareCount.ok}}</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--<app-flats-apartment-modal *ngIf="showApartmentWindow"-->
+    <!--[showApartmentWindow]="showApartmentWindow"-->
+    <!--[flatsList]="share.shareFlats"-->
+    <!--[flatIndex]="selectedFlatIndex"-->
+    <!--(close)="showApartmentWindow = false; windowScrollLocker.unblock()">-->
+<!--</app-flats-apartment-modal>-->

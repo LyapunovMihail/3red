@@ -2,7 +2,7 @@ import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.int
 import { Uploader } from 'angular2-http-file-upload';
 import { SharesImageUpload } from './shares-edit/shares-edit.upload';
 import { adminHeaders } from '../../commons/admin-headers.utilit';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -15,8 +15,8 @@ export class SharesService {
         private uploaderService: Uploader
     ) {}
 
-    public getShares(limit: number, skip: number): Observable<{length: number, sharesList: Share[]}> {
-        return this.http.get<{length: number, sharesList: Share[]}>(`/api/shares/list?limit=${limit}&skip=${skip}`);
+    public getShares(): Observable<Share[]> {
+        return this.http.get<Share[]>(`/api/shares/list`);
     }
 
     public getShareById(id): Observable<Share[]> {
@@ -30,6 +30,15 @@ export class SharesService {
 
     public updateShare(id, obj: Share) {
         return this.http.post(`/api/admin/shares/update`, {id, obj}, adminHeaders());
+    }
+
+    public updateShareCount(id, form, item) {
+        console.log('form: ', form);
+        let message = JSON.stringify({ id, form, item });
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post('/api/shares/update/shareCount', message, {headers});
     }
 
     public deleteShare(id) {

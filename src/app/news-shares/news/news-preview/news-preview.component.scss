@@ -1,4 +1,4 @@
-@import "../../../styles/modules/mixins/mixin";
+@import "../../../../styles/modules/mixins/mixin";
 
 .btn-admin--settings {
     background-image: url(/assets/img/add.svg);
@@ -11,8 +11,8 @@
     margin: 0 auto;
     padding: 157px 88px 96px;
     box-sizing: border-box;
-
 }
+
 .news__title {
     font-size: 48px;
     line-height: 1.35;
@@ -55,4 +55,3 @@
     }
 
 }
-

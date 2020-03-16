@@ -16,12 +16,13 @@ export interface INewsSnippet {
     thumbnail: string ;
     objectId?: string;
     objectName?: string;
+    shareCount: ShareCount;
     body: NewsBodyBlock[];
 }
 
 export enum NewsBodyEnum {
     DESCRIPTION = 'description',
-    HEADER = 'header',
+    HEADER = 'title',
     IMAGE = 'image',
     IMAGE2 = 'image2'
 }
@@ -30,7 +31,7 @@ export interface NewsBodyBlock {
     blockType: NewsBodyEnum;
     blockOrderNumber: number;
     blockDescription?: string;
-    blockHeader?: string;
+    blockTitle?: string;
     blockImg?: {
         image: string;
         thumbnail: string;
@@ -41,4 +42,10 @@ export interface NewsBodyBlock {
         image2: string;
         thumbnail2: string;
     };
+}
+
+export interface ShareCount {
+    vk: number;
+    fb: number;
+    ok: number;
 }

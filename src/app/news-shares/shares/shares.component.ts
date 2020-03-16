@@ -8,5 +8,4 @@ import { HouseService } from '../../flats/house/house.service';
     providers: [HouseService]
 })
 export class SharesComponent  {
-
 }
