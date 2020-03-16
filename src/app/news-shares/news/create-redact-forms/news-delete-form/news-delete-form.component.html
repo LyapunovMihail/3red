@@ -5,14 +5,14 @@
     <div class="delete-news__container">
 
         <form (ngSubmit)="onSubmit()" class="delete-news__form">
-            <div (click)="close.emit()" class="delete-news__cls-btn"></div>
+            <div (click)="close.emit()" class="delete-news__cls-btn btn-cls"><span></span></div>
 
             <h1 class="delete-news__form-title">Удаление новости</h1>
             <p class="delete-news__form-text">После удаления, новость нельзя будет восстановить</p>
 
-            <div>
-                <button type="submit" class="delete-news__form-del">Удалить</button>
-                <button (click)="close.emit()" class="delete-news__form-cnsl">Отменить</button>
+            <div class="delete-news__form-wrap">
+                <button type="submit" class="delete-news__form-del delete-news__form-del_accept btn_var-2">Удалить</button>
+                <button (click)="close.emit()" class="delete-news__form-del delete-news__form-del_reject">Отменить</button>
             </div>
 
         </form>

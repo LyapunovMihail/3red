@@ -6,7 +6,6 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { Meta } from '@angular/platform-browser';
-declare let VK: any;
 
 @Component({
     selector: 'app-news-view',
@@ -27,53 +26,7 @@ export class NewsViewComponent implements OnInit, OnDestroy {
 
     public routerEvent;
 
-    public VK = VK;
     public id;
-
-    // Share = {
-    //     vkontakte: (() => {
-    //         let url  = 'http://vkontakte.ru/share.php?';
-    //         url += 'url='          + encodeURIComponent(window.location.href);
-    //         url += '&title='       + encodeURIComponent('Новость');
-    //         url += '&description=' + encodeURIComponent('Text');
-    //         url += '&image='       + encodeURIComponent('https://s13.stc.all.kpcdn.net/share/i/12/10913134/inx960x640.jpg');
-    //         url += '&noparse=true';
-    //         this.Share.popup(url);
-    //     }),
-    //     odnoklassniki: ((purl, text) => {
-    //         let url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
-    //         url += '&st.comments=' + encodeURIComponent(text);
-    //         url += '&st._surl='    + encodeURIComponent(purl);
-    //         this.Share.popup(url);
-    //     }),
-    //     facebook: ((purl, ptitle, pimg, text) => {
-    //         let url  = 'http://www.facebook.com/sharer.php?s=100';
-    //         url += '&p[title]='     + encodeURIComponent(ptitle);
-    //         url += '&p[summary]='   + encodeURIComponent(text);
-    //         url += '&p[url]='       + encodeURIComponent(purl);
-    //         url += '&p[images][0]=' + encodeURIComponent(pimg);
-    //         this.Share.popup(url);
-    //     }),
-    //     twitter: ((purl, ptitle) => {
-    //         let url  = 'http://twitter.com/share?';
-    //         url += 'text='      + encodeURIComponent(ptitle);
-    //         url += '&url='      + encodeURIComponent(purl);
-    //         url += '&counturl=' + encodeURIComponent(purl);
-    //         this.Share.popup(url);
-    //     }),
-    //     mailru: ((purl, ptitle, pimg, text) => {
-    //         let url  = 'http://connect.mail.ru/share?';
-    //         url += 'url='          + encodeURIComponent(purl);
-    //         url += '&title='       + encodeURIComponent(ptitle);
-    //         url += '&description=' + encodeURIComponent(text);
-    //         url += '&imageurl='    + encodeURIComponent(pimg);
-    //         this.Share.popup(url);
-    //     }),
-    //
-    //     popup: ((url) => {
-    //         window.open(url,'','toolbar=0,status=0,width=626,height=436');
-    //     })
-    // };
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -85,6 +38,9 @@ export class NewsViewComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
+        console.log('this.router: ', this.router.url);
+        console.log('location: ', location);
+
         moment.locale('ru');
         this.id = this.activatedRoute.snapshot.params.id;
         this.getSnippets(this.id);
@@ -160,7 +116,7 @@ export class NewsViewComponent implements OnInit, OnDestroy {
             url += 'url='          + encodeURIComponent(window.location.href);
             url += '&title='       + encodeURIComponent(this.snippet.title);
             url += '&description=' + encodeURIComponent(this.snippet.description);
-            url += '&image='       + encodeURIComponent(this.snippet.image);
+            url += '&image='       + encodeURIComponent(window.location.origin + this.uploadsPath + this.snippet.image);
             url += '&noparse=true';
 
             window.open(url,'','toolbar=0,status=0,width=626,height=436');
@@ -174,7 +130,7 @@ export class NewsViewComponent implements OnInit, OnDestroy {
             url += 'url='    + encodeURIComponent(window.location.href);
             url += '&title='       + encodeURIComponent(this.snippet.title);
             url += '&description=' + encodeURIComponent(this.snippet.description);
-            url += '&imageUrl='       + encodeURIComponent(this.snippet.image);
+            url += '&imageUrl='       + encodeURIComponent(window.location.origin + this.uploadsPath + this.snippet.image);
             window.open(url,'','toolbar=0,status=0,width=626,height=436');
         }
     }
@@ -183,18 +139,18 @@ export class NewsViewComponent implements OnInit, OnDestroy {
         this.meta.updateTag({property : 'og:type', content: 'website'});
         this.meta.updateTag({property : 'og:title', content: this.snippet.title});
         this.meta.updateTag({property : 'og:description', content: this.snippet.description});
-        this.meta.updateTag({property : 'og:image', content: this.snippet.image});
+        this.meta.updateTag({property : 'og:image', content: window.location.origin + this.uploadsPath + this.snippet.image});
     }
 
-    private removeMetaTags() {
-        // this.meta.removeTag('og:type');
-        // this.meta.removeTag('og:title');
-        // this.meta.removeTag('og:description');
-        // this.meta.removeTag('og:image');
-    }
+    // private removeMetaTags() {
+    //     // this.meta.removeTag('og:type');
+    //     // this.meta.removeTag('og:title');
+    //     // this.meta.removeTag('og:description');
+    //     // this.meta.removeTag('og:image');
+    // }
 
     public ngOnDestroy() {
-        this.removeMetaTags();
+        // this.removeMetaTags();
         this.routerEvent.unsubscribe();
     }
 }

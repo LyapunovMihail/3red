@@ -40,12 +40,7 @@
         position: absolute;
         right: -60px;
         top: 0;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid #fff;
-        background: url('/assets/img/cls_white.svg') center no-repeat;
-        background-size: 20px;
+        z-index: 2;
         cursor: pointer;
     }
 
@@ -69,16 +64,28 @@
             margin: 0 0 30px;
         }
         &-cnsl,
+        &-wrap {
+            display: flex;
+        }
         &-del {
-            width: 160px;
-            height: 50px;
-            border-radius: 4px;
-            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-            background-color: $col-blue;
-            font: 500 16px/20px $font-mus;
-            @include font-smoothing;
-            text-transform: uppercase;
-            color: #fff;
+            height: 35px;
+            padding: 0 16px 0 40px;
+            display: flex;
+            align-items: center;
+            font: 18px/23px $font-proba;
+            color: $col-white;
+            cursor: pointer;
+
+            &_accept {
+                height: 48px;
+                margin-right: 8px;
+                padding: 0 24px;
+            }
+            &_reject {
+                height: 48px;
+                padding: 0 24px 0 8px;
+                color: $col-black;
+            }
         }
         &-cnsl {
             border: solid 1px $col-blue;
