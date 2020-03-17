@@ -1,0 +1,90 @@
+<!--<div class="object-location__way location-way">-->
+    <!--&lt;!&ndash; Пути для автомобиля &ndash;&gt;-->
+    <!--<div class="location-way__type location-way__type_auto">-->
+        <!--<p class="location-way__title" (click)="asideTypeActive = asideTypeActive === 'auto' ? '' : 'auto'"-->
+           <!--[ngClass]="{'location-way__title_open': asideTypeActive === 'auto'}">Автомобиль</p>-->
+
+        <!--<ol class="location-way__list">-->
+            <!--<ng-container *ngFor="let link of markers">-->
+                <!--<li (click)="changeRoute(link)" *ngIf="link.config.type == 'auto'" class="location-way__list-item">-->
+                    <!--{{link.config.aside.text}} <br>-->
+                    <!--<span class="location-way__list-item location-way__list-item_time">{{link.config.aside.hint}}</span>-->
+                <!--</li>-->
+            <!--</ng-container>-->
+        <!--</ol>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; Пути для общественного транспорта &ndash;&gt;-->
+    <!--<div class="location-way__type location-way__type_social">-->
+        <!--<p class="location-way__title" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'"-->
+           <!--[ngClass]="{'location-way__title_open': asideTypeActive === 'metro'}">Общественный транспорт</p>-->
+
+        <!--<ol class="location-way__list">-->
+            <!--<ng-container *ngFor="let link of markers">-->
+                <!--<li (click)="changeRoute(link)" *ngIf="link.config.type == 'metro'" class="location-way__list-item">-->
+                    <!--{{link.config.aside.text}} <br>-->
+                    <!--<span class="location-way__list-item location-way__list-item_time">{{link.config.aside.hint}}</span>-->
+                <!--</li>-->
+            <!--</ng-container>-->
+        <!--</ol>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; Пути для электричек &ndash;&gt;-->
+    <!--<div class="location-way__type location-way__type_social">-->
+        <!--<p class="location-way__title" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'"-->
+           <!--[ngClass]="{'location-way__title_open': asideTypeActive === 'railway'}">Электричка</p>-->
+
+        <!--<ol class="location-way__list">-->
+            <!--<ng-container *ngFor="let link of markers">-->
+                <!--<li (click)="changeRoute(link)" *ngIf="link.config.type == 'railway'" class="location-way__list-item">-->
+                    <!--{{link.config.aside.text}} <br>-->
+                    <!--<span class="location-way__list-item location-way__list-item_time">{{link.config.aside.hint}}</span>-->
+                <!--</li>-->
+            <!--</ng-container>-->
+        <!--</ol>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="location_aside">
+
+    <ul class="location_aside_list">
+
+        <!-- собираются маркеры с типом 'auto' -->
+        <div class="location_aside_list_block">
+            <h5 class="location_aside_list_title location_aside_list_title--auto" [class.location_aside_list_title--open]="asideTypeActive === 'auto'" (click)="asideTypeActive = asideTypeActive === 'auto' ? '' : 'auto'">Автомобиль</h5>
+            <ng-container *ngFor="let link of markers">
+                <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'auto' && asideTypeActive === 'auto'" class="location_aside_list_item">
+                    <p class="location_aside_list_item_name">{{link.config.aside.text}} <br><span class="location_aside_list_item_hint">{{link.config.aside.hint}}</span></p>
+                </li>
+            </ng-container>
+        </div>
+
+        <!-- собираются маркеры с типом 'railway' -->
+        <div  class="location_aside_list_block">
+            <h5 class="location_aside_list_title location_aside_list_title--railway" [class.location_aside_list_title--open]="asideTypeActive === 'railway'" (click)="asideTypeActive = asideTypeActive === 'railway' ? '' : 'railway'">Электричка</h5>
+            <ng-container *ngFor="let link of markers">
+                <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'railway' && asideTypeActive === 'railway'" class="location_aside_list_item">
+                    <p class="location_aside_list_item_name">{{link.config.aside.text}} <span class="location_aside_list_item_hint">{{link.config.aside.hint}}</span></p>
+                    <p *ngFor="let subText of link.config.aside.subText" class="location_aside_list_item_subtext_name">
+                        {{subText.text}}&nbsp;
+                        <span class="location_aside_list_item_subtext_hint">{{subText.hint}}</span>
+                    </p>
+                </li>
+            </ng-container>
+        </div>
+
+        <!-- собираются маркеры с типом 'metro' -->
+        <div class="location_aside_list_block">
+            <h5 class="location_aside_list_title location_aside_list_title--metro" [class.location_aside_list_title--open]="asideTypeActive === 'metro'" (click)="asideTypeActive = asideTypeActive === 'metro' ? '' : 'metro'">Общественный транспорт</h5>
+            <ng-container *ngFor="let link of markers">
+                <li (click)="changeRoute(link)" [ngClass]="{ 'location_aside_list_item--active': link.config.content == linkActive }" *ngIf="link.config.type == 'metro' && asideTypeActive === 'metro'" class="location_aside_list_item">
+                    <p class="location_aside_list_item_name">{{link.config.aside.text}} <span class="location_aside_list_item_hint">{{link.config.aside.hint}}</span></p>
+                    <p *ngFor="let subText of link.config.aside.subText" class="location_aside_list_item_subtext_name location_aside_list_item_subtext--bus">
+                        {{subText.text}}&nbsp;
+                        <span class="location_aside_list_item_subtext_hint">{{subText.hint}}</span>
+                    </p>
+                </li>
+            </ng-container>
+        </div>
+
+    </ul>
+
+</div>

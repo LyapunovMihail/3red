@@ -124,7 +124,7 @@ export let markersConfig = [
         content: '<div class="marker-content__tooltip"><div class="marker-content__tooltip-content"><p class="marker-content__tooltip-content-text">Остановка ВУГИ</p></div></div>',
         coord: [55.659336, 37.928028]
     }, {
-        type: 'main-marker',
+        type: 'main',
         content: '',
         coord: [55.656355158866056, 37.9214221574383],
         size: [56, 56],
@@ -135,30 +135,30 @@ export let markersConfig = [
 export let navList = [
     {
         type: 'shop',
-        content: 'Магазины'
+        name: 'Магазины'
     }, {
         type: 'school',
-        content: 'Школы'
+        name: 'Школы'
     }, {
         type: 'kindergarten',
-        content: 'Детские сады'
+        name: 'Детские сады'
     }, {
         type: 'hospital',
-        content: 'Поликлиники'
+        name: 'Поликлиники'
     }, {
         type: 'sport',
-        content: 'Спортивные учреждения'
+        name: 'Спортивные учреждения'
     }, {
         type: 'recreation',
-        content: 'Рекреационные зоны'
+        name: 'Рекреационные зоны'
     }, {
         type: 'transport',
-        content: 'Остановки'
+        name: 'Остановки'
     }, {
         type: 'cafe',
-        content: 'Кафе'
+        name: 'Кафе'
     }, {
         type: 'pharmacy',
-        content: 'Аптеки'
+        name: 'Аптеки'
     }
 ];

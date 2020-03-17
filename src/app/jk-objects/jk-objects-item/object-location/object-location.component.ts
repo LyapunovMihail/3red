@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PlatformDetectService } from './../../../platform-detect.service';
-
-import { navInfrastructure, mockNav } from './config/mockContent';
-import { markersConfig } from './config/routes';
-declare let ymaps: any;
-declare let $: any;
+import { mockNav } from './config/mockContent';
+import { ObjectLocationAdminService } from './object-location-content-admin/object-location-admin.service';
+import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
+import { IObjectLocationSnippet } from '../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-object-item-location',
@@ -12,6 +11,9 @@ declare let $: any;
     styleUrls: [
         'object-location.component.scss',
         '../jk-objects-item.component.scss'
+    ],
+    providers: [
+        ObjectLocationAdminService
     ]
 })
 
@@ -20,42 +22,31 @@ export class ObjectLocationComponent implements OnInit {
     @Input()
     public isAuthorizated = false;
 
-    // Переменные которые я  создал что бы сделать верстку
-    public infrastructure = navInfrastructure;
     public navPoint = mockNav;
-    public mockMarkerRoutes = markersConfig;
-    // /Переменные которые я  создал что бы сделать верстку
 
-    public openPath = 'object';
+    public contentSnippet: IObjectLocationSnippet;
+    public tabSnippet: IObjectTabsSnippet;
+    public objectId: string;
+    public switchOn = false;
 
-    public asideTypeActive: string;
-
-    public map: any;
+    public openPath = 'Объект';
 
     constructor(
-        private platform: PlatformDetectService,
+        private locationService: ObjectLocationAdminService,
+        private activatedRoute: ActivatedRoute
     ) { }
 
     ngOnInit() {
-        this.initMap();
+        this.objectId = this.activatedRoute.snapshot.params.id;
+        console.log('navPoint: ', this.navPoint);
     }
 
-    initMap() {
-        if ( !this.platform.isBrowser ) { return false; }
-
-        let that = this;
-        this.map = ymaps.ready(() => {
-
-            // создание новой карты с опциями
-            let myMap = new ymaps.Map('map', {
-                center: [55.673638, 37.861333],
-                zoom: 12,
-                controls: ['zoomControl'],
-                behaviors: ['']
-            }, {
-                minZoom: 11,
-                maxZoom: 18
-            });
-        });
+    public switchBlock($event) {
+        this.switchOn = $event.target.checked;
+        const data = {...this.contentSnippet, objectId: this.objectId, switchOn: this.switchOn};
+        this.locationService.setContentSnippetData(data).subscribe(
+            () => console.log('success'),
+            (err) => console.error(err)
+        );
     }
 }

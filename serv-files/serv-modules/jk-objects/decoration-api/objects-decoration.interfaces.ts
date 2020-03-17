@@ -30,10 +30,3 @@ export interface IDecorationInfo {
     name: string;
     mod: string;
 }
-
-export interface IObjectDecorationTab {
-    name: string;
-    show: boolean;
-    turnOnDecorationTypes?: boolean; // когда жмешь галку добавить на табе декорации
-    decorationType?: string;
-}

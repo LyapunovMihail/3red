@@ -6,6 +6,7 @@ export interface IObjectTabsSnippet {
     _id?: any;
     objectId: string;
     gallery?: IObjectGalleryTabs[];
+    location?: IObjectLocationTab[];
     decorationType?: string[];
     created_at: any;
     last_modifyed: any;
@@ -21,4 +22,17 @@ export interface IObjectDecorationTab {
     show: boolean;
     turnOnDecorationTypes?: boolean; // когда жмешь галку добавить на табе декорации
     decorationType?: string;
+}
+
+export interface IObjectLocationTab {
+    name: LocationTabsEnum;
+    coords: string;
+    image: string;
+    thumbnail: string;
+}
+
+export enum LocationTabsEnum {
+    OBJECT = 'Объект',
+    SALESOFFICE = 'Офис продаж',
+    INFRASTRUCTURE = 'Инфраструктура'
 }

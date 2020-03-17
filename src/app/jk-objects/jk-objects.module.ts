@@ -19,7 +19,6 @@ import { ObjectProjectComponent } from './jk-objects-item/object-project/object-
 import { ObjectFlatComponent } from './jk-objects-item/object-flat/object-flat.component';
 import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-gallery.component';
 import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
-import { ObjectLocationComponent } from './jk-objects-item/object-location/object-location.component';
 import { ObjectPurchaseComponent } from './jk-objects-item/object-purchase/object-purchase.component';
 import { ObjectDocumentationComponent } from './jk-objects-item/object-documentation/object-documentation.component';
 import { ObjectMembersComponent } from './jk-objects-item/object-members/object-members.component';
@@ -43,6 +42,7 @@ import { ObjectDocumentationAdminComponent } from './jk-objects-item/object-docu
 import { ObjectDecorationTabsAdminComponent } from './jk-objects-item/object-decoration/object-decoration-tabs-admin/object-decoration-tabs-admin.component';
 import { ObjectDecorationAdminComponent } from './jk-objects-item/object-decoration/object-decoration-content-admin/object-decoration-admin.component';
 import { ObjectNewsModule } from './jk-objects-item/object-news/object-news.module';
+import { ObjectLocationModule } from './jk-objects-item/object-location/object-location.module';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -56,7 +56,6 @@ const jkObjectsComponents = [
     ObjectFlatComponent,
     ObjectGalleryComponent,
     ObjectDecorationComponent,
-    ObjectLocationComponent,
     ObjectPurchaseComponent,
     ObjectDocumentationComponent,
     ObjectMembersComponent,
@@ -95,6 +94,7 @@ const jkObjectsComponents = [
         ReactiveFormsModule,
         FormsModule,
         ObjectNewsModule,
+        ObjectLocationModule,
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent
                 , children : [
