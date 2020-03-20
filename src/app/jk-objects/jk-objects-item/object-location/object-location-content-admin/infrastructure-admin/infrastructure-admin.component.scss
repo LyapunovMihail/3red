@@ -36,6 +36,10 @@
     outline: none;
     padding-bottom: 8px;
     font-size: 18px;
+
+    &--select {
+        padding-bottom: 0px;
+    }
 }
 .info-suptitle, .info-input {
     display: block;
@@ -58,41 +62,7 @@
     border: none;
     cursor: pointer;
 }
-.btn--settings {
-    background: #454545;
-    margin-top: 0;
-    &:hover {
-        background: rgba(0, 0, 0, .7);
-    }
-    &::before {
-        content:url(/assets/img/jk-object/admin-modal/plus.svg);
-        margin-right:5px ;
-    }
-}
-.button__delete {
-    position: absolute;
-    border-radius: 50%;
-    background: #ee4237;
-    width: 17px;
-    height: 17px;
-    top: -8px;
-    left: -8px;
-    z-index: 2;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    &:hover {
-        background: #ee534a;
-    }
-}
 
-//.location__btn {
-//    margin-top: 16px;
-//    &::before {
-//        content:url(../../assets/img/previewContent/snippet_plus.svg);
-//        margin-right:5px ;
-//    }
-//}
 .location__wrap {
     position: relative;
 }

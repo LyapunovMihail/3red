@@ -1,0 +1,47 @@
+<ng-container [formGroup]="form">
+    <div class="location__info" formArrayName="routesMarks" *ngFor="let mark of form.get('routesMarks')['controls']; let i = index">
+        <ng-container formGroupName="{{i}}">
+            <div class="location__wrapper">
+                <h2 class="info-title">Метка {{i + 1}}</h2>
+                <a href="javascript:void(0)" class="location__delete" (click)="popMark(i)">Удалить</a>
+            </div>
+            <div class="form">
+                <div class="form__wrap">
+                    <div class="form-item form-item--inline form-item--mr" >
+                        <select type="text" class="form-input info-input info-input--select" formControlName="type" [value]="mark.get('type').value" appSlideTopLabel>
+                            <option value="auto">Автомобиль</option>
+                            <option value="metro">Общественный транспорт</option>
+                        </select>
+                        <label class="form-label info-suptitle">Вид транспорта</label>
+                    </div>
+                    <div class="form-item form-item--inline">
+                        <input type="text" class="form-input info-input" formControlName="coords" appSlideTopLabel>
+                        <label class="form-label info-suptitle">Координаты для метки</label>
+                    </div>
+                </div>
+                <div class="form__wrap">
+                    <div class="form-item form-item--inline form-item--mr" >
+                        <input type="text" class="form-input info-input" formControlName="place" appSlideTopLabel>
+                        <label class="form-label info-suptitle">Описание метки</label>
+                        <div class="location__hint">Место метки (например м. Пражская)</div>
+                    </div>
+                    <div class="form-item form-item--inline">
+                        <input type="text" class="form-input info-input" formControlName="info" appSlideTopLabel>
+                        <label class="form-label info-suptitle">Расстояние и время пути</label>
+                        <div class="location__hint">Например 29 км, 20 мин.</div>
+                    </div>
+                </div>
+
+                <div class="form-item" *ngIf="mark.get('type').value === 'metro'">
+                    <input type="text" class="form-input info-input" formControlName="name" appSlideTopLabel>
+                    <label class="form-label info-suptitle">Траснпортное средство и номер</label>
+                    <div class="location__hint">Например Автобус №115</div>
+                </div>
+
+            </div>
+        </ng-container>
+
+    </div>
+</ng-container>
+
+<div><button class="btn location__btn" (click)="pushMark()">Добавить метку</button></div>

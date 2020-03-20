@@ -1,0 +1,30 @@
+<ng-container [formGroup]="form">
+    <div class="location__info" formArrayName="infraMarks" *ngFor="let mark of form.get('infraMarks')['controls']; let i = index">
+        <ng-container formGroupName="{{i}}">
+            <div class="location__wrapper">
+                <h2 class="location__info-title">Метка {{i + 1}}</h2>
+                <a href="javascript:void(0)" class="location__delete" (click)="popMark(i)">Удалить</a>
+            </div>
+            <div  class="form">
+                <div class="form__wrap">
+                    <div class="form-item form-item--inline form-item--mr" >
+                        <select type="text" class="form-input info-input  info-input--select" formControlName="type" [value]="mark.get('type').value" appSlideTopLabel>
+                            <option [value]="item.type" *ngFor="let item of navList">{{item.name}}</option>
+                        </select>
+                        <label class="form-label info-suptitle">Вид маркера</label>
+                    </div>
+                    <div class="form-item form-item--inline">
+                        <input type="text" class="form-input info-input" formControlName="coords" appSlideTopLabel>
+                        <label class="form-label info-suptitle">Координаты для метки</label>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <input type="text" class="form-input info-input" formControlName="name" appSlideTopLabel>
+                    <label class="form-label info-suptitle">Название объекта</label>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
+
+<div><button class="btn location__btn" (click)="pushMark()">Добавить метку</button></div>

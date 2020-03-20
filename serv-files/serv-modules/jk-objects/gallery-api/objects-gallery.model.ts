@@ -22,7 +22,7 @@ export class ObjectsGalleryModel {
 
         const result = await this.collection.findOne(findCriteria);
 
-        if (result && tab && tab !== 'null') { // при передаче в строку запросов параметров, на выходе они конвертируются в строку. Не стал менять метод на пост, и так понятно что имеется в виду присутствие вкладки в параметрах
+        if (result && result.image_data && tab && tab !== 'null') { // при передаче в строку запросов параметров, на выходе они конвертируются в строку. Имеется в виду присутствие вкладки в параметрах
             result.image_data = result.image_data.filter((slide) => slide.tab === tab);
         }
         return result;

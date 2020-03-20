@@ -1,8 +1,9 @@
-import { markersConfig, destination } from './config';
+import { destination } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
-import { Component, ChangeDetectorRef, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
 declare let ymaps: any;
 declare let $: any;
 
@@ -20,9 +21,15 @@ declare let $: any;
     ]
 })
 
-export class LocationRoutesComponent implements OnInit, OnDestroy {
+export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
 
-    @Input() public map: any;
+    @Input() public contentSnippet: IObjectLocationSnippet;
+    @Input() public tab: string;
+
+    public map: any;
+    public markersConfig: any[];
+    public mainMarker: any;
+    public destination: string[];
 
     // номер активного маркера для подсветки нужных маршрутов и ссылок бокового меню
     // берется из config.content
@@ -34,6 +41,8 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
 
     public page: string;
 
+    public uploadsPath = `/${OBJECTS_LOCATION_UPLOADS_PATH}`;
+
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
     constructor(
@@ -43,18 +52,46 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        // если страница офиса, то удаляем главный маркер роутов, если страница роутов, то удаляем главный маркер офиса
-        if (this.router.url === '/location/routes') {
-            markersConfig[markersConfig.length - 1].title = 'ЖК Новотомилино';
-            markersConfig[markersConfig.length - 1].class = 'marker-content marker-content__main-marker';
-            this.page = 'routes';
-        } else if (this.router.url === '/location/office') {
-            markersConfig[markersConfig.length - 1].title = 'Офис продаж';
-            markersConfig[markersConfig.length - 1].class = 'marker-content marker-content__office-marker';
-            this.page = 'office';
-        }
+        this.parseData();
         // инициализация карты
         this.initMap();
+    }
+
+    ngOnChanges(changes) {
+        this.map.destroy();
+        this.markers = [];
+        this.parseData();
+        this.initMap();
+    }
+
+    private parseData() {
+        if (this.contentSnippet.data) {
+            const contentSnippet = JSON.parse(JSON.stringify(this.contentSnippet));
+            this.markersConfig = contentSnippet.data[0].routesMarks;
+            this.destination = contentSnippet.data[0].tab.coords.split(',');
+            this.mainMarker = this.tab === 'Объект' ? contentSnippet.data[0].tab : contentSnippet.data[1].tab;
+            this.parseMarkers();
+        }
+    }
+    private parseMarkers() {
+        this.markersConfig.forEach((mark) => {
+           mark.coords = mark.coords.split(',');
+           mark.text = mark.place + ' (' + mark.info + ')';
+           mark.route.origin = [mark.route.origin.split(',')];
+        });
+        this.mainMarker = {
+            coords: this.mainMarker.coords.split(','),
+            thumbnail: this.mainMarker.thumbnail,
+            size: [50, 74],
+            offset: [-20, -20],
+            zIndex: 0,
+            content: this.markersConfig.length,
+            tooltip: '',
+            title: '',
+            text: '',
+            type: 'main'
+        };
+        this.markersConfig.push(this.mainMarker);
     }
 
     ngOnDestroy() {
@@ -70,8 +107,8 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
         ymaps.ready(() => {
 
             // создание новой карты с опциями
-            this.map = new ymaps.Map('map', {
-                center: [55.673638, 37.861333],
+            that.map = new ymaps.Map('map', {
+                center: that.mainMarker.coords,
                 zoom: 12,
                 controls: ['zoomControl']
             }, {
@@ -79,13 +116,16 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                 maxZoom: 18
             });
 
-            markersConfig.forEach( ( item: any, index ) => {
-                that.markers[index] = {};
+            if (that.contentSnippet.data) {
+                that.markersConfig.forEach((item: any, index) => {
+                    that.markers[index] = {};
 
-                // для каждого маркера добавляем опции, тултипы, внутреннюю разметку
-                let marker = new ymaps.Placemark(item.coords, {
-                    iconContent: `
+                    const img = item.type === 'main' ?  `<img class="marker-content__img" src="${this.uploadsPath + item.thumbnail}" width="56" height="56" />` : '';
+                    // для каждого маркера добавляем опции, тултипы, внутреннюю разметку
+                    let marker = new ymaps.Placemark(item.coords, {
+                        iconContent: `
                         <div class="marker-content marker-content__${item.type}">
+                            ${img}
                             <span class="marker-content__text">${item.content}</span>
                             <div class="marker-content__tooltip marker-content__tooltip_${item.type}">
                                 <div class="marker-content__tooltip-content marker-content__tooltip-content_${item.type}">
@@ -94,95 +134,89 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                                 </div>
                             </div>
                         </div>`
-                }, {
-                    // опции
-                    iconLayout: 'default#imageWithContent',
-                    iconImageHref: '/assets/img/location/marker-transparent.svg',
-                    iconImageSize: item.size,
-                    iconImageOffset: item.offset,
-                    zIndex: item.zIndex
+                    }, {
+                        // опции
+                        iconLayout: 'default#imageWithContent',
+                        iconImageHref: '/assets/img/location/marker-transparent.svg',
+                        iconImageSize: item.size,
+                        iconImageOffset: item.offset,
+                        zIndex: item.zIndex
+                    });
+
+                    // все маркеры добавляем во временное хранилище
+                    that.markers[index]['marker'] = marker;
+                    // так же добавляем каждому конфиг
+                    that.markers[index]['config'] = item;
+
+                    // добавляем маркеры на карту
+                    that.map.geoObjects.add(that.markers[index]['marker']);
+
+                    // Далее в работу берутся те маркеры, у которых
+                    // в конфиге есть объект route или его тип polyline.
+
+                    // У первого маркера из markersConfig (тип polyline), заданы координаты
+                    // точек, по которым рисуется линия, эмулируя проложение маршрута поезда
+                    // иначе не получается отрисовать маршрут по рельсам,
+                    // т.к. Яндекс.Карты не предоставляют возможность выбора только лишь поезда
+                    // есть возможность выбора общественного транспорта, но тогда могут
+                    // отрисоваться несколько маршрутов, для автобуса, метро, поезда,
+                    // а такой вариант не подходит
+
+                    // Прим. у главного маркера нет маршрута
+                    // поэтому работа с ним ограничилась созданием/добавлением выше
+                    if ('route' in item) {
+
+                        // созддаем на карте маршруты для каждого маркера
+                        ymaps.route([
+                            ...item['route'].origin, destination
+                        ]).then((route) => {
+                            route.getPaths().options.set({
+                                strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
+                                strokeWidth: 5,
+                                strokeStyle: item['route'].strokeStyle,
+                                zIndex: 10,
+                                openBalloonOnClick: false
+                            });
+                            // во временное хранилище к нужному маркеру добавляем объект с созданным маршрутом
+                            that.markers[index]['route'] = route;
+                            // добавляем маршрут на карту
+                            that.map.geoObjects.add(route.getPaths(that.markers[index]['route']));
+                        });
+
+                        // при наведении на маркер, если он не активен ( проверяется zIndex в опциях маршрута )
+                        that.markers[index]['marker'].events.add('mouseenter', () => {
+                            let markerZIndex = that.markers[index]['route']._paths.options._options.zIndex;
+                            if (markerZIndex !== 100) {
+                                // добавляем ему активный цвет из его конфигов и дополнительный zIndex
+                                that.markers[index]['route'].getPaths().options.set({
+                                    strokeColor: that.markers[index]['config']['route'].activeColor,
+                                    zIndex: 101
+                                });
+                            }
+                        });
+
+                        // при уведении курсора возвращаем маршрут маркера в предыдущее состояние
+                        that.markers[index]['marker'].events.add('mouseleave', () => {
+                            let markerZIndex = that.markers[index]['route']._paths.options._options.zIndex;
+                            if (markerZIndex !== 100) {
+                                that.markers[index]['route'].getPaths().options.set({
+                                    strokeColor: that.markers[index]['config']['route'].color,
+                                    zIndex: 10
+                                });
+                            }
+                        });
+
+                        // на все маркеры (кроме главного) вешается клик для изменения активного маршрута и тултипа
+                        that.markers[index]['marker'].events.add('click', () => {
+                            that.changeRoute(that.markers[index]);
+                        });
+                    }
                 });
 
-                // все маркеры добавляем во временное хранилище
-                that.markers[index]['marker'] = marker;
-                // так же добавляем каждому конфиг
-                that.markers[index]['config'] = item;
-
-                // добавляем маркеры на карту
-                this.map.geoObjects.add(that.markers[index]['marker']);
-
-                // Далее в работу берутся те маркеры, у которых
-                // в конфиге есть объект route или его тип polyline.
-
-                // У первого маркера из markersConfig (тип polyline), заданы координаты
-                // точек, по которым рисуется линия, эмулируя проложение маршрута поезда
-                // иначе не получается отрисовать маршрут по рельсам,
-                // т.к. Яндекс.Карты не предоставляют возможность выбора только лишь поезда
-                // есть возможность выбора общественного транспорта, но тогда могут
-                // отрисоваться несколько маршрутов, для автобуса, метро, поезда,
-                // а такой вариант не подходит
-
-                // Прим. у главного маркера нет маршрута
-                // поэтому работа с ним ограничилась созданием/добавлением выше
-                if ('route' in item) {
-
-                    // созддаем на карте маршруты для каждого маркера
-                    ymaps.route([
-                        ...item['route'].origin, destination
-                    ]).then( (route) => {
-                        route.getPaths().options.set({
-                            strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
-                            strokeWidth: 5,
-                            strokeStyle: item['route'].strokeStyle,
-                            zIndex: 10,
-                            openBalloonOnClick: false
-                        });
-                        // во временное хранилище к нужному маркеру добавляем объект с созданным маршрутом
-                        that.markers[index]['route'] = route;
-                        // добавляем маршрут на карту
-                        this.map.geoObjects.add(route.getPaths(that.markers[index]['route']));
-                    });
-
-                    // при наведении на маркер, если он не активен ( проверяется zIndex в опциях маршрута )
-                    that.markers[index]['marker'].events.add('mouseenter', () => {
-                        let markerZIndex = that.markers[index]['route']._paths.options._options.zIndex;
-                        if ( markerZIndex !== 100 ) {
-                            // добавляем ему активный цвет из его конфигов и дополнительный zIndex
-                            that.markers[index]['route'].getPaths().options.set({
-                                strokeColor: that.markers[index]['config']['route'].activeColor,
-                                zIndex: 101
-                            });
-                        }
-                    });
-
-                    // при уведении курсора возвращаем маршрут маркера в предыдущее состояние
-                    that.markers[index]['marker'].events.add('mouseleave', () => {
-                        let markerZIndex = that.markers[index]['route']._paths.options._options.zIndex;
-                        if ( markerZIndex !== 100 ) {
-                            that.markers[index]['route'].getPaths().options.set({
-                                strokeColor: that.markers[index]['config']['route'].color,
-                                zIndex: 10
-                            });
-                        }
-                    });
-
-                    // на все маркеры (кроме главного) вешается клик для изменения активного маршрута и тултипа
-                    that.markers[index]['marker'].events.add('click', () => {
-                        that.changeRoute(that.markers[index]);
-                    });
-                }
-            });
-
-            // на главный маркер вешается клик для изменения активного тултипа
-            that.markers[that.markers.length - 1]['marker'].events.add('click', () => {
-                that.changeRoute(that.markers[that.markers.length - 1]);
-            });
-
-            // после инициализации надо обновить состояние компонента принудительно
-            // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
-            that.ref.detectChanges();
-            console.log('this.markers: ', this.markers);
-
+                // после инициализации надо обновить состояние компонента принудительно
+                // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
+                that.ref.detectChanges();
+            }
         });
 
     }
@@ -204,21 +238,12 @@ export class LocationRoutesComponent implements OnInit, OnDestroy {
                     zIndex: 10
                 });
             }
-            // для одного маркера с линией вместо маршрута
-            if ( marker.config.type === 'polyline' && 'polyline' in marker ) {
-                // на линию так же ставится не активное состояние
-                marker.polyline.options.set('strokeOpacity', .6).set('zIndex', 10);
-            }
             marker['marker'].options.set({zIndex: 10}); // прячем неактивные маркеры под активными чтобы не перекрывали тултипы активных маркеров
         });
 
         val['marker'].options.set({zIndex: 110}); // ставим активные маркеры над неактивными чтобы закрывать тултипами неактивные
 
-        // если в аргументах передано значение маркера с линией
-        if ( val.config.type === 'polyline' && 'polyline' in val ) {
-            // то для линии добавляется активное состояние
-            val.polyline.options.set('strokeOpacity', 1).set('zIndex', 100);
-        } else if ('route' in val) {
+        if ('route' in val) {
             // иначе для переданного аргумента(маркера)
             // добавляем актив к его маршруту
             val['route'].getPaths().options.set({

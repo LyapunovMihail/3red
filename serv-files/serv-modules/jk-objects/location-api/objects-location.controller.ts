@@ -22,16 +22,12 @@ export class ObjectsLocationController extends ObjectsLocationModel {
     }
 
     routing() {
-        this.router.get('/jk-object/location/id/:id/tab/:tab', responseHandler(async(req) => {
-            return await this.getSnippet(req.params.id, req.params.tab);
+        this.router.get('/jk-object/location/id/:id', responseHandler(async(req) => {
+            return await this.getSnippet(req.params.id);
         }));
 
         this.router.post('/admin/jk-object/location/create-update', responseHandler(async(req) => {
             return await this.updateSnippet(req.body);
-        }));
-
-        this.router.post('/admin/jk-object/location/update', responseHandler(async(req) => {
-            return await this.removeTabSlides(req.body);
         }));
 
         const multipartMiddleware = multipart();

@@ -29,8 +29,14 @@
 
                     <div class="object-decoration__slider-item decoration-slider">
 
-                        <button (click)="prevBtn()" class="decoration-slider__btn decoration-slider__btn_prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
-                        <button (click)="nextBtn()" class="decoration-slider__btn decoration-slider__btn_next btn-slider btn-slider_next btn-slider_black"><span></span></button>
+                        <button (click)="prevBtn()" class="decoration-slider__btn decoration-slider__btn_prev btn-slider btn-slider_prev btn-slider_black"
+                                *ngIf="currentTab?.images?.length && currentSlide > 0">
+                            <span></span>
+                        </button>
+                        <button (click)="nextBtn()" class="decoration-slider__btn decoration-slider__btn_next btn-slider btn-slider_next btn-slider_black"
+                                *ngIf="currentTab?.images?.length && currentSlide < currentTab.images.length - 1">
+                            <span></span>
+                        </button>
 
                         <div class="decoration-slider__dots" *ngIf="currentTab">
                             <span *ngFor="let dots of currentTab.images; let i = index"
@@ -47,14 +53,21 @@
                             </p>
                         </div>
 
-                        <ng-container *ngIf="currentTab">
-                            <div class="decoration-slider__slide" *ngFor="let slide of currentTab.images; let i = index"
-                                [ngClass]="{'current-slide': currentSlide === i}">
-                                <ng-container *ngIf="slide">
-                                    <img [src]="uploadsPath + slide.image" alt="image-slider">
-                                </ng-container>
-                            </div>
+                        <ng-container *ngIf="currentTab; else elseBlock">
+                            <ng-container *ngIf="currentTab.images.length; else elseBlock">
+                                <div class="decoration-slider__slide" *ngFor="let slide of currentTab.images; let i = index"
+                                     [ngClass]="{'current-slide': currentSlide === i}">
+                                    <ng-container *ngIf="slide; else elseBlock">
+                                        <img [src]="uploadsPath + slide.image" alt="image-slider">
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+
                         </ng-container>
+                        <ng-template #elseBlock>
+                            <div class="object-item__mock-img"></div>
+                        </ng-template>
+
                     </div>
                 </div>
                 <div class="object-decoration__slider-wrap object-decoration__slider-wrap_info">

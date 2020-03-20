@@ -150,7 +150,7 @@ export let navList = [
         name: 'Спортивные учреждения'
     }, {
         type: 'recreation',
-        name: 'Рекреационные зоны'
+        name: 'Зона отдыха'
     }, {
         type: 'transport',
         name: 'Остановки'

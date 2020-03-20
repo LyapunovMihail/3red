@@ -97,8 +97,9 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     }
 
     public setCurrentTab() {
-        if (this.contentSnippet.data && this.contentSnippet.data.length && this.contentSnippet.data.some((item) => item.tab.show)) {
+        if (this.contentSnippet && this.contentSnippet.data && this.contentSnippet.data.length && this.contentSnippet.data.some((item) => item.tab.show)) {
             this.currentTab = this.contentSnippet.data.find((item) => item.tab.show && ('turnOnDecorationTypes' in item.tab));
+            console.log('this.currentTab setCurrentTab: ', this.currentTab);
             if (this.typesSnippet && this.typesSnippet.decorationType.length && this.currentTab) {
                 this.changeTab(this.currentTab);
             }
@@ -111,11 +112,11 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
         if (tabWithType) {
             this.currentTab = tabWithType;
             this.currentType = this.currentTab.tab.decorationType; // в массиве contentSnippet.data содержатся табы без decorationType и могут быть такие же табы с decorationType. Когда меняется таб,
-                                                                   // происходит поиск таких же табов с decorationType'ами. Если такой находится, то currentType меняется на decorationType установленного таба
-        } else {
+        } else {                                                   // происходит поиск таких же табов с decorationType'ами. Если такой находится, то currentType меняется на decorationType установленного таба
             this.currentType = null;
         }
         this.currentSlide = 0;
+        console.log('this.currentTab changeTab: ', this.currentTab);
         // this.getContent();
     }
 

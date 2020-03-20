@@ -1,78 +1,32 @@
 <app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
 
-    <div class="hint">
-        <h4 class="hint__title">Как работает:</h4>
-        <a href="javascript:void(0)" class="hint__link" (click)="showHint = true">Показать подсказку</a>
-        <div class="hint__content" *ngIf="showHint">
-            <div class="hint__wrap">
-                <p class="hint__text">1) Настройка видов отделки</p>
-                <p class="hint__text hint__text--opacity">Если для данного ЖК есть деление на виды отделки, то создайте карточки видов отделки.
-                    Для этого нажмите кнопку «Добавить вид отделки», затем задайте имя виду отделки. Необходимо создать минимум два вида отделки. Если отделка только одного вида, то можно приступать
-                    к редактированию общих вкладок (п. 2). </p>
-            </div>
-            <div class="hint__wrap">
-                <p class="hint__text">2) Настройка вкладок отделки</p>
-                <p class="hint__text hint__text--opacity ">Основные вкладки созданы автоматически. При необходимости можно добавить больше вкладок, для этого нажмите кнопку «Добавить вкладку», затем задайте имя вкладке.</p>
-            </div>
-            <div class="hint__wrap">
-                <p class="hint__text">3) Подключение видов отделки к вкладкам отделки</p>
-                <p class="hint__text hint__text--opacity ">После создания видов отделки и всех вкладок необходимо проставить галочки на чекбоксах «Подключить виды отделки» для тех вкладок, на которых есть деление на виды отделки.</p>
-            </div>
-            <div class="hint__wrap">
-                <p class="hint__text">4) Сохраните изменения</p>
-            </div>
-            <a href="javascript:void(0)" class="hint__link btn-hide" (click)="showHint = false">Скрыть подсказку</a>
-        </div>
-    </div>
-
-    <h2 class="decoration__title">Настройка видов отделки</h2>
-    <form class="tabs" [formGroup]="typesForm">
-        <div class="tabs__wrap" formArrayName="decorationType" *ngFor="let type of typesForm.get('decorationType')['controls']; let i = index">
-            <div class="tabs__container">
-                <h2 class="tabs__title">Вид отделки {{i + 1}}</h2>
-                <div class="tabs__nav">
-                    <a href="javascript:void(0)" (click)="popType(i)" class="tabs__nav-link">Удалить</a>
-                </div>
-            </div>
-            <div class="form">
-                <div class="form-item">
-                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="{{i}}" (change)="changeType($event, i)">
-                    <label class="form-label info-suptitle">Название вида отделки</label>
-                </div>
-            </div>
-        </div>
-        <button class="btn btn--settings" (click)="pushType()">Добавить вид отделки</button>
-    </form>
-
-    <h2 class="decoration-tabs__title">Настройка вкладок отделки</h2>
-    <form class="tabs" [formGroup]="form">
-        <ng-container formArrayName="data" *ngFor="let data of form.get('data')['controls']; let i = index">
+    <h1 class="location__title">Настройка «Местоположения»</h1>
+    <form [formGroup]="form">
+        <div class="location__info" [class.location__info--disable]="!data.get('show').value" formArrayName="location" *ngFor="let data of form.get('location')['controls']; let i = index">
             <ng-container formGroupName="{{i}}">
-                <!--<div class="tabs__wrap" formGroupName="tab">-->
-                <div class="tabs__wrap" formGroupName="tab" *ngIf="!data.get('tab')['controls'].decorationType?.value">
-                    <div class="tabs__container">
-                        <h2 class="tabs__title">Вкладка {{getTabIndex(i)}}</h2>
-                        <!--<h2 class="tabs__title">Вкладка {{i + 1}}</h2>-->
-                        <div class="tabs__nav">
-                            <!--<a href="#" class="tabs__nav-link">Выключить</a>-->
-                            <label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{data.get('tab')['controls'].show.value ? 'Выключить' : 'Включить'}}</label>
-                            <a href="javascript:void(0)" class="tabs__nav-link" (click)="popTab(i)">Удалить</a>
-                            <a href="#" class="tabs__nav-link">Вверх</a>
-                            <a href="#" class="tabs__nav-link">Вниз</a>
-                        </div>
+                <div class="location__wrapper">
+                    <h2 class="location__info-title">{{data.get('name').value}}</h2>
+                    <label class="location__delete"><input hidden type="checkbox" formControlName="show">{{data.get('show').value ? 'Выключить' : 'Включить'}}</label>
+                </div>
+                <div class="form">
+                    <div class="form-item">
+                        <input type="text" class="form-input info-input" formControlName="coords" appSlideTopLabel>
+                        <label class="form-label info-suptitle">Координаты объекта</label>
                     </div>
-                    <div class="form">
-                        <div class="form-item">
-                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="name" required>
-                            <label class="form-label info-suptitle">Название вкладки</label>
-                        </div>
-                    </div>
-                    <input class="decoration__checkbox" type="checkbox" formControlName="turnOnDecorationTypes" id="decoration{{i}}">
-                    <label class="decoration__label" for="decoration{{i}}">Подключить виды отделки</label>
+                    <a href="https://yandex.ru/maps/?text={{objectName}}" target="_blank" class="location__coords">Узнать координаты</a>
+                </div>
+                <div class="location__helper">
+                    <label class="btn  btn--location">Загрузить фото
+                        <input style='display: none;' type="file" placeholder="Upload file" accept=".jpg" (change)="imageUpload($event, i)">
+                    </label>
+                    <p class="location__hint">Загрузите фото для маркера на карте</p>
+                </div>
+                <div class="location__wrap" *ngIf="data.get('thumbnail').value">
+                    <button class="button__delete" (click)="delImage(i)"><img class="location__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                    <img class='bg-img' [src]="uploadsPath + data.get('thumbnail').value" alt="image" width="164" height="108">
                 </div>
             </ng-container>
-        </ng-container>
-        <button class="btn btn--settings" (click)="pushTab()">Добавить вкладку</button>
+        </div>
     </form>
 
 </app-admin-modal>

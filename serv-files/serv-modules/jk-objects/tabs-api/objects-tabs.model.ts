@@ -1,19 +1,22 @@
 import { ErrorNotCorrectArguments, OBJECTS_TABS_COLLECTION_NAME, IObjectTabsSnippet } from './objects-tabs.interfaces';
+import { OBJECTS_LOCATION_COLLECTION_NAME } from '../location-api/objects-location.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class ObjectsTabsModel {
 
     collectionName = OBJECTS_TABS_COLLECTION_NAME;
-
     collection: any;
+    locationCollectionName = OBJECTS_LOCATION_COLLECTION_NAME;
+    locationCollection: any;
 
     constructor( public db: any ) {
         this.collection = db.collection(this.collectionName);
+        this.locationCollection = db.collection(this.locationCollectionName);
     }
 
     async getGalleryTabs(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria, {decorationType: 0});
+        return await this.collection.findOne(findCriteria, {decorationType: 0, location: 0});
     }
 
     async updateGalleryTabs(parameters) {
@@ -21,13 +24,13 @@ export class ObjectsTabsModel {
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'gallery', async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
-            const created = await this.collection.update({ objectId : options.objectId }, { $set : {gallery: options.gallery, created_at: options.created_at, last_modifyed: options.last_modifyed} }, {upsert: true});
+            await this.collection.update({ objectId : options.objectId }, { $set : {gallery: options.gallery, created_at: options.created_at, last_modifyed: options.last_modifyed, objectId : options.objectId} }, {upsert: true});
         });
     }
 
     async getDecorationTabs(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria, {gallery: 0});
+        return await this.collection.findOne(findCriteria, {gallery: 0, location: 0});
     }
 
     async updateDecorationTabs(parameters) {
@@ -35,7 +38,25 @@ export class ObjectsTabsModel {
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'decoration', async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
-            const created = await this.collection.update({ objectId : options.objectId }, { $set : {decorationType: options.decorationType, created_at: options.created_at, last_modifyed: options.last_modifyed} }, {upsert: true});
+            await this.collection.update({ objectId : options.objectId }, { $set : {decorationType: options.decorationType, created_at: options.created_at, last_modifyed: options.last_modifyed, objectId : options.objectId} }, {upsert: true});
+        });
+    }
+
+    async getLocationTabs(objectId?) {
+        const findCriteria = objectId ? {objectId} : {};
+        return await this.collection.findOne(findCriteria, {gallery: 0, decorationType: 0});
+    }
+
+    async updateLocationTabs(parameters) {
+        const options: IObjectTabsSnippet = parameters;
+        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'location', async () => {
+            // удаление _id из параметров если он там есть
+            if ( '_id' in options ) { delete options._id; }
+            await this.collection.update({ objectId : options.objectId }, { $set : {location: options.location, created_at: options.created_at, last_modifyed: options.last_modifyed, objectId : options.objectId} }, {upsert: true});
+            const contentSnippet = await this.locationCollection.findOne({ objectId : options.objectId });
+            contentSnippet.data.forEach((item, i) => { item.tab = options.location[i]; });
+            if ( '_id' in contentSnippet) { delete contentSnippet._id; }
+            await this.locationCollection.update({ objectId : contentSnippet.objectId }, { $set : contentSnippet }, {upsert: true});
         });
     }
 
@@ -51,6 +72,8 @@ export class ObjectsTabsModel {
                 return this.getGalleryTabs(objectId);
             } else if (type === 'decoration') {
                 return await this.getDecorationTabs(objectId);
+            } else if (type === 'location') {
+                return await this.getLocationTabs(objectId);
             }
         } else {
             throw new Error(ErrorNotCorrectArguments);
@@ -59,8 +82,7 @@ export class ObjectsTabsModel {
 
     private valuesReview(options) {
         // если есть все параметры
-        console.log('options: ', options);
-        return 'objectId' in options && ('gallery' in options || 'decorationType' in options);
+        return 'objectId' in options && ('gallery' in options || 'decorationType' in options || 'location' in options);
     }
 
 }

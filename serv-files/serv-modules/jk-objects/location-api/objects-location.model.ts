@@ -1,5 +1,4 @@
 import { imageSaver, thumbnailSaver, fileExtension } from '../../utilits/image-saver.utilits';
-import { IObjectTabsSnippet } from '../tabs-api/objects-tabs.interfaces';
 import { ErrorNotCorrectArguments, IObjectLocationSnippet, OBJECTS_LOCATION_COLLECTION_NAME, OBJECTS_LOCATION_UPLOADS_PATH } from './objects-location.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
@@ -13,15 +12,10 @@ export class ObjectsLocationModel {
         this.collection = db.collection(this.collectionName);
     }
 
-    async getSnippet(objectId?, tab?) {
+    async getSnippet(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
 
-        const result = await this.collection.findOne(findCriteria);
-
-        if (result && tab) {
-            result.image_data = result.image_data.filter((slide) => slide.tab === tab);
-        }
-        return result;
+        return await this.collection.findOne(findCriteria);
     }
 
     async updateSnippet(parameters) {
@@ -33,18 +27,6 @@ export class ObjectsLocationModel {
         });
     }
 
-    async removeTabSlides(parameters) {
-        const options: IObjectTabsSnippet = parameters;
-        const tabs = parameters.decoration;
-        tabs.push('no-tab');
-
-        return await this.errorParamsCatcher('objectId' in options, options.objectId, async () => {
-            // удаление _id из параметров если он там есть
-            if ( '_id' in options ) { delete options._id; }
-            await this.collection.update({ objectId : options.objectId }, { $pull : {data: {tab: {$nin: tabs}}}});  // удаляем из массива слайдов те что не относятся ни к одному существующему табу и no-tab'у
-        });
-    }
-
     async deleteSnippet(objectId) {
         return await this.collection.deleteOne({objectId});
     }
@@ -53,7 +35,7 @@ export class ObjectsLocationModel {
         if (fileExtension(req.files.file.originalFilename) === '.jpg' ) {
             const path = OBJECTS_LOCATION_UPLOADS_PATH;
             const image = await imageSaver(req, path, 50);
-            const thumbnail = await thumbnailSaver(req, path, {width: '300', height: '200'});
+            const thumbnail = await thumbnailSaver(req, path, {width: '164', height: '108'});
             return ({
                 image,
                 thumbnail,

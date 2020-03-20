@@ -5,8 +5,7 @@ import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { IObjectTabsSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
-import { IDecorationData, IObjectDecorationSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/decoration-api/objects-decoration.interfaces';
-import { IObjectLocationSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
+import { IObjectLocationSnippet, IRoutesMarks } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
 
 @Injectable()
 
@@ -20,25 +19,20 @@ export class ObjectLocationAdminService {
     ) {
     }
 
-    public getContentSnippetByIdAndTab(objectID, tab?): Observable<IObjectLocationSnippet> {
-        return this.http.get<IObjectLocationSnippet>(`/api/jk-object/location/id/${objectID}/tab/${tab}`);
+    public getContentSnippet(objectID): Observable<IObjectLocationSnippet> {
+        return this.http.get<IObjectLocationSnippet>(`/api/jk-object/location/id/${objectID}`);
     }
 
-    public setContentSnippetData(form) {
-        return this.http.post('/api/admin/jk-object/location/create-update', form, adminHeaders());
+    public setContentSnippetData(form): Observable<IObjectLocationSnippet> {
+        return this.http.post<IObjectLocationSnippet>('/api/admin/jk-object/location/create-update', form, adminHeaders());
     }
 
-    public getTypesSnippetById(objectID): Observable<IObjectTabsSnippet> {
-        console.log('get tab snippet');
+    public getTabsSnippetById(objectID): Observable<IObjectTabsSnippet> {
         return this.http.get<IObjectTabsSnippet>(`/api/jk-object/tabs/id/${objectID}/location`);
     }
 
-    public setTypesSnippetData(form) {
+    public setTabsSnippetData(form) {
         return this.http.post('/api/admin/jk-object/tabs/location/create-update', form, adminHeaders());
-    }
-
-    public removeTabSlidesFromGallery(tabs) {
-        return this.http.post('/api/admin/jk-object/location/update', tabs, adminHeaders());
     }
 
     public setPercentLoadedImage(val: number) {
@@ -64,41 +58,34 @@ export class ObjectLocationAdminService {
             this.uploaderService.onErrorUpload = (item, response, status, headers) => {
                 reject(response);
             };
-            // this.uploaderService.onCompleteUpload = (item, response, status, headers) => {};
+            this.uploaderService.onCompleteUpload = (item, response, status, headers) => {};
             this.uploaderService.onProgressUpload = (item, percentComplete) => {
-                this.setPercentLoadedImage(percentComplete);
             };
             this.uploaderService.upload(myUploadItem);
         });
     }
 
-    public setTabsWithTypes(formValue: IObjectDecorationSnippet, typesFormValue: IObjectTabsSnippet, prevTypes: string[]) {
-        const newFormValue = {...formValue, data: []};
-        formValue.data.forEach((item) => {
-            if (!item.tab.decorationType) {
-                newFormValue.data.push(item);
+    public parseFormValue(marks: IRoutesMarks[]) {
+        marks.forEach((mark) => {
+            if (mark.type === 'auto') {
+                mark.route = {
+                    origin: mark.coords, // Начало линии откуда простраивается путь
+                    color: 'rgba(90,49,197,.6)',
+                    activeColor: 'rgb(90,49,197)',
+                    strokeStyle: '1 0'
+                };
+                mark.offset = [0, -20];
             }
-            if (item.tab.turnOnDecorationTypes) {
-                const masTabsWithTypes = [];
-                prevTypes.forEach((type, i) => {
-                    const tabWithType = formValue.data.find((data) => data.tab.name === item.tab.name && data.tab.decorationType === type);
-                    if (tabWithType) {
-                        tabWithType.tab.decorationType = typesFormValue.decorationType[i];
-                        masTabsWithTypes.push(tabWithType);
-                    }
-                    if (!formValue.data.some((data) => data.tab.name === item.tab.name && data.tab.decorationType === type)) {
-                        masTabsWithTypes.push({
-                            images: [],
-                            info: [],
-                            tab: {name: item.tab.name, show: item.tab.show, decorationType: typesFormValue.decorationType[i]}
-                        });
-                    }
-                });
-                console.log('masTabsWithNewTypes: ', masTabsWithTypes);
-                newFormValue.data.push(...masTabsWithTypes);
+            if (mark.type === 'metro') {
+                mark.route = {
+                    origin: mark.coords, // Начало линии откуда простраивается путь
+                    color: 'rgba(255,0,19,.6)',
+                    activeColor: 'rgb(255,0,19)',
+                    strokeStyle: '1 0'
+                };
+                mark.offset = [0, -16];
             }
         });
-        console.log('newFormValue2: ', newFormValue);
-        return newFormValue;
+
     }
 }

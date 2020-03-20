@@ -3,21 +3,39 @@ import { CommonModule } from '@angular/common';
 import { ObjectLocationComponent } from './object-location.component';
 import { LocationRoutesComponent } from './location-routes/location-routes.component';
 import { LocationInfrastructureComponent } from './location-infrastructure/location-infrastructure.component';
+import { ObjectLocationTabsAdminComponent } from './object-location-tabs-admin/object-location-tabs-admin.component';
+import { AdminModalModule } from '../../../admin-modal/admin-modal.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label.module';
+import { ObjectLocationAdminComponent } from './object-location-content-admin/object-location-admin.component';
+import { RoutesAdminComponent } from './object-location-content-admin/routes-admin/routes-admin.component';
+import { InfrastructureAdminComponent } from './object-location-content-admin/infrastructure-admin/infrastructure-admin.component';
 
 @NgModule({
     exports: [
         ObjectLocationComponent,
         LocationRoutesComponent,
-        LocationInfrastructureComponent
+        LocationInfrastructureComponent,
+        ObjectLocationTabsAdminComponent,
+        ObjectLocationAdminComponent,
+        RoutesAdminComponent,
+        InfrastructureAdminComponent
     ],
     declarations: [
         ObjectLocationComponent,
         LocationRoutesComponent,
-        LocationInfrastructureComponent
-
+        LocationInfrastructureComponent,
+        ObjectLocationTabsAdminComponent,
+        ObjectLocationAdminComponent,
+        RoutesAdminComponent,
+        InfrastructureAdminComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AdminModalModule,
+        SlideTopLabelModule
     ]
 })
 export class ObjectLocationModule {

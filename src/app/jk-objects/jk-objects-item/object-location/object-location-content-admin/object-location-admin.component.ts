@@ -1,196 +1,88 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ObjectLocationAdminService } from './object-location-admin.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { IObjectTabsSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 import {
-    IObjectDecorationSnippet,
-    OBJECTS_DECORATION_UPLOADS_PATH
-} from '../../../../../../serv-files/serv-modules/jk-objects/decoration-api/objects-decoration.interfaces';
-import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
+    IInfraMarks,
+    IObjectLocationSnippet,
+    IRoutesMarks,
+    OBJECTS_LOCATION_UPLOADS_PATH
+} from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
+import { ObjectLocationAdminService } from './object-location-admin.service';
 
 @Component({
-    selector: 'app-objects-item-decoration-content-admin',
-    templateUrl: './object-decoration-admin.component.html',
+    selector: 'app-objects-item-location-content-admin',
+    templateUrl: './object-location-admin.component.html',
     styleUrls: ['../../jk-objects-item.component.scss',
-                './object-decoration-admin.component.scss']
+                './object-location-admin.component.scss']
 })
+
 export class ObjectLocationAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
     @Output()
-    public contentSnippetChange = new EventEmitter();
+    public snippetChange = new EventEmitter();
 
     @Input()
     public id: string;
     @Input()
-    public contentSnippet: IObjectDecorationSnippet;
+    public tabSnippet: IObjectTabsSnippet;
+    @Input()
+    public contentSnippet: IObjectLocationSnippet;
 
-    public form: FormGroup = this.formBuilder.group({});
+    public form: FormGroup;
+    public routesMarks: IRoutesMarks[] = [];
+    public infraMarks: IInfraMarks[] = [];
+    public show = '';
 
-    public imageUploadEvent;
-    public imageUploadPercent: number;
-    public isLoad = true;
-
-    public showModal = false;
-
-    uploadsPath = `/${OBJECTS_DECORATION_UPLOADS_PATH}`;
-
-    public selectedIcon = '';
-    public selectedInfo: FormGroup;
+    uploadsPath = `/${OBJECTS_LOCATION_UPLOADS_PATH}`;
 
     constructor(
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
-        private decorationService: ObjectLocationAdminService,
-        public windowScrollLocker: WindowScrollLocker
+        private locationService: ObjectLocationAdminService
     ) { }
 
     ngOnInit() {
-        if (this.contentSnippet) {
-            this.setFormFromSnippet();
-        } else {
-            this.setNewForm();
+        if (!this.contentSnippet.data) {
+            this.setSnippet();
         }
+        this.show = 'routes';
     }
 
-    private setNewForm() {
-        this.form = this.formBuilder.group({
+    private setSnippet() {
+        this.contentSnippet = {
             objectId: this.id,
             switchOn: true,
-            created_at : new Date(),
-            last_modifyed : new Date(),
-            data: this.setPrimaryDataTabs()
-        });
-    }
-    private setFormFromSnippet() {
-        let decorationData;
-        if (this.contentSnippet.data && this.contentSnippet.data.length) {
-            decorationData = this.formBuilder.array(this.contentSnippet.data.map((data) => this.formBuilder.group({images: this.parseImagesArray(data.images), info: this.parseInfosArray(data.info), tab:
-                this.formBuilder.group({
-                    name: data.tab.name,
-                    show: data.tab.show,
-                    turnOnDecorationTypes: data.tab.turnOnDecorationTypes,
-                    decorationType: data.tab.decorationType
-                })})));
-        } else {
-            decorationData = this.setPrimaryDataTabs();
-        }
-
-        this.form = this.formBuilder.group({
-            objectId: this.contentSnippet.objectId,
-            switchOn: this.contentSnippet.switchOn,
-            created_at : this.contentSnippet.created_at,
-            last_modifyed : new Date(),
-            data: decorationData
-        });
-    }
-    private parseImagesArray(images) {
-        return this.formBuilder.array(images.map((data) => {
-                return this.formBuilder.group({
-                    image: data.image,
-                    thumbnail: data.thumbnail
-                });
+            created_at: new Date(),
+            last_modifyed: new Date(),
+            data: this.tabSnippet.location.map((item) => {
+                if (item.name === 'Объект' || item.name === 'Офис продаж') {
+                    return {tab: item, routesMarks: []};
+                } else if (item.name === 'Инфраструктура') {
+                    return {tab: item, infraMarks: []};
+                }
             })
-        );
-    }
-    private parseInfosArray(info) {
-        return this.formBuilder.array(info.map((data) => {
-                return this.formBuilder.group({
-                    name: data.name,
-                    mod: data.mod
-                });
-            })
-        );
-    }
-    private setPrimaryDataTabs() {
-        return this.formBuilder.array([
-            this.formBuilder.group({
-                images: this.formBuilder.array([]),
-                info: this.formBuilder.array([]),
-                tab: this.formBuilder.group({name: 'Жилая комната', show: true, turnOnDecorationTypes: false})
-            }),
-            this.formBuilder.group({
-                images: this.formBuilder.array([]),
-                info: this.formBuilder.array([]),
-                tab: this.formBuilder.group({name: 'Кухня', show: true, turnOnDecorationTypes: false})
-            }),
-            this.formBuilder.group({
-                images: this.formBuilder.array([]),
-                info: this.formBuilder.array([]),
-                tab: this.formBuilder.group({name: 'Санузел', show: true, turnOnDecorationTypes: false})
-            }),
-            this.formBuilder.group({
-                images: this.formBuilder.array([]),
-                info: this.formBuilder.array([]),
-                tab: this.formBuilder.group({name: 'Прихожая', show: true, turnOnDecorationTypes: false})
-            }),
-            this.formBuilder.group({
-                images: this.formBuilder.array([]),
-                info: this.formBuilder.array([]),
-                tab: this.formBuilder.group({name: 'Общедомовые пространства', show: true, turnOnDecorationTypes: false})
-            })
-        ]);
+        };
     }
 
-    deleteImage(i, j) {
-        (this.form.get(['data', i, 'images']) as FormArray).removeAt(j);
-    }
+    private setReference() {
+        this.contentSnippet.data[1].routesMarks = this.contentSnippet.data[0].routesMarks;
 
-    addGallerySlide(data, i) {
-        (this.form.get(['data', i, 'images']) as FormArray).push(this.formBuilder.group({image: data.image, thumbnail: data.thumbnail}));
     }
-
-    imageUpload(e, i) {
-        this.isLoad = true;
-        this.imageUploadEvent = this.decorationService.getPercentLoadedImage().subscribe(
-            (val) => {
-                this.imageUploadPercent = val;
-                this.ref.detectChanges();
+    public save() {
+        this.locationService.parseFormValue(this.contentSnippet.data[0].routesMarks);
+        this.setReference();
+        console.log('this.contentSnippet after parse: ', this.contentSnippet);
+        this.locationService.setContentSnippetData(this.contentSnippet).subscribe(
+            (data) => {
+                this.snippetChange.emit(data);
+                this.closeModal.emit(true);
             },
             (err) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-            }
-        );
-
-        this.decorationService.imageUpload(e)
-            .then( (data: any) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                this.addGallerySlide(data, i);
-            })
-            .catch((err) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
                 alert('Что-то пошло не так!');
                 console.error(err);
             });
-    }
-
-    addInfo(i) {
-        (this.form.get(['data', i, 'info']) as FormArray).push(this.formBuilder.group({name: '', mod: ''}));
-    }
-
-    setInfoIcon() {
-        this.selectedInfo.get('mod').setValue(this.selectedIcon);
-    }
-    delInfoIcon() {
-        this.selectedInfo.get('mod').setValue('');
-    }
-
-    showModalIcon(info) {
-        this.showModal = true;
-        this.selectedInfo = info;
-    }
-
-    public save() {
-        this.decorationService.setContentSnippetData(this.form.value).subscribe(
-            (content) => {
-                this.contentSnippetChange.emit(content);
-                this.closeModal.emit(true);
-            },
-            (err) => console.error(err)
-        );
     }
 
     public close(isSave) {

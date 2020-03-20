@@ -16,8 +16,8 @@ export interface IObjectLocationSnippet {
 }
 
 export interface ILocationData {
-    routesMarks: IRoutesMarks[];
-    infraMarks: IInfraMarks[];
+    routesMarks?: IRoutesMarks[];
+    infraMarks?: IInfraMarks[];
     tab: IObjectLocationTab;
 }
 
@@ -35,7 +35,7 @@ export interface IRoutesMarks {
 
 }
 export interface IRouteParams {
-    origin: number[][];
+    origin: string;
     color: string;
     activeColor: string;
     strokeStyle: string;

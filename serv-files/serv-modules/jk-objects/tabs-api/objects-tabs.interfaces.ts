@@ -29,6 +29,7 @@ export interface IObjectLocationTab {
     coords: string;
     image: string;
     thumbnail: string;
+    show: boolean;
 }
 
 export enum LocationTabsEnum {

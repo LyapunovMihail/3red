@@ -36,6 +36,14 @@ export class ObjectsTabsController extends ObjectsTabsModel {
             return await this.updateDecorationTabs(req.body);
         }));
 
+        this.router.get('/jk-object/tabs/id/:id/location', responseHandler(async (req) => {
+            return await this.getLocationTabs(req.params.id);
+        }));
+
+        this.router.post('/admin/jk-object/tabs/location/create-update', responseHandler(async (req) => {
+            return await this.updateLocationTabs(req.body);
+        }));
+
         const app: Express = this.expressAppService.getApp();
         app.use('/api', this.router);
     }

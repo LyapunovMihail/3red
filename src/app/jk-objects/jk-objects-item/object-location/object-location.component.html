@@ -1,6 +1,5 @@
 <section class="object-location" [class.object-item--margin]="switchOn || isAuthorizated">
 
-
     <div class="object-item__container">
 
         <div [class.object-location__head]="switchOn">
@@ -13,15 +12,22 @@
             <h2 *ngIf="!isAuthorizated">Местоположение</h2>
 
             <div class="object-location__options" *ngIf="isAuthorizated">
-                <button class="btn__admin-setting">Настройки</button>
-                <button class="btn__admin-content btn_var-2">Контент</button>
+                <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
+                <button class="btn__admin-content btn_var-2" (click)="closeContentModal = false" *ngIf="this.tabSnippet?.location?.length">Контент</button>
             </div>
 
             <nav class="object-location__nav">
-                <ul class="object-location__nav-list">
-                    <li class="object-location__nav-item" *ngFor="let nav of navPoint"
-                        [ngClass]="{'object-location__nav-item_active': nav.name === openPath}"
-                        (click)="openPath = nav.name">{{nav.name}}</li>
+                <ul class="object-location__nav-list" *ngIf="!isTabSet">
+                    <li class="object-location__nav-item" *ngFor="let tab of mockTabs"
+                        [ngClass]="{'object-location__nav-item_active': tab === openTab}"
+                        (click)="openTab = tab">{{tab}}</li>
+                </ul>
+                <ul class="object-location__nav-list" *ngIf="isTabSet">
+                    <ng-container *ngFor="let tab of tabSnippet.location">
+                        <li class="object-location__nav-item" *ngIf="tab.show"
+                            [ngClass]="{'object-location__nav-item_active': tab.name === openTab}"
+                            (click)="openTab = tab.name">{{tab.name}}</li>
+                    </ng-container>
                 </ul>
 
                 <div class="object-location__address">
@@ -30,10 +36,9 @@
                 </div>
             </nav>
 
-            <app-location-infrastructure *ngIf="openPath === 'Инфраструктура'">
-
+            <app-location-infrastructure *ngIf="openTab === 'Инфраструктура' && isTabSet"
+                [contentSnippet]="contentSnippet">
             </app-location-infrastructure>
-
 
         </ng-container>
 
@@ -41,13 +46,32 @@
 
     <div class="object-location__map" *ngIf="switchOn">
 
-        <app-location-routes *ngIf="openPath === 'Объект'">
-
+        <app-location-routes *ngIf="(openTab === 'Объект' || openTab === 'Офис продаж') && isTabSet"
+            [contentSnippet]="contentSnippet"
+            [tab]="openTab">
         </app-location-routes>
 
-        <div id="map" class="object-location__map-item">
-        </div>
+        <div id="map" class="object-location__map-item" *ngIf="isTabSet; else elseBlock"></div>
+        <ng-template #elseBlock>
+            <div class="object-item__mock-img"></div>
+        </ng-template>
 
     </div>
 
 </section>
+
+<app-objects-item-location-tabs-admin *ngIf="!closeTabsModal"
+    [id]="objectId"
+    [snippet]="tabSnippet"
+    [objectName]="objectName"
+    (snippetChange)="refreshTabs($event)"
+    (closeModal)="closeTabsModal = $event">
+</app-objects-item-location-tabs-admin>
+
+<app-objects-item-location-content-admin  *ngIf="!closeContentModal"
+    [id]="objectId"
+    [tabSnippet]="tabSnippet"
+    [contentSnippet]="contentSnippet"
+    (snippetChange)="contentSnippet = $event"
+    (closeModal)="closeContentModal = $event">
+</app-objects-item-location-content-admin>

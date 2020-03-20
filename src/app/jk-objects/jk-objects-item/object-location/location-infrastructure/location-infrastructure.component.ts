@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/platform-browser';
-import { markersConfig, navList } from './config';
+import { navList } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
 declare let ymaps: any;
 declare let $: any;
 
@@ -15,9 +16,14 @@ declare let $: any;
     ]
 })
 
-export class LocationInfrastructureComponent implements OnInit, OnDestroy {
+export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnChanges {
 
-    @Input() public map: any;
+    @Input() public contentSnippet: IObjectLocationSnippet;
+
+    public map: any;
+    public markersConfig: any[];
+    public mainMarker: any;
+    public destination: string[];
 
     // кнопки боковой навигации
     public navList = navList;
@@ -27,13 +33,51 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy {
     // при выборе определенного типа
     public markers = [];
 
+    public uploadsPath = `/${OBJECTS_LOCATION_UPLOADS_PATH}`;
+
     constructor(
         private platform: PlatformDetectService,
         @Inject(DOCUMENT) private document: any
     ) { }
 
     ngOnInit() {
+        this.parseData();
         this.initMap();
+    }
+
+    ngOnChanges(changes) {
+        this.map.destroy();
+        this.markers = [];
+        this.parseData();
+        this.initMap();
+    }
+
+    private parseData() {
+        if (this.contentSnippet.data) {
+            const contentSnippet = JSON.parse(JSON.stringify(this.contentSnippet));
+            this.markersConfig = contentSnippet.data[2].infraMarks;
+            this.destination = contentSnippet.data[2].tab.coords.split(',');
+            this.mainMarker = contentSnippet.data[2].tab;
+            this.parseMarkers();
+        }
+    }
+    private parseMarkers() {
+        this.markersConfig.forEach((mark) => {
+            mark.coords = mark.coords.split(',');
+        });
+        this.mainMarker = {
+            coords: this.mainMarker.coords.split(','),
+            thumbnail: this.mainMarker.thumbnail,
+            size: [50, 74],
+            offset: [-20, -20],
+            zIndex: 0,
+            content: this.markersConfig.length,
+            tooltip: '',
+            title: '',
+            text: '',
+            type: 'main'
+        };
+        this.markersConfig.push(this.mainMarker);
     }
 
     ngOnDestroy() {
@@ -78,8 +122,8 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy {
         const that = this;
         ymaps.ready(() => {
 
-            this.map = new ymaps.Map('map', {
-                center: [55.656725165497704, 37.92175475135617],
+            that.map = new ymaps.Map('map', {
+                center: that.mainMarker.coords,
                 zoom: 14,
                 controls: ['zoomControl']
             }, {
@@ -88,12 +132,20 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy {
             });
 
             // из маркер-конфига собираем массив маркеров
-            markersConfig.forEach( ( item, index ) => {
+            that.markersConfig.forEach( ( item, index ) => {
                 that.markers[index] = {};
                 that.markers[index].click = false;
                 that.markers[index].type = item.type;
-                that.markers[index].marker = new ymaps.Placemark(item.coord, {
-                    iconContent: `<div id="marker-${index}" class="marker-content marker-content__${item.type}">${item.content}</div>`
+                const img = item.type === 'main' ?  `<img class="marker-content__img" src="${this.uploadsPath + item.thumbnail}" width="56" height="56" />` : '';
+                that.markers[index].marker = new ymaps.Placemark(item.coords, {
+                    iconContent: `<div id="marker-${index}" class="marker-content marker-content__${item.type}">
+                                    ${img}
+                                    <div class="marker-content__tooltip">
+                                        <div class="marker-content__tooltip-content">
+                                            <p class="marker-content__tooltip-content-text">${item.name}</p>.
+                                        </div>
+                                    </div>
+                                  </div>`
                 }, {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',
@@ -102,7 +154,7 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy {
                     zIndex: 10
                 });
 
-                this.map.geoObjects.add(that.markers[index].marker);
+                that.map.geoObjects.add(that.markers[index].marker);
 
                 // Навешиваем события на маркеры. Если мышь над маркером - показываем маркер, если нет - убираем (если не было клика, если был - ховер не срабатывает).
                 // Если клик по маркеру - показываем. Если повторный клик по маркеру - убираем.
