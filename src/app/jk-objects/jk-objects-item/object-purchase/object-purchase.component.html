@@ -1,4 +1,3 @@
-
 <section class="object-purchase">
 
     <div class="object-item__container object-purchase__container">
@@ -23,28 +22,12 @@
         </nav>
 
         <div class="object-purchase__list" *ngIf="showType === 'credit'">
-    
-            <div class="object-purchase__list-container"
-                [ngClass]="{'object-purchase__list-container_more': moreBanks }">
-    
-                <div class="object-purchase__list-head">
-                    <p class="object-purchase__list-text object-purchase__list-text_head">Банк</p>
-                    <p class="object-purchase__list-text object-purchase__list-text_head">Ставка от</p>
-                    <p class="object-purchase__list-text object-purchase__list-text_head">Срок</p>
-                    <p class="object-purchase__list-text object-purchase__list-text_head">Минимальный взнос</p>
-                </div>
-                <div class="object-purchase__list-item" *ngFor="let bank of mockBank">
-                    <div class="object-purchase__list-text object-purchase__list-image">
-                        <img src="{{bank.image}}" alt="bank-logo">
-                    </div>
-                    <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
-                    <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-rate">{{bank.rate}}</p>
-                    <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-date">до {{bank.date}} лет</p>
-                    <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-payment">от {{bank.payment}}%</p>
-                </div>
-            </div>
 
-            <button class="object-purchase__list-btn btn-empty" (click)="moreBanks = !moreBanks">Показать все банки</button>
+            <app-object-credit-output  *ngIf="showType === 'credit'"
+                [isAuthorizated]="isAuthorizated"
+                [bankList]="mockBank">
+            </app-object-credit-output>
+
         </div>
         
         <app-object-item-installment 

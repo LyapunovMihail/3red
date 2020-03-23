@@ -1,4 +1,3 @@
-import { ObjectPurchaseInstallmentNumberPipe } from './object-installment.pipe';
 import { Injectable } from '@angular/core';
 
 export interface FormParams {
@@ -22,7 +21,7 @@ export interface FormParams {
 
 @Injectable()
 
-export class ObjectPurchaseInstallmentService {
+export class ObjectInstallmentService {
 
     constructor ( ) { }
 

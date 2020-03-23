@@ -1,4 +1,4 @@
-@import "../../../../styles/modules/mixins/mixin";
+@import "../../../../../../styles/modules/mixins/mixin";
 
 .ghm-range-number {
     width: 100%;
@@ -8,10 +8,9 @@
     overflow: hidden;
     user-select: none;
     box-sizing: border-box;
-    @media (max-width: 1279px) { width: 100%; }
 
     &-text {
-        @include fw18-24;
+        font: 18px/23px $font-proba;
         display: block;
         width: 100%;
     }
@@ -21,7 +20,7 @@
         width: calc(100% - 2px);
         position: relative;
         height: 1px;
-        background: #999a9b;
+        background: $col-border;
         margin: 8px 0;
     }
 
@@ -34,7 +33,7 @@
         border-radius: 50%; 
         width: 16px;
         height: 16px;
-        background: $col-red; 
+        background: $col-red;
         cursor: pointer;
 
         &:before {

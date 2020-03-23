@@ -3,10 +3,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Pipe({
     pure: false,
-    name: 'objectInstallmentNumberPipe'
+    name: 'installmentNumberPipe'
 })
 
-export class ObjectPurchaseInstallmentNumberPipe implements PipeTransform  {
+export class ObjectInstallmentPipe implements PipeTransform  {
 
    constructor(private _sanitizer: DomSanitizer) {}
 

@@ -2,9 +2,9 @@ import { imageSaver, thumbnailSaver, fileExtension } from '../../utilits/image-s
 import {
     IObjectDecorationSnippet,
     ErrorNotCorrectArguments,
-    OBJECTS_DECORATION_UPLOADS_PATH, OBJECTS_DECORATION_COLLECTION_NAME, IDecorationImage, IDecorationInfo
+    OBJECTS_DECORATION_UPLOADS_PATH, OBJECTS_DECORATION_COLLECTION_NAME,
 } from './objects-decoration.interfaces';
-import { IObjectDecorationTab, IObjectTabsSnippet } from '../tabs-api/objects-tabs.interfaces';
+import { IObjectTabsSnippet } from '../tabs-api/objects-tabs.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class ObjectsDecorationModel {

@@ -7,6 +7,7 @@ import { ObjectsDocumentaionController } from './documentation-api/objects-docum
 import { ObjectsDecorationController } from './decoration-api/objects-decoration.controller';
 import { ObjectsNewsController } from './news-api/objects-news.controller';
 import { ObjectsLocationController } from './location-api/objects-location.controller';
+import { ObjectsCreditController } from './credit-api/objects-credit.controller';
 
 export const objectControllers = [
     ObjectsPreviewController,
@@ -17,5 +18,6 @@ export const objectControllers = [
     ObjectsDocumentaionController,
     ObjectsDecorationController,
     ObjectsNewsController,
-    ObjectsLocationController
+    ObjectsLocationController,
+    ObjectsCreditController
 ];

@@ -1,0 +1,32 @@
+<div class="object-purchase__list-container"
+     [ngClass]="{'object-purchase__list-container_more': moreBanks }">
+
+    <div class="object-purchase__list-head">
+        <p class="object-purchase__list-text object-purchase__list-text_head">Банк</p>
+        <p class="object-purchase__list-text object-purchase__list-text_head">Ставка от</p>
+        <p class="object-purchase__list-text object-purchase__list-text_head">Срок</p>
+        <p class="object-purchase__list-text object-purchase__list-text_head">Минимальный взнос</p>
+    </div>
+    <div class="object-purchase__list-item" *ngFor="let bank of bankList">
+        <div class="object-purchase__list-text object-purchase__list-image">
+            <img src="{{bank.image}}" alt="bank-logo">
+        </div>
+        <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
+        <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-rate">
+            <span>{{bank.percent}}</span>
+            <span> %</span>
+        </p>
+        <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-date">
+            <span>до </span>
+            <span>{{bank.deadline}}</span>
+            <span> лет</span>
+        </p>
+        <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-payment">
+            <span>от </span>
+            <span>{{bank.initial}}</span>
+            <span> %</span>
+        </p>
+    </div>
+</div>
+
+<button class="object-purchase__list-btn btn-empty" (click)="moreBanks = !moreBanks">Показать все банки</button>

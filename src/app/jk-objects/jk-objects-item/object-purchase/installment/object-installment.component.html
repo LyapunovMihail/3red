@@ -50,17 +50,17 @@
                 <input (change)="formChanges($event.target.value, 'price')"
                        (input)="bitReplace($event.target.value, 'price')"
                        (keyup)="keyUpReviuse($event)"
-                       [value]="form.price.val | objectInstallmentNumberPipe"
+                       [value]="form.price.val | installmentNumberPipe"
                        class="field installment-calculator__item-field" type="text">
                 <div class="installment-calculator__item-wrap">
-                    <!-- <ghm-range-number 
+                    <ghm-range-number 
                         (move)="form.price.val = $event"
                         (moveend)="formChanges($event, 'price')"
                         [toFixed]="true"
                         [min]="form.price.min"
                         [max]="form.price.max"
                         [start]="form.price.val">
-                    </ghm-range-number> -->
+                    </ghm-range-number>
                 </div>
             </li>
             <li class="installment-calculator__item" *ngIf="typeInstallment !== fullPay">
@@ -69,21 +69,21 @@
                     <input (change)="formChanges($event.target.value, 'firstpay')"
                            (input)="bitReplace($event.target.value, 'firstpay')"
                            (keyup)="keyUpReviuse($event);"
-                           [value]="form.firstpay.val | objectInstallmentNumberPipe"
+                           [value]="form.firstpay.val | installmentNumberPipe"
                            class="field installment-calculator__item-field" type="text">
                     <p class="installment-calculator__item-field installment-calculator__item-field_percent">
-                        {{ firstpayPercent(form.firstpay.val, form.price.val) | objectInstallmentNumberPipe }}%
+                        {{ firstpayPercent(form.firstpay.val, form.price.val) | installmentNumberPipe }}%
                     </p>
                 </div>
                 <div class="installment-calculator__item-wrap ">
-                    <!-- <ghm-range-number 
+                    <ghm-range-number 
                         (move)="form.firstpay.val = $event"
                         (moveend)="formChanges($event, 'firstpay')"
                         [toFixed]="true"
                         [min]="form.firstpay.min"
                         [max]="form.firstpay.max"
                         [start]="form.firstpay.val">
-                    </ghm-range-number> -->
+                    </ghm-range-number>
                 </div>
             </li>
             <li class="installment-calculator__item" *ngIf="typeInstallment !== fullPay">
@@ -94,14 +94,14 @@
                        [value]="form.month.val"
                        class="field installment-calculator__item-field" type="text">
                 <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__item-wrap">
-                    <!-- <ghm-range-number
+                    <ghm-range-number
                         (move)="form.month.val = $event"
                         (moveend)="formChanges($event, 'month')"
                         [toFixed]="true"
                         [min]="typeInstallment === freeInstallment ? form.month.min : 7"
                         [max]="typeInstallment === freeInstallment ? form.month.max : 24"
                         [start]="typeInstallment === freeInstallment ? form.month.val : 7">
-                    </ghm-range-number> -->
+                    </ghm-range-number>
                 </div>
             </li>
         </ul>
@@ -110,27 +110,27 @@
     
             <div class="installment-calculator__result-item">
                 <p class="installment-calculator__result-title">Сумма</p>
-                <p class="installment-calculator__result-result">{{form.price.val | objectInstallmentNumberPipe }} &#8381;</p>
+                <p class="installment-calculator__result-result">{{form.price.val | installmentNumberPipe }} &#8381;</p>
             </div>
     
-            <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item" *ngIf="typeInstallment !== fullPay">
+            <!-- <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item" *ngIf="typeInstallment !== fullPay">
                 <p class="installment-calculator__result-title">Ставка</p>
                 <p class="installment-calculator__result-result">{{percent}}% годовых</p>
-            </div>
+            </div> -->
     
             <div [ngClass]="{'disabled-opacity': isFullPay }" class="installment-calculator__result-item" *ngIf="typeInstallment !== fullPay">
                 <p class="installment-calculator__result-title">Размер ежемесячных выплат</p>
-                <p class="installment-calculator__result-result">{{ monthPay | objectInstallmentNumberPipe }} &#8381;</p>
+                <p class="installment-calculator__result-result">{{ monthPay | installmentNumberPipe }} &#8381;</p>
             </div>
     
             <div class="installment-calculator__result-item" *ngIf="typeInstallment === fullPay">
                 <p class="installment-calculator__result-title">Размер скидки</p>
-                <p class="installment-calculator__result-result">{{ fullPaySale(form.price.val) | objectInstallmentNumberPipe }} &#8381;</p>
+                <p class="installment-calculator__result-result">{{ fullPaySale(form.price.val) | installmentNumberPipe }} &#8381;</p>
             </div>
     
             <div class="installment-calculator__result-item" *ngIf="typeInstallment === fullPay">
                 <p class="installment-calculator__result-title">Итоговая стоимость квартиры</p>
-                <p class="installment-calculator__result-result">{{ fullPayPrice(form.price.val) | objectInstallmentNumberPipe }} &#8381;</p>
+                <p class="installment-calculator__result-result">{{ fullPayPrice(form.price.val) | installmentNumberPipe }} &#8381;</p>
             </div>
     
         </div>

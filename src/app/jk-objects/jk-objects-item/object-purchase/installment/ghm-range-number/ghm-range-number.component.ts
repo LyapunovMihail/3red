@@ -1,4 +1,4 @@
-import { PlatformDetectService } from './../../../platform-detect.service';
+import { PlatformDetectService } from '../../../../../platform-detect.service';
 import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, HostListener, SimpleChanges } from '@angular/core';
 
 @Component({

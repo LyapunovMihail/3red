@@ -119,12 +119,16 @@
     }
     &__result {
         width: 100%;
+        max-width: 922px;
         box-sizing: border-box;
         display: flex;
-        justify-content: space-between;
         margin: 50px 0 0;
         
-        &-item { width: 287px; }
+        &-item {
+            width: 287px;
+
+            &+ .installment-calculator__result-item { margin-left: 30px; }
+        }
         &-title {
             font: 18px/23px $font-proba;
             color: $col-black-5;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ICreditSnippet } from '../../../../serv-files/serv-modules/credit-api/credit.interfaces';
+import { ICreditSnippet } from '../../../../serv-files/serv-modules/jk-objects/credit-api/credit.interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable()

@@ -10,6 +10,7 @@ import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label
 import { ObjectLocationAdminComponent } from './object-location-content-admin/object-location-admin.component';
 import { RoutesAdminComponent } from './object-location-content-admin/routes-admin/routes-admin.component';
 import { InfrastructureAdminComponent } from './object-location-content-admin/infrastructure-admin/infrastructure-admin.component';
+import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
 
 @NgModule({
     exports: [
@@ -19,7 +20,8 @@ import { InfrastructureAdminComponent } from './object-location-content-admin/in
         ObjectLocationTabsAdminComponent,
         ObjectLocationAdminComponent,
         RoutesAdminComponent,
-        InfrastructureAdminComponent
+        InfrastructureAdminComponent,
+        LocationRoutesPipe
     ],
     declarations: [
         ObjectLocationComponent,
@@ -28,7 +30,8 @@ import { InfrastructureAdminComponent } from './object-location-content-admin/in
         ObjectLocationTabsAdminComponent,
         ObjectLocationAdminComponent,
         RoutesAdminComponent,
-        InfrastructureAdminComponent
+        InfrastructureAdminComponent,
+        LocationRoutesPipe
     ],
     imports: [
         CommonModule,

@@ -19,13 +19,9 @@ import { ObjectProjectComponent } from './jk-objects-item/object-project/object-
 import { ObjectFlatComponent } from './jk-objects-item/object-flat/object-flat.component';
 import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-gallery.component';
 import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
-import { ObjectPurchaseComponent } from './jk-objects-item/object-purchase/object-purchase.component';
 import { ObjectDocumentationComponent } from './jk-objects-item/object-documentation/object-documentation.component';
 import { ObjectMembersComponent } from './jk-objects-item/object-members/object-members.component';
 import { ObjectProjectsComponent } from './jk-objects-item/object-projects/object-projects.component';
-import { ObjectInstallmentComponent } from './jk-objects-item/object-purchase/installment/object-installment.component';
-import { ObjectPurchaseInstallmentNumberPipe } from './jk-objects-item/object-purchase/installment/object-installment.pipe';
-import { ObjectPurchaseInstallmentService } from './jk-objects-item/object-purchase/installment/object-installment.service';
 import { ObjectPreviewAdminComponent } from './jk-objects-item/object-preview/object-preview-admin/object-preview-admin.component';
 import { ObjectProjectAdminComponent } from './jk-objects-item/object-project/object-project-admin/object-project-admin.component';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
@@ -43,6 +39,7 @@ import { ObjectDecorationTabsAdminComponent } from './jk-objects-item/object-dec
 import { ObjectDecorationAdminComponent } from './jk-objects-item/object-decoration/object-decoration-content-admin/object-decoration-admin.component';
 import { ObjectNewsModule } from './jk-objects-item/object-news/object-news.module';
 import { ObjectLocationModule } from './jk-objects-item/object-location/object-location.module';
+import { ObjectPurchaseModule } from './jk-objects-item/object-purchase/object-purchase.module';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -56,12 +53,9 @@ const jkObjectsComponents = [
     ObjectFlatComponent,
     ObjectGalleryComponent,
     ObjectDecorationComponent,
-    ObjectPurchaseComponent,
     ObjectDocumentationComponent,
     ObjectMembersComponent,
     ObjectProjectsComponent,
-    ObjectInstallmentComponent,
-    ObjectPurchaseInstallmentNumberPipe,
     ObjectPreviewAdminComponent,
     ObjectProjectAdminComponent,
     ObjectDynamicComponent,
@@ -95,6 +89,7 @@ const jkObjectsComponents = [
         FormsModule,
         ObjectNewsModule,
         ObjectLocationModule,
+        ObjectPurchaseModule,
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent
                 , children : [
@@ -105,9 +100,6 @@ const jkObjectsComponents = [
                 ]
             }
         ])
-    ],
-    providers: [
-        ObjectPurchaseInstallmentService
     ]
 })
 export class JkObjectsModule { }

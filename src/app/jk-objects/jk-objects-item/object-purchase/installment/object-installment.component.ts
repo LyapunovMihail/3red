@@ -1,14 +1,10 @@
-import { ObjectPurchaseInstallmentNumberPipe } from './object-installment.pipe';
-import { ObjectPurchaseInstallmentService, FormParams } from './object-installment.service';
+import { ObjectInstallmentService, FormParams } from './object-installment.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-object-item-installment',
     templateUrl: 'object-installment.component.html',
-    styleUrls: [ 'object-installment.component.scss' ],
-    providers: [
-        ObjectPurchaseInstallmentNumberPipe
-    ]
+    styleUrls: [ 'object-installment.component.scss' ]
 })
 
 export class ObjectInstallmentComponent implements OnInit {
@@ -19,7 +15,7 @@ export class ObjectInstallmentComponent implements OnInit {
 
     public isFullPay = false;
 
-    public typeInstallment: string = '';
+    public typeInstallment: string = 'Бесплатная рассрочка';
 
     public freeInstallment: string = 'Бесплатная рассрочка';
     public payInstallment: string = 'Платная рассрочка';
@@ -34,7 +30,7 @@ export class ObjectInstallmentComponent implements OnInit {
         month: {
             val : 1,
             min : 1,
-            max : 14
+            max : 12
         },
         firstpay: {
             val : 0,
@@ -44,8 +40,7 @@ export class ObjectInstallmentComponent implements OnInit {
     };
 
     constructor(
-        private bitNumber: ObjectPurchaseInstallmentNumberPipe,
-        private srvc: ObjectPurchaseInstallmentService
+        private srvc: ObjectInstallmentService
     ) { }
 
     public ngOnInit( ) {
@@ -62,7 +57,7 @@ export class ObjectInstallmentComponent implements OnInit {
         } else {
             this.form.month.val <= this.form.month.min ? this.form.month.val = this.form.month.min : this.form.month.val = this.form.month.val
             this.form.month.min = 1;
-            this.form.month.max >= 6 ? this.form.month.max = 6 : this.form.month.max = this.form.month.max;
+            this.form.month.max = this.form.month.max >= 6 ? 6 : this.form.month.max;
         }
 
         // price

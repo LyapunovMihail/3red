@@ -8,7 +8,7 @@ import { EmailerController } from './emailer-api/emailer.controller';
 import { ExpressAppService } from './express-app.service';
 import { PagesController } from './pages/pages.controller';
 import { UploadsController } from './uploads/uploads.controller';
-import { CreditController } from './credit-api/credit.controller';
+import { ObjectsCreditController } from './jk-objects/credit-api/credit.controller';
 import { DynamicController } from './dynamic-api/dynamic.controller';
 import { FileUploadsController } from './fileuploads-api/fileuploads.controller';
 import { SharesController } from './shares-api/shares.controller';
@@ -25,7 +25,7 @@ import { objectControllers } from './jk-objects/object-controllers';
         PagesController,
         AddressesController,
         EmailerController,
-        CreditController,
+        ObjectsCreditController,
         DynamicController,
         FileUploadsController,
         SharesController,

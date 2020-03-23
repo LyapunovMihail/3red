@@ -1,4 +1,4 @@
-import { ICreditSnippet, CREDIT_UPLOADS_PATH } from '../../../../serv-files/serv-modules/credit-api/credit.interfaces';
+import { ICreditSnippet, CREDIT_UPLOADS_PATH } from '../../../../serv-files/serv-modules/jk-objects/credit-api/credit.interfaces';
 import { PurchaseCreditService } from './purchase-credit.service';
 import { Component, OnInit } from '@angular/core';
 

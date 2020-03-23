@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { banks } from './mockBank';
 
 @Component({
@@ -10,7 +10,7 @@ import { banks } from './mockBank';
     ]
 })
 
-export class ObjectPurchaseComponent implements OnInit {
+export class ObjectPurchaseComponent implements OnInit, OnChanges {
 
     @Input()
     public isAuthorizated = false;
@@ -24,4 +24,10 @@ export class ObjectPurchaseComponent implements OnInit {
     ) { }
 
     ngOnInit() { }
+
+    ngOnChanges(changes) {
+        if (this.isAuthorizated) {
+            this.showType = 'credit';
+        }
+    }
 }
