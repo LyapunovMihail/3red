@@ -3,6 +3,7 @@ import { navList } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
 import { Component, Inject, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
+import { IObjectLocationTab } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 declare let ymaps: any;
 declare let $: any;
 
@@ -19,9 +20,10 @@ declare let $: any;
 export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() public contentSnippet: IObjectLocationSnippet;
+    @Input() public infraTab: IObjectLocationTab;
 
     public map: any;
-    public markersConfig: any[];
+    public markersConfig: any[] = [];
     public mainMarker: any;
     public destination: string[];
 
@@ -53,18 +55,22 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnCha
     }
 
     private parseData() {
+        if (this.infraTab) {
+            this.mainMarker = this.infraTab;
+            this.destination = this.mainMarker.coords.split(',');
+        }
+
+        this.parseMarkers();
+    }
+    private parseMarkers() {
         if (this.contentSnippet.data) {
             const contentSnippet = JSON.parse(JSON.stringify(this.contentSnippet));
             this.markersConfig = contentSnippet.data[2].infraMarks;
-            this.destination = contentSnippet.data[2].tab.coords.split(',');
-            this.mainMarker = contentSnippet.data[2].tab;
-            this.parseMarkers();
+            this.markersConfig.forEach((mark) => {
+                mark.coords = mark.coords.split(',');
+            });
         }
-    }
-    private parseMarkers() {
-        this.markersConfig.forEach((mark) => {
-            mark.coords = mark.coords.split(',');
-        });
+
         this.mainMarker = {
             coords: this.mainMarker.coords.split(','),
             thumbnail: this.mainMarker.thumbnail,
@@ -132,20 +138,20 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnCha
             });
 
             // из маркер-конфига собираем массив маркеров
-            that.markersConfig.forEach( ( item, index ) => {
+            that.markersConfig.forEach((item, index) => {
                 that.markers[index] = {};
                 that.markers[index].click = false;
                 that.markers[index].type = item.type;
-                const img = item.type === 'main' ?  `<img class="marker-content__img" src="${this.uploadsPath + item.thumbnail}" width="56" height="56" />` : '';
+                const img = item.type === 'main' ? `<img class="marker-content__img" src="${this.uploadsPath + item.thumbnail}" width="56" height="56" />` : '';
                 that.markers[index].marker = new ymaps.Placemark(item.coords, {
                     iconContent: `<div id="marker-${index}" class="marker-content marker-content__${item.type}">
-                                    ${img}
-                                    <div class="marker-content__tooltip">
-                                        <div class="marker-content__tooltip-content">
-                                            <p class="marker-content__tooltip-content-text">${item.name}</p>.
-                                        </div>
+                                ${img}
+                                <div class="marker-content__tooltip">
+                                    <div class="marker-content__tooltip-content">
+                                        <p class="marker-content__tooltip-content-text">${item.name}</p>.
                                     </div>
-                                  </div>`
+                                </div>
+                              </div>`
                 }, {
                     iconLayout: 'default#imageWithContent',
                     iconImageHref: '/assets/img/location/marker-transparent.svg',

@@ -4,6 +4,7 @@ import { Component, ChangeDetectorRef, OnInit, OnDestroy, Input, OnChanges } fro
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
+import { IObjectLocationTab } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 declare let ymaps: any;
 declare let $: any;
 
@@ -24,10 +25,12 @@ declare let $: any;
 export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() public contentSnippet: IObjectLocationSnippet;
+    @Input() public routesTab: IObjectLocationTab;
+    @Input() public officeTab: IObjectLocationTab;
     @Input() public tab: string;
 
     public map: any;
-    public markersConfig: any[];
+    public markersConfig: any[] = [];
     public mainMarker: any;
     public destination: string[];
 
@@ -65,20 +68,23 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     private parseData() {
+        if (this.routesTab || this.officeTab) {
+            this.mainMarker = this.tab === 'Объект' ? this.routesTab : this.officeTab;
+            this.destination = this.mainMarker.coords.split(',');
+        }
+
+        this.parseMarkers();
+    }
+    private parseMarkers() {
         if (this.contentSnippet.data) {
             const contentSnippet = JSON.parse(JSON.stringify(this.contentSnippet));
             this.markersConfig = contentSnippet.data[0].routesMarks;
-            this.destination = contentSnippet.data[0].tab.coords.split(',');
-            this.mainMarker = this.tab === 'Объект' ? contentSnippet.data[0].tab : contentSnippet.data[1].tab;
-            this.parseMarkers();
+            this.markersConfig.forEach((mark) => {
+                mark.coords = mark.coords.split(',');
+                mark.text = mark.place + ' (' + mark.info + ')';
+                mark.route.origin = [mark.route.origin.split(',')];
+            });
         }
-    }
-    private parseMarkers() {
-        this.markersConfig.forEach((mark) => {
-           mark.coords = mark.coords.split(',');
-           mark.text = mark.place + ' (' + mark.info + ')';
-           mark.route.origin = [mark.route.origin.split(',')];
-        });
         this.mainMarker = {
             coords: this.mainMarker.coords.split(','),
             thumbnail: this.mainMarker.thumbnail,
@@ -105,18 +111,15 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
 
         let that = this;
         ymaps.ready(() => {
-
             // создание новой карты с опциями
             that.map = new ymaps.Map('map', {
-                center: that.mainMarker.coords,
+                center: [55.632183, 37.981327],
                 zoom: 12,
                 controls: ['zoomControl']
             }, {
                 minZoom: 11,
                 maxZoom: 18
             });
-
-            if (that.contentSnippet.data) {
                 that.markersConfig.forEach((item: any, index) => {
                     that.markers[index] = {};
 
@@ -216,7 +219,6 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
                 // после инициализации надо обновить состояние компонента принудительно
                 // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
                 that.ref.detectChanges();
-            }
         });
 
     }

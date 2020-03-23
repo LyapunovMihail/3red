@@ -37,7 +37,8 @@
             </nav>
 
             <app-location-infrastructure *ngIf="openTab === 'Инфраструктура' && isTabSet"
-                [contentSnippet]="contentSnippet">
+                [contentSnippet]="contentSnippet"
+                [infraTab]="tabSnippet.location[2]">
             </app-location-infrastructure>
 
         </ng-container>
@@ -48,6 +49,8 @@
 
         <app-location-routes *ngIf="(openTab === 'Объект' || openTab === 'Офис продаж') && isTabSet"
             [contentSnippet]="contentSnippet"
+            [routesTab]="tabSnippet.location[0]"
+            [officeTab]="tabSnippet.location[1]"
             [tab]="openTab">
         </app-location-routes>
 
