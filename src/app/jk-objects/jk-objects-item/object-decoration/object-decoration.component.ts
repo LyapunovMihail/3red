@@ -100,7 +100,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
         if (this.contentSnippet && this.contentSnippet.data && this.contentSnippet.data.length && this.contentSnippet.data.some((item) => item.tab.show)) {
             this.currentTab = this.contentSnippet.data.find((item) => item.tab.show && ('turnOnDecorationTypes' in item.tab));
             console.log('this.currentTab setCurrentTab: ', this.currentTab);
-            if (this.typesSnippet && this.typesSnippet.decorationType.length && this.currentTab) {
+            if (this.typesSnippet && this.typesSnippet.decorationType && this.typesSnippet.decorationType.length && this.currentTab) {
                 this.changeTab(this.currentTab);
             }
         }
