@@ -80,13 +80,13 @@ export class ObjectLocationTabsAdminComponent implements OnInit {
 
     private setFormFromSnippet() {
         let locationTabs;
-        if (this.snippet.location.length) {
+        if (this.snippet.location && this.snippet.location.length) {
             locationTabs = this.formBuilder.array(this.snippet.location.map((tab) => this.formBuilder.group(
                 {name: tab.name, coords: tab.coords, image: tab.image, thumbnail: tab.thumbnail, show: tab.show }
                 )
             ));
         } else {
-            locationTabs = this.formBuilder.array([]);
+            locationTabs = this.setPrimaryTabs();
         }
 
         this.form = this.formBuilder.group({
