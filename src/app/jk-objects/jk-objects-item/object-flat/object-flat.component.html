@@ -1,6 +1,6 @@
 <section class="object-flat" [class.object-item--margin]="switchOn || isAuthorizated">
 
-    <div class="object-item__container object-flat__container">
+    <div class="object-item__container" [class.object-flat__container]="switchOn">
         <div class="project__wrap">
             <input type="checkbox" name="switch" id="chooseHouse-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="chooseHouse-switch" class="object-item__title">Выберите дом</label>

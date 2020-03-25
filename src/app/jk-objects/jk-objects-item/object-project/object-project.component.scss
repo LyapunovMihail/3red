@@ -1,5 +1,9 @@
 @import "../../../../styles/modules/mixins/mixin";
 
+.object-builder--margin {
+    margin: 96px 0;
+}
+
 .object-builder {
     width: 100%;
     display: flex;
