@@ -7,34 +7,6 @@ export const banks = [
         date: '30',
         payment: '10'
     }, {
-        name: 'ВТБ',
-        cssclass: 'vtb',
-        image: '/assets/img/purchase/credit/vtb_logo_bage.svg',
-        rate: '3%',
-        date: '30',
-        payment: '5'
-    }, {
-        name: 'Райффайзенбанк',
-        cssclass: 'raif',
-        image: '/assets/img/purchase/credit/raif_logo_bage.svg',
-        rate: '8%',
-        date: '30',
-        payment: '7'
-    }, {
-        name: 'ВОЗРОЖДЕНИЕ БАНК',
-        cssclass: 'ress',
-        image: '/assets/img/purchase/credit/ress_logo_bage.png',
-        rate: '0%',
-        date: '30',
-        payment: '10'
-    }, {
-        name: 'УРАЛСИБ БАНК',
-        cssclass: 'ural',
-        image: '/assets/img/purchase/credit/ural_logo_bage.svg',
-        rate: '0%',
-        date: '30',
-        payment: '10'
-    }, {
         name: 'Открытие',
         cssclass: 'open',
         image: '/assets/img/purchase/credit/open_logo.png',
@@ -42,33 +14,12 @@ export const banks = [
         date: '5',
         payment: '10'
     }, {
-        name: 'ДОМ РФ',
-        cssclass: 'dom',
-        image: '/assets/img/purchase/credit/dom_logo.svg',
-        rate: '0%',
+        name: 'ВТБ',
+        cssclass: 'vtb',
+        image: '/assets/img/purchase/credit/vtb_logo_bage.svg',
+        rate: '3%',
         date: '30',
-        payment: '10'
-    }, {
-        name: 'Металлинвестбанк',
-        cssclass: 'iron',
-        image: '/assets/img/purchase/credit/iron_logo.svg',
-        rate: '30%',
-        date: '30',
-        payment: '10'
-    }, {
-        name: 'БАНК ЗЕНИТ',
-        cssclass: 'zenit',
-        image: '/assets/img/purchase/credit/zenit_logo_bage.svg',
-        rate: '6%',
-        date: '30',
-        payment: '10'
-    }, {
-        name: 'РоссельхозБанк',
-        cssclass: 'ross',
-        image: '/assets/img/purchase/credit/ross_logo.svg',
-        rate: '0%',
-        date: '30',
-        payment: '10'
+        payment: '5'
     }, {
         name: 'Росбанк дом',
         cssclass: 'rossBank',
@@ -76,6 +27,13 @@ export const banks = [
         rate: '0%',
         date: '30',
         payment: '8'
+    }, {
+        name: 'Возрождение Банк',
+        cssclass: 'ress',
+        image: '/assets/img/purchase/credit/ress_logo_bage.png',
+        rate: '0%',
+        date: '30',
+        payment: '10'
     }, {
         name: 'ТрансКапиталБанк',
         cssclass: 'capital',
@@ -105,10 +63,52 @@ export const banks = [
         date: '30',
         payment: '10'
     }, {
+        name: 'Россельхозбанк',
+        cssclass: 'ross',
+        image: '/assets/img/purchase/credit/ross_logo.svg',
+        rate: '0%',
+        date: '30',
+        payment: '10'
+    }, {
+        name: 'Металлинвестбанк',
+        cssclass: 'iron',
+        image: '/assets/img/purchase/credit/iron_logo.svg',
+        rate: '30%',
+        date: '30',
+        payment: '10'
+    }, {
+        name: 'ДОМ РФ',
+        cssclass: 'dom',
+        image: '/assets/img/purchase/credit/dom_logo.svg',
+        rate: '0%',
+        date: '30',
+        payment: '10'
+    }, {
+        name: 'Райффайзенбанк',
+        cssclass: 'raif',
+        image: '/assets/img/purchase/credit/raif_logo_bage.svg',
+        rate: '8%',
+        date: '30',
+        payment: '7'
+    }, {
         name: 'Совкомбанк',
         cssclass: 'sovcom',
         image: '/assets/img/purchase/credit/sovcom_logo.png',
         rate: '7%',
+        date: '30',
+        payment: '10'
+    }, {
+        name: 'Уралсиб банк',
+        cssclass: 'ural',
+        image: '/assets/img/purchase/credit/ural_logo_bage.svg',
+        rate: '0%',
+        date: '30',
+        payment: '10'
+    }, {
+        name: 'Банк Зенит',
+        cssclass: 'zenit',
+        image: '/assets/img/purchase/credit/zenit_logo_bage.svg',
+        rate: '6%',
         date: '30',
         payment: '10'
     }, {

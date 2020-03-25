@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-object-credit-output',
@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     styleUrls: ['./object-credit-output.component.scss']
 })
 
-export class ObjectCreditOutputComponent {
+export class ObjectCreditOutputComponent implements OnInit, OnChanges {
 
     @Input() public isAuthorizated;
 
@@ -14,7 +14,19 @@ export class ObjectCreditOutputComponent {
 
     public moreBanks = false;
 
+    public blockHeight: number;
+
+    public activeBanksLength: number;
+
     constructor(
     ) { }
+
+    ngOnInit() {
+        this.activeBanksLength = this.bankList.filter((item) => item.show).length;
+    }
+
+    ngOnChanges(changes) {
+        this.activeBanksLength = this.bankList.filter((item) => item.show).length;
+    }
 
 }

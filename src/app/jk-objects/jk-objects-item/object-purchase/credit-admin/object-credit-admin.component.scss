@@ -1,0 +1,81 @@
+.mortgage__title {
+    font-size: 36px;
+    margin-bottom: 24px;
+}
+.mortgage__info {
+    background: #efefef;
+    padding: 20px 24px 32px;
+    margin-bottom: 8px;
+}
+.mortgage__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mortgage__delete {
+    color: black;
+    font-size: 18px;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.form__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-item {
+    display: block;
+    position: relative;
+    margin-top: 46px;
+    &--inline {
+        width: auto;
+        flex-grow: 1;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    &--mr {
+        margin-right: 24px;
+    }
+}
+.info-title {
+    font-size: 24px;
+}
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+    opacity: 1;
+    &--hide {
+        opacity: .15;
+    }
+
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 1);
+    &--hide {
+        color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.form-label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    transition: .3s;
+}

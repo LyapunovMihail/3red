@@ -1,18 +1,24 @@
-export const CREDIT_COLLECTION_NAME = 'credit';
+export const CREDIT_COLLECTION_NAME = 'objectCredit';
 
 export const CREDIT_UPLOADS_PATH = 'uploads/credit/';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface ICreditSnippet {
+export interface IObjectCreditSnippet {
     _id?: any;
     objectId: string;
     switchOn: boolean;
-    name: string;
-    percent: number;
-    initial: number;
-    deadline: number;
-    show: boolean;
+    banks: IBankSnippet[];
     created_at: any;
     last_modifyed: any;
+}
+
+export interface IBankSnippet {
+    name: string;
+    cssClass: string;
+    image: string;
+    percent: string;
+    initial: string;
+    deadline: string;
+    show: boolean;
 }

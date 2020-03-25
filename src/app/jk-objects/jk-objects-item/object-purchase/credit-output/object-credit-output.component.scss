@@ -16,10 +16,8 @@
 
     &-container {
         width: 916px;
-        height: (98px * 5) + 39px;
         overflow: hidden;
         transition: height .4s ease;
-        &_more { height: (98px * 18) + 39px; }
     }
     &-head { display: flex; }
     &-text {

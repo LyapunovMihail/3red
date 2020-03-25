@@ -1,4 +1,4 @@
-import { ICreditSnippet, CREDIT_COLLECTION_NAME } from './objects-credit.interfaces';
+import { IObjectCreditSnippet, CREDIT_COLLECTION_NAME } from './objects-credit.interfaces';
 import { ErrorNotCorrectArguments } from '../documentation-api/objects-documentation.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
@@ -18,7 +18,7 @@ export class ObjectsCreditModel {
     }
 
     async updateSnippet(parameters) {
-        const options: ICreditSnippet = parameters;
+        const options: IObjectCreditSnippet = parameters;
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }

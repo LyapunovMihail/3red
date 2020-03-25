@@ -1,0 +1,38 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
+
+    <h1 class="mortgage__title">Настройка «Ипотеки»</h1>
+
+    <ng-container [formGroup]="form">
+
+        <div class="mortgage__info" formArrayName="banks" *ngFor="let bank of form.get('banks')['controls']; let i = index">
+            <ng-container formGroupName="{{i}}">
+                <div class="mortgage__wrapper">
+                    <h2 class="info-title">{{bank.get('name').value}}</h2>
+                    <div class="mortgage__tabs">
+                        <a href="#" class="mortgage__delete">Вверх</a>
+                        <a href="#" class="mortgage__delete">Вниз</a>
+                        <label class="mortgage__delete">{{bank.get('show').value ? 'Выключить' : 'Включить'}}<input hidden type="checkbox" formControlName="show"/></label>
+                    </div>
+                </div>
+                <div  class="form">
+                    <div class="form__wrap">
+                        <div class="form-item form-item--inline form-item--mr" >
+                            <input type="text" class="form-input info-input" [class.info-input--hide]="!bank.get('show').value" formControlName="percent" appSlideTopLabel>
+                            <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Ставка от</label>
+                        </div>
+                        <div class="form-item form-item--inline form-item--mr">
+                            <input type="text" class="form-input info-input" [class.info-input--hide]="!bank.get('show').value" formControlName="deadline" appSlideTopLabel>
+                            <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Срок</label>
+                        </div>
+                        <div class="form-item form-item--inline">
+                            <input type="text" class="form-input info-input" [class.info-input--hide]="!bank.get('show').value" formControlName="initial" appSlideTopLabel>
+                            <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Минимальный взнос</label>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </ng-container>
+
+</app-admin-modal>

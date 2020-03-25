@@ -1,37 +1,48 @@
-<section class="object-purchase">
+<section class="object-purchase" [class.object-item--margin]="switchOn || isAuthorizated">
 
-    <div class="object-item__container object-purchase__container">
+    <div class="object-item__container">
 
-        <div class="object-purchase__head">
-            <input type="checkbox" name="switch" id="purchase-switch" class="switch">
+        <div  [class.object-purchase__head]="switchOn">
+            <input type="checkbox" name="switch" id="purchase-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="purchase-switch" class="object-item__title">Условия покупки</label>
+        </div>
+
+        <ng-container *ngIf="switchOn">
+
             <h2 *ngIf="!isAuthorizated">Условия покупки</h2>
-        </div>
 
-        <div class="object-purchase__options" *ngIf="isAuthorizated">
-            <button class="btn__admin-setting">Настройки</button>
-        </div>
-        
-        <nav class="object-purchase__nav">
-            <ul class="object-purchase__nav-list" *ngIf="!isAuthorizated">
-                <li class="object-purchase__nav-item" (click)="showType = 'credit'"
-                    [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
-                <li class="object-purchase__nav-item" (click)="showType = 'installment'"
-                    [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
-            </ul>
-        </nav>
+            <div class="object-purchase__options" *ngIf="isAuthorizated">
+                <button class="btn__admin-setting" (click)="closeModal = false">Настройки</button>
+            </div>
 
-        <div class="object-purchase__list" *ngIf="showType === 'credit'">
+            <nav class="object-purchase__nav">
+                <ul class="object-purchase__nav-list" *ngIf="!isAuthorizated">
+                    <li class="object-purchase__nav-item" (click)="showType = 'credit'"
+                        [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
+                    <li class="object-purchase__nav-item" (click)="showType = 'installment'"
+                        [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
+                </ul>
+            </nav>
 
-            <app-object-credit-output  *ngIf="showType === 'credit'"
-                [isAuthorizated]="isAuthorizated"
-                [bankList]="mockBank">
-            </app-object-credit-output>
+            <div class="object-purchase__list" *ngIf="showType === 'credit'">
 
-        </div>
-        
-        <app-object-item-installment 
-            *ngIf="showType === 'installment'">
-        </app-object-item-installment>
+                <app-object-credit-output *ngIf="showType === 'credit' && snippet?.banks"
+                    [isAuthorizated]="isAuthorizated"
+                    [bankList]="snippet.banks">
+                </app-object-credit-output>
+
+            </div>
+
+            <app-object-item-installment
+                *ngIf="showType === 'installment'">
+            </app-object-item-installment>
+
+        </ng-container>
     </div>
 </section>
+
+<app-objects-item-credit-admin *ngIf="!closeModal"
+    [id]="objectId"
+    [(snippet)]="snippet"
+    (closeModal)="closeModal = $event">
+</app-objects-item-credit-admin>

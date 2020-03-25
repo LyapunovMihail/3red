@@ -24,7 +24,6 @@ export class ObjectsCreditController extends ObjectsCreditModel {
             return await this.getSnippet(req.params.id);
         }));
 
-
         this.router.post('/admin/jk-object/credit/create-update', responseHandler(async (req) => {
             return await this.updateSnippet(req.body);
         }));

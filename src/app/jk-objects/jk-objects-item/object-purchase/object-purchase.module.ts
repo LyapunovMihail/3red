@@ -6,23 +6,32 @@ import { GHMRangetNumberModule } from './installment/ghm-range-number/ghm-range-
 import { ObjectPurchaseComponent } from './object-purchase.component';
 import { ObjectInstallmentService } from './installment/object-installment.service';
 import { ObjectCreditOutputComponent } from './credit-output/object-credit-output.component';
+import { ObjectCreditAdminComponent } from './credit-admin/object-credit-admin.component';
+import { AdminModalModule } from '../../../admin-modal/admin-modal.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label.module';
 
 @NgModule({
     exports: [
         ObjectPurchaseComponent,
         ObjectCreditOutputComponent,
         ObjectInstallmentComponent,
-        ObjectInstallmentPipe
+        ObjectInstallmentPipe,
+        ObjectCreditAdminComponent
     ],
     declarations: [
         ObjectPurchaseComponent,
         ObjectCreditOutputComponent,
         ObjectInstallmentComponent,
-        ObjectInstallmentPipe
+        ObjectInstallmentPipe,
+        ObjectCreditAdminComponent
     ],
     imports: [
         CommonModule,
-        GHMRangetNumberModule
+        GHMRangetNumberModule,
+        AdminModalModule,
+        ReactiveFormsModule,
+        SlideTopLabelModule
     ],
     providers: [
         ObjectInstallmentService
