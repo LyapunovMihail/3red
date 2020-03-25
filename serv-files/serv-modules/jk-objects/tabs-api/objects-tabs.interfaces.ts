@@ -32,6 +32,11 @@ export interface IObjectLocationTab {
     show: boolean;
 }
 
+export interface IObjectMembersTab {
+    name: string;
+    id: string;
+}
+
 export enum LocationTabsEnum {
     OBJECT = 'Объект',
     SALESOFFICE = 'Офис продаж',

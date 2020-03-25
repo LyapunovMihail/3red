@@ -1,5 +1,6 @@
 import { ErrorNotCorrectArguments, OBJECTS_TABS_COLLECTION_NAME, IObjectTabsSnippet } from './objects-tabs.interfaces';
 import { OBJECTS_LOCATION_COLLECTION_NAME } from '../location-api/objects-location.interfaces';
+import { OBJECTS_MEMBERS_COLLECTION_NAME } from '../members-api/objects-members.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class ObjectsTabsModel {
@@ -8,10 +9,13 @@ export class ObjectsTabsModel {
     collection: any;
     locationCollectionName = OBJECTS_LOCATION_COLLECTION_NAME;
     locationCollection: any;
+    membersCollectionName = OBJECTS_MEMBERS_COLLECTION_NAME;
+    membersCollection: any;
 
     constructor( public db: any ) {
         this.collection = db.collection(this.collectionName);
         this.locationCollection = db.collection(this.locationCollectionName);
+        this.membersCollection = db.collection(this.membersCollectionName);
     }
 
     async getGalleryTabs(objectId?) {

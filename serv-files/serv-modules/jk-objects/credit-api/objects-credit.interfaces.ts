@@ -1,6 +1,4 @@
-export const CREDIT_COLLECTION_NAME = 'objectCredit';
-
-export const CREDIT_UPLOADS_PATH = 'uploads/credit/';
+export const OBJECTS_CREDIT_COLLECTION_NAME = 'objectCredit';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 

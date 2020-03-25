@@ -1,44 +1,63 @@
+<section class="object-members" [class.object-item--margin]="switchOn || isAuthorizated">
 
-<section class="object-members">
+    <div class="object-item__container">
 
-    <div class="object-item__container object-members__container">
-
-        <div class="object-members__head">
-            <input type="checkbox" name="switch" id="members-switch" class="switch">
+        <div [class.object-members__head]="switchOn">
+            <input type="checkbox" name="switch" id="members-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="members-switch" class="object-item__title">Участники проекта</label>
-            <h2 *ngIf="!isAuthorizated">Участники проекта</h2>
         </div>
 
-        <div class="object-members__options" *ngIf="isAuthorizated">
-            <button class="btn__admin-setting">Настройки</button>
-            <button class="btn__admin-content btn_var-2">Контент</button>
-        </div>
-        
-        <div class="object-members__wrap">
-    
-            <div class="object-members__wrap object-members__wrap_members">
-                <p class="object-members__text object-members__text_for-title">Тройка РЭД в проекте</p>
-    
-                <a class="object-members__text object-members__text_black">Застройщик</a>
-                <a class="object-members__text object-members__text_black">Технический заказчик</a>
-                <a class="object-members__text object-members__text_black">Генеральный подрядчик</a>
+        <ng-container *ngIf="switchOn">
+            <h2 *ngIf="!isAuthorizated">Участники проекта</h2>
+
+            <div class="object-members__options" *ngIf="isAuthorizated">
+                <button class="btn__admin-content btn_var-2" (click)="closeModal = false">Контент</button>
             </div>
-            <div class="object-members__wrap object-members__wrap_members">
-                <p class="object-members__text object-members__text_for-title">Агент по реализации квартир</p>
-    
-                <a class="object-members__text">BSA</a>
-                <a class="object-members__text">Best-novostroy</a>
+
+            <div class="object-members__wrap">
+
+                <div class="object-members__wrap object-members__wrap_members" *ngFor="let block of snippet.data">
+                    <p class="object-members__text object-members__text_for-title">{{block.name}}</p>
+
+                    <ng-container *ngFor="let member of block.members">
+                        <a class="object-members__text object-members__text--anchor object-members__text_black"
+                           href="{{member.url}}"
+                           target="_blank"
+                           *ngIf="member.url">
+                            {{member.name}}
+                        </a>
+                        <a class="object-members__text object-members__text_black"
+                           *ngIf="!member.url">
+                            {{member.name}}
+                        </a>
+                    </ng-container>
+
+
+                </div>
+                <!--<div class="object-members__wrap object-members__wrap_members">-->
+                    <!--<p class="object-members__text object-members__text_for-title">Агент по реализации квартир</p>-->
+
+                    <!--<a class="object-members__text">BSA</a>-->
+                    <!--<a class="object-members__text">Best-novostroy</a>-->
+                <!--</div>-->
+                <!--<div class="object-members__wrap object-members__wrap_members">-->
+                    <!--<p class="object-members__text object-members__text_for-title">Управление</p>-->
+
+                    <!--<a class="object-members__text">ВБ-комфорт</a>-->
+                <!--</div>-->
+                <!--<div class="object-members__wrap object-members__wrap_members">-->
+                    <!--<p class="object-members__text object-members__text_for-title">Застройщик</p>-->
+
+                    <!--<a class="object-members__text">Cotar</a>-->
+                <!--</div>-->
             </div>
-            <div class="object-members__wrap object-members__wrap_members">
-                <p class="object-members__text object-members__text_for-title">Управление</p>
-    
-                <a class="object-members__text">ВБ-комфорт</a>
-            </div>
-            <div class="object-members__wrap object-members__wrap_members">
-                <p class="object-members__text object-members__text_for-title">Застройщик</p>
-    
-                <a class="object-members__text">Cotar</a>
-            </div>
-        </div>
+        </ng-container>
+
     </div>
 </section>
+
+<app-objects-item-members-admin *ngIf="!closeModal"
+    [id]="objectId"
+    [(snippet)]="snippet"
+    (closeModal)="closeModal = $event">
+</app-objects-item-members-admin>

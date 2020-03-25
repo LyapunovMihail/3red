@@ -20,7 +20,6 @@ import { ObjectFlatComponent } from './jk-objects-item/object-flat/object-flat.c
 import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-gallery.component';
 import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
 import { ObjectDocumentationComponent } from './jk-objects-item/object-documentation/object-documentation.component';
-import { ObjectMembersComponent } from './jk-objects-item/object-members/object-members.component';
 import { ObjectProjectsComponent } from './jk-objects-item/object-projects/object-projects.component';
 import { ObjectPreviewAdminComponent } from './jk-objects-item/object-preview/object-preview-admin/object-preview-admin.component';
 import { ObjectProjectAdminComponent } from './jk-objects-item/object-project/object-project-admin/object-project-admin.component';
@@ -40,6 +39,7 @@ import { ObjectDecorationAdminComponent } from './jk-objects-item/object-decorat
 import { ObjectNewsModule } from './jk-objects-item/object-news/object-news.module';
 import { ObjectLocationModule } from './jk-objects-item/object-location/object-location.module';
 import { ObjectPurchaseModule } from './jk-objects-item/object-purchase/object-purchase.module';
+import { ObjectMembersModule } from './jk-objects-item/object-members/object-members.module';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -54,7 +54,6 @@ const jkObjectsComponents = [
     ObjectGalleryComponent,
     ObjectDecorationComponent,
     ObjectDocumentationComponent,
-    ObjectMembersComponent,
     ObjectProjectsComponent,
     ObjectPreviewAdminComponent,
     ObjectProjectAdminComponent,
@@ -90,6 +89,8 @@ const jkObjectsComponents = [
         ObjectNewsModule,
         ObjectLocationModule,
         ObjectPurchaseModule,
+        ObjectMembersModule,
+
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent
                 , children : [

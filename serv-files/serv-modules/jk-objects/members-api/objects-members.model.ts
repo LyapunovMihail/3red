@@ -1,10 +1,10 @@
-import { IObjectCreditSnippet, OBJECTS_CREDIT_COLLECTION_NAME } from './objects-credit.interfaces';
+import { IObjectMembersSnippet, OBJECTS_MEMBERS_COLLECTION_NAME } from './objects-members.interfaces';
 import { ErrorNotCorrectArguments } from '../documentation-api/objects-documentation.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
-export class ObjectsCreditModel {
+export class ObjectsMembersModel {
 
-    collectionName = OBJECTS_CREDIT_COLLECTION_NAME;
+    collectionName = OBJECTS_MEMBERS_COLLECTION_NAME;
 
     collection: any;
 
@@ -18,7 +18,7 @@ export class ObjectsCreditModel {
     }
 
     async updateSnippet(parameters) {
-        const options: IObjectCreditSnippet = parameters;
+        const options: IObjectMembersSnippet = parameters;
         return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
@@ -36,8 +36,8 @@ export class ObjectsCreditModel {
     }
 
     private valuesReview(options) {
+        console.log('options: ', options);
         // если есть все параметры
-        return ('objectId' in options && 'created_at' in options && 'last_modifyed' && 'name' in options
-            && 'percent' in options && 'initial' in options && 'deadline' in options && 'show' in options) || 'objectId' in options && 'switchOn' in options;
+        return ('objectId' in options && 'created_at' in options && 'last_modifyed' && 'data' in options) || 'objectId' in options && 'switchOn' in options;
     }
 }

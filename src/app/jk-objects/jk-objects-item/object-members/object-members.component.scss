@@ -4,7 +4,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin: 0 0 96px;
 
     &__head { margin: 0 0 32px; }
 
@@ -35,6 +34,9 @@
             font-size: 16px;
             line-height: 24px;
             color: $col-black-5;
+        }
+        &--anchor {
+            text-decoration: underline;
         }
     }
 }

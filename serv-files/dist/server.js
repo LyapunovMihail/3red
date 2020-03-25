@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3534cc4503433d059df1";
+/******/ 	var hotCurrentHash = "c2b9ec8170db4ff3c6dc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1108,7 +1108,7 @@ eval("\nvar __decorate = (this && this.__decorate) || function (decorators, targ
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.CREDIT_COLLECTION_NAME = 'credit';\nexports.CREDIT_UPLOADS_PATH = 'uploads/credit/';\nexports.ErrorNotCorrectArguments = 'Параметры переданы не корректно.';\n\n\n//# sourceURL=webpack:///./serv-modules/jk-objects/credit-api/objects-credit.interfaces.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.CREDIT_COLLECTION_NAME = 'objectCredit';\nexports.CREDIT_UPLOADS_PATH = 'uploads/credit/';\nexports.ErrorNotCorrectArguments = 'Параметры переданы не корректно.';\n\n\n//# sourceURL=webpack:///./serv-modules/jk-objects/credit-api/objects-credit.interfaces.ts?");
 
 /***/ }),
 

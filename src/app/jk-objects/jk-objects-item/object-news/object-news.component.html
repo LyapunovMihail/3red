@@ -2,7 +2,7 @@
 
     <div class="object-item__container">
 
-        <div class="object-news__head">
+        <div [class.object-news__head]="switchOn">
             <input type="checkbox" name="switch" id="news-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="news-switch" class="object-item__title">Новости</label>
         </div>
