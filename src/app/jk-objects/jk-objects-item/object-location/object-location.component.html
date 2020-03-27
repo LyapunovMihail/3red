@@ -67,11 +67,12 @@
     [id]="objectId"
     [snippet]="tabSnippet"
     [objectName]="objectName"
+    [objectCoords]="objectCoords"
     (snippetChange)="refreshTabs($event)"
     (closeModal)="closeTabsModal = $event">
 </app-objects-item-location-tabs-admin>
 
-<app-objects-item-location-content-admin  *ngIf="!closeContentModal"
+<app-objects-item-location-content-admin *ngIf="!closeContentModal"
     [id]="objectId"
     [tabSnippet]="tabSnippet"
     [contentSnippet]="contentSnippet"

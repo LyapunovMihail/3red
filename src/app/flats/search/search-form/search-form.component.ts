@@ -1,6 +1,6 @@
 import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({

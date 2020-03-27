@@ -9,6 +9,7 @@ import { ObjectsNewsController } from './news-api/objects-news.controller';
 import { ObjectsLocationController } from './location-api/objects-location.controller';
 import { ObjectsCreditController } from './credit-api/objects-credit.controller';
 import { ObjectsMembersController } from './members-api/objects-members.controller';
+import { ObjectsController } from './object-api/objects.controller';
 
 export const objectControllers = [
     ObjectsPreviewController,
@@ -21,5 +22,6 @@ export const objectControllers = [
     ObjectsNewsController,
     ObjectsLocationController,
     ObjectsCreditController,
-    ObjectsMembersController
+    ObjectsMembersController,
+    ObjectsController
 ];

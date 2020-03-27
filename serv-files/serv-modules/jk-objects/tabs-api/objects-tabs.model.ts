@@ -58,9 +58,11 @@ export class ObjectsTabsModel {
             if ( '_id' in options ) { delete options._id; }
             await this.collection.update({ objectId : options.objectId }, { $set : {location: options.location, created_at: options.created_at, last_modifyed: options.last_modifyed, objectId : options.objectId} }, {upsert: true});
             const contentSnippet = await this.locationCollection.findOne({ objectId : options.objectId });
-            contentSnippet.data.forEach((item, i) => { item.tab = options.location[i]; });
-            if ( '_id' in contentSnippet) { delete contentSnippet._id; }
-            await this.locationCollection.update({ objectId : contentSnippet.objectId }, { $set : contentSnippet }, {upsert: true});
+            if (contentSnippet.data) {
+                contentSnippet.data.forEach((item, i) => { item.tab = options.location[i]; });
+                if ( '_id' in contentSnippet) { delete contentSnippet._id; }
+                await this.locationCollection.update({ objectId : contentSnippet.objectId }, { $set : contentSnippet }, {upsert: true});
+            }
         });
     }
 

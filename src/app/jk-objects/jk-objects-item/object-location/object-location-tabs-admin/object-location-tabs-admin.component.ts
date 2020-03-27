@@ -20,6 +20,8 @@ export class ObjectLocationTabsAdminComponent implements OnInit {
     @Input()
     public objectName: string;
     @Input()
+    public objectCoords: string;
+    @Input()
     public id: string;
     @Input()
     public snippet: IObjectTabsSnippet;
@@ -56,22 +58,22 @@ export class ObjectLocationTabsAdminComponent implements OnInit {
         return this.formBuilder.array([
             this.formBuilder.group({
                 name: 'Объект',
-                coords: ['', Validators.required],
-                image: ['', Validators.required],
+                coords: [this.objectCoords, Validators.required],
+                image: [this.objectCoords, Validators.required],
                 thumbnail: ['', Validators.required],
                 show: false
             }),
             this.formBuilder.group({
                 name: 'Офис продаж',
-                coords: ['', Validators.required],
-                image: ['', Validators.required],
+                coords: [this.objectCoords, Validators.required],
+                image: [this.objectCoords, Validators.required],
                 thumbnail: ['', Validators.required],
                 show: false
             }),
             this.formBuilder.group({
                 name: 'Инфраструктура',
-                coords: ['', Validators.required],
-                image: ['', Validators.required],
+                coords: [this.objectCoords, Validators.required],
+                image: [this.objectCoords, Validators.required],
                 thumbnail: ['', Validators.required],
                 show: false
             })

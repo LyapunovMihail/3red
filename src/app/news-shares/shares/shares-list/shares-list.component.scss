@@ -14,8 +14,8 @@
 
 }
 .news__title {
-    font-size: 48px;
-    line-height: 1.35;
+    font: 500 48px $font-formular;
+    margin-bottom: 24px;
 }
 
 .tabs__wrap {
@@ -25,7 +25,6 @@
     margin-bottom: 24px;
 }
 .tabs {
-    margin-bottom: 16px ;
     display: flex;
 
     li {

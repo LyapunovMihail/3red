@@ -47,7 +47,6 @@ export class NewsDeleteFormComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     public onSubmit() {
-
         this.close.emit();
         this.newsService.deleteSnippet(this.redactId).subscribe(
             // а в общий компонент передается новый массив сниппетов

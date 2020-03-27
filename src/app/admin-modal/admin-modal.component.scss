@@ -11,6 +11,10 @@
         padding: 48px 70px;
         background-color: $col-white;
         position: relative;
+
+        &--tight {
+            width: 728px;
+        }
     }
 
     &__close {

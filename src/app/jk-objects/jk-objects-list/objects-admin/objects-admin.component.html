@@ -1,0 +1,58 @@
+<app-admin-modal [formValid]="form.valid" [tight]="true" (closeModal)="close($event)">
+
+    <h1 class="object__title">Редактировать ЖК</h1>
+    <form [formGroup]="form">
+        <div class="form">
+            <div class="form-item">
+                <input type="text" class="form-input info-input" formControlName="name" appSlideTopLabel>
+                <label class="form-label info-suptitle">Название ЖК</label>
+            </div>
+        </div>
+        <div class="form">
+            <div class="form-item">
+                <input type="text" class="form-input info-input" formControlName="subtext" appSlideTopLabel>
+                <label class="form-label info-suptitle">Подзаголовок</label>
+            </div>
+        </div>
+        <div class="form">
+            <div class="form-item">
+                <input type="text" class="form-input info-input" formControlName="address" appSlideTopLabel>
+                <label class="form-label info-suptitle">Адрес комплекса для превью</label>
+            </div>
+        </div>
+        <div class="form">
+            <div class="form-item">
+                <input type="text" class="form-input info-input" formControlName="coords" appSlideTopLabel>
+                <label class="form-label info-suptitle">Координаты объекта</label>
+            </div>
+            <a href="https://yandex.ru/maps/?text={{form.get('coords').value}}" target="_blank" class="object__coords">Узнать координаты</a>
+        </div>
+        <div class="form">
+            <div class="form-item">
+                <input type="text" class="form-input info-input" formControlName="objectId" appSlideTopLabel>
+                <label class="form-label info-suptitle">Аббревиатура ЖК</label>
+            </div>
+        </div>
+        <div class="form">
+            <div class="form-item">
+                <select type="text" class="form-input info-input info-input--select" formControlName="status" [value]="form.get('status').value" appSlideTopLabel>
+                    <option value="inProject">В проекте</option>
+                    <option value="inConstruction">В строительстве</option>
+                    <option value="ready">Готовые</option>
+                </select>
+                <label class="form-label info-suptitle">Вид транспорта</label>
+            </div>
+        </div>
+
+        <div class="object__helper" [class.object__helper--margin]="form.get('thumbnail').value">
+            <label class="btn  btn--camera">Добавить превью
+                <input style='display: none;' type="file" placeholder="Upload file" accept=".jpg" (change)="imageUpload($event)">
+            </label>
+        </div>
+        <div class="object__wrap" *ngIf="form.get('thumbnail').value">
+            <button class="button__delete" (click)="delImage(i)"><img class="object__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+            <img class='bg-img' [src]="uploadsPath + form.get('thumbnail').value" alt="image" width="164" height="108">
+        </div>
+    </form>
+
+</app-admin-modal>

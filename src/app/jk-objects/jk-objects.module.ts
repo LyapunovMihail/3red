@@ -40,10 +40,10 @@ import { ObjectNewsModule } from './jk-objects-item/object-news/object-news.modu
 import { ObjectLocationModule } from './jk-objects-item/object-location/object-location.module';
 import { ObjectPurchaseModule } from './jk-objects-item/object-purchase/object-purchase.module';
 import { ObjectMembersModule } from './jk-objects-item/object-members/object-members.module';
+import { JkObjectsListModule } from './jk-objects-list/jk-objects-list.module';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
-    JkObjectsListComponent,
     JkObjectsItemComponent,
     ObjectPreviewComponent,
     ObjectFilterComponent,
@@ -90,6 +90,7 @@ const jkObjectsComponents = [
         ObjectLocationModule,
         ObjectPurchaseModule,
         ObjectMembersModule,
+        JkObjectsListModule,
 
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent
