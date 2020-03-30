@@ -61,3 +61,15 @@
 //     position: relative;
 //     height: calc(100vh + 336px);
 // }
+
+.img-map {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    &--hover {
+        border: 3px solid #ee4237;
+        transform: scale(1.1);
+    }
+
+}

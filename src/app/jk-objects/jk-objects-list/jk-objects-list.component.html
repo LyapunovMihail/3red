@@ -4,11 +4,11 @@
             <div class="objects__title-wrap">
                 <h2 class="objects__title">Объекты</h2>
                 <div class="objects__title-wrapper" *ngIf="!isAuthorizated">
-                    <input type="checkbox" name="switch" id="map1" class="switch" (change)="createSnippet()"
+                    <input type="checkbox" name="switch" id="map1" class="switch" (change)="showMap = !showMap"
                         [checked]="showMap">
                     <label for="map1" class="objects__title-label">На карте</label>
                 </div>
-                <button class="objects__add-button" (click)="closeModal = false" *ngIf="isAuthorizated">Добавить новый ЖК</button>
+                <button class="objects__add-button" (click)="createSnippet()" *ngIf="isAuthorizated">Добавить новый ЖК</button>
             </div>
         </div>
 
