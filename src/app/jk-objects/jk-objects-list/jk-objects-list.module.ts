@@ -8,19 +8,22 @@ import { AdminModalModule } from '../../admin-modal/admin-modal.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SlideTopLabelModule } from '../../UI/slide-top-label/slide-top-label.module';
 import { RouterModule } from '@angular/router';
+import { CheckboxListComponent } from './objects-items/checkbox-list/checkbox-list.component';
 
 @NgModule({
   exports: [
       JkObjectsListComponent,
       ObjectsItemsComponent,
       ObjectsMapComponent,
-      ObjectsAdminComponent
+      ObjectsAdminComponent,
+      CheckboxListComponent
   ],
   declarations: [
       JkObjectsListComponent,
       ObjectsItemsComponent,
       ObjectsMapComponent,
-      ObjectsAdminComponent
+      ObjectsAdminComponent,
+      CheckboxListComponent
   ],
   imports: [
       CommonModule,

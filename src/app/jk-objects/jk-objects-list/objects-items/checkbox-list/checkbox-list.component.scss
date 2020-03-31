@@ -1,0 +1,39 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.offer__complex-wrapper {
+    border: 1px solid #d8d8d8;
+    border-top: 0;
+    padding: 16px 16px 13px;
+}
+.offer__complex-label{
+    position: relative;
+    padding-left: 32px;
+    // margin: 24px 0 5px;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1.25;
+    &::before {
+        content:"";
+        width: 24px;
+        height: 24px;
+        border: 1px solid #898989;
+        background: transparent;
+        position: absolute;
+        left: 0;
+        top: -3px;
+    }
+    &:hover {
+        color: #ee4237;
+    }
+    &:hover::before {
+        border: 1px solid #ee4237;
+    }
+}
+.offer__complex-checkbox:checked + .offer__complex-label::before {
+    background: url(/assets/img/jk-object/admin-modal/check.svg) no-repeat center/ cover;
+    background-size: 80%;
+    border-color: #ee4237;
+}
+.offer__complex-checkbox:checked + .offer__complex-label   {
+    color: #ee4237;
+}

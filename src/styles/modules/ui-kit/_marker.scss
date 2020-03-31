@@ -213,3 +213,15 @@
     &__pharmacy .marker-content__tooltip .marker-content__tooltip-content { border-color: #ec1f27; }
     &__cafe .marker-content__tooltip .marker-content__tooltip-content { border-color: #f2883d; }
 }
+
+.img-map {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    &--hover {
+        border: 3px solid #ee4237;
+        transform: scale(1.1);
+    }
+
+}

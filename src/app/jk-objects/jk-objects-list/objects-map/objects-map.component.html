@@ -2,84 +2,14 @@
 
   <div class="objects__map-container">
 
-    <a href="#" class="objects__map-item">
+    <a routerLink="/objects/list/{{marker.id}}" class="objects__map-item" *ngFor="let marker of markers; let i = index" (mouseenter)="sideMarkerHover(i)" (mouseleave)="sideMarkerDishover(i)">
       <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
+        <img [src]="this.uploadsPath + marker.thumbnail" alt="img" class="objects__map-img">
       </div>
 
       <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status">Достройка объекта</div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status"></div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status">Достройка объекта</div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status">Достройка объекта</div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status">Достройка объекта</div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status"></div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status">Достройка объекта</div>
-      </div>
-    </a>
-    <a href="#" class="objects__map-item">
-      <div class="objects__map-imgwrap">
-        <img src="/assets/img/mock/map-obj/obj1.jpg" alt="img" class="objects__map-img">
-      </div>
-
-      <div class="objects__map-wrap">
-        <div class="objects__map-title">Булатниково</div>
-        <div class="objects__map-status">Достройка объекта</div>
+        <div class="objects__map-title">{{marker.name}}</div>
+        <div class="objects__map-status">{{marker.status}}</div>
       </div>
     </a>
 

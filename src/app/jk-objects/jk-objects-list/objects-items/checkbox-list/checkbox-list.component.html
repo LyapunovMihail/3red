@@ -1,0 +1,19 @@
+<!--<ul>-->
+
+    <!--<li *ngFor="let btn of btnList" class="search-form__list-item search-form__list-item&#45;&#45;{{name}}">-->
+        <!--<input [id]="btn.value" [name]="name"-->
+            <!--(change)="checkBtn($event)"-->
+            <!--[value]="btn.value"-->
+            <!--[checked]="isChecked(btn.value)"-->
+            <!--type="checkbox">-->
+        <!--<label [for]="btn.value" class="g-checkbox search-form__list-checkbox"></label>-->
+        <!--<label [for]="btn.value" class="search-form__list-text&#45;&#45;{{name}}">{{btn.name}}</label>-->
+    <!--</li>-->
+
+<!--</ul>-->
+
+<div class="offer__complex-wrapper" *ngFor="let btn of btnList">
+    <input class="offer__complex-checkbox" [id]="btn.value" [name]="name"
+        (change)="checkBtn($event)" [value]="btn.value" type="checkbox" [name]="name" id="lock" hidden [checked]="isChecked(btn.value)">
+    <label class="offer__complex-label" [for]="btn.value">{{btn.name}}</label>
+</div>

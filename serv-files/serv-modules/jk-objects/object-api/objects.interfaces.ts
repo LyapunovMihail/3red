@@ -13,7 +13,7 @@ export interface IObjectSnippet {
     coords: string;
     show_on_main: boolean;
     publish: boolean;
-    status: boolean;
+    status: string;
     image: string;
     thumbnail: string;
     created_at: any;

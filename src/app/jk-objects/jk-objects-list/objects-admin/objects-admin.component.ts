@@ -53,7 +53,7 @@ export class ObjectsAdminComponent implements OnInit {
             coords: ['', Validators.required],
             show_on_main: [false, Validators.required],
             publish: [false, Validators.required],
-            status: ['inProject', Validators.required],
+            status: ['В проекте', Validators.required],
             image:  ['', Validators.required],
             thumbnail:  ['', Validators.required],
             created_at: new Date(),

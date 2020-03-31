@@ -12,37 +12,26 @@
             </div>
         </div>
 
-        <div class="objects__utilities">
+        <div class="objects__utilities" [formGroup]="form">
             <div class="objects__utilities-helper">
                 <div class="objects__utilities-lock">
                     <button class="objects__utilities-search" [class.objects__utilities-search--active]="showPopUp"
-                            (click)="showPopUp = !showPopUp">Район
+                        (click)="showPopUp = !showPopUp">Район
                     </button>
                     <div class="objects__utilities-wrap" *ngIf="showPopUp">
-                        <div class="offer__complex-wrapper">
-                            <input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock1" hidden>
-                            <label class="offer__complex-label" for="lock1">Все районы</label>
-                        </div>
-                        <div class="offer__complex-wrapper">
-                            <input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock2" hidden>
-                            <label class="offer__complex-label" for="lock2">Район №1</label>
-                        </div>
-                        <div class="offer__complex-wrapper">
-                            <input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock3" hidden>
-                            <label class="offer__complex-label" for="lock3">Район №2</label>
-                        </div>
-                        <div class="offer__complex-wrapper">
-                            <input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock4" hidden>
-                            <label class="offer__complex-label" for="lock4">Район №3</label>
-                        </div>
-                        <div class="offer__complex-wrapper">
-                            <input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock5" hidden>
-                            <label class="offer__complex-label" for="lock5">Район №4</label>
-                        </div>
-                        <div class="offer__complex-wrapper">
-                            <input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock6" hidden>
-                            <label class="offer__complex-label" for="lock6">Район №5</label>
-                        </div>
+                        <app-checkbox-list
+                            [btnList]="btnList"
+                            [formControlName]="'districts'"
+                            [name]="'districts'">
+                        </app-checkbox-list>
+                        <!--<div class="offer__complex-wrapper">-->
+                            <!--<input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock" hidden (change)="">-->
+                            <!--<label class="offer__complex-label" for="lock">Все районы</label>-->
+                        <!--</div>-->
+                        <!--<div class="offer__complex-wrapper" *ngFor="let district of districts; let i = index">-->
+                            <!--<input class="offer__complex-checkbox" type="checkbox" name="checkbox" id="lock-{{i}}" hidden>-->
+                            <!--<label class="offer__complex-label" for="lock-{{i}}">{{district}}</label>-->
+                        <!--</div>-->
                     </div>
                 </div>
                 <div class="objects__utilities-price">
@@ -54,16 +43,16 @@
             <div class="objects__nav">
                 <ul class="objects__nav-list">
                     <li>
-                        <a href="javascript:void(0)" class="objects__nav-link objects__nav-link--ml objects__nav-link--active">Все</a>
+                        <a href="javascript:void(0)" class="objects__nav-link objects__nav-link--ml" [class.objects__nav-link--active]="form.get('status').value === 'Все'" (click)="form.get('status').setValue('Все')">Все</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" class="objects__nav-link">В проекте</a>
+                        <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'В проекте'" (click)="form.get('status').setValue('В проекте')">В проекте</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" class="objects__nav-link">В строительстве</a>
+                        <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'В строительстве'" (click)="form.get('status').setValue('В строительстве')">В строительстве</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" class="objects__nav-link">Готовые</a>
+                        <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'Готовые'" (click)="form.get('status').setValue('Готовые')">Готовые</a>
                     </li>
                 </ul>
             </div>
@@ -87,6 +76,7 @@
 
 <app-objects-admin *ngIf="!closeModal"
     (closeModal)="closeModal = $event"
-    [(snippets)]="snippets"
+    [snippets]="snippets"
+    (snippetsChange)="snippetsChange($event)"
     [id]="redactId">
 </app-objects-admin>
