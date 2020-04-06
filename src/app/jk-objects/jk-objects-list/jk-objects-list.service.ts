@@ -22,6 +22,10 @@ export class JkObjectsListService {
         return this.http.get<IObjectSnippet[]>(`/api/jk-object/object/id/${objectID}`);
     }
 
+    public getSnippetsByParams(params): Observable<IObjectSnippet[]> {
+        return this.http.get<IObjectSnippet[]>(`/api/jk-object/object`, {params});
+    }
+
     public setSnippet(form): Observable<IObjectSnippet[]> {
         let message = JSON.stringify({ form });
         return this.http.post<IObjectSnippet[]>(`/api/admin/jk-object/object/create`, message, adminHeaders());

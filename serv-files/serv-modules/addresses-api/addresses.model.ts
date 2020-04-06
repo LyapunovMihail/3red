@@ -1,4 +1,4 @@
-import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
+import { ADDRESSES_COLLECTION_NAME } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
 const ObjectId = require('mongodb').ObjectID;

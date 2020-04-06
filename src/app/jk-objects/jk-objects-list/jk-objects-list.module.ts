@@ -8,7 +8,9 @@ import { AdminModalModule } from '../../admin-modal/admin-modal.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SlideTopLabelModule } from '../../UI/slide-top-label/slide-top-label.module';
 import { RouterModule } from '@angular/router';
-import { CheckboxListComponent } from './objects-items/checkbox-list/checkbox-list.component';
+import { CheckboxListComponent } from './objects-form/checkbox-list/checkbox-list.component';
+import { JkObjectsNumberPipe } from './jk-objects-number.pipe';
+import { ObjectsFormComponent } from './objects-form/objects-form.component';
 
 @NgModule({
   exports: [
@@ -16,14 +18,18 @@ import { CheckboxListComponent } from './objects-items/checkbox-list/checkbox-li
       ObjectsItemsComponent,
       ObjectsMapComponent,
       ObjectsAdminComponent,
-      CheckboxListComponent
+      CheckboxListComponent,
+      JkObjectsNumberPipe,
+      ObjectsFormComponent
   ],
   declarations: [
       JkObjectsListComponent,
       ObjectsItemsComponent,
       ObjectsMapComponent,
       ObjectsAdminComponent,
-      CheckboxListComponent
+      CheckboxListComponent,
+      JkObjectsNumberPipe,
+      ObjectsFormComponent
   ],
   imports: [
       CommonModule,

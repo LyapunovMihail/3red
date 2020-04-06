@@ -1,6 +1,6 @@
 import { destination } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
-import { Component, ChangeDetectorRef, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
@@ -22,7 +22,7 @@ declare let $: any;
     ]
 })
 
-export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
+export class LocationRoutesComponent implements OnDestroy, OnChanges {
 
     @Input() public contentSnippet: IObjectLocationSnippet;
     @Input() public routesTab: IObjectLocationTab;
@@ -36,7 +36,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
 
     // номер активного маркера для подсветки нужных маршрутов и ссылок бокового меню
     // берется из config.content
-    public linkActive: number = 1;
+    public linkActive = 1;
     public asideTypeActive: string;
 
     // временное хранилище маркеров, их конфигов и маршрутов им принадлежащих
@@ -54,14 +54,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
         private router: Router
     ) { }
 
-    ngOnInit() {
-        this.parseData();
-        // инициализация карты
-        this.initMap();
-    }
-
     ngOnChanges(changes) {
-        this.map.destroy();
         this.markers = [];
         this.parseData();
         this.initMap();
@@ -109,9 +102,15 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
     initMap() {
         if ( !this.platform.isBrowser ) { return false; }
 
-        let that = this;
+        const that = this;
         ymaps.ready(() => {
+
+            if (this.map) {
+                this.map.destroy();
+            }
+
             // создание новой карты с опциями
+
             that.map = new ymaps.Map('map', {
                 center: [55.632183, 37.981327],
                 zoom: 12,
@@ -120,12 +119,12 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
                 minZoom: 11,
                 maxZoom: 18
             });
-                that.markersConfig.forEach((item: any, index) => {
+            that.markersConfig.forEach((item: any, index) => {
                     that.markers[index] = {};
 
                     const img = item.type === 'main' ?  `<img class="marker-content__img" src="${this.uploadsPath + item.thumbnail}" width="56" height="56" />` : '';
                     // для каждого маркера добавляем опции, тултипы, внутреннюю разметку
-                    let marker = new ymaps.Placemark(item.coords, {
+                    const marker = new ymaps.Placemark(item.coords, {
                         iconContent: `
                         <div class="marker-content marker-content__${item.type}">
                             ${img}
@@ -147,12 +146,12 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
                     });
 
                     // все маркеры добавляем во временное хранилище
-                    that.markers[index]['marker'] = marker;
+                    that.markers[index].marker = marker;
                     // так же добавляем каждому конфиг
-                    that.markers[index]['config'] = item;
+                    that.markers[index].config = item;
 
                     // добавляем маркеры на карту
-                    that.map.geoObjects.add(that.markers[index]['marker']);
+                    that.map.geoObjects.add(that.markers[index].marker);
 
                     // Далее в работу берутся те маркеры, у которых
                     // в конфиге есть объект route или его тип polyline.
@@ -171,46 +170,46 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
 
                         // созддаем на карте маршруты для каждого маркера
                         ymaps.route([
-                            ...item['route'].origin, destination
+                            ...item.route.origin, destination
                         ]).then((route) => {
                             route.getPaths().options.set({
-                                strokeColor: (item.content === 1) ? item['route'].activeColor : item['route'].color,
+                                strokeColor: (item.content === 1) ? item.route.activeColor : item.route.color,
                                 strokeWidth: 5,
-                                strokeStyle: item['route'].strokeStyle,
+                                strokeStyle: item.route.strokeStyle,
                                 zIndex: 10,
                                 openBalloonOnClick: false
                             });
                             // во временное хранилище к нужному маркеру добавляем объект с созданным маршрутом
-                            that.markers[index]['route'] = route;
+                            that.markers[index].route = route;
                             // добавляем маршрут на карту
-                            that.map.geoObjects.add(route.getPaths(that.markers[index]['route']));
+                            that.map.geoObjects.add(route.getPaths(that.markers[index].route));
                         });
 
                         // при наведении на маркер, если он не активен ( проверяется zIndex в опциях маршрута )
-                        that.markers[index]['marker'].events.add('mouseenter', () => {
-                            let markerZIndex = that.markers[index]['route']._paths.options._options.zIndex;
+                        that.markers[index].marker.events.add('mouseenter', () => {
+                            const markerZIndex = that.markers[index].route._paths.options._options.zIndex;
                             if (markerZIndex !== 100) {
                                 // добавляем ему активный цвет из его конфигов и дополнительный zIndex
-                                that.markers[index]['route'].getPaths().options.set({
-                                    strokeColor: that.markers[index]['config']['route'].activeColor,
+                                that.markers[index].route.getPaths().options.set({
+                                    strokeColor: that.markers[index].config.route.activeColor,
                                     zIndex: 101
                                 });
                             }
                         });
 
                         // при уведении курсора возвращаем маршрут маркера в предыдущее состояние
-                        that.markers[index]['marker'].events.add('mouseleave', () => {
-                            let markerZIndex = that.markers[index]['route']._paths.options._options.zIndex;
+                        that.markers[index].marker.events.add('mouseleave', () => {
+                            const markerZIndex = that.markers[index].route._paths.options._options.zIndex;
                             if (markerZIndex !== 100) {
-                                that.markers[index]['route'].getPaths().options.set({
-                                    strokeColor: that.markers[index]['config']['route'].color,
+                                that.markers[index].route.getPaths().options.set({
+                                    strokeColor: that.markers[index].config.route.color,
                                     zIndex: 10
                                 });
                             }
                         });
 
                         // на все маркеры (кроме главного) вешается клик для изменения активного маршрута и тултипа
-                        that.markers[index]['marker'].events.add('click', () => {
+                        that.markers[index].marker.events.add('click', () => {
                             that.changeRoute(that.markers[index]);
                         });
                     }
@@ -218,7 +217,7 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
 
                 // после инициализации надо обновить состояние компонента принудительно
                 // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
-                that.ref.detectChanges();
+            that.ref.detectChanges();
         });
 
     }
@@ -228,28 +227,28 @@ export class LocationRoutesComponent implements OnInit, OnDestroy, OnChanges {
     // меняет активный маршрут
     changeRoute( val ) {
 
-        let markerContent = $('.marker-content');
-        let markerContentArr = Array.prototype.slice.call(markerContent);
+        const markerContent = $('.marker-content');
+        const markerContentArr = Array.prototype.slice.call(markerContent);
 
         this.markers.forEach( ( marker ) => {
             // для всех маршрутов
             if ( 'route' in marker ) {
                 // устанавливается не активное состояние
-                marker['route'].getPaths().options.set({
-                    strokeColor: marker['config']['route'].color,
+                marker.route.getPaths().options.set({
+                    strokeColor: marker.config.route.color,
                     zIndex: 10
                 });
             }
-            marker['marker'].options.set({zIndex: 10}); // прячем неактивные маркеры под активными чтобы не перекрывали тултипы активных маркеров
+            marker.marker.options.set({zIndex: 10}); // прячем неактивные маркеры под активными чтобы не перекрывали тултипы активных маркеров
         });
 
-        val['marker'].options.set({zIndex: 110}); // ставим активные маркеры над неактивными чтобы закрывать тултипами неактивные
+        val.marker.options.set({zIndex: 110}); // ставим активные маркеры над неактивными чтобы закрывать тултипами неактивные
 
         if ('route' in val) {
             // иначе для переданного аргумента(маркера)
             // добавляем актив к его маршруту
-            val['route'].getPaths().options.set({
-                strokeColor: val['config']['route'].activeColor,
+            val.route.getPaths().options.set({
+                strokeColor: val.config.route.activeColor,
                 zIndex: 100
             });
         }

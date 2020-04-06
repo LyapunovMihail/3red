@@ -19,6 +19,26 @@ export class ObjectsModel {
         return await this.collection.find(findCriteria).toArray();
     }
 
+    async getSnippetByParams(query) {
+        console.log('query: ', query);
+        const request: any = {};
+
+        if ('districts' in query) {
+            request.district = { $in: query.districts.split(',') };
+        }
+        if ( 'status' in query ) {
+            request.status = query.status;
+        }
+
+        /*
+         Для бэкэнда
+         snippets.filter((jk) => {
+            return flats.some((flat) => flat.mod === jk.objectId && flat.price >= params.priceMin && flat.price <= params.priceMax);
+         });
+        */
+        return await this.collection.find(request).toArray();
+    }
+
     // async updateSnippet(parameters) {
     //     const options: IObjectSnippet = parameters;
     //     return await this.errorParamsCatcher(this.valuesReview(options), async () => {

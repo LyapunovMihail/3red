@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { JkObjectsListService } from '../jk-objects-list.service';
 import { IObjectSnippet, OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 declare let ymaps: any;
@@ -11,28 +11,39 @@ declare let ymaps: any;
         JkObjectsListService
     ]
 })
-export class ObjectsMapComponent implements OnInit {
+export class ObjectsMapComponent implements OnChanges, OnDestroy {
 
     @Input()
     public snippets: IObjectSnippet[];
 
     public markers = [];
-
+    public map: any;
+    public ready: any;
     public uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
 
     constructor(
+        public ref: ChangeDetectorRef
     ) {
     }
 
-    ngOnInit() {
+    ngOnChanges(changes) {
+        this.markers = [];
         this.initMap();
+    }
+
+    ngOnDestroy() {
+        this.map.destroy();
     }
 
     private initMap() {
 
         ymaps.ready(() => {
 
-                const myMap = new ymaps.Map('map', {
+                if (this.map) {
+                    this.map.destroy();
+                }
+
+                this.map = new ymaps.Map('map', {
                         center: [55.751574, 37.573856],
                         zoom: 9,
                         controls: ['zoomControl']
@@ -62,9 +73,11 @@ export class ObjectsMapComponent implements OnInit {
                             iconImageOffset: [-24, -24],
 
                             iconContentOffset: [15, 15],
+
+                            zIndex: 1
                         });
-                    myMap.behaviors.disable(['scrollZoom']);
-                    myMap.geoObjects
+                    this.map.behaviors.disable(['scrollZoom']);
+                    this.map.geoObjects
                     // .add(myPlacemark)
                         .add(this.markers[index].marker);
 
@@ -73,20 +86,37 @@ export class ObjectsMapComponent implements OnInit {
                             // Ссылку на объект, вызвавший событие,
                             // можно получить из поля 'target'.
                             // e.get('target').options.set('preset', 'islands#greenIcon');
+                            document.querySelector(`#objects__map-item-${index}`).classList.add('objects__map-item--hover');
                             document.querySelector(`#img-map-${index}`).classList.add('img-map--hover');
+                            this.markers[index].marker.options.set({
+                                zIndex: 10
+                            });
                         })
                         .add('mouseleave', (e) => {
+                            document.querySelector(`#objects__map-item-${index}`).classList.remove('objects__map-item--hover');
                             document.querySelector(`#img-map-${index}`).classList.remove('img-map--hover');
+                            this.markers[index].marker.options.set({
+                                zIndex: 1
+                            });
                         });
                 });
+                this.ref.detectChanges();
         });
     }
 
     public sideMarkerHover(i) {
+        document.querySelector(`#objects__map-item-${i}`).classList.add('objects__map-item--hover');
         document.querySelector(`#img-map-${i}`).classList.add('img-map--hover');
+        this.markers[i].marker.options.set({
+            zIndex: 10
+        });
     }
 
     public sideMarkerDishover(i) {
+        document.querySelector(`#objects__map-item-${i}`).classList.remove('objects__map-item--hover');
         document.querySelector(`#img-map-${i}`).classList.remove('img-map--hover');
+        this.markers[i].marker.options.set({
+            zIndex: 1
+        });
     }
 }

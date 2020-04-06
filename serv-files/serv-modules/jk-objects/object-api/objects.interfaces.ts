@@ -10,6 +10,7 @@ export interface IObjectSnippet {
     name: string;
     subtext: string;
     address: string;
+    district: string;
     coords: string;
     show_on_main: boolean;
     publish: boolean;

@@ -1,0 +1,40 @@
+<div class="objects__utilities" [formGroup]="form" *ngIf="form">
+    <div class="objects__utilities-helper">
+        <div class="objects__utilities-lock">
+            <button class="objects__utilities-search" [class.objects__utilities-search--active]="showPopUp"
+                    (click)="showPopUp = !showPopUp">Район
+            </button>
+            <div class="objects__utilities-wrap" *ngIf="showPopUp">
+                <app-checkbox-list
+                    [btnList]="btnList"
+                    [formControlName]="'districts'"
+                    [name]="'districts'">
+                </app-checkbox-list>
+            </div>
+        </div>
+        <div class="objects__utilities-price">
+            <p class="objects__price-title">Цена</p>
+            <input type="text" class="objects__price-input" placeholder="от 2.2 млн" formControlName="priceMin"
+                   (input)="removeChars($event.target.value, 'priceMin')">
+            <input type="text" class="objects__price-input" placeholder="до 9.2 млн" formControlName="priceMax"
+                   (input)="removeChars($event.target.value, 'priceMax')">
+        </div>
+    </div>
+    <div class="objects__nav">
+        <ul class="objects__nav-list">
+            <li>
+                <a href="javascript:void(0)" class="objects__nav-link objects__nav-link--ml" [class.objects__nav-link--active]="form.get('status').value === 'Все'" (click)="form.get('status').setValue('Все')">Все</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'В проекте'" (click)="form.get('status').setValue('В проекте')">В проекте</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'В строительстве'" (click)="form.get('status').setValue('В строительстве')">В строительстве</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'Готовые'" (click)="form.get('status').setValue('Готовые')">Готовые</a>
+            </li>
+        </ul>
+    </div>
+
+</div>

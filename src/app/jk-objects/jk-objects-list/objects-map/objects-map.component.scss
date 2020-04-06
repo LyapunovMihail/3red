@@ -20,17 +20,15 @@
 .objects__map-item {
     display: flex;
     align-items: center;
-    &:hover {
+    &--hover {
         background: #ee4237;
-        color: #fff ;
+        .objects__map-title,
+        .objects__map-status {
+            color: #fff ;
+        }
     }
 }
-.objects__map-item:hover .objects__map-title  {
-    color: #fff ;
-}
-.objects__map-item:hover .objects__map-status  {
-    color: #fff ;
-}
+
 .objects__map-title {
     font-size: 20px;
     line-height: 1.25;

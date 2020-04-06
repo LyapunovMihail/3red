@@ -17,7 +17,7 @@ declare let $: any;
     ]
 })
 
-export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnChanges {
+export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
 
     @Input() public contentSnippet: IObjectLocationSnippet;
     @Input() public infraTab: IObjectLocationTab;
@@ -42,13 +42,7 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnCha
         @Inject(DOCUMENT) private document: any
     ) { }
 
-    ngOnInit() {
-        this.parseData();
-        this.initMap();
-    }
-
     ngOnChanges(changes) {
-        this.map.destroy();
         this.markers = [];
         this.parseData();
         this.initMap();
@@ -128,6 +122,10 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnCha
         const that = this;
         ymaps.ready(() => {
 
+            if (this.map) {
+                this.map.destroy();
+            }
+
             that.map = new ymaps.Map('map', {
                 center: that.mainMarker.coords,
                 zoom: 14,
@@ -184,6 +182,7 @@ export class LocationInfrastructureComponent implements OnInit, OnDestroy, OnCha
                     }
                 });
             });
+
         });
 
     }

@@ -26,6 +26,10 @@ export class ObjectsController extends ObjectsModel {
             return await this.getSnippet(req.params.id);
         }));
 
+        this.router.get('/jk-object/object', responseHandler(async (req) => {
+            return await this.getSnippetByParams(req.query);
+        }));
+
         this.router.post('/admin/jk-object/object/create', responseHandler(async (req) => {
             return await this.setSnippet(req.body.form);
         }));
