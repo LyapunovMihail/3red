@@ -98,7 +98,9 @@ const jkObjectsComponents = [
                     { path: '', redirectTo: 'list', pathMatch: 'full' },
                     { path: 'list', component: JkObjectsListComponent },
                     { path: 'list/:id', component: JkObjectsItemComponent },
-                    { path: 'list/:id/dynamic', component: ObjectDynamicComponent }
+                    { path: 'list/:id/dynamic', component: ObjectDynamicComponent },
+                    // { path: 'search', component: SearchComponent },
+                    // { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
                 ]
             }
         ])

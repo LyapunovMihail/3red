@@ -53,7 +53,7 @@ export class ObjectsMapComponent implements OnChanges, OnDestroy {
 
                     this.markers[index] = {};
                     this.markers[index].click = false;
-                    this.markers[index].id = item.objectId;
+                    this.markers[index].mod = item.mod;
                     this.markers[index].thumbnail = item.thumbnail;
                     this.markers[index].name = item.name;
                     this.markers[index].status = item.status;

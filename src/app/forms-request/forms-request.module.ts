@@ -7,6 +7,7 @@ import { FormReserveComponent } from './form-reserve/form-reserve.component';
 import { FormCallComponent } from './form-call/form-call.component';
 import { NgModule } from '@angular/core';
 import { TextMaskModule } from 'angular2-text-mask';
+import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.module';
 
 let Components = [
     FormCallComponent,
@@ -26,7 +27,8 @@ let Components = [
         TextMaskModule,
         CommonModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        SlideTopLabelModule
     ],
     providers: [
         FormsRequestService

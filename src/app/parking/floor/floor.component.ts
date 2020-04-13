@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FloorCount } from '../../flats/floor/floor-count';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ParkingService } from '../parking.service';
@@ -24,7 +23,6 @@ export class FloorComponent implements OnInit, OnDestroy {
     public routerEvents: any;
     public sectionNumber: string;
     public floorNumber: string;
-    public floorCount = FloorCount;
     public floorSvg: string = '';
     public parkingData: IAddressItemFlat;
     public infoWindow: IAddressItemFlat;

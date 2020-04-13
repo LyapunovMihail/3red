@@ -1,0 +1,106 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+:host {
+    width: 100%;
+    margin: 0 0 60px;
+}
+.house__sections {
+
+    &-notice { display: flex; }
+    &-aside {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        z-index: 1;
+        pointer-events: none;
+
+        &-text {
+            font: 14px/14px $font-text;
+            position: relative;
+            display: flex;
+            margin-right: 16px;
+            align-items: center;
+            &:last-child { margin-right: 0; }
+
+            &_free,
+            &_sale,
+            &_reserve {
+                width: 18px;
+                height: 18px;
+                display: block;
+                box-sizing: border-box;
+                margin: 0 5px 0 0;
+                padding: 2px 0 0;
+                text-align: center;
+                line-height: 1;
+                @media screen and (-webkit-min-device-pixel-ratio:0) {
+                    /* this will target only Mac Safari and Chrome browsers */
+                    padding: 4px 0 0;
+                }
+            }
+            &_free { background-color: rgba(0, 0, 0, .1); }
+            &_sale {
+                color: $col-red;
+                border: 1px solid $col-red;
+                @media screen and (-webkit-min-device-pixel-ratio:0) {
+                    padding: 3px 0 0;
+                }
+            }
+            &_reserve {
+                border: 1px solid $col-border;
+                background: url(/assets/img/flats/house/lock_flat.svg) center no-repeat;
+            }
+        }
+
+        &-plan {
+            pointer-events: all;
+            margin-right: 35px;
+        }
+    }
+
+    &-priority {
+        position: relative;
+        margin: 0 0 5px;
+        
+        &-text {
+            font: $font-14;
+            line-height: 30px;
+            position: relative;
+            user-select: none;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 6px;
+                left: calc(100% + 5px);
+                width: 16px;
+                height: 16px;
+                background: url(/assets/img/flats/information.svg) center no-repeat;
+            }
+            &:hover + .house__sections-tooltip {
+                opacity: 1 !important;
+                transform: translateY(0px) !important;
+                pointer-events: all !important;
+            }
+        }
+    }
+
+    &-tooltip {
+        width: 316px;
+        height: 310px;
+        padding: 8px;
+        position: absolute;
+        left: -135px;
+        top: 100%;
+        box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        box-sizing: border-box;
+        transition: opacity $transition, transform $transition;
+        z-index: 10;
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+
+        img { width: 100%; }
+    }
+}

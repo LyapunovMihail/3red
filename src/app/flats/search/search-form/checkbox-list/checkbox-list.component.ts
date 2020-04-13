@@ -19,7 +19,7 @@ export class CheckboxListComponent {
     @Input() public btnList: any[] = [];
     @Input() public name: string;
 
-    public activeList: string[] = [];
+    public activeList: {value: string, mod: string}[] = [];
 
     constructor() {}
 
@@ -27,7 +27,7 @@ export class CheckboxListComponent {
         if (val === 'all') {
             return this.isCheckedAll();
         }
-        return this.activeList.some((item) => item === val);
+        return this.activeList.some((item) => item.value === val);
     }
 
     // Если проверяется состояние чекбокса 'выбрать всё' - проверяем равен ли массив значений кол-ву чекбоксов-1, если равен, то возвращаем тру, если нет - фэлс.
@@ -36,18 +36,21 @@ export class CheckboxListComponent {
         return this.activeList.length === this.btnList.length - 1;
     }
 
-    public checkBtn(event) {
-        const value = event.target.value;
+    public checkBtn(isChecked, btn) {
+        console.log('event: ', event);
+        const value = btn.value;
+        console.log('value: ', btn.value);
         if (value === 'all') {
-            this.checkAll(event);
+            this.checkAll(isChecked);
             this.propagateChange(this.activeList);
             return;
         }
 
-        if (event.target.checked && !this.activeList.some((item) => item === value)) {
-            this.activeList.push(value);
+        if (isChecked && !this.activeList.some((item) => item.value === value)) {
+            console.log('this.activeList.push: ', {value, mod: btn.mod});
+            this.activeList.push({value, mod: btn.mod});
         } else {
-            const index = this.activeList.findIndex((item) => item === value);
+            const index = this.activeList.findIndex((item) => item.value === value);
             if (index >= 0) {
                 this.activeList.splice(index, 1);
             }
@@ -56,19 +59,20 @@ export class CheckboxListComponent {
         this.propagateChange(this.activeList);
     }
 
-    // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
-    public checkAll(event) {
+    // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё',
+    // если выключили - удаляем все значения из масиива
+    public checkAll(isChecked) {
         this.btnList.forEach((item) => {
-           if (item.value !== 'all') {
-               if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
-                   this.activeList.push(item.value);
-               } else if (!event.target.checked) {
-                   const index = this.activeList.findIndex((value) => value === item.value);
-                   if (index >= 0) {
-                       this.activeList.splice(index, 1);
-                   }
-               }
-           }
+            if (item.value !== 'all') {
+                if (isChecked && !this.activeList.some((entity) => entity.value === item.value)) {
+                    this.activeList.push({ value: item.value, mod: item.mod });
+                } else if (!isChecked) {
+                    const index = this.activeList.findIndex((entity) => entity.value === item.value);
+                    if (index >= 0) {
+                        this.activeList.splice(index, 1);
+                    }
+                }
+            }
         });
     }
 
@@ -86,4 +90,3 @@ export class CheckboxListComponent {
 
     public registerOnTouched() {}
 }
-

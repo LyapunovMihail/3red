@@ -9,14 +9,20 @@ import {
 } from 'stream';
 import * as JSONStream from 'JSONStream';
 import { DbJsonObject } from './db.types';
+import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
 const url = 'http://incrm.ru/export-tred/ExportToSite.svc/ExportToTf/json';
 const CronJob = cron.CronJob;
 
 export class DbCronUpdate {
 
+    collectionName = OBJECTS_OBJECT_COLLECTION_NAME;
+    collection: any;
+    objects: IObjectSnippet[];
+
     public counter: number;
 
     constructor(public db: any) {
+        this.collection = db.collection(this.collectionName);
         this.counter = 0;
         this.start();
     }
@@ -31,6 +37,7 @@ export class DbCronUpdate {
 
     public async requestBase() {
 
+        this.objects = await this.collection.find().toArray();
         this.counter = 0;
 
         const collectionAddresses = this.db.collection(ADDRESSES_COLLECTION_NAME);
@@ -78,11 +85,12 @@ export class DbCronUpdate {
     }
 
     public transformFlatItem(object: DbJsonObject) {
-        if (('Article' in object) && !object.Article.startsWith('ТОМ')) {
+        if (('Article' in object) && !this.objects.some((jk) => jk.mod === object.Article.split('-')[0])) { // Если жилой комплекс этой квартиры создан, она добавляется в бд
             return;
         }
-        const {house, section, floor, flat} = this.parseArticle(object.Article);
+        const {mod, house, section, floor, flat} = this.parseArticle(object.Article);
         const itemflat: IAddressItemFlat = {
+            mod,
             house,
             section,
             floor,
@@ -98,7 +106,8 @@ export class DbCronUpdate {
             twolevel: (object['2level'] === '1'),
             space: Number(object.Quantity),
             price: Number(object.Sum),
-            deliveryDate: object.DeliveryPeriodDate
+            deliveryDate: object.DeliveryPeriodDate,
+            article: object.Article
         };
         this.counter++;
         return itemflat;
@@ -106,13 +115,35 @@ export class DbCronUpdate {
 
     private parseArticle(article: string) {
         // ТОМ-03-01-04-02-018
-        const [, houseStr, sectionStr, floorStr, , flatStr] = article.split('-');
-        const [house, section, floor, flat] = [houseStr, sectionStr, floorStr, flatStr].map(Number);
-        return {
-            house,
-            section,
-            floor,
-            flat,
-        };
+        if (!article.startsWith('МКВ')) {
+            const [mod, house, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
+            return {
+                mod,
+                house,
+                section,
+                floor,
+                flat,
+            };
+        } else {
+            const [mod, houseStr, , floorStr, , flatStr] = article.split('-');
+            const [section, floor, flat] = [houseStr.slice(-1), floorStr, flatStr].map(Number); // обрезаем из корпуса последнюю цифру и ставим её в секцию
+            const house = this.parseHouseNumber(houseStr.slice(0, 2)); // берём из названия дома первые 2 символа
+            return {
+                mod,
+                house,
+                section,
+                floor,
+                flat,
+            };
+        }
+    }
+
+    private parseHouseNumber(number: string): string { // меняем символы русской раскладки на латинские a b
+        if (number.endsWith('А')){
+            return number.slice(0, number.length - 1) + 'a';
+        } else if (number.endsWith('Б')) {
+            return number.slice(0, number.length - 1) + 'b';
+        }
     }
 }

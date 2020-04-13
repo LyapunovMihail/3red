@@ -2,23 +2,30 @@ import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { GHMNumberPipe } from './ghm-range-number/ghm-number.pipe';
 
 @Component({
     selector: 'app-search-form',
     templateUrl: './search-form.component.html',
-    styleUrls: ['./../search.component.scss']
+    styleUrls: ['./../search.component.scss'],
+    providers: [GHMNumberPipe]
 })
 
 export class SearchFormComponent implements OnInit, OnDestroy {
 
     public config = FormConfig;
+    public routerEvents: any;
     public formEvents: any;
     public form: FormGroup;
     public moreFilter: boolean = false;
     public showCorpus: boolean = false;
     public sort: string;
 
-    @Input() public parentPlan: boolean;
+    @Input()
+    public housesBtnList: any[] = [];
+    @Input()
+    public modsBtnList: any[] = [];
+
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
 
@@ -26,15 +33,20 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public formBuilder: FormBuilder,
         public router: Router,
         public activatedRoute: ActivatedRoute,
+        public parseNumberPipe: GHMNumberPipe
     ) {}
 
     public ngOnInit() {
-        this.activatedRoute.queryParams.subscribe((queryParams) => {
+        console.log('housesBtnList: ', this.housesBtnList);
+        console.log('modsBtnList: ', this.modsBtnList);
+        this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
             this.buildForm(queryParams);
         });
+
     }
 
     public buildForm(params) {
+
         const roomsFormArray = ((() => {
             /**
              * if there are rooms in the url's params,
@@ -42,12 +54,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
              * if index is exist, then true
              * otherwise pass an array of false
              */
-            const arr = [false, false, false, false, false];
+            const arr = [false, false, false, false];
             if (params.rooms) {
                 const result = parseQueryParams(params.rooms);
-                const test = result.every((item) => (/^[0|1|2|3|4]$/).exec((item).toString()) ? true : false);
+                const test = result.every((item) => (/^[0|1|2|3]$/).exec((item).toString()) ? true : false);
                 if (test) {
-                    result.forEach((item) => arr[(item === '0') ? 4 : Number(item) - 1] = true);
+                    result.forEach((item) => arr[Number(item)] = true);
                 }
             }
             return arr.map((item) => (new FormControl(item)));
@@ -79,19 +91,24 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 return [];
             })(params.decoration)],
             rooms: this.formBuilder.array(roomsFormArray) as FormArray,
-            houses: [((houses) => {
-                /**
-                 * if there are houses in the url's params,
-                 * then split them into an array,
-                 * otherwise pass an empty array
-                 */
-                if (houses) {
-                    const result = parseQueryParams(houses);
-                    const test = result.every((item) => (/^[1|2|3|9]$/).exec((item).toString()) ? true : false);
-                    return (test) ? result : [];
-                }
-                return [];
-            })(params.houses)]
+            sections: [
+                ((sections) => {
+                    if (sections) {
+                        return sections.split(','); // для квартир объектов надо отдавать sections ( один дом ), или пустую строку '';
+                    }
+                    return [];
+                })(params.sections)
+            ],
+            housesMods: [
+                ((housesMods) => {
+                    console.log('housesMods: ', housesMods);
+                    if (housesMods) {
+                        return housesMods.split('nzt;').map((item) => JSON.parse(item)); // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
+                    }
+                    return [];
+                })(params.housesMods)               // houses - застрингифаенные объекты, разделённые символами 'chpokl', поэтому сплитим по 'chpokl и парсим массив с JSON
+            ],
+            mod: params.mod || ''               // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
         });
 
         this.formChange.emit(this.form.value);
@@ -116,5 +133,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
+        this.routerEvents.unsubscribe();
     }
 }

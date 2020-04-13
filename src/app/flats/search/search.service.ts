@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
+import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Injectable()
 
@@ -11,8 +12,12 @@ export class SearchService {
 
     constructor(private http: HttpClient) {}
 
-    public getObjects(options): Observable<IAddressItemFlat[]> {
+    public getFlats(options): Observable<IAddressItemFlat[]> {
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
+    }
+
+    public getFlatsMultiple(options): Observable<{modsBtnList, housesBtnList, flats: IAddressItemFlat[]}> {
+        return this.http.post<{modsBtnList, housesBtnList, flats: IAddressItemFlat[]}>('/api/search/multiple', { search: options });
     }
 
     public getConfig() {

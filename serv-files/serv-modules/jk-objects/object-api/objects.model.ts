@@ -1,7 +1,6 @@
 import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME, OBJECTS_UPLOADS_PATH } from './objects.interfaces';
 import { ErrorNotCorrectArguments } from '../documentation-api/objects-documentation.interfaces';
 import { fileExtension, imageSaver, thumbnailSaver } from '../../utilits/image-saver.utilits';
-import { INewsSnippet } from '../../news-api/news.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class ObjectsModel {
@@ -97,7 +96,7 @@ export class ObjectsModel {
 
     private valuesReview(options) {
         // если есть все параметры
-        return ('objectId' in options && 'created_at' in options && 'last_modifyed' && 'name' in options && 'address' in options && 'coords' in options && 'show_on_main' in options
+        return ('mod' in options && 'created_at' in options && 'last_modifyed' && 'name' in options && 'address' in options && 'coords' in options && 'show_on_main' in options
             && 'publish' in options && 'status' in options);
     }
 }
