@@ -16,7 +16,7 @@
         </h2>
         <div class="apartment__image">
             <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
-                 [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
+                 [src]="'/assets/floor-plans/jk_' + flatData.mod + '/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
             <div *ngIf="img.style.display === 'none'" class="apartment__image-error g-3red"></div>
         </div>
 

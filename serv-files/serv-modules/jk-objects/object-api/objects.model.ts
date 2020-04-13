@@ -19,7 +19,6 @@ export class ObjectsModel {
     }
 
     async getSnippetByParams(query) {
-        console.log('query: ', query);
         const request: any = {};
 
         if ('districts' in query) {
