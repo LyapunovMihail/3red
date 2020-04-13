@@ -109,7 +109,6 @@ export class AddressesModel {
     public parseRequest(query) {
         let request: any = {};
 
-        console.log('query: ', query);
         if ('sections' in query) {
             request.section = { $in: query.sections.split(',').map(Number) };
         }

@@ -67,7 +67,6 @@ export class SearchComponent implements OnDestroy {
 
         if ( 'housesMods' in form && form.housesMods.length > 0 ) {                                                  // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
             params['housesMods'] = form.housesMods.map((item) => JSON.stringify(item)).join('nzt;');       // if ( 'housesMods' in form && form.housesMods.length > 0 ) {
-            console.log('params housesMods: ', params['housesMods']);                                                //          params['housesMods'] = form.housesMods; дом здесь один либо его нету
         }                                                                                                    //     }
 
         if ( 'mod' in form && form.mod.length) { // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
@@ -87,10 +86,8 @@ export class SearchComponent implements OnDestroy {
 
     public getFlats(params) {
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
-        console.log('params.mod: ', params.mod);
         this.searchService.getFlatsMultiple(params).subscribe(
             (data) => {
-                console.log('data: ', data);
                 data.flats = data.flats.filter((flat) => flat.status !== '8');
                 this.count = data.flats.length;
                 this.searchFlats = data.flats;

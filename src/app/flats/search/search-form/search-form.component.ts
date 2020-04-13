@@ -37,8 +37,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
-        console.log('housesBtnList: ', this.housesBtnList);
-        console.log('modsBtnList: ', this.modsBtnList);
         this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
             this.buildForm(queryParams);
         });
@@ -101,7 +99,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             ],
             housesMods: [
                 ((housesMods) => {
-                    console.log('housesMods: ', housesMods);
+                    console.log('housesMods: ' housesMods);
                     if (housesMods) {
                         return housesMods.split('nzt;').map((item) => JSON.parse(item)); // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
                     }

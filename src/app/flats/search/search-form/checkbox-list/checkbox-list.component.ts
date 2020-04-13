@@ -37,9 +37,7 @@ export class CheckboxListComponent {
     }
 
     public checkBtn(isChecked, btn) {
-        console.log('event: ', event);
         const value = btn.value;
-        console.log('value: ', btn.value);
         if (value === 'all') {
             this.checkAll(isChecked);
             this.propagateChange(this.activeList);
@@ -47,7 +45,6 @@ export class CheckboxListComponent {
         }
 
         if (isChecked && !this.activeList.some((item) => item.value === value)) {
-            console.log('this.activeList.push: ', {value, mod: btn.mod});
             this.activeList.push({value, mod: btn.mod});
         } else {
             const index = this.activeList.findIndex((item) => item.value === value);
