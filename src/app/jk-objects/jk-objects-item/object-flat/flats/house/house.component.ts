@@ -96,6 +96,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                             this.scrollCalculate();
                         });
                     }
+                } else if (params.house === 'all') {
+                    this.showChess = false;
                 } else {
                     this.router.navigate(['/error-404'], {
                         skipLocationChange: true

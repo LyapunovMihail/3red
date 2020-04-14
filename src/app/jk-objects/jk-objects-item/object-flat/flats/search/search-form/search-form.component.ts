@@ -99,9 +99,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             houses: [
                 ((houses) => {
                     if (houses) {
-                        return houses.split(','); // для квартир объектов надо отдавать houses ( один дом ), или пустую строку '';
+                        return houses; // для квартир объектов надо отдавать houses ( один дом ), или пустую строку '';
                     }
-                    return [];
+                    return '';
                 })(params.houses)
             ]
         });

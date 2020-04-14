@@ -1,7 +1,7 @@
 <div class="objects-inner">
     <div class="objects__item-container">
         <div class="objects__item" *ngFor="let snippet of snippets">
-            <a routerLink="/objects/list/{{snippet.mod}}" class="objects__item-link"></a>
+            <a routerLink="/objects/list/{{snippet._id}}" class="objects__item-link"></a>
             <img [src]="uploadsPath + snippet.image" alt="img" class="objects__item-img">
             <div class="objects__item-location">{{snippet.address}}</div>
             <div class="objects__item-wrapper">

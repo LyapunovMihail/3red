@@ -14,7 +14,7 @@ export class ObjectsModel {
     }
 
     async getSnippet(objectId?) {
-        const findCriteria = objectId && objectId !== 'undefined' ? { mod : objectId } : {};
+        const findCriteria = objectId && objectId !== 'undefined' ? { _id : ObjectId(objectId)} : {};
         return await this.collection.find(findCriteria).toArray();
     }
 

@@ -62,7 +62,7 @@ export class AddressesModel {
         const modsBtnList = [];
         modsBtnList.push({ name: 'Все комплексы', value: '' });
         for (const item of objects) {
-            const flatSnippet = await this.flatCollection.findOne({ objectId: item.mod }); // Проверяем включен ли блок квартир в объекте, если включен, то добавляем таб этого объекта
+            const flatSnippet = await this.flatCollection.findOne({ objectId: item._id.toString() }); // Проверяем включен ли блок квартир в объекте, если включен, то добавляем таб этого объекта
             if (flatSnippet && flatSnippet.switchOn) {
                 if (!modsBtnList.includes({ name: item.name, value: item.mod })) {
                     modsBtnList.push({ name: item.name, value: item.mod });

@@ -40,8 +40,9 @@ const FlatsComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: '', component: ObjectFlatsComponent,
+            { path: 'flats', component: ObjectFlatsComponent,
                 children: [
+                    { path: '', redirectTo: 'house/all', pathMatch: 'full' },
                     { path: 'house/:house', component: HouseComponent },
                     { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
                     { path: 'house/:house/section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }

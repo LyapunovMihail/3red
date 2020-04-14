@@ -42,6 +42,9 @@ import { ObjectMembersModule } from './jk-objects-item/object-members/object-mem
 import { JkObjectsListModule } from './jk-objects-list/jk-objects-list.module';
 import { ObjectFlatsModule } from './jk-objects-item/object-flat/flats/object-flats.module';
 import { ObjectFlatsComponent } from './jk-objects-item/object-flat/flats/object-flats.component';
+import { HouseComponent } from './jk-objects-item/object-flat/flats/house/house.component';
+import { FloorComponent } from './jk-objects-item/object-flat/flats/floor/floor.component';
+import { ApartmentComponent } from './jk-objects-item/object-flat/flats/apartment/apartment.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -99,7 +102,14 @@ const jkObjectsComponents = [
                 , children : [
                     { path: 'list', component: JkObjectsListComponent },
                     { path: 'list/:id', component: JkObjectsItemComponent },
-                    { path: 'list/:id/flats', component: ObjectFlatsComponent },
+                    { path: 'list/:id/flats', component: ObjectFlatsComponent,
+                        children: [
+                            { path: '', redirectTo: 'house/1', pathMatch: 'full' },
+                            { path: 'house/:house', component: HouseComponent },
+                            { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
+                            { path: 'house/:house/section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
+                        ]
+                    },
                     { path: 'list/:id/dynamic', component: ObjectDynamicComponent },
                     // { path: 'search', component: SearchComponent },
                     // { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },

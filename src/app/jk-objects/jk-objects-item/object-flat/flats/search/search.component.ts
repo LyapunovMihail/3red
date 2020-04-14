@@ -64,7 +64,7 @@ export class SearchComponent implements OnDestroy {
         }
 
         if ( 'houses' in form && form.houses.length > 0 ) {  // для квартир объектов надо отдавать houses ( один дом ), или пустую строку '';
-            params['houses'] = (form.houses).join(',');      // if ( 'houses' in form && form.houses.length > 0 ) {
+            params['houses'] = form.houses;     // if ( 'houses' in form && form.houses.length > 0 ) {
                                                             //          params['houses'] = form.houses; дом здесь один либо его нету
         }                                                   //     }
 
@@ -79,9 +79,15 @@ export class SearchComponent implements OnDestroy {
     public getFlats(params) {
         let url = this.router.url.split('?')[0];
         const urlMas = url.split('/');
+        // /objects/list/%D0%9D%D0%A2%D0%9C/flats/house/
+        console.log('urlMas: ', urlMas);
         url = url.slice(0, -urlMas[urlMas.length - 1].length); // убираем из урлы старый номер дома
-
-        this.router.navigate([url + params.houses], {queryParams: params}); // добавляем в параметры урлы номер дома чтобы извлечь его в house компоненте
+        console.log('this.router.url: ', this.router.url);
+        console.log('this.router.url.split: ', this.router.url.split('?')[0]);
+        console.log('url: ', url);
+        console.log('params.houses: ', params.houses);
+        const houses = params.houses ? params.houses : 'all';
+        this.router.navigate([url + houses], {queryParams: params}); // добавляем в параметры урлы номер дома чтобы извлечь его в house компоненте
         this.searchService.getObjects(params).subscribe(
             (data: IAddressItemFlat[]) => {
                 data = data.filter((flat) => flat.status !== '8');
