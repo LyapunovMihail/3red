@@ -14,7 +14,7 @@ export class ObjectsModel {
     }
 
     async getSnippet(objectId?) {
-        const findCriteria = objectId && objectId !== 'undefined' ? { _id : ObjectId(objectId)} : {};
+        const findCriteria = objectId && objectId !== 'undefined' ? { mod : objectId } : {};
         return await this.collection.find(findCriteria).toArray();
     }
 
@@ -46,7 +46,6 @@ export class ObjectsModel {
     //     });
     // }
 
-    // создание новости
     async setSnippet(parameters) {
         const options: IObjectSnippet = parameters;
         return await this.errorParamsCatcher( this.valuesReview(options), async () => {
@@ -54,7 +53,6 @@ export class ObjectsModel {
         });
     }
 
-    // обновление новости
     async updateSnippet(id, parameters) {
         const options: IObjectSnippet = parameters;
         return await this.errorParamsCatcher( ( this.valuesReview(options) && ObjectId.isValid(id) ),async () => {

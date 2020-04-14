@@ -16,7 +16,6 @@ import { ObjectFilterComponent } from './jk-objects-item/object-filter/object-fi
 import { ObjectTriggerComponent } from './jk-objects-item/object-trigger/object-trigger.component';
 import { ObjectStorageComponent } from './jk-objects-item/object-storage/object-storage.component';
 import { ObjectProjectComponent } from './jk-objects-item/object-project/object-project.component';
-import { ObjectFlatComponent } from './jk-objects-item/object-flat/object-flat.component';
 import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-gallery.component';
 import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
 import { ObjectDocumentationComponent } from './jk-objects-item/object-documentation/object-documentation.component';
@@ -42,6 +41,8 @@ import { ObjectPurchaseModule } from './jk-objects-item/object-purchase/object-p
 import { ObjectMembersModule } from './jk-objects-item/object-members/object-members.module';
 import { JkObjectsListModule } from './jk-objects-list/jk-objects-list.module';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ObjectFlatsModule } from './jk-objects-item/object-flat/flats/object-flats.module';
+import { ObjectFlatsComponent } from './jk-objects-item/object-flat/flats/object-flats.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -51,7 +52,6 @@ const jkObjectsComponents = [
     ObjectTriggerComponent,
     ObjectStorageComponent,
     ObjectProjectComponent,
-    ObjectFlatComponent,
     ObjectGalleryComponent,
     ObjectDecorationComponent,
     ObjectDocumentationComponent,
@@ -91,15 +91,17 @@ const jkObjectsComponents = [
         ObjectLocationModule,
         ObjectPurchaseModule,
         ObjectMembersModule,
+        ObjectFlatsModule,
+
         JkObjectsListModule,
         TextMaskModule,
 
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent
                 , children : [
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
                     { path: 'list', component: JkObjectsListComponent },
                     { path: 'list/:id', component: JkObjectsItemComponent },
+                    { path: 'list/:id/flats', component: ObjectFlatsComponent },
                     { path: 'list/:id/dynamic', component: ObjectDynamicComponent },
                     // { path: 'search', component: SearchComponent },
                     // { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },

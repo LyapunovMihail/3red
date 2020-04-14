@@ -29,15 +29,15 @@
 
             <div class="object-gallery__slider" *ngIf="contentSnippet?.image_data && contentSnippet?.image_data.length > 0">
 
-                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data.length > 1"><span></span></button>
-                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data.length > 1"><span></span></button>
+                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
+                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
 
-                <div class="object-gallery__slider-dots" *ngIf="contentSnippet?.image_data.length > 1">
+                <div class="object-gallery__slider-dots" *ngIf="contentSnippet?.image_data?.length > 1">
                     <span *ngFor="let dots of contentSnippet.image_data; let i = index"
                         [ngClass]="{'current-dots': currentSlide === i}"></span>
                 </div>
 
-                <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide" *ngIf="contentSnippet?.image_data.length; else elseBlock">
+                <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide" *ngIf="contentSnippet?.image_data?.length; else elseBlock">
                     <div class="gallery-slide__item" *ngFor="let slide of contentSnippet.image_data; let i = index"
                         [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
 

@@ -17,7 +17,7 @@ export class SearchService {
     }
 
     public getFlatsMultiple(options): Observable<{modsBtnList, housesBtnList, flats: IAddressItemFlat[]}> {
-        return this.http.post<{modsBtnList, housesBtnList, flats: IAddressItemFlat[]}>('/api/search/multiple', { search: options });
+        return this.http.post<{modsBtnList, housesBtnList, flats: IAddressItemFlat[]}>('/api/search/common', { search: options });
     }
 
     public getConfig() {
