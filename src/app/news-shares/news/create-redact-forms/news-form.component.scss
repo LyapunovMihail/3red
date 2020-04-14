@@ -278,6 +278,7 @@ $required-input : #ffb3b3;
         &-area {
             width: 100%;
             height: 35px;
+            min-height: 35px;
             box-sizing: border-box;
             overflow: hidden;
             padding: 4px 0 8px;

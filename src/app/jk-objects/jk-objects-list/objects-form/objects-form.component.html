@@ -5,6 +5,7 @@
                     (click)="showPopUp = !showPopUp">Район
             </button>
             <div class="objects__utilities-wrap" *ngIf="showPopUp">
+                <div class="objects__close-area" (click)="showPopUp = !showPopUp"></div>
                 <app-checkbox-list
                     [btnList]="btnList"
                     [formControlName]="'districts'"

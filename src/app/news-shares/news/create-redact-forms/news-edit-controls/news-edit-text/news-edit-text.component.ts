@@ -10,8 +10,8 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
 
             <div class="create-shares__wrap create-shares__wrap_btn">
                 <button class="create-shares__btn create-shares__btn_path-controll" (click)="remove.next()">Удалить</button>
-                <button class="create-shares__btn create-shares__btn_path-controll" (click)="move.emit(1)">Вверх</button>
-                <button class="create-shares__btn create-shares__btn_path-controll" (click)="move.emit(-1)">Вниз</button>
+                <a class="create-shares__btn create-shares__btn_path-controll" *ngIf="isFirst > 0" (click)="move.emit(-1)">Вверх</a>
+                <a class="create-shares__btn create-shares__btn_path-controll" *ngIf="!isLast" (click)="move.emit(1)">Вниз</a>
             </div>
 
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_full">
@@ -50,8 +50,10 @@ export class NewsEditTextComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
     @Output() public addLink: EventEmitter<any> = new EventEmitter();
-    @Output() public move: EventEmitter<any> = new EventEmitter();
     @Input() public type: string;
+    @Output() public move: EventEmitter<any> = new EventEmitter();
+    @Input() public isLast;
+    @Input() public isFirst;
 
     public conf: NewsBodyBlock;
 
