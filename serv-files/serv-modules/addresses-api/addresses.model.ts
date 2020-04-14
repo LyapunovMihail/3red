@@ -1,30 +1,40 @@
 import { ADDRESSES_COLLECTION_NAME } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
-import { OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
+import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
+import { OBJECTS_FLAT_COLLECTION_NAME } from '../jk-objects/flat-api/objects-flat.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class AddressesModel {
 
     private collectionName = ADDRESSES_COLLECTION_NAME;
     private collection: any;
-
     private objectCollectionName = OBJECTS_OBJECT_COLLECTION_NAME;
     private objectCollection: any;
+    private flatCollectionName = OBJECTS_FLAT_COLLECTION_NAME;
+    private flatCollection: any;
 
     private objectId = mongodb.ObjectId;
 
     constructor( public db: any ) {
         this.collection = db.collection(this.collectionName);
         this.objectCollection = db.collection(this.objectCollectionName);
+        this.flatCollection = db.collection(this.flatCollectionName);
     }
 
-    public async getObjects(query) {
+    public async getFlats(query) {
         let data = this.parseRequest(query);
         return await this.collection.find(data.request, data.parameters).toArray();
     }
 
-    public async getObjectsMultiple(query) {
+    public async getObjectFlats(query) {
+        let data = this.parseRequest(query);
+
+
+        return await this.collection.find(data.request, data.parameters).toArray();
+    }
+
+    public async getCommonFlats(query) {
         let data = this.parseRequest(query);
 
         const findByMod = query.mod ? {mod : query.mod} : {};
@@ -51,11 +61,14 @@ export class AddressesModel {
         const objects = await this.objectCollection.find().toArray();
         const modsBtnList = [];
         modsBtnList.push({ name: 'Все комплексы', value: '' });
-        objects.forEach((item) => {
-            if (!modsBtnList.includes({ name: item.name, value: item.mod })) {
-                modsBtnList.push({ name: item.name, value: item.mod });
+        for (const item of objects) {
+            const flatSnippet = await this.flatCollection.findOne({ objectId: item.mod }); // Проверяем включен ли блок квартир в объекте, если включен, то добавляем таб этого объекта
+            if (flatSnippet && flatSnippet.switchOn) {
+                if (!modsBtnList.includes({ name: item.name, value: item.mod })) {
+                    modsBtnList.push({ name: item.name, value: item.mod });
+                }
             }
-        });
+        }
         return modsBtnList;
     }
     private async setHousesBtns(mod, flatsOfMod, modsBtnList) {

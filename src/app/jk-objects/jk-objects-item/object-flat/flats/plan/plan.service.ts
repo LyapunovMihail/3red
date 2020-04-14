@@ -1,12 +1,12 @@
-import { adminHeaders } from '../../../commons/admin-headers.utilit';
+import { adminHeaders } from '../../../../../commons/admin-headers.utilit';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { IObjectFlatSnippet } from '../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
+import { IObjectFlatSnippet } from '../../../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
 
 @Injectable()
 
-export class ObjectFlatService {
+export class PlanService {
 
     public subject = new BehaviorSubject<number>(0);
 

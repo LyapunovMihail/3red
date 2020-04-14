@@ -1,0 +1,9 @@
+
+<div class="search-form__corpus">
+    <p *ngFor="let house of housesList" (click)="houseNavigate(house.value)"
+        [class.search-form__corpus-item--active]="house.value === value"
+        class="search-form__corpus-item">
+           Тип дома {{house.value | uppercase}}
+    </p>
+</div>
+

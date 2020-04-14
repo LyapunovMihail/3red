@@ -19,13 +19,13 @@ export class AddressesController extends AddressesModel {
 
     public routing() {
         this.router.post('/search', responseHandler(async(req) => {
-            return await this.getObjects(req.body.search);
+            return await this.getFlats(req.body.search);
         }));
-        this.router.get('/search', responseHandler(async(req) => {
-            return await this.getObjects(req.query);
+        this.router.get('/search/object', responseHandler(async(req) => {
+            return await this.getObjectFlats(req.query);
         }));
-        this.router.post('/search/multiple', responseHandler(async(req) => {
-            return await this.getObjectsMultiple(req.body.search);
+        this.router.post('/search/common', responseHandler(async(req) => {
+            return await this.getCommonFlats(req.body.search);
         }));
         this.router.post('/search/with_count', responseHandler(async(req) => {
             return await this.getObjectsWithCount(req.body.search);

@@ -34,7 +34,7 @@ export class HeaderService {
                 url: '/about'
             }, {
                 name: 'Объекты',
-                url: `/objects`
+                url: `/objects/list`
             }, {
                 name: 'Квартиры',
                 url: `/flats/search`

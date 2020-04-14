@@ -1,20 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { placement, mockHouse } from './object-flat.config';
-import { ObjectFlatService } from './object-flat.service';
-import { IObjectFlatSnippet } from '../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
+import { placement, mockHouse } from './plan.config';
+import { PlanService } from './plan.service';
+import { IObjectFlatSnippet } from '../../../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-object-item-flat',
-    templateUrl: 'object-flat.component.html',
+    templateUrl: 'plan.component.html',
     styleUrls: [
-        'object-flat.component.scss',
-        '../jk-objects-item.component.scss'
+        'plan.component.scss',
+        '../../../jk-objects-item.component.scss'
     ],
-    providers: [ObjectFlatService]
+    providers: [PlanService]
 })
 
-export class ObjectFlatComponent implements OnInit {
+export class PlanComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
@@ -27,7 +27,7 @@ export class ObjectFlatComponent implements OnInit {
     public switchOn = false;
 
     constructor(
-        private flatService: ObjectFlatService,
+        private flatService: PlanService,
         private activatedRoute: ActivatedRoute
     ) { }
 

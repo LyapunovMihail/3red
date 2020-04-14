@@ -30,7 +30,7 @@ const FlatsComponents = [
         CommonModule,
         RouterModule,
         RouterModule.forChild([
-            { path: 'flats', component: FlatsComponent,
+            { path: '', component: FlatsComponent,
                 children: [
                     { path: 'search', component: SearchComponent}
                 ]
