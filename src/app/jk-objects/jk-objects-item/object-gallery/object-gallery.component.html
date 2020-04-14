@@ -27,7 +27,7 @@
                 </ul>
             </nav>
 
-            <div class="object-gallery__slider" *ngIf="contentSnippet?.image_data && contentSnippet?.image_data.length > 0">
+            <div class="object-gallery__slider">
 
                 <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
                 <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
