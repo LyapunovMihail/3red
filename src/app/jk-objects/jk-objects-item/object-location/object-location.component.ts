@@ -25,6 +25,8 @@ export class ObjectLocationComponent implements OnInit {
     public objectName: string;
     @Input()
     public objectCoords: string;
+    @Input()
+    public objectAddress: string;
 
     public isTabSet = false;
 

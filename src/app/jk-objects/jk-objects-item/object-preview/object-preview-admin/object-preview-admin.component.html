@@ -36,7 +36,7 @@
             <ng-container formArrayName="deadlines" *ngFor="let deadline of form.controls['deadlines']['controls']; let i = index">
                 <div class="snippet__info" formGroupName="{{i}}">
                     <div class="snippet__wrapper">
-                        <h2 class="snippet__info-title">Снипет 1</h2>
+                        <h2 class="snippet__info-title">Снипет {{i + 1}}</h2>
                         <button class="snippet__delete" (click)="popDeadlineSnippet(i)">Удалить</button>
                     </div>
                     <div class="form">
@@ -68,7 +68,7 @@
                     <div class="form__wrap">
                         <ng-container formArrayName="indicators" *ngFor="let indicator of indicators; let i = index">
                             <div class="form-item form-item--inline" formGroupName="{{i}}">
-                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="{{indicator}}">
+                                <input maxlength="25" type="text" class="form-input info-input" appSlideTopLabel formControlName="{{indicator}}">
                                 <label class="form-label info-suptitle">{{indicator}}</label>
                             </div>
                         </ng-container>

@@ -41,6 +41,7 @@ import { ObjectLocationModule } from './jk-objects-item/object-location/object-l
 import { ObjectPurchaseModule } from './jk-objects-item/object-purchase/object-purchase.module';
 import { ObjectMembersModule } from './jk-objects-item/object-members/object-members.module';
 import { JkObjectsListModule } from './jk-objects-list/jk-objects-list.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -91,6 +92,7 @@ const jkObjectsComponents = [
         ObjectPurchaseModule,
         ObjectMembersModule,
         JkObjectsListModule,
+        TextMaskModule,
 
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent

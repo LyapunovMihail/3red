@@ -10,12 +10,20 @@ import { NewsBodyBlock } from '../../../../../../../serv-files/serv-modules/news
 
             <div class="create-shares__wrap create-shares__wrap_btn">
                 <button class="create-shares__btn create-shares__btn_path-controll" (click)="remove.next()">Удалить</button>
-                <button class="create-shares__btn create-shares__btn_path-controll">Вверх</button>
-                <button class="create-shares__btn create-shares__btn_path-controll">Вниз</button>
+                <button class="create-shares__btn create-shares__btn_path-controll" (click)="move.emit(1)">Вверх</button>
+                <button class="create-shares__btn create-shares__btn_path-controll" (click)="move.emit(-1)">Вниз</button>
             </div>
 
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_full">
-                <ghm-textarea *ngIf="conf" [(ngModel)]="conf.blockDescription"
+                <ghm-textarea *ngIf="conf && type === 'description'" [(ngModel)]="conf.blockDescription"
+                    (input)="changeText()"
+                    [placeholder]="type === 'title' ? 'Заголовок' : 'Текст'"
+                    [link]="type === 'description'"
+                    [bodyBlockIndex]="conf.blockOrderNumber"
+                    (addLink)="addLink.emit($event)"
+                    class="create-shares__input create-shares__input_area">
+                </ghm-textarea>
+                <ghm-textarea *ngIf="conf && type === 'title'" [(ngModel)]="conf.blockTitle"
                     (input)="changeText()"
                     [placeholder]="type === 'title' ? 'Заголовок' : 'Текст'"
                     [link]="type === 'description'"
@@ -42,6 +50,7 @@ export class NewsEditTextComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
     @Output() public addLink: EventEmitter<any> = new EventEmitter();
+    @Output() public move: EventEmitter<any> = new EventEmitter();
     @Input() public type: string;
 
     public conf: NewsBodyBlock;

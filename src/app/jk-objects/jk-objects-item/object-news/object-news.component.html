@@ -55,7 +55,7 @@
 
                             </a>
 
-                            <a [routerLink]="['/news-shares/shares/list/1/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.name">
+                            <a [routerLink]="['/news-shares/shares/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.name">
                                 <p class="slider-list__house-name">{{snippet.objectName}}</p>
                                 <div class="slider-list__image">
                                     <img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">

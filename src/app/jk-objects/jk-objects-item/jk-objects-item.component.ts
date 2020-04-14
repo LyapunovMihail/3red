@@ -52,7 +52,10 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
     public getJkObject() {
         this.jkObjectsItemService.getSnippets(this.objectId)
             .subscribe(
-                (data) => { this.jkObject = data[0]; },
+                (data) => {
+                    this.jkObject = data[0];
+                    console.log('Этот ЖК ->', data[0]);
+                },
                 (err) => {console.error(err); this.jkObject = { name: 'Сердце Ярославля', objectId: this.objectId }; console.log('this.jkObject: ', this.jkObject); }
             );
     }

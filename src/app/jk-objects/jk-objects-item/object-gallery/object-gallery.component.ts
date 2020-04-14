@@ -46,7 +46,10 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
         this.objectId = this.activatedRoute.snapshot.params.id;
 
         this.getTabsThanContent();
-        this.slideShow();
+        console.log('this.contentSnippet', this.contentSnippet);
+        // if ( this.contentSnippet.image_data && this.contentSnippet.image_data.length > 0 ) {
+        //     this.slideShow();
+        // }
     }
 
     public getTabsThanContent() {

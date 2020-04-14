@@ -34,6 +34,7 @@ export class ObjectDocumentationAdminComponent implements OnInit {
     public progressCount: number;
     public progressCurrent: number;
     public progressLoaded = false;
+    public dataMask = [/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/];
 
     constructor(
         private router: Router,
@@ -151,4 +152,24 @@ export class ObjectDocumentationAdminComponent implements OnInit {
         }
     }
 
+    public parseDate(date) {
+        if (moment(date, 'DD.MM.YYYY').isValid()) {
+            return date;
+        } else {
+            return moment(date).format('DD.MM.YYYY');
+        }
+    }
+    public dateMask(val, elem) {
+        console.log('dateMask: ->', val)
+        if ( val.length > 2 && val.length < 4) {
+            val = val + '.';
+            elem = val;
+        } else if ( val.length > 5 && val.length < 7) {
+            val = val + '.';
+            elem = val;
+        } else if ( val.length > 10 ) {
+            val = val.substr(0, 10);
+            elem = val;
+        }
+    }
 }

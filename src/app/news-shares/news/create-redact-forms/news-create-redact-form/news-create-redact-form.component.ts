@@ -211,6 +211,11 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         }
     }
 
+    public moveBlock(i, dir) {
+
+        console.log(this.body.at(i).value.blockOrderNumber);
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         // при открытии формы
         if ( this.isForm ) {
@@ -297,7 +302,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
 
     onSubmit(form) {
         form.publish = !(form.publish === 'false' || form.publish === false);
-
+        console.log('news form ->', form);
         if (!this.redactId) {
             this.newsCreateService.createSnippet(form).subscribe(
                 // а в общий компонент передается новый массив сниппетов

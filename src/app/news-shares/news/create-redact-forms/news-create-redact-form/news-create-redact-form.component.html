@@ -97,6 +97,7 @@
                             [formControlName]="i"
                             [type]="'description'"
                             *ngSwitchCase="'description'"
+                            (move)="moveBlock(i, $event)"
                             (remove)="removeBlock(i)"
                             (addLink)="showModalFunc($event, i)">
                         </app-news-edit-text>
