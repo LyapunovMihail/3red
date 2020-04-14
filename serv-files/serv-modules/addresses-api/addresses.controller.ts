@@ -27,9 +27,6 @@ export class AddressesController extends AddressesModel {
         this.router.post('/search/common', responseHandler(async(req) => {
             return await this.getCommonFlats(req.body.search);
         }));
-        this.router.post('/search/multiple', responseHandler(async(req) => {
-            return await this.getObjectsMultiple(req.body.search);
-        }));
         this.router.post('/search/with_count', responseHandler(async(req) => {
             return await this.getObjectsWithCount(req.body.search);
         }));
