@@ -1,5 +1,5 @@
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { SearchService } from '../search.service';
@@ -19,6 +19,11 @@ export class SearchOutputComponent implements OnInit {
     public selectedFlatIndex: number;
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
+    @Input() public showMore: boolean;
+    @Output() public loadMore = new EventEmitter<boolean>();
+
+    @ViewChild('container')
+    public container: ElementRef;
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
@@ -50,4 +55,8 @@ export class SearchOutputComponent implements OnInit {
         this.windowScrollLocker.block();
         this.showApartmentWindow = true;
     }
-}
+
+    public scrollToTop() {
+        window.scrollTo(0, this.container.nativeElement.offsetTop);
+    }
+ }

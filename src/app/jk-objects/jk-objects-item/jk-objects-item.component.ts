@@ -48,7 +48,6 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
         clearInterval(this.intervalTimer);
     }
 
-    // ToDo реализовать контроллер и интерфейсы для jk-objects/object-api
     public getJkObject() {
         this.jkObjectsItemService.getSnippets(this.objectId)
             .subscribe(

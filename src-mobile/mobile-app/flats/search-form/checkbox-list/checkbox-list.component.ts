@@ -17,7 +17,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CheckboxListComponent {
 
     @Input() public btnList: any[] = [];
-    @Input() public name: string;
 
     public activeList: string[] = [];
 

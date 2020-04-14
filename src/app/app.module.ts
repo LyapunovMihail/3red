@@ -37,7 +37,6 @@ import { AboutModule } from './about/about.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
 import { DecorationModule } from './decoration/decoration.module';
 import { FlatsModule } from './flats/flats.module';
-import { FavoritesModule } from './favorites/favorites.module';
 import { ParkingModule } from './parking/parking.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
@@ -80,7 +79,6 @@ const APP_MODULES = [
     NewsSharesModule,
     DecorationModule,
     FlatsModule,
-    FavoritesModule,
     ParkingModule,
     StoreroomsModule,
     AdminContactsModule,

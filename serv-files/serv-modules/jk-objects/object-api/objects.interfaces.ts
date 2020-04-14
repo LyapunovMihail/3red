@@ -6,7 +6,7 @@ export const ErrorNotCorrectArguments = 'Параметры переданы н�
 
 export interface IObjectSnippet {
     _id?: any;
-    objectId: string;
+    mod: string;
     name: string;
     subtext: string;
     address: string;

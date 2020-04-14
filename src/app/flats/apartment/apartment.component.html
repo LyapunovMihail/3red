@@ -1,112 +1,75 @@
-<div class="g-modal-bg apartment__modal" *ngIf="showApartmentWindow">
+<div class="g-modal-bg" *ngIf="showApartmentWindow">
 
     <div class="apartment">
 
         <div class="apartment__elements">
-            <div class="apartment__elements-btn apartment__elements-btn_prev" *ngIf="flatIndex - 1 >= 0">
-                <button class="apartment__elements-prev" (click)="prevFlat()"></button>
-                <p>№ {{flatsList[flatIndex-1].flat}}</p>
-            </div>
-            <div class="apartment__elements-btn apartment__elements-btn_next" *ngIf="flatIndex + 1 < flatsList.length">
-                <button class="apartment__elements-next" (click)="nextFlat()"></button>
-                <p>№ {{flatsList[flatIndex+1].flat}}</p>
-            </div>
-            <button class="apartment__elements-cls" (click)="close.emit(false)"></button>
-            <!-- <div class="apartment__elements-compass">
-                <img src="/assets/img/flats/apartment/compass.svg" alt="compass">
-            </div> -->
+            <button class="apartment__elements-prev btn-slider btn-slider_white btn-slider_prev" 
+                (click)="prevFlat()" *ngIf="flatIndex - 1 >= 0"><span></span></button>
+            <button class="apartment__elements-next btn-slider btn-slider_white btn-slider_next" 
+                (click)="nextFlat()" *ngIf="flatIndex + 1 < flatsList.length"><span></span></button>
+            <button class="apartment__elements-cls btn-cls" (click)="close.emit(false)"><span></span></button>
+        </div>
+
+
+        <h2 class="apartment__info-title">
+            {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
+        </h2>
+        <div class="apartment__image">
+            <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
+                 [src]="'/assets/floor-plans/jk_' + flatData.mod + '/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
+            <div *ngIf="img.style.display === 'none'" class="apartment__image-error g-3red"></div>
         </div>
 
         <div class="apartment__info">
-            <nav class="apartment__info-nav">
-                <ul class="apartment__info-nav-list">
-                    <li class="apartment__info-nav-item">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/plan'" (click)="close.emit(false)">Общий вид</a>
-                    </li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house" (click)="close.emit(false)">Корпус {{flatData.house}}</a>
-                    </li>
-                    <li class="apartment__info-nav-item">
-                        Секция {{flatData.section}}
-                    </li>
-                    <li class="apartment__info-nav-item apartment__info-nav-item--underline">
-                        <a class="apartment__info-nav-item-link" [routerLink]="'/flats/house/' + flatData.house + '/section/' + flatData.section + '/floor/' + flatData.floor" (click)="close.emit(false)">Этаж {{flatData.floor}}</a>
-                    </li>
-                    <li class="apartment__info-nav-item">Квартира №{{flatData.flat}}</li>
-                </ul>
-            </nav>
-
-            <h1 class="apartment__info-title">
-                {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
-            </h1>
-            <div class="apartment__info-descr">
-                <div class="apartment__info-descr-item">
-                    <p class="apartment__info-subtitle">Отделка</p>
-                    <p class="apartment__info-descr-value">{{flatData.decorationName}}</p>
-                </div>
-                <div class="apartment__info-descr-item">
-                    <p class="apartment__info-subtitle">Площадь</p>
-                    <p class="apartment__info-descr-value">{{flatData.space}} м<sup>2</sup></p>
-                </div>
-                <div class="apartment__info-descr-item">
-                    <p class="apartment__info-subtitle">Ипотека от</p>
-                    <p class="apartment__info-descr-value">100 000 &#8381;</p>
-                </div>
+            <div class="apartment__info-item">
+                <p class="apartment__info-subtitle">Площадь</p>
+                <p class="apartment__info-value">{{flatData.space}} м<sup>2</sup></p>
             </div>
-            <div class="apartment__info-delivery">
-                Срок сдачи {{flatData.deliveryDate}}
+            <div class="apartment__info-item">
+                <p class="apartment__info-subtitle">Тип дома</p>
+                <p class="apartment__info-value apartment__info-value--house">{{flatData.house}}</p>
             </div>
-            <div class="apartment__info-price">
+            <div class="apartment__info-item">
+                <p class="apartment__info-subtitle">Этаж</p>
+                <p class="apartment__info-value">{{flatData.floor}}</p>
+            </div>
+            <div class="apartment__info-item">
+                <p class="apartment__info-subtitle">Отделка</p>
+                <p class="apartment__info-value">{{flatData.decorationName}}</p>
+            </div>
+            <div class="apartment__info-item">
                 <p class="apartment__info-subtitle">Стоимость</p>
-                <p class="apartment__info-price-value"
-                    [class.apartment__info-price-value_not-sale]="flatData.discount">
-                    {{flatData.price | myBitNumberPipe}} &#8381;
-                </p>
-                <p *ngIf="flatData.discount"
-                    class="apartment__info-price-value apartment__info-price-value_sale">
-                    {{flatData.price - flatData.discount | myBitNumberPipe}} &#8381;
+                <p class="apartment__info-value"
+                    [class.apartment__info-value--sale]="flatData.discount">
+                    {{ (flatData.discount ?  (flatData.price - flatData.discount) : flatData.price) | myBitNumberPipe }} &#8381;
                 </p>
             </div>
-            <p class="apartment__info-text">
-                При покупке квартиры в ипотеку или при 100% оплате действует скидка 3%. 
-            </p>
-            <div class="apartment__info-btn">
-                <button (click)="isReserveFormOpen = true;" class="apartment__info-btn-reserve">Забронировать</button>
-                <button (click)="isCreditFormOpen = true;" class="apartment__info-btn-credit">Заявка на ипотеку</button>
+            <div class="apartment__info-item">
+                <p class="apartment__info-subtitle">Срок сдачи</p>
+                <p class="apartment__info-value">{{flatData.deliveryDate}}</p>
             </div>
         </div>
-
-        <div class="apartment__plan">
-            <div class="apartment__plan-link">
-                <!-- <a class="g-link_red apartment__plan-link-dwnld" [href]="pdfLink" target="_blank">План квартиры.pdf</a> -->
-                <!-- <div (click)="toFavorite()"
-                     [ngClass]="{'apartment__plan-link-favorite_active': inFavorite}" 
-                     class="g-link_red apartment__plan-link-favorite">
-                    Добавить в избранное
-                </div> -->
-            </div>
-            <div class="apartment__plan-img">
-                <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
-                     [src]="'/assets/floor-plans/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>
-                <div *ngIf="img.style.display === 'none'" class="apartment__plan-img-error">Изображение недоступно</div>
-            </div>
+        <div class="apartment__btn">
+            <button (click)="isReserveFormOpen = true" class="apartment__btn-reserve btn_var-2">Забронировать</button>
+            <button (click)="isCreditFormOpen = true;" class="apartment__btn-credit btn_var-3">Заявка на ипотеку</button>
         </div>
 
     </div>
 </div>
-
 
 <app-form-credit *ngIf="flatData"
     (close)="isCreditFormOpen = $event"
     [isOpen]="isCreditFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
-    [type]="flatData.type">
+    [type]="flatData.type"
+    [article]="flatData.article">
 </app-form-credit>
 <app-form-reserve *ngIf="flatData"
     (close)="isReserveFormOpen = $event"
     [isOpen]="isReserveFormOpen"
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
-    [type]="flatData.type">
+    [type]="flatData.type"
+    [article]="flatData.article">
 </app-form-reserve>

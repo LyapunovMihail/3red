@@ -41,7 +41,9 @@ export const ADDRESSES_COLLECTION_NAME = 'addresses';
 
 export interface IAddressItemFlat {
     type?: string;
-    house: number;
+    mod: string;
+    jkName?: string;
+    house: string;
     section: number;
     floor: number;
     flat: number;
@@ -57,6 +59,7 @@ export interface IAddressItemFlat {
     space: number;
     price: number;
     deliveryDate: string;
+    article: string;
     _id?: any;
 }
 

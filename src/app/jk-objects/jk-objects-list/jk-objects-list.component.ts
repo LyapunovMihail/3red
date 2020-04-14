@@ -112,7 +112,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         console.log('this.btnList: ', this.btnList);
         this.btnList.push({ name: 'Все районы', value: 'Все районы' });
         this.snippets.forEach((item) => {
-            if (!this.btnList.includes({ name: item.district, value: item.district })) {
+            if (!this.btnList.some((btn) => btn.value === item.district)) {
                 this.btnList.push({ name: item.district, value: item.district });
             }
         });

@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FormConfig } from './search-form.config';
 
 @Pipe({
     name: 'mySearchFormPipe',
@@ -8,19 +7,17 @@ import { FormConfig } from './search-form.config';
 
 export class SearchFormPipe implements PipeTransform  {
 
-    public housesList = FormConfig.housesList;
-
     constructor() {}
 
-    transform(housesValues: string[]): string {
-        if (housesValues.length > 0 && housesValues.length < 4) {
-            housesValues.sort();
-            let housesString = housesValues.reduce((prevVal, currentVal, i) => {
-                return prevVal + this.housesList.find((item) => item.value === currentVal).name + (i + 1 < housesValues.length ? '; ' : '');
+    transform(ButtonsValues: {value: string, mod: string}[], allButtons?: any): string {
+        if (allButtons.length && ButtonsValues.length > 0 && ButtonsValues.length < allButtons.length - 1) {
+            ButtonsValues.sort();
+            let text = ButtonsValues.reduce((prevVal, currentVal, i) => {
+                return prevVal + allButtons.find((item) => item.value === currentVal.value).name + (i + 1 < ButtonsValues.length ? '; ' : '');
             }, '');
-            housesString = housesString.length > 15 ? housesString.slice(0, 13) + '..' : housesString;
-            return housesString;
+            text = text.length > 15 ? text.slice(0, 13) + '..' : text;
+            return text;
         }
-        return 'Все корпуса';
+        return 'Все дома';
     }
 }

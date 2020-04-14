@@ -1,15 +1,15 @@
 export const FormConfig = {
     price: {
-        min: 1400000,
-        max: 7000000
+        min: 1500000,
+        max: 15000000
     },
     floor: {
-        min: 2,
-        max: 17
+        min: 1,
+        max: 50
     },
     space: {
-        min: 17,
-        max: 120
+        min: 20,
+        max: 200
     },
     sort: 'floor_1',
     typeList: [
@@ -28,7 +28,7 @@ export const FormConfig = {
             value: '00'
         },
         {
-            name: 'Черновая',
+            name: 'WhiteBox',
             value: '01'
         },
         {
@@ -38,24 +38,20 @@ export const FormConfig = {
     ],
     housesList: [
         {
-            name: 'Все корпуса',
-            value: 'all'
+            name: 'Тип дома 1А',
+            value: '1a'
         },
         {
-            name: 'Корпус 1',
-            value: '1'
+            name: 'Тип дома 2А',
+            value: '2a'
         },
         {
-            name: 'Корпус 2',
-            value: '2'
+            name: 'Тип дома 1Б',
+            value: '1b'
         },
         {
-            name: 'Корпус 3',
-            value: '3'
-        },
-        {
-            name: 'Корпус 9',
-            value: '9'
+            name: 'Тип дома 2Б',
+            value: '2b'
         }
     ]
 

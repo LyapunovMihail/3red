@@ -1,296 +1,89 @@
 @import "../../../styles/modules/mixins/mixin";
 
 .apartment {
-    width: 1088px;
-    height: 606px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
+    width: 964px;
     background: #fff;
     position: relative;
+    box-sizing: border-box;
+    padding: 48px 94px;
     z-index: 1000;
 
-    &__modal {
-        padding: 60px 0;
-        box-sizing: border-box;
-        align-items: center;
-    }
-
-    &__overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-    }
-
     &__elements {
-        width: 0;
+        position: absolute;
+        width: 0;  
         height: 0;
+        left: 0;
+        top: 0;
+        pointer-events: none;
 
         &-cls {
-            position: absolute;
-            right: -80px;
-            top: 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            background: url(/assets/img/cls_white.svg) 50% 49% no-repeat;
-            background-size: 20px;
-            transition: border-color $transition;
-            &:hover { border-color: #fff; }
-        }
-        &-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-
-            p {
-                font: 500 16px/23px $font-mus;
-                @include font-smoothing;
-                color: #fff;
-            }
-            &_prev { left: - 70px; }
-            &_next { right: -70px; }
+            position: fixed;
+            top: 64px;
+            right: calc(((100% - 964px) / 2) - (22px + 48px));
+            pointer-events: all;
         }
         &-prev,
         &-next {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: 0.2s linear;
-            margin: 0 0 5px;
-            &:hover {
-                border-color: #fff;
-                background-position: calc(50% - 3px);
-            }
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: all;
         }
-        &-prev { background: url(/assets/img/btn_next_white.svg) 50% 49% no-repeat; }
+        &-prev {
+            left: calc(((100% - 964px) / 2) - (22px + 48px));
+        }
         &-next {
-            background: url(/assets/img/btn_next_white.svg) 50% 49% no-repeat;
-            transform: rotate(180deg);
+            right: calc(((100% - 964px) / 2) - (22px + 48px));
         }
+    }
 
-        &-compass {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+    &__image {
+        width: 100%;
+        height: 600px;
+        margin: 0 0 16px;
+
+        &-error {
+            width: 100%;
+            height: 100%;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     }
 
     &__info {
-        width: calc(100% - 559px);
+        width: 100%;
         box-sizing: border-box;
-        padding: 40px 30px 0 40px;
+        margin: 0 0 24px;
 
-        &-subtitle {
-            font: 500 14px/20px $font-mus;
-            @include font-smoothing;
-            color: rgba(0, 1, 5, .6);
-            margin: 0 0 5px;
+        &-title { margin: 0 0 18px; }
+
+        &-subtitle,
+        &-value { font: $font-18; }
+        &-value {
+            color: $col-black-5;
+            &--sale { color: $col-red; }
+            &--house { text-transform: uppercase; }
         }
 
-        &-nav {
-            margin: 0 0 10px;
-
-            &-list {
-                display: flex;
-                list-style: none;
-                font: 500 9px/15px $font-mus;
-                @include font-smoothing;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-                color: #323232;
-            }
-            &-item {
-                position: relative;
-                margin: 0 9.5px 5px 0;
-                &:last-child { &:before { display: none; } }
-                &:before {
-                    content: '';
-                    position: absolute;
-                    right: -7PX;
-                    top: 2.9px;
-                    width: 6px;
-                    height: 8px;
-                    transform: rotate(180deg);
-                    background: url(/assets/img/btn_next_grey.svg) no-repeat;
-                    background-size: 6px 8px;
-                }
-
-                &-link {
-                    text-decoration: underline;
-                }
-            }
-        }
-
-        &-title {
-            font: 42px/46px 'Leksa';
-            @include font-smoothing;
-            color: $col-black;
-            margin: 0 0 41px;
-        }
-
-        &-descr {
-            width: 100%;
+        &-item {
             display: flex;
-            border-bottom: 1px solid rgba(0, 1, 5, 0.3);
-            padding: 0 0 10px;
-            margin: 0 0 10px;
-
-            &-item {
-                margin: 0 45px 0 0;
-                &:last-child { margin: 0; }
-            }
-
-            &-value {
-                font: 500 20px/24px $font-mus;
-                @include font-smoothing;
-                color: $col-black;
-            }
-        }
-
-        &-delivery {
-            margin-bottom: 30px;
-            font: 500 20px/24px $font-mus;
-            color: #666769;
-        }
-
-        &-price {
-            margin: 0 0 30px;
-
-            &-value {
-                font: 500 36px/40px $font-mus;
-                @include font-smoothing;
-                color: $col-black;
-
-                &_sale {
-                    position: relative;
-                    color: $col-orange;
-                    padding: 0 0 0 32px;
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        left: 0;
-                        top: 12px;
-                        width: 27px;
-                        height: 15px;
-                        background: url(/assets/img/stock-ic.svg) no-repeat;
-                        background-size: 100%;
-                    }
-                }
-                &_not-sale {
-                    text-decoration: line-through;
-                    color: #999a9b;
-                }
-            }
-        }
-
-        &-text {
-            width: calc(100% - 30px);
-            @include f16-24(rgba(0, 1, 5, 0.8));
-        }
-
-        &-btn {
-            position: absolute;
-            left: 40px;
-            bottom: 40px;
-
-            &-reserve,
-            &-credit {
-                width: 210px;
-                height: 50px;
-                border-radius: 4px;
-                font: 500 16px/20px $font-mus;
-                @include font-smoothing;
-                letter-spacing: .5px;
-                text-transform: uppercase;
-                box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-            }
-            &-reserve {
-                color: #fff;
-                background-color: $col-orange;
-                margin: 0 20px 0 0;
-            }
-            &-credit { color: $col-orange; }
+            justify-content: space-between;
+            padding: 8px 0;
+            margin: 0 0 8px;
+            border-bottom: 1px solid $col-border;
         }
     }
+    &__btn {
+        display: flex;
+        justify-content: space-between;
 
-    &__plan {
-        width: 559px;
-        height: 606px;
-        box-sizing: border-box;
-        padding: 40px 30px;
-        background: rgba(170, 171, 34, 0.2);
-
-        &-link {
-            margin: 0 0 30px;
-
-            &-dwnld,
-            &-favorite {
-                display: block;
-                position: relative;
-                padding: 0 0 0 30px;
-                cursor: pointer;
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 22px;
-                    height: 22px;
-                    left: 0;
-                    top: -1px;
-                }
-            }
-            &-dwnld {
-                margin: 0 0 10px;
-                &:before {
-                    background: url(/assets/img/pdf.svg) no-repeat;
-                    background-size: 22px 22px;
-                }
-            }
-            &-favorite {
-                &:before {
-                    background: url(/assets/img/favorite.svg) no-repeat;
-                    background-size: 100%;
-                }
-                &_active {
-                    &:before {
-                        background: url(/assets/img/favorite-active.svg) no-repeat;
-                        background-size: 100%;
-                    }
-                }
-            }
-        }
-
-        &-img {
-            width: 490px;
-            height: 442px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &-error {
-                display: flex;
-                width: 100%;
-                height: 100%;
-                align-items: center;
-                justify-content: center;
-                background-color: #fafafa;
-                font: 500 14px/20px 'Museo Sans Cyrl', sans-serif;
-                color: #000105;
-                opacity: 0.6;
-            }
-
-            img {
-                height: 100%;
-                max-width: 100%;
-            }
+        &-reserve,
+        &-credit {
+            width: 376px;
+            height: 48px;
         }
     }
 }

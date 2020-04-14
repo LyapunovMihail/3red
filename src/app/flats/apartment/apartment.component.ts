@@ -3,6 +3,7 @@ import { FavoritesService } from '../../commons/favorites.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+// declare let chWidget: any; // переменная для работы с чейзером
 
 @Component({
     selector: 'app-flats-apartment-modal',
@@ -16,11 +17,13 @@ export class ApartmentComponent implements OnInit {
     public isReserveFormOpen: boolean = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
+    // public chWidget = chWidget; // переменная для работы с чейзером
 
     @Input() public showApartmentWindow = false;
     @Input() public flatIndex: number;
     @Input() public flatsList: IFlatWithDiscount[];
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
+
 
     constructor(
         public router: Router,
@@ -46,6 +49,14 @@ export class ApartmentComponent implements OnInit {
 
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
+    }
+
+    public minCredit(price) {
+        let minPrice = (price / 100 * 5);
+        if (this.flatData.discount) {
+            minPrice = (price - this.flatData.discount) / 100 * 5;
+        }
+        return minPrice;
     }
 
     public toFavorite(): void {

@@ -1,23 +1,96 @@
 import { ADDRESSES_COLLECTION_NAME } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
+import { OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class AddressesModel {
 
     private collectionName = ADDRESSES_COLLECTION_NAME;
-
     private collection: any;
+
+    private objectCollectionName = OBJECTS_OBJECT_COLLECTION_NAME;
+    private objectCollection: any;
 
     private objectId = mongodb.ObjectId;
 
     constructor( public db: any ) {
         this.collection = db.collection(this.collectionName);
+        this.objectCollection = db.collection(this.objectCollectionName);
     }
 
     public async getObjects(query) {
         let data = this.parseRequest(query);
         return await this.collection.find(data.request, data.parameters).toArray();
+    }
+
+    public async getObjectsMultiple(query) {
+        let data = this.parseRequest(query);
+
+        const findByMod = query.mod ? {mod : query.mod} : {};
+        const flatsOfMod = await this.collection.find(findByMod).toArray();
+        const modsBtnList = await this.setModBtns();
+        const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList);
+        const housesMods = query.housesMods ? query.housesMods.split('nzt;').map((item) => JSON.parse(item)) : [];
+
+        const result = {modsBtnList, housesBtnList, flats: []};
+        if (housesMods.length) {
+            for (const item of housesMods) {
+                const items = await this.collection.find({...data.request, mod: item.mod, house: item.value}, data.parameters).toArray();
+                result.flats.push(...items);
+            }
+        } else {
+            result.flats.push(...await this.collection.find(data.request, data.parameters).toArray());
+        }
+
+        result.flats.forEach((flat) => flat.jkName = modsBtnList.find((jk) => jk.value === flat.mod).name);
+
+        return result;
+    }
+    private async setModBtns() {
+        const objects = await this.objectCollection.find().toArray();
+        const modsBtnList = [];
+        modsBtnList.push({ name: 'Все комплексы', value: '' });
+        objects.forEach((item) => {
+            if (!modsBtnList.includes({ name: item.name, value: item.mod })) {
+                modsBtnList.push({ name: item.name, value: item.mod });
+            }
+        });
+        return modsBtnList;
+    }
+    private async setHousesBtns(mod, flatsOfMod, modsBtnList) {
+        const housesBtnList = [];
+        housesBtnList.push({ name: 'Все дома', value: 'all' });
+        if (mod) {
+            const jk = modsBtnList.find((item) => item.value === mod);
+            housesBtnList.push({jk : jk.name});
+
+            const flats = flatsOfMod.filter((flat) => flat.mod === jk.value);
+            flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1); // сортировка по возрастанию номера дома
+
+            flats.forEach((item) => {
+                if (!housesBtnList.some((btn) => btn.value === item.house)) {
+                    housesBtnList.push({ name: 'Дом № ' + item.house, value: item.house, mod: jk.value });
+                }
+            });
+        } else {
+            modsBtnList.forEach((jk, i) => {
+                if (i > 0) {
+                    const flats = flatsOfMod.filter((flat) => flat.mod === jk.value);
+                    flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1);   // сортировка по возрастанию номера дома
+                    if (flats.length) {
+                        housesBtnList.push({ jk: jk.name });    // При появлении нового жк, добавлять его название в массив
+
+                        flats.forEach((item) => {
+                            if (!housesBtnList.some((btn) => btn.value === item.house)) {
+                                housesBtnList.push({ name: 'Дом № ' + item.house, value: item.house, mod: item.mod});
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        return housesBtnList;
     }
 
     public async getObjectsWithCount(query) {
@@ -36,13 +109,19 @@ export class AddressesModel {
     public parseRequest(query) {
         let request: any = {};
 
-        if ('sections' in query && (/[1|2|3|4|5|6]/).exec(query.sections)) {
+        if ('sections' in query) {
             request.section = { $in: query.sections.split(',').map(Number) };
         }
-        if ('houses' in query && (/[1|2|3|9]/).exec(query.houses)) {
-            request.house = { $in: query.houses.split(',').map(Number) };
+        if ('houses' in query) {
+            request.house = { $in: query.houses.split(',') };
         }
-        if ('rooms' in query && (/[0|1|2|3|4]/).exec(query.rooms)) {
+        if ('mod' in query) {
+            request.mod = { $in: query.mod.split(',') };
+        }
+        if ('rooms' in query && (/[0|1|2|3]/).exec(query.rooms)) {
+            if ((/[3]/).exec(query.rooms)) {
+                query.rooms = query.rooms + ',4,5,6'; // если выбраны 3+, то добавляем квартиры большей комнатности
+            }
             request.rooms = { $in: query.rooms.split(',').map(Number) };
         }
         if ( 'priceMin' in query && 'priceMax' in query ) {

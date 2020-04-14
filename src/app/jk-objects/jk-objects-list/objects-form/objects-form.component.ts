@@ -62,13 +62,13 @@ export class ObjectsFormComponent implements OnInit {
 
         params.priceMin = form.priceMin.replace(/[\s]/g, '');
         params.priceMax = form.priceMax.replace(/[\s]/g, '');
+
         if (form.status !== 'Все') {
             params.status = form.status;
         }
         if (form.districts.length > 0) {
             params.districts = (form.districts).join(',');
         }
-        console.log('params: ', params);
         return params;
     }
 

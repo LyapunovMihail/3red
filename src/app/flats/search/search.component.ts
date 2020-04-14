@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FormConfig } from './search-form/search-form.config';
 import { SearchService } from './search.service';
@@ -16,7 +16,7 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
     ]
 })
 
-export class SearchComponent implements OnInit, OnChanges, OnDestroy {
+export class SearchComponent implements OnDestroy {
 
     public outputFlatsList: IAddressItemFlat[] = [];
     public searchFlats: IAddressItemFlat[] = [];
@@ -27,9 +27,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     public params: any;
     public isLoadMoreBtn = false;
 
-    @Input() public showSearchWindow: boolean;
-    @Input() public parentPlan: boolean;
-    @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
+    public housesBtnList: any = [];
+    public modsBtnList: any = [];
 
     constructor(
         public router: Router,
@@ -38,15 +37,8 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         public windowScrollLocker: WindowScrollLocker
     ) {}
 
-    public ngOnInit() {
-        if (this.platform.isBrowser) {
-            if (!this.showSearchWindow) {return; }
-        }
-    }
-
     public formChange(form) {
         this.form = form;
-        if (!this.showSearchWindow) {return; }
 
         const params = {
             spaceMin: form.space.min,
@@ -66,11 +58,23 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
-            params['rooms'] = (form.rooms).map((index, i) => (index) ? (i === 4) ? 0 : i + 1 : false).filter((i) => i !== false).join(',');
+            params['rooms'] = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
 
-        if ( 'houses' in form && form.houses.length > 0 ) {
-            params['houses'] = (form.houses).join(',');
+        if ( 'sections' in form && form['sections'].length > 0 ) {
+            params['sections'] = (form.sections).join(',');
+        }
+
+        if ( 'housesMods' in form && form.housesMods.length > 0 ) {                                                  // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
+            params['housesMods'] = form.housesMods.map((item) => JSON.stringify(item)).join('nzt;');       // if ( 'housesMods' in form && form.housesMods.length > 0 ) {
+        }                                                                                                    //     }
+
+        if ( 'mod' in form && form.mod.length) { // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
+            params['mod'] = form.mod;
+
+        }
+        if (this.params && this.params.mod !== params['mod']) {
+            delete params['housesMods'];
         }
 
         this.params = params;
@@ -81,22 +85,22 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public getFlats(params) {
-
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
-        this.searchService.getObjects(params).subscribe(
-            (data: IAddressItemFlat[]) => {
-                this.count = data.length;
-                this.searchFlats = data;
-                this.sortFlats();
+        this.searchService.getFlatsMultiple(params).subscribe(
+            (data) => {
+                data.flats = data.flats.filter((flat) => flat.status !== '8');
+                this.count = data.flats.length;
+                this.searchFlats = data.flats;
+                this.sortFlats(this.sort);
                 this.loadMore();
-                this.flatsChanged.emit(this.searchFlats);
+                this.modsBtnList = data.modsBtnList;
+                this.housesBtnList = data.housesBtnList;
             },
             (err) => {
                 console.log(err);
             }
         );
     }
-
     public loadMore() {
         for (let i = 0; i < 10; i++) {
             if (this.skip < this.searchFlats.length) {
@@ -106,34 +110,16 @@ export class SearchComponent implements OnInit, OnChanges, OnDestroy {
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
         this.searchService.setOutputFlatsChanged(this.outputFlatsList);
     }
-
-    public ngOnChanges() {
-        if (this.showSearchWindow) {
-            setTimeout(() => {
-                this.formChange(this.form);
-                this.windowScrollLocker.unblock();
-            }, 500); // таймаут чтобы анимация открытия окна отработала без тормозов
-
-        } else {
-            this.router.navigate([this.router.url.split('?')[0]]);
-            this.outputFlatsList = [];
-            setTimeout(() => {
-                this.windowScrollLocker.block();
-            }, 130); // таймаут чтобы при смене роута на этой же и других страницах экран успел проскроллиться вверх перед блокировкой скролла
-        }
-    }
-
     public sortChange(sort) {
         this.sort = sort;
         this.skip = 0;
         this.outputFlatsList = [];
 
-        this.sortFlats();
+        this.sortFlats(this.sort);
         this.loadMore();
     }
-
-    public sortFlats() {
-        this.searchService.sortFlats(this.sort, this.searchFlats);
+    private sortFlats(sort) {
+        this.searchService.sortFlats(sort, this.searchFlats);
     }
 
     public ngOnDestroy() {

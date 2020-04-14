@@ -1,52 +1,70 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
-.search-form {
+.search-form__list {
+    position: absolute;
+    width: 260px;
+    max-height: 50px * 7;
+    background: #fff;
+    left: 0;
+    top: calc(100% + 10px);
+    border: 1px solid $col-border;
+    z-index: 10;
+    box-sizing: border-box;
+    transition: .2s linear;
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: default;
 
-    &--row {
+    &-item {
+        width: 100%;
+        height: 50px;
         display: flex;
-        margin: 23px 0 0;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 16px;
+        border-bottom: 1px solid $col-border;
+        &:last-child { border-bottom: 0; }
+        &--active { color: $col-red; }
+
+        &-title {
+            font: 18px/23px "ProbaPro", "sans-serif", "Arial";
+            opacity: 0.5;
+        }
     }
+}
 
-    &__list {
 
-        &-item {
+.search-form__corpus {
+    // opacity: 0;
+    position: absolute;
+    width: 260px;
+    max-height: 50px * 7;
+    background: #fff;
+    left: 0;
+    top: calc(100% + 10px);
+    border: 1px solid $col-border;
+    z-index: 10;
+    box-sizing: border-box;
+    transition: .2s linear;
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: default;
 
-            &--decoration {
-                display: flex;
-                margin: 0 30px 0 0;
+    &-item {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 16px;
+        border-bottom: 1px solid $col-border;
+        &:last-child { border-bottom: 0; }
 
-            }
-            &--houses {
-                display: flex;
-                margin: 0 0 14px;
-            }
-
-            &:hover .search-form__list-checkbox,
-            &:hover .search-form__list-text {
-                border-color: $col-orange;
-                color: $col-orange;
-            }
-            input {
-                display: none;
-                &:checked + .search-form__list-checkbox {
-                    background: url(/assets/img/check.svg) center no-repeat #e7490f;
-                    border-color: #e7490f;
-                }
-            }
-        }
-        &-text,
-        &-checkbox {
-            transition: color $transition, border-color $transition;
+        &_scheme {
+            transition: color .2s linear;
             cursor: pointer;
+            &:hover { color: $col-red_hover; }
         }
-        &-text {
-            &--decoration {
-                @include f16-24(rgba(0, 1, 5, 0.8));
-            }
-            &--houses {
-                @include fw18-24();
-            }
-        }
-        &-checkbox { background-color: #fff; }
+        &_active { color: $col-red; }
     }
 }

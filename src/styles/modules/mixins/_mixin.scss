@@ -22,7 +22,10 @@ $container: 1104px;
     -o-font-smoothing: antialiased;
 }
 
-
+$font-text: $font-proba;
+$font-14: 14px/18px $font-proba;
+$font-18: 18px/23px $font-proba;
+$font-16: 16px/19px $font-proba;
 
 // old style:
 

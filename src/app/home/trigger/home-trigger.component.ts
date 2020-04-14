@@ -28,7 +28,7 @@ export class HomeTriggerComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.searchService.getObjects({})
+        this.searchService.getFlats({})
             .subscribe((flats) => {
                 console.log('flats: ', flats);
                 this.buildTriggersData(flats);
