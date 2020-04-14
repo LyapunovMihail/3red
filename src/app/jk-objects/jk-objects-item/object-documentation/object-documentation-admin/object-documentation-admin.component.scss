@@ -182,8 +182,60 @@
     }
 
     &__date {
-        font: 18px/23px $font-proba;
-        color: $col-black-5;
+        width: 200px;
+        position: relative;
+        margin: -5px 0 0;
+
+        &-area {
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            width: 100%;
+            height: 35px;
+            border: 0;
+            box-sizing: border-box;
+            padding: 4px 0 6px;
+            background: transparent;
+            transition: color .2s linear;
+            outline: none;
+            &+ label {
+                font: 18px/23px $font-proba;
+                color: $col-black-5;
+                position: absolute;
+                top: 4px; left: 0;
+                pointer-events: none;
+                transition: (
+                    top .2s linear,
+                    font-size .2s linear,
+                    line-height .2s linear
+                );
+            }
+            &+ label + div {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0; left: 0;
+                pointer-events: none;
+                box-sizing: border-box;
+                border-bottom: 1px solid $col-black-5;
+                transition: border-bottom .2s linear;
+            }
+            &:focus {
+                color: $col-black;
+                &+ label {
+                    font: 14px/18px $font-proba;
+                    top: -15px; left: 0;
+                }
+                &+ label + div {
+                    border-bottom: 2px solid $col-black;
+                }
+            }
+            &--no-empty {
+                &+ label {
+                    font: 14px/18px $font-proba;
+                    top: -15px; left: 0;
+                }
+            }
+        }
     }
 }
 

@@ -2,7 +2,7 @@
 
     <div class="hint">
         <h4 class="hint__title">Как работает:</h4>
-        <a href="javascript:void(0)" class="hint__link" (click)="showHint = true">Показать подсказку</a>
+        <a href="javascript:void(0)" class="hint__link" *ngIf="!showHint" (click)="showHint = true">Показать подсказку</a>
         <div class="hint__content" *ngIf="showHint">
             <div class="hint__wrap">
                 <p class="hint__text">1) Настройка видов отделки</p>

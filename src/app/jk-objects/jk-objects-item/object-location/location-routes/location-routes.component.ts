@@ -91,6 +91,7 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
             type: 'main'
         };
         this.markersConfig.push(this.mainMarker);
+        console.log('this.mainMarker.coords: ->', this.mainMarker.coords);
     }
 
     ngOnDestroy() {
@@ -112,11 +113,11 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
             // создание новой карты с опциями
 
             that.map = new ymaps.Map('map', {
-                center: [55.632183, 37.981327],
+                center: that.mainMarker.coords,
                 zoom: 12,
                 controls: ['zoomControl']
             }, {
-                minZoom: 11,
+                minZoom: 9,
                 maxZoom: 18
             });
             that.markersConfig.forEach((item: any, index) => {
@@ -218,6 +219,7 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
                 // после инициализации надо обновить состояние компонента принудительно
                 // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
             that.ref.detectChanges();
+            that.map.setBounds(that.map.geoObjects.getBounds(), {checkZoomRange: true});
         });
 
     }

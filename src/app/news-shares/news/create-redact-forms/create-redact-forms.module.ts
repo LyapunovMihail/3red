@@ -10,6 +10,7 @@ import { GHMTextAreaModule } from '../../../UI/ghm-textarea/ghm-textarea.module'
 import { NewsEditImage2Component } from './news-edit-controls/news-edit-image2/news-edit-image2.component';
 import { NewsEditAnchorComponent } from './news-edit-controls/news-edit-anchor/news-edit-anchor.component';
 import { AdminModalModule } from '../../../admin-modal/admin-modal.module';
+import { AutoResizeTextareaModule } from '../../../UI/auto-resize-textarea/auto-resize-textarea.module';
 
 @NgModule({
     exports: [
@@ -34,7 +35,8 @@ import { AdminModalModule } from '../../../admin-modal/admin-modal.module';
         ReactiveFormsModule,
         DatePickerModule,
         CommonModule,
-        AdminModalModule
+        AdminModalModule,
+        AutoResizeTextareaModule
     ]
 })
 

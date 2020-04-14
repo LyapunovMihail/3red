@@ -20,12 +20,11 @@
                     <h3 class="object-documentation__list-title">{{item.blockTitle}}</h3>
                     <div class="object-documentation__list-wrap">
                         <div class="object-documentation__list-wrap object-documentation__list-wrap_file" *ngFor="let doc of item.uploads">
-                            <a [href]="'/' + uploadsPath + doc.name"
-                                [attr.download]="doc.originalName"
+                            <a [href]="'/' + uploadsPath + doc.name" target="_blank"
                                 class="object-documentation__list-file">
                                     {{doc.originalName}}
                             </a>
-                            <p class="object-documentation__list-date">{{doc.date}}</p>
+                            <p class="object-documentation__list-date">{{ parseDate(doc.date) }}</p>
                         </div>
                     </div>
                 </li>

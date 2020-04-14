@@ -13,7 +13,7 @@
                     {{ limit.corpusId + ' — ' + limit.deadline }}
                 </p>
             </div>
-            <div class="object-preview__item" *ngIf="snippet.mainInfo.webcamLink">
+            <div class="object-preview__item object-preview__item--link" *ngIf="snippet.mainInfo.webcamLink">
                 <a [href]="snippet.mainInfo.webcamLink" class="object-preview__info object-preview__info--icon">Трансляция с веб-камер</a>
             </div>
         </div>

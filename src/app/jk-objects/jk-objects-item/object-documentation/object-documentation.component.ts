@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FILEUPLOADS_UPLOADS_PATH, IObjectDocSnippet } from '../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
 import { ObjectDocumentationAdminService } from './object-documentation-admin/object-documentation-admin.service';
 import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-object-item-documentation',
@@ -31,7 +32,7 @@ export class ObjectDocumentationComponent implements OnInit {
     constructor(
         private documentationService: ObjectDocumentationAdminService,
         private activatedRoute: ActivatedRoute
-    ) { }
+    ) { moment.locale('ru'); }
 
     ngOnInit() {
         this.objectId = this.activatedRoute.snapshot.params.id;
@@ -52,5 +53,13 @@ export class ObjectDocumentationComponent implements OnInit {
             () => console.log('success'),
             (err) => console.error(err)
         );
+    }
+
+    public parseDate(date) {
+        if (moment(date, 'DD.MM.YYYY').isValid()) {
+            return date;
+        } else {
+            return moment(date).format('DD.MM.YYYY');
+        }
     }
 }

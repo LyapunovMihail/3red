@@ -42,7 +42,7 @@
                     <div class="form__wrap">
                         <ng-container formArrayName="indicators" *ngFor="let indicator of indicators; let i = index">
                             <div class="form-item form-item--inline" formGroupName="{{i}}">
-                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="{{indicator}}">
+                                <input maxlength="50" type="text" class="form-input info-input" appSlideTopLabel formControlName="{{indicator}}">
                                 <label class="form-label info-suptitle">{{indicator}}</label>
                             </div>
                         </ng-container>
