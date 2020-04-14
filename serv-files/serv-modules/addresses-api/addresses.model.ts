@@ -14,6 +14,9 @@ export class AddressesModel {
     private flatCollectionName = OBJECTS_FLAT_COLLECTION_NAME;
     private flatCollection: any;
 
+    private objectCollectionName = OBJECTS_OBJECT_COLLECTION_NAME;
+    private objectCollection: any;
+
     private objectId = mongodb.ObjectId;
 
     constructor( public db: any ) {

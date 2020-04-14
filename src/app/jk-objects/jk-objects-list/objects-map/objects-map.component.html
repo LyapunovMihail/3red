@@ -3,8 +3,8 @@
   <div class="objects__map-container">
 
     <a routerLink="/objects/list/{{marker.mod}}" class="objects__map-item" id="objects__map-item-{{i}}" *ngFor="let marker of markers; let i = index" (mouseenter)="sideMarkerHover(i)" (mouseleave)="sideMarkerDishover(i)">
-      <div class="objects__map-imgwrap">
-        <img [src]="this.uploadsPath + marker.thumbnail" alt="img" class="objects__map-img">
+      <div class="objects__map-img">
+        <img [src]="this.uploadsPath + marker.thumbnail" alt="img">
       </div>
 
       <div class="objects__map-wrap">
@@ -14,5 +14,5 @@
     </a>
 
   </div>
-  <div id="map" style="width: 100%; height: 100vh"></div>
+  <div id="map" class="objects__map-block"></div>
 </div>

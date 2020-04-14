@@ -40,6 +40,7 @@ import { ObjectLocationModule } from './jk-objects-item/object-location/object-l
 import { ObjectPurchaseModule } from './jk-objects-item/object-purchase/object-purchase.module';
 import { ObjectMembersModule } from './jk-objects-item/object-members/object-members.module';
 import { JkObjectsListModule } from './jk-objects-list/jk-objects-list.module';
+import { TextMaskModule } from 'angular2-text-mask';
 import { ObjectFlatsModule } from './jk-objects-item/object-flat/flats/object-flats.module';
 import { ObjectFlatsComponent } from './jk-objects-item/object-flat/flats/object-flats.component';
 import { HouseComponent } from './jk-objects-item/object-flat/flats/house/house.component';
@@ -96,6 +97,7 @@ const jkObjectsComponents = [
         ObjectFlatsModule,
 
         JkObjectsListModule,
+        TextMaskModule,
 
         RouterModule.forChild([
             { path: '', component: JkObjectsComponent

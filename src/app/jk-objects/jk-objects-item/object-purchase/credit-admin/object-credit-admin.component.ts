@@ -56,6 +56,7 @@ export class ObjectCreditAdminComponent implements OnInit {
     }
 
     public save() {
+        console.log(this.form.value);
         this.projectService.setSnippetData(this.form.value).subscribe(
             (data) => {
                 this.snippetChange.emit(data);
@@ -73,5 +74,12 @@ export class ObjectCreditAdminComponent implements OnInit {
         } else {
             this.closeModal.emit(true);
         }
+    }
+
+    moveBank(array, i, dir) {
+        let arr = this.form.value.banks;
+
+        array[i] = array.splice((i + dir), 1, array[i])[0];
+        arr[i] = arr.splice((i + dir), 1, arr[i])[0];
     }
 }

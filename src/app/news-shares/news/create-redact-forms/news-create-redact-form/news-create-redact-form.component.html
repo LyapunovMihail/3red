@@ -2,7 +2,7 @@
 
     <div class="create-form__cls-area" (click)="close.emit()" ></div>
 
-    <div class="create-form__container">
+    <div class="create-form__container" >
 
         <div class='admin-news_progress-loader' *ngIf="isLoad">
             <div class='admin-news_progress-loader-title'>Загрузка изображения {{imageUploadPercent}}%</div>
@@ -23,7 +23,7 @@
                 
                 <div class="create-form__form-wrap create-form__form-wrap_input create-form__form-wrap_full">
                     <textarea class="create-form__form-area"
-                        name="title"
+                        name="title" appAutoResizeTextarea rows="1"
                         [ngClass]="{'invalid-input-value' : (!form.controls['title'].valid)}"
                         [formControl]="form.controls['title']" #title>
                     </textarea>
@@ -34,6 +34,7 @@
 
                 <div class="create-form__form-wrap create-form__form-wrap_input create-form__form-wrap_full">    
                     <textarea class="create-form__form-area"
+                        appAutoResizeTextarea rows="1"
                         [formControl]="form.controls['description']" #text>
                     </textarea>
                     <p class="create-form__form-title create-form__form-title_for-input"
@@ -90,20 +91,25 @@
             <div class="shares-edit-form__path-wrap">
 
                 <div formArrayName="body" *ngIf="body['controls'].length">
-                    <div *ngFor="let block of body['controls']; index as i"
+                    <div *ngFor="let block of body['controls']; index as i; let last = last"
                          [ngSwitch]="block.value.blockType">
 
                         <app-news-edit-text
                             [formControlName]="i"
                             [type]="'description'"
+                            [isFirst]="i"
+                            [isLast]="last"
                             *ngSwitchCase="'description'"
+                            (move)="moveBlock(body['controls'], i, $event)"
                             (remove)="removeBlock(i)"
                             (addLink)="showModalFunc($event, i)">
                         </app-news-edit-text>
 
                         <app-news-edit-image
                             [formControlName]="i"
+                            [isLast]="last"
                             *ngSwitchCase="'image'"
+                            (move)="moveBlock(body['controls'], i, $event)"
                             (remove)="removeBlock(i)">
                             <label class="create-form__form-btn create-form__form-btn_preview-image">
                                 <span>Загрузить фото</span>
@@ -113,7 +119,10 @@
 
                         <app-news-edit-image2
                             [formControlName]="i"
+                            [isFirst]="i"
+                            [isLast]="last"
                             *ngSwitchCase="'image2'"
+                            (move)="moveBlock(body['controls'], i, $event)"
                             (remove)="removeBlock(i)">
                             <label class="create-form__form-btn create-form__form-btn_preview-image">
                                 <span>Загрузить фото</span>
@@ -127,8 +136,11 @@
 
                         <app-news-edit-text
                             [formControlName]="i"
+                            [isFirst]="i"
+                            [isLast]="last"
                             [type]="'title'"
                             *ngSwitchCase="'title'"
+                            (move)="moveBlock(body['controls'], i, $event)"
                             (remove)="removeBlock(i)">
                         </app-news-edit-text>
 

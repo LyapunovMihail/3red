@@ -54,7 +54,17 @@
                                 [attr.download]="doc.originalName">
                                 {{doc.originalName}}
                             </a>
-                            <p class="upload-file__date">{{doc.date}}</p>
+                            <div class="upload-file__date">
+
+                                <input class="upload-file__date-area" type="text" id="dateUpload"
+                                    [class.upload-file__date-area--no-empty]="inputDate.value.length > 0"
+                                    [value]="parseDate(doc.date)"
+                                    (change)="doc.date = $event.target.value"
+                                    [textMask]="{mask: dataMask}"
+                                    #inputDate>
+                                <label for="dateUpload">Дата документа</label>
+                                <div></div>
+                            </div>
                         </li>
                     </ul>
                 </ng-container>

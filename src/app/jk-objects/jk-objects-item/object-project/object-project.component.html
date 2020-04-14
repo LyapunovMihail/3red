@@ -9,7 +9,7 @@
 
         <div class="object-item__container">
 
-            <h2 *ngIf="!isAuthorizated">ЖК Сердце Ярославля</h2>
+            <h2 *ngIf="!isAuthorizated">{{objectName}}</h2>
 
             <button *ngIf="isAuthorizated" class="btn__admin-content btn_var-2 object-builder__admin-btn" (click)="closeModal = false">Контент</button>
 

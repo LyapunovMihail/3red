@@ -11,7 +11,6 @@
     <!--</li>-->
 
 <!--</ul>-->
-
 <div class="offer__complex-wrapper" *ngFor="let btn of btnList">
     <input class="offer__complex-checkbox" [id]="btn.value" [name]="name"
         (change)="checkBtn($event)" [value]="btn.value" type="checkbox" [name]="name" id="lock" hidden [checked]="isChecked(btn.value)">
