@@ -1,6 +1,7 @@
 <div class="search">
 
     <app-search-form
+        [config]="config"
         [housesBtnList]="housesBtnList"
         [modsBtnList]="modsBtnList"
         (formChange)="formChange($event)"

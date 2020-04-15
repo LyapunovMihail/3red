@@ -1,6 +1,4 @@
 import { WindowScrollLocker } from '../commons/window-scroll-block';
-import { VideoModalService } from '../modal/video-modal/video-modal.service';
-import { OverlayService } from '../modal/overlay.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
@@ -22,8 +20,6 @@ export class FooterComponent implements OnInit, OnDestroy {
 
     constructor(
         private windowScrollLocker: WindowScrollLocker,
-        private videoModalService: VideoModalService,
-        private overlayService: OverlayService,
         private router: Router
     ) { }
 
@@ -47,12 +43,6 @@ export class FooterComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-    }
-
-    openVideo() {
-        this.overlayService.changeOverlayVisibility(true);
-        this.videoModalService.changeVideoVisibility(true);
-        this.windowScrollLocker.block();
     }
 
 }

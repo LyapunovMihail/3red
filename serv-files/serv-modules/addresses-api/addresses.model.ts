@@ -1,4 +1,4 @@
-import { ADDRESSES_COLLECTION_NAME } from './addresses.interfaces';
+import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
 import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
@@ -22,28 +22,74 @@ export class AddressesModel {
         this.flatCollection = db.collection(this.flatCollectionName);
     }
 
-    public async getFlats(query) {
-        let data = this.parseRequest(query);
-        return await this.collection.find(data.request, data.parameters).toArray();
-    }
-
     public async getObjectFlats(query) {
         let data = this.parseRequest(query);
-
-
         return await this.collection.find(data.request, data.parameters).toArray();
     }
 
-    public async getCommonFlats(query) {
+    public async getObjectFlatsData(objectId) { // извлекаем объект жилищного комплекса, создаём список домов, схему домов-секций-этажей и мин-макс параметры для формы фильтрации
+        const jk = await this.objectCollection.findOne({_id: ObjectId(objectId)});
+        const data = this.parseRequest({ mod: jk.mod });
+        const flats = await this.collection.find(data.request, data.parameters).toArray();
+        const { housesBtnList, floorCount } = this.setFloorCount(flats); // создаём список домов, схему домов-секций-этажей
+        const config = this.setMinMaxParams(flats); // устанавливаем мин-макс параметры для формы фильтрации
+        return {jk, housesBtnList, floorCount, config};
+    }
+    private setFloorCount(flats): {housesBtnList, floorCount} {      // устанавливаем схему домов-секций-этажей и список домов
+        const housesBtnList = [];
+        housesBtnList.push({ name: 'Все дома', value: '' });
+        const floorCount: any = {};
+
+        flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1); // сортировка по возрастанию номера дома
+
+        flats.forEach((flat: IAddressItemFlat) => {
+            if (!housesBtnList.some((btn) => btn.value === flat.house)) {
+                housesBtnList.push({ name: 'Дом № ' + flat.house, value: flat.house });    // формируем список домов
+            }
+
+            if (!floorCount[flat.house]) {
+                floorCount[flat.house] = {};                    // добавляем дома к схеме
+            }
+            if (!floorCount[flat.house][flat.section]) {
+                floorCount[flat.house][flat.section] = [];      // добавляем секции к домам
+            }
+            if (!floorCount[flat.house][flat.section].some((floor) => floor === flat.floor)) {
+                floorCount[flat.house][flat.section].push(flat.floor);                           // добавляем этажи к секциям
+                floorCount[flat.house][flat.section].sort((floor1, floor2) => floor2 - floor1);  // сортируем этажи в порядке убывания
+            }
+        });
+        return { housesBtnList, floorCount };
+    }
+
+    private setMinMaxParams(flats) {
+        return {
+            price: {
+                min: Math.min(...flats.map((flat) => flat.price)),
+                max: Math.max(...flats.map((flat) => flat.price))
+            },
+            floor: {
+                min: Math.min(...flats.map((flat) => flat.floor)),
+                max: Math.max(...flats.map((flat) => flat.floor))
+            },
+            space: {
+                min: Math.floor(Math.min(...flats.map((flat) => flat.space))),
+                max: Math.ceil(Math.max(...flats.map((flat) => flat.space)))
+            },
+            sort: 'floor_1'
+        };
+    }
+
+    public async getCommonFlats(query) {    // Создаём спсисок табов жилищных комплексов, список домов жк и соответствующих им квартир с названиями жк и мин-макс параметры для формы фильтрации
         let data = this.parseRequest(query);
 
         const findByMod = query.mod ? {mod : query.mod} : {};
         const flatsOfMod = await this.collection.find(findByMod).toArray();
-        const modsBtnList = await this.setModBtns();
-        const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList);
+        const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
+        const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
+        const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
         const housesMods = query.housesMods ? query.housesMods.split('nzt;').map((item) => JSON.parse(item)) : [];
 
-        const result = {modsBtnList, housesBtnList, flats: []};
+        const result = {modsBtnList, housesBtnList, flats: [], config};
         if (housesMods.length) {
             for (const item of housesMods) {
                 const items = await this.collection.find({...data.request, mod: item.mod, house: item.value}, data.parameters).toArray();
@@ -53,11 +99,13 @@ export class AddressesModel {
             result.flats.push(...await this.collection.find(data.request, data.parameters).toArray());
         }
 
-        result.flats.forEach((flat) => flat.jkName = modsBtnList.find((jk) => jk.value === flat.mod).name);
+        if (modsBtnList.length) {
+            result.flats.forEach((flat) => flat.jkName = modsBtnList.find((jk) => jk.value === flat.mod).name);
+        }
 
         return result;
     }
-    private async setModBtns() {
+    private async setModBtns() { // утсанавливаем список табов жилищных комплексов
         const objects = await this.objectCollection.find().toArray();
         const modsBtnList = [];
         modsBtnList.push({ name: 'Все комплексы', value: '' });
@@ -71,9 +119,9 @@ export class AddressesModel {
         }
         return modsBtnList;
     }
-    private async setHousesBtns(mod, flatsOfMod, modsBtnList) {
+    private async setHousesBtns(mod, flatsOfMod, modsBtnList) { // Устанавливаем спсиок домов жилищных комплексов
         const housesBtnList = [];
-        housesBtnList.push({ name: 'Все дома', value: 'all' });
+        housesBtnList.push({ name: 'Все дома', value: 'all' }); // Добавляем название жк в массив
         if (mod) {
             const jk = modsBtnList.find((item) => item.value === mod);
             housesBtnList.push({jk : jk.name});
@@ -92,7 +140,7 @@ export class AddressesModel {
                     const flats = flatsOfMod.filter((flat) => flat.mod === jk.value);
                     flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1);   // сортировка по возрастанию номера дома
                     if (flats.length) {
-                        housesBtnList.push({ jk: jk.name });    // При появлении нового жк, добавлять его название в массив
+                        housesBtnList.push({ jk: jk.name });        // При появлении нового жк, добавлять его название в массив
 
                         flats.forEach((item) => {
                             if (!housesBtnList.some((btn) => btn.value === item.house)) {

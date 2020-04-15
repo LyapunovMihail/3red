@@ -13,7 +13,7 @@ export class SearchFormPipe implements PipeTransform  {
         if (allButtons.length && ButtonsValues.length > 0 && ButtonsValues.length < allButtons.length - 1) {
             ButtonsValues.sort();
             let text = ButtonsValues.reduce((prevVal, currentVal, i) => {
-                return prevVal + allButtons.find((item) => item.value === currentVal.value).name + (i + 1 < ButtonsValues.length ? '; ' : '');
+                return prevVal + currentVal.value + (i + 1 < ButtonsValues.length ? ', ' : '');
             }, '');
             text = text.length > 15 ? text.slice(0, 13) + '..' : text;
             return text;

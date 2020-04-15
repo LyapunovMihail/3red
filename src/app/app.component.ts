@@ -24,10 +24,6 @@ export const ROOT_SELECTOR = 'app-root';
           <app-footer></app-footer>
 
       </section>
-
-      <app-overlay></app-overlay>
-      <app-img-modal></app-img-modal>
-      <app-video-modal></app-video-modal>
   `,
     providers: []
 })

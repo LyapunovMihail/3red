@@ -22,12 +22,6 @@ import { WindowScrollLocker } from './commons/window-scroll-block';
 
 // App is our top level component
 import { AppComponent } from './app.component';
-import { VideoModalService } from './modal/video-modal/video-modal.service';
-import { VideoModalComponent } from './modal/video-modal/video-modal.component';
-import { ImgModalService } from './modal/img-modal/img-modal.service';
-import { ImgModalComponent } from './modal/img-modal/img-modal.component';
-import { OverlayService } from './modal/overlay.service';
-import { OverlayComponent } from './modal/overlay.component';
 import { HomeModule } from './home/home.module';
 import { LocationModule } from './location/location.module';
 import { FooterModule } from './footer/footer.module';
@@ -53,9 +47,6 @@ import '../styles/styles.scss';
 const APP_PROVIDERS = [
     ...APP_RESOLVER_PROVIDERS,
     AppState,
-    VideoModalService,
-    ImgModalService,
-    OverlayService,
     WindowEventsService,
     EventsService,
     AuthorizationObserverService,
@@ -107,10 +98,7 @@ interface StoreType {
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
-      AppComponent,
-      VideoModalComponent,
-      ImgModalComponent,
-      OverlayComponent
+      AppComponent
   ],
   imports: [
     ...APP_MODULES

@@ -18,11 +18,11 @@ export class AddressesController extends AddressesModel {
     }
 
     public routing() {
-        this.router.post('/search', responseHandler(async(req) => {
-            return await this.getFlats(req.body.search);
+        this.router.post('/search/object', responseHandler(async(req) => {
+            return await this.getObjectFlats(req.body.search);
         }));
-        this.router.get('/search/object', responseHandler(async(req) => {
-            return await this.getObjectFlats(req.query);
+        this.router.get('/search/object-data/:objectId', responseHandler(async(req) => {
+            return await this.getObjectFlatsData(req.params.objectId);
         }));
         this.router.post('/search/common', responseHandler(async(req) => {
             return await this.getCommonFlats(req.body.search);

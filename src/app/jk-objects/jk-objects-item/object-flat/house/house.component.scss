@@ -1,0 +1,270 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+// .search { position: static !important; }
+.house {
+    width: 100%;
+    min-height: calc(100vh - 362px);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 16px 0 0;
+
+    &__container {
+        width: 100%;
+        max-width: $container;
+
+        &_for-flat { max-width: 1216px; }
+    }
+
+    &__nav {
+        margin: 75px 0 25px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        &-back {
+            font: 24px/29px $font-proba;
+            color: $col-black;
+            margin-bottom: 37px;
+            padding-left: 8px + 28px;
+            position: relative;
+            cursor: pointer;
+            &::before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: 0;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .3);
+                transition: background-color .2s linear;
+            }
+            &:hover::before {
+                background-color: rgba($color: $col-black, $alpha: .5);
+            }
+        }
+        &-list {
+            display: flex;
+            padding: 0 0 8px;
+            border-bottom: 1px solid $col-border;
+        }
+        &-item {
+            font: $font-18;
+            margin-right: 16px;
+            color: $col-black-5;
+            transition: color .2s linear;
+            position: relative;
+            cursor: pointer;
+            &:hover { color: $col-red_hover; }
+            &:last-child { margin-right: 0; }
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -9px;
+                width: 100%;
+                height: 1px;
+                background: transparent;
+            }
+            &_disabled {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+
+            &_active {
+                color: $col-red;
+                &::before { background-color: $col-red; }
+            }
+        }
+    }
+
+    &__sections {
+        width: $container;
+        height: 247px; // что бы не прыгала высота и не сбивался фиксированый фильтр
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin: 10px 0 32px;
+        position: relative;
+
+        &__nav {
+            width: $container;
+            position: absolute;
+            left: auto;
+            top: 15px;
+
+            &-list {
+                font: $font-18;
+                @include font-smoothing;
+                color: $col-orange;
+                display: flex;
+            }
+            &-item {
+                position: relative;
+                margin: 0 13px 0 16px;
+                text-decoration: underline;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: calc(100% + -100.5px);
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    width: 8px;
+                    height: 8px;
+                    border-top: solid 2px #e7490f;
+                    border-left: solid 2px #e7490f;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        &-plan {
+            position: relative;
+            display: flex;
+            transition: .2s linear;
+        }
+
+        &-btn {
+
+            &_prev,
+            &_next {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+                background: url(/assets/img/btn_next_white.svg) 50% no-repeat;
+                transition: background-position $transition;
+                background-color: #e74911;
+                &:hover { background-position: calc(50% - 3px); }
+            }
+            &_prev {
+                left: 40px;
+            }
+            &_next {
+                right: 40px;
+                transform: rotate(180deg);
+            }
+        }
+
+        &-chess {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-right: 65px;
+
+            &:last-child {
+                margin-right: 35px;
+            }
+
+            &_section {
+                position: relative;
+                padding: 10px 0 10px 10px;
+                border: solid 1px #efefef;
+                background-color: $col-white;
+
+                &_title {
+                    font: $font-18;
+                    position: absolute;
+                    top: -32px;
+                    left: 0;
+                    white-space: nowrap;
+                }
+
+                &_floor {
+                    // display: flex;
+                    // align-items: center;
+                    // justify-content: center;
+                    // padding: 2px 0 0;
+                    &:not(:last-child) { margin-bottom: 10px; }
+                    ul { display: flex; }
+
+                    &-button {
+                        position: absolute;
+                        right: -35px;
+                        width: 24px;
+                        height: 18px;
+                        margin: -1px 0 0;
+                        border: 1px solid $col-border;
+                        font: 14px/16px $font-text;
+                        transition: color .2s linear, background-color .2s linear;
+                        box-sizing: border-box;
+                        // padding: 2px 0 0;
+                        &:hover {
+                            background-color: $col-red;
+                            color: $col-white;
+                        }
+                    }
+                    &-link {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        box-sizing: border-box;
+                        padding: 1px 0 0;
+                        line-height: 1;
+                        @media screen and (-webkit-min-device-pixel-ratio:0) {
+                            /* this will target only Mac Safari and Chrome browsers */
+                            padding: 3px 0 0;
+                        }
+                    }
+                }
+
+                &_flat {
+                    width: 18px;
+                    height: 18px;
+                    font: 14px/16px $font-text;
+                    box-sizing: border-box;
+                    transition: background-color 0.2s linear;
+                    margin-right: 10px;
+                    position: relative;
+                    cursor: pointer;
+                    &:hover { background-color: $col-red; }
+
+                    &--free {
+                        background-color: rgba(0,0,0,0.1);
+                        &:hover { color: #ffffff; }
+                    }
+                    &--reserved {
+                        position: relative;
+                        border: solid 1px rgba(0,0,0,0.1);
+                        pointer-events: none;
+                        background: url('/assets/img/flats/floor/lock.svg') center no-repeat;
+                        background-size: 80%;
+                    }
+                    &--discount {
+                        border: solid 1px $col-red;
+                        color: $col-red;
+                        &:hover { color: #ffffff; }
+                    }
+                    &--disabled { opacity: 0.3; }
+                    &--no-sale {
+                        border: solid 1px rgba(0,0,0,0.1);
+                        pointer-events: none;
+                    }
+
+                    &_link {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        padding: 1px 0 0;
+                        box-sizing: border-box;
+                        line-height: 1;
+                        @media screen and (-webkit-min-device-pixel-ratio:0) {
+                            /* this will target only Mac Safari and Chrome browsers */
+                            padding: 4px 0 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

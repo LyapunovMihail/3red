@@ -11,7 +11,7 @@ import {
     Inject,
     ViewEncapsulation,
     PLATFORM_ID,
-    forwardRef
+    forwardRef, ChangeDetectorRef
 } from '@angular/core';
 import {
     isPlatformBrowser,
@@ -49,7 +49,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     `
 })
 
-export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
+export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueAccessor {
 
     @Input( ) public min: number;
     @Input( ) public max: number;
@@ -69,13 +69,20 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
 
     constructor(
         private elRef: ElementRef,
-        @Inject(PLATFORM_ID) private platformId: Object
+        @Inject(PLATFORM_ID) private platformId: Object,
+        private ref: ChangeDetectorRef
     ) { }
 
     public ngOnInit() {
         if ( isPlatformBrowser(this.platformId) ) {
             this.elRef.nativeElement.classList.add('ghm-range');
         }
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        console.log('changes: ', changes);
+
+        this.ref.detectChanges();
     }
 
     public writeValue(control) {

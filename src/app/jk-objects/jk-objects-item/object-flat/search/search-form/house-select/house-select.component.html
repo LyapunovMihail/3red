@@ -1,0 +1,13 @@
+
+<!--<div class="search-form__corpus">-->
+    <!--<p *ngFor="let house of housesList" (click)="houseNavigate(house.value)"-->
+        <!--[class.search-form__corpus-item&#45;&#45;active]="house.value === value"-->
+        <!--class="search-form__corpus-item">-->
+           <!--Тип дома {{house.value | uppercase}}-->
+    <!--</p>-->
+<!--</div>-->
+<ul class="search-form__list">
+    <li *ngFor="let btn of btnList" class="search-form__list-item" (click)="houseNavigate(btn)">
+        <span>{{btn.name}}</span>
+    </li>
+</ul>

@@ -8,12 +8,11 @@ import { GHMNumberPipe } from './ghm-range-number/ghm-number.pipe';
     selector: 'app-search-form',
     templateUrl: './search-form.component.html',
     styleUrls: ['./../search.component.scss'],
-    providers: [GHMNumberPipe]
+    providers: [ GHMNumberPipe ]
 })
 
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-    public config = FormConfig;
     public routerEvents: any;
     public formEvents: any;
     public form: FormGroup;
@@ -21,6 +20,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public showCorpus: boolean = false;
     public sort: string;
 
+    @Input()
+    public config: any = {};
     @Input()
     public housesBtnList: any[] = [];
     @Input()
@@ -37,6 +38,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
+        this.config = FormConfig;
         this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
             this.buildForm(queryParams);
         });

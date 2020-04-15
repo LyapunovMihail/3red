@@ -26,6 +26,7 @@ export class SearchComponent implements OnDestroy {
     public sort: string = FormConfig.sort;
     public params: any;
     public isLoadMoreBtn = false;
+    public config: any;
 
     public housesBtnList: any = [];
     public modsBtnList: any = [];
@@ -65,9 +66,9 @@ export class SearchComponent implements OnDestroy {
             params['sections'] = (form.sections).join(',');
         }
 
-        if ( 'housesMods' in form && form.housesMods.length > 0 ) {                                                  // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
-            params['housesMods'] = form.housesMods.map((item) => JSON.stringify(item)).join('nzt;');       // if ( 'housesMods' in form && form.housesMods.length > 0 ) {
-        }                                                                                                    //     }
+        if ( 'housesMods' in form && form.housesMods.length > 0 ) {
+            params['housesMods'] = form.housesMods.map((item) => JSON.stringify(item)).join('nzt;');
+        }
 
         if ( 'mod' in form && form.mod.length) { // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
             params['mod'] = form.mod;
@@ -95,6 +96,7 @@ export class SearchComponent implements OnDestroy {
                 this.loadMore();
                 this.modsBtnList = data.modsBtnList;
                 this.housesBtnList = data.housesBtnList;
+                this.config = data.config;
             },
             (err) => {
                 console.log(err);
