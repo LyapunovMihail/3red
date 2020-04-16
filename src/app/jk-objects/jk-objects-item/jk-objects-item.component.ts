@@ -3,6 +3,7 @@ import { AuthorizationObserverService } from '../../authorization/authorization.
 import { EventsService } from '../../commons/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JkObjectsListService } from '../jk-objects-list/jk-objects-list.service';
+import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-jk-objects-item',
@@ -19,7 +20,7 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
     public intervalTimer;
 
     public objectId: string;
-    public jkObject: any;
+    public jk: IObjectSnippet;
 
     @ViewChild('container')
     public container: ElementRef;
@@ -52,7 +53,7 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
     public getJkObject() {
         this.jkObjectsItemService.getSnippets(this.objectId)
             .subscribe(
-                (data) => { this.jkObject = data[0]; },
+                (data) => { this.jk = data[0]; },
                 (err) => {
                     console.error(err);
                     this.router.navigate(['/error-404'], { skipLocationChange: true });

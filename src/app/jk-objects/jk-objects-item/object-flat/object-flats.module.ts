@@ -8,12 +8,13 @@ import { HouseComponents } from './house/house';
 import { FloorComponents } from './floor/floor';
 import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { PlanComponent } from './plan/plan.component';
 import { ObjectFlatsService } from './object-flats.service';
+import { PlanComponents } from './plan/plan';
 
 const FlatsComponents = [
     ObjectFlatsComponent,
-    PlanComponent,
+
+    ...PlanComponents,
 
     ...HouseComponents,
 

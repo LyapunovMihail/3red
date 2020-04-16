@@ -79,6 +79,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             },
             (err) => {
                 console.log(err);
+                this.router.navigate(['/error-404'], {
+                    skipLocationChange: true
+                });
             }
         );
     }
@@ -217,6 +220,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public ngOnDestroy() {
         // отписка от событий роута
-        this.routerEvent.unsubscribe();
+        if (this.routerEvent) {
+            this.routerEvent.unsubscribe();
+        }
     }
 }

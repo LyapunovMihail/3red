@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { JkObjectsListService } from '../jk-objects-list.service';
 import { IObjectSnippet, OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { Router } from '@angular/router';
 declare let ymaps: any;
 
 @Component({
@@ -22,7 +23,8 @@ export class ObjectsMapComponent implements OnChanges, OnDestroy {
     public uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
 
     constructor(
-        public ref: ChangeDetectorRef
+        public ref: ChangeDetectorRef,
+        private router: Router
     ) {
     }
 
@@ -53,7 +55,7 @@ export class ObjectsMapComponent implements OnChanges, OnDestroy {
 
                     this.markers[index] = {};
                     this.markers[index].click = false;
-                    this.markers[index].mod = item.mod;
+                    this.markers[index].id = item._id;
                     this.markers[index].thumbnail = item.thumbnail;
                     this.markers[index].name = item.name;
                     this.markers[index].status = item.status;
@@ -98,6 +100,9 @@ export class ObjectsMapComponent implements OnChanges, OnDestroy {
                             this.markers[index].marker.options.set({
                                 zIndex: 1
                             });
+                        })
+                        .add('click', (e) => {
+                            this.router.navigate([`/objects/list/${this.markers[index].id}`]);
                         });
                 });
                 this.ref.detectChanges();

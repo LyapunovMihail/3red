@@ -1,27 +1,14 @@
+<section class="object-filter" *ngIf="form">
 
-<section class="object-filter">
-
-    <div class="object-filter__container">
+    <div [formGroup]="form" class="object-filter__container">
 
         <h3 class="object-filter__title">Подобрать квартиру</h3>
     
         <div class="object-filter__room">
             <p class="object-filter__text object-filter__text_for-input g-text_sign">Количество комнат</p>
-            <div class="object-filter__room-item">
-                <input id="stud" type="checkbox" style="display: none;">
-                <label for="stud">Ст</label>
-            </div>
-            <div class="object-filter__room-item">
-                <input id="room1" type="checkbox" style="display: none;">
-                <label for="room1">1</label>
-            </div>
-            <div class="object-filter__room-item">
-                <input id="room2" type="checkbox" style="display: none;">
-                <label for="room2">2</label>
-            </div>
-            <div class="object-filter__room-item">
-                <input id="room3" type="checkbox" style="display: none;">
-                <label for="room3">3+</label>
+            <div class="object-filter__room-item" formArrayName="rooms" *ngFor="let control of form.get('rooms')['controls']; let i = index">
+                <input id="room{{i}}" type="checkbox" style="display: none;" formControlName="{{i}}">
+                <label for="room{{i}}">{{(i === 0) ? 'Ст' : (i === 3) ? '3+' : i}}</label>
             </div>
         </div>
         
@@ -29,22 +16,25 @@
             <p class="object-filter__text object-filter__text_for-input g-text_sign">Стоимость</p>
 
             <div class="object-filter__price-range">
-                <p class="object-filter__text object-filter__text_for-price"><span #minPrice>2 000 000</span> &#8381;</p>
+                <p class="object-filter__text object-filter__text_for-price"><span #minPrice></span> &#8381;</p>
                 <p class="object-filter__text object-filter__text_for-price">&mdash;</p>
-                <p class="object-filter__text object-filter__text_for-price"><span #maxPrice>12 000 000</span> &#8381;</p>
+                <p class="object-filter__text object-filter__text_for-price"><span #maxPrice></span> &#8381;</p>
             </div>
 
             <!-- Он не правильно работает, но я добавил что бы сделать верстку -->
             <ghm-range-number
+                formControlName="price"
                 [min]="config.price.min"
                 [max]="config.price.max"
                 [toFixed]="true"
-                (move)="minPrice.innerHTML = ($event.min / 1000000).toFixed(1); maxPrice.innerHTML = ($event.max / 1000000).toFixed(1)">
+                (move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0))">
             </ghm-range-number>
         </div>
 
-        <button class="object-filter__btn-link btn_var-3">
-            1241 предложение
-        </button>
+        <a class="object-filter__btn-link btn_var-3"
+           [class.object-filter__btn-link--disabled]="!flatsLength"
+           [routerLink]="'/objects/list/' + objectId + '/flats'" [queryParams]="params">
+            {{ flatsLength ? flatsLength + ' предложение' : 'Нет предложений'}}
+        </a>
     </div>
 </section>

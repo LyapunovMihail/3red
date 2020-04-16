@@ -1,7 +1,7 @@
 import { ADDRESSES_COLLECTION_NAME, IAddressItemFlat } from './addresses.interfaces';
 import * as mongodb from 'mongodb';
 import { FormConfig } from './search-form.config';
-import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
+import { OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
 import { OBJECTS_FLAT_COLLECTION_NAME } from '../jk-objects/flat-api/objects-flat.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
@@ -22,9 +22,29 @@ export class AddressesModel {
         this.flatCollection = db.collection(this.flatCollectionName);
     }
 
+    // public async getObjectFlats(query) {
+    //     let data = this.parseRequest(query);
+    //     return await this.collection.find(data.request, data.parameters).toArray();
+    // }
+
     public async getObjectFlats(query) {
-        let data = this.parseRequest(query);
-        return await this.collection.find(data.request, data.parameters).toArray();
+        console.log('query: ', query);
+        if (query.mod) {
+            console.log('checkFilter');
+            const jk = await this.objectCollection.findOne({mod: query.mod});
+            const flatSnippet = await this.flatCollection.findOne({ objectId: jk._id.toString() });
+            if (flatSnippet && flatSnippet.switchOn) {
+                console.log('checkFilter flatSnippet.switchOn');
+                const data = this.parseRequest(query);
+                return await this.collection.find(data.request, data.parameters).toArray();
+            } else {
+                console.log('checkFilter !flatSnippet.switchOn');
+                return [];
+            }
+        } else {
+            const data = this.parseRequest(query);
+            return await this.collection.find(data.request, data.parameters).toArray();
+        }
     }
 
     public async getObjectFlatsData(objectId) { // извлекаем объект жилищного комплекса, создаём список домов, схему домов-секций-этажей и мин-макс параметры для формы фильтрации
@@ -90,16 +110,16 @@ export class AddressesModel {
         const housesMods = query.housesMods ? query.housesMods.split('nzt;').map((item) => JSON.parse(item)) : [];
 
         const result = {modsBtnList, housesBtnList, flats: [], config};
-        if (housesMods.length) {
-            for (const item of housesMods) {
-                const items = await this.collection.find({...data.request, mod: item.mod, house: item.value}, data.parameters).toArray();
-                result.flats.push(...items);
-            }
-        } else {
-            result.flats.push(...await this.collection.find(data.request, data.parameters).toArray());
-        }
 
-        if (modsBtnList.length) {
+        if (modsBtnList.length > 1) {
+            if (housesMods.length) {
+                for (const item of housesMods) {
+                    const items = await this.collection.find({...data.request, mod: item.mod, house: item.value}, data.parameters).toArray();
+                    result.flats.push(...items);
+                }
+            } else {
+                result.flats.push(...await this.collection.find(data.request, data.parameters).toArray());
+            }
             result.flats.forEach((flat) => flat.jkName = modsBtnList.find((jk) => jk.value === flat.mod).name);
         }
 

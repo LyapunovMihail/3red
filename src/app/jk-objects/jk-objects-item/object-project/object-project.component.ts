@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ObjectProjectAdminService } from './object-project-admin/object-project-admin.service';
 import { IObjectProjectSnippet } from '../../../../../serv-files/serv-modules/jk-objects/project-api/objects-project.interfaces';
 
@@ -17,22 +16,20 @@ export class ObjectProjectComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
-
+    @Input()
+    public objectId: string;
     @Input()
     public objectName: string;
 
     public closeModal = true;
-    public objectId: string;
     public snippet: IObjectProjectSnippet;
     public switchOn = false;
 
     constructor(
-        private projectService: ObjectProjectAdminService,
-        private activatedRoute: ActivatedRoute
+        private projectService: ObjectProjectAdminService
     ) { }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
         this.projectService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
             if (this.snippet) {

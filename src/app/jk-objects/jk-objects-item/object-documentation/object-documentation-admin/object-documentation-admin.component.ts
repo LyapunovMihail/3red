@@ -1,5 +1,4 @@
 import { ObjectDocumentationAdminService } from './object-documentation-admin.service';
-import { FILEUPLOADS_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/fileuploads-api/fileuploads.interfaces';
 import { Uploader } from 'angular2-http-file-upload';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';

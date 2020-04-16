@@ -85,5 +85,13 @@
         width: 258px;
         height: 48px;
         margin: 22px 0 0;
+        text-align: center;
+        box-sizing: border-box;
+        line-height: 48px;
+
+        &--disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
     }
 }

@@ -8,7 +8,7 @@ export const FormConfig = {
         max: 50
     },
     space: {
-        min: 20,
+        min: 10,
         max: 200
     },
     sort: 'floor_1',

@@ -6,7 +6,6 @@ import {
     IObjectDecorationSnippet,
     OBJECTS_DECORATION_UPLOADS_PATH
 } from '../../../../../serv-files/serv-modules/jk-objects/decoration-api/objects-decoration.interfaces';
-import { ActivatedRoute } from '@angular/router';
 import { ObjectDecorationAdminService } from './object-decoration-content-admin/object-decoration-admin.service';
 import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
 
@@ -27,6 +26,8 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
 
     @Input()
     public isAuthorizated = false;
+    @Input()
+    public objectId: string;
 
     public mockSlider = slider;
     public sliderContent = slider[0];
@@ -35,7 +36,6 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     public currentTab: IDecorationData;
     public currentType: string;
 
-    public objectId: string;
     public contentSnippet: IObjectDecorationSnippet;
     public typesSnippet: IObjectTabsSnippet;
     public switchOn = false;
@@ -47,13 +47,10 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
 
     constructor(
         private decorationService: ObjectDecorationAdminService,
-        private activatedRoute: ActivatedRoute,
         public ref: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
-        // this.getTypes();
         this.getTypesThanContent();
     }
 
@@ -116,8 +113,6 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
             this.currentType = null;
         }
         this.currentSlide = 0;
-        console.log('this.currentTab changeTab: ', this.currentTab);
-        // this.getContent();
     }
 
     public checkTabImages(type) {
@@ -128,7 +123,6 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     public changeType(type) { // когда устанавливается новый тип отделки из массива typesSnippet.decorationType, происходит и переключение на таб с таким же decorationType
         this.currentType = type;
         this.currentTab = this.contentSnippet.data.find((item) => item.tab.name === this.currentTab.tab.name && item.tab.decorationType === this.currentType);
-        // this.getContent();
     }
 
     public nextBtn() {

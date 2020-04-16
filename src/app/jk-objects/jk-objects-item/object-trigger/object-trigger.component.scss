@@ -12,6 +12,7 @@
     }
 
     &__item {
+        position: relative;
         width: 258px;
         height: 160px;
         background-color: $col-white;
@@ -19,10 +20,18 @@
         box-sizing: border-box;
         padding: 16px 24px;
         cursor: pointer;
-        position: relative;
         box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
         &:hover { background-color: rgba(238, 66, 55, 0.1); }
-        
+
+        &-anchor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 258px;
+            height: 160px;
+        }
+
         &-text {
             font: 18px/23px $font-proba;
             color: $col-black;

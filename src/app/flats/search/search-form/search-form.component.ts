@@ -1,4 +1,3 @@
-import { FormConfig } from './search-form.config';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
@@ -38,7 +37,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
-        this.config = FormConfig;
         this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
             this.buildForm(queryParams);
         });

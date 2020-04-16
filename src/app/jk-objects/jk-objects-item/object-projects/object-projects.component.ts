@@ -13,7 +13,6 @@ import { project } from './mockProject';
 export class ObjectProjectsComponent implements OnInit {
 
     public mockProject = project;
-
     public currentSlide = 0;
 
     constructor() { }

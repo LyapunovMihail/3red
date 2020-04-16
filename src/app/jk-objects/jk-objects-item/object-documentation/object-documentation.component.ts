@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { FILEUPLOADS_UPLOADS_PATH, IObjectDocSnippet } from '../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
 import { ObjectDocumentationAdminService } from './object-documentation-admin/object-documentation-admin.service';
 import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
@@ -22,20 +21,19 @@ export class ObjectDocumentationComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
+    @Input()
+    public objectId: string;
 
     public uploadsPath = FILEUPLOADS_UPLOADS_PATH;
     public closeModal = true;
-    public objectId: string;
     public snippet: IObjectDocSnippet;
     public switchOn = false;
 
     constructor(
-        private documentationService: ObjectDocumentationAdminService,
-        private activatedRoute: ActivatedRoute
+        private documentationService: ObjectDocumentationAdminService
     ) { moment.locale('ru'); }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
         this.documentationService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
             if (this.snippet) {

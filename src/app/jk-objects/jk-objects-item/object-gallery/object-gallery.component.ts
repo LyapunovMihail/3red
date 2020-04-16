@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { mockSlider } from './mockSlide';
 import { ObjectGalleryAdminService } from './object-gallery-content-admin/object-gallery-admin.service';
-import { ActivatedRoute } from '@angular/router';
 import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 import { IObjectGallerySnippet, OBJECTS_GALLERY_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/gallery-api/objects-gallery.interfaces';
 
@@ -19,6 +18,8 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
 
     @Input()
     public isAuthorizated = false;
+    @Input()
+    public objectId: string;
 
     public slideList = mockSlider;
 
@@ -27,7 +28,6 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
 
     public interval;
 
-    public objectId: string;
     public contentSnippet: IObjectGallerySnippet;
     public tabSnippet: IObjectTabsSnippet;
     public switchOn = false;
@@ -39,17 +39,10 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
 
     constructor(
         private galleryService: ObjectGalleryAdminService,
-        private activatedRoute: ActivatedRoute
     ) { }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
-
         this.getTabsThanContent();
-        console.log('this.contentSnippet', this.contentSnippet);
-        // if ( this.contentSnippet.image_data && this.contentSnippet.image_data.length > 0 ) {
-        //     this.slideShow();
-        // }
     }
 
     public getTabsThanContent() {
@@ -75,7 +68,6 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
     }
 
     public getContent() {
-        console.log('this.currentTab getContent: ', this.currentTab);
         this.galleryService.getContentSnippetByIdAndTab(this.objectId, this.currentTab).subscribe((data) => {
             this.contentSnippet = data;
             if (this.contentSnippet) {

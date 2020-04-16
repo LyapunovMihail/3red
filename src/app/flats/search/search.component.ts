@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FormConfig } from './search-form/search-form.config';
 import { SearchService } from './search.service';
@@ -16,7 +16,7 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
     ]
 })
 
-export class SearchComponent implements OnDestroy {
+export class SearchComponent implements OnInit, OnDestroy {
 
     public outputFlatsList: IAddressItemFlat[] = [];
     public searchFlats: IAddressItemFlat[] = [];
@@ -37,6 +37,10 @@ export class SearchComponent implements OnDestroy {
         public platform: PlatformDetectService,
         public windowScrollLocker: WindowScrollLocker
     ) {}
+
+    public ngOnInit() {
+        this.getFlats({});
+    }
 
     public formChange(form) {
         this.form = form;
@@ -82,11 +86,11 @@ export class SearchComponent implements OnDestroy {
         this.skip = 0;
         this.outputFlatsList = [];
 
+        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         this.getFlats(params);
     }
 
     public getFlats(params) {
-        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
         this.searchService.getFlatsMultiple(params).subscribe(
             (data) => {
                 data.flats = data.flats.filter((flat) => flat.status !== '8');

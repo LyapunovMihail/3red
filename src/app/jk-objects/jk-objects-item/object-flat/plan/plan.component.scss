@@ -8,6 +8,11 @@
     &__container {
         margin: 0 0 32px;
     }
+    &__title {
+        width: 100%;
+        max-width: 1104px;
+        margin-bottom: 24px;
+    }
     &__text {
         font-size: 18px;
     }

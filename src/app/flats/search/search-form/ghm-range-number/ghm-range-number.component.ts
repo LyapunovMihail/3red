@@ -81,6 +81,7 @@ export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueA
 
     public ngOnChanges(changes: SimpleChanges): void {
         this.start(changes.min.currentValue, changes.max.currentValue);
+        this.mouseUp(0);
     }
 
     public writeValue(control) {

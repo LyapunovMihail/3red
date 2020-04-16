@@ -3,11 +3,9 @@ import { Share, SHARES_UPLOADS_PATH } from '../../../../../serv-files/serv-modul
 import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { ObjectNewsService } from './object-news.service';
 import { IObjectNewsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/news-api/objects-news.interfaces';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
-declare let $: any;
 import * as moment from 'moment';
 
 @Component({
@@ -26,7 +24,8 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
 
     @Input()
     public isAuthorizated = false;
-
+    @Input()
+    public objectId: string;
     @Input()
     public objectName: string;
 
@@ -42,7 +41,6 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
 
-    public objectId: string;
     public objectSnippet: IObjectNewsSnippet;
     public switchOn = false;
 
@@ -56,13 +54,10 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
-        public objectNewsService: ObjectNewsService,
-        private activatedRoute: ActivatedRoute
+        public objectNewsService: ObjectNewsService
     ) { }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
-
         this.objectNewsService.getSnippetById(this.objectId).subscribe((data) => {
             this.objectSnippet = data;
             if (this.objectSnippet) {

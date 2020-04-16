@@ -1,4 +1,3 @@
-import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 import { SearchComponent } from './search.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchOutputComponent } from './search-output/search-output.component';
@@ -16,6 +15,5 @@ export const SearchComponents = [
     HouseSelectComponent,
     SearchOutputPipe,
     SearchFormPipe,
-    BitNumberPipe,
-    CheckboxListComponent
+    BitNumberPipe
 ];

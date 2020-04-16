@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ObjectLocationAdminService } from './object-location-content-admin/object-location-admin.service';
 import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 import { IObjectLocationSnippet } from '../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-object-item-location',
@@ -20,7 +19,8 @@ export class ObjectLocationComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
-
+    @Input()
+    public objectId: string;
     @Input()
     public objectName: string;
     @Input()
@@ -28,11 +28,11 @@ export class ObjectLocationComponent implements OnInit {
     @Input()
     public objectAddress: string;
 
+
     public isTabSet = false;
 
     public contentSnippet: IObjectLocationSnippet;
     public tabSnippet: IObjectTabsSnippet;
-    public objectId: string;
     public switchOn = false;
 
     public openTab = 'Объект';
@@ -42,12 +42,10 @@ export class ObjectLocationComponent implements OnInit {
     public closeContentModal = true;
 
     constructor(
-        private locationService: ObjectLocationAdminService,
-        private activatedRoute: ActivatedRoute
+        private locationService: ObjectLocationAdminService
     ) { }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
         this.getTabsThanContent();
     }
 

@@ -1,31 +1,31 @@
 <div class="object-item" #container>
-    <ng-container *ngIf="jkObject">
+    <ng-container *ngIf="jk">
 
-        <app-object-item-preview [isAuthorizated]="isAuthorizated"></app-object-item-preview>
+        <app-object-item-preview [isAuthorizated]="isAuthorizated" [objectId]="objectId"></app-object-item-preview>
 
-        <app-object-item-filter *ngIf="!isAuthorizated"></app-object-item-filter>
+        <app-object-item-filter [objectId]="objectId" [mod]="jk.mod" *ngIf="!isAuthorizated"></app-object-item-filter>
 
-        <app-object-item-trigger *ngIf="!isAuthorizated"></app-object-item-trigger>
+        <app-object-item-trigger [objectId]="objectId" [mod]="jk.mod" *ngIf="!isAuthorizated"></app-object-item-trigger>
 
         <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
 
-        <app-object-item-project [isAuthorizated]="isAuthorizated" id="project" [objectName]="jkObject.name"></app-object-item-project>
+        <app-object-item-project [isAuthorizated]="isAuthorizated" [objectId]="objectId" [objectName]="jk.name" id="project"></app-object-item-project>
 
-        <app-object-item-flat [isAuthorizated]="isAuthorizated" id="choose"></app-object-item-flat>
+        <app-object-item-flat [isAuthorizated]="isAuthorizated" [objectId]="objectId" [mod]="jk.mod" id="choose"></app-object-item-flat>
 
-        <app-object-item-gallery [isAuthorizated]="isAuthorizated" id="gallery"></app-object-item-gallery>
+        <app-object-item-gallery [isAuthorizated]="isAuthorizated" [objectId]="objectId" id="gallery"></app-object-item-gallery>
 
-        <app-object-item-decoration [isAuthorizated]="isAuthorizated" id="decoration"></app-object-item-decoration>
+        <app-object-item-decoration [isAuthorizated]="isAuthorizated" [objectId]="objectId" id="decoration"></app-object-item-decoration>
 
-        <app-object-item-location [isAuthorizated]="isAuthorizated" id="location" [objectName]="jkObject.name" [objectCoords]="jkObject.location" [objectAddress]="jkObject.address"></app-object-item-location>
+        <app-object-item-location [isAuthorizated]="isAuthorizated" [objectId]="objectId" [objectName]="jk.name" [objectCoords]="jk.coords" [objectAddress]="jk.address" id="location"></app-object-item-location>
 
-        <app-object-item-purchase [isAuthorizated]="isAuthorizated" id="purchase"></app-object-item-purchase>
+        <app-object-item-purchase [isAuthorizated]="isAuthorizated" [objectId]="objectId" id="purchase"></app-object-item-purchase>
 
-        <app-object-item-news [isAuthorizated]="isAuthorizated" id="news" [objectName]="jkObject.name"></app-object-item-news>
+        <app-object-item-news [isAuthorizated]="isAuthorizated" [objectId]="objectId" [objectName]="jk.name" id="news"></app-object-item-news>
 
-        <app-object-item-documentation [isAuthorizated]="isAuthorizated" id="documentation"></app-object-item-documentation>
+        <app-object-item-documentation [isAuthorizated]="isAuthorizated" [objectId]="objectId" id="documentation"></app-object-item-documentation>
 
-        <app-object-item-members [isAuthorizated]="isAuthorizated"></app-object-item-members>
+        <app-object-item-members [isAuthorizated]="isAuthorizated" [objectId]="objectId"></app-object-item-members>
 
         <app-object-item-projects *ngIf="!isAuthorizated"></app-object-item-projects>
 
@@ -33,7 +33,7 @@
             <div class="utilities__item">
                 <a href="#" class="utilities__path">Админ</a>
                 <a href="#" class="utilities__path">Объкты</a>
-                <a href="#" class="utilities__path">{{jkObject.name}}</a>
+                <a href="#" class="utilities__path">{{jk.name}}</a>
             </div>
 
             <div class="utilities__item">

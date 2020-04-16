@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { IObjectMembersSnippet } from '../../../../../serv-files/serv-modules/jk-objects/members-api/objects-members.interfaces';
 import { ObjectMembersAdminService } from './object-members-admin/object-members-admin.service';
 
@@ -17,19 +16,18 @@ export class ObjectMembersComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
+    @Input()
+    public objectId: string;
 
     public closeModal = true;
-    public objectId: string;
     public snippet: IObjectMembersSnippet;
     public switchOn = false;
 
     constructor(
-        private membersService: ObjectMembersAdminService,
-        private activatedRoute: ActivatedRoute
+        private membersService: ObjectMembersAdminService
     ) { }
 
     ngOnInit() {
-        this.objectId = this.activatedRoute.snapshot.params.id;
         this.getContent();
     }
 
