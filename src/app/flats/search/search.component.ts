@@ -39,7 +39,32 @@ export class SearchComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
-        this.getFlats({});
+        this.getData({});
+    }
+
+    public getData(params) {
+        this.searchService.getFlatsData({mod: params.mod || ''}).subscribe(
+            (data) => {
+                this.modsBtnList = data.modsBtnList;
+                this.housesBtnList = data.housesBtnList;
+                this.config = data.config;
+                const newParams = {
+                    ...params,
+                    spaceMin: this.config.space.min,
+                    spaceMax: this.config.space.max,
+                    priceMin: this.config.price.min,
+                    priceMax: this.config.price.max,
+                    floorMin: this.config.floor.min,
+                    floorMax: this.config.floor.max,
+                };
+                console.log('paramsWithConfig: ', newParams);
+
+                this.router.navigate([this.router.url.split('?')[0]], {queryParams: newParams});
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 
     public formChange(form) {
@@ -80,6 +105,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
         if (this.params && this.params.mod !== params['mod']) {
             delete params['housesMods'];
+            console.log('check');
+            this.getData(params);
+            this.params = params;
+            return;
         }
 
         this.params = params;
@@ -90,17 +119,19 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.getFlats(params);
     }
 
+
     public getFlats(params) {
-        this.searchService.getFlatsMultiple(params).subscribe(
-            (data) => {
-                data.flats = data.flats.filter((flat) => flat.status !== '8');
-                this.count = data.flats.length;
-                this.searchFlats = data.flats;
+        console.log('params: ', params);
+        this.searchService.getFlatsMultiple({ modsBtnList: this.modsBtnList, params }).subscribe(
+            (flats) => {
+                flats = flats.filter((flat) => flat.status !== '8');
+                this.count = flats.length;
+                this.searchFlats = flats;
                 this.sortFlats(this.sort);
                 this.loadMore();
-                this.modsBtnList = data.modsBtnList;
-                this.housesBtnList = data.housesBtnList;
-                this.config = data.config;
+                // this.modsBtnList = data.modsBtnList;
+                // this.housesBtnList = data.housesBtnList;
+                // this.config = data.config;
             },
             (err) => {
                 console.log(err);

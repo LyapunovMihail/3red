@@ -46,7 +46,7 @@ export class ObjectsAdminComponent implements OnInit {
 
     private setNewForm() {
         this.form = this.formBuilder.group({
-            mod: ['', Validators.required],
+            mod: [''],
             name: ['', Validators.required],
             subtext: ['', Validators.required],
             address: ['', Validators.required],
@@ -64,7 +64,7 @@ export class ObjectsAdminComponent implements OnInit {
 
     private setFormFromSnippet() {
         this.form = this.formBuilder.group({
-            mod: [this.snippet.mod, Validators.required],
+            mod: [this.snippet.mod],
             name: [this.snippet.name, Validators.required],
             subtext: [this.snippet.subtext, Validators.required],
             address: [this.snippet.address, Validators.required],

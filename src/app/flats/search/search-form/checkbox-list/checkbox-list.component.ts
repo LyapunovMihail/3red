@@ -23,17 +23,17 @@ export class CheckboxListComponent {
 
     constructor() {}
 
-    public isChecked(val) {
-        if (val === 'all') {
+    public isChecked(btn) {
+        if (btn.value === 'all') {
             return this.isCheckedAll();
         }
-        return this.activeList.some((item) => item.value === val);
+        return this.activeList.some((item) => item.value === btn.value && item.mod === btn.mod);
     }
 
     // Если проверяется состояние чекбокса 'выбрать всё' - проверяем равен ли массив значений кол-ву чекбоксов-1, если равен, то возвращаем тру, если нет - фэлс.
     // Так как значение 'выбрать всё' не попадает в массив значений, сделать проверку на наличие этого значения в массиве не удастся
     public isCheckedAll(): boolean {
-        return this.activeList.length === this.btnList.length - 1;
+        return this.activeList.length === this.btnList.filter((item) => !item.jk).length - 1; // При проверке убираем из массива кнопок те что с названием жк
     }
 
     public checkBtn(isChecked, btn) {
@@ -44,10 +44,10 @@ export class CheckboxListComponent {
             return;
         }
 
-        if (isChecked && !this.activeList.some((item) => item.value === value)) {
+        if (isChecked && !this.activeList.some((item) => item.value === value && item.mod === btn.mod)) {
             this.activeList.push({value, mod: btn.mod});
         } else {
-            const index = this.activeList.findIndex((item) => item.value === value);
+            const index = this.activeList.findIndex((item) => item.value === value && item.mod === btn.mod);
             if (index >= 0) {
                 this.activeList.splice(index, 1);
             }
@@ -60,11 +60,11 @@ export class CheckboxListComponent {
     // если выключили - удаляем все значения из масиива
     public checkAll(isChecked) {
         this.btnList.forEach((item) => {
-            if (item.value !== 'all') {
-                if (isChecked && !this.activeList.some((entity) => entity.value === item.value)) {
+            if (item.value !== 'all' && !item.jk) {
+                if (isChecked && !this.activeList.some((entity) => entity.value === item.value && entity.mod === item.mod)) {
                     this.activeList.push({ value: item.value, mod: item.mod });
                 } else if (!isChecked) {
-                    const index = this.activeList.findIndex((entity) => entity.value === item.value);
+                    const index = this.activeList.findIndex((entity) => entity.value === item.value && entity.mod === item.mod);
                     if (index >= 0) {
                         this.activeList.splice(index, 1);
                     }

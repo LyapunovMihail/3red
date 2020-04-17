@@ -37,17 +37,19 @@ export class ObjectTriggerComponent implements OnInit {
         if (flats.length) {
             for (let i = 0; i < 4; i++) {
                 const filteredFlats = flats.filter((flat) => Number(flat.rooms) === i);
-                this.triggerSnippets[i] = {rooms: i, space: '', price: 0};
-                this.triggerSnippets[i].price = Math.min.apply(Math, filteredFlats.map((flat) => flat.price));
-                this.triggerSnippets[i].price = Number((this.triggerSnippets[i].price / 1000000).toFixed(2));
+                if (filteredFlats.length) {
+                    this.triggerSnippets[i] = {rooms: i, space: '', price: 0};
+                    this.triggerSnippets[i].price = Math.min.apply(Math, filteredFlats.map((flat) => flat.price));
+                    this.triggerSnippets[i].price = Number((this.triggerSnippets[i].price / 1000000).toFixed(2));
 
-                let spaceMin = Math.min.apply(Math, filteredFlats.map((flat) => flat.space));
-                spaceMin =  Math.round(spaceMin);
+                    let spaceMin = Math.min.apply(Math, filteredFlats.map((flat) => flat.space));
+                    spaceMin =  Math.round(spaceMin);
 
-                let spaceMax = Math.max.apply(Math, filteredFlats.map((flat) => flat.space));
-                spaceMax =  Math.round(spaceMax);
+                    let spaceMax = Math.max.apply(Math, filteredFlats.map((flat) => flat.space));
+                    spaceMax =  Math.round(spaceMax);
 
-                this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
+                    this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
+                }
             }
         }
     }

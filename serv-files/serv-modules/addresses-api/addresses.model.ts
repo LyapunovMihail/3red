@@ -28,17 +28,13 @@ export class AddressesModel {
     // }
 
     public async getObjectFlats(query) {
-        console.log('query: ', query);
-        if (query.mod) {
-            console.log('checkFilter');
+        if (query.mod && query.mod.split(',').length === 1) {
             const jk = await this.objectCollection.findOne({mod: query.mod});
             const flatSnippet = await this.flatCollection.findOne({ objectId: jk._id.toString() });
             if (flatSnippet && flatSnippet.switchOn) {
-                console.log('checkFilter flatSnippet.switchOn');
                 const data = this.parseRequest(query);
                 return await this.collection.find(data.request, data.parameters).toArray();
             } else {
-                console.log('checkFilter !flatSnippet.switchOn');
                 return [];
             }
         } else {
@@ -100,30 +96,47 @@ export class AddressesModel {
     }
 
     public async getCommonFlats(query) {    // Создаём спсисок табов жилищных комплексов, список домов жк и соответствующих им квартир с названиями жк и мин-макс параметры для формы фильтрации
-        let data = this.parseRequest(query);
+        let data = this.parseRequest(query.params);
 
-        const findByMod = query.mod ? {mod : query.mod} : {};
-        const flatsOfMod = await this.collection.find(findByMod).toArray();
-        const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
-        const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
-        const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
-        const housesMods = query.housesMods ? query.housesMods.split('nzt;').map((item) => JSON.parse(item)) : [];
+        // const findByMod = query.mod ? {mod : query.mod} : {};
+        // const flatsOfMod = await this.collection.find(findByMod).toArray();
+        // const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
+        const modsBtnList = query.modsBtnList; // утсанавливаем список табов жилищных комплексов
+        // const housesBtnList = query.housesBtnList; // Устанавливаем спсиок домов жилищных комплексов
+        const housesMods = query.params.housesMods ? query.params.housesMods.split('nzt;').map((item) => JSON.parse(item)) : [];
 
-        const result = {modsBtnList, housesBtnList, flats: [], config};
+        let flats = [];
 
         if (modsBtnList.length > 1) {
             if (housesMods.length) {
                 for (const item of housesMods) {
                     const items = await this.collection.find({...data.request, mod: item.mod, house: item.value}, data.parameters).toArray();
-                    result.flats.push(...items);
+                    flats.push(...items);
                 }
             } else {
-                result.flats.push(...await this.collection.find(data.request, data.parameters).toArray());
+                flats.push(...await this.collection.find(data.request, data.parameters).toArray());
             }
-            result.flats.forEach((flat) => flat.jkName = modsBtnList.find((jk) => jk.value === flat.mod).name);
+            flats = flats.filter((flat) => {
+                if (modsBtnList.find((jk) => jk.value === flat.mod)) {
+                    flat.jkName = modsBtnList.find((jk) => jk.value === flat.mod).name;
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         }
 
-        return result;
+        return flats;
+    }
+
+    public async getCommonFlatsData(query) {
+        const findByMod = query.mod ? {mod : query.mod} : {};
+        const flatsOfMod = await this.collection.find(findByMod).toArray();
+        const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
+        const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
+        const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
+
+        return { config, modsBtnList, housesBtnList };
     }
     private async setModBtns() { // утсанавливаем список табов жилищных комплексов
         const objects = await this.objectCollection.find().toArray();
@@ -132,7 +145,7 @@ export class AddressesModel {
         for (const item of objects) {
             const flatSnippet = await this.flatCollection.findOne({ objectId: item._id.toString() }); // Проверяем включен ли блок квартир в объекте, если включен, то добавляем таб этого объекта
             if (flatSnippet && flatSnippet.switchOn) {
-                if (!modsBtnList.includes({ name: item.name, value: item.mod })) {
+                if (!modsBtnList.some((btn) => btn.value === item.mod )) {
                     modsBtnList.push({ name: item.name, value: item.mod });
                 }
             }
@@ -161,10 +174,9 @@ export class AddressesModel {
                     flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1);   // сортировка по возрастанию номера дома
                     if (flats.length) {
                         housesBtnList.push({ jk: jk.name });        // При появлении нового жк, добавлять его название в массив
-
                         flats.forEach((item) => {
-                            if (!housesBtnList.some((btn) => btn.value === item.house)) {
-                                housesBtnList.push({ name: 'Дом № ' + item.house, value: item.house, mod: item.mod});
+                            if (!housesBtnList.some((btn) => btn.value === item.house && btn.mod === item.mod)) {
+                                housesBtnList.push({ name: 'Дом № ' + item.house, value: item.house, mod: jk.value});
                             }
                         });
                     }

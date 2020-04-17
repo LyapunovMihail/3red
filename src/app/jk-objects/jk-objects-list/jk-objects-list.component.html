@@ -33,7 +33,7 @@
 </section>
 
 <app-objects-admin *ngIf="!closeModal"
-    (closeModal)="closeModal = $event"
+    (closeModal)="closeModal = $event; redactId = null"
     [snippets]="snippets"
     (snippetsChange)="snippetsChange($event)"
     [id]="redactId">

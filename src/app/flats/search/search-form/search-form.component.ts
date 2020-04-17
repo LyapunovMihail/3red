@@ -103,7 +103,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                         return housesMods.split('nzt;').map((item) => JSON.parse(item)); // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
                     }
                     return [];
-                })(params.housesMods)               // houses - застрингифаенные объекты, разделённые символами 'chpokl', поэтому сплитим по 'chpokl и парсим массив с JSON
+                })(params.housesMods)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON
             ],
             mod: params.mod || ''               // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
         });

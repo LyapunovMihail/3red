@@ -7,7 +7,7 @@
             <input [id]="btn.value"
                 (change)="checkBtn($event.target.checked, btn)"
                 [value]="btn.value"
-                [checked]="isChecked(btn.value)"
+                [checked]="isChecked(btn)"
                 type="checkbox">
             <div></div>
             <span>{{btn.name}}</span>

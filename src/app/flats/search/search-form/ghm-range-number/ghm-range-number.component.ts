@@ -49,7 +49,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     `
 })
 
-export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
 
     @Input( ) public min: number;
     @Input( ) public max: number;
@@ -79,10 +79,10 @@ export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueA
         }
     }
 
-    public ngOnChanges(changes: SimpleChanges): void {
-        this.start(changes.min.currentValue, changes.max.currentValue);
-        this.mouseUp(0);
-    }
+    // public ngOnChanges(changes: SimpleChanges): void {
+    //     this.start(changes.min.currentValue, changes.max.currentValue);
+    //     this.mouseUp(0);
+    // }
 
     public writeValue(control) {
         if (control) {

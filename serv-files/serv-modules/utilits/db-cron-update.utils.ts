@@ -88,7 +88,11 @@ export class DbCronUpdate {
         if (('Article' in object) && !this.objects.some((jk) => jk.mod === object.Article.split('-')[0])) { // Если жилой комплекс этой квартиры создан, она добавляется в бд
             return;
         }
-        const {mod, house, section, floor, flat} = this.parseArticle(object.Article);
+        const {mod, house, section, floor, flat, type} = this.parseArticle(object.Article);
+        if (type !== 'КВ' && type !== 'АП') {
+            return;
+        }
+
         const itemflat: IAddressItemFlat = {
             mod,
             house,
@@ -96,6 +100,7 @@ export class DbCronUpdate {
             floor,
             rooms: Number(object.Rooms),
             flat,
+            type,
             status: object.StatusCode,
             statusName: object.StatusCodeName,
             decoration: object.Finishing,
@@ -115,17 +120,7 @@ export class DbCronUpdate {
 
     private parseArticle(article: string) {
         // ТОМ-03-01-04-02-018
-        if (!article.startsWith('МКВ')) {
-            const [mod, house, sectionStr, floorStr, , flatStr] = article.split('-');
-            const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
-            return {
-                mod,
-                house,
-                section,
-                floor,
-                flat,
-            };
-        } else {
+        if (article.startsWith('МКВ')) {
             const [mod, houseStr, , floorStr, , flatStr] = article.split('-');
             const [section, floor, flat] = [houseStr.slice(-1), floorStr, flatStr].map(Number); // обрезаем из корпуса последнюю цифру и ставим её в секцию
             const house = this.parseHouseNumber(houseStr.slice(0, 2)); // берём из названия дома первые 2 символа
@@ -135,6 +130,40 @@ export class DbCronUpdate {
                 section,
                 floor,
                 flat,
+                type: 'КВ',
+            };
+        } else if (article.startsWith('БР')) {
+            const [mod, type, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
+            return {
+                mod,
+                house: '1',
+                section,
+                floor,
+                flat,
+                type,
+            };
+        } else if (article.startsWith('ОБ')) {
+            const [mod, type, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
+            return {
+                mod,
+                house: section === 1 || section === 2 || section === 3 ? '1' : '2',
+                section,
+                floor,
+                flat,
+                type,
+            };
+        } else {
+            const [mod, houseStr, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [house, section, floor, flat] = [houseStr, sectionStr, floorStr, flatStr].map(Number);
+            return {
+                mod,
+                house: house.toString(),
+                section,
+                floor,
+                flat,
+                type: 'КВ',
             };
         }
     }
