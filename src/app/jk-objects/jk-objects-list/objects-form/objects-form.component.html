@@ -16,9 +16,9 @@
         <div class="objects__utilities-price">
             <p class="objects__price-title">Цена</p>
             <input type="text" class="objects__price-input" placeholder="от 2.2 млн" formControlName="priceMin"
-                   (input)="removeChars($event.target.value, 'priceMin')">
+                   (blur)="removeChars($event.target.value, 'priceMin')">
             <input type="text" class="objects__price-input" placeholder="до 9.2 млн" formControlName="priceMax"
-                   (input)="removeChars($event.target.value, 'priceMax')">
+                   (blur)="removeChars($event.target.value, 'priceMax')">
         </div>
     </div>
     <div class="objects__nav">

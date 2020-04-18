@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FormConfig } from './search-form/search-form.config';
@@ -35,14 +35,15 @@ export class SearchComponent implements OnInit, OnDestroy {
         public router: Router,
         public searchService: SearchService,
         public platform: PlatformDetectService,
-        public windowScrollLocker: WindowScrollLocker
+        public windowScrollLocker: WindowScrollLocker,
+        private route: ActivatedRoute
     ) {}
 
     public ngOnInit() {
-        this.getData({});
+        this.getData(this.route.snapshot.queryParams, true);
     }
 
-    public getData(params) {
+    public getData(params, firstBoot) {
         this.searchService.getFlatsData({mod: params.mod || ''}).subscribe(
             (data) => {
                 this.modsBtnList = data.modsBtnList;
@@ -57,9 +58,12 @@ export class SearchComponent implements OnInit, OnDestroy {
                     floorMin: this.config.floor.min,
                     floorMax: this.config.floor.max,
                 };
-                console.log('paramsWithConfig: ', newParams);
 
                 this.router.navigate([this.router.url.split('?')[0]], {queryParams: newParams});
+                if (firstBoot) { // Если первая загрузка - после подгрузки конфига перевбиваем параметры запроса
+                    this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+                }
+
             },
             (err) => {
                 console.log(err);
@@ -70,7 +74,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public formChange(form) {
         this.form = form;
 
-        const params = {
+        const params: any = {
             spaceMin: form.space.min,
             spaceMax: form.space.max,
             priceMin: form.price.min,
@@ -80,33 +84,33 @@ export class SearchComponent implements OnInit, OnDestroy {
         };
 
         if (form.type.length > 0) {
-            params['type'] = (form.type).join(',');
+            params.type = (form.type).join(',');
         }
 
         if (form.decoration.length > 0) {
-            params['decoration'] = (form.decoration).join(',');
+            params.decoration = (form.decoration).join(',');
         }
 
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
-            params['rooms'] = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
+            params.rooms = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
 
-        if ( 'sections' in form && form['sections'].length > 0 ) {
-            params['sections'] = (form.sections).join(',');
+        if ( 'sections' in form && form.sections.length > 0 ) {
+            params.sections = (form.sections).join(',');
         }
 
         if ( 'housesMods' in form && form.housesMods.length > 0 ) {
-            params['housesMods'] = form.housesMods.map((item) => JSON.stringify(item)).join('nzt;');
+            params.housesMods = form.housesMods.map((item) => JSON.stringify(item)).join('nzt;');
         }
 
         if ( 'mod' in form && form.mod.length) { // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
-            params['mod'] = form.mod;
+            params.mod = form.mod;
 
         }
-        if (this.params && this.params.mod !== params['mod']) {
-            delete params['housesMods'];
+        if (this.params && this.params.mod !== params.mod) {
+            delete params.housesMods;
             console.log('check');
-            this.getData(params);
+            this.getData(params, false); // При смене таба подгружаем конфиг с параметрами
             this.params = params;
             return;
         }
@@ -115,7 +119,9 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.skip = 0;
         this.outputFlatsList = [];
 
+
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+
         this.getFlats(params);
     }
 
@@ -129,9 +135,6 @@ export class SearchComponent implements OnInit, OnDestroy {
                 this.searchFlats = flats;
                 this.sortFlats(this.sort);
                 this.loadMore();
-                // this.modsBtnList = data.modsBtnList;
-                // this.housesBtnList = data.housesBtnList;
-                // this.config = data.config;
             },
             (err) => {
                 console.log(err);
