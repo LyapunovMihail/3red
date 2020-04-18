@@ -44,12 +44,12 @@ export class AddressesModel {
     }
 
     public async getObjectFlatsData(objectId) { // извлекаем объект жилищного комплекса, создаём список домов, схему домов-секций-этажей и мин-макс параметры для формы фильтрации
-        const jk = await this.objectCollection.findOne({_id: ObjectId(objectId)});
+        const jk = await this.objectCollection.findOne({ _id: ObjectId(objectId) });
         const data = this.parseRequest({ mod: jk.mod });
         const flats = await this.collection.find(data.request, data.parameters).toArray();
         const { housesBtnList, floorCount } = this.setFloorCount(flats); // создаём список домов, схему домов-секций-этажей
         const config = this.setMinMaxParams(flats); // устанавливаем мин-макс параметры для формы фильтрации
-        return {jk, housesBtnList, floorCount, config};
+        return { jk, housesBtnList, floorCount, config };
     }
     private setFloorCount(flats): {housesBtnList, floorCount} {      // устанавливаем схему домов-секций-этажей и список домов
         const housesBtnList = [];
@@ -98,11 +98,7 @@ export class AddressesModel {
     public async getCommonFlats(query) {    // Создаём спсисок табов жилищных комплексов, список домов жк и соответствующих им квартир с названиями жк и мин-макс параметры для формы фильтрации
         let data = this.parseRequest(query.params);
 
-        // const findByMod = query.mod ? {mod : query.mod} : {};
-        // const flatsOfMod = await this.collection.find(findByMod).toArray();
-        // const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
         const modsBtnList = query.modsBtnList; // утсанавливаем список табов жилищных комплексов
-        // const housesBtnList = query.housesBtnList; // Устанавливаем спсиок домов жилищных комплексов
         const housesMods = query.params.housesMods ? query.params.housesMods.split('nzt;').map((item) => JSON.parse(item)) : [];
 
         let flats = [];
@@ -130,10 +126,15 @@ export class AddressesModel {
     }
 
     public async getCommonFlatsData(query) {
-        const findByMod = query.mod ? {mod : query.mod} : {};
+        const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
+        const mods = modsBtnList.map((item, i) => {
+            if ( i > 0 ) {
+                return item.value;
+            }
+        });
+        const findByMod = query.mod ? {mod : query.mod} : mods.length ? { mod : { $in : mods } } : {};
         const flatsOfMod = await this.collection.find(findByMod).toArray();
         const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
-        const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
         const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
 
         return { config, modsBtnList, housesBtnList };
@@ -186,17 +187,25 @@ export class AddressesModel {
         return housesBtnList;
     }
 
+    public async getSearchConfig() {
+        const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
+        const mods = modsBtnList.map((item, i) => {
+            if ( i > 0 ) {
+                return item.value;
+            }
+        });
+        const findByMod = mods.length ? { mod : { $in : mods } } : {};
+        const flatsOfMod = await this.collection.find(findByMod).toArray();
+        const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
+        return config;
+    }
+
     public async getObjectsWithCount(query) {
         let data = this.parseRequest(query);
         return {
             count: await this.collection.find(data.request, data.parameters).count(),
             flats: await this.collection.find(data.request, data.parameters).toArray()
         };
-    }
-
-    public async getSearchConfig() {
-        let config = await this.db.collection('flats-search-config').find({}).toArray();
-        return config;
     }
 
     public parseRequest(query) {

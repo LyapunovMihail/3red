@@ -46,13 +46,17 @@ export class ObjectsFormComponent implements OnInit {
 
     public setForm(queryParams) {
         this.form = this.formBuilder.group({
-            priceMin: this.jkObjectsNumberPipe.transform(queryParams.priceMin || '1000000'),
-            priceMax: this.jkObjectsNumberPipe.transform(queryParams.priceMax || '10000000'),
+            priceMin: this.jkObjectsNumberPipe.transform(queryParams.priceMin || '1600000'),
+            priceMax: this.jkObjectsNumberPipe.transform(queryParams.priceMax || '13000000'),
             districts: [queryParams.districts ? queryParams.districts.split(',') : []],
             status: queryParams.status || 'Все'
         });
+
+        let params = this.onFormChange(this.form.value);
+        this.formChange.emit(params);
+
         this.formEvents = this.form.valueChanges.subscribe((form) => {
-            const params = this.onFormChange(form);
+            params = this.onFormChange(form);
             this.formChange.emit(params);
         });
     }

@@ -1,16 +1,19 @@
 import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME, OBJECTS_UPLOADS_PATH } from './objects.interfaces';
 import { ErrorNotCorrectArguments } from '../documentation-api/objects-documentation.interfaces';
 import { fileExtension, imageSaver, thumbnailSaver } from '../../utilits/image-saver.utilits';
+import { ADDRESSES_COLLECTION_NAME } from '../../addresses-api/addresses.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
 export class ObjectsModel {
 
-    collectionName = OBJECTS_OBJECT_COLLECTION_NAME;
-
-    collection: any;
+    private collectionName = OBJECTS_OBJECT_COLLECTION_NAME;
+    private collection: any;
+    private addressesCollectionName = ADDRESSES_COLLECTION_NAME;
+    private addressesCollection: any;
 
     constructor(public db: any) {
         this.collection = db.collection(this.collectionName);
+        this.addressesCollection = db.collection(this.addressesCollectionName);
     }
 
     async getSnippet(objectId?) {
@@ -20,6 +23,7 @@ export class ObjectsModel {
 
     async getSnippetByParams(query) {
         const request: any = {};
+        const flatsRequest: any = {};
 
         if ('districts' in query) {
             request.district = { $in: query.districts.split(',') };
@@ -27,14 +31,15 @@ export class ObjectsModel {
         if ( 'status' in query ) {
             request.status = query.status;
         }
+        if ( 'priceMin' in query && 'priceMax' in query) {
+            flatsRequest.price = { $gte: Number(query.priceMin), $lte: Number(query.priceMax) };
+        }
 
-        /*
-         Для бэкэнда
-         snippets.filter((jk) => {
-            return flats.some((flat) => flat.mod === jk.objectId && flat.price >= params.priceMin && flat.price <= params.priceMax);
-         });
-        */
-        return await this.collection.find(request).toArray();
+        const jkSnippets = await this.collection.find(request).toArray();
+        const flatsSnippets = await this.addressesCollection.find(flatsRequest).toArray();
+
+
+        return jkSnippets.filter((jk) => flatsSnippets.some((flat) => flat.mod === jk.mod));
     }
 
     // async updateSnippet(parameters) {
@@ -55,7 +60,7 @@ export class ObjectsModel {
 
     async updateSnippet(id, parameters) {
         const options: IObjectSnippet = parameters;
-        return await this.errorParamsCatcher( ( this.valuesReview(options) && ObjectId.isValid(id) ),async () => {
+        return await this.errorParamsCatcher( ( this.valuesReview(options) && ObjectId.isValid(id) ), async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
             const created = await this.collection.updateOne({ _id : ObjectId(id) }, { $set : options });
