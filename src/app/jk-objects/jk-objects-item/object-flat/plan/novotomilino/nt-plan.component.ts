@@ -31,10 +31,10 @@ export class NtPlanComponent implements OnInit {
     ngOnInit() {
 
         combineLatest(
-            this.planService.getHouse('01', this.mod),
-            this.planService.getHouse('02', this.mod),
-            this.planService.getHouse('03', this.mod),
-            this.planService.getHouse('09', this.mod)
+            this.planService.getHouse('1', this.mod),
+            this.planService.getHouse('2', this.mod),
+            this.planService.getHouse('3', this.mod),
+            this.planService.getHouse('9', this.mod)
         ).subscribe(([houseOne, houseTwo, houseThree, houseNine]) => {
             this.buildHousesData(0, houseOne);
             this.buildHousesData(1, houseTwo);

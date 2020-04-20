@@ -2,7 +2,9 @@
     <p class="house-selector__label-text">Дом {{houseTranslate[houseNumber]}} №{{sectionNumber}}</p>
     
     <div class="house-selector__modal" *ngIf="showCorpus">
-        <p class="house-selector__modal-item" *ngFor="let house of houseData" (click)="navigateMKV(house)">
+        <p *ngFor="let house of houseData" (click)="navigateMKV(house)"
+            class="house-selector__modal-item"
+           [class.house-selector__modal-item--disabled]="!floorCount[house.house] || !floorCount[house.house][house.section]">
             Дом {{houseTranslate[house.house]}} №{{house.section}}
         </p>
     </div>
@@ -12,7 +14,9 @@
     <p class="house-selector__label-text">Дом №{{houseNumber}}</p>
 
     <div class="house-selector__modal" *ngIf="showCorpus">
-        <p class="house-selector__modal-item" *ngFor="let house of houseData" (click)="navigateAll(house.value)">
+        <p *ngFor="let house of houseData" (click)="navigateAll(house.value)"
+           class="house-selector__modal-item"
+           [class.house-selector__modal-item--disabled]="!floorCount[house.value][sectionNumber]">
             {{house.name}}
         </p>
     </div>

@@ -40,9 +40,11 @@ export class HouseSelectorComponent implements OnInit {
         if (section > this.sectionNumber) {
             section = this.sectionNumber;
         }
-        let floor = this.floorCount[num][section][0];
-        if (floor > this.floorNumber) {
+        let floor;
+        if (this.floorCount[num][section].some((sFloor) => sFloor === this.floorNumber)) {
             floor = this.floorNumber;
+        } else {
+            floor = this.floorCount[num][section].find((item) => item);
         }
 
         this.router.navigate(['/objects/list/' + this.jk._id + '/flats/house/' + num + '/section/' + section + '/floor/' + floor]);
@@ -58,6 +60,8 @@ export class HouseSelectorComponent implements OnInit {
             nextFloor = nextFloorMin;
         } else if (nextFloorMax < this.floorNumber) {
             nextFloor = nextFloorMax;
+        } else {
+            nextFloor = floors.find((item) => item);
         }
 
         this.router.navigate(['/objects/list/' + this.jk._id + '/flats/house/' + house.house + '/section/' + house.section + '/floor/' + nextFloor]);

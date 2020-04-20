@@ -21,6 +21,7 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
     @Output() public svgClick: EventEmitter<any> = new EventEmitter();
 
     public selectorShift = 1;
+    public selectorIndex: number;
 
     private selectedFloor$: Subject<number> = new Subject<number>();
     private _ngUnsubscribe: Subject<any> = new Subject();
@@ -34,8 +35,8 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
 
         this.selectedFloor$
         .pipe(debounceTime(300), takeUntil(this._ngUnsubscribe))
-        .subscribe((floor) => {
-            this.router.navigate([`/objects/list/${this.jk._id}/flats/house/${this.houseNumber}/section/${this.sectionNumber}/floor/${floor}`]);
+        .subscribe((floorIndex) => {
+            this.router.navigate([`/objects/list/${this.jk._id}/flats/house/${this.houseNumber}/section/${this.sectionNumber}/floor/${this.floorSelector[floorIndex]}`]);
         });
     }
 
@@ -49,6 +50,7 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
 
     private evaluateSelectorShift() {
         this.selectorShift = Math.abs(this.floorSelector.length - this.floorSelector[0]);
+        this.selectorIndex = this.floorSelector.indexOf(this.floorNumber);
     }
 
     public ngOnDestroy() {
@@ -56,12 +58,13 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
         this._ngUnsubscribe.complete();
     }
 
-    public floorSelect(floor) {
-        if (this.floorSelector.indexOf(floor) === -1) {
+    public floorSelect(floorIndex) {
+        console.log('floorIndex: ', floorIndex);
+        if (this.floorSelector.length < floorIndex + 1 || floorIndex < 0) {
             return;
         }
-        this.floorNumber = floor;
-        this.selectedFloor$.next(floor);
+        this.selectorIndex = floorIndex;
+        this.selectedFloor$.next(floorIndex);
     }
 
 }

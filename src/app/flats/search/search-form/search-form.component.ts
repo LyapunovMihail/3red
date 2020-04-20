@@ -105,7 +105,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     return [];
                 })(params.housesMods)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON
             ],
-            mod: params.mod || ''               // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
+            mod: params.mod || ''                   // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
         });
 
         this.formChange.emit(this.form.value);

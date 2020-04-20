@@ -1,16 +1,16 @@
 <aside class="floor__slider">
-    <button (click)="floorSelect(floorNumber + 1)" 
+    <button (click)="floorSelect(selectorIndex - 1)"
         class="floor__slider-btn_up btn-slider btn-slider_white btn-slider_next">
             <span></span>
     </button>
 
     <div class="floor__slider_hidden">
-        <ul [style.top.px]="-((floorSelector.length + selectorShift - floorNumber) * 48)" class="floor__slider-list">
+        <ul [style.top.px]="-(selectorIndex * 48)" class="floor__slider-list">
             <li *ngFor="let floor of floorSelector" class="floor__slider-item">{{floor}}</li>
         </ul>
     </div>
 
-    <button (click)="floorSelect(floorNumber - 1)"
+    <button (click)="floorSelect(selectorIndex + 1)"
         class="floor__slider-btn_down btn-slider btn-slider_white btn-slider_prev">
             <span></span>
     </button>

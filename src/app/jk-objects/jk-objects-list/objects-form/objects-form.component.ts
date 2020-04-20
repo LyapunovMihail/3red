@@ -37,10 +37,10 @@ export class ObjectsFormComponent implements OnInit {
     }
 
     /// format input's values
-    public removeChars(val, field) {
+    public removeChars(e) {
         const rep = /[-.;":'a-zA-Zа-яА-Я]/g;
-        if (rep.test(val)) {
-            this.form.get(field).setValue(val.replace(rep, ''));
+        if (rep.test(e.target.value)) {
+            e.target.value = (e.target.value.replace(rep, ''));
         }
     }
 

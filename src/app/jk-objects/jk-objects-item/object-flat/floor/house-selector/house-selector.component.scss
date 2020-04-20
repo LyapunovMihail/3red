@@ -11,6 +11,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 10;
+    cursor: default;
 
     &-item {
         height: 48px;
@@ -22,6 +23,12 @@
         display: flex;
         align-items: center;
         &:hover { color: $col-red; }
+
+
+        &--disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
     }
 }
 
