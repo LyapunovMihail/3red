@@ -10,6 +10,7 @@ import { ObjectsLocationController } from './location-api/objects-location.contr
 import { ObjectsCreditController } from './credit-api/objects-credit.controller';
 import { ObjectsMembersController } from './members-api/objects-members.controller';
 import { ObjectsController } from './object-api/objects.controller';
+import { ObjectsDynamicController } from './dynamic-api/objects-dynamic.controller';
 
 export const objectControllers = [
     ObjectsPreviewController,
@@ -23,5 +24,6 @@ export const objectControllers = [
     ObjectsLocationController,
     ObjectsCreditController,
     ObjectsMembersController,
-    ObjectsController
+    ObjectsController,
+    ObjectsDynamicController
 ];

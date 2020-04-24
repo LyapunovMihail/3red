@@ -1,7 +1,6 @@
-// import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { image } from './mockImage';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SwipeSlides } from '../../../../../commons/swipe-slides.service';
+import { IDynamicImage, IDynamicObject, OBJECTS_DYNAMIC_UPLOADS_PATH } from '../../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
 
 @Component({
     selector: 'app-object-dynamic-slideshow',
@@ -12,29 +11,24 @@ import { SwipeSlides } from '../../../../../commons/swipe-slides.service';
     ]
 })
 
-export class ObjectDynamicSlideshowComponent implements OnChanges {
+export class ObjectDynamicSlideshowComponent {
 
-    // @Input() objectsArray: IDynamicObject[] = [];
-    @Input() slideShowCurrent: number = 0;
-    @Input() slideShowId: any;
-    @Input() isSlideShow: boolean = false;
+    @Input()
+    public currentObject: IDynamicObject;
+    @Input()
+    public slideShowCurrent = 0;
+    @Input()
+    public month: number;
+    @Input()
+    public year: number;
 
     @Output() close: EventEmitter<boolean> = new EventEmitter();
 
-    // public uploadsPath: string = `/${DYNAMIC_UPLOADS_PATH}`;
+    public slides: IDynamicImage[] = this.currentObject.images;
 
-    public slides = [];
-    public mockSlides = image;
+    public uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
     constructor() {}
-
-    ngOnChanges() {
-        // if ( this.isSlideShow ) {
-        //     this.slides = this.objectsArray.filter((i) => {
-        //         return i._id === this.slideShowId;
-        //     })[0]['images'];
-        // }
-    }
 
     prev() {
         if (this.slideShowCurrent > 0) {
@@ -43,9 +37,9 @@ export class ObjectDynamicSlideshowComponent implements OnChanges {
             this.slideShowCurrent = this.slides.length - 1 ;
         }
 
-        if(this.slides[this.slideShowCurrent].type == 'VIDEO') {
+        if (this.slides[this.slideShowCurrent].type == 'VIDEO') {
             do {
-                if(this.slideShowCurrent > 0) {
+                if (this.slideShowCurrent > 0) {
                     this.slideShowCurrent -- ;
                 } else {
                     this.slideShowCurrent = this.slides.length - 1 ;

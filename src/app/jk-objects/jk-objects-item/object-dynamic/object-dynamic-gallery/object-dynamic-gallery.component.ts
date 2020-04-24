@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
+import { IDynamicObject, OBJECTS_DYNAMIC_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
 
 @Component({
     selector: 'app-object-dynamic-gallery',
@@ -14,25 +15,31 @@ export class ObjectDynamicGalleryComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
+    @Input()
+    public tempArray: IDynamicObject[];
+    @Input()
+    public month: number;
+    @Input()
+    public year: number;
 
-    @Input() public tempArray;
+    public isVideoShow = false;
+    public videoUrl = '';
+    public isSlideShow = false;
+    public slideShowCurrent = 0;
+    public slideShowObject: IDynamicObject;
 
-    public isVideoShow: boolean = false;
-    public videoUrl: string = '';
-    public isSlideShow: boolean = false;
-    public slideShowId: any;
-    public slideShowCurrent: number = 0;
+    uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
     constructor( public windowScrollLocker: WindowScrollLocker ) { }
 
     ngOnInit() { }
 
-    public startSlideShow(id, i) {
+    public startSlideShow(object, i) {
         if ( !this.isAuthorizated ) {
             this.windowScrollLocker.block();
-            this.isSlideShow = true;
-            this.slideShowId = id;
+            this.slideShowObject = object;
             this.slideShowCurrent = i;
+            this.isSlideShow = true;
         }
     }
 
@@ -42,5 +49,9 @@ export class ObjectDynamicGalleryComponent implements OnInit {
             this.isVideoShow = true;
             this.videoUrl = url;
         }
+    }
+
+    public getId(title) {
+        return title.split('').map((item: string) => item.charCodeAt(0)).join('');
     }
 }

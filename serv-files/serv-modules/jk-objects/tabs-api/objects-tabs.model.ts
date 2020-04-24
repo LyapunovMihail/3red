@@ -20,7 +20,7 @@ export class ObjectsTabsModel {
 
     async getGalleryTabs(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria, {decorationType: 0, location: 0});
+        return await this.collection.findOne(findCriteria, { decorationType: 0, location: 0, dynamic: 0 });
     }
 
     async updateGalleryTabs(parameters) {
@@ -34,7 +34,7 @@ export class ObjectsTabsModel {
 
     async getDecorationTabs(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria, {gallery: 0, location: 0});
+        return await this.collection.findOne(findCriteria, { gallery: 0, location: 0, dynamic: 0 });
     }
 
     async updateDecorationTabs(parameters) {
@@ -48,7 +48,7 @@ export class ObjectsTabsModel {
 
     async getLocationTabs(objectId?) {
         const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria, {gallery: 0, decorationType: 0});
+        return await this.collection.findOne(findCriteria, { gallery: 0, decorationType: 0, dynamic: 0 });
     }
 
     async updateLocationTabs(parameters) {
@@ -63,6 +63,20 @@ export class ObjectsTabsModel {
                 if ( '_id' in contentSnippet) { delete contentSnippet._id; }
                 await this.locationCollection.update({ objectId : contentSnippet.objectId }, { $set : contentSnippet }, {upsert: true});
             }
+        });
+    }
+
+    async getDynamicTabs(objectId?) {
+        const findCriteria = objectId ? {objectId} : {};
+        return await this.collection.findOne(findCriteria, { gallery: 0, location: 0, decorationType: 0 });
+    }
+
+    async updateDynamicTabs(parameters) {
+        const options: IObjectTabsSnippet = parameters;
+        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, 'dynamic', async () => {
+            // удаление _id из параметров если он там есть
+            if ( '_id' in options ) { delete options._id; }
+            await this.collection.update({ objectId : options.objectId }, { $set : { dynamic: options.dynamic, created_at: options.created_at, last_modifyed: options.last_modifyed, objectId : options.objectId } }, {upsert: true});
         });
     }
 
@@ -81,6 +95,9 @@ export class ObjectsTabsModel {
             } else if (type === 'location') {
                 return await this.getLocationTabs(objectId);
             }
+            else if (type === 'dynamic') {
+                return await this.getDynamicTabs(objectId);
+            }
         } else {
             throw new Error(ErrorNotCorrectArguments);
         }
@@ -88,7 +105,7 @@ export class ObjectsTabsModel {
 
     private valuesReview(options) {
         // если есть все параметры
-        return 'objectId' in options && ('gallery' in options || 'decorationType' in options || 'location' in options);
+        return 'objectId' in options && ('gallery' in options || 'decorationType' in options || 'location' in options || 'dynamic' in options);
     }
 
 }

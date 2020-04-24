@@ -27,7 +27,6 @@ export class ObjectGalleryAdminService {
     }
 
     public getTabsSnippetById(objectID): Observable<IObjectTabsSnippet> {
-        console.log('get tab snippet');
         return this.http.get<IObjectTabsSnippet>(`/api/jk-object/tabs/id/${objectID}/gallery`);
     }
 

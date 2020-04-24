@@ -45,7 +45,7 @@
                 color: $col-red;
                 &::before { background-color: $col-red; }
             }
-            &_disabled { color: rgba($color: $col-black, $alpha: .25); }
+            &_disabled { color: rgba($color: $col-black, $alpha: .25); pointer-events: none }
         }
     }
     
@@ -85,6 +85,7 @@
             position: absolute;
             top: calc(100% + 5px);
             left: 0;
+            z-index: 1;
         }
         &-item {
             width: 100%;

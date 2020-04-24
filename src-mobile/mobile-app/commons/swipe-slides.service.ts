@@ -1,11 +1,7 @@
 import { PlatformDetectService } from './../platform-detect.service';
-import { Input,
+import {
      ChangeDetectorRef,
      ElementRef,
-     OnChanges,
-     SimpleChanges,
-     Output,
-     EventEmitter,
      Injectable
 } from '@angular/core';
 
@@ -17,13 +13,13 @@ export class SwipeSlides {
      public counter = 0;
      public left: any = 0;
 
-     constructor (
+     constructor(
          private ref: ChangeDetectorRef,
          private elRef: ElementRef,
          public platform: PlatformDetectService
      ) { }
 
-     public startPosition ( val, elem, size, px ) {
+     public startPosition( val, elem, size, px ) {
          this.counter = val;
          elem.style.left = - (size * val) + px;
          this.ref.detectChanges();
@@ -34,20 +30,20 @@ export class SwipeSlides {
           slideWidth - Ширина одного слайда
           units - Единица измерения
      */
-     public sliderInit ( sliderListParent, sliderList, egLeft, egRight, slideWidth, units ) {
-          let blockSlider = sliderListParent;
-          let sliderInner = sliderList;
-          let that = this;
+     public sliderInit( sliderListParent, sliderList, egLeft, egRight, slideWidth, units ) {
+          const blockSlider = sliderListParent;
+          const sliderInner = sliderList;
+          const that = this;
           let edgeLeft = egLeft;
           let edgeRight = egRight;
 
           blockSlider.ontouchstart = (e) => {
 
-               let sliderItems = sliderInner.children;
-               let startPoint = e.touches[0].pageX;
-               let sliderInnerCoords = getCoords(sliderInner);
-               let shiftX = e.touches[0].pageX - sliderInnerCoords.left;
-               let blockSliderCoords = getCoords(blockSlider);
+               const sliderItems = sliderInner.children;
+               const startPoint = e.touches[0].pageX;
+               const sliderInnerCoords = getCoords(sliderInner);
+               const shiftX = e.touches[0].pageX - sliderInnerCoords.left;
+               const blockSliderCoords = getCoords(blockSlider);
 
                window.addEventListener('touchmove', touchMoveEvent );
                window.addEventListener('touchend', touchEndEvent);
@@ -61,7 +57,7 @@ export class SwipeSlides {
                               edgeLeft = 0;
                          }, 300);
                     }
-                    let rightEdge = blockSlider.offsetWidth - sliderInner.offsetWidth;
+                    const rightEdge = blockSlider.offsetWidth - sliderInner.offsetWidth;
                     if (newLeft < rightEdge) {
                          newLeft = rightEdge;
                          edgeRight = 70;
@@ -78,9 +74,9 @@ export class SwipeSlides {
                     window.removeEventListener('touchend', touchEndEvent);
 
                     sliderInner.ontouchmove = sliderInner.ontouchend = null;
-                    let slideRange = (startPoint - e.changedTouches[0].pageX);
-                    let direction = (slideRange >= 0) ? 'LEFT' : 'RIGHT';
-                    let timeValue = 300;
+                    const slideRange = (startPoint - e.changedTouches[0].pageX);
+                    const direction = (slideRange >= 0) ? 'LEFT' : 'RIGHT';
+                    const timeValue = 300;
                     sliderInner.style.transition = timeValue + 'ms linear';
 
                     Array.prototype.forEach.call(sliderItems, (item, i) => {
@@ -104,7 +100,7 @@ export class SwipeSlides {
                return false;
 
                function getCoords(elem) {
-                   let box = elem.getBoundingClientRect();
+                   const box = elem.getBoundingClientRect();
                    return {
                        top: box.top + pageYOffset,
                        left: box.left + pageXOffset

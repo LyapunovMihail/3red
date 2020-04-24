@@ -1,65 +1,66 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
 
-<section class="g-modal-bg dynamic-content">
+        <h2 class="dynamic-content__title dynamic-content__title_out-path">Настройка контента, {{ monthArray[month - 1] }} {{year}}</h2>
 
-    <div class="dynamic-content__container">
+        <form [formGroup]="form">
 
-        <h2 class="dynamic-content__title dynamic-content__title_out-path">Настройка контента, октябрь 2019</h2>
+            <div class="dynamic-content__wrap dynamic-content__wrap_path"
+                 [ngClass]="{'dynamic-content__wrap_disabled': !object.get('show').value}"
+                 formArrayName="objects"
+                 *ngFor="let object of form.get('objects')['controls']; let i = index">
 
-        <button class="dynamic-content__btn dynamic-content__btn_close-main btn-cls"
-            (click)="closeContent(false); scrollLock.block()"><span></span></button>
-        <button class="dynamic-content__btn dynamic-content__btn_success-main btn-success"></button>
+                <ng-container formGroupName="{{i}}">
 
-        <div class="dynamic-content__wrap dynamic-content__wrap_path">
-            
-            <div class="dynamic-content__wrap dynamic-content__wrap_head">
+                    <div class="dynamic-content__wrap dynamic-content__wrap_head">
 
-                <h3 class="dynamic-content__title dynamic-content__title_in-path">Дом №1</h3>
+                        <!--<h3 class="dynamic-content__title dynamic-content__title_in-path">Дом №1</h3>-->
 
-                <button class="dynamic-content__btn dynamic-content_switch btn-empty">Включить</button>
+                        <label class="dynamic-settings__btn dynamic-settings_switch btn-empty">
+                            <input hidden type="checkbox" formControlName="show">{{object.get('show').value ? 'Выключить' : 'Включить'}}
+                        </label>
+                        <button class="dynamic-settings__btn dynamic-settings_switch btn-empty" (click)="popObject(i)">Удалить объект</button>
+                    </div>
+
+                    <div class="form">
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="title">
+                            <label class="form-label info-suptitle">Название объекта</label>
+                        </div>
+                    </div>
+
+                    <div class="dynamic-content__wrap dynamic-content__wrap_area">
+
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input dynamic-content__input_descr" appSlideTopLabel formControlName="description">
+                            <label class="form-label info-suptitle">Описание работ</label>
+                        </div>
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input dynamic-content__input_complite" appSlideTopLabel
+                                   [value]="object.get('ready').value"
+                                   (input)="removeChars($event)"
+                                   (change)="changeReady(i, $event.target.value)">
+                            <label class="form-label info-suptitle">Готовность объекта, %</label>
+                        </div>
+                    </div>
+
+                    <label class="dynamic-content__btn dynamic-content__btn_upload-image btn-admin">Загрузить фото
+                        <input style="display: none;" type="file" accept=".jpg" (change)="imageUpload($event, i)">
+                    </label>
+
+                    <ul class="dynamic-content__image" *ngIf="object.get('images')['controls'].length">
+                        <li class="dynamic-content__image-item" formArrayName="images" *ngFor="let image of object.get('images')['controls']; let j = index">
+                            <img [src]="uploadsPath + image.value.thumbnail" alt="dynamic image">
+                            <button class="dynamic-content__btn dynamic-content__btn_del-image" (click)="deleteImage(i, j)"><span></span></button>
+                        </li>
+                    </ul>
+
+                    <h2 class="dynamic-content__btn_del-object" (click)="popObject(i)">Удалить объект</h2>
+
+                </ng-container>
             </div>
-            <div class="dynamic-content__wrap dynamic-content__wrap_area">
 
-                <ghm-textarea class="dynamic-content__input dynamic-content__input_descr"
-                    [placeholder]="'Описание работ'"></ghm-textarea>
-                <ghm-textarea class="dynamic-content__input dynamic-content__input_complite"
-                    [placeholder]="'Готовность объекта, %'"></ghm-textarea>
-            </div>
+        </form>
 
-            <button class="dynamic-content__btn dynamic-content__btn_upload-image btn-admin">Загрузить фото</button>
+        <button class="btn btn--settings" (click)="pushObject()">Добавить объект</button>
 
-            <ul class="dynamic-content__image">
-                <li class="dynamic-content__image-item">
-                    <img src="/assets/img3red/temp.jpg" alt="dynamic image">
-                    <button class="dynamic-content__btn dynamic-content__btn_del-image"><span></span></button>
-                </li>
-            </ul>
-        </div>
-        <div class="dynamic-content__wrap dynamic-content__wrap_disabled dynamic-content__wrap_path">
-            
-            <div class="dynamic-content__wrap dynamic-content__wrap_head">
-
-                <h3 class="dynamic-content__title dynamic-content__title_in-path">Дом №2</h3>
-
-                <button class="dynamic-content__btn dynamic-content_switch btn-empty">Включить</button>
-            </div>
-            <div class="dynamic-content__wrap dynamic-content__wrap_area">
-
-                <ghm-textarea class="dynamic-content__input dynamic-content__input_descr"
-                    [placeholder]="'Описание работ'"></ghm-textarea>
-                <ghm-textarea class="dynamic-content__input dynamic-content__input_complite"
-                    [placeholder]="'Готовность объекта, %'"></ghm-textarea>
-            </div>
-
-            <button class="dynamic-content__btn dynamic-content__btn_upload-image btn-admin">Загрузить фото</button>
-
-            <!-- <ul class="dynamic-content__image">
-            </ul> -->
-        </div>
-
-        <div class="dynamic-content__wrap dynamic-content__wrap_btn-main">
-
-            <button class="dynamic-content__btn dynamic-content__btn_save btn_var-2">Сохранить и закрыть</button>
-            <button class="dynamic-content__btn dynamic-content__btn_cancel btn-empty">Отменить</button>
-        </div>
-    </div>
-</section>
+</app-admin-modal>

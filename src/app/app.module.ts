@@ -13,11 +13,10 @@ import { ROUTES } from './app.routes';
 import { WindowEventsService } from './commons/window-events.observer.service';
 import { EventsService } from './commons/events.service';
 import { AuthorizationObserverService } from './authorization/authorization.observer.service';
-import { FavoritesService } from './commons/favorites.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
-import { SearchFlatsLinkHandlerService } from './commons/searchFlatsLinkHandler.service';
 import { PhoneObserverService } from './admin-contacts/phone.observer.service';
+import { JkService } from './commons/jk.service';
 import { WindowScrollLocker } from './commons/window-scroll-block';
 
 // App is our top level component
@@ -50,12 +49,11 @@ const APP_PROVIDERS = [
     WindowEventsService,
     EventsService,
     AuthorizationObserverService,
-    FavoritesService,
     PlatformDetectService,
     FlatsDiscountService,
-    SearchFlatsLinkHandlerService,
     PhoneObserverService,
-    WindowScrollLocker
+    WindowScrollLocker,
+    JkService
 ];
 
 const APP_MODULES = [

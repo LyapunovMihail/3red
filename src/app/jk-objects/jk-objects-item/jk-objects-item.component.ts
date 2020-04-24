@@ -4,6 +4,7 @@ import { EventsService } from '../../commons/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JkObjectsListService } from '../jk-objects-list/jk-objects-list.service';
 import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { JkService } from '../../commons/jk.service';
 
 @Component({
     selector: 'app-jk-objects-item',
@@ -30,7 +31,8 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
         private authorization: AuthorizationObserverService,
         private eventsService: EventsService,
         private activatedRoute: ActivatedRoute,
-        private jkObjectsItemService: JkObjectsListService
+        private jkObjectsItemService: JkObjectsListService,
+        private jkService: JkService
     ) { }
 
     ngOnInit() {
@@ -38,6 +40,7 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
             this.isAuthorizated = val;
         });
         this.objectId = this.activatedRoute.snapshot.params.id;
+        this.jkService.setJkId(this.objectId); // Для хедера
         this.getJkObject();
     }
 

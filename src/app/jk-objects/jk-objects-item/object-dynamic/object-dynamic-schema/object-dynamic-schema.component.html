@@ -1,7 +1,7 @@
 
 <section class="dynamic-schema">
 
-    <div class="dynamic-schema__item" *ngFor="let item of objectProgress">
+    <div class="dynamic-schema__item" *ngFor="let item of objectsArray" (click)="scrollLink(item.title)">
         <p class="dynamic-schema__item-name">{{item.title}}</p>
         <p class="dynamic-schema__item-progress">{{item.ready}}%</p>
 

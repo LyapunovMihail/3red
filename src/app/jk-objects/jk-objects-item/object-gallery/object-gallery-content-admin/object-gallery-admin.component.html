@@ -20,7 +20,7 @@
                 <input hidden="true" type="text" formControlName="thumbnail">
 
                 <div class="form">
-                    <div class="form-item form-item--option" *ngIf="tabSnippet && tabSnippet.gallery.length">
+                    <div class="form-item form-item--option" *ngIf="tabSnippet && tabSnippet.gallery?.length">
                         <select type="text" class="form-input info-input" appSlideTopLabel formControlName="tab">
                             <option [value]="tab.name" *ngFor="let tab of tabSnippet.gallery">{{tab.name}}</option>
                         </select>

@@ -5,7 +5,6 @@ import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/o
 import { adminHeaders } from '../../commons/admin-headers.utilit';
 import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
 import { ObjectAdminUpload } from './jk-objects-list.upload';
-import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 
 @Injectable()
 

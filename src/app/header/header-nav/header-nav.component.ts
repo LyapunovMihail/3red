@@ -1,8 +1,9 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { WindowEventsService } from '../../commons/window-events.observer.service';
 import { HeaderService, IHeaderLink } from '../header.service';
 import { Router } from '@angular/router';
 import { EventsService } from '../../commons/events.service';
+import { JkService } from '../../commons/jk.service';
 
 interface INavLink extends IHeaderLink {
     blockOffsetTop: number;
@@ -18,7 +19,7 @@ interface INavLink extends IHeaderLink {
     styleUrls: ['./header-nav.component.scss']
 })
 
-export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     @Input() public anchors: INavLink[] = [];
     @Input() public isFixed: boolean;
@@ -33,14 +34,39 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
     public windowScrollEvent;
     public pageResizeEvent;
 
-    constructor(
+    public year: number;
+    public month: number;
 
+    public objectId: string;
+
+    constructor(
         private windowEventsService: WindowEventsService,
         private eventsService: EventsService,
         private headerService: HeaderService,
         public router: Router,
         private changeDetectorRef: ChangeDetectorRef
     ) { }
+
+    ngOnInit() {
+        this.getDynamicLink();
+    }
+
+    private getDynamicLink() {
+        this.headerService.getDynamicLink()
+            .subscribe(
+                (data) => {
+                    const date = new Date();
+                    this.year = data.year ? data.year : date.getFullYear();
+                    this.month = data.month ? data.month : ( date.getMonth() + 1 );
+                },
+                (err) => {
+                    console.error(err);
+                    const date = new Date();
+                    this.year = date.getFullYear();
+                    this.month = date.getMonth() + 1;
+                }
+            );
+    }
 
     ngAfterViewInit() {
         setTimeout(() => {
@@ -65,6 +91,7 @@ export class HeaderNavComponent implements OnChanges, AfterViewInit, OnDestroy {
                 this.getBlocksSizes();
                 this.changeDetectorRef.detectChanges();
             }, 200);
+            this.getDynamicLink();
         }
     }
 

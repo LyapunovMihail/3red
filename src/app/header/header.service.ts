@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NAVANCHORS } from './navAnchors';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
+import { Observable } from 'rxjs';
 
 export interface IHeaderLink {
     name: string;
@@ -14,20 +15,23 @@ export class HeaderService {
 
     public navAnchors = NAVANCHORS;
     public nav: HeaderNavComponent;
+    public objectId: string;
 
     constructor(
         private http: HttpClient,
         private ref: ChangeDetectorRef
     ) { }
 
-    public getDynamicLink() {
-        return this.http.get('/api/dynamic/last/link');
+    public setJkId(id) {
+        this.objectId = id;
     }
 
-    public links(data): IHeaderLink[] {
-        let date = new Date();
-        let year = (data.year) ? data.year : date.getFullYear();
-        let month = (data.month) ? data.month : ( date.getMonth() + 1 );
+    public getDynamicLink(): Observable<{year: number, month: number}> {
+        console.log('this.objectId: ', this.objectId);
+        return this.http.get<{year: number, month: number}>(`/jk-object/dynamic/last/link/${this.objectId}`);
+    }
+
+    public links(): IHeaderLink[] {
         return [
             {
                 name: 'О компании',

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { SearchFlatsLinkHandlerService } from '../../commons/searchFlatsLinkHandler.service';
 import { SearchService } from '../../flats/search/search.service';
 
 interface ITriggerSnippet {
@@ -23,8 +22,7 @@ export class HomeTriggerComponent implements OnInit {
     public triggersData: ITriggerSnippet[] = [];
 
     constructor(
-        public searchService: SearchService,
-        private searchFlatsLinkHandlerService: SearchFlatsLinkHandlerService
+        public searchService: SearchService
     ) { }
 
     ngOnInit() {
@@ -62,7 +60,4 @@ export class HomeTriggerComponent implements OnInit {
         }
     }
 
-    public navigate(rooms) {
-        this.searchFlatsLinkHandlerService.linkHandle(true, {rooms});
-    }
 }

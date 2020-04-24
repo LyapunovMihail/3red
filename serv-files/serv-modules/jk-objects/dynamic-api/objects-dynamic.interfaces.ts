@@ -1,23 +1,29 @@
-export const DYNAMIC_COLLECTION_NAME = 'dynamic';
+export const OBJECTS_DYNAMIC_COLLECTION_NAME = 'objectDynamic';
 
-export const DYNAMIC_UPLOADS_PATH = 'uploads/dynamic/';
+export const OBJECTS_DYNAMIC_UPLOADS_PATH = 'uploads/object-dynamic/';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface IDynamicObject {
+export interface IObjectDynamicSnippet {
     _id?: any;
+    objectId: string;
     created_at: any;
     last_modifyed: any;
-    title: string;
-    description: string;
     month: number;
     year: number;
-    ready: number;
-    images: IDynamicImageSnippet[];
+    objects: IDynamicObject[];
 }
 
-export interface IDynamicImageSnippet {
-    origin: string;
+export interface IDynamicObject {
+    title: string;
+    description: string;
+    ready: number;
+    show: boolean;
+    images: IDynamicImage[];
+}
+
+export interface IDynamicImage {
+    image: string;
     thumbnail: string;
     type: EnumDynamicImageType;
 }

@@ -2,8 +2,8 @@
 <section class="dynamic-gallery">
 
     <ng-container *ngFor="let object of tempArray">
-        <!-- [id]="object._id" *ngIf="(object.year === year && object.month === month)" -->
-        <div class="dynamic-gallery__object">
+         <!--[id]="object._id" *ngIf="(object.year === year && object.month === month)" -->
+        <div class="dynamic-gallery__object" [id]="getId(object.title)">
             
             <div class="dynamic-gallery__head">
                 <h3 class="dynamic-gallery__head-title">{{object.title}}</h3>
@@ -15,7 +15,7 @@
                         [class.dynamic-gallery__head-progress-bar_complete]="object.ready >= 100"></div>
                 </div>
 
-                <p class="dynamic-gallery__head-descr">{{object.descr}}</p>
+                <p class="dynamic-gallery__head-descr">{{object.description}}</p>
             </div>
 
             <!-- Удалить объект / Заголовок / Прогресс / Добавить фото -->
@@ -26,7 +26,7 @@
                 <!-- блок с изображениями -->
                 <ul class="dynamic-gallery__gallery">
                     <!-- (click)="image.type == 'VIDEO' ? startVideoShow(image.origin) : startSlideShow(object._id, item)" -->
-                    <li  (click)="startSlideShow(object._id, item)" *ngFor="let image of object.images; let item = index"
+                    <li  (click)="startSlideShow(object, item)" *ngFor="let image of object.images; let item = index"
                         class="dynamic-gallery__gallery-item"
                         [ngClass]="{
                             'dynamic-gallery__gallery-item_img': image.type === 'IMAGE',
@@ -34,8 +34,7 @@
                         }">
                         
                         <div class="dynamic-gallery__gallery-item-image">
-                            <!-- [src]="uploadsPath + image.thumbnail" -->
-                            <img *ngIf='image.type == "IMAGE"' class="dynamic-gallery__gallery-item-content" [src]="image.thumbnail">
+                            <img class="dynamic-gallery__gallery-item-content" [src]="uploadsPath + image.thumbnail">
                         </div>
         
                         <!-- <iframe *ngIf='image.type == "VIDEO"' class="dynamic-gallery__gallery-item-content"
@@ -53,9 +52,11 @@
 </section>
 
 <!-- [objectsArray]="objectsArray" -->
-<app-object-dynamic-slideshow
-    [isSlideShow]="isSlideShow"
+<app-object-dynamic-slideshow *ngIf="isSlideShow"
     [slideShowCurrent]="slideShowCurrent"
-    [slideShowId]="slideShowId"
-    (close)="windowScrollLocker.unblock(); isSlideShow = false">
+    [currentObject]="slideShowObject"
+    [slides]="slideShowObject.images"
+    [month]="month"
+    [year]="year"
+    (close)="windowScrollLocker.unblock(); isSlideShow = $event">
 </app-object-dynamic-slideshow>

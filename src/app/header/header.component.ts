@@ -4,6 +4,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HeaderService } from './header.service';
+import { JkService } from '../commons/jk.service';
+import set = Reflect.set;
 
 @Component({
     selector : 'app-header',
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public navAnchors = [];
     public hoveredLink = -1;
     public pageName;
+    public objectId: string;
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -32,12 +35,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
-        private router: Router
+        private router: Router,
+        private jkService: JkService
     ) {
     }
 
     public ngOnInit() {
         this.fixedHeader();
+
+        this.jkService.getJkId().subscribe((objectId) => this.headerService.setJkId(objectId) );
 
         this.router.events
             .pipe(takeUntil(this.ngUnsubscribe))
@@ -55,18 +61,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.headerService.getDynamicLink()
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe(
-                (data) => {
-                    this.links = this.headerService.links(data);
-                },
-                (err) => {
-                    console.error(err);
-                    const date = new Date();
-                    this.links = this.headerService.links({ year: date.getFullYear(), month: ( date.getMonth() + 1 ) });
-                }
-            );
+
+        this.links = this.headerService.links();
+
     }
 
     public ngOnDestroy() {

@@ -52,10 +52,30 @@
         &_disabled {
 
             .dynamic-settings__title_in-path,
-            .dynamic-settings__input {
+            .info-input {
                 opacity: .3;
                 pointer-events: none;
             }
         }
     }
+}
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: #000;
+    opacity: .5;
 }

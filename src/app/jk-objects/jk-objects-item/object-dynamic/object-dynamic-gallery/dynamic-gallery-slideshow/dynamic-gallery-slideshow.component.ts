@@ -1,6 +1,6 @@
-// import { IDynamicObject, DYNAMIC_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { fakeObject } from '../../mockObject';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { IDynamicImage, IDynamicObject, OBJECTS_DYNAMIC_UPLOADS_PATH } from '../../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { MONTHARRAY } from '../../monthArray';
 
 @Component({
     selector: 'app-object-dynamic-slideshow',
@@ -8,27 +8,23 @@ import { fakeObject } from '../../mockObject';
     styleUrls: ['./dynamic-gallery-slideshow.component.scss']
 })
 
-export class ObjectDynamicSlideshowComponent implements OnChanges {
+export class ObjectDynamicSlideshowComponent {
 
-    // @Input() objectsArray: IDynamicObject[] = [];
-    @Input() slideShowCurrent: number = 0;
-    @Input() slideShowId: any;
-    @Input() isSlideShow: boolean = false;
+    @Input()
+    public currentObject: IDynamicObject;
+    @Input()
+    public slides: IDynamicImage[];
+    @Input()
+    public slideShowCurrent = 0;
+    @Input()
+    public month: number;
+    @Input()
+    public year: number;
 
     @Output() close: EventEmitter<boolean> = new EventEmitter();
 
-    // public uploadsPath: string = `/${DYNAMIC_UPLOADS_PATH}`;
-
-    public slides = [];
-    public mockSlides = fakeObject;
-
-    ngOnChanges() {
-        // if ( this.isSlideShow ) {
-        //     this.slides = this.objectsArray.filter((i) => {
-        //         return i._id === this.slideShowId;
-        //     })[0]['images'];
-        // }
-    }
+    public monthArray: string[] = MONTHARRAY;
+    public uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
     prev() {
         if (this.slideShowCurrent > 0) {
@@ -63,22 +59,6 @@ export class ObjectDynamicSlideshowComponent implements OnChanges {
                     this.slideShowCurrent = 0;
                 }
             } while (this.slides[this.slideShowCurrent].type == 'VIDEO');
-        }
-    }
-
-    mockPrev() {
-        if (this.slideShowCurrent > 0) {
-            this.slideShowCurrent -- ;
-        } else {
-            this.slideShowCurrent = this.mockSlides.length - 1 ;
-        }
-    }
-
-    mockNext() {
-        if (this.slideShowCurrent < this.mockSlides.length - 1) {
-            this.slideShowCurrent ++ ;
-        } else {
-            this.slideShowCurrent = 0 ;
         }
     }
 }

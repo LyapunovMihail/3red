@@ -59,8 +59,7 @@ export class ObjectGalleryAdminComponent implements OnInit {
             switchOn: true,
             created_at : new Date(),
             last_modifyed : new Date(),
-            image_data: this.formBuilder.array(
-                [])
+            image_data: this.formBuilder.array([])
         });
     }
 
@@ -90,7 +89,7 @@ export class ObjectGalleryAdminComponent implements OnInit {
         (this.form.controls.image_data as FormArray).push(this.formBuilder.group({
             image: ['', Validators.required],
             thumbnail: ['', Validators.required],
-            tab: this.tabSnippet.gallery.length ? this.tabSnippet.gallery[0].name : 'no-tab',
+            tab: this.tabSnippet.gallery && this.tabSnippet.gallery.length ? this.tabSnippet.gallery[0].name : 'no-tab',
             title:  ['', Validators.required],
             description: ''
         }));

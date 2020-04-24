@@ -1,5 +1,50 @@
 @import "../../../../../../styles/modules/mixins/mixin";
 
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: #000;
+    opacity: .5;
+}
+
+.btn {
+    margin: 24px 0 ;
+    display: inline-block;
+    background:  rgba(0, 0, 0, 0.56);
+    padding:10px 16px;
+    font-family: inherit;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.btn--settings {
+    background: #454545;
+    margin-top: 0;
+    &:hover {
+        background: rgba(0, 0, 0, .7);
+    }
+    &::before {
+        content:url(/assets/img/jk-object/admin-modal/plus.svg);
+        margin-right:5px ;
+    }
+}
+
 .dynamic-content {
 
     &__container {
@@ -62,6 +107,13 @@
                 &::after { transform: rotate(-45deg); }
             }
         }
+        &_del-object {
+            font-weight: normal;
+            font-size: 24px;
+            line-height: 24px;
+            margin-top: 37px;
+            cursor: pointer
+        }
     }
 
     &__wrap {
@@ -69,7 +121,7 @@
         &_head {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             margin: 0 0 54px;
         }
         &_path {
@@ -78,7 +130,7 @@
             box-sizing: border-box;
             background-color: $col-ef;
             margin: 0 0 8px;
-            &:nth-last-child(2) { margin: 0 0 48px; }
+            //&:nth-last-child(2) { margin: 0 0 48px; }
         }
         &_area {
             min-height: 36px;
@@ -92,7 +144,7 @@
 
             .dynamic-content__title_in-path,
             .dynamic-content__btn_upload-image,
-            .dynamic-content__input {
+            .info-input {
                 opacity: .3;
                 pointer-events: none;
             }
@@ -124,3 +176,4 @@
         }
     }
 }
+

@@ -1,11 +1,15 @@
 
 
-<div class="month-switcher__btn month-switcher__btn_prev">
+<div class="month-switcher__btn month-switcher__btn_prev"
+     [class.month-switcher__btn--disabled]="!isValidPrevMonth"
+     (click)="toPrevMonth()">
     <button class="btn-slider btn-slider_prev btn-slider_white"><span></span></button>
-    <p class="month-switcher__btn-text">Сентябрь</p>
+    <p class="month-switcher__btn-text">{{prevBtn}}</p>
 </div>
 
-<div class="month-switcher__btn month-switcher__btn_next">
-    <p class="month-switcher__btn-text">Ноябрь</p>
+<div class="month-switcher__btn month-switcher__btn_next"
+     [class.month-switcher__btn--disabled]="!isValidNextMonth"
+     (click)="toNextMonth()">
+    <p class="month-switcher__btn-text">{{nextBtn}}</p>
     <button class="btn-slider btn-slider_next btn-slider_white"><span></span></button>
 </div>

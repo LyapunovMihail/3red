@@ -7,7 +7,7 @@
         <li *ngFor="let item of monthArray; let i = index; let last = last"
             [ngClass]="{
                 'dynamic-header__months-item_disabled': item.disabled,
-                'dynamic-header__months-item_current': (i + 1) == month || last
+                'dynamic-header__months-item_current': (i + 1) == month
             }"
             (click)="monthChange.emit(i + 1)"
             class="dynamic-header__months-item">

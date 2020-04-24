@@ -11,6 +11,11 @@
     align-items: center;
     cursor: pointer;
 
+    &--disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
     &-text {
         font: 24px/29px $font-proba;
         color: $col-black;

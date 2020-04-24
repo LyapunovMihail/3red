@@ -1,46 +1,33 @@
-
-<section class="g-modal-bg dynamic-settings" >
-
-    <div class="dynamic-settings__container">
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
 
         <h2 class="dynamic-settings__title dynamic-settings__title_out-path">Настройка «Фотоотчета»</h2>
 
-        <button class="dynamic-settings__btn dynamic-settings__btn_close-main btn-cls"
-            (click)="closeSetting(false); scrollLock.unblock()"><span></span></button>
-        <button class="dynamic-settings__btn dynamic-settings__btn_success-main btn-success"></button>
+        <form [formGroup]="form">
 
-        <div class="dynamic-settings__wrap dynamic-settings__wrap_path"
-            [ngClass]="{'dynamic-settings__wrap_disabled': !onDynamic}">
-            
-            <div class="dynamic-settings__wrap dynamic-settings__wrap_head">
+            <div class="dynamic-settings__wrap dynamic-settings__wrap_path"
+                 [ngClass]="{'dynamic-settings__wrap_disabled': !data.get('show').value}"
+                 formArrayName="dynamic"
+                 *ngFor="let data of form.get('dynamic')['controls']; let i = index">
 
-                <h3 class="dynamic-settings__title dynamic-settings__title_in-path">Ход строительства</h3>
+                <ng-container formGroupName="{{i}}">
+                    <div class="dynamic-settings__wrap dynamic-settings__wrap_head">
 
-                <button class="dynamic-settings__btn dynamic-settings_switch btn-empty"
-                    (click)="onDynamic = !onDynamic">{{ onDynamic ? 'Выключить' : 'Включить' }}</button>
+                        <h3 class="dynamic-settings__title dynamic-settings__title_in-path">{{data.get('name').value}}</h3>
+
+                        <label class="dynamic-settings__btn dynamic-settings_switch btn-empty">
+                            <input hidden type="checkbox" formControlName="show">{{data.get('show').value ? 'Выключить' : 'Включить'}}
+                        </label>
+                    </div>
+
+                    <div class="form">
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="description">
+                            <label class="form-label info-suptitle">Общее описание</label>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
-            <ghm-textarea class="dynamic-settings__input"
-                [placeholder]="'Общее описание'"></ghm-textarea>
-        </div>
-        <div class="dynamic-settings__wrap dynamic-settings__wrap_path"
-            [ngClass]="{'dynamic-settings__wrap_disabled': !onHouse}">
-            
-            <div class="dynamic-settings__wrap dynamic-settings__wrap_head">
 
-                <h3 class="dynamic-settings__title dynamic-settings__title_in-path">Готовые дома</h3>
+        </form>
 
-                <button class="dynamic-settings__btn dynamic-settings_switch btn-empty"
-                    (click)="onHouse = !onHouse">{{ onHouse ? 'Выключить' : 'Включить' }}</button>
-            </div>
-            <ghm-textarea class="dynamic-settings__input"
-                [placeholder]="'Общее описание'"></ghm-textarea>
-        </div>
-
-        <div class="dynamic-settings__wrap dynamic-settings__wrap_btn-main">
-
-            <button class="dynamic-settings__btn dynamic-settings__btn_save btn_var-2">Сохранить и закрыть</button>
-            <button class="dynamic-settings__btn dynamic-settings__btn_cancel btn-empty"
-                (click)="closeSetting(false); scrollLock.unblock()">Отменить</button>
-        </div>
-    </div>
-</section>
+</app-admin-modal>

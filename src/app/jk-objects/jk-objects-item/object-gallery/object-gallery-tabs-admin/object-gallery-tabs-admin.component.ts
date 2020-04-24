@@ -48,7 +48,7 @@ export class ObjectGalleryTabsAdminComponent implements OnInit {
 
     private setFormFromSnippet() {
         let galleryTabs;
-        if (this.snippet.gallery.length) {
+        if (this.snippet.gallery && this.snippet.gallery.length) {
             galleryTabs = this.formBuilder.array(this.snippet.gallery.map((tab) => this.formBuilder.group({name: tab.name, show: tab.show})));
         } else {
             galleryTabs = this.formBuilder.array([]);

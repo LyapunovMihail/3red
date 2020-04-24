@@ -22,14 +22,6 @@ import { ObjectDocumentationComponent } from './jk-objects-item/object-documenta
 import { ObjectProjectsComponent } from './jk-objects-item/object-projects/object-projects.component';
 import { ObjectPreviewAdminComponent } from './jk-objects-item/object-preview/object-preview-admin/object-preview-admin.component';
 import { ObjectProjectAdminComponent } from './jk-objects-item/object-project/object-project-admin/object-project-admin.component';
-import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
-import { ObjectDynamicDateComponent } from './jk-objects-item/object-dynamic/object-dynamic-date/object-dynamic-date.component';
-import { ObjectDynamicGalleryComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/object-dynamic-gallery.component';
-import { ObjectDynamicSchemaComponent } from './jk-objects-item/object-dynamic/object-dynamic-schema/object-dynamic-schema.component';
-import { ObjectDynamicSlideshowComponent } from './jk-objects-item/object-dynamic/object-dynamic-gallery/dynamic-gallery-slideshow/dynamic-gallery-slideshow.component';
-import { ObjectDynamicMonthSwitcherComponent } from './jk-objects-item/object-dynamic/object-dynamic-month-switcher/object-dynamic-month-switcher.component';
-import { DynamicAdminSettingsComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-settings/dynamic-admin-settings.component';
-import { DynamicAdminContentComponent } from './jk-objects-item/object-dynamic/object-dynamic-admin/dynamic-admin-content/dynamic-admin-content.component';
 import { ObjectGalleryTabsAdminComponent } from './jk-objects-item/object-gallery/object-gallery-tabs-admin/object-gallery-tabs-admin.component';
 import { ObjectGalleryAdminComponent } from './jk-objects-item/object-gallery/object-gallery-content-admin/object-gallery-admin.component';
 import { ObjectDocumentationAdminComponent } from './jk-objects-item/object-documentation/object-documentation-admin/object-documentation-admin.component';
@@ -46,7 +38,8 @@ import { ObjectFlatsComponent } from './jk-objects-item/object-flat/object-flats
 import { HouseComponent } from './jk-objects-item/object-flat/house/house.component';
 import { FloorComponent } from './jk-objects-item/object-flat/floor/floor.component';
 import { ApartmentComponent } from './jk-objects-item/object-flat/apartment/apartment.component';
-import { PlanComponents } from './jk-objects-item/object-flat/plan/plan';
+import { ObjectDynamicModule } from './jk-objects-item/object-dynamic/object-dynamic.module';
+import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -62,14 +55,6 @@ const jkObjectsComponents = [
     ObjectProjectsComponent,
     ObjectPreviewAdminComponent,
     ObjectProjectAdminComponent,
-    ObjectDynamicComponent,
-    ObjectDynamicDateComponent,
-    ObjectDynamicGalleryComponent,
-    ObjectDynamicSchemaComponent,
-    ObjectDynamicSlideshowComponent,
-    ObjectDynamicMonthSwitcherComponent,
-    DynamicAdminSettingsComponent,
-    DynamicAdminContentComponent,
     ObjectGalleryTabsAdminComponent,
     ObjectGalleryAdminComponent,
     ObjectDocumentationAdminComponent,
@@ -98,6 +83,7 @@ const jkObjectsComponents = [
         ObjectPurchaseModule,
         ObjectMembersModule,
         ObjectFlatsModule,
+        ObjectDynamicModule,
 
         JkObjectsListModule,
         TextMaskModule,
@@ -115,7 +101,7 @@ const jkObjectsComponents = [
                             { path: 'house/:house/section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
                         ]
                     },
-                    { path: 'list/:id/dynamic', component: ObjectDynamicComponent }
+                    { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent }
                 ]
             }
         ])

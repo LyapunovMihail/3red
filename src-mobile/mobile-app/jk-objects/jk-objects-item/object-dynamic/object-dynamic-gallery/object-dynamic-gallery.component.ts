@@ -18,11 +18,11 @@ export class ObjectDynamicGalleryComponent implements OnInit {
 
     public tempArray = fakeObject;
 
-    public isVideoShow: boolean = false;
-    public videoUrl: string = '';
-    public isSlideShow: boolean = false;
+    public isVideoShow = false;
+    public videoUrl = '';
+    public isSlideShow = false;
     public slideShowId: any;
-    public slideShowCurrent: number = 0;
+    public slideShowCurrent = 0;
 
     constructor( public windowScrollLocker: WindowScrollLocker ) { }
 

@@ -56,7 +56,7 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
     public refreshTabs(data) {
         this.tabSnippet = data;
         if (this.tabSnippet) {
-            if (this.tabSnippet.gallery.length && this.tabSnippet.gallery.some((tab) => tab.show)) {
+            if (this.tabSnippet.gallery && this.tabSnippet.gallery.length && this.tabSnippet.gallery.some((tab) => tab.show)) {
                 this.currentTab = this.tabSnippet.gallery.find((tab) => tab.show).name;
             } else {
                 this.currentTab = 'no-tab';

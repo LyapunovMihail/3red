@@ -7,6 +7,7 @@ export interface IObjectTabsSnippet {
     objectId: string;
     gallery?: IObjectGalleryTabs[];
     location?: IObjectLocationTab[];
+    dynamic?: IObjectDynamicTabs[];
     decorationType?: string[];
     created_at: any;
     last_modifyed: any;
@@ -32,9 +33,10 @@ export interface IObjectLocationTab {
     show: boolean;
 }
 
-export interface IObjectMembersTab {
+export interface IObjectDynamicTabs {
     name: string;
-    id: string;
+    description: string;
+    show: boolean;
 }
 
 export enum LocationTabsEnum {
