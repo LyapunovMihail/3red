@@ -18,7 +18,7 @@
                         <label class="dynamic-settings__btn dynamic-settings_switch btn-empty">
                             <input hidden type="checkbox" formControlName="show">{{object.get('show').value ? 'Выключить' : 'Включить'}}
                         </label>
-                        <button class="dynamic-settings__btn dynamic-settings_switch btn-empty" (click)="popObject(i)">Удалить объект</button>
+                        <button class="dynamic-settings__btn dynamic-settings_switch btn-empty" (click)="popObject(i)">Удалить</button>
                     </div>
 
                     <div class="form">
@@ -53,8 +53,6 @@
                             <button class="dynamic-content__btn dynamic-content__btn_del-image" (click)="deleteImage(i, j)"><span></span></button>
                         </li>
                     </ul>
-
-                    <h2 class="dynamic-content__btn_del-object" (click)="popObject(i)">Удалить объект</h2>
 
                 </ng-container>
             </div>

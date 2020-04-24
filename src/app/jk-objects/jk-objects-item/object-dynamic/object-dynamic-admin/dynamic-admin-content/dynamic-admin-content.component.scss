@@ -144,7 +144,8 @@
 
             .dynamic-content__title_in-path,
             .dynamic-content__btn_upload-image,
-            .info-input {
+            .info-input,
+            .dynamic-content__image {
                 opacity: .3;
                 pointer-events: none;
             }
@@ -177,3 +178,6 @@
     }
 }
 
+.dynamic-settings__btn:first-child {
+    margin-right: 10px;
+}
