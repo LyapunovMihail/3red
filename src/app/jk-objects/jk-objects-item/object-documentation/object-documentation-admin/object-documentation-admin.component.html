@@ -44,14 +44,12 @@
 
                     <ul class="documentation__object-content">
                         <li class="documentation__object-file upload-file"
-                            *ngFor="let doc of block.get('uploads').value">
+                            *ngFor="let doc of block.get('uploads').value; let j = index">
                             <button class="upload-file__delete-btn" (click)="popDoc(i, j)">
                                 <span></span>
                             </button>
                             <a class="upload-file__file-name upload-file__file-name_admin"
-                                target="_blank"
-                                [href]="'/' + uploadsPath + doc.name"
-                                [attr.download]="doc.originalName">
+                                target="_blank">
                                 {{doc.originalName}}
                             </a>
                             <div class="upload-file__date">

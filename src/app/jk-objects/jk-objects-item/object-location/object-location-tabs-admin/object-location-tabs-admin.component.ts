@@ -59,22 +59,22 @@ export class ObjectLocationTabsAdminComponent implements OnInit {
             this.formBuilder.group({
                 name: 'Объект',
                 coords: [this.objectCoords, Validators.required],
-                image: [this.objectCoords, Validators.required],
-                thumbnail: ['', Validators.required],
+                image: '',
+                thumbnail: '',
                 show: false
             }),
             this.formBuilder.group({
                 name: 'Офис продаж',
                 coords: [this.objectCoords, Validators.required],
-                image: [this.objectCoords, Validators.required],
-                thumbnail: ['', Validators.required],
+                image: '',
+                thumbnail: '',
                 show: false
             }),
             this.formBuilder.group({
                 name: 'Инфраструктура',
                 coords: [this.objectCoords, Validators.required],
-                image: [this.objectCoords, Validators.required],
-                thumbnail: ['', Validators.required],
+                image: '',
+                thumbnail: '',
                 show: false
             })
         ]);

@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/platform-browser';
 import { navList } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
-import { Component, Inject, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnDestroy } from '@angular/core';
 import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
 import { IObjectLocationTab } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 declare let ymaps: any;
@@ -64,6 +64,7 @@ export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
                 mark.coords = mark.coords.split(',');
             });
         }
+        this.setNavList();
 
         this.mainMarker = {
             coords: this.mainMarker.coords.split(','),
@@ -78,6 +79,16 @@ export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
             type: 'main'
         };
         this.markersConfig.push(this.mainMarker);
+    }
+    private setNavList() {
+        const navTypes = [];
+        this.markersConfig.forEach((item) => {
+            if (!navTypes.some((type) => type === item.type)) {
+                navTypes.push(item.type);
+            }
+        });
+        this.navList = navList.filter((item) => navTypes.includes(item.type) );
+        console.log('this.navList: ', this.navList);
     }
 
     ngOnDestroy() {

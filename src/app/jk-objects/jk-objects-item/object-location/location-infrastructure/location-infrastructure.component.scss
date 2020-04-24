@@ -15,11 +15,12 @@
     &-list {
         width: $w1600;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin: 0 0 24px;
 
         &-item {
             display: flex;
+            margin-right: 7px;
             padding: 5px 10px;
             border: 1px solid rgba(32, 149, 210, 0.3);
             border-radius: 14.5px;

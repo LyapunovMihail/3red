@@ -33,7 +33,6 @@ export class RoutesAdminComponent implements OnInit {
         });
 
         this.form.valueChanges.subscribe((value) => {
-            console.log('this.form: ', value);
             this.routesMarksChange.emit(value.routesMarks);
         });
     }

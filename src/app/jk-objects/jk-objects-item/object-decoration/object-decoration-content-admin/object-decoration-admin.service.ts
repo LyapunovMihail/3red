@@ -83,8 +83,7 @@ export class ObjectDecorationAdminService {
                     if (tabWithType) {
                         tabWithType.tab.decorationType = typesFormValue.decorationType[i];
                         masTabsWithTypes.push(tabWithType);
-                    }
-                    if (!formValue.data.some((data) => data.tab.name === item.tab.name && data.tab.decorationType === type)) {
+                    } else  {
                         masTabsWithTypes.push({
                             images: [],
                             info: [],

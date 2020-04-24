@@ -73,7 +73,6 @@ export class ObjectLocationAdminComponent implements OnInit {
     public save() {
         this.locationService.parseFormValue(this.contentSnippet.data[0].routesMarks);
         this.setReference();
-        console.log('this.contentSnippet after parse: ', this.contentSnippet);
         this.locationService.setContentSnippetData(this.contentSnippet).subscribe(
             (data) => {
                 this.snippetChange.emit(data);
