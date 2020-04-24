@@ -48,7 +48,7 @@ export class ObjectDecorationTabsAdminComponent implements OnInit {
         } else {
             this.setNewTypesForm();
         }
-        this.prevTypes = this.typesSnippet.decorationType;
+        this.prevTypes = this.typesSnippet && this.typesSnippet.decorationType ? this.typesSnippet.decorationType : [];
     }
 
     private setNewForm() {

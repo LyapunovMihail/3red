@@ -46,6 +46,7 @@ export class ObjectDecorationAdminComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        console.log('this.contentSnippet: ', this.contentSnippet);
         if (this.contentSnippet) {
             this.setFormFromSnippet();
         } else {
@@ -153,31 +154,37 @@ export class ObjectDecorationAdminComponent implements OnInit {
             }
         );
 
-        this.decorationService.imageUpload(e)
-            .then( (data: any) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                this.addGallerySlide(data, i);
-            })
-            .catch((err) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                alert('Что-то пошло не так!');
-                console.error(err);
-            });
+        const fileList: FileList = e.target.files;
+
+        let chain = Promise.resolve();
+
+        for (let j = 0; j < fileList.length; j++) {
+            chain = chain
+                .then(() => this.decorationService.imageUpload(fileList[j]))
+                .then( (data: any) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                    this.addGallerySlide(data, i);
+                })
+                .catch((err) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                    alert('Что-то пошло не так!');
+                    console.error(err);
+                });
+        }
     }
 
     addInfo(i) {
         (this.form.get(['data', i, 'info']) as FormArray).push(this.formBuilder.group({name: '', mod: ''}));
     }
+    delInfo(i, j) {
+        (this.form.get(['data', i, 'info']) as FormArray).removeAt(j);
+    }
 
     setInfoIcon() {
         this.selectedInfo.get('mod').setValue(this.selectedIcon);
     }
-    delInfoIcon() {
-        this.selectedInfo.get('mod').setValue('');
-    }
-
     showModalIcon(info) {
         this.showModal = true;
         this.selectedInfo = info;

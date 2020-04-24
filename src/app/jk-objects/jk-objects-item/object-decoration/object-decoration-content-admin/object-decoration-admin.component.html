@@ -3,43 +3,45 @@
     <h2 class="decoration-settings__title">Настройка контента</h2>
     <form [formGroup]="form">
         <div class="decoration-settings__item" formArrayName="data" *ngFor="let data of form.get('data')['controls']; let i = index">
-            <div class="item__wrap" formGroupName="{{i}}">
-                <div class="title__wrap">
-                    <h2 class="decoration-settings__item-title">{{data.get('tab')['controls'].name.value}}</h2>
-                    <h2 class="decoration-settings__item-title decoration-settings__item-title--gray" *ngIf="data.get('tab')['controls'].decorationType?.value">{{data.get('tab')['controls'].decorationType.value}}</h2>
-                </div>
-                <label class="btn btn--camera">Загрузить фото
-                    <input style="display: none;" type="file" accept=".jpg" (change)="imageUpload($event, i)">
-                </label>
-                <div class="wrap">
-                    <div class="decoration-settings__wrapper" formArrayName="images" *ngFor="let image of data.get('images')['controls']; let j = index">
-                        <ng-container formGroupName="{{j}}">
-                            <button class="button__delete" (click)="deleteImage(i, j)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
-                            <img class="bg-img" [src]="uploadsPath + image.get('thumbnail').value" alt="image" width="94" height="62">
-                        </ng-container>
+            <ng-container *ngIf="!data.get('tab')['controls'].turnOnDecorationTypes.value">
+                <div class="item__wrap" formGroupName="{{i}}">
+                    <div class="title__wrap">
+                        <h2 class="decoration-settings__item-title">{{data.get('tab')['controls'].name.value}}</h2>
+                        <h2 class="decoration-settings__item-title decoration-settings__item-title--gray" *ngIf="data.get('tab')['controls'].decorationType?.value">{{data.get('tab')['controls'].decorationType.value}}</h2>
                     </div>
-                </div>
-                <button class="btn btn--settings" (click)="addInfo(i)">Добавить описание</button>
-                <div class="form">
+                    <label class="btn btn--camera">Загрузить фото
+                        <input style="display: none;" type="file" accept=".jpg" multiple (change)="imageUpload($event, i)">
+                    </label>
+                    <div class="wrap">
+                        <div class="decoration-settings__wrapper" formArrayName="images" *ngFor="let image of data.get('images')['controls']; let j = index">
+                            <ng-container formGroupName="{{j}}">
+                                <button class="button__delete" (click)="deleteImage(i, j)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                                <img class="bg-img" [src]="uploadsPath + image.get('thumbnail').value" alt="image" width="94" height="62">
+                            </ng-container>
+                        </div>
+                    </div>
+                    <button class="btn btn--settings" (click)="addInfo(i)">Добавить описание</button>
+                    <div class="form">
 
-                    <div class="form__item-wrapper" formArrayName="info" *ngFor="let info of data.get('info')['controls']; let j = index">
-                        <ng-container formGroupName="{{j}}">
-                            <div class="decoration-settings__img-wrap" *ngIf="info.get('mod').value">
-                                <img src="/assets/img/jk-object/decoration-icon-admin/{{info.get('mod').value}}.svg" alt="baseboard">
-                                <a class="decoration-settings__text" href="javascript:void(0)" (click)="showModalIcon(info)">Заменить</a>
-                            </div>
-                            <div class="decoration-settings__wrap-empty" *ngIf="!info.get('mod').value">
-                                <a class="decoration-settings__text" href="javascript:void(0)" (click)="showModalIcon(info)">Выбрать иконку</a>
-                            </div>
-                            <div class="form-item">
-                                <button *ngIf="info.get('mod').value" class="button__delete button__delete--textarea" (click)="delInfoIcon()"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
-                                <input type="text" class="form-input info-input textarea" appSlideTopLabel formControlName="name">
-                                <label class="form-label info-suptitle">Описание</label>
-                            </div>
-                        </ng-container>
+                        <div class="form__item-wrapper" formArrayName="info" *ngFor="let info of data.get('info')['controls']; let j = index">
+                            <ng-container formGroupName="{{j}}">
+                                <div class="decoration-settings__img-wrap" *ngIf="info.get('mod').value">
+                                    <img src="/assets/img/jk-object/decoration-icon-admin/{{info.get('mod').value}}.svg" alt="baseboard">
+                                    <a class="decoration-settings__text" href="javascript:void(0)" (click)="showModalIcon(info)">Заменить</a>
+                                </div>
+                                <div class="decoration-settings__wrap-empty" *ngIf="!info.get('mod').value">
+                                    <a class="decoration-settings__text" href="javascript:void(0)" (click)="showModalIcon(info)">Выбрать иконку</a>
+                                </div>
+                                <div class="form-item">
+                                    <button class="button__delete button__delete--textarea" (click)="delInfo(i, j)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                                    <input type="text" class="form-input info-input textarea" appSlideTopLabel formControlName="name">
+                                    <label class="form-label info-suptitle">Описание</label>
+                                </div>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
     </form>
 

@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <button *ngIf="!isAuthorizated" class="object-preview__change-flats btn_var-1">Выбрать квартиру</button>
+        <a *ngIf="!isAuthorizated" class="object-preview__change-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'">Выбрать квартиру</a>
     </div>
 </section>
 
