@@ -24,15 +24,16 @@
                 
                 <ng-container *ngFor="let snippet of mockProject; let i = index">
 
-                    <div class="slider-list__item"
-                        [ngClass]="{'current-slide': currentSlide === i }">
-    
-                        <div class="slider-list__image">
-                            <img src="{{snippet.image}}" alt="news-image">
+                        <div class="slider-list__item"
+                            [ngClass]="{'current-slide': currentSlide === i }">
+                            <a href="{{snippet.url}}" target="_blank">
+                                <div class="slider-list__image">
+                                    <img src="{{snippet.image}}" alt="news-image">
+                                </div>
+                                <p class="slider-list__title">{{snippet.title}}</p>
+                                <p class="slider-list__info">{{snippet.info}}</p>
+                            </a>
                         </div>
-                        <p class="slider-list__title">{{snippet.title}}</p>
-                        <p class="slider-list__info">{{snippet.info}}</p>
-                    </div>
                 </ng-container>
             </div>
         </div>
