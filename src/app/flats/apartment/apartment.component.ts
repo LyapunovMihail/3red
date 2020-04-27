@@ -2,6 +2,7 @@ import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { SearchService } from '../search/search.service';
 // declare let chWidget: any; // переменная для работы с чейзером
 
 @Component({
@@ -16,6 +17,7 @@ export class ApartmentComponent implements OnInit {
     public isReserveFormOpen: boolean = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
+    public objectLink;
     // public chWidget = chWidget; // переменная для работы с чейзером
 
     @Input() public showApartmentWindow = false;
@@ -25,13 +27,26 @@ export class ApartmentComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private flatsDiscountService: FlatsDiscountService
+        private flatsDiscountService: FlatsDiscountService,
+        public searchService: SearchService,
     ) {}
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        this.searchService.getObjects().subscribe(
+            (data) => {
+                data.forEach( (obj) => {
+                    if (obj.name === this.flatData.jkName) {
+                        this.objectLink = obj._id;
+                    }
+                });
+            },
+            (error) => console.log(error)
+        );
+
+        console.log('FLAT', this.flatData);
     }
 
     public prevFlat() {

@@ -61,8 +61,8 @@
     }
 
 }
-.objects__item:nth-child(1),
-.objects__item:nth-child(5) {
+.objects__item:nth-child(6n + 1),
+.objects__item:nth-child(6n + 5) {
     grid-row: span 2;
     height: 560px;
     .objects__item-img {
