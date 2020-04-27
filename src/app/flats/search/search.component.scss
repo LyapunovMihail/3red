@@ -79,6 +79,7 @@
         &--container {
             width: $container;
             flex-flow: row nowrap;
+            position: relative;
         }
 
         &-item {
