@@ -52,7 +52,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false});
         this.objectService.getSnippetsByParams(params).subscribe(
             (data) => {
-                // this.snippets = data;
+                this.snippets = data;
             },
             (err) => {
                 console.log(err);
