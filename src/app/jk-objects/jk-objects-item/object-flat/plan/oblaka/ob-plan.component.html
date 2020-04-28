@@ -9,7 +9,7 @@
             (mouseenter)="activeLink = link" 
             (mouseleave)="activeLink = ''" 
             [ngClass]="{'plan_house-select_link--active' : link === activeLink }"
-            [routerLink]="[ '/flats/plan/house/' + link ]">
+            [routerLink]="'/objects/list/' + objectId + '/flats/house/' + link.houseNumber">
 
             Секции {{link === '1' ? '1-3' : '4-6'}} 
 
@@ -21,8 +21,8 @@
 
             <ng-container *ngFor="let plan of housesPlanSvg; let i = index">
 
-                <a (click)="svgRouterLink($event, ( '/flats/plan/house/' + plan.houseNumber ))" 
-                        [attr.xlink:href]=" '/flats/plan/house/' + plan.houseNumber">
+                <a (click)="svgRouterLink($event, ( '/objects/list/' + objectId + '/flats/house/' + plan.houseNumber ))"
+                        [attr.xlink:href]="'/objects/list/' + objectId + '/flats/house/' + plan.houseNumber">
     
                     <path class="plan_house-select_svg_section"
                         [attr.style]="('opacity:' + ( activeLink == plan.houseNumber ? '1' : '0' )) | stylePipe"
