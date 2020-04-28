@@ -12,7 +12,7 @@
 
         <h2 class="object-flat__title" *ngIf="!isAuthorizated">Выберите дом</h2>
 
-        <div class="object-flat__plan" *ngIf="mod !== 'НТМ'">
+        <div class="object-flat__plan" *ngIf="mod !== 'НТМ' && mod !== 'ОБ'">
 
             <img class="object-flat__plan-img" src="/assets/img/jk-object/temp_bg.jpg" alt="">
     <!-- Места поблизсти -->
@@ -45,6 +45,11 @@
             [objectId]="objectId"
             [mod]="mod">
         </app-flats-nt-plan-page>
+
+        <app-flats-ob-plan-page *ngIf="mod === 'ОБ'"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-ob-plan-page>
 
     </ng-container>
 </section>

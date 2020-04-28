@@ -1,0 +1,50 @@
+<div class="plan flats_main">
+
+    <div class="plan_house-select flats_wrapper">
+
+        <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/1_korpus.jpg">
+
+        <a *ngFor="let link of links"
+            class="plan_house-select_link plan_house-select_link--section-{{link}}"
+            (mouseenter)="activeLink = link" 
+            (mouseleave)="activeLink = ''" 
+            [ngClass]="{'plan_house-select_link--active' : link === activeLink }"
+            [routerLink]="[ '/flats/plan/house/' + link ]">
+
+            Секции {{link === '1' ? '1-3' : '4-6'}} 
+
+            <span class="plan_house-select_link_floors">{{ link === '1' ? '25 этажей' : '14-18 этажей'}}</span>
+            <!-- <span class="plan_house-select_link_in-sale">Квартир в продаже: 1236</span> -->
+        </a>
+
+        <svg class="plan_house-select_svg flats_svg" viewBox="0 0 2560 1440" preserveAspectRatio="xMidYMid slice">
+
+            <ng-container *ngFor="let plan of housesPlanSvg; let i = index">
+
+                <a (click)="svgRouterLink($event, ( '/flats/plan/house/' + plan.houseNumber ))" 
+                        [attr.xlink:href]=" '/flats/plan/house/' + plan.houseNumber">
+    
+                    <path class="plan_house-select_svg_section"
+                        [attr.style]="('opacity:' + ( activeLink == plan.houseNumber ? '1' : '0' )) | stylePipe"
+                        (mouseenter)="activeLink = plan.houseNumber" 
+                        (mouseleave)="activeLink = ''"
+                        [attr.d]="plan.svgPath"
+                        id="k-{{plan.houseNumber}}"/>
+                </a>
+
+            </ng-container>
+
+        </svg>
+    
+    </div>
+    <!-- <a href="https://exporealty.ru/visit/registration/" class="link__banner"></a> -->
+
+    <div class="flats_main__quantity flats_main__quantity--left">
+        <div class="flats_main__quantity__number">{{houseOneFreeFlats}}</div>
+        <div class="flats_main__quantity__text">квартир<br> в продаже</div>
+    </div>
+    <div class="flats_main__quantity flats_main__quantity--right">
+        <div class="flats_main__quantity__number">{{houseTwoFreeFlats}}</div>
+        <div class="flats_main__quantity__text">квартир<br> в продаже</div>
+    </div>
+</div>
