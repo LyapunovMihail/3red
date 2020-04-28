@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Injectable()
 
@@ -13,6 +14,10 @@ export class SearchService {
 
     public getFlats(options): Observable<IAddressItemFlat[]> {
         return this.http.post<IAddressItemFlat[]>('/api/search', { search: options });
+    }
+
+    public getObjects(id?): Observable<IObjectSnippet[]> {
+        return this.http.get<IObjectSnippet[]>(`/api/jk-object/object/id/${id}`);
     }
 
     public getFlatsMultiple(options): Observable<IAddressItemFlat[]>  {

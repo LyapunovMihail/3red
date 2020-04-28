@@ -46,6 +46,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public getData(params, firstBoot) {
         this.searchService.getFlatsData({mod: params.mod || ''}).subscribe(
             (data) => {
+                console.log('DATA!!!!!', data);
                 this.modsBtnList = data.modsBtnList;
                 this.housesBtnList = data.housesBtnList;
                 this.config = data.config;
