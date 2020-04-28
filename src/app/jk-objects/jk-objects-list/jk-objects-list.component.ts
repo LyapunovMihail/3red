@@ -43,6 +43,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         this.objectService.getSnippets()
             .subscribe((data) => {
                 this.snippets = data;
+                console.log('OBJECT', data);
                 this.getDistricts();
             });
     }

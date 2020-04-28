@@ -17,6 +17,7 @@
         width: 822px;
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
         margin: 0 0 16px;
 
         &-list {
@@ -27,7 +28,7 @@
             font: 18px/23px $font-proba;
             color: $col-black-5;
             position: relative;
-            padding: 8px 0;
+            padding: 0 0 8px;
             margin-right: 16px;
             cursor: pointer;
             &:last-child { margin-right: 0; }

@@ -40,7 +40,7 @@
     &__image {
         width: 100%;
         height: 600px;
-        margin: 0 0 16px;
+        margin: 24px 0 16px;
 
         &-error {
             width: 100%;
@@ -59,6 +59,34 @@
         margin: 0 0 24px;
 
         &-title { margin: 0 0 18px; }
+        &-favorites {
+            font: 16px/22px $font-proba;
+            color: $col-red;
+            margin: 0 0 24px;
+            position: relative;
+            &::after {
+                content: url(/assets/img/header_heart.svg);
+                position: absolute;
+                top: 50%; left: calc(100% + 9px);
+                transform: translateY(-50%);
+            }
+        }
+        &-jkLink {
+            margin: 0 0 32px;
+
+            &> a {
+                font: 18px/23px $font-proba;
+                color: $col-red;
+                padding-left: 21px;
+                position: relative;
+                &::after {
+                    content: url(/assets/img/flat-link-jk.svg);
+                    position: absolute;
+                    top: 50%; left: 0;
+                    transform: translateY(-50%);
+                }
+            }
+        }
 
         &-subtitle,
         &-value { font: $font-18; }
