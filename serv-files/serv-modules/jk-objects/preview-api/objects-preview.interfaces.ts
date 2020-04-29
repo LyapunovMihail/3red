@@ -11,6 +11,7 @@ export interface IObjectPreviewSnippet {
     mainInfo: IObjectPreviewMainInfo;
     deadlines?: IObjectPreviewDeadline[];
     indicators?: IObjectPreviewIndicator[];
+    createdIndicators?: IObjectPreviewCreatedIndicator[];
     created_at: any;
     last_modifyed: any;
 }
@@ -45,4 +46,8 @@ export interface IObjectPreviewDeadline {
 export interface IObjectPreviewIndicator {
     value: string;
     text: string;
+}
+export interface IObjectPreviewCreatedIndicator {
+    name: string;
+    value: string;
 }

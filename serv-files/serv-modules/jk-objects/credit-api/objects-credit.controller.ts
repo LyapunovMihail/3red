@@ -1,6 +1,8 @@
 import { responseHandler } from '../../utilits/response-handler.utilits';
+import { IFileRequest } from '../../utilits/image-saver.utilits';
 import { ObjectsCreditModel } from './objects-credit.model';
 import * as express from 'express';
+import * as multipart from 'connect-multiparty';
 import { MongoConnectionService } from '../../mongo-connection.service';
 import { ExpressAppService } from '../../express-app.service';
 import { Controller } from '@nestjs/common';
@@ -26,6 +28,11 @@ export class ObjectsCreditController extends ObjectsCreditModel {
 
         this.router.post('/admin/jk-object/credit/create-update', responseHandler(async (req) => {
             return await this.updateSnippet(req.body);
+        }));
+
+        const multipartMiddleware = multipart();
+        this.router.post('/admin/jk-object/credit/image/', multipartMiddleware, responseHandler(async(req: IFileRequest) => {
+            return await this.uploadImage(req);
         }));
 
         const app: Express = this.expressAppService.getApp();

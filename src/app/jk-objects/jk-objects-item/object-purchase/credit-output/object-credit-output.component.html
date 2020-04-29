@@ -17,7 +17,8 @@
             'no-initial': hideEmptyColums('initial',bankList)
         }">
             <div class="object-purchase__list-text object-purchase__list-image">
-                <img [src]="bank.image" alt="bank-logo">
+                <img [src]="bank.image" alt="bank-logo" *ngIf="!bank.isNew">
+                <img [src]="uploadsPath + bank.image" alt="bank-logo" *ngIf="bank.isNew">
             </div>
             <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
             <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-rate">

@@ -61,7 +61,8 @@ export class ObjectPreviewAdminComponent implements OnInit {
             deadlines: this.formBuilder.array(
                 []),
             indicators: this.formBuilder.array(
-                this.indicators.map((item) => this.formBuilder.group({[item] : ''})))
+                this.indicators.map((item) => this.formBuilder.group({[item] : ''}))),
+            createdIndicators: this.formBuilder.array([])
         });
     }
 
@@ -83,7 +84,15 @@ export class ObjectPreviewAdminComponent implements OnInit {
                 this.indicators.map((item) => {
                     const foundItem = this.snippet.indicators.find((indic) => indic.text === item);
                     return this.formBuilder.group({[item]: (foundItem ? foundItem.value : '')}); // ключи на русском языке
-                }))
+                })),
+            createdIndicators: this.formBuilder.array(
+                this.snippet.createdIndicators.map( item => {
+                    return this.formBuilder.group({
+                        name: item.name,
+                        value: item.value
+                    });
+                })
+            )
         });
         this.loadedImage = this.snippet.mainInfo.thumbnail;
     }
@@ -91,9 +100,15 @@ export class ObjectPreviewAdminComponent implements OnInit {
     public pushDeadlineSnippet() {
         (this.form.controls.deadlines as FormArray).push(this.formBuilder.group({corpusId: '', deadline: '', realized: false}));
     }
+    public pushNewIndicator() {
+        (this.form.controls.createdIndicators as FormArray).push(this.formBuilder.group({name: '', value: ''}));
+    }
 
     public popDeadlineSnippet(i) {
         (this.form.controls.deadlines as FormArray).removeAt(i);
+    }
+    public deleteCreatedIndicators(i) {
+        (this.form.controls.createdIndicators as FormArray).removeAt(i);
     }
 
     imageUpload(e) {
