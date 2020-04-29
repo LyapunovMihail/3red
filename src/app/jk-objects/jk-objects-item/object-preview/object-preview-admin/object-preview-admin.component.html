@@ -79,7 +79,7 @@
             <div class="indicators__info indicators__info--created">
                 <div class="form">
                     <div class="form__wrap">
-                        <ng-container formArrayName="createdIndicators" *ngFor="let indicator of form.controls['createdIndicators'].controls; let j = index">
+                        <ng-container formArrayName="createdIndicators" *ngFor="let indicator of form.controls['createdIndicators']['controls']; let j = index">
                             <div class="form-item form-item--flex" formGroupName="{{j}}">
                                 <div class="form-item form-item--wrap">
                                     <input maxlength="25" type="text" class="form-input info-input" appSlideTopLabel formControlName="name">
