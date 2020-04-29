@@ -1,6 +1,6 @@
 <section class="dynamic-header">
 
-    <p class="dynamic-header__start">Начало строительства — 29 ноября 2018 года</p>
+    <p class="dynamic-header__start">{{description}}</p>
 
     <ul class="dynamic-header__months">
     
@@ -17,7 +17,7 @@
     </ul>
 
     <div class="dynamic-header__years">
-        <div class="dynamic-header__years-active" (click)="tooltipYear = true">2019</div>
+        <div class="dynamic-header__years-active" (click)="tooltipYear = true">{{year}}</div>
         
         <ul class="dynamic-header__years-list" *ngIf="tooltipYear">
             <li class="dynamic-header__years-cls" (click)="tooltipYear = false"></li>

@@ -51,11 +51,10 @@ export class DynamicService {
         return this.subject.asObservable();
     }
 
-    public imageUpload(e) {
+    public imageUpload(file) {
         return new Promise((resolve, reject) => {
 
-            const fileList: FileList = e.target.files;
-            const uploadFile: File = fileList[0];
+            const uploadFile: File = file;
 
             const myUploadItem = new DynamicAdminContentUpload(uploadFile);
             myUploadItem.formData = {FormDataKey: 'Form Data Value'};
