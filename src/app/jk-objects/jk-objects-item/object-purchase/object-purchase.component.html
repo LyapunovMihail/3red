@@ -2,14 +2,14 @@
 
     <div class="object-item__container">
 
-        <div [class.object-purchase__head]="switchOn">
+        <div [class.object-purchase__head]="switchOn" *ngIf="isAuthorizated">
             <input type="checkbox" name="switch" id="purchase-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
             <label *ngIf="isAuthorizated" for="purchase-switch" class="object-item__title">Условия покупки</label>
         </div>
 
         <ng-container *ngIf="switchOn">
 
-            <h2 *ngIf="!isAuthorizated">Условия покупки</h2>
+            <h2 class="object-purchase__title" *ngIf="!isAuthorizated">Условия покупки</h2>
 
             <div class="object-purchase__options" *ngIf="isAuthorizated">
                 <button class="btn__admin-setting" (click)="closeModal = false">Настройки</button>

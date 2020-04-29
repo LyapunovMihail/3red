@@ -213,11 +213,9 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
 
     public moveBlock(array, i, dir) {
         let arr = this.form.value.body;
-        
+
         array[i] = array.splice((i + dir), 1, array[i])[0];
         arr[i] = arr.splice((i + dir), 1, arr[i])[0];
-        // console.log(arr);
-        console.log(array);
     }
 
     ngOnChanges(changes: SimpleChanges) {

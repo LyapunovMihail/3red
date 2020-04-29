@@ -4,34 +4,55 @@
 
     <ng-container [formGroup]="form">
 
-        <div class="mortgage__info" formArrayName="banks" *ngFor="let bank of form.get('banks')['controls']; let i = index; let last = last">
+        <div class="mortgage__info" formArrayName="banks" *ngFor="let bank of form.get('banks')['controls']; let i = index; let last = last"
+            [class.isNew]="bank.get('isNew').value">
+
             <ng-container formGroupName="{{i}}">
                 <div class="mortgage__wrapper">
-                    <h2 class="info-title">{{bank.get('name').value}}</h2>
+                    <h2 *ngIf="!bank.get('isNew').value" class="info-title">{{bank.get('name').value}}</h2>
+
+                    <div *ngIf="bank.get('isNew').value" class="mortgage__name" [class.disabled]="!bank.get('show').value">
+                        <input class="g-input" type="text" formControlName="name" appSlideTopLabel>
+                        <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Название банка</label>
+                    </div>
+
                     <div class="mortgage__tabs">
                         <a class="mortgage__delete" *ngIf="i > 0" (click)="moveBank(form.get('banks')['controls'], i, -1)">Вверх</a>
                         <a class="mortgage__delete" *ngIf="!last" (click)="moveBank(form.get('banks')['controls'], i, 1)">Вниз</a>
                         <label class="mortgage__delete">{{bank.get('show').value ? 'Выключить' : 'Включить'}}<input hidden type="checkbox" formControlName="show"/></label>
+                        <a *ngIf="bank.get('isNew').value" class="mortgage__delete" (click)="deleteCreatedBank(i)" href="javascript:void(0)">Удалить</a>
                     </div>
                 </div>
-                <div  class="form">
+                <div class="form mortgage__form" [class.disabled]="!bank.get('show').value">
                     <div class="form__wrap">
                         <div class="form-item form-item--inline form-item--mr" >
-                            <input type="text" class="form-input info-input" [class.info-input--hide]="!bank.get('show').value" formControlName="percent" appSlideTopLabel>
-                            <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Ставка от</label>
+                            <input type="text" class="g-input"  formControlName="percent" appSlideTopLabel>
+                            <label class="form-label info-suptitle">Ставка от</label>
                         </div>
                         <div class="form-item form-item--inline form-item--mr">
-                            <input type="text" class="form-input info-input" [class.info-input--hide]="!bank.get('show').value" formControlName="deadline" appSlideTopLabel>
-                            <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Срок</label>
+                            <input type="text" class="g-input" formControlName="deadline" appSlideTopLabel>
+                            <label class="form-label info-suptitle">Срок</label>
                         </div>
                         <div class="form-item form-item--inline">
-                            <input type="text" class="form-input info-input" [class.info-input--hide]="!bank.get('show').value" formControlName="initial" appSlideTopLabel>
-                            <label class="form-label info-suptitle" [class.info-suptitle--hide]="!bank.get('show').value">Минимальный взнос</label>
+                            <input type="text" class="g-input" formControlName="initial" appSlideTopLabel>
+                            <label class="form-label info-suptitle">Минимальный взнос</label>
                         </div>
                     </div>
+                </div>
+                <div class="mortgage__image" *ngIf="bank.get('isNew').value">
+                    <img *ngIf="bank.get('image').value && bank.get('image').value.length > 0" [src]="uploadsPath + bank.get('image').value" alt="logoBank">
+                    <label class="mortgage__image-btn btn-admin">
+                        <input hidden="true" type="file" placeholder="Upload file" (change)="imageUpload($event, i)">
+                        Загрузить логотип
+                    </label>
+                    <!-- url(/assets/img/jk-object/admin-modal/previewContent/preview_camera.svg) -->
+                    <input hidden="true" type="text" formControlName="image">
+                    <!-- <input hidden="true" type="text" formControlName="thumbnail"> -->
                 </div>
             </ng-container>
         </div>
+        <button class="mortgage__add-snippet btn-admin" (click)="pushNewBank()">Добавить банк</button>
+        <!-- url(/assets/img/jk-object/admin-modal/plus.svg) -->
 
     </ng-container>
 

@@ -27,6 +27,7 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
     public currentTab: string;
 
     public interval;
+    public showTimeline = true;
 
     public contentSnippet: IObjectGallerySnippet;
     public tabSnippet: IObjectTabsSnippet;
@@ -43,6 +44,8 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.getTabsThanContent();
+
+        this.slideShow();
     }
 
     public getTabsThanContent() {
@@ -103,6 +106,7 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
     }
 
     public clearInt() {
+        this.showTimeline = false;
         clearInterval(this.interval);
     }
 

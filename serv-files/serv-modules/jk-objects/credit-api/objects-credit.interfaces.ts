@@ -1,5 +1,7 @@
 export const OBJECTS_CREDIT_COLLECTION_NAME = 'objectCredit';
 
+export const OBJECTS_CREDIT_UPLOADS_PATH = 'uploads/object-credit/';
+
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
 export interface IObjectCreditSnippet {
@@ -19,4 +21,5 @@ export interface IBankSnippet {
     initial: string;
     deadline: string;
     show: boolean;
+    isNew: boolean;
 }

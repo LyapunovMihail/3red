@@ -1,3 +1,52 @@
+@import '../../../../../styles/modules/mixins/mixin';
+
+.mortgage {
+
+    &__name {
+        width: 45%;
+        position: relative;
+        transform: translateY(4px);
+        &> input { width: 100%; }
+        &.disabled {
+            opacity: .15;
+            pointer-events: none;
+        }
+    }
+    &__image {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        margin: 20px 0 0;
+
+        img {
+            display: block;
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        &-btn {
+            display: block;
+            box-sizing: border-box;
+            background-image: url(/assets/img/jk-object/admin-modal/previewContent/preview_camera.svg);
+            background-position: 12px 42%;
+            margin: 10px 0 0;
+        }
+    }
+
+    &__add-snippet {
+        background-image: url(/assets/img/jk-object/admin-modal/plus.svg);
+        margin: 0 0 50px;
+    }
+
+    &__form {
+        &.disabled {
+            opacity: .15;
+            pointer-events: none;
+        }
+    }
+}
+
 .mortgage__title {
     font-size: 36px;
     margin-bottom: 24px;
@@ -6,6 +55,7 @@
     background: #efefef;
     padding: 20px 24px 32px;
     margin-bottom: 8px;
+    &.isNew { padding: 40px 24px 32px; }
 }
 .mortgage__wrapper {
     display: flex;

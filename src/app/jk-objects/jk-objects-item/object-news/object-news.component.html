@@ -9,7 +9,7 @@
 
         <ng-container *ngIf="switchOn">
 
-            <h2 *ngIf="!isAuthorizated">Новости</h2>
+            <h2 class="object-news__title" *ngIf="!isAuthorizated">Новости</h2>
 
             <div class="object-news__options" *ngIf="isAuthorizated">
                 <button class="object-news__options-btn btn-admin" (click)="createNewsSnippet()">Добавить новость</button>
@@ -25,11 +25,11 @@
                     <li class="object-news__nav-item" (click)="changeType(shareSnippets, 'shares')"
                         [ngClass]="{'object-news__nav-item_active': showSnippetType === 'shares'}">Акции</li>
                 </ul>
+                <a class="object-news__nav-link btn-empty" routerLink="/news-shares/all">Все новости</a>
             </nav>
 
             <div class="object-news__slider">
 
-                <a class="object-news__slider-all btn-empty" routerLink="/news-shares/all">Все новости</a>
                 <button (click)="prevBtn()" *ngIf="currentSlide > 0"
                     class="object-news__slider-btn object-news__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
                     <span></span>

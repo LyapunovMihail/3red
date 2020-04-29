@@ -9,7 +9,7 @@
 
         <ng-container *ngIf="switchOn">
 
-            <h2 *ngIf="!isAuthorizated">Местоположение</h2>
+            <h2 class="object-location__title" *ngIf="!isAuthorizated">Местоположение</h2>
 
             <div class="object-location__options" *ngIf="isAuthorizated">
                 <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>

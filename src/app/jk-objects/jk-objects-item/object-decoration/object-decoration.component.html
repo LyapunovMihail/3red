@@ -7,7 +7,7 @@
 
         <ng-container *ngIf="switchOn">
 
-            <h2 *ngIf="!isAuthorizated">Отделка квартир</h2>
+            <h2 class="object-decoration__title" *ngIf="!isAuthorizated">Отделка квартир</h2>
 
             <div class="object-decoration__options" *ngIf="isAuthorizated">
                 <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>

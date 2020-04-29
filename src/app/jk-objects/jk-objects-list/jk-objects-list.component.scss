@@ -81,8 +81,10 @@
 
 .objects__title-wrap {
     display: flex;
-    align-items: center;
+    // align-items: center;
+    align-items: flex-end;
 }
+.objects__title-wrapper { transform: translateY(-11px); }
 .switch {
     display: none;
 }

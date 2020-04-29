@@ -1,5 +1,5 @@
 
-<section class="object-project">
+<section class="object-project" *ngIf="snippets && snippets.length > 0">
 
     <div class="object-item__container object-members__container">
 
@@ -20,20 +20,21 @@
                 <span></span>
             </button>
 
-            <div class="object-project__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 282 ) ) + 'px)') }">
+            <div class="object-project__slider-item slider-list"  *ngIf="snippets"
+                [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 282 ) ) + 'px)') }">
                 
-                <ng-container *ngFor="let snippet of mockProject; let i = index">
+                <ng-container *ngFor="let snippet of snippets; let i = index">
 
-                        <div class="slider-list__item"
-                            [ngClass]="{'current-slide': currentSlide === i }">
-                            <a href="{{snippet.url}}" target="_blank">
-                                <div class="slider-list__image">
-                                    <img src="{{snippet.image}}" alt="news-image">
-                                </div>
-                                <p class="slider-list__title">{{snippet.title}}</p>
-                                <p class="slider-list__info">{{snippet.info}}</p>
-                            </a>
-                        </div>
+                    <div class="slider-list__item"
+                        [ngClass]="{'current-slide': currentSlide === i }">
+                        <a routerLink="/objects/list/{{snippet._id}}" target="_blank">
+                            <div class="slider-list__image">
+                                <img [src]="uploadsPath + snippet.image" alt="news-image">
+                            </div>
+                            <p class="slider-list__title">{{snippet.name}}</p>
+                            <p *ngIf="readyBuildPrice" class="slider-list__info">{{objects[i].minPrice ? 'Квартиры от ' + objects[i].minPrice + ' млн. руб' : snippet.status}}</p>
+                        </a>
+                    </div>
                 </ng-container>
             </div>
         </div>

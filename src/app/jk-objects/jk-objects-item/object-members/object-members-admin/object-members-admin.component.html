@@ -3,15 +3,15 @@
     <h2 class="members-settings__title">Настройка контента «Участники проекта»</h2>
     <div class="tabs">
         <form [formGroup]="form">
-            <div class="tabs__wrap" formArrayName="data" *ngFor="let block of form.get('data')['controls']; let i = index">
+            <div class="tabs__wrap" formArrayName="data" *ngFor="let block of form.get('data')['controls']; let i = index; last as last">
                 <ng-container formGroupName="{{i}}">
 
                     <div class="tabs__container">
                         <h2 class="tabs__title">Блок {{i + 1}}</h2>
                         <div class="tabs__nav">
                             <a href="javascript:void(0)" class="tabs__nav-link" (click)="popData(i)">Удалить</a>
-                            <a href="#" class="tabs__nav-link">Вверх</a>
-                            <a href="#" class="tabs__nav-link">Вниз</a>
+                            <a href="javascript:void(0)" *ngIf="i !== 0" class="tabs__nav-link" (click)="moveBlock(form.get('data')['controls'], i, -1)">Вверх</a>
+                            <a href="javascript:void(0)" *ngIf="!last" class="tabs__nav-link" (click)="moveBlock(form.get('data')['controls'], i, 1)">Вниз</a>
                         </div>
                     </div>
 
