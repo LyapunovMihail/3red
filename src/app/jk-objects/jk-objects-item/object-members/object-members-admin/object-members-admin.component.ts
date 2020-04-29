@@ -86,6 +86,15 @@ export class ObjectMembersAdminComponent implements OnInit {
     public popData(i) {
         (this.form.get('data') as FormArray).removeAt(i);
     }
+    
+    public moveBlock(array, i, dir) {
+        let arr = this.form.get('data').value;
+
+        array[i] = array.splice((i + dir), 1, array[i])[0];
+        arr[i] = arr.splice((i + dir), 1, arr[i])[0];
+        // console.log('ARR-MEMBERS!!! ->', arr);
+        // console.log(array);
+    }
 
     public pushMembers(i) {
         (this.form.get(['data', i, 'members']) as FormArray).push(

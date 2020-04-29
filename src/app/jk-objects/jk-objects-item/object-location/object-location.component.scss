@@ -12,12 +12,14 @@
         margin: 0 0 16px;
         .btn__admin-setting { margin-right: 8px; }
     }
+    &__title { margin: 0 0 24px; }
 
     &__nav {
         width: 822px;
+        height: 32px;
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: flex-end;
         margin: 0 0 16px;
 
         &-list {

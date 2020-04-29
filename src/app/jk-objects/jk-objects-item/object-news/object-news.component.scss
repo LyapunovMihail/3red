@@ -18,11 +18,13 @@
             margin-right: 8px;
         }
     }
+    &__title { margin: 0 0 24px;}
 
     &__nav {
         display: flex;
-        justify-content: flex-start;
-        margin: 0 0 16px;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin: 0 0 24px;
 
         &-list {
             display: flex;
@@ -32,7 +34,7 @@
             font: 18px/23px $font-proba;
             color: $col-black-5;
             position: relative;
-            padding: 8px 0;
+            padding: 0 0 8px;
             margin-right: 16px;
             cursor: pointer;
             &:last-child { margin-right: 0; }
@@ -50,6 +52,14 @@
                 &::before { background-color: $col-red; }
             }
         }
+        &-link {
+            display: block;
+            font: 18px/23px $font-proba;
+            color: $col-red;
+            padding-right: 24px;
+            background: url(/assets/img/arrow-next.svg) right 49% no-repeat;
+            background-size: 16px 10px;
+        }
     }
 
     &__slider {
@@ -57,17 +67,6 @@
         position: relative;
         padding: 20px 0 0;
 
-        &-all {
-            position: absolute;
-            display: block;
-            top: -44px - 23px;
-            right: 0;
-            font: 18px/23px $font-proba;
-            color: $col-red;
-            padding-right: 24px;
-            background: url(/assets/img/arrow-next.svg) right 49% no-repeat;
-            background-size: 16px 10px;
-        }
         &-btn {
             position: absolute;
             top: calc((264px / 2) + 20px ); // где 20px - это padding у ".object-news__slider", а 264 высота блока с картинкой

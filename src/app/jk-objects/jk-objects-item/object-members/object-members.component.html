@@ -8,7 +8,7 @@
         </div>
 
         <ng-container *ngIf="switchOn">
-            <h2 *ngIf="!isAuthorizated">Участники проекта</h2>
+            <h2 class="object-members__title" *ngIf="!isAuthorizated">Участники проекта</h2>
 
             <div class="object-members__options" *ngIf="isAuthorizated">
                 <button class="btn__admin-content btn_var-2" (click)="closeModal = false">Контент</button>
@@ -20,16 +20,16 @@
                     <p class="object-members__text object-members__text_for-title">{{block.name}}</p>
 
                     <ng-container *ngFor="let member of block.members">
-                        <a class="object-members__text object-members__text--anchor object-members__text_black"
+                        <a class="object-members__text"
                            href="{{member.url}}"
                            target="_blank"
                            *ngIf="member.url">
                             {{member.name}}
                         </a>
-                        <a class="object-members__text object-members__text_black"
+                        <p class="object-members__text object-members__text_black"
                            *ngIf="!member.url">
                             {{member.name}}
-                        </a>
+                        </p>
                     </ng-container>
 
 

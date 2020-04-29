@@ -18,6 +18,9 @@
         width: 916px;
         overflow: hidden;
         transition: height .4s ease;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
     }
     &-head { display: flex; }
     &-text {
@@ -31,6 +34,10 @@
             &:nth-child(2) { width: 75px + 88px; }
             &:nth-child(3) { width: 41px + 172px; }
             &:nth-child(4) { width: 170px; }
+
+            &.no-percent:nth-child(2) { display: none; }
+            &.no-deadline:nth-child(3) { display: none; }
+            &.no-initial:nth-child(4) { display: none; }
         }
         &_grey { color: $col-black-5; }
     }
@@ -42,6 +49,13 @@
         border-top: 1px solid #d8d8d8;
         display: flex;
         align-items: center;
+        &.no-percent .object-purchase__list-rate { display: none; }
+        &.no-deadline .object-purchase__list-date { display: none; }
+        &.no-initial .object-purchase__list-payment { display: none; }
+
+        &.no-percent,
+        &.no-deadline,
+        &.no-initial { width: auto; }
     }
 
     &-image {

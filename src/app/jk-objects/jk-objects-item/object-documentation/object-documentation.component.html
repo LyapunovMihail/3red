@@ -8,7 +8,7 @@
         </div>
 
         <ng-container *ngIf="switchOn">
-            <h2 *ngIf="!isAuthorizated">Документация</h2>
+            <h2 class="object-documentation__title" *ngIf="!isAuthorizated">Документация</h2>
 
             <div class="object-documentation__options" *ngIf="isAuthorizated">
                 <button class="btn__admin-setting" (click)="closeModal = false">Настройки</button>

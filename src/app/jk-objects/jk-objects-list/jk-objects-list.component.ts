@@ -43,7 +43,6 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         this.objectService.getSnippets()
             .subscribe((data) => {
                 this.snippets = data;
-                console.log('OBJECT', data);
                 this.getDistricts();
             });
     }
@@ -51,12 +50,8 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     public getObjects(params) {
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false});
         this.objectService.getSnippetsByParams(params).subscribe(
-            (data) => {
-                this.snippets = data;
-            },
-            (err) => {
-                console.log(err);
-            }
+            (data) => this.snippets = data,
+            (err) => console.log(err)
         );
     }
 

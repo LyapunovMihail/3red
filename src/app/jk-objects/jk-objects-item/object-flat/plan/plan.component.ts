@@ -25,6 +25,7 @@ export class PlanComponent implements OnInit {
     public genplanPlacement = placement;
     public tempHouse = mockHouse;
 
+    public selectNavPoint = '';
     public snippet: IObjectFlatSnippet;
     public switchOn = false;
 

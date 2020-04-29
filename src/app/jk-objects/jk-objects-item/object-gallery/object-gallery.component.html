@@ -9,7 +9,7 @@
 
         <ng-container *ngIf="switchOn">
 
-            <h2 *ngIf="!isAuthorizated">Галерея</h2>
+            <h2 class="object-gallery__title" *ngIf="!isAuthorizated">Галерея</h2>
 
             <div class="object-gallery__options" *ngIf="isAuthorizated">
                 <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
@@ -29,8 +29,8 @@
 
             <div class="object-gallery__slider">
 
-                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
-                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
+                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
+                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
 
                 <div class="object-gallery__slider-dots" *ngIf="contentSnippet?.image_data?.length > 1">
                     <span *ngFor="let dots of contentSnippet.image_data; let i = index"
@@ -44,7 +44,7 @@
                         <div class="gallery-slide__image">
                             <img [src]="uploadsPath + slide.image" alt="slide">
                         </div>
-                        <div class="gallery-slide__timeline" *ngIf="!isAuthorizated && contentSnippet?.image_data.length > 1"></div>
+                        <div class="gallery-slide__timeline" *ngIf="!isAuthorizated && contentSnippet?.image_data.length > 1 && showTimeline"></div>
 
                         <div class="gallery-slide__content">
                             <h3 class="gallery-slide__content-title">{{slide.title}}</h3>

@@ -7,7 +7,7 @@
 
         <app-object-item-trigger [objectId]="objectId" [mod]="jk.mod" *ngIf="!isAuthorizated"></app-object-item-trigger>
 
-        <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
+        <!-- <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage> -->
 
         <app-object-item-project [isAuthorizated]="isAuthorizated" [objectId]="objectId" [objectName]="jk.name" id="project"></app-object-item-project>
 
@@ -27,7 +27,7 @@
 
         <app-object-item-members [isAuthorizated]="isAuthorizated" [objectId]="objectId"></app-object-item-members>
 
-        <app-object-item-projects *ngIf="!isAuthorizated"></app-object-item-projects>
+        <app-object-item-projects [objectId]="objectId" *ngIf="!isAuthorizated"></app-object-item-projects>
 
         <div class="utilities" *ngIf="isAuthorizated">
             <div class="utilities__item">
