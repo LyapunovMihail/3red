@@ -41,8 +41,8 @@ export class ObjectProjectsComponent implements OnInit {
     ngOnInit() {
         this.objectService.getSnippets()
             .subscribe((data) => {
-                this.getFlatsMinPrice(data.filter(item => item._id !== this.objectId));
-                this.snippets = data.filter(item => item._id !== this.objectId);
+                this.getFlatsMinPrice(data.filter(item => item._id !== this.objectId && item.publish));
+                this.snippets = data.filter(item => item._id !== this.objectId && item.publish);
             });
     }
 
@@ -73,7 +73,7 @@ export class ObjectProjectsComponent implements OnInit {
 
         this.objects[i] = {
             status: obj.status,
-            minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : false
+            minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : obj.status === 'Готовые' ? 'Полностью распродан!' : false
         };
     }
 }
