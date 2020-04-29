@@ -32,7 +32,7 @@
                                 <img [src]="uploadsPath + snippet.image" alt="news-image">
                             </div>
                             <p class="slider-list__title">{{snippet.name}}</p>
-                            <p *ngIf="readyBuildPrice" class="slider-list__info">{{objects[i].minPrice ? 'Квартиры от ' + objects[i].minPrice + ' млн. руб' : snippet.status}}</p>
+                            <p *ngIf="objects[i]" class="slider-list__info">{{objects[i].minPrice ? 'Квартиры от ' + objects[i].minPrice + ' млн. руб' : snippet.status}}</p>
                         </a>
                     </div>
                 </ng-container>
