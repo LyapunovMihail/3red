@@ -5,7 +5,7 @@ import { OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-
 import { SearchService } from '../../../flats/search/search.service';
 
 export interface IObjectSnippet {
-    status: String;
+    status: string;
     minPrice: any;
 }
 
@@ -28,29 +28,22 @@ export class ObjectProjectsComponent implements OnInit {
     public mockProject = project;
     public currentSlide = 0;
     public uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
-    
+
     public objects: IObjectSnippet[] = [];
     public snippets;
     public flats;
-    public readyBuildPrice = false;
 
     constructor(
         public objectService: JkObjectsListService,
         public searchService: SearchService
-    ) {
-        this.objectService.getSnippets()
-            .subscribe((data) => {
-                this.getFlatsMinPrice(data.filter(item => item._id !== this.objectId));
-                this.snippets = data.filter(item => item._id !== this.objectId);
-            });
-    }
+    ) { }
 
     ngOnInit() {
-        // this.objectService.getSnippets()
-        //     .subscribe((data) => {
-        //         this.snippets = data;
-        //         this.getFlatsMinPrice(this.snippets);
-        //     });
+        this.objectService.getSnippets()
+            .subscribe((data) => {
+                this.getFlatsMinPrice(data.filter(item => item._id !== this.objectId && item.publish));
+                this.snippets = data.filter(item => item._id !== this.objectId && item.publish);
+            });
     }
 
     public nextBtn() {
@@ -80,10 +73,7 @@ export class ObjectProjectsComponent implements OnInit {
 
         this.objects[i] = {
             status: obj.status,
-            minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : false
+            minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : obj.status === 'Готовые' ? 'Полностью распродан!' : false
         };
-
-        this.readyBuildPrice = (i + 1) === last ? true : false;
-        console.log('OBJEECT', this.objects[i]);
     }
 }

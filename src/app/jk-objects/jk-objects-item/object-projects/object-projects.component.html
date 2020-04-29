@@ -10,7 +10,7 @@
 
         <div class="object-project__slider">
 
-            <button class="object-project__slider-all btn-empty">Все проекты</button>
+            <a routerLink="/objects/list" class="object-project__slider-all btn-empty">Все проекты</a>
             <button (click)="prevBtn()" *ngIf="currentSlide > 0"
                 class="object-project__slider-btn object-project__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
                 <span></span>
@@ -32,7 +32,12 @@
                                 <img [src]="uploadsPath + snippet.image" alt="news-image">
                             </div>
                             <p class="slider-list__title">{{snippet.name}}</p>
-                            <p *ngIf="readyBuildPrice" class="slider-list__info">{{objects[i].minPrice ? 'Квартиры от ' + objects[i].minPrice + ' млн. руб' : snippet.status}}</p>
+                            <p *ngIf="objects[i]" class="slider-list__info">
+                                {{objects[i].minPrice && objects[i].minPrice !== 'Полностью распродан!' ? 
+                                  'Квартиры от ' + objects[i].minPrice + ' млн. руб' :
+                                  objects[i].minPrice === 'Полностью распродан!' ? objects[i].minPrice : 
+                                  snippet.status}}
+                            </p>
                         </a>
                     </div>
                 </ng-container>
