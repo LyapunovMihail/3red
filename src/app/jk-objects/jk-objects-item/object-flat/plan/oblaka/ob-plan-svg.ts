@@ -1,6 +1,13 @@
 export interface IPlanSvgItem {
     houseNumber: string;
     svgPath: string;
+    freeFlats: number;
+    rooms: IRoomsMinPrices[];
+}
+
+export interface IRoomsMinPrices {
+    name: number;
+    minPrice: number;
 }
 
 export const PLAN_SVG = [
@@ -28,7 +35,26 @@ export const PLAN_SVG = [
             l-2.5,1.8l-3.2-0.2l-3.2-0.5v-1.5l-3.8,0.2v-1.2l1.8-2.8l3.5-1.2h3.5l0.2-3.8l-2-4.8l-3,1.5l-0.8,3l-1.5-1.5l-3.5-1l-2.2,1l-3-3
             l-5.5-0.8l-2.2,0.5v3l-2.2,3.2v2.5l-5,0.5l-2.2,1.5v3l3.5,2.2l-1,3.8v4.8l-2.5,3.2h-4h-2V867l-4.2-1.5l-4.5-1.5l-5.8,1.8l-2.8,1.2
             l2.2,2.8l-2.2,4.8h-2.2v-3l-3.5,0.2l-3,2.8v5.2l-1.8,1.8l1.8,3.8v2.8h-4l-2.2-1.8v3.8l1.8,2.5l1,4.8l-1.2,2.8l1.2,1.8l-0.2,1.2
-            l-23.2,6.2v-4.8l-2.5-3.2`
+            l-23.2,6.2v-4.8l-2.5-3.2`,
+        freeFlats: 0,
+        rooms: [
+            {
+                name: 0,
+                minPrice: 0
+            }, {
+                name: 1,
+                minPrice: 0
+            }, {
+                name: 2,
+                minPrice: 0
+            }, {
+                name: 3,
+                minPrice: 0
+            }, // {
+            //     name: 4,
+            //     minPrice: 0
+            // }
+        ]
     }, {
         houseNumber: '2',
         svgPath: `M1775.5,558.8l-6.5,1.2l-41-13.2l-77,19.8l-1.5,27l-8.8,2l-0.5-9l-67.8-23.5h-1.3l0.2-22
@@ -52,6 +78,25 @@ export const PLAN_SVG = [
             l1.5,1.5l1.8,3.5l3.5-1l0.8-2.2l-3.8-3l-1.2-2.5l2.2-2.5l1.5-2.8l3.5,0.8l-2,2.8l1.2,1.2l3.2,7l3.8-0.8l-3.2-5.2l2.8-2l1.2-1.2
             l-2.5-2.5l1.8-3.5v-3l5.5-0.5l1.2,1.8l1.8-2l3.8-1.2l2.5-0.2l2.5,1.5l1.5,4.2l4.2-0.5l-0.5,3.5l2.8,1.5l-0.2,5.2h2l0.8,3.8l2.2,2.8
             l1.5,5.2l4.5,1.2l0.8-2.8l-1.8-1.8h3.5l2,4.5l1-2.5l1.2-2.2l2-0.2v3l-2,2.8l-1.2,3.2l2,3.5l1.5,6l1.8,4l-2.2,3.5l-6.2-1.8l-3-1.8
-            l1.2,2.5l3,2.5l0.5,3l7-1.8l1.2-1.2l0.2-3l2.5-2.5l2.8-1.2l26.5-408.2L1775.5,558.8z`
+            l1.2,2.5l3,2.5l0.5,3l7-1.8l1.2-1.2l0.2-3l2.5-2.5l2.8-1.2l26.5-408.2L1775.5,558.8z`,
+        freeFlats: 0,
+        rooms: [
+            {
+                name: 0,
+                minPrice: 0
+            }, {
+                name: 1,
+                minPrice: 0
+            }, {
+                name: 2,
+                minPrice: 0
+            }, {
+                name: 3,
+                minPrice: 0
+            }, // {
+            //     name: 4,
+            //     minPrice: 0
+            // }
+        ]
     }
 ];

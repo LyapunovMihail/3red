@@ -13,17 +13,17 @@ export const project = [
         title: 'Дом на Барвихинской',
         image: '/assets/img/p3.jpg',
         info: 'Полностью распродан!',
-        url: 'barvihadom.ru'
+        url: 'https://barvihadom.ru'
     }, {
         title: 'Новотомилино',
         image: '/assets/img/p4.png',
         info: 'Полностью распродан!',
-        url: 'novotomilino'
+        url: 'https://novotomilino.ru'
     }, {
         title: 'Новокрасково',
         image: '/assets/img/p5.png',
         info: 'Полностью распродан!',
-        url: 'novokraskovo.ru'
+        url: 'https://novokraskovo.ru'
     },
     // {
     //     title: 'Видный берег 2',

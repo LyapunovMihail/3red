@@ -1,5 +1,6 @@
 $color: #ffffff;
 $color2: #83d6f4;
+@import "../../../../../../styles/modules/mixins/mixin";
 
 @mixin font-smoothing {
     -webkit-font-smoothing: antialiased;
@@ -188,4 +189,25 @@ $color2: #83d6f4;
         left: 50%;
         transform: translate(-50%, -50%)
     }
+}
+
+.object-flat__house-tooltip_house-1 {
+    top: 110%;
+    left: -61%;
+}
+
+.object-flat__house-tooltip_house-2 {
+    top: 110%;
+    left: -61%;
+}
+
+.object-flat__house-wrap_house-2 {
+    top: 50%;
+    left: 62%;
+}
+
+.object-flat__house-wrap_house-1 {
+    top: 30%;
+    left: 39%;
+
 }
