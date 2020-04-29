@@ -50,7 +50,7 @@
 
     <div class="object-flat__house">
         <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of housesPlanSvg">
-            <a class="object-flat__house-item" [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber"  [queryParams]="{'houses' : house.houseNumber}">
+            <a class="object-flat__house-item" [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}">
                 <span>№{{house.houseNumber}}</span>
                 <span>{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</span>
             </a>
