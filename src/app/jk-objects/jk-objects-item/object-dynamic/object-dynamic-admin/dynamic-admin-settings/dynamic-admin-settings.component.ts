@@ -63,7 +63,7 @@ export class DynamicAdminSettingsComponent implements OnInit {
     private setFormFromSnippet() {
         let dynamicTabs;
         if (this.snippet.dynamic && this.snippet.dynamic.length) {
-            dynamicTabs = this.formBuilder.array(this.snippet.dynamic.map((tab) => this.formBuilder.group({name: tab.name, show: tab.show})));
+            dynamicTabs = this.formBuilder.array(this.snippet.dynamic.map((tab) => this.formBuilder.group({name: tab.name, description: tab.description, show: tab.show})));
         } else {
             dynamicTabs = this.setPrimaryTabs();
         }

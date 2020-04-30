@@ -44,7 +44,7 @@
                     </div>
 
                     <label class="dynamic-content__btn dynamic-content__btn_upload-image btn-admin">Загрузить фото
-                        <input style="display: none;" type="file" accept=".jpg" (change)="imageUpload($event, i)">
+                        <input style="display: none;" type="file" accept=".jpg" multiple (change)="imageUpload($event, i)">
                     </label>
 
                     <ul class="dynamic-content__image" *ngIf="object.get('images')['controls'].length">

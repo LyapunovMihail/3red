@@ -25,7 +25,7 @@ export class NewsModel {
 
     // новости жилищного комплекса
     async getObjectSnippet(objectId) {
-        return await this.collection.find({ objectId }).toArray();
+        return await this.collection.find({ objectId }).sort({ created_at: -1 }).toArray();
     }
 
     // создание новости

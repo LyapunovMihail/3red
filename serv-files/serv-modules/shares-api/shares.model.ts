@@ -36,7 +36,7 @@ export class SharesModel {
 
     public async getShareById(id) {
         if ( (ObjectId.isValid(id)) ) {
-            return await this.collection.find({ _id: ObjectId(id) }).toArray();
+            return await this.collection.find({ _id: ObjectId(id) }).sort({ created_at: -1 }).toArray();
         } else {
             return [];
         }

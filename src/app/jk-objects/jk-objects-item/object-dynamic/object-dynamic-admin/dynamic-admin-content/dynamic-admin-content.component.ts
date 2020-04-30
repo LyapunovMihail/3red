@@ -126,18 +126,25 @@ export class DynamicAdminContentComponent implements OnInit {
             }
         );
 
-        this.dynamicService.imageUpload(e)
-            .then( (data: any) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                this.addImage(data, i);
-            })
-            .catch((err) => {
-                this.isLoad = false;
-                this.imageUploadEvent.unsubscribe();
-                alert('Что-то пошло не так!');
-                console.error(err);
-            });
+        const fileList: FileList = e.target.files;
+
+        let chain = Promise.resolve();
+
+        for (let j = 0; j < fileList.length; j++) {
+            chain = chain
+                .then(() => this.dynamicService.imageUpload(fileList[j]))
+                .then((data: any) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                    this.addImage(data, i);
+                })
+                .catch((err) => {
+                    this.isLoad = false;
+                    this.imageUploadEvent.unsubscribe();
+                    alert('Что-то пошло не так!');
+                    console.error(err);
+                });
+        }
     }
 
     public changeReady(i, value) {

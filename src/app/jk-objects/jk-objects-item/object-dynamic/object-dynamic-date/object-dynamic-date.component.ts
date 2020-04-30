@@ -14,6 +14,7 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
     @Input() month: number;
     @Input() year: number;
     @Input() objectId: number;
+    @Input() description: number;
 
     @Output() monthChange: EventEmitter<number> = new EventEmitter();
     @Output() yearChange: EventEmitter<number> = new EventEmitter();
