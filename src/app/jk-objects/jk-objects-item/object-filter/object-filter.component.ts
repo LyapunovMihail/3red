@@ -48,6 +48,18 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
         return this.service.getFlatsDataByObjectId(this.objectId);
     }
 
+    public parseText(num) {
+
+        num = Math.abs(num) % 100;
+        const words = ['предложение', 'предложения', 'предложений'];
+        const sum = num % 10;
+
+        if (num > 10 && num < 20) { return words [2]; }
+        if (sum > 1 && sum < 5) { return words[1]; }
+        if (sum === 1) { return words[0]; }
+        return words[2];
+    }
+
     public formBuild() {
         const roomArr = [false, false, false, false];
 

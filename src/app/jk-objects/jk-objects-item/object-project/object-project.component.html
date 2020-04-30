@@ -51,6 +51,13 @@
                         <p class="project-indicators__key">{{item.text}}</p>
                         <p class="project-indicators__value">{{item.value}}</p>
                     </div>
+
+                    <ng-container *ngIf="snippet.createdIndicators && snippet.createdIndicators.length > 0">
+                        <div class="indicators__grid-item" *ngFor="let createdItem of snippet.createdIndicators">
+                            <div class="project-indicators__key">{{createdItem.name}}</div>
+                            <div class="project-indicators__value">{{createdItem.value}}</div>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
 

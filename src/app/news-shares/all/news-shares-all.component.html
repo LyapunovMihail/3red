@@ -5,13 +5,13 @@
         <button class="btn-admin-2 btn-admin-2--settings" (click)="createNewsSnippet()" *ngIf="isAuthorizated">Добавить новость</button>
         <button class="btn-admin-2 btn-admin-2--settings" (click)="createSharesSnippet()" *ngIf="isAuthorizated">Добавить акцию</button>
 
-        <div class="tabs__wrap">
-            <ul class="tabs">
-                <li><a routerLink="/news-shares/all" [routerLinkActive]="['tab--active']" class="tab">Все</a></li>
-                <li><a routerLink="/news-shares/news" [routerLinkActive]="['tab--active']" class="tab">Новости</a></li>
-                <li><a routerLink="/news-shares/shares" [routerLinkActive]="['tab--active']" class="tab">Акции</a></li>
+        <nav class="news__nav">
+            <ul class="news__nav-list">
+                <li routerLink="/news-shares/all" [routerLinkActive]="['active']" class="news__nav-item">Все</li>
+                <li routerLink="/news-shares/news" [routerLinkActive]="['active']" class="news__nav-item">Новости</li>
+                <li routerLink="/news-shares/shares" [routerLinkActive]="['active']" class="news__nav-item">Акции</li>
             </ul>
-        </div>
+        </nav>
 
         <app-news-shares-all-items
             [isAuthorizated]="isAuthorizated"
