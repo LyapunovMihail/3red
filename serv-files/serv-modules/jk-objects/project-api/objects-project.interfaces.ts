@@ -9,6 +9,7 @@ export interface IObjectProjectSnippet {
     socials?: IObjectProjectSocialsUrls;
     description?: string;
     indicators?: IObjectProjectIndicator[];
+    createdIndicators?: IObjectProjectCreatedIndicator[];
     created_at: any;
     last_modifyed: any;
 }
@@ -22,4 +23,8 @@ export interface IObjectProjectSocialsUrls {
 export interface IObjectProjectIndicator {
     value: string;
     text: string;
+}
+export interface IObjectProjectCreatedIndicator {
+    name: string;
+    value: string;
 }

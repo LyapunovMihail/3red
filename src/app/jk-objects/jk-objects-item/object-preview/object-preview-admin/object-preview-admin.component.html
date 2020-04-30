@@ -75,28 +75,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="indicators__info indicators__info--created">
-                <div class="form">
-                    <div class="form__wrap">
-                        <ng-container formArrayName="createdIndicators" *ngFor="let indicator of form.controls['createdIndicators']['controls']; let j = index">
-                            <div class="form-item form-item--flex" formGroupName="{{j}}">
-                                <div class="form-item form-item--wrap">
-                                    <input maxlength="25" type="text" class="form-input info-input" appSlideTopLabel formControlName="name">
-                                    <label class="form-label info-suptitle">Название показателя</label>
-                                </div>
-                                <div class="form-item form-item--wrap">
-                                    <input maxlength="25" type="text" class="form-input info-input" appSlideTopLabel formControlName="value">
-                                    <label class="form-label info-suptitle">Значение показателя</label>
-                                </div>
-                                <button class="preview-delete btn-empty" (click)="deleteCreatedIndicators(j)">Удалить</button>
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
         </div>
-        <button class="btn snippet__btn" (click)="pushNewIndicator()">Добавить показатель</button>
     </form>
 
 </app-admin-modal>
