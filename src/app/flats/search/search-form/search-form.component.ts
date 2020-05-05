@@ -103,7 +103,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             housesMods: [
                 ((housesMods) => {
                     if (housesMods) {
-                        return housesMods.split('nzt;').map((item) => JSON.parse(item)); // для квартир объектов надо отдавать housesMods ( один дом ), или пустую строку '';
+                        return housesMods.split('nzt;').map((item) => JSON.parse(item));
                     }
                     return [];
                 })(params.housesMods)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON

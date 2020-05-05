@@ -1,20 +1,21 @@
-<main class="main">
+<main class="main" *ngIf="newsLoaded">
 
-    <app-home-preview *ngIf="newsLoaded"
-        [newsSnippets]="mainNews"
-        [shareSnippets]="mainShares">
+    <app-home-preview
+        [newsSnippet]="newsSnippets[0]"
+        [isAuthorizated]="isAuthorizated">
     </app-home-preview>
 
-    <app-home-trigger></app-home-trigger>
+    <app-home-item-filter>
+    </app-home-item-filter>
 
-    <app-home-description></app-home-description>
+    <app-jk-objects-list
+        [isMainPage]="true">
+    </app-jk-objects-list>
 
-    <app-home-places></app-home-places>
-
-    <app-home-news *ngIf="newsLoaded"
-        [newsSnippets]="newsSnippets"
-        [shareSnippets]="shareSnippets"
-        [allSnippets]="allSnippets">
+    <app-home-news>
     </app-home-news>
 
+    <app-home-info
+        [isAuthorizated]="isAuthorizated">
+    </app-home-info>
 </main>

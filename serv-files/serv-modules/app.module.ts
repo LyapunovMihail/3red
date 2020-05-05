@@ -14,6 +14,7 @@ import { SharesController } from './shares-api/shares.controller';
 import { TriggerController } from './trigger-api/trigger.controller';
 import { GalleryController } from './gallery-api/gallery.controller';
 import { objectControllers } from './jk-objects/object-controllers';
+import { homeControllers } from './home/home-controllers';
 
 @Module({
     imports: [],
@@ -31,7 +32,8 @@ import { objectControllers } from './jk-objects/object-controllers';
         GalleryController,
         ContactsController,
 
-        ...objectControllers
+        ...objectControllers,
+        ...homeControllers
     ],
     providers: [
         MongoConnectionService,

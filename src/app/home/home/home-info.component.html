@@ -1,0 +1,45 @@
+<section class="info">
+    <div class="info-container">
+        <div class="info-wrap">
+            <img src="/assets/img/home/parallax/parallax-block1.png" alt="image" class="info-img info-img1"
+                 [ngStyle]="{ 'transform' : img2.getBoundingClientRect().top < 200 ? ('translateY(' + -img2.getBoundingClientRect().top * 25/100 + 'px)') : img.style.transform }" #img>
+            <img src="/assets/img/home/parallax/parallax-block2.png" alt="image" class="info-img2" #img2>
+            <img src="/assets/img/home/parallax/parallax-block3.png" alt="image" class="info-img3"
+                 [ngStyle]="{ 'transform' : img2.getBoundingClientRect().top < 200 ? ('translateY(' + img2.getBoundingClientRect().top * 15/100 + 'px)') : img3.style.transform }" #img3>
+        </div>
+        <div class="info__wrapper">
+            <div class="info__content">
+                <a class="btn" (click)="closeModal = false" *ngIf="isAuthorizated">Контент</a>
+                <ng-container *ngIf="snippet">
+                    <p class="info__main-text">{{snippet.title}}</p>
+                    <p class="info__text">{{snippet.text}}</p>
+                </ng-container>
+            </div>
+            <div class="info__links">
+                <ul>
+                    <li>
+                        <a href="#" class="info__link">Вакансии</a>
+                    </li>
+                    <li>
+                        <a href="#" class="info__link">Контакты</a>
+                    </li>
+                    <li>
+                        <a href="#" class="info__link">Команда</a>
+                    </li>
+                    <li>
+                        <a href="#" class="info__link">Наши функции</a>
+                    </li>
+                    <li>
+                        <a href="#" class="info__link">Этапы реализации проекта</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<app-home-info-admin *ngIf="!closeModal"
+    (closeModal)="closeModal = $event"
+    [(snippet)]="snippet">
+</app-home-info-admin>

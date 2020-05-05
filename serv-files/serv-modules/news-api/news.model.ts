@@ -20,7 +20,7 @@ export class NewsModel {
 
     // новость для главной страницы
     async getMainSnippet() {
-        return await this.collection.find({ show_on_main: true }).toArray();
+        return await this.collection.find({ show_on_main: true }).sort({ created_at: -1 }).toArray();
     }
 
     // новости жилищного комплекса

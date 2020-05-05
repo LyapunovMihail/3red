@@ -1,0 +1,74 @@
+.preview__info {
+    background:  #efefef;
+    padding: 20px 24px 32px;
+    margin-bottom: 50px;
+}
+.info-title {
+    margin-bottom:46px;
+    font-size: 24px;
+}
+
+.form-item {
+    display: block;
+    position: relative;
+    margin-top: 40px;
+}
+
+.form-label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    transition: .3s;
+}
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: #000;
+    opacity: .5;
+}
+
+.snippet__checkbox {
+    display: none;
+}
+.snippet__label{
+    position: relative;
+    font-size: 18px;
+    padding-left: 32px;
+    margin: 24px 0 5px;
+    display: inline-block;
+    &::before {
+        content:"";
+        width: 24px;
+        height: 24px;
+        border: 1px solid #898989;
+        background: transparent;
+        position: absolute;
+        left: 0;
+        top: -25%;
+    }
+}
+
+.snippet__checkbox:checked + .snippet__label:before {
+    background: url(/assets/img/jk-object/admin-modal/check.svg) no-repeat center/ cover;
+    background-size: 80%;
+
+    border-color: #ee4237;
+
+}

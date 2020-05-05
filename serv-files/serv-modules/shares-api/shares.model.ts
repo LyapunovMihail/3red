@@ -43,7 +43,7 @@ export class SharesModel {
     }
 
     public async getMainSnippet() {
-        return await this.collection.find({ show_on_main: true }).toArray();
+        return await this.collection.find({ show_on_main: true }).sort({ created_at: -1 }).toArray();
     }
 
     public async getObjectSnippet(objectId) {

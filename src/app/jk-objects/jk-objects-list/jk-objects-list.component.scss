@@ -48,6 +48,10 @@
     margin: auto;
     padding: 173px 88px 0;
     box-sizing: border-box;
+
+    &--main {
+        padding-top: 0px;
+    }
 }
 .objects-inner {
     width: 1280px;
@@ -77,6 +81,11 @@
 
 .objects__title {
     font: 500 48px $font-formular;
+
+    &__main {
+        font-size: 36px;
+        line-height: 1.25;
+    }
 }
 
 .objects__title-wrap {
@@ -122,6 +131,16 @@
     cursor: pointer;
     transition: .3s;
 }
+
+.objects__link {
+    color: #ee4237;
+    font-size: 18px;
+    &::after {
+        content: url(/assets/img/home/right-arrow.svg);
+        margin-left: 11px;
+    }
+}
+
 .switch:checked + .objects__title-label::before {
     right:-51px;
     background:  #fff;

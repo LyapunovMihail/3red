@@ -1,15 +1,17 @@
 <section class="objects">
-    <div class="objects-container">
+    <div class="objects-container" [class.objects-container--main]="isMainPage">
         <div class="objects-wrap">
             <div class="objects__title-wrap">
-                <h2 class="objects__title">Объекты</h2>
-                <div class="objects__title-wrapper" *ngIf="!isAuthorizated">
+                <h2 [ngClass]="{'objects__title': !isMainPage, 'objects__title__main' : isMainPage}">Объекты</h2>
+                <div class="objects__title-wrapper" *ngIf="!isAuthorizated || isMainPage">
                     <input type="checkbox" name="switch" id="map1" class="switch" (change)="showMap = !showMap"
                         [checked]="showMap">
                     <label for="map1" class="objects__title-label">На карте</label>
                 </div>
-                <button class="objects__add-button" (click)="createSnippet()" *ngIf="isAuthorizated">Добавить новый ЖК</button>
+                <button class="objects__add-button" (click)="createSnippet()" *ngIf="isAuthorizated && !isMainPage">Добавить новый ЖК</button>
             </div>
+
+            <a routerLink="/objects/list" class="objects__link" *ngIf="isMainPage">Все объекты</a>
         </div>
 
         <app-jk-objects-form *ngIf="isLoaded"

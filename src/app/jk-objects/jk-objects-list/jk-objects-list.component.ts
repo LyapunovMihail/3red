@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { JkObjectsListService } from './jk-objects-list.service';
 import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
@@ -15,6 +15,9 @@ import { JkObjectsNumberPipe } from './jk-objects-number.pipe';
     ]
 })
 export class JkObjectsListComponent implements OnInit, OnDestroy {
+
+    @Input()
+    isMainPage = false;
 
     public showMap = false;
     public snippets: IObjectSnippet[];
@@ -48,7 +51,9 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     }
 
     public getObjects(params) {
-        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false});
+        if (!this.isMainPage) {
+            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false, skipLocationChange: true});
+        }
         this.objectService.getSnippetsByParams(params).subscribe(
             (data) => this.snippets = data,
             (err) => console.log(err)

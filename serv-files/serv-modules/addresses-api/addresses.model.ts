@@ -27,7 +27,7 @@ export class AddressesModel {
     //     return await this.collection.find(data.request, data.parameters).toArray();
     // }
 
-    public async getObjectFlats(query) {
+    public async getObjectsFlats(query) {
         if (query.mod && query.mod.split(',').length === 1) {
             const jk = await this.objectCollection.findOne({mod: query.mod});
             const flatSnippet = await this.flatCollection.findOne({ objectId: jk._id.toString() });
@@ -95,7 +95,7 @@ export class AddressesModel {
         };
     }
 
-    public async getCommonFlats(query) {    // Создаём спсисок табов жилищных комплексов, список домов жк и соответствующих им квартир с названиями жк и мин-макс параметры для формы фильтрации
+    public async getCommonFlats(query) { // Создаём спсисок табов жилищных комплексов, список домов жк и соответствующих им квартир с названиями жк и мин-макс параметры для формы фильтрации
         let data = this.parseRequest(query.params);
 
         const modsBtnList = query.modsBtnList; // утсанавливаем список табов жилищных комплексов
@@ -132,7 +132,8 @@ export class AddressesModel {
                 return item.value;
             }
         });
-        const findByMod = query.mod ? {mod : query.mod} : mods.length ? { mod : { $in : mods } } : {};
+
+        const findByMod = query.mod ? { mod : { $in: query.mod.split(',') } } : mods.length ? { mod : { $in : mods } } : {};
         const flatsOfMod = await this.collection.find(findByMod).toArray();
         const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
         const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
@@ -156,7 +157,7 @@ export class AddressesModel {
     private async setHousesBtns(mod, flatsOfMod, modsBtnList) { // Устанавливаем спсиок домов жилищных комплексов
         const housesBtnList = [];
         housesBtnList.push({ name: 'Все дома', value: 'all' }); // Добавляем название жк в массив
-        if (mod) {
+        if (mod && mod.split(',').length === 1) {
             const jk = modsBtnList.find((item) => item.value === mod);
             housesBtnList.push({jk : jk.name});
 

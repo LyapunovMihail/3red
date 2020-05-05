@@ -1,0 +1,20 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
+
+    <div class="preview__info">
+        <h2 class="info-title">Текстовый блок</h2>
+        <form class="form" [formGroup]="form">
+            <div class="form-item">
+                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="title">
+                <label class="form-label info-suptitle">Заголовок</label>
+            </div>
+            <div class="form-item">
+                <textarea type="text" class="form-input info-input" id="text" rows="1" appSlideTopLabel appAutoResizeTextarea formControlName="text"></textarea>
+                <label class="form-label info-suptitle">Текст</label>
+            </div>
+
+            <!--<input class="snippet__checkbox" type="checkbox" name="snippet" id="show" formControlName="showNews">-->
+            <!--<label class="snippet__label" for="show">Показывать превью новостей</label>-->
+        </form>
+    </div>
+
+</app-admin-modal>

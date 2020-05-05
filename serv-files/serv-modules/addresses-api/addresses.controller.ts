@@ -19,7 +19,7 @@ export class AddressesController extends AddressesModel {
 
     public routing() {
         this.router.post('/search/object', responseHandler(async(req) => {
-            return await this.getObjectFlats(req.body.search);
+            return await this.getObjectsFlats(req.body.search);
         }));
         this.router.get('/search/object-data/:objectId', responseHandler(async(req) => {
             return await this.getObjectFlatsData(req.params.objectId);

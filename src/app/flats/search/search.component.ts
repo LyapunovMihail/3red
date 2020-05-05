@@ -109,7 +109,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
         if (this.params && this.params.mod !== params.mod) {
             delete params.housesMods;
-            console.log('check');
             this.getData(params, false); // При смене таба подгружаем конфиг с параметрами
             this.params = params;
             return;
