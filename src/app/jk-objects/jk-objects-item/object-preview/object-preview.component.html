@@ -28,13 +28,6 @@
                 <div class="indicators__value">{{item.value}}</div>
                 <div class="indicators__key">{{item.text}}</div>
             </div>
-
-            <ng-container *ngIf="snippet.createdIndicators && snippet.createdIndicators.length > 0">
-                <div class="indicators__item" *ngFor="let createdItem of snippet.createdIndicators">
-                    <div class="indicators__value">{{createdItem.value}}</div>
-                    <div class="indicators__key">{{createdItem.name}}</div>
-                </div>
-            </ng-container>
         </div>
 
         <a *ngIf="!isAuthorizated" class="object-preview__change-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'">Выбрать квартиру</a>

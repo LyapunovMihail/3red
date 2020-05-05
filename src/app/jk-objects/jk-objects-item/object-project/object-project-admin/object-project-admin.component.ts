@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ObjectProjectAdminService } from './object-project-admin.service';
 import { IObjectProjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/project-api/objects-project.interfaces';
 import { INDICATORS } from '../../object-preview/object-preview-admin/indicators';
@@ -52,7 +52,8 @@ export class ObjectProjectAdminComponent implements OnInit {
             }),
             description: '',
             indicators: this.formBuilder.array(
-                this.indicators.map((item) => this.formBuilder.group({[item] : ''})))
+                this.indicators.map((item) => this.formBuilder.group({[item] : ''}))),
+            createdIndicators: this.formBuilder.array([])
         });
     }
 
@@ -72,8 +73,20 @@ export class ObjectProjectAdminComponent implements OnInit {
                 this.indicators.map((item) => {
                     const foundItem = this.snippet.indicators.find((indic) => indic.text === item);
                     return this.formBuilder.group({[item]: (foundItem ? foundItem.value : '')}); // ключи на русском языке
-                }))
+                })),
+            createdIndicators: this.formBuilder.array(
+                this.snippet.createdIndicators ?
+                    this.snippet.createdIndicators.map( item => this.formBuilder.group({ name: item.name, value: item.value }) ) : []
+            )
         });
+    }
+
+    public pushNewIndicator() {
+        (this.form.controls.createdIndicators as FormArray).push(this.formBuilder.group({name: '', value: ''}));
+    }
+
+    public deleteCreatedIndicators(i) {
+        (this.form.controls.createdIndicators as FormArray).removeAt(i);
     }
 
     public save() {

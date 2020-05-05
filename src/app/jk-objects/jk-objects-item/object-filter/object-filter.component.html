@@ -34,7 +34,7 @@
         <a class="object-filter__btn-link btn_var-3"
            [class.object-filter__btn-link--disabled]="!flatsLength"
            [routerLink]="'/objects/list/' + objectId + '/flats'" [queryParams]="params">
-            {{ flatsLength ? flatsLength + ' предложение' : 'Нет предложений'}}
+            {{ flatsLength ? flatsLength + ' ' + parseText(flatsLength) : 'Нет предложений'}}
         </a>
     </div>
 </section>

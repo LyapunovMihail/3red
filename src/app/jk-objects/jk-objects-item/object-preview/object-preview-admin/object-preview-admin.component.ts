@@ -61,8 +61,7 @@ export class ObjectPreviewAdminComponent implements OnInit {
             deadlines: this.formBuilder.array(
                 []),
             indicators: this.formBuilder.array(
-                this.indicators.map((item) => this.formBuilder.group({[item] : ''}))),
-            createdIndicators: this.formBuilder.array([])
+                this.indicators.map((item) => this.formBuilder.group({[item] : ''})))
         });
     }
 
@@ -84,15 +83,7 @@ export class ObjectPreviewAdminComponent implements OnInit {
                 this.indicators.map((item) => {
                     const foundItem = this.snippet.indicators.find((indic) => indic.text === item);
                     return this.formBuilder.group({[item]: (foundItem ? foundItem.value : '')}); // ключи на русском языке
-                })),
-            createdIndicators: this.formBuilder.array(
-                this.snippet.createdIndicators.map( item => {
-                    return this.formBuilder.group({
-                        name: item.name,
-                        value: item.value
-                    });
-                })
-            )
+                }))
         });
         this.loadedImage = this.snippet.mainInfo.thumbnail;
     }
