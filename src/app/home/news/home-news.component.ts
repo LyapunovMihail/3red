@@ -22,6 +22,8 @@ export class HomeNewsComponent implements OnInit, OnChanges {
 
     @Input()
     public isAuthorizated = false;
+    @Input()
+    public pageName: string;
 
     public currentSnippets = [];
 

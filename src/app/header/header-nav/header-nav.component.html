@@ -3,19 +3,19 @@
             'project__nav-fixed' : isFixed,
             'project__nav-fixed--side' : isSided}">
     <div class="project__nav-container">
-        <ul class="project__nav-bar" #list>
+        <ul class="project__nav-bar">
             <li *ngFor="let anchor of anchors" id="a-{{anchor.url}}">
-                <a  *ngIf="anchor.blockOffsetTop"
-                    [routerLink]="router.url" [fragment]="anchor.url"
-                    [skipLocationChange]="true" class="project__nav-link" 
+                <a *ngIf="anchor.blockOffsetTop || anchor.name === 'О компании'"
+                    href="javascript:void(0)"
+                    (click)="scrollLink(anchor.url)"
+                    class="project__nav-link"
                     [class.active-link]="anchor.url === activeAnchor.url">
                         {{anchor.name}}
                 </a>
             </li>
         </ul>
-
         <a *ngIf="pageName === 'objects'" class="photo__btn" [routerLink]="'/objects/list/' + headerService.objectId +  '/dynamic/' + year + '/' + month">Фотоотчет</a>
         <div class="project__nav-progress"
-            [ngStyle]="{'max-width' : list.style.width, 'width' : progressWidth}"></div>
+            [ngStyle]="{'width' : progressWidth}"></div>
     </div>
 </div>

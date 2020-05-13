@@ -1,13 +1,13 @@
 import { Uploader } from 'angular2-http-file-upload';
-import { ObjectDocumentationAdminUpload } from './object-documentation-admin.upload';
+import { AboutDocumentationAdminUpload } from './about-documentation-admin.upload';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { adminHeaders } from '../../../commons/admin-headers.utilit';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, forwardRef, Inject } from '@angular/core';
-import { IObjectDocSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
+import { IDocSnippet } from '../../../../../serv-files/serv-modules/about/documentation-api/about-documentation.interfaces';
 
 @Injectable()
-export class ObjectDocumentationAdminService {
+export class AboutDocumentationAdminService {
 
     public subject = new BehaviorSubject<number>(0);
 
@@ -16,12 +16,12 @@ export class ObjectDocumentationAdminService {
         @Inject(forwardRef(() => Uploader)) private uploaderService: Uploader
     ) { }
 
-    public getSnippet(): Observable<IObjectDocSnippet> {
-        return this.http.get<IObjectDocSnippet>(`/api/about/docs`);
+    public getSnippet(): Observable<IDocSnippet> {
+        return this.http.get<IDocSnippet>(`/api/about/docs`);
     }
 
-    public setSnippetData(data): Observable<IObjectDocSnippet> {
-        return this.http.post<IObjectDocSnippet>('/api/admin/about/docs/create-update', data , adminHeaders());
+    public setSnippetData(data): Observable<IDocSnippet> {
+        return this.http.post<IDocSnippet>('/api/admin/about/docs/create-update', data , adminHeaders());
     }
 
     public setCurrentLoadedFile(val: number) {
@@ -38,7 +38,7 @@ export class ObjectDocumentationAdminService {
 
             const upload = (i) => {
                 this.setCurrentLoadedFile(i + 1);
-                const myUploadItem = new ObjectDocumentationAdminUpload(fileList[i]);
+                const myUploadItem = new AboutDocumentationAdminUpload(fileList[i]);
                 myUploadItem.formData = {FormDataKey: 'Form Data Value'};
                 this.uploaderService.upload(myUploadItem);
             };

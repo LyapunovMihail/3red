@@ -1,23 +1,18 @@
-
-export const OBJECTS_MEMBERS_COLLECTION_NAME = 'objectMembers';
+export const ABOUT_CAREER_COLLECTION_NAME = 'aboutCareer';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface IObjectMembersSnippet {
+export interface ICareerSnippet {
     _id?: any;
-    objectId: string;
     switchOn: boolean;
-    data: IMembersData[];
+    data: ICareerData[];
     created_at: any;
     last_modifyed: any;
 }
 
-export interface IMembersData {
+export interface ICareerData {
     name: string;
-    members: IMembersAnchor[];
-}
-
-export interface IMembersAnchor {
-    name: string;
+    text: string;
     url: string;
+    show: boolean;
 }

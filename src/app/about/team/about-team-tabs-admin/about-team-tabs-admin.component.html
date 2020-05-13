@@ -1,30 +1,30 @@
 <app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
 
-    <h2 class="gallery-settings__title">Настройка вкладок «Галереи»</h2>
+    <h2 class="team-settings__title">Настройка подразделений команд</h2>
     <section class="tabs">
         <form [formGroup]="form">
-            <div class="tabs__wrap" formArrayName="gallery" *ngFor="let tab of form.controls['gallery']['controls']; let i = index">
+            <div class="tabs__wrap" formArrayName="team" *ngFor="let team of form.get('team')['controls']; let i = index">
                 <ng-container formGroupName="{{i}}">
                     <div class="tabs__container">
-                        <h2 class="tabs__title">Вкладка {{i + 1}}</h2>
+                        <h2 class="tabs__title">Подразделение {{i + 1}}</h2>
                         <div class="tabs__nav">
-                            <label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{tab.controls.show.value ? 'Выключить' : 'Включить'}}</label>
-                            <a class="tabs__nav-link" (click)="popTab(i)">Удалить</a>
-                            <a class="tabs__nav-link">Вверх</a>
-                            <a class="tabs__nav-link">Вниз</a>
+                            <label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{team.get('show').value ? 'Выключить' : 'Включить'}}</label>
+                            <a href="javascript:void(0)" class="tabs__nav-link" (click)="popTab(i)">Удалить</a>
+                            <!--<a href="#" class="tabs__nav-link">Вверх</a>-->
+                            <!--<a href="#" class="tabs__nav-link">Вниз</a>-->
                         </div>
-
                     </div>
                     <div class="form">
                         <div class="form-item">
-                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="name">
+                            <input type="text" class="form-input info-input" formControlName="name" appSlideTopLabel>
                             <label class="form-label info-suptitle">Название вкладки</label>
                         </div>
                     </div>
                 </ng-container>
             </div>
         </form>
-        <button class="btn btn--settings" (click)="pushTab()">Добавить вкладку</button>
+
+        <button class="btn btn--settings" (click)="pushTab()">Добавить подразделение</button>
 
     </section>
 

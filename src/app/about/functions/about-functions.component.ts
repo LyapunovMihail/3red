@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-about-members',
-    templateUrl: './about-members.component.html',
-    styleUrls: ['./about-members.component.scss', './../about.component.scss']
+    selector: 'app-about-functions',
+    templateUrl: './about-functions.component.html',
+    styleUrls: ['./about-functions.component.scss', './../about.component.scss']
 })
 
-export class AboutMembersComponent {}
+export class AboutFunctionsComponent {}

@@ -54,13 +54,13 @@
                             </a>
                             <div class="upload-file__date">
 
-                                <input class="upload-file__date-area" type="text" id="dateUpload"
+                                <input class="upload-file__date-area" type="text" id="dateUpload{{i}}{{j}}"
                                     [class.upload-file__date-area--no-empty]="inputDate.value.length > 0"
                                     [value]="parseDate(doc.date)"
                                     (change)="doc.date = $event.target.value"
                                     [textMask]="{mask: dataMask}"
                                     #inputDate>
-                                <label for="dateUpload">Дата документа</label>
+                                <label for="dateUpload{{i}}{{j}}">Дата документа</label>
                                 <div></div>
                             </div>
                         </li>

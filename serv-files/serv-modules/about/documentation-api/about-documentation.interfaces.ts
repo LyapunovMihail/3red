@@ -1,10 +1,10 @@
-export const DOCUMENTATION_COLLECTION_NAME = 'documentation';
+export const ABOUT_DOCUMENTATION_COLLECTION_NAME = 'aboutDocumentation';
 
-export const FILEUPLOADS_UPLOADS_PATH = 'uploads/object-files/';
+export const FILEUPLOADS_UPLOADS_PATH = 'uploads/about-files/';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface IObjectDocSnippet {
+export interface IDocSnippet {
     _id?: any ;
     switchOn: boolean;
     created_at: string ;

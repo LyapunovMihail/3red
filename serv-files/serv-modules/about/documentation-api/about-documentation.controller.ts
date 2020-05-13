@@ -1,6 +1,6 @@
 import { IFileRequest } from '../../utilits/image-saver.utilits';
 import { responseHandler } from '../../utilits/response-handler.utilits';
-import { ObjectsDocumentationModel } from './objects-documentation.model';
+import { AboutDocumentationModel } from './about-documentation.model';
 import { Express } from 'express-serve-static-core';
 import * as multipart from 'connect-multiparty';
 import * as express from 'express';
@@ -9,7 +9,7 @@ import { MongoConnectionService } from '../../mongo-connection.service';
 import { ExpressAppService } from '../../express-app.service';
 
 @Controller('/api')
-export class ObjectsDocumentaionController extends ObjectsDocumentationModel {
+export class AboutDocumentationController extends AboutDocumentationModel {
 
     public router = express.Router();
 
@@ -23,10 +23,10 @@ export class ObjectsDocumentaionController extends ObjectsDocumentationModel {
 
     routing() {
         this.router.get('/about/docs', responseHandler(async (req) => {
-            return await this.getSnippet(req.params.id);
+            return await this.getSnippet();
         }));
 
-        this.router.post('/about/docs/create-update', responseHandler(async (req) => {
+        this.router.post('/admin/about/docs/create-update', responseHandler(async (req) => {
             return await this.updateSnippet(req.body);
         }));
 

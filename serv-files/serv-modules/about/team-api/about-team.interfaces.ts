@@ -1,18 +1,20 @@
-export const ABOUT_CAREER_COLLECTION_NAME = 'aboutCareer';
+export const ABOUT_TEAM_COLLECTION_NAME = 'aboutTeam';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface ICareerSnippet {
+export const ABOUT_TEAM_UPLOADS_PATH = 'uploads/about-team/';
+
+export interface ITeamSnippet {
     _id?: any;
-    switchOn: boolean;
-    data: ICareerData[];
+    tab: string;
+    data: ITeamData[];
     created_at: any;
     last_modifyed: any;
 }
 
-export interface ICareerData {
-    name: string;
-    text: string;
-    url: string;
-    show: boolean;
+export interface ITeamData {
+    fio: string;
+    position: string;
+    image: string;
+    thumbnail: string;
 }

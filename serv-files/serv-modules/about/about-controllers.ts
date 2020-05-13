@@ -1,7 +1,11 @@
-import { HomePreviewController } from './preview-api/home-preview.controller';
-import { HomeInfoController } from './info-api/home-info.controller';
+import { AboutCareerController } from './career-api/about-career.controller';
+import { AboutDocumentationController } from './documentation-api/about-documentation.controller';
+import { TeamTabsController } from './team-tabs-api/team-tabs.controller';
+import { AboutTeamController } from './team-api/about-team.controller';
 
-export const homeControllers = [
-    HomePreviewController,
-    HomeInfoController
+export const aboutControllers = [
+    AboutCareerController,
+    AboutDocumentationController,
+    TeamTabsController,
+    AboutTeamController
 ];

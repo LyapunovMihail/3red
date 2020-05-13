@@ -1,13 +1,15 @@
 import { responseHandler } from '../../utilits/response-handler.utilits';
-import { AboutCareerModel } from './about-career.model';
+import { AboutTeamModel } from './about-team.model';
 import * as express from 'express';
+import * as multipart from 'connect-multiparty';
 import { MongoConnectionService } from '../../mongo-connection.service';
 import { ExpressAppService } from '../../express-app.service';
 import { Controller } from '@nestjs/common';
 import { Express } from 'express';
+import { IFileRequest } from '../../utilits/image-saver.utilits';
 
 @Controller('/api')
-export class AboutCareerController extends AboutCareerModel {
+export class AboutTeamController extends AboutTeamModel {
 
     public router = express.Router();
 
@@ -20,12 +22,17 @@ export class AboutCareerController extends AboutCareerModel {
     }
 
     routing() {
-        this.router.get('/about/career', responseHandler(async (req) => {
-            return await this.getSnippet();
+        this.router.get('/about/team', responseHandler(async (req) => {
+            return await this.getSnippets();
         }));
 
-        this.router.post('/admin/about/career/create-update', responseHandler(async (req) => {
+        this.router.post('/admin/about/team/create-update', responseHandler(async (req) => {
             return await this.updateSnippet(req.body);
+        }));
+
+        const multipartMiddleware = multipart();
+        this.router.post('/admin/about/team/image/', multipartMiddleware, responseHandler(async(req: IFileRequest) => {
+            return await this.uploadImage(req);
         }));
 
         const app: Express = this.expressAppService.getApp();

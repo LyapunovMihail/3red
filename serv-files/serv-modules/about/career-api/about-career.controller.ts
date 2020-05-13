@@ -1,5 +1,5 @@
 import { responseHandler } from '../../utilits/response-handler.utilits';
-import { ObjectsMembersModel } from './objects-members.model';
+import { AboutCareerModel } from './about-career.model';
 import * as express from 'express';
 import { MongoConnectionService } from '../../mongo-connection.service';
 import { ExpressAppService } from '../../express-app.service';
@@ -7,7 +7,7 @@ import { Controller } from '@nestjs/common';
 import { Express } from 'express';
 
 @Controller('/api')
-export class ObjectsMembersController extends ObjectsMembersModel {
+export class AboutCareerController extends AboutCareerModel {
 
     public router = express.Router();
 
@@ -20,11 +20,11 @@ export class ObjectsMembersController extends ObjectsMembersModel {
     }
 
     routing() {
-        this.router.get('/jk-object/members/id/:id', responseHandler(async (req) => {
-            return await this.getSnippet(req.params.id);
+        this.router.get('/about/career', responseHandler(async (req) => {
+            return await this.getSnippet();
         }));
 
-        this.router.post('/admin/jk-object/members/create-update', responseHandler(async (req) => {
+        this.router.post('/admin/about/career/create-update', responseHandler(async (req) => {
             return await this.updateSnippet(req.body);
         }));
 

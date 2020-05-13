@@ -1,45 +1,44 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ObjectMembersAdminService } from './object-members-admin.service';
-import { IMembersAnchor, IObjectMembersSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/members-api/objects-members.interfaces';
+import { AboutCareerAdminService } from './about-career-admin.service';
+import { ICareerSnippet } from '../../../../../serv-files/serv-modules/about/career-api/about-career.interfaces';
 
 @Component({
-    selector: 'app-objects-item-members-admin',
-    templateUrl: './object-members-admin.component.html',
-    styleUrls: ['../../jk-objects-item.component.scss',
-        './object-members-admin.component.scss']
+    selector: 'app-about-career-admin',
+    templateUrl: './about-career-admin.component.html',
+    styleUrls: ['./about-career-admin.component.scss']
 })
 
-export class ObjectMembersAdminComponent implements OnInit {
+export class AboutCareerAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
     @Output()
     public snippetChange = new EventEmitter();
     @Input()
-    public id: string;
-    @Input()
-    public snippet: IObjectMembersSnippet;
+    public snippet: ICareerSnippet;
 
     public form: FormGroup;
 
     constructor(
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
-        private membersService: ObjectMembersAdminService
+        private careerService: AboutCareerAdminService
     ) { }
 
     ngOnInit() {
-        if (this.snippet) {
+        console.log('this.snippet: ', this.snippet);
+
+        if (this.snippet && this.snippet.data) {
             this.setFormFromSnippet();
         } else {
             this.setNewForm();
         }
+
     }
 
     private setNewForm() {
         this.form = this.formBuilder.group({
-            objectId: this.id,
             switchOn: true,
             created_at: new Date(),
             last_modifyed: new Date(),
@@ -49,7 +48,6 @@ export class ObjectMembersAdminComponent implements OnInit {
 
     private setFormFromSnippet() {
         this.form = this.formBuilder.group({
-            objectId: this.snippet.objectId,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
             data: this.parseDataArray()
@@ -60,16 +58,9 @@ export class ObjectMembersAdminComponent implements OnInit {
         return this.formBuilder.array(this.snippet.data.map((dataItem) => {
             return this.formBuilder.group({
                 name: dataItem.name,
-                members: this.parseMembersArray(dataItem.members)
-            });
-        }));
-    }
-
-    private parseMembersArray(members: IMembersAnchor[]) {
-        return this.formBuilder.array(members.map((membersItem) => {
-            return this.formBuilder.group({
-                name: membersItem.name,
-                url: membersItem.url
+                text: dataItem.text,
+                url: dataItem.url,
+                show: dataItem.show
             });
         }));
     }
@@ -78,7 +69,9 @@ export class ObjectMembersAdminComponent implements OnInit {
         (this.form.get('data') as FormArray).push(
             this.formBuilder.group({
                 name: '',
-                members: this.formBuilder.array([])
+                text: '',
+                url: '',
+                show: true
             })
         );
     }
@@ -86,7 +79,7 @@ export class ObjectMembersAdminComponent implements OnInit {
     public popData(i) {
         (this.form.get('data') as FormArray).removeAt(i);
     }
-    
+
     public moveBlock(array, i, dir) {
         let arr = this.form.get('data').value;
 
@@ -96,22 +89,8 @@ export class ObjectMembersAdminComponent implements OnInit {
         // console.log(array);
     }
 
-    public pushMembers(i) {
-        (this.form.get(['data', i, 'members']) as FormArray).push(
-            this.formBuilder.group({
-                name: '',
-                url: ''
-            })
-        );
-        console.log('this.form: ', this.form);
-    }
-
-    public popMembers(i, j) {
-        (this.form.get(['data', i, 'members']) as FormArray).removeAt(j);
-    }
-
     public save() {
-        this.membersService.setSnippetData(this.form.value).subscribe(
+        this.careerService.setSnippetData(this.form.value).subscribe(
             (data) => {
                 this.snippetChange.emit(data);
                 this.closeModal.emit(true);

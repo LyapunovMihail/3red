@@ -37,35 +37,31 @@ export const NAVANCHORS = {
     about: [
         {
             name: 'О компании',
-            url: '#project'
+            url: 'product'
         },
         {
             name: 'Наши функции',
-            url: '#choose'
+            url: 'functions'
         },
         {
             name: 'Этапы реализации проекта',
-            url: '#gallery'
+            url: 'stage'
         },
         {
             name: 'Команда',
-            url: '#decoration'
+            url: 'team'
         },
         {
             name: 'Карьера',
-            url: '#'
-        },
-        {
-            name: 'Документация',
-            url: '#'
+            url: 'career'
         },
         {
             name: 'Новости',
-            url: '#'
+            url: 'about-news'
         },
         {
             name: 'Документация',
-            url: '#'
+            url: 'docs'
         }
     ]
 };

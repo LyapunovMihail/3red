@@ -1,55 +1,45 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { mockSlider } from './mockSlide';
-import { ObjectGalleryAdminService } from './object-gallery-content-admin/object-gallery-admin.service';
-import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
-import { IObjectGallerySnippet, OBJECTS_GALLERY_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/gallery-api/objects-gallery.interfaces';
+import { Component, Input, OnInit } from '@angular/core';
+import { AboutTeamAdminService } from './about-team-content-admin/about-team-admin.service';
+import { IAboutTeamTabsSnippet } from '../../../../serv-files/serv-modules/about/team-tabs-api/team-tabs.interfaces';
+import { ABOUT_TEAM_UPLOADS_PATH, ITeamSnippet } from '../../../../serv-files/serv-modules/about/team-api/about-team.interfaces';
 
 @Component({
-    selector: 'app-object-item-gallery',
-    templateUrl: 'object-gallery.component.html',
+    selector: 'app-about-team',
+    templateUrl: 'about-team.component.html',
     styleUrls: [
-        'object-gallery.component.scss',
-        '../jk-objects-item.component.scss'
+        'about-team.component.scss'
     ],
-    providers: [ObjectGalleryAdminService]
+    providers: [AboutTeamAdminService]
 })
 
-export class AboutCommandComponent implements OnInit, OnDestroy {
+export class AboutTeamComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
-    @Input()
-    public objectId: string;
 
-    public slideList = mockSlider;
-
-    public currentSlide: number = 0;
-    public currentTab: string;
-
-    public interval;
-    public showTimeline = true;
-
-    public contentSnippet: IObjectGallerySnippet;
-    public tabSnippet: IObjectTabsSnippet;
+    public contentSnippets: ITeamSnippet[];
+    public tabSnippet: IAboutTeamTabsSnippet;
     public switchOn = false;
 
     public closeTabsModal = true;
     public closeContentModal = true;
 
-    public uploadsPath = `/${OBJECTS_GALLERY_UPLOADS_PATH}`;
+    public currentTeam: ITeamSnippet;
+    public currentTab: string;
+    public teams: any;
+
+    public uploadsPath = `/${ABOUT_TEAM_UPLOADS_PATH}`;
 
     constructor(
-        private galleryService: ObjectGalleryAdminService,
+        private aboutTeamService: AboutTeamAdminService,
     ) { }
 
     ngOnInit() {
         this.getTabsThanContent();
-
-        this.slideShow();
     }
 
     public getTabsThanContent() {
-        this.galleryService.getTabsSnippetById(this.objectId).subscribe((data) => {
+        this.aboutTeamService.getTabsSnippet().subscribe((data) => {
             this.refreshTabs(data);
         }, (error) => {
             console.error(error);
@@ -59,67 +49,41 @@ export class AboutCommandComponent implements OnInit, OnDestroy {
     public refreshTabs(data) {
         this.tabSnippet = data;
         if (this.tabSnippet) {
-            if (this.tabSnippet.gallery && this.tabSnippet.gallery.length && this.tabSnippet.gallery.some((tab) => tab.show)) {
-                this.currentTab = this.tabSnippet.gallery.find((tab) => tab.show).name;
-            } else {
-                this.currentTab = 'no-tab';
-            }
-        } else {
-            this.currentTab = 'no-tab';
+            this.switchOn = this.tabSnippet.switchOn;
         }
         this.getContent();
     }
 
     public getContent() {
-        this.galleryService.getContentSnippetByIdAndTab(this.objectId, this.currentTab).subscribe((data) => {
-            this.contentSnippet = data;
-            if (this.contentSnippet) {
-                this.switchOn = this.contentSnippet.switchOn;
-            } else {
-                this.clearInt();
-            }
-            console.log('this.contentSnippet: ', this.contentSnippet);
+        this.aboutTeamService.getContentSnippets().subscribe((data) => {
+            this.contentSnippets = data;
+            console.log('this.contentSnippets: ', this.contentSnippets);
+            this.setTeams();
+            console.log('this.teams: ', this.teams);
         }, (error) => {
             console.error(error);
         });
     }
 
-    public changeTab(tab) {
-        this.currentTab = tab;
-        this.getContent();
-    }
-
-    public nextSlide() {
-        this.currentSlide = (this.currentSlide < this.contentSnippet.image_data.length - 1 ) ? this.currentSlide + 1 : 0;
-    }
-
-    public prevSlide() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.contentSnippet.image_data.length - 1;
-    }
-
-    public slideShow() {
-        this.interval = setInterval(() => {
-            this.currentSlide < this.contentSnippet.image_data.length - 1
-                ? this.nextSlide()
-                : this.currentSlide = 0;
-        }, 5000);
-    }
-
-    public clearInt() {
-        this.showTimeline = false;
-        clearInterval(this.interval);
-    }
-
-    ngOnDestroy() {
-        this.clearInt();
+    private setTeams() {
+        this.teams = {};
+        this.tabSnippet.team.forEach((item) => {
+           this.teams[item.name] = { unlimit: false, team: this.contentSnippets.find((team) => team.tab === item.name ) };
+        });
     }
 
     public switchBlock($event) {
         this.switchOn = $event.target.checked;
-        const data = {...this.contentSnippet, objectId: this.objectId, switchOn: this.switchOn};
-        this.galleryService.setContentSnippetData(data).subscribe(
+        const data = {...this.tabSnippet, switchOn: this.switchOn};
+        this.aboutTeamService.setTabsSnippetData(data).subscribe(
             () => console.log('success'),
             (err) => console.error(err)
         );
+    }
+
+    public showContentModal(teamSnippet, tabName) {
+        this.currentTeam = teamSnippet;
+        this.currentTab = tabName;
+        this.closeContentModal = false;
     }
 }

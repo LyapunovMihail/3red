@@ -1,80 +1,56 @@
-<section class="object-gallery" [class.object-item--margin]="switchOn || isAuthorizated">
+<section class="team__container" [class.team__container--margin]="switchOn || isAuthorizated">
 
-    <div class="object-item__container object-gallery__container">
-
-        <div  [class.object-gallery__head]="switchOn">
-            <input type="checkbox" name="switch" id="gallery-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
-            <label *ngIf="isAuthorizated" for="gallery-switch" class="object-item__title">Галерея</label>
+        <div [class.team__head]="switchOn">
+            <input type="checkbox" name="switch" id="team1" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
+            <label for="team1" class="team__label" *ngIf="isAuthorizated">Команда</label>
         </div>
 
-        <ng-container *ngIf="switchOn">
+        <ng-container *ngIf="switchOn && teams">
 
-            <h2 class="object-gallery__title" *ngIf="!isAuthorizated">Галерея</h2>
+            <h2 class="team__title" *ngIf="!isAuthorizated">Команда</h2>
 
-            <div class="object-gallery__options" *ngIf="isAuthorizated">
-                <button class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
-                <button class="btn__admin-content btn_var-2" (click)="closeContentModal = false">Контент</button>
+            <div class="team__options" *ngIf="isAuthorizated">
+                <a class="btn btn--settings" (click)="closeTabsModal = false">Настройки</a>
             </div>
 
-            <nav class="object-gallery__nav" *ngIf="tabSnippet.gallery && tabSnippet">
-                <ul class="object-gallery__nav-list">
-                    <ng-container *ngFor="let tab of this.tabSnippet.gallery">
-                        <li class="object-gallery__nav-item"
-                            [class.object-gallery__nav-item_active]="currentTab === tab.name"
-                            (click)="changeTab(tab.name)"
-                            *ngIf="tab.show">{{tab.name}}</li>
-                    </ng-container>
-                </ul>
-            </nav>
+            <div class="team__divisions" *ngFor="let tab of tabSnippet.team; let i = index">
+                <ng-container *ngIf="tab.show">
+                    <div class="team__item-title team__item-title--first" *ngIf="isAuthorizated">{{tab.name}}</div>
 
-            <div class="object-gallery__slider">
-
-                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
-                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
-
-                <div class="object-gallery__slider-dots" *ngIf="contentSnippet?.image_data?.length > 1">
-                    <span *ngFor="let dots of contentSnippet.image_data; let i = index"
-                        [ngClass]="{'current-dots': currentSlide === i}"></span>
-                </div>
-
-                <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide" *ngIf="contentSnippet?.image_data?.length; else elseBlock">
-                    <div class="gallery-slide__item" *ngFor="let slide of contentSnippet.image_data; let i = index"
-                        [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
-
-                        <div class="gallery-slide__image">
-                            <img [src]="uploadsPath + slide.image" alt="slide">
+                    <div class="team__item">
+                        <div class="team__wrapper">
+                            <a (click)="showContentModal(teams[tab.name].team, tab.name)" class="btn" *ngIf="isAuthorizated">Контент</a>
+                            <h4 class="team__item-title" *ngIf="!isAuthorizated">{{tab.name}}</h4>
+                            <button class="team__btn" [class.team__btn--active]="teams[tab.name].unlimit" (click)="teams[tab.name].unlimit = !teams[tab.name].unlimit" *ngIf="teams[tab.name].team?.data.length > 4">Все сотрудники</button>
                         </div>
-                        <div class="gallery-slide__timeline" *ngIf="!isAuthorizated && contentSnippet?.image_data.length > 1 && showTimeline"></div>
-
-                        <div class="gallery-slide__content">
-                            <h3 class="gallery-slide__content-title">{{slide.title}}</h3>
-                            <div class="gallery-slide__content-descr">{{slide.description}}</div>
+                        <div class="team__wrap team__wrap--building" *ngIf="teams[tab.name].team">
+                            <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
+                                <div class="team__list" *ngIf="j < 4 || teams[tab.name].unlimit">
+                                    <div class="team__list-item">
+                                        <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
+                                        <div class="team__list-name">{{employee.fio}}</div>
+                                        <div class="team__list-prof">{{employee.position}}</div>
+                                    </div>
+                                </div>
+                            </ng-container>
                         </div>
                     </div>
-                </div>
-
-                <ng-template #elseBlock>
-                    <div class="gallery-slide__image">
-                        <div class="object-item__mock-img"></div>
-                    </div>
-                </ng-template>
+                </ng-container>
             </div>
 
         </ng-container>
 
-    </div>
 </section>
 
-<app-objects-item-gallery-tabs-admin *ngIf="!closeTabsModal"
-    [id]="objectId"
+<app-about-team-tabs-admin *ngIf="!closeTabsModal"
     [snippet]="tabSnippet"
     (snippetChange)="refreshTabs($event)"
     (closeModal)="closeTabsModal = $event">
-</app-objects-item-gallery-tabs-admin>
+</app-about-team-tabs-admin>
 
-<app-objects-item-gallery-content-admin *ngIf="!closeContentModal"
-    [id]="objectId"
-    [tabSnippet]="tabSnippet"
+<app-about-team-content-admin *ngIf="!closeContentModal"
+    [tabName]="currentTab"
+    [snippet]="currentTeam"
     (snippetChange)="getContent()"
     (closeModal)="closeContentModal = $event">
-</app-objects-item-gallery-content-admin>
+</app-about-team-content-admin>

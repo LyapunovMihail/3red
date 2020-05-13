@@ -1,6 +1,5 @@
 .stage {
     background: #2d358f;
-
     max-width: 100%;
 }
 .stage__container {
@@ -8,6 +7,7 @@
     padding: 96px 88px 140px;
     width: 1280px;
     color: #fff;
+    box-sizing: border-box;
 }
 .stage__title {
     font-size: 36px;

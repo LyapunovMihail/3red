@@ -7,37 +7,34 @@
                 <ng-container formGroupName="{{i}}">
 
                     <div class="tabs__container">
-                        <h2 class="tabs__title">Блок {{i + 1}}</h2>
+                        <h2 class="tabs__title">Вакансия {{i + 1}}</h2>
                         <div class="tabs__nav">
+                            <!--<a href="javascript:void(0)" class="tabs__nav-link">Выключить</a>-->
+                            <label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{block.get('show').value ? 'Выключить' : 'Включить'}}</label>
                             <a href="javascript:void(0)" class="tabs__nav-link" (click)="popData(i)">Удалить</a>
-                            <a href="javascript:void(0)" *ngIf="i !== 0" class="tabs__nav-link" (click)="moveBlock(form.get('data')['controls'], i, -1)">Вверх</a>
-                            <a href="javascript:void(0)" *ngIf="!last" class="tabs__nav-link" (click)="moveBlock(form.get('data')['controls'], i, 1)">Вниз</a>
+                            <!--<a href="javascript:void(0)" *ngIf="i !== 0" class="tabs__nav-link" (click)="moveBlock(form.get('data')['controls'], i, -1)">Вверх</a>-->
+                            <!--<a href="javascript:void(0)" *ngIf="!last" class="tabs__nav-link" (click)="moveBlock(form.get('data')['controls'], i, 1)">Вниз</a>-->
                         </div>
                     </div>
 
                     <div class="form">
                         <div class="form-item">
                             <input type="text" class="form-input info-input" formControlName="name" appSlideTopLabel>
-                            <label class="form-label info-suptitle">Заголовок</label>
+                            <label class="form-label info-suptitle">Название вакансии</label>
                         </div>
                     </div>
 
-                    <button class="btn btn--settings" (click)="pushMembers(i)">Добавить строку</button>
-
-                    <div class="form" formArrayName="members" *ngFor="let member of block.get('members')['controls']; let j = index">
-                        <div class="form__wrap" formGroupName="{{j}}">
-                            <div class="form-item form-item--inline form-item--mr">
-                                <input type="text" class="form-input info-input" formControlName="name" appSlideTopLabel>
-                                <label class="form-label info-suptitle">Участник</label>
-                            </div>
-                            <div class="form-item form-item--inline">
-                                <button class="button__delete button__delete--textarea" (click)="popMembers(i, j)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
-                                <input type="text" class="form-input info-input" formControlName="url" appSlideTopLabel>
-                                <label class="form-label info-suptitle">URL</label>
-                            </div>
+                    <!--<button class="btn btn&#45;&#45;settings" (click)="pushMembers(i)">Добавить строку</button>-->
+                    <div class="form__wrap">
+                        <div class="form-item form-item--inline form-item--mr">
+                            <input type="text" class="form-input info-input" formControlName="text" appSlideTopLabel>
+                            <label class="form-label info-suptitle">Текст для ссылки</label>
+                        </div>
+                        <div class="form-item form-item--inline">
+                            <input type="text" class="form-input info-input" formControlName="url" appSlideTopLabel>
+                            <label class="form-label info-suptitle">URL</label>
                         </div>
                     </div>
-
                 </ng-container>
 
             </div>

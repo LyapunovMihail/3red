@@ -67,6 +67,11 @@
     display: block;
     position: relative;
     margin-top: 46px;
+
+    &--inline {
+        width: 50%;
+    }
+
     &--mr {
         margin-right: 24px;
     }

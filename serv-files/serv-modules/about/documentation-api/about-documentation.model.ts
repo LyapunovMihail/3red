@@ -1,14 +1,13 @@
 import { fileSaver } from '../../utilits/file-saver.utilits';
 import {
-    DOCUMENTATION_COLLECTION_NAME, FILEUPLOADS_UPLOADS_PATH,
-    IObjectDocSnippet, IDocUploadItem,
-} from './objects-documentation.interfaces';
-import {ErrorNotCorrectArguments} from './objects-documentation.interfaces';
+    FILEUPLOADS_UPLOADS_PATH, IDocUploadItem, ABOUT_DOCUMENTATION_COLLECTION_NAME, IDocSnippet,
+} from './about-documentation.interfaces';
+import {ErrorNotCorrectArguments} from './about-documentation.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
-export class ObjectsDocumentationModel {
+export class AboutDocumentationModel {
 
-    private collectionName = DOCUMENTATION_COLLECTION_NAME;
+    private collectionName = ABOUT_DOCUMENTATION_COLLECTION_NAME;
 
     private collection: any;
 
@@ -16,14 +15,13 @@ export class ObjectsDocumentationModel {
         this.collection = db.collection(this.collectionName);
     }
 
-    async getSnippet(objectId?) {
-        const findCriteria = objectId ? {objectId} : {};
-        return await this.collection.findOne(findCriteria);
+    async getSnippet() {
+        return await this.collection.findOne();
     }
 
     async updateSnippet(parameters) {
-        const options: IObjectDocSnippet = parameters;
-        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
+        const options: IDocSnippet = parameters;
+        return await this.errorParamsCatcher(this.valuesReview(options),  async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
             await this.collection.update({}, { $set : options }, {upsert: true});
@@ -47,7 +45,7 @@ export class ObjectsDocumentationModel {
     }
 
     // обертка для возврата ошибки о неверно переданных параметрах
-    async errorParamsCatcher(val, objectId, fn) {
+    async errorParamsCatcher(val, fn) {
         if ( val ) {
             await fn();
             return await this.getSnippet();
@@ -57,8 +55,7 @@ export class ObjectsDocumentationModel {
     }
 
     private valuesReview(options) {
-        console.log('options: ', options);
         // если есть все параметры
-        return ('objectId' in options && 'created_at' in options && 'last_modifyed' && 'block' in options) || 'objectId' in options && 'switchOn' in options;
+        return ('created_at' in options && 'last_modifyed' && 'block' in options) || 'switchOn' in options;
     }
 }

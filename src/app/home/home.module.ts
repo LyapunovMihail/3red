@@ -14,8 +14,8 @@ import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.modul
 import { HomeFilterModule } from './filter/home-filter.module';
 import { JkObjectsListModule } from '../jk-objects/jk-objects-list/jk-objects-list.module';
 import { HomeNewsModule } from './news/home-news.module';
-import { HomeInfoComponent } from './home/home-info.component';
-import { HomeInfoAdminComponent } from './home/home-info-admin/home-info-admin.component';
+import { HomeInfoComponent } from './info/home-info.component';
+import { HomeInfoAdminComponent } from './info/home-info-admin/home-info-admin.component';
 
 @NgModule({
     exports: [

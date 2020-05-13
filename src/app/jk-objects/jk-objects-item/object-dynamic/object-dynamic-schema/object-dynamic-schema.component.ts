@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IDynamicObject } from '../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { ViewportScroller } from '@angular/common';
 declare let $: any;
 
 @Component({
@@ -14,7 +15,9 @@ export class ObjectDynamicSchemaComponent implements OnInit {
     public isAuthorizated = false;
     @Input() public objectsArray: IDynamicObject[];
 
-    constructor() { }
+    constructor(
+        private viewportScroller: ViewportScroller
+    ) { }
 
     ngOnInit() { }
 
@@ -23,7 +26,7 @@ export class ObjectDynamicSchemaComponent implements OnInit {
         link = link.split('').map((item: string) => item.charCodeAt(0)).join(''); // перевожу в цифры так как jquery не распознаёт селектор на русском, а фрагменты ангулара чето тормозят
         if (!$(`#${link}`).length) { return; }
         const destination = $(`#${link}`).offset().top;
-        $('html:not(:animated),body:not(:animated)').animate({ scrollTop: destination - 30 }, 500);
+        this.viewportScroller.scrollToPosition([0, destination - 30]);
         return false;
     }
 }

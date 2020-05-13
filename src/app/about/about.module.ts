@@ -1,24 +1,36 @@
-import { AboutMembersComponent } from './members/about-members.component';
-import { AboutBuilderComponent } from './builder/about-builder.component';
+import { AboutFunctionsComponent } from './functions/about-functions.component';
+import { AboutCareerComponent } from './career/about-career.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AboutComponent } from './about.component';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GHMTextAreaModule } from './../UI/ghm-textarea/ghm-textarea.module';
-import { AboutGenplanComponent } from './genplan/about-genplan.component';
-import { AboutProjectComponent } from './project/about-project.component';
-import { AboutGalleryComponent } from './gallery/about-gallery.component';
-import { AboutGalleryAdminComponent } from './gallery/gallery-admin/about-gallery-admin.component';
+import { AboutStageComponent } from './stage/about-stage.component';
+import { AboutProductComponent } from './product/about-product.component';
+import { AboutCareerAdminComponent } from './career/career-admin/about-career-admin.component';
+import { AdminModalModule } from '../admin-modal/admin-modal.module';
+import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HomeNewsModule } from '../home/news/home-news.module';
+import { AboutDocumentationAdminComponent } from './docs/about-documentation-admin/about-documentation-admin.component';
+import { AboutDocumentationComponent } from './docs/about-documentation.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { AboutTeamComponent } from './team/about-team.component';
+import { AboutTeamTabsAdminComponent } from './team/about-team-tabs-admin/about-team-tabs-admin.component';
+import { AboutTeamAdminComponent } from './team/about-team-content-admin/about-team-admin.component';
 
 const AboutComponents = [
     AboutComponent,
-    AboutGenplanComponent,
-    AboutProjectComponent,
-    AboutGalleryComponent,
-    AboutGalleryAdminComponent,
-    AboutBuilderComponent,
-    AboutMembersComponent
+    AboutStageComponent,
+    AboutProductComponent,
+    AboutTeamComponent,
+    AboutTeamTabsAdminComponent,
+    AboutTeamAdminComponent,
+    AboutCareerComponent,
+    AboutCareerAdminComponent,
+    AboutFunctionsComponent,
+    AboutDocumentationComponent,
+    AboutDocumentationAdminComponent
 ];
 
 @NgModule({
@@ -29,12 +41,15 @@ const AboutComponents = [
         ...AboutComponents
     ],
     imports: [
-        RouterModule,
         CommonModule,
         GHMTextAreaModule,
-        BrowserAnimationsModule,
+        AdminModalModule,
+        SlideTopLabelModule,
+        ReactiveFormsModule,
+        HomeNewsModule,
+        TextMaskModule,
         RouterModule.forChild([
-            { path: 'about', component: AboutComponent }
+            { path: '', component: AboutComponent }
         ])
     ]
 })

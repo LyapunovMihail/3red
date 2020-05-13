@@ -1,15 +1,14 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ObjectGalleryAdminService } from '../object-gallery-content-admin/object-gallery-admin.service';
-import { IObjectTabsSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
+import { AboutTeamAdminService } from '../about-team-content-admin/about-team-admin.service';
+import { IAboutTeamTabsSnippet } from '../../../../../serv-files/serv-modules/about/team-tabs-api/team-tabs.interfaces';
 
 @Component({
-    selector: 'app-objects-item-gallery-tabs-admin',
-    templateUrl: './object-gallery-tabs-admin.component.html',
-    styleUrls: ['../../jk-objects-item.component.scss',
-                './object-gallery-tabs-admin.component.scss']
+    selector: 'app-about-team-tabs-admin',
+    templateUrl: './about-team-tabs-admin.component.html',
+    styleUrls: ['./about-team-tabs-admin.component.scss']
 })
-export class ObjectGalleryTabsAdminComponent implements OnInit {
+export class AboutTeamTabsAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
@@ -17,16 +16,14 @@ export class ObjectGalleryTabsAdminComponent implements OnInit {
     public snippetChange = new EventEmitter();
 
     @Input()
-    public id: string;
-    @Input()
-    public snippet: IObjectTabsSnippet;
+    public snippet: IAboutTeamTabsSnippet;
 
     public form: FormGroup;
 
     constructor(
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
-        private galleryService: ObjectGalleryAdminService
+        private teamService: AboutTeamAdminService
     ) { }
 
     ngOnInit() {
@@ -39,47 +36,42 @@ export class ObjectGalleryTabsAdminComponent implements OnInit {
 
     private setNewForm() {
         this.form = this.formBuilder.group({
-            objectId: this.id,
+            switchOn: true,
             created_at : new Date(),
             last_modifyed : new Date(),
-            gallery: this.formBuilder.array([])
+            team: this.formBuilder.array([])
         });
     }
 
     private setFormFromSnippet() {
-        let galleryTabs;
-        if (this.snippet.gallery && this.snippet.gallery.length) {
-            galleryTabs = this.formBuilder.array(this.snippet.gallery.map((tab) => this.formBuilder.group({name: tab.name, show: tab.show})));
+        let teamTabs;
+        if (this.snippet.team && this.snippet.team.length) {
+            teamTabs = this.formBuilder.array(this.snippet.team.map((tab) => this.formBuilder.group({name: tab.name, show: tab.show})));
         } else {
-            galleryTabs = this.formBuilder.array([]);
+            teamTabs = this.formBuilder.array([]);
         }
 
         this.form = this.formBuilder.group({
-            objectId: this.snippet.objectId,
+            switchOn: this.snippet.switchOn,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
-            gallery: galleryTabs
+            team: teamTabs
         });
     }
 
     public pushTab() {
-        (this.form.controls.gallery as FormArray).push(this.formBuilder.group( {name: ['', Validators.required], show: true}));
+        (this.form.controls.team as FormArray).push(this.formBuilder.group( {name: ['', Validators.required], show: true}));
     }
 
     public popTab(i) {
-        (this.form.controls.gallery as FormArray).removeAt(i);
+        (this.form.controls.team as FormArray).removeAt(i);
     }
 
     public save() {
-        this.galleryService.setTabsSnippetData(this.form.value).subscribe(
+        this.teamService.setTabsSnippetData(this.form.value).subscribe(
             (data) => {
-                this.galleryService.removeTabSlidesFromGallery(data).subscribe(
-                    () => {
-                        this.snippetChange.emit(data);
-                        this.closeModal.emit(true);
-                    },
-                    (err) => console.error(err)
-                );
+                this.snippetChange.emit(data);
+                this.closeModal.emit(true);
             },
             (err) => {
                 alert('Что-то пошло не так!');

@@ -1,10 +1,15 @@
+p {
+    font: unset;
+}
+
 .product {
     width: 1280px;
     padding: 0 88px;
     margin: auto;
-    padding-top: 292px ;
+    padding-top: 292px;
     // padding-bottom: 145px;
     position: relative;
+    box-sizing: border-box;
 }
 .product__shape-img {
     position: absolute;
@@ -20,7 +25,7 @@
 .product__text {
     font-size: 24px;
     line-height: 30px;
-    width: 634px;
+    width: 764px;
     margin-right: 118px;
 }
 .product__sidetext {
@@ -66,7 +71,7 @@
 }
 .product__parallax-num {
     font-size: 72px;
-    font-family: 'Formular';
+    font-family: 'Formular-medium';
 }
 .product__parallax-num--mod {
     position: relative;
@@ -146,7 +151,7 @@
 .company__year {
     font-size: 40px;
     color:  #ee4237;
-    font-family: "Formular";
+    font-family: "Formular-medium";
     position: relative;
     &::after {
         content: '';

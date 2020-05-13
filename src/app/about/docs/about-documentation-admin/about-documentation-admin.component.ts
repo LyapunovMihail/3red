@@ -1,21 +1,22 @@
-import { ObjectDocumentationAdminService } from './object-documentation-admin.service';
+import { AboutDocumentationAdminService } from './about-documentation-admin.service';
 import { Uploader } from 'angular2-http-file-upload';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
-import { IDocUploadItem, IObjectDocSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
+import { IDocUploadItem } from '../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IDocSnippet } from '../../../../../serv-files/serv-modules/about/documentation-api/about-documentation.interfaces';
 
 @Component({
-    selector: 'app-objects-item-documentation-admin',
-    templateUrl: './object-documentation-admin.component.html',
-    styleUrls: ['./object-documentation-admin.component.scss'],
+    selector: 'app-about-documentation-admin',
+    templateUrl: './about-documentation-admin.component.html',
+    styleUrls: ['./about-documentation-admin.component.scss'],
     providers: [
-        ObjectDocumentationAdminService,
+        AboutDocumentationAdminService,
         Uploader
     ]
 })
-export class ObjectDocumentationAdminComponent implements OnInit {
+export class AboutDocumentationAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
@@ -23,9 +24,7 @@ export class ObjectDocumentationAdminComponent implements OnInit {
     public snippetChange = new EventEmitter();
 
     @Input()
-    public id: string;
-    @Input()
-    snippet: IObjectDocSnippet;
+    snippet: IDocSnippet;
 
     public form: FormGroup;
 
@@ -38,7 +37,7 @@ export class ObjectDocumentationAdminComponent implements OnInit {
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
-        public documentationService: ObjectDocumentationAdminService
+        public documentationService: AboutDocumentationAdminService
     ) {}
 
     ngOnInit() {
@@ -51,7 +50,6 @@ export class ObjectDocumentationAdminComponent implements OnInit {
 
     private setNewForm() {
         this.form = this.formBuilder.group({
-            objectId: this.id,
             switchOn: true,
             created_at : new Date(),
             last_modifyed : new Date(),
@@ -68,7 +66,6 @@ export class ObjectDocumentationAdminComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
-            objectId: this.snippet.objectId,
             switchOn: this.snippet.switchOn,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),

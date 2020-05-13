@@ -3,7 +3,8 @@ import { WindowEventsService } from '../../commons/window-events.observer.servic
 import { HeaderService, IHeaderLink } from '../header.service';
 import { Router } from '@angular/router';
 import { EventsService } from '../../commons/events.service';
-import { JkService } from '../../commons/jk.service';
+import { ViewportScroller } from '@angular/common';
+declare let $: any;
 
 interface INavLink extends IHeaderLink {
     blockOffsetTop: number;
@@ -37,18 +38,19 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     public year: number;
     public month: number;
 
-    public objectId: string;
-
     constructor(
         private windowEventsService: WindowEventsService,
         private eventsService: EventsService,
-        private headerService: HeaderService,
+        public headerService: HeaderService,
         public router: Router,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private viewportScroller: ViewportScroller
     ) { }
 
     ngOnInit() {
-        this.getDynamicLink();
+        if (this.pageName === 'objects') {
+            this.getDynamicLink();
+        }
     }
 
     private getDynamicLink() {
@@ -91,7 +93,10 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
                 this.getBlocksSizes();
                 this.changeDetectorRef.detectChanges();
             }, 200);
-            this.getDynamicLink();
+
+            if (this.pageName === 'objects') {
+                this.getDynamicLink();
+            }
         }
     }
 
@@ -116,6 +121,14 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
                 return;
             }
         });
+    }
+
+    // Скролл до якоря
+    public scrollLink(link) {
+        if (!$(`#${link}`).length) { return; }
+        const destination = $(`#${link}`).offset().top;
+        this.viewportScroller.scrollToPosition([0, destination - 60]);
+        return false;
     }
 
     ngOnDestroy() {

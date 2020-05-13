@@ -12,6 +12,10 @@
         margin: auto;
         padding: 0 88px 96px;
         box-sizing: border-box;
+
+        &--about {
+            padding-top: 96px;
+        }
     }
 
     &__options {

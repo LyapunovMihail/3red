@@ -1,12 +1,12 @@
-import { adminHeaders } from '../../../../commons/admin-headers.utilit';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { IObjectMembersSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/members-api/objects-members.interfaces';
+import { ICareerSnippet } from '../../../../../serv-files/serv-modules/about/career-api/about-career.interfaces';
+import { adminHeaders } from '../../../commons/admin-headers.utilit';
 
 @Injectable()
 
-export class ObjectMembersAdminService {
+export class AboutCareerAdminService {
 
     public subject = new BehaviorSubject<number>(0);
 
@@ -14,11 +14,11 @@ export class ObjectMembersAdminService {
         private http: HttpClient
     ) { }
 
-    public getSnippetById(objectID): Observable<IObjectMembersSnippet> {
-        return this.http.get<IObjectMembersSnippet>(`/api/jk-object/members/id/${objectID}`);
+    public getSnippet(): Observable<ICareerSnippet> {
+        return this.http.get<ICareerSnippet>(`/api/about/career`);
     }
 
-    public setSnippetData(data): Observable<IObjectMembersSnippet> {
-        return this.http.post<IObjectMembersSnippet>('/api/admin/jk-object/members/create-update', data , adminHeaders());
+    public setSnippetData(data): Observable<ICareerSnippet> {
+        return this.http.post<ICareerSnippet>('/api/admin/about/career/create-update', data , adminHeaders());
     }
 }

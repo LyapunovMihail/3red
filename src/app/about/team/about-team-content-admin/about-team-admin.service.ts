@@ -1,15 +1,15 @@
-import { adminHeaders } from '../../../../commons/admin-headers.utilit';
-import { ObjectGalleryAdminUpload } from './object-gallery-admin.upload';
+import { adminHeaders } from '../../../commons/admin-headers.utilit';
+import { AboutTeamAdminUpload } from './about-team-admin.upload';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { IObjectGallerySnippet } from '../../../../../../serv-files/serv-modules/jk-objects/gallery-api/objects-gallery.interfaces';
-import { IObjectTabsSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
+import { IAboutTeamTabsSnippet } from '../../../../../serv-files/serv-modules/about/team-tabs-api/team-tabs.interfaces';
+import { ITeamSnippet } from '../../../../../serv-files/serv-modules/about/team-api/about-team.interfaces';
 
 @Injectable()
 
-export class ObjectGalleryAdminService {
+export class AboutTeamAdminService {
 
     public subject = new BehaviorSubject<number>(0);
 
@@ -18,24 +18,20 @@ export class ObjectGalleryAdminService {
         @Inject(forwardRef(() => Uploader)) private uploaderService: Uploader
     ) { }
 
-    public getContentSnippetByIdAndTab(objectID, tab?, type?): Observable<IObjectGallerySnippet> {
-        return this.http.get<IObjectGallerySnippet>(`/api/jk-object/gallery/id/${objectID}/tab/${tab}`);
+    public getContentSnippets(): Observable<ITeamSnippet[]> {
+        return this.http.get<ITeamSnippet[]>(`/api/about/team`);
     }
 
     public setContentSnippetData(form) {
-        return this.http.post('/api/admin/jk-object/gallery/create-update', form , adminHeaders());
+        return this.http.post('/api/admin/about/team/create-update', form , adminHeaders());
     }
 
-    public getTabsSnippetById(objectID): Observable<IObjectTabsSnippet> {
-        return this.http.get<IObjectTabsSnippet>(`/api/jk-object/tabs/id/${objectID}/gallery`);
+    public getTabsSnippet(): Observable<IAboutTeamTabsSnippet> {
+        return this.http.get<IAboutTeamTabsSnippet>(`/api/about/team/tabs`);
     }
 
     public setTabsSnippetData(form) {
-        return this.http.post('/api/admin/jk-object/tabs/gallery/create-update', form , adminHeaders());
-    }
-
-    public removeTabSlidesFromGallery(tabs) {
-        return this.http.post('/api/admin/jk-object/gallery/update', tabs , adminHeaders());
+        return this.http.post('/api/admin/about/team/tabs/create-update', form , adminHeaders());
     }
 
     public setPercentLoadedImage(val: number) {
@@ -52,7 +48,7 @@ export class ObjectGalleryAdminService {
             const fileList: FileList = e.target.files;
             const uploadFile: File = fileList[0];
 
-            const myUploadItem = new ObjectGalleryAdminUpload(uploadFile);
+            const myUploadItem = new AboutTeamAdminUpload(uploadFile);
             myUploadItem.formData = { FormDataKey: 'Form Data Value' };
 
             this.uploaderService.onSuccessUpload = (item, response, status, headers) => {

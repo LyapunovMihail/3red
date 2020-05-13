@@ -1,38 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FILEUPLOADS_UPLOADS_PATH, IObjectDocSnippet } from '../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
-import { ObjectDocumentationAdminService } from './object-documentation-admin/object-documentation-admin.service';
+import { AboutDocumentationAdminService } from './about-documentation-admin/about-documentation-admin.service';
 import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
 import * as moment from 'moment';
+import { FILEUPLOADS_UPLOADS_PATH, IDocSnippet } from '../../../../serv-files/serv-modules/about/documentation-api/about-documentation.interfaces';
 
 @Component({
-    selector: 'app-object-item-documentation',
-    templateUrl: 'object-documentation.component.html',
+    selector: 'app-about-documentation',
+    templateUrl: 'about-documentation.component.html',
     styleUrls: [
-        'object-documentation.component.scss',
-        '../jk-objects-item.component.scss'
+        'about-documentation.component.scss'
     ],
     providers: [
-        ObjectDocumentationAdminService,
+        AboutDocumentationAdminService,
         Uploader
     ]
 })
 
-export class ObjectDocumentationComponent implements OnInit {
+export class AboutDocumentationComponent implements OnInit {
 
     @Input()
     public isAuthorizated = false;
 
     public uploadsPath = FILEUPLOADS_UPLOADS_PATH;
     public closeModal = true;
-    public snippet: IObjectDocSnippet;
+    public snippet: IDocSnippet;
     public switchOn = false;
 
     constructor(
-        private documentationService: ObjectDocumentationAdminService
+        private documentationService: AboutDocumentationAdminService
     ) { moment.locale('ru'); }
 
     ngOnInit() {
-        this.documentationService.getSnippetById().subscribe((data) => {
+        this.documentationService.getSnippet().subscribe((data) => {
             this.snippet = data;
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;

@@ -86,7 +86,7 @@ export class ObjectMembersAdminComponent implements OnInit {
     public popData(i) {
         (this.form.get('data') as FormArray).removeAt(i);
     }
-    
+
     public moveBlock(array, i, dir) {
         let arr = this.form.get('data').value;
 

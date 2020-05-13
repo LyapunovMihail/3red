@@ -1,4 +1,4 @@
-<section class="stage" id="stage">
+<section class="stage" id="stage" #stage>
     <div class="stage__container">
         <h2 class="stage__title">Этапы реализации проекта</h2>
         <p class="stage__text">Каждый наш объект реализован по индивидуальному проекту, разработанному
@@ -11,7 +11,8 @@
             <img src="/assets/img/about/product/all-arrow.svg" alt="arrows" class="stage__parallax-img1">
 
             <div class="stage__parallax-wrapper">
-                <img src="/assets/img/about/product/parallax-img.png" alt="image" class="stage__parallax-img2">
+                <img src="/assets/img/about/product/parallax-img.png" alt="image" class="stage__parallax-img2"
+                     [style.transform]="stage.getBoundingClientRect().top < 200 ? 'translateY(' + stage.getBoundingClientRect().top * - 0.08333 + 'px)' : img.style.transform" #img>
             </div>
             <div class="stage__grid-container">
                 <div class="stage__grid-item">

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-about-genplan',
-    templateUrl: './about-genplan.component.html',
-    styleUrls: ['./about-genplan.component.scss', './../about.component.scss']
+    selector: 'app-about-stage',
+    templateUrl: './about-stage.component.html',
+    styleUrls: ['./about-stage.component.scss']
 })
 
-export class AboutGenplanComponent {
+export class AboutStageComponent {
 
 
 }

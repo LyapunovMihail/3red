@@ -18,7 +18,6 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
 
     public authorizationEvent;
     public isAuthorizated = false;
-    public intervalTimer;
 
     public objectId: string;
     public jk: IObjectSnippet;
@@ -50,7 +49,6 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
 
     ngOnDestroy() {
         this.authorizationEvent.unsubscribe();
-        clearInterval(this.intervalTimer);
     }
 
     public getJkObject() {

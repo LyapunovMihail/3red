@@ -1,13 +1,21 @@
-<section class="about">
+<section class="about" #container>
 
-    <app-about-genplan id="genplan"></app-about-genplan>
+    <app-about-product id="product"></app-about-product>
 
-    <app-about-project id="project"></app-about-project>
+    <app-about-functions id="functions"></app-about-functions>
 
-    <!-- <app-about-gallery id="gallery"></app-about-gallery> -->
+    <div class="helper" #helper>
 
-    <app-about-builder id="builder"></app-about-builder>
+        <app-about-stage id="stage"></app-about-stage>
 
-    <app-about-members id="members"></app-about-members>
+        <app-about-team id="team" [isAuthorizated]="isAuthorizated"></app-about-team>
+
+        <app-about-career id="career" [isAuthorizated]="isAuthorizated"></app-about-career>
+
+        <app-home-news id="about-news" [pageName]="'about'"></app-home-news>
+
+        <app-about-documentation id="docs" [isAuthorizated]="isAuthorizated"></app-about-documentation>
+
+    </div>
 
 </section>

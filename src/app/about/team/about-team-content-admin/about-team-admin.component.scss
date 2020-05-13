@@ -1,4 +1,4 @@
-.gallery-settings__title {
+.team-settings__title {
     font-size: 36px;
     font-weight: normal;
     margin-bottom: 24px;
@@ -7,6 +7,12 @@
 .wrap {
     position: relative;
     margin-top: 16px;
+}
+
+.tabs__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .tab__img {
@@ -58,17 +64,38 @@
     resize: none;
 }
 
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0;
-    background-image: url(/assets/img/jk-object/admin-modal/arrow.svg)  !important;
-    background-repeat: no-repeat !important;
-    background-position: center right !important;
+.form__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-option {
-    width: 400px;
+.form-item {
+    display: block;
+    position: relative;
+    margin-top: 46px;
+}
+
+.form-item--option {
+    position: relative;
+
+}
+
+.form-item--inline {
+    width: 50%;
+}
+.form-item--mr {
+    margin-right: 24px;
+}
+
+
+.form-label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    transition: .3s;
 }
 
 .btn {

@@ -1,16 +1,14 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { ObjectGalleryAdminService } from './object-gallery-admin.service';
-import { IObjectGallerySnippet, OBJECTS_GALLERY_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/gallery-api/objects-gallery.interfaces';
-import { IObjectTabsSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
+import { AboutTeamAdminService } from './about-team-admin.service';
+import { ABOUT_TEAM_UPLOADS_PATH, ITeamSnippet } from '../../../../../serv-files/serv-modules/about/team-api/about-team.interfaces';
 
 @Component({
-    selector: 'app-objects-item-gallery-content-admin',
-    templateUrl: './object-gallery-admin.component.html',
-    styleUrls: ['../../jk-objects-item.component.scss',
-                './object-gallery-admin.component.scss']
+    selector: 'app-about-team-content-admin',
+    templateUrl: './about-team-admin.component.html',
+    styleUrls: ['./about-team-admin.component.scss']
 })
-export class ObjectGalleryAdminComponent implements OnInit {
+export class AboutTeamAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
@@ -18,9 +16,9 @@ export class ObjectGalleryAdminComponent implements OnInit {
     public snippetChange = new EventEmitter();
 
     @Input()
-    public id: string;
+    public tabName: string;
     @Input()
-    public tabSnippet: IObjectTabsSnippet;
+    public snippet: ITeamSnippet;
 
     public form: FormGroup;
 
@@ -28,80 +26,67 @@ export class ObjectGalleryAdminComponent implements OnInit {
     public imageUploadPercent: number;
     public isLoad = true;
 
-    public snippet: IObjectGallerySnippet;
-
-    uploadsPath = `/${OBJECTS_GALLERY_UPLOADS_PATH}`;
+    uploadsPath = `/${ABOUT_TEAM_UPLOADS_PATH}`;
 
     constructor(
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
-        private galleryService: ObjectGalleryAdminService
+        private teamService: AboutTeamAdminService
     ) { }
 
     ngOnInit() {
-        this.galleryService.getContentSnippetByIdAndTab(this.id, null).subscribe(
-            (data) => {
-                this.snippet = data;
-                if (this.snippet) {
-                    this.setFormFromSnippet();
-                } else {
-                    this.setNewForm();
-                }
-                this.isLoad = false;
-            },
-            (err) => console.error(err)
-        );
+        console.log('this.snippet: ', this.snippet);
+        if (this.snippet) {
+            this.setFormFromSnippet();
+        } else {
+            this.setNewForm();
+        }
+        this.isLoad = false;
     }
 
     private setNewForm() {
         this.form = this.formBuilder.group({
-            objectId: this.id,
-            switchOn: true,
             created_at : new Date(),
             last_modifyed : new Date(),
-            image_data: this.formBuilder.array([])
+            tab: this.tabName,
+            data: this.formBuilder.array([])
         });
     }
 
     private setFormFromSnippet() {
-        let imageData;
-        if (this.snippet.image_data && this.snippet.image_data.length) {
-            imageData = this.formBuilder.array(this.snippet.image_data.map((tab) => {
-                if (!this.tabSnippet.gallery.length) {
-                    tab.tab = 'no-tab';
-                }
-                return this.formBuilder.group({image: tab.image, thumbnail: tab.thumbnail, tab: tab.tab, title: tab.title, description: tab.description});
+        let data;
+        if (this.snippet.data && this.snippet.data.length) {
+            data = this.formBuilder.array(this.snippet.data.map((item) => {
+                return this.formBuilder.group({image: item.image, thumbnail: item.thumbnail, fio: item.fio, position: item.position});
                 }
             ));
         } else {
-            imageData = this.formBuilder.array([]);
+            data = this.formBuilder.array([]);
         }
         this.form = this.formBuilder.group({
-            objectId: this.id,
-            switchOn: this.snippet.switchOn,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
-            image_data: imageData
+            tab: this.snippet.tab,
+            data
         });
     }
 
-    public pushImageData() {
-        (this.form.controls.image_data as FormArray).push(this.formBuilder.group({
+    public pushData() {
+        (this.form.controls.data as FormArray).push(this.formBuilder.group({
             image: ['', Validators.required],
             thumbnail: ['', Validators.required],
-            tab: this.tabSnippet.gallery && this.tabSnippet.gallery.length ? this.tabSnippet.gallery[0].name : 'no-tab',
-            title:  ['', Validators.required],
-            description: ''
+            fio:  ['', Validators.required],
+            position: ['', Validators.required]
         }));
     }
 
-    public popImageData(i) {
-        (this.form.controls.image_data as FormArray).removeAt(i);
+    public popData(i) {
+        (this.form.controls.data as FormArray).removeAt(i);
     }
 
     imageUpload(e, i) {
         this.isLoad = true;
-        this.imageUploadEvent = this.galleryService.getPercentLoadedImage().subscribe(
+        this.imageUploadEvent = this.teamService.getPercentLoadedImage().subscribe(
             (val) => {
                 this.imageUploadPercent = val;
                 this.ref.detectChanges();
@@ -112,14 +97,14 @@ export class ObjectGalleryAdminComponent implements OnInit {
             }
         );
 
-        this.galleryService.imageUpload(e)
+        this.teamService.imageUpload(e)
             .then( (data: any) => {
                 this.isLoad = false;
                 this.imageUploadEvent.unsubscribe();
                 // сразу сохраняется на сервере
                 // значение подставляетс в текстовые (скрытые) инпуты формы
-                (this.form.controls.image_data as FormArray).at(i).get('image').setValue(data.image);
-                (this.form.controls.image_data as FormArray).at(i).get('thumbnail').setValue(data.thumbnail);
+                (this.form.controls.data as FormArray).at(i).get('image').setValue(data.image);
+                (this.form.controls.data as FormArray).at(i).get('thumbnail').setValue(data.thumbnail);
             })
             .catch((err) => {
                 this.isLoad = false;
@@ -130,12 +115,12 @@ export class ObjectGalleryAdminComponent implements OnInit {
     }
 
     public delImg(i) {
-        (this.form.controls.image_data as FormArray).at(i).get('image').setValue('');
-        (this.form.controls.image_data as FormArray).at(i).get('thumbnail').setValue('');
+        (this.form.controls.data as FormArray).at(i).get('image').setValue('');
+        (this.form.controls.data as FormArray).at(i).get('thumbnail').setValue('');
     }
 
     public save() {
-        this.galleryService.setContentSnippetData(this.form.value).subscribe(
+        this.teamService.setContentSnippetData(this.form.value).subscribe(
             () => {
                 this.snippetChange.emit();
                 this.closeModal.emit(true);

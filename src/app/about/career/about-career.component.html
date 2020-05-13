@@ -7,28 +7,25 @@
 
     <ng-container *ngIf="switchOn">
 
-        <h2 class="career__label" *ngIf="!isAuthorizated">Участники проекта</h2>
+        <h2 class="career__title" *ngIf="!isAuthorizated">Карьера</h2>
 
-        <a class="btn btn--settings" *ngIf="isAuthorizated">Настройки</a>
+        <div class="career__options" *ngIf="isAuthorizated">
+            <a class="btn btn--settings" (click)="closeModal = false">Настройки</a>
+        </div>
 
-        <div class="career__wrap">
-            <div class="career__item">
-                <p class="career__prof">Руководитель проекта</p>
-                <a href="#" class="career__link">Вакансия на hh.ru</a>
-            </div>
-            <div class="career__item">
-                <p class="career__prof">Инженер ПТО</p>
-                <a href="#" class="career__link">Вакансия на hh.ru</a>
-            </div>
-            <div class="career__item">
-                <p class="career__prof">IT Специалист</p>
-                <a href="#" class="career__link">Вакансия на hh.ru</a>
-            </div>
-            <div class="career__item">
-                <p class="career__prof">Инженер технического надзора</p>
-                <a href="#" class="career__link">Вакансия на hh.ru</a>
-            </div>
+        <div class="career__wrap" *ngIf="snippet?.data">
+            <ng-container *ngFor="let block of snippet.data">
+                <div class="career__item" *ngIf="block.show">
+                    <p class="career__prof">{{block.name}}</p>
+                    <a href="{{block.url}}" target="_blank" class="career__link">{{block.text}}</a>
+                </div>
+            </ng-container>
         </div>
 
     </ng-container>
 </div>
+
+<app-about-career-admin *ngIf="!closeModal"
+    [(snippet)]="snippet"
+    (closeModal)="closeModal = $event">
+</app-about-career-admin>
