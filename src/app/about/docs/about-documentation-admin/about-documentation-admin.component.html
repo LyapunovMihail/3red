@@ -1,0 +1,78 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)">
+
+    <h2 class="documentation__title documentation__title_out-path">Настройка «Документации»</h2>
+
+    <div *ngIf="progressLoaded" class="admin-gallery_progress">
+        <div class="admin-gallery_progress-title">Загрузка</div>
+        <div class="admin-gallery_progress-info">{{progressCurrent}} из {{progressCount}}</div>
+        <div class="admin-gallery_progress-line">
+            <div [style.width.%]="((100 / progressCount) * progressCurrent)" class="admin-gallery_progress-line-inner"></div>
+        </div>
+    </div>
+
+    <form [formGroup]="form">
+        <ul class="documentation__objects">
+            <li class="documentation__object" formArrayName="block"
+                *ngFor="let block of form.get('block')['controls']; let i = index; let last = last">
+                <ng-container formGroupName="{{i}}">
+                    <div class="documentation__object-wrap documentation__object-wrap_head">
+                        <h3 class="documentation__object-title">Блок {{i + 1}}</h3>
+
+                        <div class="documentation__object-wrap documentation__object-wrap_btn-head">
+                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty"
+                                (click)="popBlock(i)">Удалить
+                            </button>
+                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="i > 0">Вверх</button>
+                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="!last">Вниз</button>
+                        </div>
+                    </div>
+
+                    <div class="documentation__object-wrap documentation__object-wrap_title">
+
+                        <ghm-textarea class="documentation__object-input"
+                            [value]="block.blockTitle"
+                            [placeholder]="'Заголовок'"
+                            (change)="block.blockTitle = $event.target.value"
+                            formControlName="blockTitle">
+                        </ghm-textarea>
+
+                        <label class="btn-admin documentation__object-btn_load-file">
+                            <input style='display: none;' type="file" (change)="fileUpload($event, i)" placeholder="Upload file" accept=".pdf" multiple>
+                            Загрузить документ
+                        </label>
+                    </div>
+
+                    <ul class="documentation__object-content">
+                        <li class="documentation__object-file upload-file"
+                            *ngFor="let doc of block.get('uploads').value; let j = index">
+                            <button class="upload-file__delete-btn" (click)="popDoc(i, j)">
+                                <span></span>
+                            </button>
+                            <a class="upload-file__file-name upload-file__file-name_admin"
+                                target="_blank">
+                                {{doc.originalName}}
+                            </a>
+                            <div class="upload-file__date">
+
+                                <input class="upload-file__date-area" type="text" id="dateUpload"
+                                    [class.upload-file__date-area--no-empty]="inputDate.value.length > 0"
+                                    [value]="parseDate(doc.date)"
+                                    (change)="doc.date = $event.target.value"
+                                    [textMask]="{mask: dataMask}"
+                                    #inputDate>
+                                <label for="dateUpload">Дата документа</label>
+                                <div></div>
+                            </div>
+                        </li>
+                    </ul>
+                </ng-container>
+            </li>
+        </ul>
+    </form>
+
+    <button class="documentation__btn documentation__btn_add-block"
+        (click)="pushBlock()">Создать новый блок
+    </button>
+
+</app-admin-modal>
+

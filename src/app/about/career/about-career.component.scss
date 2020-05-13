@@ -1,0 +1,115 @@
+.career__container {
+    max-width: 1280px;
+    width: 100%;
+    margin: auto;
+    padding: 0 48px 120px;
+    margin-top: 60px;
+
+    &--margin {
+        margin: 0 0 96px;
+    }
+}
+
+.career__head {
+    margin: 0 0 16px;
+}
+
+.btn {
+
+    padding: 10px 16px ;
+    background: #ee4237;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    font-family: inherit;
+    border:none;
+    display: inline-block;
+    cursor: pointer;
+    &:hover {
+        background: #ee534a
+    }
+    &::before {
+        content:url(../../assets/img/mainPage/content_icon.svg);
+        margin-right:5px ;
+    }
+}
+
+.btn--settings {
+    background: #454545;
+    margin-left: 40px;
+    margin-top: 20px;
+    &:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+    &::before {
+        content:url(../../assets/img/mainPage/settings.svg);
+        margin-right:5px ;
+    }
+}
+.switch {
+    display: none;
+}
+.career__label {
+    position: relative;
+    padding-left: 40px;
+    font-size: 36px;
+    margin-bottom: 24px;
+}
+.career__label::after {
+    content: '';
+    width: 32px;
+    height: 20px;
+    background: #ee4237 ;
+    position: absolute;
+    border-radius: 20px;
+    top: 3px;
+    left: 0;
+    z-index: 1;
+
+}
+.career__label::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: #fff ;
+    position: absolute;
+    border-radius: 50%;
+    top: 5px;
+    left: 13px;
+    z-index: 2;
+    cursor: pointer;
+    transition: .3s;
+}
+.switch:checked + .career__label::before {
+    left:3px;
+}
+.switch:checked + .career__label::after {
+    background:  #787878;
+}
+.career__container {
+    margin:  auto;
+    padding: 60px 40px 120px;
+    width: 1280px;
+}
+.career__title {
+    font-size: 36px;
+    margin-bottom: 32px;
+    line-height: 1.25;
+}
+.career__wrap {
+    display: grid;
+    grid-template-columns: 352px 352px;
+    grid-row-gap: 24px;
+    margin-top: 20px;
+    margin: 20px 40px 0;
+}
+.career__prof {
+    font-size: 24px;
+    line-height: 1.25;
+}
+.career__link {
+    color: #ee4237;
+    font-size: 18px;
+    line-height: 1.25;
+    margin-top: 8px;
+}

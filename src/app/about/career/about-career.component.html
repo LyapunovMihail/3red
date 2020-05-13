@@ -1,0 +1,34 @@
+<div class="career__container" [class.career__container--margin]="switchOn || isAuthorizated">
+
+    <div class="career__wrapper" [class.career__head]="switchOn">
+        <input type="checkbox" name="switch" id="career1" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
+        <label for="career1" class="career__label" *ngIf="isAuthorizated">Карьера</label>
+    </div>
+
+    <ng-container *ngIf="switchOn">
+
+        <h2 class="career__label" *ngIf="!isAuthorizated">Участники проекта</h2>
+
+        <a class="btn btn--settings" *ngIf="isAuthorizated">Настройки</a>
+
+        <div class="career__wrap">
+            <div class="career__item">
+                <p class="career__prof">Руководитель проекта</p>
+                <a href="#" class="career__link">Вакансия на hh.ru</a>
+            </div>
+            <div class="career__item">
+                <p class="career__prof">Инженер ПТО</p>
+                <a href="#" class="career__link">Вакансия на hh.ru</a>
+            </div>
+            <div class="career__item">
+                <p class="career__prof">IT Специалист</p>
+                <a href="#" class="career__link">Вакансия на hh.ru</a>
+            </div>
+            <div class="career__item">
+                <p class="career__prof">Инженер технического надзора</p>
+                <a href="#" class="career__link">Вакансия на hh.ru</a>
+            </div>
+        </div>
+
+    </ng-container>
+</div>
