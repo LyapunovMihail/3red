@@ -1,4 +1,3 @@
-
 export interface IProjectItem {
     link: string;
     city: string;

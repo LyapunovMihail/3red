@@ -40,7 +40,7 @@ export class JkObjectsListService {
         const message = JSON.stringify({ id });
         return this.http.post<IObjectSnippet[]>('/api/admin/jk-object/object/delete', message, adminHeaders());
     }
-    
+
     public getFlats(options): Observable<IAddressItemFlat[]> {
         return this.http.post<IAddressItemFlat[]>('/api/search/object', { search: options });
     }

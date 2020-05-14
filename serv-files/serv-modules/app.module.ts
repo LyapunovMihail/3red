@@ -16,6 +16,7 @@ import { GalleryController } from './gallery-api/gallery.controller';
 import { objectControllers } from './jk-objects/object-controllers';
 import { homeControllers } from './home/home-controllers';
 import { aboutControllers } from './about/about-controllers';
+import { serviceControllers } from './service/service-controllers';
 
 @Module({
     imports: [],
@@ -35,7 +36,8 @@ import { aboutControllers } from './about/about-controllers';
 
         ...objectControllers,
         ...homeControllers,
-        ...aboutControllers
+        ...aboutControllers,
+        ...serviceControllers
     ],
     providers: [
         MongoConnectionService,

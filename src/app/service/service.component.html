@@ -1,0 +1,48 @@
+<section class="intro">
+    <div class="intro__container">
+        <div class="intro__wrap">
+            <a href="javascript:void(0)" class="btn btn--settings" (click)="closeTabsModal = false" *ngIf="isAuthorizated">Настройки</a>
+            <a href="javascript:void(0)" class="btn"  (click)="closeContentModal = false" *ngIf="currentTab && isAuthorizated">Контент</a>
+        </div>
+        <h2 class="intro__text" *ngIf="contentSnippet"><span class="intro__text-span">{{contentSnippet.blackPart}} </span> {{contentSnippet.greyPart}}</h2>
+    </div>
+</section>
+
+<section class="newss">
+    <div class="news__container">
+
+        <ul class="tabs" *ngIf="tabSnippet?.tab?.length">
+            <ng-container *ngFor="let tab of tabSnippet.tab">
+                <li *ngIf="tab.show">
+                    <a class="tab" [class.tab--active]="currentTab === tab.name" href="javascript:void(0)" (click)="changeTab(tab.name)">{{tab.name}}</a>
+                </li>
+            </ng-container>
+        </ul>
+
+        <ng-container *ngIf="contentSnippet?.uk?.length">
+            <a href="{{uk.url}}" target="_blank" *ngFor="let uk of contentSnippet.uk">
+                <div class="news__item">
+                    <div class="news__item-title">{{uk.title}}</div>
+                    <div class="news__item-text">{{uk.description}}</div>
+                    <p class="news__info-title">Жилые комплексы под управлением компании:</p>
+                    <div class="news__item-info">
+                        <a [routerLink]="'/objects/list/' +  jk.id" class="news__link" *ngFor="let jk of uk.jk">{{jk.name}}</a>
+                    </div>
+                </div>
+            </a>
+        </ng-container>
+
+    </div>
+</section>
+
+<app-service-tabs-admin *ngIf="!closeTabsModal"
+    [snippet]="tabSnippet"
+    (snippetChange)="refreshTabs($event)"
+    (closeModal)="closeTabsModal = $event">
+</app-service-tabs-admin>
+
+<app-service-content-admin *ngIf="!closeContentModal"
+    [tabSnippet]="tabSnippet"
+    (snippetChange)="getContent()"
+    (closeModal)="closeContentModal = $event">
+</app-service-content-admin>

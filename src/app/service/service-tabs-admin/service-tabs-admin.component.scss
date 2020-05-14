@@ -1,0 +1,118 @@
+.team-settings__title {
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 24px;
+}
+
+.tabs__wrap {
+    background: #efefef;
+    padding: 20px 24px 32px;
+    margin-bottom: 8px;
+}
+.tabs__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tabs__title {
+    font-weight: normal;
+    font-size: 24px;
+}
+.tabs__nav-link {
+    color: #000;
+    margin-left: 16px;
+    font-size: 18px;
+    &:hover {
+        color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: #000;
+    opacity: .5;
+}
+
+.form-label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    transition: .3s;
+}
+
+.form__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 32px;
+}
+.form-item {
+    display: block;
+    position: relative;
+    margin-top: 46px;
+
+    &--inline {
+        width: 50%;
+    }
+
+    &--mr {
+        margin-right: 24px;
+    }
+}
+.button__delete {
+    position: absolute;
+    border-radius: 50%;
+    background: #ee4237;
+    width: 17px;
+    height: 17px;
+    top: -8px;
+    left: -8px;
+    z-index: 2;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        background: #ee534a;
+    }
+    &--textarea {
+        top: 50%;
+        left: 100% ;
+        margin-left: 15px;
+    }
+}
+
+.btn {
+    margin: 24px 0;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.56);
+    padding: 10px 16px;
+    font-family: inherit;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn--settings {
+    background: #454545;
+    margin-top: 0;
+}
+
