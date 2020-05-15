@@ -34,7 +34,6 @@ export class AboutCareerComponent implements OnInit {
     public getContent() {
         this.careerService.getSnippet().subscribe((data) => {
             this.snippet = data;
-            console.log('this.contentSnippet: ', this.snippet);
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;
             }

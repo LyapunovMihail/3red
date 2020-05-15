@@ -222,7 +222,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 }
             });
             this.countDown();
-            console.log('this.form: ', this.form);
         });
     }
 

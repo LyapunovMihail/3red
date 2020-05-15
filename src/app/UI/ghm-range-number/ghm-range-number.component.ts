@@ -80,7 +80,6 @@ export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueA
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        console.log('changes: ', changes);
 
         this.ref.detectChanges();
     }

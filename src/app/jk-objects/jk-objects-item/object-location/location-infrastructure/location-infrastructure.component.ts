@@ -88,7 +88,6 @@ export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
             }
         });
         this.navList = navList.filter((item) => navTypes.includes(item.type) );
-        console.log('this.navList: ', this.navList);
     }
 
     ngOnDestroy() {

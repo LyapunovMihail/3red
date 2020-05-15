@@ -74,7 +74,6 @@ export class ObjectLocationComponent implements OnInit {
     public getContent() {
         this.locationService.getContentSnippet(this.objectId).subscribe((data) => {
             this.contentSnippet = data;
-            console.log('this.contentSnippet: ', this.contentSnippet);
             if (this.contentSnippet) {
                 this.switchOn = this.contentSnippet.switchOn;
             }

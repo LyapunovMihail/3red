@@ -41,7 +41,6 @@ export class ObjectsProjectModel {
 
     private valuesReview(options) {
         // если есть все параметры
-        console.log('options: ', options);
         return ( ( 'objectId' in options && 'created_at' in options && 'last_modifyed' in options && 'socials' in options
             && 'description' in options && 'indicators' in options ) || 'objectId' in options && 'switchOn' in options ? true : false );
     }

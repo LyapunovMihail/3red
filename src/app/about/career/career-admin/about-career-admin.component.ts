@@ -27,7 +27,6 @@ export class AboutCareerAdminComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('this.snippet: ', this.snippet);
 
         if (this.snippet && this.snippet.data) {
             this.setFormFromSnippet();

@@ -6,6 +6,7 @@ export const ROUTES: Routes = [
     { path: 'dynamic/:year/:month', loadChildren: './dynamic/dynamic.module#DynamicModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
     { path: 'service', loadChildren: './service/service.module#ServiceModule' },
+    { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsModule' },
     { path: 'news-shares', loadChildren: './news-shares/news-shares.module#NewsSharesModule' },
     { path: 'decoration', loadChildren: './decoration/decoration.module#DecorationModule' },
     { path: 'flats', loadChildren: './flats/flats.module#FlatsModule' },

@@ -78,7 +78,6 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
             } else {
                 this.clearInt();
             }
-            console.log('this.contentSnippet: ', this.contentSnippet);
         }, (error) => {
             console.error(error);
         });

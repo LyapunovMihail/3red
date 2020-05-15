@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { environment } from 'environments/environment';
 import { ROUTES } from './app.routes';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
@@ -35,6 +34,7 @@ import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { JkObjectsModule } from './jk-objects/jk-objects.module';
 import { ServiceModule } from './service/service.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -74,6 +74,7 @@ const APP_MODULES = [
     AdminContactsModule,
     JkObjectsModule,
     ServiceModule,
+    ContactsModule,
 
     BrowserModule,
     BrowserAnimationsModule,

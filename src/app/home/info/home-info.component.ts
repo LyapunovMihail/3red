@@ -28,7 +28,7 @@ export class HomeInfoComponent implements OnInit {
     ngOnInit() {
         this.homeInfoService.getSnippet()
             .subscribe(
-                (data) => { this.snippet = data; console.log('this.snippet: ', this.snippet); },
+                (data) => this.snippet = data,
                 (err) => console.error(err)
             );
     }

@@ -25,7 +25,6 @@ export class ObjectTriggerComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('this.mod: ', this.mod);
         this.flatsService.getFlats({ mod: this.mod})
             .subscribe((flats) => {
                 this.buildTriggersData(flats);

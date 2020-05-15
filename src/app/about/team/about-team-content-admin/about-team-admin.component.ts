@@ -35,7 +35,6 @@ export class AboutTeamAdminComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('this.snippet: ', this.snippet);
         if (this.snippet) {
             this.setFormFromSnippet();
         } else {

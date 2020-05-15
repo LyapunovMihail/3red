@@ -59,7 +59,6 @@ export class FloorSelectorComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     public floorSelect(floorIndex) {
-        console.log('floorIndex: ', floorIndex);
         if (this.floorSelector.length < floorIndex + 1 || floorIndex < 0) {
             return;
         }

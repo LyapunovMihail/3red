@@ -29,7 +29,6 @@ export class ObjectPreviewComponent implements OnInit {
     ngOnInit() {
         this.previewService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
-            console.log("DATA-PREVIEW", data);
         }, (error) => {
             console.error(error);
         });

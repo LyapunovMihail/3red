@@ -39,7 +39,6 @@ export class NewsEditAnchorComponent implements OnInit {
 
     @Input() public data;
     public textArea;
-    public fakeTextArea;
     public formControl;
 
     @Output() public close: EventEmitter<any> = new EventEmitter();
@@ -54,7 +53,6 @@ export class NewsEditAnchorComponent implements OnInit {
         this.textArea = this.data.textArea;
         this.formControl = this.data.formControl;
         this.text = this.textArea.value.slice(this.textArea.selectionStart, this.textArea.selectionEnd);
-        console.log('data: ', this.data);
     }
 
     insertText() {
@@ -76,9 +74,6 @@ export class NewsEditAnchorComponent implements OnInit {
             blockDescription: finText
         });
 
-        console.log('textarea: ', this.textArea.value);
-
-        console.log('this.formControl: ', this.formControl);
         // возвращаем фокус на элемент
         txtarea.focus();
         // возвращаем курсор на место - учитываем выделили ли текст или просто курсор поставили

@@ -38,9 +38,6 @@ export class NewsViewComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
-        console.log('this.router: ', this.router.url);
-        console.log('location: ', location);
-
         moment.locale('ru');
         this.id = this.activatedRoute.snapshot.params.id;
         this.getSnippets(this.id);

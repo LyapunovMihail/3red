@@ -68,8 +68,6 @@ export class ObPlanComponent implements OnInit {
                 room.minPrice = room.minPrice === 9999999999 ? 0 : Number((room.minPrice / 1000000).toFixed(2));
             });
         }
-
-        console.log('flats: ', flats);
     }
 
     public svgRouterLink(event: Event, url) {

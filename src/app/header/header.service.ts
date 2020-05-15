@@ -27,7 +27,6 @@ export class HeaderService {
     }
 
     public getDynamicLink(): Observable<{year: number, month: number}> {
-        console.log('this.objectId: ', this.objectId);
         return this.http.get<{year: number, month: number}>(`/jk-object/dynamic/last/link/${this.objectId}`);
     }
 

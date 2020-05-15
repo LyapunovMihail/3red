@@ -72,7 +72,6 @@ export class RoutesAdminComponent implements OnInit {
             info: '',
             name: ''
         }));
-        console.log('this.form: ', this.form);
     }
 
     public popMark(i) {

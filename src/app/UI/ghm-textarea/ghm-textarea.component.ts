@@ -28,7 +28,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
             <p class="textarea__placeholder" *ngIf="placeholder.length > 0"
                 [class.textarea__placeholder_top]="area.value.length > 0">{{placeholder}}</p>
             <p class="textarea__add-link" *ngIf="link"
-                [class.textarea__add-link_show]="showLink" (click)="addLink.emit({textArea: area, fakeTextArea: fakeTextArea, val: value})">Вставить ссылку</p>
+                [class.textarea__add-link_show]="showLink" (click)="addLink.emit({textArea: area})">Вставить ссылку</p>
         </div>
     `,
     styleUrls: ['./ghm-textarea.component.css'],

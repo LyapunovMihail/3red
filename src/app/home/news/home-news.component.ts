@@ -72,7 +72,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
-                console.log('this.newsSnippets: ', this.newsSnippets);
                 this.allSnippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });

@@ -33,7 +33,6 @@ export class SharesService {
     }
 
     public updateShareCount(id, form, item) {
-        console.log('form: ', form);
         let message = JSON.stringify({ id, form, item });
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',

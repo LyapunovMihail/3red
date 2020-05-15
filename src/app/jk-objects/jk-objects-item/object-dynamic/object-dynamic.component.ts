@@ -65,7 +65,6 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
         this.dynamicService.getContentSnippet(this.objectId, this.currentYear, this.currentMonth).subscribe(
             (data) => {
                 this.setContent(data);
-                console.log('this.contentSnippet: ', this.contentSnippet);
             },
             (err) => console.error(err)
         );
@@ -82,7 +81,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     public getTabSnippet() {
         this.dynamicService.getTabsSnippetById(this.objectId).subscribe(
-            (data) => { this.tabSnippet = data; console.log('this.tabSnippet: ', this.tabSnippet); },
+            (data) => this.tabSnippet = data,
             (err) => console.error(err)
         );
     }
@@ -94,10 +93,8 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     setContent(data) {
         this.contentSnippet = data;
-        console.log('this.contentSnippet: ', this.contentSnippet);
         if (this.contentSnippet && this.contentSnippet.objects) {
             this.objectsArray = this.active === 'process' ? this.contentSnippet.objects : this.contentSnippet.objects.filter((item) => item.ready === 100 && item.show);
-            console.log('this.objectsArray: ', this.objectsArray);
         } else {
             this.objectsArray = [];
         }

@@ -100,7 +100,6 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
 
     // вызывается после создания, удаления, редактирования
     public snippetsChange(data: INewsSnippet[]) {
-        console.log('data: ', data);
         this.snippetsArray = data;
     }
 

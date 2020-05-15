@@ -45,8 +45,6 @@ export class ApartmentComponent implements OnInit {
             },
             (error) => console.log(error)
         );
-
-        console.log('FLAT', this.flatData);
     }
 
     public prevFlat() {

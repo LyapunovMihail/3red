@@ -39,10 +39,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
             this.buildForm(queryParams);
-            console.log('FORM', this.form);
         });
         setTimeout( () => {
-            console.log('DecorationList', this.config.decorationList);
         }, 1000);
     }
 

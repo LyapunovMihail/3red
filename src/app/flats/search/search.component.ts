@@ -126,7 +126,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
     public getFlats(params) {
-        console.log('params: ', params);
         this.searchService.getFlatsMultiple({ modsBtnList: this.modsBtnList, params }).subscribe(
             (flats) => {
                 flats = flats.filter((flat) => flat.status !== '8');

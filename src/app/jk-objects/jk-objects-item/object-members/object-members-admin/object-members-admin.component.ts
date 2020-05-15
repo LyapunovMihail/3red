@@ -92,8 +92,6 @@ export class ObjectMembersAdminComponent implements OnInit {
 
         array[i] = array.splice((i + dir), 1, array[i])[0];
         arr[i] = arr.splice((i + dir), 1, arr[i])[0];
-        // console.log('ARR-MEMBERS!!! ->', arr);
-        // console.log(array);
     }
 
     public pushMembers(i) {
@@ -103,7 +101,6 @@ export class ObjectMembersAdminComponent implements OnInit {
                 url: ''
             })
         );
-        console.log('this.form: ', this.form);
     }
 
     public popMembers(i, j) {

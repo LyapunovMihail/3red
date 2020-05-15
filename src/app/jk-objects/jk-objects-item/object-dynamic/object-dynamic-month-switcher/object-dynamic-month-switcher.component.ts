@@ -87,7 +87,6 @@ export class ObjectDynamicMonthSwitcherComponent implements OnChanges {
     public getSnippet(check, year, month) {
         this.dynamicService.getContentSnippet(this.objectId, year, month).subscribe(
             (data) => {
-                console.log('data: ', data);
                 if (check === 'prev') {
                     this.isValidPrevMonth = !!data && !!data.objects.length;
                 } else if (check === 'next') {

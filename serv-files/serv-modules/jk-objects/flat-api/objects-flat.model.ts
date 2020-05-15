@@ -41,7 +41,6 @@ export class ObjectsFlatModel {
 
     private valuesReview(options) {
         // если есть все параметры
-        console.log('options: ', options);
         return ( 'objectId' in options && 'switchOn' in options  ? true : false );
     }
 

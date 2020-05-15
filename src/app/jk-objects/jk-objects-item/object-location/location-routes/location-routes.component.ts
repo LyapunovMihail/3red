@@ -91,7 +91,6 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
             type: 'main'
         };
         this.markersConfig.push(this.mainMarker);
-        console.log('this.mainMarker.coords: ->', this.mainMarker.coords);
     }
 
     ngOnDestroy() {

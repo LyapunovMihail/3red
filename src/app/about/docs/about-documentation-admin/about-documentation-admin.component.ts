@@ -156,7 +156,6 @@ export class AboutDocumentationAdminComponent implements OnInit {
         }
     }
     public dateMask(val, elem) {
-        console.log('dateMask: ->', val)
         if ( val.length > 2 && val.length < 4) {
             val = val + '.';
             elem = val;

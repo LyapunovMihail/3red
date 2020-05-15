@@ -54,7 +54,6 @@ export class SharesEditAnchorComponent implements OnInit {
         this.textArea = this.data.textArea;
         this.formControl = this.data.formControl;
         this.text = this.textArea.value.slice(this.textArea.selectionStart, this.textArea.selectionEnd);
-        console.log('data: ', this.data);
     }
 
     insertText() {
@@ -76,9 +75,6 @@ export class SharesEditAnchorComponent implements OnInit {
             blockDescription: finText
         });
 
-        console.log('textarea: ', this.textArea.value);
-
-        console.log('this.formControl: ', this.formControl);
         // возвращаем фокус на элемент
         txtarea.focus();
         // возвращаем курсор на место - учитываем выделили ли текст или просто курсор поставили

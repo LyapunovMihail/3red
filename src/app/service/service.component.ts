@@ -58,12 +58,11 @@ export class ServiceComponent implements OnInit, OnDestroy {
     }
 
     public getContent() {
-        this.serviceAdminService.getContentSnippetByTab(this.currentTab).subscribe((data) => {
-            this.contentSnippet = data;
-            console.log('this.contentSnippet: ', this.contentSnippet);
-        }, (error) => {
-            console.error(error);
-        });
+        this.serviceAdminService.getContentSnippetByTab(this.currentTab)
+            .subscribe(
+                (data) => this.contentSnippet = data,
+                (error) => console.error(error)
+            );
     }
 
     public changeTab(tab) {

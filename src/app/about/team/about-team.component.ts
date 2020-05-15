@@ -57,9 +57,7 @@ export class AboutTeamComponent implements OnInit {
     public getContent() {
         this.aboutTeamService.getContentSnippets().subscribe((data) => {
             this.contentSnippets = data;
-            console.log('this.contentSnippets: ', this.contentSnippets);
             this.setTeams();
-            console.log('this.teams: ', this.teams);
         }, (error) => {
             console.error(error);
         });

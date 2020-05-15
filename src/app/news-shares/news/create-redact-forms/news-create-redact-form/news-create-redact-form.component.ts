@@ -249,7 +249,6 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
                 this.form.controls.objectId.setValue(this.objectId);
                 this.form.controls.objectName.setValue(this.objectName);
             }
-            console.log('this.form: ', this.form);
         }
     }
 
@@ -304,7 +303,6 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
 
     onSubmit(form) {
         form.publish = !(form.publish === 'false' || form.publish === false);
-        console.log('news form ->', form);
         if (!this.redactId) {
             this.newsCreateService.createSnippet(form).subscribe(
                 // а в общий компонент передается новый массив сниппетов

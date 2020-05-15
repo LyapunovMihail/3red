@@ -36,7 +36,6 @@ export class ObjectsMembersModel {
     }
 
     private valuesReview(options) {
-        console.log('options: ', options);
         // если есть все параметры
         return ('objectId' in options && 'created_at' in options && 'last_modifyed' && 'data' in options) || 'objectId' in options && 'switchOn' in options;
     }

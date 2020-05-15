@@ -36,7 +36,6 @@ export class ServiceAdminComponent implements OnInit {
             .subscribe(
                 (data) => {
                     this.snippet = data;
-                    console.log('this.snippet: ', this.snippet);
                     if (this.snippet) {
                         this.setFormFromSnippet();
                     } else {
@@ -51,7 +50,7 @@ export class ServiceAdminComponent implements OnInit {
     private getJk() {
         this.serviceAdminService.getJkSnippets()
             .subscribe(
-                (data) => { this.jkArray = data; console.log('this.jkArray: ', this.jkArray); },
+                (data) => this.jkArray = data,
                 (err) => console.error(err)
             );
     }

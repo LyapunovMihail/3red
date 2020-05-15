@@ -25,19 +25,19 @@ export class FooterComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
 
-        this.router.events
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-                    if (this.router.url === '/flats/plan' || this.router.url === '/flats/house') {
-                        this.isHidden = true;
-                        document.body.style.padding = '0';
-                    } else {
-                        this.isHidden = false;
-                        document.body.style.padding = '0 0 93px';
-                    }
-                }
-            });
+        // this.router.events
+        //     .pipe(takeUntil(this.ngUnsubscribe))
+        //     .subscribe((event) => {
+        //         if (event instanceof NavigationEnd) {
+        //             if (this.router.url === '/flats/plan' || this.router.url === '/flats/house') {
+        //                 this.isHidden = true;
+        //                 document.body.style.padding = '0';
+        //             } else {
+        //                 this.isHidden = false;
+        //                 document.body.style.padding = '0 0 93px';
+        //             }
+        //         }
+        //     });
     }
 
     public ngOnDestroy() {
