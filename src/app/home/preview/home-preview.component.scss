@@ -3,8 +3,34 @@
 .about {
     padding-top: 77px;
     background-color: #f5f5f5;
-    height: 100vh;
+    min-height: 700px;
     overflow: hidden;
+
+    &__news {
+        width: 489px;
+        height: 88px;
+        position: relative;
+        margin: 0 0 80px;
+
+        &-item {
+            position: absolute;
+            top: 0; left: 0;
+            transition: opacity .5s linear;
+            opacity: 0;
+            &.active { opacity: 1; }
+            &:hover {
+                .about__news-date,
+                .about__news-title { color: rgba(0, 0, 0, 0.5); }
+            }
+        }
+        &-date,
+        &-title {
+            font: 24px/31px $font-proba;
+            color: $col-red;
+            transition: color .2s linear;
+        }
+        &-date { margin: 0 0 8px; }
+    }
 
 }
 .about-container {
@@ -90,22 +116,10 @@
     width: 410px;
     white-space: pre-wrap;
 }
-.about__news-preview {
-    color: #ee4237;
-    &:hover {
-        color: rgba(0, 0, 0, 0.5);
-    }
 
-}
 .about__date-preview {
-    font-size: 15px;
 }
 .about__text-preview {
-    font-size: 24px;
-    line-height: 31px;
-    margin-top: 8px;
-    margin-bottom: 80px;
-    width: 440px;
 }
 .about__mouse {
     position: relative;

@@ -23,14 +23,13 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input()
     isAuthorizated: boolean;
 
-    // @Input()
-    // shareSnippets: Share[];
-    // @Input()
-    // allSnippets: any[];
     public snippet: IHomePreviewSnippet;
     public windowScrollEvent;
     public scrollTop;
     public closeModal = true;
+
+    public newsInterval;
+    public currentNews = 0;
 
     constructor(
         private windowEventsService: WindowEventsService,
@@ -44,6 +43,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
                 (data) => this.snippet = data,
                 (err) => console.error(err)
             );
+        this.changesNews();
     }
 
     ngAfterViewInit() {
@@ -54,6 +54,19 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnDestroy() {
         this.windowScrollEvent.unsubscribe();
+        if (this.newsInterval) {
+            clearInterval(this.newsInterval);
+        }
+    }
+
+    public changesNews() {
+        console.log(this.newsSnippet);
+        const total = this.newsSnippet.length - 1;
+        if (total > 0) {
+            this.newsInterval = setInterval( () => {
+                this.currentNews = this.currentNews < total ? this.currentNews + 1 : 0;
+            }, 5000);
+        }
     }
 
     public parseDate(createdAt) {

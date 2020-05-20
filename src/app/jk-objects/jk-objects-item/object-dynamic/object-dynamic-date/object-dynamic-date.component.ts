@@ -27,6 +27,8 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
     public realYear: number = Number(this.date.getFullYear());
     public realMonth: number = Number(this.date.getMonth()) + 1;
 
+    public visibleYears = [];
+
     public monthArray: any[] = [
         {
             name: 'Январь',
@@ -97,6 +99,7 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
             this.getSnippets();
         });
         this.yearsArray = this.yearsArrayGenerate();
+        this.getNotEmptyYears();
     }
 
     getSnippets() {
@@ -157,12 +160,24 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     private yearsArrayGenerate(): number[] {
-        let from = 2019;
+        let from = 2005;
         let to = Number(this.date.getFullYear());
         let result = [];
         for ( let i = from ; i <= to ; i ++ ) {
             result.push(i);
         }
-        return result;
+        return result.sort( (year1, year2) => year1 > year2 ? -1 : 1);
+    }
+
+    public getNotEmptyYears() {
+
+        this.dynamicService.getContentSnippets(this.objectId).subscribe(
+            (data) => {
+                const objecs = data.sort( (obj1, obj2) => obj1.year > obj2.year ? -1 : 1);
+                objecs.forEach( (item) => {
+                    this.visibleYears.push(item.year);
+                });
+            }
+        )
     }
 }

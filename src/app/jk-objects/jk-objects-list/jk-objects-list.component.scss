@@ -81,8 +81,9 @@
 
 .objects__title {
     font: 500 48px $font-formular;
+    margin-right: 24px;
 
-    &__main {
+    &--main {
         font-size: 36px;
         line-height: 1.25;
     }
@@ -93,14 +94,18 @@
     // align-items: center;
     align-items: flex-end;
 }
-.objects__title-wrapper { transform: translateY(-11px); }
+.objects__title-wrapper {
+    display: block;
+    transform: translateY(-11px);
+    cursor: pointer;
+    padding-right: 54px;
+    position: relative;
+}
 .switch {
     display: none;
 }
 .objects__title-label {
     height: 19px;
-    position: relative;
-    padding-left: 24px;
     font-size: 18px;
     line-height: 1.25;
 }
@@ -112,7 +117,7 @@
     position: absolute;
     border-radius: 20px;
     top: 50%;
-    right: -54px;
+    right: 0;
     transform: translateY(-50%);
     z-index: 1;
 
@@ -125,7 +130,7 @@
     position: absolute;
     border-radius: 50%;
     top: 50%;
-    right: -32px;
+    right: 21px;
     transform: translateY(-50%);
     z-index: 2;
     cursor: pointer;
@@ -142,8 +147,8 @@
 }
 
 .switch:checked + .objects__title-label::before {
-    right:-51px;
-    background:  #fff;
+    right: 4px;
+    background: #fff;
 }
 .switch:checked + .objects__title-label::after {
     background: #ee4237;

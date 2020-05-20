@@ -21,7 +21,8 @@
     margin: 0 0 96px;
 
     &__container {
-        max-width: 1279px;
+        width: 100%;
+        max-width: 1104px;
         display: flex;
         justify-content: space-between;
     }
@@ -109,6 +110,7 @@
     }
 
     &__wrap {
+        display: flex;
         &-item {
             flex-flow: row nowrap;
             margin: 0 32px 15px 0;
@@ -127,27 +129,13 @@
         position: relative;
 
         &_mod {
-            width: 221px;
+            max-width: 221px - 38px;
             position: relative;
             display: flex;
             align-items: center;
-            padding-right: 38px;
             box-sizing: border-box;
-            overflow: hidden;
             white-space: nowrap;
-
-            &:before {
-                content: '';
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                position: absolute;
-                right: 0;
-                top: auto;
-                background: url(/assets/img/flats/search/arrow_select_list.svg) 45% no-repeat rgba($color: $col-border, $alpha: .31);
-                background-size: 8px 10px;
-                transform: rotate(-90deg);
-            }
+            pointer-events: all;
 
             &-for-schema {
                 width: 112px + 12px + 28px;

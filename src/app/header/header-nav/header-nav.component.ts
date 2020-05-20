@@ -127,7 +127,7 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     public scrollLink(link) {
         if (!$(`#${link}`).length) { return; }
         const destination = $(`#${link}`).offset().top;
-        this.viewportScroller.scrollToPosition([0, destination - 60]);
+        this.viewportScroller.scrollToPosition([0, destination - 96]);
         return false;
     }
 

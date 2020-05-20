@@ -7,7 +7,7 @@
 
         <app-object-item-trigger [objectId]="objectId" [mod]="jk.mod" *ngIf="!isAuthorizated"></app-object-item-trigger>
 
-        <!-- <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage> -->
+        <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
 
         <app-object-item-project [isAuthorizated]="isAuthorizated" [objectId]="objectId" [objectName]="jk.name" id="project"></app-object-item-project>
 
@@ -25,22 +25,22 @@
 
         <app-object-item-documentation [isAuthorizated]="isAuthorizated" [objectId]="objectId" id="documentation"></app-object-item-documentation>
 
-        <app-object-item-members [isAuthorizated]="isAuthorizated" [objectId]="objectId"></app-object-item-members>
+        <app-object-item-members [isAuthorizated]="isAuthorizated" [objectId]="objectId" id="members"></app-object-item-members>
 
         <app-object-item-projects [objectId]="objectId" *ngIf="!isAuthorizated"></app-object-item-projects>
 
         <div class="utilities" *ngIf="isAuthorizated">
             <div class="utilities__item">
-                <a href="#" class="utilities__path">Админ</a>
-                <a href="#" class="utilities__path">Объкты</a>
-                <a href="#" class="utilities__path">{{jk.name}}</a>
+                <a href="javascript:void(0)" class="utilities__path">Админ</a>
+                <a routerLink="/objects" class="utilities__path">Объкты</a>
+                <a href="javascript:void(0)" class="utilities__path">{{jk.name}}</a>
             </div>
 
             <div class="utilities__item">
                 <ul class="utilities__nav">
-                    <li><a href="#" class="utilities__link">Предпросмотр</a></li>
-                    <li><a href="#" class="utilities__link">Опубликовать</a></li>
-                    <li><a href="#" class="utilities__link">Показать на главной</a></li>
+                    <li><a href="javascript:void(0)" class="utilities__link">Предпросмотр</a></li>
+                    <li><a href="javascript:void(0)" class="utilities__link">Опубликовать</a></li>
+                    <li><a href="javascript:void(0)" class="utilities__link">Показать на главной</a></li>
                 </ul>
             </div>
         </div>
