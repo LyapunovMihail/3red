@@ -2,7 +2,7 @@
     <div class="objects-container" [class.objects-container--main]="isMainPage">
         <div class="objects-wrap">
             <div class="objects__title-wrap">
-                <h2 [ngClass]="{'objects__title': !isMainPage, 'objects__title__main' : isMainPage}">Объекты</h2>
+                <h1 [ngClass]="{'objects__title': !isMainPage, 'objects__title__main' : isMainPage}">Объекты</h1>
                 <div class="objects__title-wrapper" *ngIf="!isAuthorizated || isMainPage">
                     <input type="checkbox" name="switch" id="map1" class="switch" (change)="showMap = !showMap"
                         [checked]="showMap">

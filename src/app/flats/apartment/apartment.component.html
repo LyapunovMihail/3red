@@ -10,11 +10,14 @@
             <button class="apartment__elements-cls btn-cls" (click)="close.emit(false)"><span></span></button>
         </div>
 
-
         <h2 class="apartment__info-title">
             {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
         </h2>
-        <a href="javascript:void(0)" class="apartment__info-favorites">Добавить избранное</a>
+        <a href="javascript:void(0)" (click)="setFavorite()"
+           class="apartment__info-favorites"
+           [class.apartment__info-favorites-active]="flatData.inFavorite">
+            {{ flatData.inFavorite ? 'Убрать из избранного' : 'Добавить в избранное' }}
+        </a>
         <div class="apartment__image">
             <img class="apartment_item_scheme" (error)="img.style.display = 'none'"
                  [src]="'/assets/floor-plans/jk_' + flatData.mod + '/house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flat.svg'" alt="" #img>

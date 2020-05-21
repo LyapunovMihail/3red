@@ -60,6 +60,25 @@
 
         &-title { margin: 0 0 18px; }
 
+        &-favorites {
+            font: 16px/22px $font-proba;
+            color: $col-red;
+            margin: 0 0 24px;
+            position: relative;
+            width: 155px;
+            display: block;
+            &:after {
+                content: url(/assets/img/jk-object/header_heart-empty.svg);
+                position: absolute;
+                top: 50%; left: calc(100% + 9px);
+                transform: translateY(-50%);
+            }
+
+            &-active:after {
+                content: url(/assets/img/jk-object/header_heart.svg);
+            }
+        }
+
         &-subtitle,
         &-value { font: $font-18; }
         &-value {

@@ -1,0 +1,119 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+:host {
+    width: 100%;
+}
+
+.search-output__result {
+    width: 100%;
+
+    &-wrap {
+        width: 100%;
+        height: 86px;
+        box-sizing: border-box;
+        padding: 8px 56px;
+        margin: 0 0 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: background-color $transition;
+        &:hover { background-color: rgba($color: $col-red, $alpha: .1); }
+
+        &:first-child {
+            margin-top: 16px;
+        }
+    }
+
+    &-item {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+
+        &-img {
+            width: 70px;
+            min-width: 70px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin: 0 33px 0 0;
+
+            &-error {
+                width: 100%;
+                height: 100%;
+                background: url(/assets/img/flats/search/lock.svg);
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        &-content {
+            font: $font-18;
+            color: $col-black-5;
+            white-space: nowrap;
+            user-select: none;
+
+            &_jk-name {
+                opacity: 0.5;
+            }
+            &_room,
+            &_price,
+            &_space { color: $col-black; }
+
+            &_price,
+            &_price-not-sale,
+            &_price-sale { text-align: right; }
+            &_price-not-sale {
+                color: $col-black-5;
+                text-decoration: line-through;
+            }
+            &_price-sale { color: $col-red; }
+
+            &_number,
+            &_floor,
+            &_house {
+                width: 9.12%;
+                min-width: 106px;
+            }
+            &_room {
+                width: 22%;
+                min-width: 150px;
+            }
+            &_space,
+            &_decoration,
+            &_delivery {
+                width: 11%;
+                min-width: 75px;
+            }
+        }
+
+        &-price {
+            width: 12%;
+            display: flex;
+            flex-flow: column;
+        }
+
+        &-favorite {
+            width: 6%;
+
+            &_img {
+                display: block;
+                width: 25px;
+                height: 23px;
+                margin-left: 40px;
+                background: url(/assets/img/jk-object/header_heart.svg) no-repeat;
+                background-size: 100%;
+            }
+            //
+            //&_active {
+            //    background: url(/assets/img/favorite-active.svg) no-repeat;
+            //    background-size: 100%;
+            //}
+        }
+    }
+}

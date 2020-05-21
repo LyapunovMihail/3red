@@ -301,4 +301,29 @@ export class AddressesModel {
             parameters
         };
     }
+
+    public async getFavorites(session) {
+        return session.favoriteFlats ? session.favoriteFlats : [];
+    }
+
+    public async setFavorites(session, flat) {
+
+        if (session.favoriteFlats === undefined) {
+            session.favoriteFlats = [];
+        }
+
+        const index = session.favoriteFlats.findIndex((item) => item.article === flat.article);
+        if (index >= 0) {
+            session.favoriteFlats.splice(index, 1);
+        } else {
+            session.favoriteFlats.push(flat);
+        }
+
+        return session.favoriteFlats;
+    }
+
+    public async refreshFavorites(session, flats) {
+        session.favoriteFlats = flats;
+        return 'OK';
+    }
 }

@@ -8,36 +8,10 @@
     <div class="search-output__result">
         <div class="search-output__empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
-        <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
-            <a (click)="openApartmentModal(i)" class="search-output__result-item">
-                <div class="search-output__result-item-img">
-                    <img (error)="img.style.display = 'none'"
-                         [src]="'/assets/floor-plans/jk_' + flat.mod + '/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
-                    <div *ngIf="img.style.display === 'none'" class="search-output__result-item-img-error g-3red"></div>
-                </div>
-                <span class="search-output__result-item-content search-output__result-item-content_room">
-                    {{(flat.rooms === 0) ? 'Студия, ' : flat.rooms + '-комнатная, '}}{{'№ ' + flat.flat}}
-                    <br> <span class="search-output__result-item-content_jk-name">ЖК {{flat.jkName}}</span>
-                </span>
-                <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
-                <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
-                <span class="search-output__result-item-content search-output__result-item-content_delivery">{{flat.deliveryDate}}</span>
-                <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
-                <span class="search-output__result-item-content search-output__result-item-content_house">Дом {{flat.house}}</span>
-                <span class="search-output__result-item-price">
-                    <span class="search-output__result-item-content"
-                          [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
-                                      'search-output__result-item-content_price-not-sale' : flat.discount}">
-                          {{flat.price | myBitNumberPipe}} &#8381;
-                    </span>
-                    <span *ngIf="flat.discount"
-                          class="search-output__result-item-content search-output__result-item-content_price-sale">
-                          {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
-                    </span>
-                </span>
-            </a>
-           <!-- <div class="search-output__result-item-favorite"></div> -->
-        </div>
+        <app-flats-list
+            [flatsList]="flatsList">
+        </app-flats-list>
+
     </div>
     <div class="search-output__btn">
         <button class="search-output__btn-show btn_var-3" *ngIf="showMore" (click)="loadMore.emit()">Показать еще</button>
@@ -46,9 +20,3 @@
 
 </div>
 
-<app-flats-apartment-modal *ngIf="showApartmentWindow"
-    [showApartmentWindow]="showApartmentWindow"
-    [flatsList]="flatsList"
-    [flatIndex]="selectedFlatIndex"
-    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
-</app-flats-apartment-modal>

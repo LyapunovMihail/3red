@@ -1,22 +1,19 @@
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
-import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { SearchService } from '../search.service';
+import { FavoritesService } from '../../../favorites/favorites.service';
 
 @Component({
     selector: 'app-search-output',
     templateUrl: './search-output.component.html',
-    styleUrls: ['./search-output.component.scss'],
-    providers: [
-        WindowScrollLocker
-    ]
+    styleUrls: ['./search-output.component.scss']
+
 })
 
 export class SearchOutputComponent implements OnInit {
 
-    public showApartmentWindow = false;
-    public selectedFlatIndex: number;
+
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
     @Input() public showMore: boolean;
@@ -26,9 +23,9 @@ export class SearchOutputComponent implements OnInit {
     public container: ElementRef;
 
     constructor(
-        public windowScrollLocker: WindowScrollLocker,
         private flatsDiscountService: FlatsDiscountService,
-        private searchService: SearchService
+        private searchService: SearchService,
+        public favoritesService: FavoritesService
     ) {}
 
     public ngOnInit() {
@@ -37,6 +34,7 @@ export class SearchOutputComponent implements OnInit {
                 this.flatsList = flats;
                 this.flatsList.map((flat) => {
                     flat.discount = this.getDiscount(flat);
+                    flat.inFavorite = this.inFavorite(flat);
                     return flat;
                 });
             });
@@ -50,10 +48,8 @@ export class SearchOutputComponent implements OnInit {
         return this.flatsDiscountService.getDiscount(flat);
     }
 
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 
     public scrollToTop() {

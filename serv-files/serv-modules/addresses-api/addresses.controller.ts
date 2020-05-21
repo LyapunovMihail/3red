@@ -37,6 +37,18 @@ export class AddressesController extends AddressesModel {
             return await this.getSearchConfig();
         }));
 
+        this.router.get('/favorites/get', responseHandler(async(req) => {
+            return await this.getFavorites(req.session);
+        }));
+
+        this.router.post('/favorites/set', responseHandler(async(req) => {
+            return await this.setFavorites(req.session, req.body.flat);
+        }));
+
+        this.router.post('/favorites/refresh', responseHandler(async(req) => {
+            return await this.refreshFavorites(req.session, req.body.flats);
+        }));
+
         const app: Express = this.expressAppService.getApp();
         app.use('/api', this.router);
     }

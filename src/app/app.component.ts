@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { FavoritesService } from './favorites/favorites.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -35,7 +36,8 @@ export class AppComponent implements OnInit {
     constructor(
         public appState: AppState,
         private router: Router,
-        public flatsDiscountService: FlatsDiscountService
+        public flatsDiscountService: FlatsDiscountService,
+        public favoritesService: FavoritesService
     ) {}
 
     public ngOnInit() {
@@ -56,5 +58,7 @@ export class AppComponent implements OnInit {
 
         // Загружаем акции для дальнейшего вычисления скидки по квартирам
         this.flatsDiscountService.getShares();
+        // Загружаем избранные квартиры
+        this.favoritesService.getFavoriteFlats();
     }
 }
