@@ -15,7 +15,7 @@
 
             <div class="team__divisions" *ngFor="let tab of tabSnippet.team; let i = index">
                 <ng-container *ngIf="tab.show">
-                    <div class="team__item-title team__item-title--first" *ngIf="isAuthorizated">{{tab.name}}</div>
+                    <div class="team__item-title" *ngIf="isAuthorizated">{{tab.name}}</div>
 
                     <div class="team__item">
                         <div class="team__wrapper">
@@ -23,7 +23,7 @@
                             <h4 class="team__item-title" *ngIf="!isAuthorizated">{{tab.name}}</h4>
                             <button class="team__btn" [class.team__btn--active]="teams[tab.name].unlimit" (click)="teams[tab.name].unlimit = !teams[tab.name].unlimit" *ngIf="teams[tab.name].team?.data.length > 4">Все сотрудники</button>
                         </div>
-                        <div class="team__wrap team__wrap--building" *ngIf="teams[tab.name].team">
+                        <div class="team__wrap" *ngIf="teams[tab.name].team">
                             <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
                                 <div class="team__list" *ngIf="j < 4 || teams[tab.name].unlimit">
                                     <div class="team__list-item">

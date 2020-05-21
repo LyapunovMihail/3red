@@ -19,7 +19,7 @@ import { IHomePreviewSnippet } from '../../../../serv-files/serv-modules/home/pr
 export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @Input()
-    newsSnippet: INewsSnippet;
+    newsSnippet;
     @Input()
     isAuthorizated: boolean;
 
