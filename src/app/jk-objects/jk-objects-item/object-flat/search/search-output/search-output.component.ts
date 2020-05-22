@@ -5,6 +5,7 @@ import { WindowScrollLocker } from '../../../../../commons/window-scroll-block';
 import { SearchService } from '../search.service';
 import { ObjectFlatsService } from '../../object-flats.service';
 import { IObjectSnippet } from '../../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { FavoritesService } from '../../../../../favorites/favorites.service';
 
 @Component({
     selector: 'app-search-output',
@@ -31,6 +32,7 @@ export class SearchOutputComponent implements OnInit {
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private flatsDiscountService: FlatsDiscountService,
+        private favoritesService: FavoritesService,
         private searchService: SearchService,
         private objectFlatsService: ObjectFlatsService
     ) {}
@@ -42,6 +44,7 @@ export class SearchOutputComponent implements OnInit {
                 this.flatsList = flats;
                 this.flatsList.map((flat) => {
                     flat.discount = this.getDiscount(flat);
+                    flat.inFavorite = this.inFavorite(flat);
                     return flat;
                 });
             });
@@ -53,6 +56,10 @@ export class SearchOutputComponent implements OnInit {
 
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
+    }
+
+    public inFavorite(flat): boolean {
+        return this.favoritesService.inFavorite(flat);
     }
 
     public openApartmentModal(index) {

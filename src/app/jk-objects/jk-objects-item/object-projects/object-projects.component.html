@@ -20,7 +20,7 @@
                 <span></span>
             </button>
 
-            <div class="object-project__slider-item slider-list"  *ngIf="snippets"
+            <div class="object-project__slider-item slider-list" *ngIf="snippets"
                 [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 282 ) ) + 'px)') }">
                 
                 <ng-container *ngFor="let snippet of snippets; let i = index">

@@ -46,8 +46,6 @@ export class ObjectCreditAdminComponent implements OnInit {
             last_modifyed: new Date(),
             banks: (this.snippet && this.snippet.banks && this.snippet.banks.length) ? this.setBanksFromSnippet() : this.setNewBanks(),
         });
-
-        console.log('this.form: ', this.form);
     }
 
     private setNewBanks() {
@@ -116,7 +114,6 @@ export class ObjectCreditAdminComponent implements OnInit {
     }
 
     public save() {
-        console.log(this.form.value);
         this.projectService.setSnippetData(this.form.value).subscribe(
             (data) => {
                 this.snippetChange.emit(data);

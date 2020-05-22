@@ -17,17 +17,15 @@ import { FlatsDiscountService } from './commons/flats-discount.service';
 import { PhoneObserverService } from './admin-contacts/phone.observer.service';
 import { JkService } from './commons/jk.service';
 import { WindowScrollLocker } from './commons/window-scroll-block';
+import { FavoritesService } from './favorites/favorites.service';
 
 // App is our top level component
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
-import { LocationModule } from './location/location.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
-import { DynamicModule } from './dynamic/dynamic.module';
 import { AboutModule } from './about/about.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
-import { DecorationModule } from './decoration/decoration.module';
 import { FlatsModule } from './flats/flats.module';
 import { ParkingModule } from './parking/parking.module';
 import { StoreroomsModule } from './storerooms/storerooms.module';
@@ -35,6 +33,7 @@ import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { JkObjectsModule } from './jk-objects/jk-objects.module';
 import { ServiceModule } from './service/service.module';
 import { ContactsModule } from './contacts/contacts.module';
+import { FavoritesModule } from './favorites/favorites.module';
 
 // import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
@@ -42,6 +41,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
+import { FlatsListComponent } from './flats/search/search-output/flats-list/flats-list.component'
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -54,20 +54,18 @@ const APP_PROVIDERS = [
     FlatsDiscountService,
     PhoneObserverService,
     WindowScrollLocker,
-    JkService
+    JkService,
+    FavoritesService
 ];
 
 const APP_MODULES = [
   //  ErrorPageModule,
     AuthorizationModule,
     HomeModule,
-    LocationModule,
     FooterModule,
     HeaderModule,
-    DynamicModule,
     AboutModule,
     NewsSharesModule,
-    DecorationModule,
     FlatsModule,
     ParkingModule,
     StoreroomsModule,
@@ -75,6 +73,7 @@ const APP_MODULES = [
     JkObjectsModule,
     ServiceModule,
     ContactsModule,
+    FavoritesModule,
 
     BrowserModule,
     BrowserAnimationsModule,

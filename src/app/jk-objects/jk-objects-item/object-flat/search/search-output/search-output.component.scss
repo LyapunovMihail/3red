@@ -153,15 +153,21 @@
             }
 
             &-favorite {
-                width: 18px;
-                height: 18px;
-                background: url(/assets/img/favorite.svg) no-repeat;
-                background-size: 100%;
+                width: 6%;
 
-                &_active {
-                    background: url(/assets/img/favorite_active.svg) no-repeat;
+                &_img {
+                    display: block;
+                    width: 25px;
+                    height: 23px;
+                    margin-left: 40px;
+                    background: url(/assets/img/jk-object/header_heart.svg) no-repeat;
                     background-size: 100%;
                 }
+                //
+                //&_active {
+                //    background: url(/assets/img/favorite-active.svg) no-repeat;
+                //    background-size: 100%;
+                //}
             }
         }
     }

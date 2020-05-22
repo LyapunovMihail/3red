@@ -32,8 +32,10 @@
                           {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
                     </span>
                 </span>
+                <span class="search-output__result-item-content search-output__result-item-favorite">
+                    <span class="search-output__result-item-favorite_img" *ngIf="flat.inFavorite"></span>
+                </span>
             </a>
-           <!-- <div class="search-output__result-item-favorite"></div> -->
         </div>
     </div>
     <div class="search-output__btn">

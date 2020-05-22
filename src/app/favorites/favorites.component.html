@@ -1,0 +1,14 @@
+<section class="objects">
+    <div class="objects-container">
+        <h1 class="objects__title">Избранное</h1>
+        <p class="objects__subtitle">{{ favoritesService.favoriteFlats.length ? 'Добавлено ' + favoritesService.favoriteFlats.length + ' квартир' : 'На данный момент в избранное ничего не добавлено' }}</p>
+    </div>
+
+    <div class="objects__wrapper">
+        <div class="objects__result">
+            <app-flats-list
+                [flatsList]="favoritesService.favoriteFlats">
+            </app-flats-list>
+        </div>
+    </div>
+</section>

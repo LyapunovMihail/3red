@@ -3,18 +3,20 @@ import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { SearchService } from '../search/search.service';
+import { FavoritesService } from '../../favorites/favorites.service';
 // declare let chWidget: any; // переменная для работы с чейзером
 
 @Component({
     selector: 'app-flats-apartment-modal',
     templateUrl: './apartment.component.html',
-    styleUrls: ['./apartment.component.scss', '../flats.component.scss']
+    styleUrls: ['./apartment.component.scss', '../flats.component.scss'],
+    providers: [SearchService]
 })
 
 export class ApartmentComponent implements OnInit {
 
-    public isCreditFormOpen: boolean = false;
-    public isReserveFormOpen: boolean = false;
+    public isCreditFormOpen = false;
+    public isReserveFormOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
     public objectLink;
@@ -29,17 +31,20 @@ export class ApartmentComponent implements OnInit {
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
         public searchService: SearchService,
+        private favoritesService: FavoritesService
     ) {}
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        console.log('this.flatData: ', this.flatData);
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
         this.searchService.getObjects().subscribe(
             (data) => {
                 data.forEach( (obj) => {
-                    if (obj.name === this.flatData.jkName) {
+                    if (obj.mod === this.flatData.mod) {
                         this.objectLink = obj._id;
+                        this.flatData.jkName = obj.name;
                     }
                 });
             },
@@ -69,12 +74,9 @@ export class ApartmentComponent implements OnInit {
         return minPrice;
     }
 
-    // public toFavorite(): void {
-    //     this.favoritesService.toFavorite(this.flatData);
-    // }
-
-    // get inFavorite(): boolean {
-    //     return this.favoritesService.inFavorite(this.flatData);
-    // }
+    public setFavorite(): void {
+        this.flatData.inFavorite = !this.flatData.inFavorite;
+        this.favoritesService.setFavorite(this.flatData);
+    }
 
 }

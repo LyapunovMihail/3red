@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { FavoritesService } from '../../../../favorites/favorites.service';
 // declare let chWidget: any; // переменная для работы с чейзером
 
 @Component({
@@ -28,13 +29,16 @@ export class ApartmentComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private flatsDiscountService: FlatsDiscountService
+        private flatsDiscountService: FlatsDiscountService,
+        private favoritesService: FavoritesService
     ) {}
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.flatData.jkName = this.jk.name;
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        console.log('this.flatData: ', this.flatData);
     }
 
     public prevFlat() {
@@ -59,12 +63,9 @@ export class ApartmentComponent implements OnInit {
         return minPrice;
     }
 
-    // public toFavorite(): void {
-    //     this.favoritesService.toFavorite(this.flatData);
-    // }
-    //
-    // get inFavorite(): boolean {
-    //     return this.favoritesService.inFavorite(this.flatData);
-    // }
+    public setFavorite(): void {
+        this.flatData.inFavorite = !this.flatData.inFavorite;
+        this.favoritesService.setFavorite(this.flatData);
+    }
 
 }

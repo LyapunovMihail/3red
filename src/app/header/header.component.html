@@ -15,7 +15,7 @@
                        class="nav__link"
                        [ngClass]="{ 'active' : checkLink(link.url) }"
                         [routerLink]="link.url">{{link.name}}</a>
-                    <a *ngIf="link.name === 'Избранное'" class="nav__link-heart" [routerLink]="link.url"><img src="/assets/img/jk-object/header_heart.svg" alt="heart"><sup>12</sup></a>
+                    <a *ngIf="link.name === 'Избранное'" class="nav__link-heart" [routerLink]="link.url"><img src="/assets/img/jk-object/header_heart.svg" alt="heart"><sup>{{favoriteCounter}}</sup></a>
                 </li>
             </ul>
         </nav>

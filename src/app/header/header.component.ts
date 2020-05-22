@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { HeaderService } from './header.service';
 import { JkService } from '../commons/jk.service';
 import set = Reflect.set;
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Component({
     selector : 'app-header',
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public hoveredLink = -1;
     public pageName;
     public objectId: string;
+    public favoriteCounter = 0;
     // подписка на скролл страницы HomePage
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -36,11 +38,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
         private router: Router,
-        private jkService: JkService
+        private jkService: JkService,
+        private favoritesService: FavoritesService
     ) {
     }
 
     public ngOnInit() {
+        this.favoritesService.getFavoriteCount().subscribe((value) => this.favoriteCounter = value);
+
         this.fixedHeader();
 
         this.jkService.getJkId().subscribe((objectId) => this.headerService.setJkId(objectId) );
