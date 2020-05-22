@@ -41,6 +41,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.authorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
+            this.getObjects([]);
         });
 
         this.objectService.getSnippets()
@@ -54,10 +55,18 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         if (!this.isMainPage) {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false, skipLocationChange: true});
         }
-        this.objectService.getSnippetsByParams(params).subscribe(
-            (data) => this.snippets = data,
-            (err) => console.log(err)
-        );
+
+        if (this.isAuthorizated) {
+            this.objectService.getSnippets().subscribe(
+                (data) => this.snippets = data,
+                (err) => console.log(err)
+            );
+        } else {
+            this.objectService.getSnippetsByParams(params).subscribe(
+                (data) => this.snippets = data,
+                (err) => console.log(err)
+            );
+        }
     }
 
     ngOnDestroy() {
@@ -116,5 +125,11 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             }
         });
         this.isLoaded = true;
+    }
+
+    public isShowMap() {
+        setTimeout( () => {
+            this.showMap = !this.showMap;
+        }, 300);
     }
 }

@@ -25,7 +25,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     public closeTabsModal = true;
     public closeContentModal = true;
 
-    public currentTab: string;
+    public currentTab: string = 'null';
 
     constructor(
         private authorization: AuthorizationObserverService,
@@ -51,7 +51,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
         this.tabSnippet = data;
         if (this.tabSnippet) {
             if (this.tabSnippet.tab && this.tabSnippet.tab.length && this.tabSnippet.tab.some((tab) => tab.show)) {
-                this.currentTab = this.tabSnippet.tab.find((tab) => tab.show).name;
+                // this.currentTab = this.tabSnippet.tab.find((tab) => tab.show).name;
                 this.getContent();
             }
         }

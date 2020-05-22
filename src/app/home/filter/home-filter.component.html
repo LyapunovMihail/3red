@@ -6,52 +6,54 @@
 
     <div [formGroup]="form" class="object-filter__container">
 
-        <div class="object-filter__room">
-            <p class="object-filter__text object-filter__text_for-input g-text_sign">Количество комнат</p>
-            <div class="object-filter__room-item" formArrayName="rooms" *ngFor="let control of form.get('rooms')['controls']; let i = index">
-                <input id="room{{i}}" type="checkbox" style="display: none;" formControlName="{{i}}">
-                <label for="room{{i}}">{{(i === 0) ? 'Ст' : (i === 3) ? '3+' : i}}</label>
+        <div class="object-filter__wrap">
+
+            <div class="object-filter__room">
+                <p class="object-filter__text object-filter__text_for-input g-text_sign">Количество комнат</p>
+                <div class="object-filter__room-item" formArrayName="rooms" *ngFor="let control of form.get('rooms')['controls']; let i = index">
+                    <input id="room{{i}}" type="checkbox" style="display: none;" formControlName="{{i}}">
+                    <label for="room{{i}}">{{(i === 0) ? 'Ст' : (i === 3) ? '3+' : i}}</label>
+                </div>
+            </div>
+            
+            <div class="object-filter__price">
+                <p class="object-filter__text object-filter__text_for-input g-text_sign">Стоимость</p>
+    
+                <div class="object-filter__price-range">
+                    <p class="object-filter__text object-filter__text_for-price"><span #minPrice></span> &#8381;</p>
+                    <p class="object-filter__text object-filter__text_for-price">&mdash;</p>
+                    <p class="object-filter__text object-filter__text_for-price"><span #maxPrice></span> &#8381;</p>
+    
+                    <ghm-range-number
+                        formControlName="price"
+                        [min]="config.price.min"
+                        [max]="config.price.max"
+                        [toFixed]="true"
+                        (move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0))">
+                    </ghm-range-number>
+                </div>
+    
+            </div>
+    
+            <div class="object-filter__wrap-item object-filter__wrap-item_mod">
+                <p class="object-filter__subtitle">Жилой комплекс</p>
+    
+                <div class="object-filter__range object-filter__range_mod g-tooltip-area" (click)="showMods = true" [class.active]="showMods">
+                    <p class="object-filter__text">
+                        {{ form.controls['mod'].value | mySearchFormPipe:modsBtnList }}
+                    </p>
+                </div>
+    
+                <div class="close-area" *ngIf="showMods" (click)="showMods = false"></div>
+                <app-filter-mod-list *ngIf="showMods"
+                    formControlName="mod"
+                    [btnList]="modsBtnList">
+                </app-filter-mod-list>
             </div>
         </div>
-        
-        <div class="object-filter__price">
-            <p class="object-filter__text object-filter__text_for-input g-text_sign">Стоимость</p>
 
-            <div class="object-filter__price-range">
-                <p class="object-filter__text object-filter__text_for-price"><span #minPrice></span> &#8381;</p>
-                <p class="object-filter__text object-filter__text_for-price">&mdash;</p>
-                <p class="object-filter__text object-filter__text_for-price"><span #maxPrice></span> &#8381;</p>
 
-                <!-- Он не правильно работает, но я добавил что бы сделать верстку -->
-                <ghm-range-number
-                    formControlName="price"
-                    [min]="config.price.min"
-                    [max]="config.price.max"
-                    [toFixed]="true"
-                    (move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0))">
-                </ghm-range-number>
-            </div>
-
-        </div>
-
-        <div class="object-filter__wrap-item object-filter__wrap-item_mod">
-            <p class="object-filter__subtitle">Жилой комплекс</p>
-
-            <div class="object-filter__range object-filter__range_mod" (click)="showMods = true">
-                <p class="object-filter__text">
-                    {{ form.controls['mod'].value | mySearchFormPipe:modsBtnList }}
-                </p>
-            </div>
-
-            <div class="close-area" *ngIf="showMods" (click)="showMods = false"></div>
-
-            <app-filter-mod-list *ngIf="showMods"
-                formControlName="mod"
-                [btnList]="modsBtnList">
-            </app-filter-mod-list>
-        </div>
-
-        <a class="object-filter__btn-link btn_var-3"
+        <a class="object-filter__btn-link btn_var-2"
            [class.object-filter__btn-link--disabled]="!flatsLength"
             (click)="getHousesAndRout()">
             {{ flatsLength ? flatsLength + ' предложение' : 'Нет предложений'}}

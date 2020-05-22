@@ -1,3 +1,5 @@
+@import '../../../../styles/modules/mixins/mixin';
+
 .objects__utilities {
     display: flex;
     align-items: flex-start;
@@ -6,45 +8,17 @@
 }
 .objects__utilities-lock {
     position: relative;
-    transform: translateY(-1px);
     z-index: 100;
 }
 .objects__utilities-helper {
     display: flex;
+    max-width: 540px;
     justify-content: flex-start;
     align-items: baseline;
 }
 .objects__utilities-search {
-    font-size: 18px;
-    line-height: 1.25;
-    position: relative;
-    width: 116px;
-    background: none;
-    cursor: pointer;
-    font-family: inherit;
-    outline: none;
-    border: 0;
-    &::after {
-        content: url(/assets/img/jk-object/complex-arrow.svg);
-        position: absolute;
-        top: -7px;
-        right: -35px;
-
-    }
-
-    &--active {
-        &::after {
-            content: url(/assets/img/jk-object/complex-uparrow.svg);
-        }
-    }
-}
-.objects__utilities-search {
     width: 47px;
-
-    &::after {
-        top: -4px;
-        right: -39px;
-    }
+    &:hover { color: $col-black; }
 }
 .objects__utilities-wrap {
     position: absolute;
@@ -63,7 +37,7 @@
 .objects__utilities-price {
     display: flex;
     align-items: flex-start;
-    margin-left: 80px;
+    margin-left: 77px;
 }
 
 
@@ -78,9 +52,12 @@
     display: block;
     color: rgba(0, 0, 0, 0.5);
     margin-left: 20px;
-    font-size: 18px;
+    font: 18px/23px $font-proba;
+    cursor: pointer;
+    transition: color .2s linear;
     &--ml { margin-left: 0 !important; }
-    &--active {
+    &:hover { color: $col-red_hover; }
+    &.active {
         color: #ee4237;
         position: relative;
         &::after {
@@ -101,25 +78,38 @@
     height: 100%;
     z-index: 1;
 }
+.objects__price {
 
-.objects__price-title {
-    font-size: 18px;
-    transform: translateY(-1px);
-}
-.objects__price-input {
-    background: none;
-    border: 0;
-    outline: 0;
-    font-family: inherit;
-    border-bottom: 1px solid #d8d8d8;
-    width: 170px;
-    line-height: 1.25;
-    font-size: 18px;
-    padding: 0 0 3px;
-    margin-left: 20px;
-
-    &::placeholder {
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 18px;
+    &-wrap {
+        width: 170px;
+        display: flex;
+        padding: 0 0 5px;
+        border-bottom: 1px solid #d8d8d8;
+        &+ .objects__price-wrap { margin-left: 16px; }
+    }
+    &-hint {
+        font: 18px/23px $font-proba;
+        color: rgba($color: $col-black, $alpha: .5);
+        pointer-events: none;
+        margin-right: 7px;
+        &.not-placeholder { color: $col-black; }
+    }
+    &-title {
+        font: 18px/23px $font-proba;
+        transform: translateY(-1px);
+        margin-right: 20px;
+    }
+    &-input {
+        width: 140px;
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        background: none;
+        border: 0;
+        outline: 0;
+        padding: 0;
+        &::placeholder {
+            color: rgba($color: $col-black, $alpha: .5);
+            font: inherit;
+        }
     }
 }

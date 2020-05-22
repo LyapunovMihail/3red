@@ -1,0 +1,20 @@
+
+<section class="parking-schema">
+
+    <div class="parking-schema__nav">
+        <div class="parking-schema__nav-container">
+
+            <a routerLink="/objects/list/{{objectId}}/parking" class="parking-schema__nav-back">Дом {{fakeInfo.house}}, секция {{fakeInfo.section}}</a>
+        </div>
+    </div>
+
+    <div class="parking-schema__container">
+
+        <div class="parking-schema__info">
+            <p class="parking-schema__info-item parking-schema__info-item--type">Машиноместо, <span>№{{fakeInfo.number}}</span></p>
+            <p class="parking-schema__info-item parking-schema__info-item--space">{{fakeInfo.space}} м²</p>
+            <p class="parking-schema__info-item parking-schema__info-item--price">{{fakeInfo.price}} P</p>
+        </div>
+        <div class="parking-schema__plan g-3red"></div>
+    </div>
+</section>

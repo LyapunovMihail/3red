@@ -22,7 +22,7 @@
                         <div class="object-documentation__list-wrap object-documentation__list-wrap_file" *ngFor="let doc of item.uploads">
                             <a [href]="'/' + uploadsPath + doc.name" target="_blank"
                                 class="object-documentation__list-file">
-                                    {{doc.originalName}}
+                                    <span class="g-doc-hover">{{doc.originalName}}</span>
                             </a>
                             <p class="object-documentation__list-date">{{ parseDate(doc.date) }}</p>
                         </div>

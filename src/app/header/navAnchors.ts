@@ -31,6 +31,10 @@ export const NAVANCHORS = {
         {
             name: 'Документация',
             url: 'documentation'
+        },
+        {
+            name: 'Участники проекта',
+            url: 'members'
         }
     ],
 

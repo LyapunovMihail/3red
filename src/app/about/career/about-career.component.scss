@@ -114,4 +114,15 @@
     font-size: 18px;
     line-height: 1.25;
     margin-top: 8px;
+    position: relative;
+    &::after {
+        content: '';
+        width: 0%;
+        height: 1px;
+        position: absolute;
+        top: 100%; left: 0;
+        background-color: $col-red;
+        transition: width .3s ease;
+    }
+    &:hover::after { width: 100%; }
 }

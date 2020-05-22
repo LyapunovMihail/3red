@@ -35,4 +35,4 @@
 
 </div>
 
-<button class="object-purchase__list-btn btn-empty" (click)="moreBanks = !moreBanks" *ngIf="activeBanksLength > 5">Показать все банки</button>
+<button class="object-purchase__list-btn btn-empty" [class.active]='moreBanks' (click)="moreBanks = !moreBanks" *ngIf="activeBanksLength > 5">Показать все банки</button>

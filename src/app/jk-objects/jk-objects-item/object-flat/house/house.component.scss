@@ -16,6 +16,7 @@
         max-width: $container;
 
         &_for-flat { max-width: 1216px; }
+        &--for-nav { max-width: 1216px; }
     }
 
     &__nav {
@@ -27,7 +28,6 @@
         &-back {
             font: 24px/29px $font-proba;
             color: $col-black;
-            margin-bottom: 37px;
             padding-left: 8px + 28px;
             position: relative;
             cursor: pointer;
@@ -39,17 +39,37 @@
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .3);
+                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
                 transition: background-color .2s linear;
             }
             &:hover::before {
                 background-color: rgba($color: $col-black, $alpha: .5);
             }
         }
+        &-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 37px;
+        }
         &-list {
             display: flex;
             padding: 0 0 8px;
             border-bottom: 1px solid $col-border;
+
+            &--for-commertial {
+                border-bottom: 0;
+                padding: 0;
+                li + li { margin-left: 16px; }
+            }
+        }
+        &-link {
+            font: 18px/23px $font-proba;
+            color: rgba($color: $col-black, $alpha: .5);
+            transition: color .2s linear;
+            &:hover { color: $col-red_hover; }
+            &.active { color: $col-red; }
         }
         &-item {
             font: $font-18;

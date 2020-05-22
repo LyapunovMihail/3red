@@ -19,18 +19,35 @@
     <div class="dynamic-header__years">
         <div class="dynamic-header__years-active" (click)="tooltipYear = true">{{year}}</div>
         
-        <ul class="dynamic-header__years-list" *ngIf="tooltipYear">
-            <li class="dynamic-header__years-cls" (click)="tooltipYear = false"></li>
+        <div class="dynamic-header__years-tooltip" *ngIf="tooltipYear">
 
-            <li *ngFor="let item of yearsArray"
-                [ngClass]="{
-                    'dynamic-header__years-item_active': item == year
-                }"
-                (click)="yearChange.emit(item); monthParser(item)"
-                class="dynamic-header__years-item">
-                {{item}}
-            </li>
-        </ul>
+            <ul class="dynamic-header__years-list">
+                <li class="dynamic-header__years-cls" (click)="tooltipYear = false"></li>
+    
+                <ng-container *ngIf="!isAuthorizated">
+    
+                    <li *ngFor="let item of visibleYears"
+                        [ngClass]="{
+                            'dynamic-header__years-item_active': item == year
+                        }"
+                        (click)="yearChange.emit(item); monthParser(item)"
+                        class="dynamic-header__years-item">
+                        {{item}}
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="isAuthorizated">
+    
+                    <li *ngFor="let item of yearsArray"
+                        [ngClass]="{
+                            'dynamic-header__years-item_active': item == year
+                        }"
+                        (click)="yearChange.emit(item); monthParser(item)"
+                        class="dynamic-header__years-item">
+                        {{item}}
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
     </div>
     
 </section>

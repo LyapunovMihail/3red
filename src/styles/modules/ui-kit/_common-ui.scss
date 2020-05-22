@@ -11,6 +11,9 @@
 // .btn__admin-setting - Кнопка админка с надписью "Настройки" (использовать совместно с .btn_var-2)
 
 // .g-checkbox/.g-radiobox - классы для чекбоксов/радиобоксов устанавликать на "label"внутри которого есть input, div, span(именно в таком порядке)
+// .g-all-object - класс для ссылок типа "Все объекты", "Все новости" и тд
+// .g-tooltip-area - класс для выпадающик списков, со стрелкой в круге
+// .g-doc-hover - Класс для ховера на загруженные документы
 
 // .g-modal-bg - класс фона у модальных окон
 
@@ -274,6 +277,45 @@
     }
 }
 // /Чекбокс + Радиобокс
+
+.g-all-object {
+    font: 18px/23px $font-proba;
+    color: $col-red;
+    position: relative;
+    padding-right: 25px;
+    &::after {
+        content: '';
+        width: 16px;
+        height: 10px;
+        position: absolute;
+        top: 50%; right: 0;
+        transform: translate(0px, -60%);
+        background: url(/assets/img/home/right-arrow.svg) no-repeat;
+        transition: transform .2s linear;
+    }
+    &:hover::after { transform: translate(4px, -60%); }
+}
+.g-tooltip-area {
+    position: relative;
+    &::after {
+        content: '';
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 14px); right: -39px;
+        background: url(/assets/img/home/tooltip-bottom.svg) center no-repeat rgba($color: #d8d8d8, $alpha: .3);
+        transition: background-color .2s linear;
+    }
+    &:hover::after { background-color: #d8d8d8; }
+    &.active::after { transform: rotate(180deg); }
+}
+.g-doc-hover {
+    background: linear-gradient($col-red, $col-red) 0 95% no-repeat;
+    background-size: 0% 1px;
+    transition: background-size .3s ease;
+    &:hover { background-size: 100% 1px; }
+}
 
 .g-modal-bg {
     width: 100vw;

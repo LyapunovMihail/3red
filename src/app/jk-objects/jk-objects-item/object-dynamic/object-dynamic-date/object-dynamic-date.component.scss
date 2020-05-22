@@ -78,14 +78,22 @@
                 background-color: rgba($color: #d8d8d8, $alpha: .7);
             }
         }
-        &-list {
+        &-tooltip {
             width: 107px;
+            max-height: 50px * 5 + 25px;
             border: 1px solid #d8d8d8;
             background-color: $col-white;
             position: absolute;
             top: calc(100% + 5px);
             left: 0;
             z-index: 1;
+            overflow: hidden;
+        }
+        &-list {
+            width: calc(100% + 20px);
+            max-height: 50px * 5 + 25px;
+            overflow-x: hidden;
+            overflow-y: scroll;
         }
         &-item {
             width: 100%;

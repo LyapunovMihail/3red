@@ -1,7 +1,7 @@
 <div class="objects__utilities" [formGroup]="form" *ngIf="form">
     <div class="objects__utilities-helper">
         <div class="objects__utilities-lock">
-            <button class="objects__utilities-search" [class.objects__utilities-search--active]="showPopUp"
+            <button class="objects__utilities-search g-tooltip-area btn-empty" [class.active]="showPopUp"
                     (click)="showPopUp = !showPopUp">Район
             </button>
             <div class="objects__utilities-wrap" *ngIf="showPopUp">
@@ -15,30 +15,34 @@
         </div>
         <div class="objects__utilities-price">
             <p class="objects__price-title">Цена</p>
-            <input type="text" class="objects__price-input" placeholder="от 2.2 млн"
-                   [value]="form.get('priceMin').value"
-                   (input)="removeChars($event, 'priceMin')"
-                   (change)="form.get('priceMin').setValue($event.target.value)">
-            <input type="text" class="objects__price-input" placeholder="до 9.2 млн"
-                   [value]="form.get('priceMax').value"
-                   (input)="removeChars($event, 'priceMax')"
-                   (change)="form.get('priceMax').setValue($event.target.value)">
+            <label class="objects__price-wrap">
+                <p class="objects__price-hint" [class.not-placeholder]="form.get('priceMin').value.length">от</p>
+                <input type="text" class="objects__price-input" placeholder="2.2 млн"
+                       [value]="form.get('priceMin').value"
+                       (input)="removeChars($event, 'priceMin')"
+                       (change)="form.get('priceMin').setValue($event.target.value)">
+            </label>
+            <label class="objects__price-wrap">
+                <p class="objects__price-hint" [class.not-placeholder]="form.get('priceMax').value.length">до</p>
+                <input type="text" class="objects__price-input" placeholder="9.2 млн"
+                       [value]="form.get('priceMax').value"
+                       (input)="removeChars($event, 'priceMax')"
+                       (change)="form.get('priceMax').setValue($event.target.value)">
+            </label>
         </div>
     </div>
     <div class="objects__nav">
         <ul class="objects__nav-list">
-            <li>
-                <a href="javascript:void(0)" class="objects__nav-link objects__nav-link--ml" [class.objects__nav-link--active]="form.get('status').value === 'Все'" (click)="form.get('status').setValue('Все')">Все</a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'В проекте'" (click)="form.get('status').setValue('В проекте')">В проекте</a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'В строительстве'" (click)="form.get('status').setValue('В строительстве')">В строительстве</a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="objects__nav-link" [class.objects__nav-link--active]="form.get('status').value === 'Готовые'" (click)="form.get('status').setValue('Готовые')">Готовые</a>
-            </li>
+
+            <ng-container *ngFor="let link of ['Все', 'В проекте', 'В строительстве', 'Готовые']; let i = index">
+                <li><a class="objects__nav-link" 
+                    [ngClass]="{
+                        'active': form.get('status').value === link,
+                        'objects__nav-link--ml': i === 0 }"
+                    (click)="form.get('status').setValue(link)">
+                    {{link}}
+                </a></li>
+            </ng-container>
         </ul>
     </div>
 

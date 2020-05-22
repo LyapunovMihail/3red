@@ -18,8 +18,9 @@
 
         &-item {
             display: flex;
-            padding: 16px 0;
+            justify-content: space-between;
             border-bottom: 1px solid #d8d8d8;
+            padding: 16px 0;
             &:last-child { border-bottom: 0; }
         }
 
@@ -27,8 +28,10 @@
 
         &-wrap {
             width: calc(100% - (446px + 24px));
+            max-width: 634px;
             display: flex;
             flex-direction: column;
+            padding: 2px 0 0;
 
             &_file {
                 width: 100%;
@@ -48,8 +51,16 @@
             color: $col-red;
             padding-left: 19px + 9px;
             position: relative;
-            background: url(/assets/img/pdf.svg) left center no-repeat;
-            background-size: 19px 23px;
+            &::after {
+                content: '';
+                width: 19px;
+                height: 23px;
+                position: absolute;
+                top: 0; left: 0;
+                background: url(/assets/img/pdf.svg) left center no-repeat;
+                background-size: 19px 23px;
+            }
+            &:hover span { background-size: 100% 1px; }
         }
         &-date {
             max-width: 85px;

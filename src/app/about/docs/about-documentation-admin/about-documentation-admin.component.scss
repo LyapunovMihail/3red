@@ -139,8 +139,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     position: relative;
-    margin: 0 0 8px;
+    margin: 0 0 30px;
     &:last-child { margin: 0; }
 
     &__delete-btn {
