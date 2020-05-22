@@ -23,16 +23,18 @@
                             <h4 class="team__item-title" *ngIf="!isAuthorizated">{{tab.name}}</h4>
                             <button class="team__btn" [class.team__btn--active]="teams[tab.name].unlimit" (click)="teams[tab.name].unlimit = !teams[tab.name].unlimit" *ngIf="teams[tab.name].team?.data.length > 4">Все сотрудники</button>
                         </div>
-                        <div class="team__wrap" *ngIf="teams[tab.name].team">
-                            <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
-                                <div class="team__list" *ngIf="j < 4 || teams[tab.name].unlimit">
-                                    <div class="team__list-item">
-                                        <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
-                                        <div class="team__list-name">{{employee.fio}}</div>
-                                        <div class="team__list-prof">{{employee.position}}</div>
+                        <div class="team__wrap" *ngIf="teams[tab.name].team" [ngStyle]="{'height': (teams[tab.name].unlimit ? getHeight.clientHeight + 'px' : '')}">
+                            <div class="team__wrap--height" #getHeight>
+                                <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
+                                    <div class="team__list"> <!-- *ngIf="j < 4 || teams[tab.name].unlimit" -->
+                                        <div class="team__list-item">
+                                            <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
+                                            <div class="team__list-name">{{employee.fio}}</div>
+                                            <div class="team__list-prof">{{employee.position}}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </ng-container>
+                                </ng-container>
+                            </div>
                         </div>
                     </div>
                 </ng-container>
