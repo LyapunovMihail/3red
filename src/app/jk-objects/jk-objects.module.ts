@@ -44,6 +44,8 @@ import { ObjectStorageListComponent } from './jk-objects-item/object-storage/sto
 import { ObjectParkingListComponent } from './jk-objects-item/object-storage/parking/parking-list/object-parking.component';
 import { StorageModalComponent } from './jk-objects-item/object-storage/storage/storage-modal/storage-modal.component';
 import { ObjectStorageSchemaComponent } from './jk-objects-item/object-storage/storage/storage-schema/object-storage-schema.component';
+import { ParkingModalComponent } from './jk-objects-item/object-storage/parking/parking-modal/parking-modal.component';
+import { ObjectParkingSchemaComponent } from './jk-objects-item/object-storage/parking/parking-schema/object-parking-schema.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -67,7 +69,9 @@ const jkObjectsComponents = [
     ObjectStorageListComponent,
     ObjectParkingListComponent,
     StorageModalComponent,
-    ObjectStorageSchemaComponent
+    ParkingModalComponent,
+    ObjectStorageSchemaComponent,
+    ObjectParkingSchemaComponent
 ];
 
 @NgModule({
@@ -113,7 +117,7 @@ const jkObjectsComponents = [
                     { path: 'list/:id/storage', component: ObjectStorageListComponent },
                     { path: 'list/:id/parking', component: ObjectParkingListComponent },
                     { path: 'list/:id/storage/:house/:section/:floor', component: ObjectStorageSchemaComponent },
-                    // { path: 'list/:id/parking/:house/:section', component: ObjectFlatStorageComponent },
+                    { path: 'list/:id/parking/:house/:section/:floor', component: ObjectParkingSchemaComponent },
                 ]
             }
         ])
