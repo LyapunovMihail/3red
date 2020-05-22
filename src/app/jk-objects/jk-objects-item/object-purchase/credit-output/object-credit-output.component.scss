@@ -9,9 +9,23 @@
 .object-purchase__list {
 
     &-btn {
-        padding-right: 8px + 16px;
-        background: url(/assets/img/jk-object/more-bank.svg) right center no-repeat;
         color: $col-red;
+        padding-right: 22px;
+        position: relative;
+        &::before {
+            content: '';
+            width: 14px;
+            height: 100%;
+            position: absolute;
+            top: 0; right: 0;
+            background: url(/assets/img/about/product/arrow-down.svg) left 50% no-repeat;
+            transition: top .2s linear;
+        }
+        &:hover::before { top: 3px; }
+        &.active{
+            &:hover::before { top: -3px; }
+            &::before { transform: rotate(180deg); }
+        }
     }
 
     &-container {
