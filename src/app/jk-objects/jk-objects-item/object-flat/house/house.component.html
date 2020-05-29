@@ -1,6 +1,6 @@
 <div class="house" *ngIf="jk">
 
-    <div class="house__container">
+    <div class="house__container house__container--for-nav">
 
         <div class="house__nav">
             <div class="object__flat-list-wrap">
@@ -12,6 +12,20 @@
                     <li class="object__flat-item" *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'">Машиноместа</a></li>
                     <!--<li class="object__flat-item">Коммерческая недвижимость</li>-->
                 </ul>
+<!--=======-->
+    <!--<div class="house__container">-->
+        <!---->
+        <!--<div class="house__nav">-->
+            <!--<div class="house__nav-wrap">-->
+                <!--<a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>-->
+
+                <!--&lt;!&ndash; <ul class="house__nav-list house__nav-list&#45;&#45;for-commertial">-->
+                    <!--<li><a routerLink="/objects/list/{{jk._id}}/flats" routerLinkActive="active" class="house__nav-link">Квартиры</a></li>-->
+                    <!--<li><a routerLink="/objects/list/{{jk._id}}/storage" routerLinkActive="active" class="house__nav-link">Кладовые</a></li>-->
+                    <!--<li><a routerLink="/objects/list/{{jk._id}}/parking" routerLinkActive="active" class="house__nav-link">Машиноместа</a></li>-->
+                    <!--<li><a class="house__nav-link">Коммерческая недвижимость</a></li>-->
+                <!--</ul> &ndash;&gt;-->
+<!--&gt;>>>>>> 3red/develop-->
             </div>
 
             <ul class="house__nav-list">

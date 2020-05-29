@@ -59,8 +59,8 @@ export class ServiceAdminComponent implements OnInit {
         this.form = this.formBuilder.group({
             created_at: new Date(),
             last_modifyed: new Date(),
-            blackPart: ['', Validators.required],
-            greyPart: ['', Validators.required],
+            blackPart: '',
+            greyPart: '',
             uk: this.formBuilder.array([])
         });
     }
@@ -100,9 +100,9 @@ export class ServiceAdminComponent implements OnInit {
         (this.form.get('uk') as FormArray).push(
             this.formBuilder.group({
                 tab: this.tabSnippet.tab[0].name,
-                title: ['', Validators.required],
+                title: '',
                 description: '',
-                url: ['', Validators.required],
+                url: '',
                 jk: this.formBuilder.array([])
             })
         );

@@ -38,7 +38,7 @@
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .3);
+                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
                 transition: background-color .2s linear;
             }
             &:hover::before {

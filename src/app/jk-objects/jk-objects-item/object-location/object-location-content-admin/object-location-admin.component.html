@@ -2,11 +2,11 @@
 
     <h1 class="location__title">Настройка контента «Местоположения»</h1>
     <ul class="tabs">
-        <li>
-            <a href="javascript:void(0)" class="tab" [class.tab--active]="show === 'routes'" (click)="show = 'routes'">Объект</a>
+        <li class="tabs__item" [class.active]="show === 'routes'" (click)="show = 'routes'">
+            Объект
         </li>
-        <li>
-            <a href="javascript:void(0)" class="tab" [class.tab--active]="show === 'infra'" (click)="show = 'infra'">Инфраструктура</a>
+        <li class="tabs__item" [class.active]="show === 'infra'" (click)="show = 'infra'">
+            Инфраструктура
         </li>
     </ul>
 

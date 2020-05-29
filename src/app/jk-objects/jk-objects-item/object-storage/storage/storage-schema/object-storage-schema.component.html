@@ -1,0 +1,20 @@
+
+<section class="storage-schema">
+
+    <div class="storage-schema__nav">
+        <div class="storage-schema__nav-container">
+
+            <a routerLink="/objects/list/{{objectId}}/storage" class="storage-schema__nav-back">Дом {{fakeInfo.house}}, секция {{fakeInfo.section}}</a>
+        </div>
+    </div>
+
+    <div class="storage-schema__container">
+
+        <div class="storage-schema__info">
+            <p class="storage-schema__info-item storage-schema__info-item--type">Кладовая, <span>№{{fakeInfo.number}}</span></p>
+            <p class="storage-schema__info-item storage-schema__info-item--space">{{fakeInfo.space}} м²</p>
+            <p class="storage-schema__info-item storage-schema__info-item--price">{{fakeInfo.price}} P</p>
+        </div>
+        <div class="storage-schema__plan g-3red"></div>
+    </div>
+</section>

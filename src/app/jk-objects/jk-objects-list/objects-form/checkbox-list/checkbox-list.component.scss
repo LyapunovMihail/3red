@@ -17,10 +17,10 @@
 .offer__complex-label{
     position: relative;
     padding-left: 32px;
-    // margin: 24px 0 5px;
     display: inline-block;
     font-size: 18px;
     line-height: 1.25;
+    cursor: pointer;
     &::before {
         content:"";
         width: 24px;

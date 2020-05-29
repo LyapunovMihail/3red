@@ -75,6 +75,4 @@ export class ObjectsFormComponent implements OnInit {
         }
         return params;
     }
-
-
 }

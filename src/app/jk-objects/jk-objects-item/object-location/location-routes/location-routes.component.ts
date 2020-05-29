@@ -119,6 +119,8 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
                 minZoom: 9,
                 maxZoom: 18
             });
+            that.map.behaviors.disable('scrollZoom');
+
             that.markersConfig.forEach((item: any, index) => {
                     that.markers[index] = {};
 

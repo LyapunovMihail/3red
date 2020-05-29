@@ -1,6 +1,6 @@
 <app-admin-modal [formValid]="form.valid" (closeModal)="close($event)" *ngIf="!isLoad">
 
-    <h2 class="team-settings__title">Контент «Тройка РЭД — Билдинг»</h2>
+    <h2 class="team-settings__title">Контент {{tabName}}</h2>
 
     <form class="tabs" [formGroup]="form">
         <div class="tabs__wrap" formArrayName="data" *ngFor="let data of form.controls['data'].controls; let i = index">

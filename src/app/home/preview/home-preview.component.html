@@ -6,10 +6,18 @@
                 <ng-container *ngIf="snippet">
                     <h2 class="about__title">{{snippet.title}}</h2>
                     <p class="about__text">{{snippet.text}}</p>
-                    <a [routerLink]="['/news-shares/news/list/' + newsSnippet._id]" class="about__news-preview" *ngIf="snippet.showNews">
-                        <div class="about__date-preview">{{parseDate(newsSnippet.created_at)}}</div>
-                        <p class="about__text-preview">{{newsSnippet.title}}!</p>
-                    </a>
+                    
+                    <div class="about__news" *ngIf="snippet.showNews">
+
+                        <a [routerLink]="news.title ? 
+                            ['/news-shares/news/list/' + news._id]
+                            : ['/news-shares/shares/list/' + news._id]" 
+                          class="about__news-item" *ngFor="let news of newsSnippet; let i = index"
+                          [class.active]="currentNews === i">
+                            <div class="about__news-date">{{parseDate(news.created_at)}}</div>
+                            <p class="about__news-title">{{news.title ? news.title : news.name}}</p>
+                        </a>
+                    </div>
                 </ng-container>
                 <div class="about__mouse">
                     <img src="/assets/img/home/mouse.svg" alt="mouse" class="mouse">

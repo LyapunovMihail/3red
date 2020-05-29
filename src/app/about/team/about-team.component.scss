@@ -24,7 +24,6 @@
 }
 
 .btn {
-
     padding: 10px 16px ;
     background: #ee4237;
     color: #fff;
@@ -98,25 +97,14 @@
 }
 
 .team__divisions {
-    //margin: 0 40px;
-
+    margin: 0 0 56px;
 }
 .team__item:not:last-child {
-    // margin-left: 40px;
     margin-bottom: 60px;
 }
 .team__item-title {
     font-size: 24px;
-    margin-bottom: 16px;
-    margin-top: 60px;
-    &--first {
-        margin-top: 30px;
-    }
-
 }
-// .team__item {
-//     margin-bottom: 56px;
-// }
 .team__wrapper {
     display: flex;
     justify-content: space-between;
@@ -125,16 +113,21 @@
 
 }
 .team__wrap {
-    display: grid;
-    grid-template-columns: repeat( 4, 1fr);
-    grid-column-gap: 24px;
-    grid-row-gap: 48px;
+    height: 309px;
+    overflow: hidden;
+    transition: height .7s ease;
+
+    &--height {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 24px;
+        grid-row-gap: 48px;
+    }
 }
 .team__item-title {
     font-size: 24px;
 }
 .team__btn {
-    background: url(/assets/img/about/product/arrow-down.svg) right no-repeat ;
     border: 0;
     outline: none;
     cursor: pointer;
@@ -143,9 +136,20 @@
     color: #ee4237;
     line-height: 23px;
     padding-right: 22px;
-
-    &--active {
-        background: url(/assets/img/about/product/arrow-top.svg) right no-repeat ;
+    position: relative;
+    &::before {
+        content: '';
+        width: 14px;
+        height: 100%;
+        position: absolute;
+        top: 0; right: 0;
+        background: url(/assets/img/about/product/arrow-down.svg) left 50% no-repeat;
+        transition: top .2s linear;
+    }
+    &:hover::before { top: 3px; }
+    &--active{
+        &:hover::before { top: -3px; }
+        &::before { transform: rotate(180deg); }
     }
 }
 

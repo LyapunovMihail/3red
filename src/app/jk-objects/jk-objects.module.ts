@@ -36,6 +36,14 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { ObjectFlatsModule } from './jk-objects-item/object-flat/object-flats.module';
 import { ObjectDynamicModule } from './jk-objects-item/object-dynamic/object-dynamic.module';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
+
+import { ObjectStorageListComponent } from './jk-objects-item/object-storage/storage/storage-list/object-storage.component';
+import { ObjectParkingListComponent } from './jk-objects-item/object-storage/parking/parking-list/object-parking.component';
+import { StorageModalComponent } from './jk-objects-item/object-storage/storage/storage-modal/storage-modal.component';
+import { ObjectStorageSchemaComponent } from './jk-objects-item/object-storage/storage/storage-schema/object-storage-schema.component';
+import { ParkingModalComponent } from './jk-objects-item/object-storage/parking/parking-modal/parking-modal.component';
+import { ObjectParkingSchemaComponent } from './jk-objects-item/object-storage/parking/parking-schema/object-parking-schema.component';
+
 const jkObjectsComponents = [
     JkObjectsComponent,
     JkObjectsItemComponent,
@@ -54,7 +62,13 @@ const jkObjectsComponents = [
     ObjectGalleryAdminComponent,
     ObjectDocumentationAdminComponent,
     ObjectDecorationTabsAdminComponent,
-    ObjectDecorationAdminComponent
+    ObjectDecorationAdminComponent,
+    ObjectStorageListComponent,
+    ObjectParkingListComponent,
+    StorageModalComponent,
+    ParkingModalComponent,
+    ObjectStorageSchemaComponent,
+    ObjectParkingSchemaComponent
 ];
 
 @NgModule({
@@ -88,7 +102,11 @@ const jkObjectsComponents = [
                 , children : [
                     { path: 'list', component: JkObjectsListComponent },
                     { path: 'list/:id', component: JkObjectsItemComponent },
-                    { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent }
+                    { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent },
+                    { path: 'list/:id/storage', component: ObjectStorageListComponent },
+                    { path: 'list/:id/parking', component: ObjectParkingListComponent },
+                    { path: 'list/:id/storage/:house/:section/:floor', component: ObjectStorageSchemaComponent },
+                    { path: 'list/:id/parking/:house/:section/:floor', component: ObjectParkingSchemaComponent },
                 ]
             }
         ])

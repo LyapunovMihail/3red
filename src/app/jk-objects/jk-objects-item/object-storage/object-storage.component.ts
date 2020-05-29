@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-object-item-storage',
@@ -10,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ObjectStorageComponent implements OnInit {
+
+    @Input() public objectId;
+
     constructor() { }
 
     ngOnInit() { }
