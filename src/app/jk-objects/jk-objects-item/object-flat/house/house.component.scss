@@ -13,7 +13,7 @@
 
     &__container {
         width: 100%;
-        max-width: $container;
+        max-width: 1216px;
 
         &_for-flat { max-width: 1216px; }
         &--for-nav { max-width: 1216px; }
@@ -26,6 +26,7 @@
         align-items: flex-start;
 
         &-back {
+            margin-bottom: 37px;
             font: 24px/29px $font-proba;
             color: $col-black;
             padding-left: 8px + 28px;
@@ -291,7 +292,7 @@
 
 .object__flat-list-wrap {
     width: 100%;
-    max-width: 1104px;
+    max-width: 1216px;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,29 +1,64 @@
-<section class="house" *ngIf="jk">
+<!--<section class="house" *ngIf="jk">-->
 
-    <div class="house__container">
+    <!--<div class="house__container">-->
 
-        <div class="house__nav">
-            <div class="object__flat-list-wrap">
-                <a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>
+        <!--<div class="house__nav">-->
+            <!--<div class="object__flat-list-wrap">-->
+                <!--<a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>-->
 
-                <ul class="object__flat-list">
-                    <li class="object__flat-item"><a [routerLink]="'/objects/list/' + jk._id + '/flats'">Квартиры</a></li>
-                    <li class="object__flat-item object__flat-item_active">Кладовые</li>
-                    <li class="object__flat-item" *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'">Машиноместа</a></li>
-                    <!--<li class="object__flat-item">Коммерческая недвижимость</li>-->
-                </ul>
-            </div>
+                <!--<ul class="object__flat-list">-->
+                    <!--<li class="object__flat-item"><a [routerLink]="'/objects/list/' + jk._id + '/flats'">Квартиры</a></li>-->
+                    <!--<li class="object__flat-item object__flat-item_active">Кладовые</li>-->
+                    <!--<li class="object__flat-item" *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'">Машиноместа</a></li>-->
+                    <!--&lt;!&ndash;<li class="object__flat-item">Коммерческая недвижимость</li>&ndash;&gt;-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="storerooms_main" *ngFor="let item of storeMas">-->
+            <!--<h3>Дом {{item.house}}</h3>-->
+            <!--<a [routerLink]="['/objects/list/' + jk._id + '/storerooms/house/' + item.house + '/section/' + store.section + '/floor/' + store.floor]" class="storerooms_main-item" *ngFor="let store of item.stores">-->
+                <!--<p>Секция {{store.section}}</p>-->
+                <!--<p>Этаж {{store.floor}}</p>-->
+                <!--<p>от {{store.price | myBitNumberPipe}} ₽</p>-->
+            <!--</a>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+<!--</section>-->
+
+<section class="storage-list" *ngIf="jk">
+
+    <div class="storage-list__nav">
+        <div class="storage-list__nav-container">
+
+            <a [routerLink]="'/objects/list/' + jk._id" class="storage-list__nav-back">ЖК {{jk.name}}</a>
+
+            <ul class="storage-list__nav-list">
+                <li><a [routerLink]="'/objects/list/' + jk._id + '/flats'" routerLinkActive="active" class="storage-list__nav-link">Квартиры</a></li>
+                <li><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" routerLinkActive="active" class="storage-list__nav-link">Кладовые</a></li>
+                <li *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'" routerLinkActive="active" class="storage-list__nav-link">Машиноместа</a></li>
+                <!--<li><a class="storage-list__nav-link">Коммерческая недвижимость</a></li>-->
+            </ul>
         </div>
-
-        <div class="storerooms_main" *ngFor="let item of storeMas">
-            <h3>Дом {{item.house}}</h3>
-            <a [routerLink]="['/objects/list/' + jk._id + '/storerooms/house/' + item.house + '/section/' + store.section + '/floor/' + store.floor]" class="storerooms_main-item" *ngFor="let store of item.stores">
-                <p>Секция {{store.section}}</p>
-                <p>Этаж {{store.floor}}</p>
-                <p>от {{store.price | myBitNumberPipe}} ₽</p>
-            </a>
-        </div>
-
     </div>
 
+    <div class="storage-list__container">
+
+        <h2 class="storage-list__title">Кладовые в ЖК {{jk.name}}</h2>
+
+        <!-- routerLink=":house/:section/:floor" -->
+        <ng-container *ngFor="let item of storeMas">
+            <div class="storage-list__houses">
+                <h2 class="storage-list__houses-title">Дом {{item.house}}</h2>
+
+                <a [routerLink]="['/objects/list/' + jk._id + '/storerooms/house/' + item.house + '/section/' + store.section + '/floor/' + store.floor]" class="storage-list__sections" *ngFor="let store of item.stores">
+                    <div class="storage-list__sections-count">Секция  {{store.section}}</div>
+                    <div class="storage-list__sections-floor">Этаж {{store.floor}}</div>
+                    <div class="storage-list__sections-price">от {{store.price | myBitNumberPipe}} ₽</div>
+                </a>
+            </div>
+        </ng-container>
+    </div>
 </section>
