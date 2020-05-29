@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { IObjectFlatSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
+import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Injectable()
 
@@ -20,5 +21,9 @@ export class PlanService {
 
     public setSnippetData(data): Observable<IObjectFlatSnippet> {
         return this.http.post<IObjectFlatSnippet>('/api/admin/jk-object/flat/create-update', data , adminHeaders());
+    }
+
+    public getFlats(options): Observable<IAddressItemFlat[]> {
+        return this.http.post<IAddressItemFlat[]>('/api/search/object', { search: options });
     }
 }

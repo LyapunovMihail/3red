@@ -32,7 +32,7 @@ export class AddressesModel {
             const jk = await this.objectCollection.findOne({mod: query.mod});
             const flatSnippet = await this.flatCollection.findOne({ objectId: jk._id.toString() });
             if (flatSnippet && flatSnippet.switchOn) {
-                const data = this.parseRequest(query);
+                const data: any = this.parseRequest(query);
                 return await this.collection.find(data.request, data.parameters).toArray();
             } else {
                 return [];
@@ -45,7 +45,7 @@ export class AddressesModel {
 
     public async getObjectFlatsData(objectId) { // извлекаем объект жилищного комплекса, создаём список домов, схему домов-секций-этажей и мин-макс параметры для формы фильтрации
         const jk = await this.objectCollection.findOne({ _id: ObjectId(objectId) });
-        const data = this.parseRequest({ mod: jk.mod });
+        const data = this.parseRequest({ mod: jk.mod, type: 'КВ,АП' });
         const flats = await this.collection.find(data.request, data.parameters).toArray();
         const { housesBtnList, floorCount } = this.setFloorCount(flats); // создаём список домов, схему домов-секций-этажей
         const config = this.setMinMaxParams(flats); // устанавливаем мин-макс параметры для формы фильтрации
@@ -242,7 +242,7 @@ export class AddressesModel {
         if ( 'number' in query ) {
             request.flat = Number(query.number);
         }
-        if ('type' in query && query.type.split(',').every((item) => FormConfig.typeList.some((i) => item === i.value))) {
+        if ('type' in query) {
             request.type = { $in: query.type.split(',')};
         }
         if ('decoration' in query && query.decoration.split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {

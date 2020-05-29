@@ -10,6 +10,11 @@ import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ObjectFlatsService } from './object-flats.service';
 import { PlanComponents } from './plan/plan';
+import { ParkingModule } from './parking/parking.module';
+import { StoreroomsModule } from './storerooms/storerooms.module';
+import { HouseComponent } from './house/house.component';
+import { FloorComponent } from './floor/floor.component';
+import { ApartmentComponent } from './apartment/apartment.component';
 
 const FlatsComponents = [
     ObjectFlatsComponent,
@@ -35,9 +40,20 @@ const FlatsComponents = [
         FormsModule,
         GHMRangeNumberModule,
         ApartmentModule,
+        ParkingModule,
+        StoreroomsModule,
 
         CommonModule,
-        RouterModule
+        RouterModule.forChild([
+            { path: 'list/:id/flats', component: ObjectFlatsComponent,
+                children: [
+                    { path: '', redirectTo: 'house/all', pathMatch: 'full' },
+                    { path: 'house/:house', component: HouseComponent },
+                    { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
+                    { path: 'house/:house/section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
+                ]
+            },
+        ])
     ],
     providers: [ObjectFlatsService]
 })

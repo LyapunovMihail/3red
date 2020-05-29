@@ -85,6 +85,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
         if (form.type.length > 0) {
             params.type = (form.type).join(',');
+        } else {
+            params.type = 'КВ,АП';
         }
 
         if (form.decoration.length > 0) {

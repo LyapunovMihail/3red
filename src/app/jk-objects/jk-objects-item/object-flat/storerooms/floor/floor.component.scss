@@ -1,0 +1,92 @@
+@import "../../../../../../styles/modules/mixins/mixin";
+
+#plan {
+    pointer-events: none;
+
+    * {
+        font-family: 'Montserrat', sans-serif !important;
+    }
+}
+
+.storerooms-floor {
+    &_description {
+        position: relative;
+
+        &_scheme {
+            display: flex;
+
+            svg {
+                height: 75vh;
+                min-height: 270px;
+            }
+        }
+    }
+}
+
+.flat-mod {
+    cursor: pointer;
+
+    &:hover path, &:hover polygon, &:hover polyline, &:hover rect {
+        fill: #cda571;
+    }
+}
+
+.flat-mod--available path, .flat-mod--available polygon, .flat-mod--available polyline, .flat-mod--available rect {
+    fill: #f2e7d5;
+}
+
+.flat-mod--out-of-stock path, .flat-mod--out-of-stock polygon, .flat-mod--out-of-stock polyline, .flat-mod--out-of-stock rect {
+    fill: #d8d8d8;
+}
+
+.house {
+    width: 100%;
+    min-height: calc(100vh - 362px);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 16px 0 0;
+
+    &__container {
+        width: 100%;
+        max-width: $container;
+
+        &_for-flat {
+            max-width: 1216px;
+        }
+    }
+
+    &__nav {
+        margin: 75px 0 25px;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        &-back {
+            font: 24px/29px $font-proba;
+            color: $col-black;
+            margin-bottom: 37px;
+            padding-left: 8px + 28px;
+            position: relative;
+            cursor: pointer;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: 0;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .3);
+                transition: background-color .2s linear;
+            }
+
+            &:hover::before {
+                background-color: rgba($color: $col-black, $alpha: .5);
+            }
+        }
+    }
+}

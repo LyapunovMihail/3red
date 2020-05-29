@@ -80,7 +80,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 max: Number(params.priceMax) || this.config.price.max
             },
             type: [((type) => {
-                if (type && type.split(',').every((item) => this.config.typeList.some((i) => item === i.value))) {
+                if (type && type.split(',').every((item) => ['КВ', 'АП'].some((i) => item === i))) {
                     return type.split(',');
                 }
                 return [];

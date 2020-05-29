@@ -34,13 +34,8 @@ import { ObjectMembersModule } from './jk-objects-item/object-members/object-mem
 import { JkObjectsListModule } from './jk-objects-list/jk-objects-list.module';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ObjectFlatsModule } from './jk-objects-item/object-flat/object-flats.module';
-import { ObjectFlatsComponent } from './jk-objects-item/object-flat/object-flats.component';
-import { HouseComponent } from './jk-objects-item/object-flat/house/house.component';
-import { FloorComponent } from './jk-objects-item/object-flat/floor/floor.component';
-import { ApartmentComponent } from './jk-objects-item/object-flat/apartment/apartment.component';
 import { ObjectDynamicModule } from './jk-objects-item/object-dynamic/object-dynamic.module';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
-
 const jkObjectsComponents = [
     JkObjectsComponent,
     JkObjectsItemComponent,
@@ -93,14 +88,6 @@ const jkObjectsComponents = [
                 , children : [
                     { path: 'list', component: JkObjectsListComponent },
                     { path: 'list/:id', component: JkObjectsItemComponent },
-                    { path: 'list/:id/flats', component: ObjectFlatsComponent,
-                        children: [
-                            { path: '', redirectTo: 'house/all', pathMatch: 'full' },
-                            { path: 'house/:house', component: HouseComponent },
-                            { path: 'house/:house/section/:section/floor/:floor', component: FloorComponent },
-                            { path: 'house/:house/section/:section/floor/:floor/apartment/:apartment', component: ApartmentComponent }
-                        ]
-                    },
                     { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent }
                 ]
             }

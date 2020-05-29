@@ -268,3 +268,33 @@
         }
     }
 }
+
+.object__flat-list-wrap {
+    width: 100%;
+    max-width: 1104px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.object__flat {
+    &-list {
+        display: flex;
+        margin-bottom: 37px;
+    }
+
+    &-item {
+        color: #000000;
+        opacity: 0.5;
+        font: $font-18;
+
+        &:not(:last-child) {
+            margin-right: 16px;
+        }
+
+        &_active {
+            color: #ee4237;
+            opacity: 1;
+        }
+    }
+}

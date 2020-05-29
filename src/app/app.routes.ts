@@ -7,8 +7,6 @@ export const ROUTES: Routes = [
     { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsModule' },
     { path: 'news-shares', loadChildren: './news-shares/news-shares.module#NewsSharesModule' },
     { path: 'flats', loadChildren: './flats/flats.module#FlatsModule' },
-    { path: 'parking', loadChildren: './parking/parking.module#ParkingModule' },
-    { path: 'storerooms', loadChildren: './storerooms/storerooms.module#StoreroomsModule' },
     { path: 'objects', loadChildren: './jk-objects/jk-objects.module#JkObjectsModule' },
     { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
 

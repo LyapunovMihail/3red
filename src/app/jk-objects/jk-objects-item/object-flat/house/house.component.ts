@@ -47,6 +47,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public lastScrollStep: number;
     public showChess = false;
 
+    public isStorerooms = false;
+    public isParking = false;
+
     public bubbleCoords: IFlatBubbleCoordinates = {
         left: 100,
         top: 100
@@ -76,6 +79,26 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.jk = data.jk;
                 this.floorCount = data.floorCount;
                 this.routerEvent = this.routerChange();
+
+                this.service.getFlats({ // запрос кладовых
+                    mod: this.jk.mod,
+                    type: 'КЛ'
+                }).subscribe(
+                    (storerooms) => {
+                        this.isStorerooms = storerooms.length > 0;
+                    },
+                    (err) => console.error(err)
+                );
+
+                this.service.getFlats({ // запрос машиномест
+                    mod: this.jk.mod,
+                    type: 'ММ'
+                }).subscribe(
+                    (parking) => {
+                        this.isParking = parking.length > 0;
+                    },
+                    (err) => console.error(err)
+                );
             },
             (err) => {
                 console.log(err);
@@ -165,7 +188,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         return this.service.getFlats({
             mod: this.jk.mod,
             houses: this.houseNumber,
-            sections: section
+            sections: section,
+            type: 'КВ,АП'
         });
     }
 

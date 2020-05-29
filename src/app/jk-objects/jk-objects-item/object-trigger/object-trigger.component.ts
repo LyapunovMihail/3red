@@ -25,7 +25,7 @@ export class ObjectTriggerComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.flatsService.getFlats({ mod: this.mod})
+        this.flatsService.getFlats({ mod: this.mod, type: 'КВ,АП' })
             .subscribe((flats) => {
                 this.buildTriggersData(flats);
             });
@@ -48,6 +48,7 @@ export class ObjectTriggerComponent implements OnInit {
                     spaceMax =  Math.round(spaceMax);
 
                     this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
+                    console.log('this.triggerSnippets: ', this.triggerSnippets);
                 }
             }
         }

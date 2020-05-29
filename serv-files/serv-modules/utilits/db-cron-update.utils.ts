@@ -89,9 +89,9 @@ export class DbCronUpdate {
             return;
         }
         const {mod, house, section, floor, flat, type} = this.parseArticle(object.Article);
-        if (type !== 'КВ' && type !== 'АП') {
-            return;
-        }
+        // if (type !== 'КВ' && type !== 'АП') {
+        //     return;
+        // }
 
         const itemflat: IAddressItemFlat = {
             mod,

@@ -27,8 +27,6 @@ import { HeaderModule } from './header/header.module';
 import { AboutModule } from './about/about.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
 import { FlatsModule } from './flats/flats.module';
-import { ParkingModule } from './parking/parking.module';
-import { StoreroomsModule } from './storerooms/storerooms.module';
 import { AdminContactsModule } from './admin-contacts/admin-contacts.module';
 import { JkObjectsModule } from './jk-objects/jk-objects.module';
 import { ServiceModule } from './service/service.module';
@@ -67,8 +65,6 @@ const APP_MODULES = [
     AboutModule,
     NewsSharesModule,
     FlatsModule,
-    ParkingModule,
-    StoreroomsModule,
     AdminContactsModule,
     JkObjectsModule,
     ServiceModule,

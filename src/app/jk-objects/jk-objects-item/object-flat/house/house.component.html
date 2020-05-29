@@ -1,9 +1,18 @@
 <div class="house" *ngIf="jk">
 
     <div class="house__container">
-        
+
         <div class="house__nav">
-            <a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>
+            <div class="object__flat-list-wrap">
+                <a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>
+
+                <ul class="object__flat-list" *ngIf="isParking || isStorerooms">
+                    <li class="object__flat-item object__flat-item_active">Квартиры</li>
+                    <li class="object__flat-item" *ngIf="isStorerooms"><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'">Кладовые</a></li>
+                    <li class="object__flat-item" *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'">Машиноместа</a></li>
+                    <!--<li class="object__flat-item">Коммерческая недвижимость</li>-->
+                </ul>
+            </div>
 
             <ul class="house__nav-list">
                 <li class="house__nav-item" [ngClass]="{'house__nav-item_active' : !showChess}"
