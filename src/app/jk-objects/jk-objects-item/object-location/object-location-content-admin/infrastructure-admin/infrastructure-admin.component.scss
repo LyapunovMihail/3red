@@ -126,4 +126,8 @@
         left: 0;
         z-index: 10;
     }
+
+    &:first-child {
+        margin-top: 24px;
+    }
 }

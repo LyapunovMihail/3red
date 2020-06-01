@@ -48,7 +48,6 @@ export class ObjectTriggerComponent implements OnInit {
                     spaceMax =  Math.round(spaceMax);
 
                     this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
-                    console.log('this.triggerSnippets: ', this.triggerSnippets);
                 }
             }
         }

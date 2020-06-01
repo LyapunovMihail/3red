@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { project } from './mockProject';
 import { JkObjectsListService } from '../../jk-objects-list/jk-objects-list.service';
 import { OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
-import { SearchService } from '../../../flats/search/search.service';
 
 export interface IObjectSnippet {
     status: string;
@@ -17,8 +16,7 @@ export interface IObjectSnippet {
         '../jk-objects-item.component.scss'
     ],
     providers: [
-        JkObjectsListService,
-        SearchService
+        JkObjectsListService
     ]
 })
 
@@ -34,15 +32,15 @@ export class ObjectProjectsComponent implements OnInit {
     public flats;
 
     constructor(
-        public objectService: JkObjectsListService,
-        public searchService: SearchService
+        public objectService: JkObjectsListService
     ) { }
 
     ngOnInit() {
         this.objectService.getSnippets()
             .subscribe((data) => {
-                this.getFlatsMinPrice(data.filter(item => item._id !== this.objectId && item.publish));
-                this.snippets = data.filter(item => item._id !== this.objectId && item.publish);
+                const tempObjects = data.filter(item => item._id !== this.objectId && item.publish);
+                this.snippets = this.getRandomObjects(tempObjects);
+                this.getFlatsMinPrice(this.snippets);
             });
     }
 
@@ -54,7 +52,7 @@ export class ObjectProjectsComponent implements OnInit {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.mockProject.length - 1 ;
     }
 
-    getFlatsMinPrice(objects) {
+    private getFlatsMinPrice(objects) {
         const last = objects.length;
 
         objects.forEach( (item, i) => {
@@ -67,7 +65,7 @@ export class ObjectProjectsComponent implements OnInit {
         });
     }
 
-    getMinPrice(obj, flats, i, last) {
+    private getMinPrice(obj, flats, i, last) {
         let price = [];
         flats.forEach( el => price.push(el.price) );
 
@@ -75,5 +73,20 @@ export class ObjectProjectsComponent implements OnInit {
             status: obj.status,
             minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : obj.status === 'Готовые' ? 'Полностью распродан!' : false
         };
+    }
+
+    private getRandomObjects(tempObjects) {
+        const jkMas = [];
+        while (jkMas.length < 5) {
+            const ind = this.getRandomInt(tempObjects.length - 1);
+            if (!jkMas.find((item) => item._id === tempObjects[ind]._id)) {
+                jkMas.push(tempObjects[ind]);
+            }
+        }
+        return jkMas;
+    }
+
+   private getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
     }
 }

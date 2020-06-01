@@ -1,6 +1,6 @@
 <app-admin-modal [formValid]="true" (closeModal)="close($event)">
 
-    <h1 class="location__title">Настройка контента «Местоположения»</h1>
+    <h2 class="location__title">Настройка контента «Местоположения»</h2>
     <ul class="tabs">
         <li class="tabs__item" [class.active]="show === 'routes'" (click)="show = 'routes'">
             Объект
@@ -17,4 +17,5 @@
     <app-infrastructure-routes-admin *ngIf="show === 'infra'"
         [(infraMarks)]="this.contentSnippet.data[2].infraMarks">
     </app-infrastructure-routes-admin>
+
 </app-admin-modal>

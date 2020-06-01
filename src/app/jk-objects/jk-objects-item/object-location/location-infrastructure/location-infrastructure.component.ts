@@ -144,6 +144,7 @@ export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
                 minZoom: 11,
                 maxZoom: 18
             });
+            that.map.behaviors.disable('scrollZoom');
 
             // из маркер-конфига собираем массив маркеров
             that.markersConfig.forEach((item, index) => {

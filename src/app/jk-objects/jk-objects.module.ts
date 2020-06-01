@@ -14,7 +14,6 @@ import { JkObjectsItemComponent } from './jk-objects-item/jk-objects-item.compon
 import { ObjectPreviewComponent } from './jk-objects-item/object-preview/object-preview.component';
 import { ObjectFilterComponent } from './jk-objects-item/object-filter/object-filter.component';
 import { ObjectTriggerComponent } from './jk-objects-item/object-trigger/object-trigger.component';
-import { ObjectStorageComponent } from './jk-objects-item/object-storage/object-storage.component';
 import { ObjectProjectComponent } from './jk-objects-item/object-project/object-project.component';
 import { ObjectGalleryComponent } from './jk-objects-item/object-gallery/object-gallery.component';
 import { ObjectDecorationComponent } from './jk-objects-item/object-decoration/object-decoration.component';
@@ -37,20 +36,12 @@ import { ObjectFlatsModule } from './jk-objects-item/object-flat/object-flats.mo
 import { ObjectDynamicModule } from './jk-objects-item/object-dynamic/object-dynamic.module';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
 
-import { ObjectStorageListComponent } from './jk-objects-item/object-storage/storage/storage-list/object-storage.component';
-import { ObjectParkingListComponent } from './jk-objects-item/object-storage/parking/parking-list/object-parking.component';
-import { StorageModalComponent } from './jk-objects-item/object-storage/storage/storage-modal/storage-modal.component';
-import { ObjectStorageSchemaComponent } from './jk-objects-item/object-storage/storage/storage-schema/object-storage-schema.component';
-import { ParkingModalComponent } from './jk-objects-item/object-storage/parking/parking-modal/parking-modal.component';
-import { ObjectParkingSchemaComponent } from './jk-objects-item/object-storage/parking/parking-schema/object-parking-schema.component';
-
 const jkObjectsComponents = [
     JkObjectsComponent,
     JkObjectsItemComponent,
     ObjectPreviewComponent,
     ObjectFilterComponent,
     ObjectTriggerComponent,
-    ObjectStorageComponent,
     ObjectProjectComponent,
     ObjectGalleryComponent,
     ObjectDecorationComponent,
@@ -62,13 +53,7 @@ const jkObjectsComponents = [
     ObjectGalleryAdminComponent,
     ObjectDocumentationAdminComponent,
     ObjectDecorationTabsAdminComponent,
-    ObjectDecorationAdminComponent,
-    ObjectStorageListComponent,
-    ObjectParkingListComponent,
-    StorageModalComponent,
-    ParkingModalComponent,
-    ObjectStorageSchemaComponent,
-    ObjectParkingSchemaComponent
+    ObjectDecorationAdminComponent
 ];
 
 @NgModule({
@@ -102,11 +87,7 @@ const jkObjectsComponents = [
                 , children : [
                     { path: 'list', component: JkObjectsListComponent },
                     { path: 'list/:id', component: JkObjectsItemComponent },
-                    { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent },
-                    { path: 'list/:id/storage', component: ObjectStorageListComponent },
-                    { path: 'list/:id/parking', component: ObjectParkingListComponent },
-                    { path: 'list/:id/storage/:house/:section/:floor', component: ObjectStorageSchemaComponent },
-                    { path: 'list/:id/parking/:house/:section/:floor', component: ObjectParkingSchemaComponent },
+                    { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent }
                 ]
             }
         ])

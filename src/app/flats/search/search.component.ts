@@ -107,8 +107,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
         if ( 'mod' in form && form.mod.length) { // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
             params.mod = form.mod;
-
         }
+
         if (this.params && this.params.mod !== params.mod) {
             delete params.housesMods;
             this.getData(params, false); // При смене таба подгружаем конфиг с параметрами
@@ -133,6 +133,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                 flats = flats.filter((flat) => flat.status !== '8');
                 this.count = flats.length;
                 this.searchFlats = flats;
+                console.log('this.searchFlats: ', this.searchFlats);
                 this.sortFlats(this.sort);
                 this.loadMore();
             },

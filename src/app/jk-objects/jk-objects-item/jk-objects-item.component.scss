@@ -9,6 +9,7 @@
     position: relative;
     width: 100%;
     padding-top: 132px;
+    overflow-x: hidden;
 
     &__container {
         width: 100%;
@@ -23,7 +24,7 @@
     }
 
     &--margin {
-        margin: 0 0 96px;
+        padding: 96px 0 0;
     }
 
     &__mock-img {

@@ -68,7 +68,6 @@ export class ObjectLocationAdminComponent implements OnInit {
 
     private setReference() {
         this.contentSnippet.data[1].routesMarks = this.contentSnippet.data[0].routesMarks;
-
     }
     public save() {
         this.locationService.parseFormValue(this.contentSnippet.data[0].routesMarks);

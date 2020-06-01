@@ -133,7 +133,8 @@ export class AddressesModel {
             }
         });
 
-        const findByMod = query.mod ? { mod : { $in: query.mod.split(',') } } : mods.length ? { mod : { $in : mods } } : {};
+        const findByMod: any = query.mod ? { mod : { $in: query.mod.split(',') } } : mods.length ? { mod : { $in : mods } } : {};
+        findByMod.type = { $in: ['КВ', 'АП'] };
         const flatsOfMod = await this.collection.find(findByMod).toArray();
         const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
         const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
@@ -195,7 +196,8 @@ export class AddressesModel {
                 return item.value;
             }
         });
-        const findByMod = mods.length ? { mod : { $in : mods } } : {};
+        const findByMod: any = mods.length ? { mod : { $in : mods } } : {};
+        findByMod.type = { $in: ['КВ', 'АП'] };
         const flatsOfMod = await this.collection.find(findByMod).toArray();
         const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
         return config;
