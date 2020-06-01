@@ -1,31 +1,39 @@
-<div class="request-window_modal">
+<section class="parking-modal">
 
-    <div class="request-window_modal-close-bgr" (click)="close.emit(false)" ></div>
+    <div class="parking-modal__container">
 
-    <div class="request-window_container">
+        <button class="parking-modal__btn-cls btn-cls" (click)="close.emit(false)"><span></span></button>
 
-        <div class="request-window_form">
-
-            <img src="assets/img/parking/parking.jpg" width="300" height="148"/>
-
-            <div class="request-window_form_columns">
-                <div class="request-window_form_description">
-                    <p>Машиноместо №{{parkingData.flat}}</p>
-                    <p>{{parkingData.space}} м²</p>
-                </div>
-                <div class="request-window_form_price">{{parkingData.price | myBitNumberPipe}} ₽</div>
-            </div>
-
-            <ul  class="request-window_form_list">
-                <li class="request-window_form_list_item"><a href="javascript:(0)" (click)="isReserveFormOpen = true">Забронировать</a></li>
-                <li class="request-window_form_list_item"><a href="javascript:(0)" (click)="isCreditFormOpen = true">Заявка на ипотеку</a></li>
-            </ul>
-
+        <h2 class="parking-modal__name">Кладовая, №{{parkingData.flat}}</h2>
+        <div class="parking-modal__image">
+            <img src="/assets/img/flats/parking-modal.jpg" alt="preview-image">
         </div>
 
-    </div>
+        <ul class="parking-modal__list">
+            <li class="parking-modal__list-item">
+                <span>Дом</span>
+                <span>{{parkingData.house}}</span>
+            </li>
+            <li class="parking-modal__list-item">
+                <span>Секция</span>
+                <span>{{parkingData.section}}</span>
+            </li>
+            <li class="parking-modal__list-item">
+                <span>Площадь</span>
+                <span>{{parkingData.space}}</span>
+            </li>
+            <li class="parking-modal__list-item">
+                <span>Стоимость</span>
+                <span>{{parkingData.price}}</span>
+            </li>
+        </ul>
 
-</div>
+        <div class="parking-modal__btns">
+            <button class="parking-modal__btns-reserve btn_var-2" (click)="isReserveFormOpen = true">Забронировать кладовую</button>
+            <button class="parking-modal__btns-credit btn_var-3" (click)="isCreditFormOpen = true">Заявка на ипотеку</button>
+        </div>
+    </div>
+</section>
 
 <app-form-credit
     (close)="isCreditFormOpen = $event; windowScrollLocker.unblock()"

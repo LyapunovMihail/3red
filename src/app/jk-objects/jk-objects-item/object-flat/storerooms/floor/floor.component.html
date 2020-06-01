@@ -1,25 +1,20 @@
-<section class="house" *ngIf="jk">
+<section class="storage-schema" *ngIf="jk">
 
-    <div class="house__container">
+    <div class="storage-schema__nav">
+        <div class="storage-schema__nav-container">
 
-        <div class="house__nav">
-            <div class="object__flat-list-wrap">
-                <a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" class="house__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
-            </div>
+            <a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" class="storage-schema__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
         </div>
-
-        <div class="storerooms-floor_description">
-
-            <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="storerooms-floor_description_scheme"></div>
-
-            <app-storeroom-info-window *ngIf="infoWindow"
-                [infoWindow]="infoWindow">
-            </app-storeroom-info-window>
-
-        </div>
-
     </div>
 
+    <div class="storage-schema__container">
+
+        <app-storeroom-info-window
+            [infoWindow]="infoWindow">
+        </app-storeroom-info-window>
+
+        <div class="storage-schema__plan" [class.g-3red]="!floorSvg" [innerHTML]="floorSvg | houseSVGSanitizePipe"></div>
+    </div>
 </section>
 
 <app-storeroom-request-window *ngIf="isRequestWindowOpen"

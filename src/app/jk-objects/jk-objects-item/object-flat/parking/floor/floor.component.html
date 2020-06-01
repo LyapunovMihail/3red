@@ -1,25 +1,20 @@
-<section class="house" *ngIf="jk">
 
-    <div class="house__container">
+<section class="parking-schema" *ngIf="jk">
 
-        <div class="house__nav">
-            <div class="object__flat-list-wrap">
-                <a [routerLink]="'/objects/list/' + jk._id + '/parking'" class="house__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
-            </div>
+    <div class="parking-schema__nav">
+        <div class="parking-schema__nav-container">
+            <a [routerLink]="'/objects/list/' + jk._id + '/parking'" class="parking-schema__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
         </div>
-
-        <div class="parking-floor_description">
-
-            <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="parking-floor_description_scheme"></div>
-
-            <app-parking-info-window *ngIf="infoWindow"
-                [infoWindow]="infoWindow">
-            </app-parking-info-window>
-
-        </div>
-
     </div>
 
+    <div class="parking-schema__container">
+
+        <app-parking-info-window
+            [infoWindow]="infoWindow">
+        </app-parking-info-window>
+
+        <div class="parking-schema__plan" [class.g-3red]="!floorSvg" [innerHTML]="floorSvg | houseSVGSanitizePipe"></div>
+    </div>
 </section>
 
 <app-parking-request-window *ngIf="isRequestWindowOpen"

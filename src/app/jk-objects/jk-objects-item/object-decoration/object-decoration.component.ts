@@ -105,7 +105,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
 
     public changeTab(tab) {
         this.currentTab = tab;
-        const tabWithType = this.contentSnippet.data.find((item) => (item.tab.name === this.currentTab.tab.name && item.tab.show) && !!item.tab.decorationType);
+        const tabWithType = this.contentSnippet.data.find((item) => (item.tab.name === this.currentTab.tab.name && item.tab.show) && !!item.tab.decorationType && item.images.length > 0);
         if (tabWithType) {
             this.currentTab = tabWithType;
             this.currentType = this.currentTab.tab.decorationType; // в массиве contentSnippet.data содержатся табы без decorationType и могут быть такие же табы с decorationType. Когда меняется таб,

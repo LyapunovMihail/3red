@@ -1,33 +1,3 @@
-<!--<section class="house" *ngIf="jk">-->
-
-    <!--<div class="house__container">-->
-
-        <!--<div class="house__nav">-->
-            <!--<div class="object__flat-list-wrap">-->
-                <!--<a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>-->
-
-                <!--<ul class="object__flat-list">-->
-                    <!--<li class="object__flat-item"><a [routerLink]="'/objects/list/' + jk._id + '/flats'">Квартиры</a></li>-->
-                    <!--<li class="object__flat-item" *ngIf="isStorerooms"><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'">Кладовые</a></li>-->
-                    <!--<li class="object__flat-item object__flat-item_active">Машиноместа</li>-->
-                    <!--&lt;!&ndash;<li class="object__flat-item">Коммерческая недвижимость</li>&ndash;&gt;-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="parking_main" *ngFor="let item of parkMas">-->
-            <!--<h3>Дом {{item.house}}</h3>-->
-            <!--<a [routerLink]="['/objects/list/' + jk._id + '/parking/house/' + item.house + '/section/' + park.section + '/floor/' + park.floor]" class="parking_main-item" *ngFor="let park of item.parks">-->
-                <!--<p>Секция {{park.section}}</p>-->
-                <!--<p>Этаж {{park.floor}}</p>-->
-                <!--<p>от {{park.price | myBitNumberPipe}} ₽</p>-->
-            <!--</a>-->
-        <!--</div>-->
-
-    <!--</div>-->
-
-<!--</section>-->
-
 <section class="parking-list" *ngIf="jk">
 
     <div class="parking-list__nav">

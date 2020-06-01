@@ -93,7 +93,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                                 );
                             },
                             (err) => {
-                                this.floorSvg = `<div class="floor-plan-error-description">Для этого этажа изображение отсутствует</div>`;
+                                this.floorSvg = null;
                                 console.log(err);
                             }
                         );
