@@ -59,8 +59,12 @@
                 position: absolute;
                 right: 0;
                 top: 0;
-                background: url(/assets/img/admin_content/up_arrow_red.svg) center no-repeat;
-                transform: rotate(180deg);
+                background: url(/assets/img/flats/red_arrow_up.svg) center no-repeat;
+                transition: all 0.2s ease-out;
+            }
+
+            &:hover:before {
+                transform: translateY(-2px);
             }
         }
     }

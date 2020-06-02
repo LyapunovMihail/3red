@@ -77,12 +77,15 @@ export class ObjectProjectsComponent implements OnInit {
 
     private getRandomObjects(tempObjects) {
         const jkMas = [];
-        while (jkMas.length < 5) {
-            const ind = this.getRandomInt(tempObjects.length - 1);
-            if (!jkMas.find((item) => item._id === tempObjects[ind]._id)) {
-                jkMas.push(tempObjects[ind]);
+        if (tempObjects.length) {
+            while (jkMas.length < 5) {
+                const ind = this.getRandomInt(tempObjects.length - 1);
+                if (!jkMas.find((item) => item._id === tempObjects[ind]._id)) {
+                    jkMas.push(tempObjects[ind]);
+                }
             }
         }
+
         return jkMas;
     }
 

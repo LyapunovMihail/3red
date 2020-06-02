@@ -61,7 +61,7 @@
                         [formControl]="form.controls['space']"
                         [min]="config.space.min"
                         [max]="config.space.max"
-                        (move)="minSpace.innerHTML = $event.min; maxSpace.innerHTML = $event.max">
+                        (move)="minSpace.innerHTML = parseNumberPipe.transform(($event.min).toFixed(1)); maxSpace.innerHTML = parseNumberPipe.transform(($event.max).toFixed(1))">
                     </ghm-range-number>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                         {{ houseName }}
                     </p>
                 </div>
-
+                <div class="close-area" *ngIf="showCorpus" (click)="showCorpus = false"></div>
                 <app-search-house-select *ngIf="showCorpus"
                     [btnList]="housesBtnList"
                     [formControl]="form.controls['houses']">

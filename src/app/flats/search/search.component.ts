@@ -60,10 +60,9 @@ export class SearchComponent implements OnInit, OnDestroy {
                 };
 
                 this.router.navigate([this.router.url.split('?')[0]], {queryParams: newParams});
-                if (firstBoot) { // Если первая загрузка - после подгрузки конфига перевбиваем параметры запроса
-                    this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
-                }
-
+                // if (firstBoot) { // Если первая загрузка - после подгрузки конфига перевбиваем параметры запроса
+                this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+                // }
             },
             (err) => {
                 console.log(err);

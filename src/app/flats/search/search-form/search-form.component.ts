@@ -2,6 +2,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { GHMNumberPipe } from './ghm-range-number/ghm-number.pipe';
+import { FormConfig } from './search-form.config';
 
 @Component({
     selector: 'app-search-form',
@@ -18,6 +19,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public moreFilter: boolean = false;
     public showCorpus: boolean = false;
     public sort: string;
+    public decorList = FormConfig.decorationList;
 
     @Input()
     public config: any = {};
@@ -84,7 +86,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 return [];
             })(params.type)],
             decoration: [((decoration) => {
-                if (decoration && decoration.split(',').every((item) => this.config.decorationList.some((i) => item === i.value))) {
+                if (decoration && decoration.split(',').every((item) => this.decorList.some((i) => item === i.value))) {
                     return decoration.split(',');
                 }
                 return [];

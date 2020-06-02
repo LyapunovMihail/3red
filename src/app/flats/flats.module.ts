@@ -7,6 +7,7 @@ import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { FlatsListModule } from './search/search-output/flats-list/flats-list.module';
+import { CheckboxListDecorComponent } from './search/search-form/checkbox-list-decor/checkbox-list-decor.component';
 
 const FlatsComponents = [
     FlatsComponent,

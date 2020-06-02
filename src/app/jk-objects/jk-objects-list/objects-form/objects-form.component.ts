@@ -46,8 +46,8 @@ export class ObjectsFormComponent implements OnInit {
 
     public setForm(queryParams) {
         this.form = this.formBuilder.group({
-            priceMin: this.jkObjectsNumberPipe.transform(queryParams.priceMin || '1600000'),
-            priceMax: this.jkObjectsNumberPipe.transform(queryParams.priceMax || '13000000'),
+            priceMin: this.jkObjectsNumberPipe.transform(queryParams.priceMin || '0'),
+            priceMax: this.jkObjectsNumberPipe.transform(queryParams.priceMax || '0'),
             districts: [queryParams.districts ? queryParams.districts.split(',') : []],
             status: queryParams.status || 'Все'
         });

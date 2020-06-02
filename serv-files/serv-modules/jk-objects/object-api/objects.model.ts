@@ -25,6 +25,7 @@ export class ObjectsModel {
         const request: any = {};
         const flatsRequest: any = {};
 
+        flatsRequest.type = {$in: ['КВ', 'АП']};
         if ('districts' in query) {
             request.district = { $in: query.districts.split(',') };
         }
@@ -37,7 +38,6 @@ export class ObjectsModel {
 
         const jkSnippets = await this.collection.find(request).toArray();
         const flatsSnippets = await this.addressesCollection.find(flatsRequest).toArray();
-
 
         return jkSnippets.filter((jk) => flatsSnippets.some((flat) => flat.mod === jk.mod));
     }
