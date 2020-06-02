@@ -22,7 +22,7 @@ export class ObjectTriggerComponent implements OnInit {
 
     constructor(
         public flatsService: SearchService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.flatsService.getFlats({ mod: this.mod, type: 'КВ,АП' })

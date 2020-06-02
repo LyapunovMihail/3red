@@ -49,16 +49,34 @@
     position: relative;
     display: flex;
 
-
-
+    li:first-child {
+        .project__nav-link:after {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 0;
+            height: 1px;
+            width: 100%;
+            background-color: red;
+        }
+    }
 }
+
 .project__nav-link {
     color:rgba(0, 0, 0, 0.5);
     font-size: 18px;
     margin-right: 16px;
     padding-bottom: 17px;
-    transition: color .4s linear
-;
+    transition: color .4s linear;
+    position: relative;
+
+    &:after {
+        position: absolute;
+        top: 54px;
+        height: 1px;
+        background-color: red;
+    }
+
     &:hover {
         color: #ee4237;
     }

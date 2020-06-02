@@ -16,7 +16,7 @@
                 <button class="btn__admin-content btn_var-2" (click)="closeContentModal = false">Контент</button>
             </div>
 
-            <nav class="object-gallery__nav" *ngIf="tabSnippet.gallery && tabSnippet">
+            <nav class="object-gallery__nav" *ngIf="tabSnippet?.gallery">
                 <ul class="object-gallery__nav-list">
                     <ng-container *ngFor="let tab of this.tabSnippet.gallery">
                         <li class="object-gallery__nav-item"
