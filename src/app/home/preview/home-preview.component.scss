@@ -28,6 +28,19 @@
             font: 24px/31px $font-proba;
             color: $col-red;
             transition: color .2s linear;
+            display: inline-block;
+            position: relative;
+            &::after {
+                content: ''; 
+                width: 0px;
+                height: 1px;
+                position: absolute;
+                top: 100%; left: 0;
+                background-color: $col-red;
+                transition: width .2s ease;
+            }
+            &:hover::after { width: 100%; }
+            
         }
         &-date { margin: 0 0 8px; }
     }
@@ -117,10 +130,10 @@
     white-space: pre-wrap;
 }
 
-.about__date-preview {
-}
-.about__text-preview {
-}
+// .about__date-preview {
+// }
+// .about__text-preview {
+// }
 .about__mouse {
     position: relative;
 }
