@@ -116,12 +116,13 @@
     height: 309px;
     overflow: hidden;
     transition: height .7s ease;
-
+    // width: 1104px;
     &--height {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 258px);
         grid-column-gap: 24px;
         grid-row-gap: 48px;
+       
     }
 }
 .team__item-title {
@@ -163,8 +164,10 @@
     font-size: 18px;
     line-height: 1.25;
     margin: 8px 0 4px;
+    overflow-wrap: break-word;
 }
 .team__list-prof {
     font-size: 16px;
     color: rgba(0, 0, 0, 0.5);
+    overflow-wrap: break-word;
 }

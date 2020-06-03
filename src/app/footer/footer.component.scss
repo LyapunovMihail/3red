@@ -46,11 +46,16 @@
 
             &_insta { 
                 background-image: url(/assets/img/footer/insta.svg); 
-                // &:hover {
-                //     background-image: url(/assets/img/footer/insta-hover.svg); 
-                // }
+                &:hover {
+                    background-image: url(/assets/img/footer/insta-hover.svg); 
+                }
             }
-            &_fb { background-image: url(/assets/img/footer/fbook.svg); }
+            &_fb {
+                 background-image: url(/assets/img/footer/fbook.svg);
+                 &:hover {
+                    background-image: url(/assets/img/footer/fb-hover.svg); 
+                }
+                 }
         }
     }
     &__copyright {
