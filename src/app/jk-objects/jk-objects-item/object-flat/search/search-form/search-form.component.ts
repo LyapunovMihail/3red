@@ -20,6 +20,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public form: FormGroup;
     public moreFilter: boolean = false;
     public showCorpus: boolean = false;
+    public decorList = FormConfig.decorationList;
     public sort: string;
     public housesBtnList: any[] = [];
 
@@ -86,7 +87,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 return [];
             })(params.type)],
             decoration: [((decoration) => {
-                if (decoration && decoration.split(',').every((item) => this.config.decorationList.some((i) => item === i.value))) {
+                if (decoration && decoration.split(',').every((item) => this.decorList.some((i) => item === i.value))) {
                     return decoration.split(',');
                 }
                 return [];

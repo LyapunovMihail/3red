@@ -16,12 +16,17 @@ export class ObjectsFormComponent implements OnInit {
     public form: FormGroup;
     public priceMin: string;
     public priceMax: string;
+    public isFirstBoot = true;
 
     @Output()
     public formChange = new EventEmitter();
 
     @Input()
     public btnList: any[] = [];
+    @Input()
+    public minPricePlaceholder: any[] = [];
+    @Input()
+    public maxPricePlaceholder: any[] = [];
 
     constructor(
         public activatedRoute: ActivatedRoute,
@@ -46,19 +51,35 @@ export class ObjectsFormComponent implements OnInit {
 
     public setForm(queryParams) {
         this.form = this.formBuilder.group({
-            priceMin: this.jkObjectsNumberPipe.transform(queryParams.priceMin || '0'),
-            priceMax: this.jkObjectsNumberPipe.transform(queryParams.priceMax || '0'),
+            priceMin: this.jkObjectsNumberPipe.transform(queryParams.priceMin || ''),
+            priceMax: this.jkObjectsNumberPipe.transform(queryParams.priceMax || ''),
             districts: [queryParams.districts ? queryParams.districts.split(',') : []],
             status: queryParams.status || 'Все'
         });
 
         let params = this.onFormChange(this.form.value);
+        if (params.priceMin === '') {
+            delete params.priceMin;
+        }
+        if (params.priceMax === '') {
+            delete params.priceMax;
+        }
+
         this.formChange.emit(params);
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
+            if (form.priceMin === '') {
+                delete params.priceMin;
+            }
+            if (form.priceMax === '') {
+                delete params.priceMax;
+            }
+
             params = this.onFormChange(form);
             this.formChange.emit(params);
         });
+
+        this.isFirstBoot = false;
     }
 
     public onFormChange(form) {

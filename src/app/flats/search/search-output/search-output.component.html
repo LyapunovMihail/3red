@@ -6,7 +6,7 @@
     </div>
 
     <div class="search-output__result">
-        <div class="search-output__empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
+        <div class="search-output__empty" *ngIf="flatsList.length === 0 && !isLoading">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
         <app-flats-list
             [flatsList]="flatsList">
@@ -19,4 +19,3 @@
     </div>
 
 </div>
-

@@ -36,6 +36,20 @@ export const FormConfig = {
             value: '03'
         }
     ],
+    extraDecorationList: [
+        {
+            name: 'классика',
+            value: '08'
+        },
+        {
+            name: 'модерн',
+            value: '09'
+        },
+        {
+            name: 'венеция',
+            value: '14'
+        }
+    ],
     housesList: [
         {
             name: 'Все корпуса',

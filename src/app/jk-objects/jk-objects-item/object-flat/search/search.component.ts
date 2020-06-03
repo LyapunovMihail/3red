@@ -37,6 +37,7 @@ export class SearchComponent implements OnDestroy {
     ) {}
 
     public formChange(form) {
+        this.searchService.setLoadingIndicator(true);
         this.form = form;
 
         const params = {
@@ -97,6 +98,7 @@ export class SearchComponent implements OnDestroy {
                 this.sortFlats();
                 this.loadMore();
                 this.flatsChanged.emit(this.searchFlats);
+                this.searchService.setLoadingIndicator(false);
             },
             (err) => {
                 console.log(err);

@@ -28,7 +28,7 @@ export const FormConfig = {
             value: '00'
         },
         {
-            name: 'WhiteBox',
+            name: 'Черновая',
             value: '01'
         },
         {

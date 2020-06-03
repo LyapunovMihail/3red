@@ -101,7 +101,19 @@
                 </app-search-house-select>
             </div>
 
-            <button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>
+            <button class="search-form__btn" [class.search-form__btn_open]="moreFilter"
+                    (click)="moreFilter = !moreFilter">Еще параметры</button>
+
+            <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter" #decorCheckbox>
+
+                <app-search-checkbox-list-decor
+                    [btnList]="decorList"
+                    [formControl]="form.controls['decoration']"
+                    [name]="'decoration'">
+                </app-search-checkbox-list-decor>
+
+                <button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>
+            </div>
         </div>
 
     </form>

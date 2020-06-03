@@ -27,7 +27,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     public params: any;
     public isLoadMoreBtn = false;
     public config: any;
-
     public housesBtnList: any = [];
     public modsBtnList: any = [];
 
@@ -71,6 +70,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     public formChange(form) {
+        this.searchService.setLoadingIndicator(true);
         this.form = form;
 
         const params: any = {
@@ -135,6 +135,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                 console.log('this.searchFlats: ', this.searchFlats);
                 this.sortFlats(this.sort);
                 this.loadMore();
+                this.searchService.setLoadingIndicator(false);
             },
             (err) => {
                 console.log(err);
