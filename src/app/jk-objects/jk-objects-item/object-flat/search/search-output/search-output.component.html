@@ -6,7 +6,7 @@
     </div>
 
     <div class="search-output__result">
-        <div class="search-output__empty" *ngIf='flatsList.length === 0'>Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
+        <div class="search-output__empty" *ngIf="flatsList.length === 0 && !isLoading">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
         <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
             <a (click)="openApartmentModal(i)" class="search-output__result-item">

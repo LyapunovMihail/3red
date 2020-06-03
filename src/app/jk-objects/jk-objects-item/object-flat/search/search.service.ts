@@ -8,6 +8,7 @@ import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addr
 export class SearchService {
 
     public outputFlatsChanged: Subject<IAddressItemFlat[]> = new Subject();
+    public loadingIndicator: Subject<boolean> = new Subject();
 
     constructor(private http: HttpClient) {}
 
@@ -21,6 +22,14 @@ export class SearchService {
 
     public setOutputFlatsChanged(flats) {
         this.outputFlatsChanged.next(flats);
+    }
+
+    public getLoadingIndicator() {
+        return this.loadingIndicator;
+    }
+
+    public setLoadingIndicator(isLoading) {
+        this.loadingIndicator.next(isLoading);
     }
 
     public sortFlats(sort, searchFlats) {

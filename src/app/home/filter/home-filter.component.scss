@@ -35,7 +35,6 @@
         &_for-input { color: $col-black-5; }
         &_for-price {
             font: 18px/23px $font-proba;
-            color: $col-black-5;
             &:not(:nth-child(2)) { width: 45%; }
             &:nth-child(2) { width: 10%; }
             &:last-child { text-align: right; }

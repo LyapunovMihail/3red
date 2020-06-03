@@ -248,7 +248,11 @@ export class AddressesModel {
             request.type = { $in: query.type.split(',')};
         }
         if ('decoration' in query && query.decoration.split(',').every((item) => FormConfig.decorationList.some((i) => item === i.value))) {
-            request.decoration = { $in: query.decoration.split(',')};
+            const decMas = query.decoration.split(',');
+            if (decMas.some((item) => item === '03')) { // Если в отделке присутствует чистовая, в её же состав входят и многие другие отделки, подключаем их к поиску
+                decMas.push(...FormConfig.extraDecorationList.map((item) => item.value));
+            }
+            request.decoration = { $in: decMas};
         }
 
         let parameters = {};

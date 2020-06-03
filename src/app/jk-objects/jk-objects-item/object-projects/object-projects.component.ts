@@ -53,21 +53,17 @@ export class ObjectProjectsComponent implements OnInit {
     }
 
     private getFlatsMinPrice(objects) {
-        const last = objects.length;
-
-        objects.forEach( (item, i) => {
-
-            this.objectService.getFlats({mod: item.mod})
+        objects.forEach((item, i) => {
+            this.objectService.getFlats({mod: item.mod, type: 'КВ,АП'})
                 .subscribe(
-                    data => this.getMinPrice(item, (data.filter(flat => flat.type === 'КВ') ), i, last ),
+                    data => this.getMinPrice(item, data, i),
                     error => console.log(error)
                 );
         });
     }
 
-    private getMinPrice(obj, flats, i, last) {
-        let price = [];
-        flats.forEach( el => price.push(el.price) );
+    private getMinPrice(obj, flats, i) {
+        const price = flats.map((el) => el.price);
 
         this.objects[i] = {
             status: obj.status,

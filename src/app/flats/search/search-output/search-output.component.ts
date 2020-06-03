@@ -22,6 +22,8 @@ export class SearchOutputComponent implements OnInit {
     @ViewChild('container')
     public container: ElementRef;
 
+    public isLoading = true;
+
     constructor(
         private flatsDiscountService: FlatsDiscountService,
         private searchService: SearchService,
@@ -38,6 +40,9 @@ export class SearchOutputComponent implements OnInit {
                     return flat;
                 });
             });
+
+        this.searchService.getLoadingIndicator()
+            .subscribe((item) => this.isLoading = item);
     }
 
     public flatsCount() {

@@ -16,8 +16,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public routerEvents: any;
     public formEvents: any;
     public form: FormGroup;
-    public moreFilter: boolean = false;
-    public showCorpus: boolean = false;
+    public moreFilter = false;
+    public showCorpus = false;
     public sort: string;
     public decorList = FormConfig.decorationList;
 

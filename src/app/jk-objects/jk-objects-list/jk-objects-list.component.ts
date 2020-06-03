@@ -4,6 +4,7 @@ import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/o
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import { Router } from '@angular/router';
 import { JkObjectsNumberPipe } from './jk-objects-number.pipe';
+import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Component({
     selector: 'app-jk-objects-list',
@@ -22,10 +23,13 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     public showMap = false;
     public snippets: IObjectSnippet[];
 
+    public flats: IAddressItemFlat[];
     public closeModal = true;
     public authorizationEvent;
     public isAuthorizated = false;
 
+    public minPricePlaceholder: string;
+    public maxPricePlaceholder: string;
     public btnList: any[] = [];
     public isLoaded = false;
     // открытие формы редактирования-создания
@@ -49,6 +53,11 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
                 this.snippets = data;
                 this.getDistricts();
             });
+
+        this.objectService.getFlats({type: 'КВ,АП'})
+            .subscribe((data) => {
+                this.getMinMaxPrice(data);
+            });
     }
 
     public getObjects(params) {
@@ -56,7 +65,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false, skipLocationChange: true});
         }
 
-        if (this.isAuthorizated || (params.priceMin === '0' && params.priceMax === '0')) {
+        if (this.isAuthorizated) {
             this.objectService.getSnippets().subscribe(
                 (data) => this.snippets = data,
                 (err) => console.log(err)
@@ -125,6 +134,13 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             }
         });
         this.isLoaded = true;
+    }
+
+    private getMinMaxPrice(flats) {
+        const price = flats.map((el) => el.price);
+
+        this.minPricePlaceholder = price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : '0';
+        this.maxPricePlaceholder = price.length > 0 ? Number(Math.max(...price) / 1000000).toFixed(2) : '0';
     }
 
     public isShowMap() {

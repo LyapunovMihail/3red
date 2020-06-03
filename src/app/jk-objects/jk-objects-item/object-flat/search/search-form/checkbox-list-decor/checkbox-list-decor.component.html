@@ -1,0 +1,35 @@
+<!--<ul [class.search-form&#45;&#45;row]="name === 'decoration'">-->
+
+    <!--<li *ngFor="let btn of btnList" class="search-form__list-item search-form__list-item&#45;&#45;{{name}}">-->
+        <!--<input [id]="btn.value" [name]="name"-->
+            <!--(change)="checkBtn($event)"-->
+            <!--[value]="btn.value"-->
+            <!--[checked]="isChecked(btn.value)"-->
+            <!--type="checkbox">-->
+        <!--<label [for]="btn.value" class="g-checkbox search-form__list-checkbox"></label>-->
+        <!--<label [for]="btn.value" class="search-form__list-text&#45;&#45;{{name}}">{{btn.name}}</label>-->
+    <!--</li>-->
+
+<!--</ul>-->
+<div class="search-form__wrap search-form__wrap--for-checkbox">
+    <label class="g-checkbox" *ngFor="let btn of btnList">
+        <input
+            (change)="checkBtn($event)"
+            [value]="btn.value"
+            [checked]="isChecked(btn.value)"
+            type="checkbox">
+        <div></div>
+        <span>{{btn.name}}</span>
+    </label>
+</div>
+
+<!--<label class="g-checkbox">-->
+    <!--<input type="checkbox" name="decoration">-->
+    <!--<div></div>-->
+    <!--<span>Черновая</span>-->
+<!--</label>-->
+<!--<label class="g-checkbox">-->
+    <!--<input type="checkbox" name="decoration">-->
+    <!--<div></div>-->
+    <!--<span>Без отделки</span>-->
+<!--</label>-->

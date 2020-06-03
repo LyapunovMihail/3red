@@ -18,6 +18,7 @@ import { FavoritesService } from '../../../../../favorites/favorites.service';
 
 export class SearchOutputComponent implements OnInit {
 
+    public isLoading = true;
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
     public jk: IObjectSnippet;
@@ -48,6 +49,9 @@ export class SearchOutputComponent implements OnInit {
                     return flat;
                 });
             });
+
+        this.searchService.getLoadingIndicator()
+            .subscribe((item) => this.isLoading = item);
     }
 
     public flatsCount() {

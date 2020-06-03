@@ -35,6 +35,12 @@ export class ObjectsModel {
         if ( 'priceMin' in query && 'priceMax' in query) {
             flatsRequest.price = { $gte: Number(query.priceMin), $lte: Number(query.priceMax) };
         }
+        if ( ('priceMin' in query) && !('priceMax' in query)) {
+            flatsRequest.price = { $gte: Number(query.priceMin) };
+        }
+        if ( 'priceMax' in query && !('priceMin' in query) ) {
+            flatsRequest.price = { $lte: Number(query.priceMax) };
+        }
 
         const jkSnippets = await this.collection.find(request).toArray();
         const flatsSnippets = await this.addressesCollection.find(flatsRequest).toArray();
