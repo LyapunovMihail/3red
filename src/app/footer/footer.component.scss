@@ -44,7 +44,12 @@
             background: center no-repeat;
             &:last-child { margin: 0; }
 
-            &_insta { background-image: url(/assets/img/footer/insta.svg); }
+            &_insta { 
+                background-image: url(/assets/img/footer/insta.svg); 
+                // &:hover {
+                //     background-image: url(/assets/img/footer/insta-hover.svg); 
+                // }
+            }
             &_fb { background-image: url(/assets/img/footer/fbook.svg); }
         }
     }

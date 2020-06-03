@@ -96,7 +96,7 @@
     transition: color .2s linear;
     position: relative;
     &::after {
-        content: '';
+        content: ''; 
         width: 0px;
         height: 1px;
         position: absolute;
