@@ -25,6 +25,7 @@
         max-width: 1104px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     &__title { margin: 22px 40px 0 0; }
@@ -95,7 +96,7 @@
     &__btn-link {
         width: 258px;
         height: 48px;
-        margin: 22px 0 0;
+        // margin: 22px 0 0;
         text-align: center;
         box-sizing: border-box;
         line-height: 48px;

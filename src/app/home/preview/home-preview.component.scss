@@ -28,7 +28,6 @@
             font: 24px/31px $font-proba;
             color: $col-red;
             transition: color .2s linear;
-            display: inline-block;
             position: relative;
             &::after {
                 content: ''; 

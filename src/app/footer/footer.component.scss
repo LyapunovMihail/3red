@@ -46,12 +46,14 @@
 
             &_insta { 
                 background-image: url(/assets/img/footer/insta.svg); 
+                transition: background 0.4s ease;
                 &:hover {
                     background-image: url(/assets/img/footer/insta-hover.svg); 
                 }
             }
             &_fb {
                  background-image: url(/assets/img/footer/fbook.svg);
+                 transition: background 0.4s ease;
                  &:hover {
                     background-image: url(/assets/img/footer/fb-hover.svg); 
                 }
