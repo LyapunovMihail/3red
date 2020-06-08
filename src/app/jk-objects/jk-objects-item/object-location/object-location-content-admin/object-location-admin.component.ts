@@ -88,6 +88,6 @@ export class ObjectLocationAdminComponent implements OnInit {
             this.save();
         } else {
             this.closeModal.emit(true);
-        }
+        } 
     }
 }

@@ -131,15 +131,15 @@
     &__dots {
         width: 100%;
         positioN: absolute;
-        top: calc(100% - 22px);
+        top: calc(100% - 28px);
         left: 0;
         display: flex;
         justify-content: center;
         z-index: 5;
 
         span {
-            width: 6px;
-            height: 6px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background-color: $col-white;
             margin: 0 8px;

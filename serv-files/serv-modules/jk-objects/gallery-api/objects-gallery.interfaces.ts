@@ -9,7 +9,7 @@ export interface IObjectGallerySnippet {
     objectId: string;
     switchOn: boolean;
     image_data: IImageData[];
-    created_at: any;
+    created_at: any; 
     last_modifyed: any;
 }
 

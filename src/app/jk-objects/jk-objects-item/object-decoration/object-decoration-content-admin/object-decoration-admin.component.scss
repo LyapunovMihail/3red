@@ -21,7 +21,7 @@
 
 .button__delete--textarea {
     top: 50%;
-    left: 100% ;
+    left: 100% !important ;
 
 }
 .button__delete {
@@ -31,6 +31,7 @@
     width: 17px;
     height: 17px;
     top: -8px;
+    left:-8px;
     z-index: 2;
     outline: none;
     border: none;

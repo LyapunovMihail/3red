@@ -6,10 +6,16 @@ p {
     width: 1280px;
     padding: 0 88px;
     margin: auto;
-    padding-top: 292px;
+    padding-top: 280px;
     // padding-bottom: 145px;
     position: relative;
     box-sizing: border-box;
+}
+.product__title {
+    width: 1104px;
+    font: 500 48px/48px 'ProbaPro', 'sans-serif', 'Arial';
+    color: #000;
+    margin: 0 0 24px;
 }
 .product__shape-img {
     position: absolute;

@@ -32,13 +32,13 @@
         z-index: 0;
     }
     &__back-btn {
-        height: 30px;
+        height: 28px;
         display: flex;
         align-items: center;
         padding-left: 33px;
         position: relative;
         margin: 0 0 15px;
-        font: 18px/23px $font-proba;
+        font: 18px/18px $font-proba;
         color: $col-white;
         &::before {
             content: '';
@@ -91,6 +91,7 @@
         display: inline-block;
         color: #fff;
         font-size: 14px;
+        line-height: 16px;
         padding: 5px 16px;
         background: #6a6a6a;
         border-radius: 20px;

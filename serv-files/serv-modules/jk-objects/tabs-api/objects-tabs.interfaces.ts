@@ -18,7 +18,7 @@ export interface IObjectGalleryTabs {
     show: boolean;
 }
 
-export interface IObjectDecorationTab {
+export interface IObjectDecorationTab { 
     name: string;
     show: boolean;
     turnOnDecorationTypes?: boolean; // когда жмешь галку добавить на табе декорации
