@@ -33,7 +33,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     public sliderContent = slider[0];
     public currentSlide = 0;
 
-    public currentTab: IDecorationData;
+    public currentTab: IDecorationData; 
     public currentType: string;
 
     public contentSnippet: IObjectDecorationSnippet;

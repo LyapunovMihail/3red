@@ -50,7 +50,8 @@
     font-size: 48px;
     line-height: 56px;
     color: rgba(0, 0, 0, 0.5);
-    font-family: 'Formular-medium';
+    font-family: $font-proba;
+    font-weight: 500;
     width: 820px;
 }
 .intro__text-span {

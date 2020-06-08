@@ -38,9 +38,9 @@
                             <span></span>
                         </button>
 
-                        <div class="decoration-slider__dots" *ngIf="currentTab">
+                        <div class="decoration-slider__dots" *ngIf="currentTab?.images?.length > 1">
                             <span *ngFor="let dots of currentTab.images; let i = index"
-                                 [ngClass]="{'current-dots': currentSlide === i}"></span>
+                                 [ngClass]="{'current-dots': currentSlide === i}"></span> 
                         </div>
 
                         <div class="decoration-slider__path" *ngIf="currentType">

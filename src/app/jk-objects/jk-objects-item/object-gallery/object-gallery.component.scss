@@ -66,14 +66,14 @@
             display: flex;
             justify-content: center;
             position: absolute;
-            top: calc(581px - 22px);
+            top: calc(581px - 28px);
             left: 0;
             z-index: 1;
 
             span {
                 display: block;
-                width: 6px;
-                height: 6px;
+                width: 12px;
+                height: 12px;
                 background-color: $col-white;
                 border-radius: 50%;
                 margin: 0 8px;

@@ -18,15 +18,22 @@
     }
 
     &__close {
-        position: absolute;
+        position: fixed;
+        right: 0;
+        top: 64px;
+        left: 0;
+        margin: auto;
+        transform: translateX(506px);
+        z-index: 1;
 
-        &_main {
-            top: 0;
-            left: calc(100% + 24px);
-        }
+        // &_main {
+        //     top: 0;
+        //     left: calc(100% + 24px);
+        // }
         &_success {
-            top: 56px;
-            left: calc(100% + 24px);
+            top: 120px;
+            // top: 56px;
+            // left: calc(100% + 24px);
         }
     }
     &__success-btn {

@@ -28,28 +28,14 @@
             }
         }
       
+        &-date ,
         &-title {
             font: 24px/31px $font-proba;
             color: $col-red;
             transition: color .2s linear;
-            position: relative;
-            &::after {
-                content: ''; 
-                width: 0px;
-                height: 1px;
-                position: absolute;
-                top: 100%; left: 0;
-                background-color: $col-red;
-                transition: width .2s ease;
-            }
-            &:hover::after { width: 100%; }
-            
         }
         &-date { 
             margin: 0 0 8px;
-            font: 24px/31px $font-proba;
-            color: $col-red;
-            transition: color .2s linear;
         }
     }
 
