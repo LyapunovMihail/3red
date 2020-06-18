@@ -4,6 +4,7 @@ import { ObjectNewsComponent } from './object-news.component';
 import { SharesEditFormsModule } from '../../../news-shares/shares/shares-edit/shares-edit-forms.module';
 import { CreateRedactFormsModule } from '../../../news-shares/news/create-redact-forms/create-redact-forms.module';
 import { RouterModule } from '@angular/router';
+import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
         RouterModule,
         SharesEditFormsModule,
         CreateRedactFormsModule,
+        NavMenuModule
     ]
 })
 export class ObjectNewsModule {

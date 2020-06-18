@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { CheckboxListComponent } from './objects-form/checkbox-list/checkbox-list.component';
 import { JkObjectsNumberPipe } from './jk-objects-number.pipe';
 import { ObjectsFormComponent } from './objects-form/objects-form.component';
+import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
   exports: [
@@ -36,7 +37,8 @@ import { ObjectsFormComponent } from './objects-form/objects-form.component';
       RouterModule,
       ReactiveFormsModule,
       AdminModalModule,
-      SlideTopLabelModule
+      SlideTopLabelModule,
+      NavMenuModule
   ]
 })
 

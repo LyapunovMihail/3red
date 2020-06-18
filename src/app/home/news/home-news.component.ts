@@ -40,6 +40,12 @@ export class HomeNewsComponent implements OnInit, OnChanges {
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
+    public navList = [
+        { name: 'Все', link: 'all' },
+        { name: 'Новости', link: 'news' },
+        { name: 'Акции', link: 'shares' }
+    ];
+
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         public objectNewsService: HomeNewsService
@@ -75,7 +81,7 @@ export class HomeNewsComponent implements OnInit, OnChanges {
                 this.allSnippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });
-                this.changeType(this.allSnippets, 'all');
+                this.changeType('all');
             },
             (err) => console.log(err)
         );
@@ -93,11 +99,21 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    public changeType(snippets, type) {
+    public changeType(type) {
         this.currentSlide = 0;
         this.showSnippetType = type;
 
-        this.currentSnippets = this.isAuthorizated ? snippets : snippets.filter((item) => item.publish);
+        switch (type) {
+            case 'all':
+                this.currentSnippets = this.isAuthorizated ? this.allSnippets : this.allSnippets.filter((item) => item.publish);
+                break;
+            case 'news':
+                this.currentSnippets = this.isAuthorizated ? this.newsSnippets : this.newsSnippets.filter((item) => item.publish);
+                break;
+            case 'shares':
+                this.currentSnippets = this.isAuthorizated ? this.shareSnippets : this.shareSnippets.filter((item) => item.publish);
+                break;
+        }
     }
 
 

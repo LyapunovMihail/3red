@@ -48,7 +48,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
             const functions = document.getElementById('functions').firstElementChild as HTMLElement;
             if (this.scrollTop > functions.offsetTop  - 77) {
                 functions.classList.add('functions--fixed');
-                helper.style.marginTop = `${functions.getBoundingClientRect().height + 77}px`;
+                helper.style.marginTop = `${functions.getBoundingClientRect().height + 400}px`;
             }
             if (this.scrollTop < functions.offsetTop + functions.getBoundingClientRect().height + 500) {
                 functions.classList.remove('functions--fixed');

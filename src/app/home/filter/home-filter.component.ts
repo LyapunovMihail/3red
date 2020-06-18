@@ -24,6 +24,8 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     public params: { priceMin: string, priceMax: string, rooms?: string, mod: string };
     public flatsLength: number;
     public modsBtnList;
+    public showMods = false;
+    public hideMods = false;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -133,4 +135,11 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         this.formEvents.unsubscribe();
     }
 
+    public switchPopup() {
+        this.hideMods = true;
+        setTimeout(() => {
+            this.showMods = false;
+            this.hideMods = false;
+        }, 400);
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { placement, mockHouse } from './plan.config';
 import { PlanService } from './plan.service';
 import { IObjectFlatSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
@@ -30,6 +30,9 @@ export class PlanComponent implements OnInit {
     public snippet: IObjectFlatSnippet;
     public switchOn = false;
 
+    public widthActive;
+    public offsetLeftActive;
+
     public flats: IAddressItemFlat[] = [];
     public storerooms: IAddressItemFlat[] = [];
     public parking: IAddressItemFlat[] = [];
@@ -38,6 +41,7 @@ export class PlanComponent implements OnInit {
 
     constructor(
         private flatService: PlanService,
+        public elRef: ElementRef
     ) { }
 
     ngOnInit() {
@@ -52,6 +56,7 @@ export class PlanComponent implements OnInit {
         }, (error) => {
             console.error(error);
         });
+        this.defaultElem();
     }
 
     getPlacements() {
@@ -88,5 +93,21 @@ export class PlanComponent implements OnInit {
             () => console.log('success'),
             (err) => console.error(err)
         );
+    }
+
+    public getActiveElement(event) {
+        const elem = event.target;
+
+        this.widthActive = elem.offsetWidth;
+        this.offsetLeftActive = elem.offsetLeft;
+    }
+    public defaultElem() {
+        if (this.elRef.nativeElement.querySelector('.object-flat__nav-item.active')) {
+            const el = this.elRef.nativeElement.querySelector('.object-flat__nav-item.active');
+            this.widthActive = el.offsetWidth;
+            this.offsetLeftActive = el.offsetLeft;
+        } else {
+            setTimeout(() => this.defaultElem(), 2000);
+        }
     }
 }

@@ -25,6 +25,11 @@ export class ObjectPurchaseComponent implements OnInit, OnChanges {
     public snippet: IObjectCreditSnippet;
     public switchOn = false;
 
+    public navList = [
+        { name: 'Ипотека', link: 'credit' },
+        { name: 'Рассрочка', link: 'installment' }
+    ];
+
     constructor(
         private creditService: ObjectCreditAdminService
     ) { }

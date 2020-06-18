@@ -5,6 +5,21 @@
     position: relative;
     // z-index: 10;
 }
+.modlist-show,
+.modlist-hide {
+    position: relative;
+    z-index: 12;
+}
+.modlist-show { animation: showpopup .4s ease forwards; }
+.modlist-hide { animation: hidepopup .4s ease forwards; }
+@keyframes showpopup {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes hidepopup {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
 
 .search {
     width: 100%;
@@ -197,24 +212,12 @@
         &_floor { width: 98px; }
         &_corpus {
             width: 71px + 12px + 28px;
-            position: relative;
             display: flex;
             align-items: center;
             padding-right: 38px;
             box-sizing: border-box;
             overflow: hidden;
-            &:before {
-                content: '';
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                position: absolute;
-                right: 0;
-                top: auto;
-                background: url(/assets/img/flats/search/arrow_select_list.svg) 45% no-repeat rgba($color: $col-border, $alpha: .31);
-                background-size: 8px 10px;
-                transform: rotate(-90deg);
-            }
+            &::after { right: 0; }
 
             &-for-schema { width: 112px + 12px + 28px;  }
         }

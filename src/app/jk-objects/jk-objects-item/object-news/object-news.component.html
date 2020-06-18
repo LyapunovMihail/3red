@@ -17,14 +17,11 @@
             </div>
 
             <nav class="object-news__nav">
-                <ul class="object-news__nav-list">
-                    <li class="object-news__nav-item" (click)="changeType(allSnippets, 'all')"
-                        [ngClass]="{'object-news__nav-item_active': showSnippetType === 'all'}">Все</li>
-                    <li class="object-news__nav-item" (click)="changeType(newsSnippets, 'news')"
-                        [ngClass]="{'object-news__nav-item_active': showSnippetType === 'news'}">Новости</li>
-                    <li class="object-news__nav-item" (click)="changeType(shareSnippets, 'shares')"
-                        [ngClass]="{'object-news__nav-item_active': showSnippetType === 'shares'}">Акции</li>
-                </ul>
+                <nav-menu
+                    [navList]="navList"
+                    [linkType]="'else'"
+                    (routeNavigate)="changeType($event)"
+                ></nav-menu>
                 <a class="g-all-object" routerLink="/news-shares/all">Все новости</a>
             </nav>
 

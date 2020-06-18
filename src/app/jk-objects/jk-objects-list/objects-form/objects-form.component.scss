@@ -1,5 +1,14 @@
 @import '../../../../styles/modules/mixins/mixin';
 
+@keyframes showpopup {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes hidepopup {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 .objects__utilities {
     display: flex;
     align-items: flex-start;
@@ -28,7 +37,9 @@
     z-index: 20;
     background-color: #fff;
     width: 260px;
-    border-top: 1px solid #d8d8d8;;
+    border-top: 1px solid #d8d8d8;
+    &.show { animation: showpopup .4s ease forwards; }
+    &.hide { animation: hidepopup .4s ease forwards; }
 }
 .objects__utilities-wrap {
     margin-top: 10px;
