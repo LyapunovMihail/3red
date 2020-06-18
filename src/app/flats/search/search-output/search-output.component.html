@@ -1,5 +1,10 @@
 <div class="search-output" *ngIf="flatsList" #container>
 
+    <app-loader 
+        [loaderHeight]="300"
+        [loaderShow]="isLoading"
+    ></app-loader>
+
     <div class="search-output__head">
 
         <h3 class="search-output__head-title">Найдено {{flatsCount()}} квартир</h3>

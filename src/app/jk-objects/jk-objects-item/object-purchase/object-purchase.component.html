@@ -16,12 +16,11 @@
             </div>
 
             <nav class="object-purchase__nav">
-                <ul class="object-purchase__nav-list" *ngIf="!isAuthorizated">
-                    <li class="object-purchase__nav-item" (click)="showType = 'credit'"
-                        [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
-                    <li class="object-purchase__nav-item" (click)="showType = 'installment'"
-                        [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
-                </ul>
+                <nav-menu *ngIf="!isAuthorizated"
+                    [navList]="navList"
+                    [linkType]="'else'"
+                    (routeNavigate)="showType = $event"
+                ></nav-menu>
             </nav>
 
             <div class="object-purchase__list" *ngIf="showType === 'credit'">

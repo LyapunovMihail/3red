@@ -1,0 +1,17 @@
+
+<section class="nav-menu">
+
+    <ul class="nav-menu__list">
+        <li class="nav-menu__list-line" 
+            [style.left.px]="offsetLeftActive"
+            [style.width.px]="widthActive"></li>
+
+        <ng-container *ngFor="let item of navList; let i = index">
+            <li class="nav-menu__list-item g-body" 
+                [class.active]="activePointDefault === i"
+                (click)="getActiveElement($event, item); route(linkType, item); activePointDefault = i"
+                *ngIf="!item.show ? (item.show === false ? false : true) : true "
+                >{{item.name}}</li>
+        </ng-container>
+    </ul>
+</section>

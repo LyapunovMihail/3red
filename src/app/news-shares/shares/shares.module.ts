@@ -11,6 +11,7 @@ import { AuthorizationGuard } from '../../authorization/authorization-guard.serv
 import { Uploader } from 'angular2-http-file-upload';
 import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
 import { SharesEditFormsModule } from './shares-edit/shares-edit-forms.module';
+import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -27,6 +28,7 @@ const SHARES_COMPONENTS = [
         CommonModule,
         FormsRequestModule,
         SharesEditFormsModule,
+        NavMenuModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

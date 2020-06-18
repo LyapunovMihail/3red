@@ -18,6 +18,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { AboutTeamComponent } from './team/about-team.component';
 import { AboutTeamTabsAdminComponent } from './team/about-team-tabs-admin/about-team-tabs-admin.component';
 import { AboutTeamAdminComponent } from './team/about-team-content-admin/about-team-admin.component';
+import { AutoResizeTextareaModule } from '../UI/auto-resize-textarea/auto-resize-textarea.module';
 
 const AboutComponents = [
     AboutComponent,
@@ -46,6 +47,7 @@ const AboutComponents = [
         AdminModalModule,
         SlideTopLabelModule,
         ReactiveFormsModule,
+        AutoResizeTextareaModule,
         HomeNewsModule,
         TextMaskModule,
         RouterModule.forChild([

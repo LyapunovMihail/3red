@@ -35,6 +35,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { ObjectFlatsModule } from './jk-objects-item/object-flat/object-flats.module';
 import { ObjectDynamicModule } from './jk-objects-item/object-dynamic/object-dynamic.module';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
+import { NavMenuModule } from '../UI/nav-menu/nav-menu.module';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -78,6 +79,7 @@ const jkObjectsComponents = [
         ObjectMembersModule,
         ObjectFlatsModule,
         ObjectDynamicModule,
+        NavMenuModule,
 
         JkObjectsListModule,
         TextMaskModule,

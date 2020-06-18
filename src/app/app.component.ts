@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
         // Подписываемся на событие смены маршрута роутера чтобы скроллить вверх страницы при смене маршрута
         this.router.events.subscribe((event) => {
             if (!(event instanceof NavigationEnd)) {
-              return;
+                return;
             }
             this.previousUrl = this.currentUrl;
             this.currentUrl = this.router.url;

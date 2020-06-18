@@ -256,6 +256,13 @@
         height: 24px;
         margin-right: 8px;
     }
+    &--flats {
+        div {
+            width: 18px;
+            height: 18px;
+            margin: 4px 8px 0 0;
+        }
+    }
 }
 .g-radiobox { // Вешать на label внутри которого input, div, span
     input:checked + div::before {

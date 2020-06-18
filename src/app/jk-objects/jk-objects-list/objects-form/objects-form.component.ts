@@ -18,6 +18,13 @@ export class ObjectsFormComponent implements OnInit {
     public priceMax: string;
     public isFirstBoot = true;
 
+    public navList = [
+        { name: 'Все', link: 'Все'},
+        { name: 'В проекте', link: 'В проекте'},
+        { name: 'В строительстве', link: 'В строительстве'},
+        { name: 'Готовые', link: 'Готовые'}
+    ];
+
     @Output()
     public formChange = new EventEmitter();
 
@@ -95,5 +102,11 @@ export class ObjectsFormComponent implements OnInit {
             params.districts = (form.districts).join(',');
         }
         return params;
+    }
+
+    public switchPopup(item) {
+        item.classList.remove('show');
+        item.classList.add('hide');
+        setTimeout(() => this.showPopUp = false, 400);
     }
 }

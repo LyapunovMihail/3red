@@ -14,10 +14,13 @@
 
         <nav class="object-flat__nav">
             <ul class="object-flat__nav-list">
-                <li class="object-flat__nav-item" [class.active]="activeTab === 'flats'" *ngIf="storerooms.length || parking.length" (click)="changeTab('flats')">Квартиры</li>
+                <li class="object-flat__nav-line"
+                    [style.left.px]="offsetLeftActive"
+                    [style.width.px]="widthActive"></li>
+                <li class="object-flat__nav-item" [class.active]="activeTab === 'flats'" *ngIf="storerooms.length || parking.length" (click)="getActiveElement($event); changeTab('flats')">Квартиры</li>
                 <!--<li class="object-flat__nav-item">Коммерческая недвижимость</li>-->
-                <li class="object-flat__nav-item" [class.active]="activeTab === 'storerooms'" *ngIf="storerooms.length" (click)="changeTab('storerooms')">Кладовые</li>
-                <li class="object-flat__nav-item" [class.active]="activeTab === 'parking'" *ngIf="parking.length" (click)="changeTab('parking')">Машиноместа</li>
+                <li class="object-flat__nav-item" [class.active]="activeTab === 'storerooms'" *ngIf="storerooms.length" (click)="getActiveElement($event); changeTab('storerooms')">Кладовые</li>
+                <li class="object-flat__nav-item" [class.active]="activeTab === 'parking'" *ngIf="parking.length" (click)="getActiveElement($event); changeTab('parking')">Машиноместа</li>
             </ul>
         </nav>
 

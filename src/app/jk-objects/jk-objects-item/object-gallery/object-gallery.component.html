@@ -17,14 +17,19 @@
             </div>
 
             <nav class="object-gallery__nav" *ngIf="tabSnippet?.gallery">
-                <ul class="object-gallery__nav-list">
+                <!-- <ul class="object-gallery__nav-list">
                     <ng-container *ngFor="let tab of this.tabSnippet.gallery">
                         <li class="object-gallery__nav-item"
                             [class.object-gallery__nav-item_active]="currentTab === tab.name"
                             (click)="changeTab(tab.name)"
                             *ngIf="tab.show">{{tab.name}}</li>
                     </ng-container>
-                </ul>
+                </ul> -->
+                <nav-menu
+                    [navList]="tabSnippet.gallery"
+                    [linkType]="'else'"
+                    (routeNavigate)="changeTab($event)"
+                ></nav-menu>
             </nav>
 
             <div class="object-gallery__slider">
