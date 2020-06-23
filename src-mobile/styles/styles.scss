@@ -1,8 +1,8 @@
 @import './modules/fonts/fonts';
 @import './modules/reset/reset';
-@import './modules/mixins/mixin.scss';
-@import './ui-kit/markers';
-@import './ui-kit/common-ui';
+@import './modules/mixins/mixin';
+@import './modules/ui-kit/marker';
+@import './modules/ui-kit/common-ui';
 
 body {
     min-height: 100vh;
@@ -13,8 +13,9 @@ body {
     margin: 0;
     padding: 86px 0 93px;
     overflow-x: hidden;
+    box-sizing: border-box;
     @media (max-width: 564px) {
-        padding-bottom: 104px;
+        padding-bottom: 62px;
     }
 }
 
@@ -65,7 +66,7 @@ label,
 input,
 button,
 textarea {
-	@include font-smoothing();
+    @include font-smoothing();
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent;
 }
@@ -86,7 +87,7 @@ h3 {
     padding: 0;
 }
 p {
-    font: 18px/23px $font-proba;
+    font: 18px/26px $font-proba;
     margin: 0;
     padding: 0;
 }
@@ -96,15 +97,18 @@ p {
         line-height: 34px;
     }
     h2 {
-        font-size: 24px;
-        line-height: 29px;
+        font: 28px/34px $font-proba;
     }
     h3 {
         font-size: 20px;
         line-height: 24px;
     }
     p {
-        font-size: 16px;
-        line-height: 19px;
+        font: 16px/22px $font-proba;
     }
+}
+
+[class*="ymaps-2"][class*="-ground-pane"] {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+    -webkit-filter: grayscale(100%);
 }

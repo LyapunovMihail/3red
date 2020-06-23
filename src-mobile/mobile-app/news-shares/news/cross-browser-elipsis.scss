@@ -1,0 +1,27 @@
+@mixin excerpt($font-size: 15, $line-height: 18, $lines-to-show: 3, $excerpt-bg: white) {
+    $max-height : $line-height * $lines-to-show;
+
+    overflow: hidden;
+    background: $excerpt-bg;
+    display: block;
+    font-size: #{$font-size}px !important;
+    line-height: #{$line-height}px !important;
+
+    display: -webkit-box;
+    max-height: #{$max-height}px !important;
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+
+    // @-moz-document url-prefix() {
+    //     position: relative;
+    //     &:before {
+    //         content: '\2026';
+    //         background: $excerpt-bg;
+    //         position: absolute;
+    //         right: 0;
+    //         bottom: 0;
+    //         width: 20px;
+    //     }
+    // }
+}

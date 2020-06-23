@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
-
         if ( !this.platform.isBrowser ) { return false; }
 
         this.authorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {

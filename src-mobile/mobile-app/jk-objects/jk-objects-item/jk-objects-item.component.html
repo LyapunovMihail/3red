@@ -1,45 +1,49 @@
-<div class="object-item">
+<div class="object-item" #container>
+    <ng-container *ngIf="jk">
 
-    <app-object-item-preview></app-object-item-preview>
-    
-    <app-object-item-trigger *ngIf="!isAuthorizated"></app-object-item-trigger>
+        <app-object-item-preview [objectId]="objectId"></app-object-item-preview>
 
-    <app-object-item-storage *ngIf="!isAuthorizated"></app-object-item-storage>
+        <app-object-item-filter [objectId]="objectId" [mod]="jk.mod"></app-object-item-filter>
 
-    <app-object-item-builder id="project"></app-object-item-builder>
+        <app-object-item-trigger [objectId]="objectId" [mod]="jk.mod"></app-object-item-trigger>
 
-    <app-object-item-flat></app-object-item-flat>
+        <!-- <app-object-item-storage *ngIf="!isAuthorizated" [objectId]="objectId"></app-object-item-storage> -->
 
-    <app-object-item-gallery></app-object-item-gallery>
+        <app-object-item-project [objectId]="objectId" [objectName]="jk.name" id="project"></app-object-item-project>
 
-    <app-object-item-decoration></app-object-item-decoration>
+        <app-object-item-flat [objectId]="objectId" [mod]="jk.mod" id="choose"></app-object-item-flat>
 
-    <app-object-item-location></app-object-item-location>
+        <app-object-item-gallery [objectId]="objectId" id="gallery"></app-object-item-gallery>
 
-    <app-object-item-purchase></app-object-item-purchase>
+        <app-object-item-decoration [objectId]="objectId" id="decoration"></app-object-item-decoration>
 
-    <app-object-item-news></app-object-item-news>
+        <app-object-item-location [objectId]="objectId" [objectName]="jk.name" [objectCoords]="jk.coords" [objectAddress]="jk.address" id="location"></app-object-item-location>
 
-    <app-object-item-documentation></app-object-item-documentation>
+        <app-object-item-purchase [objectId]="objectId" id="purchase"></app-object-item-purchase>
 
-    <app-object-item-members></app-object-item-members>
+        <app-object-item-news [objectId]="objectId" [objectName]="jk.name" id="news"></app-object-item-news>
 
-    <app-object-item-project *ngIf="!isAuthorizated"></app-object-item-project>
+        <app-object-item-documentation [objectId]="objectId" id="documentation"></app-object-item-documentation>
 
-    <div class="utilities" *ngIf="isAuthorizated">
-        <div class="utilities__item">
-            <a href="#" class="utilities__path">Админ</a> 
-            <a href="#" class="utilities__path">Объкты</a> 
-            <a href="#" class="utilities__path">Сердце Ярославля</a> 
-        </div>
+        <app-object-item-members [objectId]="objectId" id="members"></app-object-item-members>
 
-        <div class="utilities__item">
-            <ul class="utilities__nav">
-                <li><a href="#" class="utilities__link">Предпросмотр</a></li>
-                <li><a href="#" class="utilities__link">Опубликовать</a></li>
-                <li><a href="#" class="utilities__link">Показать на главной</a></li>
-            </ul>
-        </div>
-    </div>
-    
+        <app-object-item-projects [objectId]="objectId"></app-object-item-projects>
+
+        <!--<div class="utilities" *ngIf="isAuthorizated">-->
+            <!--<div class="utilities__item">-->
+                <!--<a href="javascript:void(0)" class="utilities__path">Админ</a>-->
+                <!--<a routerLink="/objects" class="utilities__path">Объкты</a>-->
+                <!--<a href="javascript:void(0)" class="utilities__path">{{jk.name}}</a>-->
+            <!--</div>-->
+
+            <!--<div class="utilities__item">-->
+                <!--<ul class="utilities__nav">-->
+                    <!--<li><a href="javascript:void(0)" class="utilities__link">Предпросмотр</a></li>-->
+                    <!--<li><a href="javascript:void(0)" class="utilities__link">Опубликовать</a></li>-->
+                    <!--<li><a href="javascript:void(0)" class="utilities__link">Показать на главной</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </ng-container>
 </div>

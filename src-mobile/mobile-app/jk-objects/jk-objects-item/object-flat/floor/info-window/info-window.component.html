@@ -1,0 +1,18 @@
+<div *ngIf="infoWindow" class="flats-item__description">
+    <p class="flats-item__description-section-text">{{(infoWindow.rooms === 0) ? '' : infoWindow.rooms }} {{((infoWindow.rooms === 0) ? 'Студия' : "комнатная")}}</p>
+
+    <p class="flats-item__description-section-text">{{infoWindow.space}} м²</p>
+
+    <p class="flats-item__description-section-text">{{infoWindow.decorationName}}</p>
+    
+    <div>
+        <p class="flats-item__description-section-text flats-item__description-section-text_price"
+           [class.flats-item__description-section-text_price_not-sale]="infoWindow.discount">
+            {{infoWindow.price | myBitNumberPipe}} &#8381;
+        </p>
+        <p *ngIf="infoWindow.discount"
+           class="flats-item__description-section-text flats-item__description-section-text_price_sale">
+            {{infoWindow.price - infoWindow.discount | myBitNumberPipe}} &#8381;
+        </p>
+    </div>
+</div>

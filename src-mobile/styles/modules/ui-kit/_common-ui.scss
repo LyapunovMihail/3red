@@ -1,0 +1,380 @@
+
+// .btn_var-1 - Первый вариант кнопки (со "срезанным" углом и фиксированной шириной)
+// .btn_var-2 - Второй вариант кнопки (красная прямоугольная, красный фон)
+// .btn_var-3 - Третий вариант кнопки (прозрачный фон, красный border)
+// .btn-empty - кнопка без границ и фона
+// .btn-slider - кнопки для слайдера (пред/след слайд)
+// .btn-admin - кнопка для админки, серый фон, отступ для фоновой картинки (присваивать через background-image)
+// .btn-cls - круглая белая кнопка закрытия модальных окон
+// .btn-success - круглая зеленая кнопка с фоновой галочкой
+// .btn__admin-content - Кнопка админка с надписью "Контент" (использовать совместно с .btn_var-2)
+// .btn__admin-setting - Кнопка админка с надписью "Настройки" (использовать совместно с .btn_var-2)
+
+// .g-checkbox/.g-radiobox - классы для чекбоксов/радиобоксов устанавликать на "label"внутри которого есть input, div, span(именно в таком порядке)
+// .g-all-object - класс для ссылок типа "Все объекты", "Все новости" и тд
+// .g-tooltip-area - класс для выпадающик списков, со стрелкой в круге
+// .g-doc-hover - Класс для ховера на загруженные документы
+
+// .g-modal-bg - класс фона у модальных окон
+
+// .g-text_small - Текстовые классы, устанавливают шрифт (font: 16px/19px $font-proba)
+// .g-text_sign - Текстовые классы, устанавливают шрифт (font: 14px/18px $font-proba)
+
+
+.btn_var-1,
+.btn_var-2 {
+    height: 48px;
+    background-color: $col-red;
+    font: 18px/23px $font-proba;
+    color: $col-white;
+    transition: background-color .2s linear;
+    &:hover { background-color: $col-red_hover; }
+    &:disabled { color: rgba($color: $col-white, $alpha: 0.5); }
+}
+.btn_var-1 {
+    width: 200px;
+    clip-path: polygon(100% 0, 100% 36px, 188px 100%, 0 100%, 0 0);
+}
+.btn_var-2 { padding: 0 24px; }
+
+.btn_var-3 {
+    height: 48px;
+    padding: 0 24px;
+    font: 18px/23px $font-proba;
+    color: $col-black;
+    border: solid 1px $col-red;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+    &:hover {
+        background-color: $col-red_hover;
+        border-color: $col-red_hover;
+        color: $col-white;
+    }
+    &:disabled { color: rgba($color: $col-black, $alpha: 0.5); }
+}
+.btn__admin-content,
+.btn__admin-setting {
+    height: 35px;
+    padding: 0 16px 0 35px;
+}
+.btn__admin-content { background: url(/assets/img/jk-object/content_icon.svg) 16px 8px no-repeat $col-red; }
+.btn__admin-setting {
+    font: 18px/23px $font-proba;
+    color: $col-white;
+    cursor: pointer;
+    background: url(/assets/img/jk-object/settings.svg) 16px 8px no-repeat #454545;
+}
+
+.btn-empty {
+    font: 18px/23px $font-proba;
+    color: $col-black;
+    transition: color .2s linear;
+    background-color: rgba($color: #000000, $alpha: 0);
+    background-color: transparent;
+    &:hover { color: rgba($color: $col-black, $alpha: 0.5); }
+}
+
+.btn-slider {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .2s linear;
+
+    span {
+        display: block;
+        width: 16px;
+        height: 1px;
+        position: relative;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            transition: background-color .2s linear;
+        }
+    }
+    &_next {
+        span::before,
+        span::after {
+            transform-origin: right;
+            transform: rotate(45deg);
+        }
+        span::after { transform: rotate(-45deg); }
+    }
+    &_prev {
+        span::before,
+        span::after {
+            transform-origin: left;
+            transform: rotate(45deg);
+        }
+        span::after { transform: rotate(-45deg); }
+    }
+
+    &_white {
+        background-color: $col-white;
+        span::before,
+        span::after { background-color: $col-black; }
+        
+        &:hover {
+            background-color: $col-red_hover;
+            span::before,
+            span::after { background-color: $col-white; }
+        }
+    }
+    &_black {
+        background-color: rgba($color: $col-black, $alpha: 0.56);
+        span::before,
+        span::after { background-color: $col-white; }
+        &:hover { background-color: rgba($color: $col-black, $alpha: 0.7); }
+    }
+}
+.btn-admin {
+    height: 35px;
+    padding: 6px 16px 6px 37px;
+    background: 16px 50% no-repeat #454545;
+    font: 18px/23px $font-proba;
+    color: $col-white;
+    cursor: pointer;
+}
+
+.btn-admin-2 {
+    margin: 24px 0 ;
+    display: inline-block;
+    background:  #454545;
+    padding:7px 12px 7px 36px;
+    font-family: inherit;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-right:8px ;
+    position: relative;
+    &--settings {
+        background: #454545;
+        margin-top: 0;
+        &:hover {
+            background: rgba(0, 0, 0, .56);
+        }
+        &::before {
+            content:url(/assets/img/plus.svg);
+            margin-right:5px ;
+            position: absolute;
+            top: 25%;
+            left: 12px;
+        }
+    }
+}
+
+.btn-cls {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .2s linear;
+    background-color: $col-white;
+
+    span {
+        display: block;
+        width: 24px;
+        height: 1px;
+        position: relative;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            transition: background-color .2s linear;
+            transform: rotate(45deg);
+            background-color: $col-black;
+        }
+        &::after { transform: rotate(-45deg); }
+    }
+    &:hover {
+        background-color: $col-red_hover;
+        span {
+            &::before,
+            &::after { background-color: $col-white; }
+        }
+    }
+}
+.btn-success {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: url(/assets/img3red/check_white.svg) center no-repeat $col-green;
+    transition: background-color .2s linear;
+    &:hover { background-color: $col-red_hover; }
+
+}
+
+.btn-disabled {
+    background-color: grey;
+
+    &:hover { background-color: grey; }
+}
+
+// Чекбокс + Радиобокс
+.g-checkbox,
+.g-radiobox {
+    display: flex;
+    cursor: pointer;
+    &:hover {
+        div  { border-color: $col-red_hover; }
+        span { color: $col-red_hover; }
+    }
+    input { display: none; }
+    span {
+        font: 18px/23px $font-proba;
+        color: $col-black;
+        transition: color .2s linear;
+        padding: 4px 0 0;
+    }
+    div {
+        border: 1px solid #898989;
+        transition: border-color .2s linear;
+    }
+}
+.g-checkbox { // Вешать на label внутри которого input, div, span
+    input:checked + div {
+        border-color: $col-red;
+        background: url(/assets/img3red/check.svg) center no-repeat;
+        background-size: 81%;
+    }
+    div {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+}
+.g-radiobox { // Вешать на label внутри которого input, div, span
+    input:checked + div::before {
+        content: '';
+        position: absolute;
+        top: calc(50% - 4px);
+        left: calc(50% - 4px);
+        width: 8px;
+        height: 8px;
+        background-color: $col-red;
+        border-radius: 50%;
+    }
+    div {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin: 3px 8px 0 0;
+        position: relative;
+    }
+}
+// /Чекбокс + Радиобокс
+
+.g-all-object {
+    font: 18px/23px $font-proba;
+    color: $col-red;
+    position: relative;
+    padding-right: 25px;
+    &::after {
+        content: '';
+        width: 16px;
+        height: 10px;
+        position: absolute;
+        top: 50%; right: 0;
+        transform: translate(0px, -60%);
+        background: url(/assets/img/home/right-arrow.svg) no-repeat;
+        transition: transform .2s linear;
+    }
+    &:hover::after { transform: translate(4px, -60%); }
+}
+.g-tooltip-area {
+    position: relative;
+    &::after {
+        content: '';
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 14px); right: -39px;
+        background: url(/assets/img/home/tooltip-bottom.svg) center no-repeat rgba($color: #d8d8d8, $alpha: .3);
+        transition: background-color .2s linear;
+    }
+    &:hover::after { background-color: #d8d8d8; }
+    &.active::after { transform: rotate(180deg); }
+}
+.g-doc-hover {
+    background: linear-gradient($col-red, $col-red) 0 95% no-repeat;
+    background-size: 0% 1px;
+    transition: background-size .3s ease;
+    &:hover { background-size: 100% 1px; }
+}
+
+.g-modal-bg {
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: $col-fa;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 64px 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 101;
+
+    &_for-link {
+        background-color: rgba($color: $col-black, $alpha: 0.7);
+    }
+}
+.g-text_small { font: 16px/19px $font-proba; }
+.g-text_sign { font: 14px/18px $font-proba; }
+
+.g-textarea,
+.g-input {
+    width: 100%;
+    border: 0;
+    height: 35px;
+    min-height: 35px;
+    border-bottom: 1px solid $col-border;
+    box-sizing: border-box;
+    padding: 4px 0 6px;
+    background: transparent;
+    outline: none;
+    font: $font-18;
+    transition: border-bottom .2s ease;
+}
+.g-textarea {
+    overflow: hidden;
+    resize: none;
+    &:focus { border-bottom: 2px solid $col-black; }
+}
+
+.g-input {
+    border-bottom: 1px solid $col-black-5;
+    &+ label {
+        font: 18px/37px $font-proba;
+        color: $col-black-5;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: top .2s linear, font-size .2s linear;
+        pointer-events: none;
+    }
+}
+
+.g-3red {
+    background: center no-repeat #dddddd;
+    background-size: 65%;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNThweCIgaGVpZ2h0PSIxNHB4IiB2aWV3Qm94PSIwIDAgNTggMTQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNi4wMDAwMDAsIC0yOC4wMDAwMDApIiBmaWxsPSIjRUVFRUVFIiBmaWxsLXJ1bGU9Im5vbnplcm8iPgogICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuMDAwMDAwLCAyOC4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNTYuNDI2MzEzNiw0LjM2NTA2NTUgQzU1LjQwOTY1NDcsMy4zMzc5OTEyNyA1NC4wNjk1MTM1LDIuOCA1Mi42MzY5NDg3LDIuOCBMNDQuNjg4NTI0NiwyLjggTDQ0LjY4ODUyNDYsMTQgTDUyLjYzNjk0ODcsMTQgQzU0LjA2OTUxMzUsMTQgNTUuNDU1ODY2NSwxMy40NjIwMDg3IDU2LjQyNjMxMzYsMTIuNDM0OTM0NSBDNTcuNDQyOTcyNSwxMS40MDc4NjAzIDU3Ljk5NzUxMzcsOS45ODk1MTk2NSA1Ny45OTc1MTM3LDguNDI0NDU0MTUgQzU4LjA0MzcyNTUsNi44MTA0ODAzNSA1Ny40NDI5NzI1LDUuMzkyMTM5NzQgNTYuNDI2MzEzNiw0LjM2NTA2NTUgWiBNNTIuNjM2OTQ4NywxMS41MDU2NzY5IEw0Ny4wOTE1MzY1LDExLjUwNTY3NjkgTDQ3LjA5MTUzNjUsNS4xOTY1MDY1NSBMNTIuNjM2OTQ4Nyw1LjE5NjUwNjU1IEM1NC40MzkyMDc2LDUuMTk2NTA2NTUgNTUuNTk0NTAxOCw2LjQxOTIxMzk3IDU1LjU5NDUwMTgsOC4zNzU1NDU4NSBDNTUuNTk0NTAxOCwxMC4zMzE4Nzc3IDU0LjQzOTIwNzYsMTEuNTA1Njc2OSA1Mi42MzY5NDg3LDExLjUwNTY3NjkgWiIgaWQ9IlNoYXBlIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTMxLjM3NzA0OTIsNy4xNTI4Mzg0MyBDMzEuMzc3MDQ5Miw0LjU2MDY5ODY5IDI5LjQ4ODU3LDIuOCAyNi42MzI4MjA5LDIuOCBMMTguMDY1NTczOCwyLjggTDE4LjA2NTU3MzgsMTQgTDIwLjQ2MDcxODEsMTQgTDIwLjQ2MDcxODEsMTAuODIwOTYwNyBMMjAuNDYwNzE4MSwxMC44MjA5NjA3IEwyMC40NjA3MTgxLDguMzI2NjM3NTUgTDIwLjQ2MDcxODEsOC4zMjY2Mzc1NSBMMjAuNDYwNzE4MSw1LjI0NTQxNDg1IEwyNi42Nzg4ODE0LDUuMjQ1NDE0ODUgQzI3LjczODI3MjIsNS4yNDU0MTQ4NSAyOC45MzU4NDQzLDUuNzM0NDk3ODIgMjguOTM1ODQ0Myw3LjE1MjgzODQzIEMyOC45MzU4NDQzLDguMzc1NTQ1ODUgMjguMTA2NzU1OSw5LjEwOTE3MDMxIDI2LjY3ODg4MTQsOS4xMDkxNzAzMSBMMjQuNDIxOTE4NCw5LjEwOTE3MDMxIEwyNC40MjE5MTg0LDEwLjMzMTg3NzcgTDI3LjczODI3MjIsMTQgTDMwLjY4NjE0MjIsMTQgTDI3Ljc4NDMzMjYsMTEuMDE2NTkzOSBDMzAuNDA5Nzc5MywxMC42NzQyMzU4IDMxLjM3NzA0OTIsOC43NjY4MTIyMyAzMS4zNzcwNDkyLDcuMTUyODM4NDMgWiIgaWQ9IlBhdGgiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiBwb2ludHM9IjM1LjE4MDMyNzkgMTQgNDEuODM2MDY1NiAxNCA0MS44MzYwNjU2IDExLjc1MDIxODMgMzcuMzk4OTA3MSAxMS43NTAyMTgzIDM3LjM5ODkwNzEgOS4zNTM3MTE3OSA0MC4yMDYwODkgOS4zNTM3MTE3OSA0MC4yMDYwODkgNy4yNTA2NTUwMiAzNy4zOTg5MDcxIDcuMjUwNjU1MDIgMzcuMzk4OTA3MSA1LjA0OTc4MTY2IDQxLjgzNjA2NTYgNS4wNDk3ODE2NiA0MS44MzYwNjU2IDIuOCAzNS4xODAzMjc5IDIuOCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNNC42MDM5Njg5NCwxNCBDMi4wNTE3Njg3NywxNCAwLDEyLjA4NjY2NjcgMCw5LjcwNjY2NjY3IEwyLjMwMTk4NDQ3LDkuNzA2NjY2NjcgQzIuMzAxOTg0NDcsMTAuOTIgMy4zNTI4OTA0MiwxMS45IDQuNjU0MDEyMDgsMTEuOSBDNS45NTUxMzM3NCwxMS45IDcuMDA2MDM5NjksMTAuOTIgNy4wMDYwMzk2OSw5LjcwNjY2NjY3IEM3LjAwNjAzOTY5LDguNTg2NjY2NjcgNi4xNTUzMDYzLDcuNzkzMzMzMzMgNS4yNTQ1Mjk3Nyw3LjUxMzMzMzMzIEM0LjUwMzg4MjY2LDcuMjggMy41MDMwMTk4NCw3LjI4IDMuNTAzMDE5ODQsNy4yOCBMMy41MDMwMTk4NCw2LjAyIEw3LjQwNjM4NDgxLDIuNzA2NjY2NjcgTDguOTU3NzIyMTcsNC4yOTMzMzMzMyBMNi40NTU1NjUxNCw1LjkyNjY2NjY3IEM4LjM1NzIwNDQ5LDYuNDQgOS4zMDgwMjQxNiw4LjEyIDkuMzA4MDI0MTYsOS43MDY2NjY2NyBDOS4yMDc5Mzc4OCwxMi4wODY2NjY3IDcuMTU2MTY5MTEsMTQgNC42MDM5Njg5NCwxNCBaIiBpZD0iUGF0aCI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiAgcG9pbnRzPSIyLjI1MTk0MTMzIDIuMSA0LjQ1MzgzOTUyIDIuMSA0LjQ1MzgzOTUyIDAgMCAwIDAgNC4xNTMzMzMzMyAyLjI1MTk0MTMzIDQuMTUzMzMzMzMiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPHJlY3QgeD0iMTEuNDA5ODM2MSIgeT0iNy40NjY2NjY2NyIgd2lkdGg9IjQuNzU0MDk4MzYiIGhlaWdodD0iMi44Ij48L3JlY3Q+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==);
+}

@@ -1,0 +1,5 @@
+<label class="offer__complex-label" *ngFor="let btn of btnList">
+    <input class="offer__complex-checkbox" [id]="btn.value" [name]="name"
+        (change)="checkBtn($event)" [value]="btn.value" type="checkbox" [name]="name" id="lock" hidden [checked]="isChecked(btn.value)">
+    <span class="offer__complex_mock-label">{{btn.name}}</span>
+</label>

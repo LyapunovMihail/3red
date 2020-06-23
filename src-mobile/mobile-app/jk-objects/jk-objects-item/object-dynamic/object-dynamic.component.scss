@@ -1,25 +1,26 @@
 @import '../../../../styles/modules/mixins/mixin';
 
 .btn__admin-setting { margin: 16px 0 0; }
+.btn__admin-content { margin: 0 0 24px; }
 
 .object-dynamic {
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding: 0 0 96px;
+    padding: 77px 0 128px;
     position: relative;
 
     &__container {
-        width: $mobileContainer;
-        max-width: 704px;
-        padding: 76px 0 0;
+        width: 100%;
+        max-width: $container;
+        padding: 79px 0 0;
     }
     &__back {
         width: calc(100% - 64px);
-        max-width: 704px;
+        max-width: 1280px - 64px;
         position: absolute;
-        top: 26px;
+        top: 91px;
         left: 50%;
         transform: translateX(-50%);
 
@@ -32,12 +33,12 @@
             &::before {
                 content: '';
                 position: absolute;
-                top: -4px;
+                top: 0;
                 left: 0;
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                background: url(/assets/img/arrrow.svg) center no-repeat rgba($color: $col-black, $alpha: .3);
+                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
                 transition: background-color .2s linear;
             }
             &:hover::before {
@@ -46,14 +47,10 @@
         }
     }
 
-    &__title {
-        margin: 0 0 32px;
-        span { white-space: nowrap; }
-    }
     &__nav {
         display: flex;
         justify-content: flex-start;
-        margin: 0 0 24px;
+        margin: 24px 0;
 
         &-list {
             display: flex;
@@ -91,34 +88,16 @@
         align-items: flex-start;
 
         &-gallery {
-            width: 100%;
+            width: 822px;
             margin: 0 0 40px;
+        }
+        &-schema {
+            width: 182px;
+            position: -webkit-sticky;
+            position: sticky;
+            padding: 45px 0 0;
+            top: 100px;
         }
     }
     &__month-switcher { width: 100%; }
-}
-
-@media (max-width: 760px) {
-    .object-dynamic {
-
-        &__back {
-            width: calc(100% - 40px);
-            top: 21px;
-
-            &-btn {
-                font-size: 16px;
-                line-height: 19px;
-                &::before { top: -7px; }
-            }
-        }
-        &__title {
-            font-size: 28px;
-            line-height: 34px;
-            margin: 0 0 16px;
-        }
-        &__container {
-            width: calc( 100% - 40px );
-            padding: 68px 0 0;
-        }
-    }
 }

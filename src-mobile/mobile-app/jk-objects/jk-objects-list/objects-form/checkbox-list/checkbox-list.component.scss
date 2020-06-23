@@ -1,0 +1,31 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+:host {
+    display: block;
+    max-height: 52px * 7;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.offer__complex-label {
+    width: 100%;
+    border: 1px solid #d8d8d8;
+    border-top: 0;
+    padding: 16px 16px 13px;
+    position: relative;
+    padding-left: 32px;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1.25;
+    cursor: pointer;
+    z-index: 3;
+    text-align: center;
+    box-sizing: border-box;
+}
+.offer__complex_mock-label {
+}
+.offer__complex-checkbox:checked + .offer__complex_mock-label {
+    border-color: #ee4237;
+    color: #ee4237;
+}

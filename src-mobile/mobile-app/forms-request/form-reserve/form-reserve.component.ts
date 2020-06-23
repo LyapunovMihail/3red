@@ -1,7 +1,7 @@
 import { PlatformDetectService } from './../../platform-detect.service';
 import { FormsRequestService } from './../forms-request.service';
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 declare let $: any;
 
 @Component({
@@ -15,22 +15,27 @@ export class FormReserveComponent implements OnChanges {
     @Input() isOpen: boolean = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
+    @Input() public article: string;
     @Input() public type: string;
     @Output() close: EventEmitter<boolean> = new EventEmitter();
 
     public form: FormGroup = this.formBuilder.group({
         name: '',
-        price: '',
-        number: '',
-        mail: '',
+        lastName: '',
+        middleName: '',
+        // price: '',
+        // number: '',
         type: '',
-        phone: ['', Validators.compose([Validators.required, Validators.maxLength(18), Validators.minLength(18)])],
+        mail: ['', Validators.compose([Validators.required, Validators.email])],
+        phone: ['', Validators.required],
         time: '',
         wait_for_call: 'now',
-        agreement: true
+        agreement: true,
+        article: '',
     });
 
-    public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
+    // public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
+    public phoneMask = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
     public timeMask = [/\d/, /\d/, ':', /\d/, /\d/];
 
     public isSubmited: boolean = false;
@@ -48,9 +53,10 @@ export class FormReserveComponent implements OnChanges {
             this.form.controls['agreement'].setValue(true);
             this.form.controls['phone'].setValue('');
             this.form.controls['mail'].setValue('');
-            this.form.controls['price'].setValue(this.apartmentPrice);
-            this.form.controls['number'].setValue(this.apartmentNumber);
+            // this.form.controls['price'].setValue(this.apartmentPrice);
+            // this.form.controls['number'].setValue(this.apartmentNumber);
             this.form.controls['type'].setValue(this.type);
+            this.form.controls['article'].setValue(this.article);
             this.isSubmited = false;
         }
     }
@@ -61,10 +67,15 @@ export class FormReserveComponent implements OnChanges {
         }
     }
 
+    onPhoneChange() {
+        this.form.get('phone').setValue(this.form.get('phone').value.replace(/[^\d\.]+/g, ''));
+    }
+
     public onSubmit(form) {
         this.service.sendReserveForm(form).subscribe(
             (data) => {
                 this.isSubmited = true;
+                this.close.emit(false);
             },
             (error) => {
                 alert('Что-то пошло не так! Ошибка при отправке формы!');

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { EventsService } from '../commons/events.service';
 import { WindowEventsService } from '../commons/window-events.observer.service';
 import { AuthorizationObserverService } from '../authorization/authorization.observer.service';
+import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
 
 @Component({
     selector: 'app-about',
@@ -24,6 +25,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     public isAuthorizated = false;
 
     constructor(
+        private platform: PlatformDetectService,
         private eventsService: EventsService,
         private windowEventsService: WindowEventsService,
         private authorization: AuthorizationObserverService
@@ -36,6 +38,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
+        if (!this.platform.isBrowser) { return; }
+
         this.eventsService.checkHeightResize(this, this.container);
         this.fixBlock();
     }
@@ -57,6 +61,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy() {
+        if (!this.platform.isBrowser) { return; }
+
         this.authorizationEvent.unsubscribe();
         this.windowScrollEvent.unsubscribe();
     }

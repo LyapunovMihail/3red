@@ -1,0 +1,25 @@
+<section class="object-documentation" [class.object-item--margin]="switchOn">
+
+    <div class="object-item__container object-documentation__container">
+
+        <ng-container *ngIf="switchOn">
+            <h2 class="object-documentation__title">Документация</h2>
+
+            <ul class="object-documentation__list">
+
+                <li class="object-documentation__list-item" *ngFor="let item of snippet?.block">
+                    <h3 class="object-documentation__list-title">{{item.blockTitle}}</h3>
+                    <div class="object-documentation__list-wrap">
+                        <div class="object-documentation__list-wrap object-documentation__list-wrap_file" *ngFor="let doc of item.uploads">
+                            <a [href]="'/' + uploadsPath + doc.name" target="_blank"
+                                class="object-documentation__list-file">
+                                    <span class="g-doc-hover">{{doc.originalName}}</span>
+                            </a>
+                            <p class="object-documentation__list-date">{{ parseDate(doc.date) }}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+    </div>
+</section>

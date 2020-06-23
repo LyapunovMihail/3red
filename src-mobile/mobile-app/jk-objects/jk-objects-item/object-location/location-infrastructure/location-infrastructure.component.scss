@@ -1,0 +1,117 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.location__infrastructure {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &-list-item {
+        &:last-of-type {
+            margin: 0;
+        }
+    }
+    &-filter {
+    }
+    &-list {
+        width: $w1600;
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 0 24px;
+
+        &-item {
+            display: flex;
+            margin-right: 7px;
+            padding: 5px 10px;
+            border: 1px solid rgba(32, 149, 210, 0.3);
+            border-radius: 14.5px;
+            transition: $transition;
+
+            &_school {
+                background-color: rgba(174, 107, 248, 0.05);
+                border-color: rgba(171, 174, 179, 0.3);
+            }
+            &_kindergarten {
+                background-color: rgba(255, 203, 13, 0.05);
+                border-color: rgba(255, 203, 13, 0.3);
+            }
+            &_shop {
+                background-color: rgba(32, 149, 210, 0.05);
+                border-color: rgba(32, 149, 210, 0.3);
+            }
+            &_cafe {
+                background-color: rgba(242, 136, 61, 0.05);
+                border-color: rgba(242, 136, 61, 0.3);
+            }
+            &_hospital {
+                background-color: rgba(250, 145, 145, 0.05);
+                border-color: rgba(250, 145, 145, 0.3);
+            }
+            &_pharmacy {
+                background-color: rgba(236, 31, 39, 0.05);
+                border-color: rgba(236, 31, 39, 0.3);
+            }
+            &_sport {
+                background-color: rgba(29, 166, 0, 0.05);
+                border-color: rgba(29, 166, 0, 0.3);
+            }
+            &_recreation {
+                background-color: rgba(170, 171, 34, 0.05);
+                border-color: rgba(170, 171, 34, 0.3);
+            }
+            &_transport {
+                background-color: rgba(41, 122, 204, 0.05);
+                border-color: rgba(41, 122, 204, 0.3);
+            }
+
+            &:hover {
+
+                &.location__infrastructure-list-item_school       { border-color: #ae6bf8; }
+                &.location__infrastructure-list-item_kindergarten { border-color: #ffcb0d; }
+                &.location__infrastructure-list-item_shop         { border-color: #2095d2; }
+                &.location__infrastructure-list-item_cafe         { border-color: #f2883d; }
+                &.location__infrastructure-list-item_hospital     { border-color: #fa9191; }
+                &.location__infrastructure-list-item_pharmacy     { border-color: #ec1f27; }
+                &.location__infrastructure-list-item_sport        { border-color: #1da600; }
+                &.location__infrastructure-list-item_recreation   { border-color: #aaab22; }
+                &.location__infrastructure-list-item_transport    { border-color: #297acc; }
+
+                .location__infrastructure-checkbox { opacity: 1; }
+            }
+
+            &_active {
+
+                .location__infrastructure-checkbox {
+                    background-image: url(/assets/img/check.svg);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 63%;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    &-text {
+        @include fw14-20;
+        cursor: pointer;
+    }
+    &-checkbox {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        opacity: .5;
+        margin: 1px 5px 0 0;
+        cursor: pointer;
+        transition: opacity $transition;
+        &:hover { opacity: 1; }
+
+        &_school       { background-color: #ae6bf8; }
+        &_kindergarten { background-color: #ffcb0d; }
+        &_shop         { background-color: #2095d2; }
+        &_cafe         { background-color: #f2883d; }
+        &_hospital     { background-color: #fa9191; }
+        &_pharmacy     { background-color: #ec1f27; }
+        &_sport        { background-color: #1da600; }
+        &_recreation   { background-color: #aaab22; }
+        &_transport    { background-color: #297acc; }
+    }
+}

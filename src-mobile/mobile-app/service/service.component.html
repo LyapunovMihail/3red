@@ -1,0 +1,40 @@
+<section class="intro">
+    <div class="intro__container">
+        <div class="intro__wrap">
+        </div>
+        <h1 class="intro__text" *ngIf="contentSnippet"><span class="intro__text-span">{{contentSnippet.blackPart}} </span> {{contentSnippet.greyPart}}</h1>
+    </div>
+</section>
+
+<section class="newss">
+    <div class="news__container">
+
+        <ul class="tabs" *ngIf="tabSnippet?.tab?.length">
+            <li *ngIf="tabSnippet?.tab?.length > 1" class="tab" [class.tab--active]="currentTab === 'null'" (click)="changeTab('null')">
+                Все
+            </li>
+            <ng-container *ngFor="let tab of tabSnippet.tab">
+                <li *ngIf="tab.show" class="tab" [class.tab--active]="currentTab === tab.name" (click)="changeTab(tab.name)">
+                    {{tab.name}}
+                </li>
+            </ng-container>
+        </ul>
+
+        <ng-container *ngIf="contentSnippet?.uk?.length">
+            <a [attr.href]="!uk.url || uk.url === '' ? null : uk.url" target="_blank" *ngFor="let uk of contentSnippet.uk"
+                class="news__item" [class.not-hover]="!uk.url || uk.url === ''">
+                
+                <div class="news__item-title">{{uk.title}}</div>
+                <div class="news__item-text">{{uk.description}}</div>
+                
+                <ng-container *ngIf="uk.jk && uk.jk.length">
+                    <p class="news__info-title">Жилые комплексы под управлением компании:</p>
+                    <div class="news__item-info">
+                        <a [routerLink]="'/objects/list/' +  jk.id" class="news__link" *ngFor="let jk of uk.jk">{{jk.name}}</a>
+                    </div>
+                </ng-container>
+            </a>
+        </ng-container>
+
+    </div>
+</section>

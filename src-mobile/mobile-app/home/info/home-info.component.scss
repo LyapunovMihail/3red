@@ -1,0 +1,128 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.info {
+    background-color: #f5f5f5;
+}
+.info-container {
+    width: 1280px;
+    position: relative;
+    margin: auto;
+    padding: 0 88px 96px;
+    box-sizing: border-box;
+}
+.info-wrap {
+    height: 812px;
+    position: relative;
+    margin: 0 0 20px;
+}
+.info__btn {
+    margin-bottom: 16px;
+    padding: 10px 16px ;
+    background: #ee4237;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    font-family: inherit;
+    border:none;
+    display: inline-block;
+    cursor: pointer;
+    &:hover {
+        background: #ee534a
+    }
+    &::before {
+        content:url(/assets/img/jk-object/content_icon.svg);
+        margin-right:5px ;
+    }
+}
+.info__wrapper {
+    display: flex;
+
+}
+.info__content {
+    margin-right: 24px;
+}
+.info-img {
+    width: 100%;
+    display: block;
+}
+.info-img1 {
+    position: absolute;
+    top: 10px;
+    right: 190px;
+    z-index: 1;
+    width: 502px;
+    height: 407px;
+}
+.info-img2 {
+    position: absolute;
+    top: 17%;
+    left: 0;
+    z-index: 2;
+    width: 1104px;
+    height: 534px;
+}
+.info-img3 {
+    position: absolute;
+    bottom: 0;
+    right: 120px;
+    z-index: 3;
+    width: 815px;
+    height: 525px;
+}
+.info__main-text {
+    font-size: 24px;
+    margin-bottom: 24px;
+    width: 405px;
+    line-height: 1.25;
+
+}
+.info__text {
+    font-size: 18px;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    width: 540px;
+    white-space: pre-wrap;
+}
+.info__links {
+
+    li {
+        margin-bottom: 16px;
+    }
+}
+.info__link {
+    color: #ee4237;
+    line-height: 1.25;
+    font-size: 18px;
+    transition: color .2s linear;
+    position: relative;
+    &::after {
+        content: ''; 
+        width: 0px;
+        height: 1px;
+        position: absolute;
+        top: 100%; left: 0;
+        background-color: $col-red;
+        transition: width .2s ease;
+    }
+    &:hover::after { width: 100%; }
+}
+
+.btn {
+    margin: 0px 0 16px ;
+    padding: 10px 16px ;
+    background: #ee4237;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    font-family: inherit;
+    border:none;
+    display: inline-block;
+    cursor: pointer;
+    &:hover {
+        background: #ee534a
+    }
+    &::before {
+        content:url(/assets/img/jk-object/content_icon.svg);
+        margin-right:5px;
+    }
+}

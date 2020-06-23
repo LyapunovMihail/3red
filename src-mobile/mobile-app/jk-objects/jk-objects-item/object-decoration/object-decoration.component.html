@@ -1,0 +1,77 @@
+<section class="object-decoration"  [class.object-item--margin]="switchOn">
+    <div class="object-item__container object-decoration__container">
+
+        <ng-container *ngIf="switchOn">
+
+            <h2 class="object-decoration__title">Отделка квартир</h2>
+
+            <nav class="object-decoration__nav" *ngIf="contentSnippet?.data?.length && this.currentTab">
+                <ul class="object-decoration__nav-list">
+                    <ng-container *ngFor="let data of contentSnippet.data">
+                        <li class="object-decoration__nav-item" *ngIf="data.tab.show && !data.tab.decorationType"
+                            [ngClass]="{'object-decoration__nav-item_active': data.tab.name === currentTab.tab.name}"
+                            (click)="changeTab(data)">{{data.tab.name}}</li>
+                    </ng-container>
+                </ul>
+            </nav>
+
+            <div class="object-decoration__slider">
+                <div class="object-decoration__slider-wrap object-decoration__slider-wrap_slides">
+
+                    <div class="object-decoration__slider-item decoration-slider">
+
+                        <button (click)="prevBtn()" class="decoration-slider__btn decoration-slider__btn_prev btn-slider btn-slider_prev btn-slider_black"
+                                *ngIf="currentTab?.images?.length && currentSlide > 0">
+                            <span></span>
+                        </button>
+                        <button (click)="nextBtn()" class="decoration-slider__btn decoration-slider__btn_next btn-slider btn-slider_next btn-slider_black"
+                                *ngIf="currentTab?.images?.length && currentSlide < currentTab.images.length - 1">
+                            <span></span>
+                        </button>
+
+                        <div class="decoration-slider__dots" *ngIf="currentTab?.images?.length > 1">
+                            <span *ngFor="let dots of currentTab.images; let i = index"
+                                 [ngClass]="{'current-dots': currentSlide === i}"></span> 
+                        </div>
+
+                        <div class="decoration-slider__path" *ngIf="currentType">
+                            <!-- decoration-slider__path-name_active - активный класс -->
+                            <p class="decoration-slider__path-name"
+                                [class.decoration-slider__path-name_active]="type === currentType"
+                                (click)="changeType(type)"
+                                *ngFor="let type of typesSnippet.decorationType">
+                                <ng-container *ngIf="checkTabImages(type)">{{type}}</ng-container>
+                            </p>
+                        </div>
+
+                        <ng-container *ngIf="currentTab; else elseBlock">
+                            <ng-container *ngIf="currentTab.images.length; else elseBlock">
+                                <div class="decoration-slider__slide" *ngFor="let slide of currentTab.images; let i = index"
+                                     [ngClass]="{'current-slide': currentSlide === i}">
+                                    <ng-container *ngIf="slide; else elseBlock">
+                                        <img [src]="uploadsPath + slide.image" alt="image-slider">
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+
+                        </ng-container>
+                        <ng-template #elseBlock>
+                            <div class="object-item__mock-img"></div>
+                        </ng-template>
+
+                    </div>
+                </div>
+                <div class="object-decoration__slider-wrap object-decoration__slider-wrap_info">
+                    <ng-container *ngIf="currentTab">
+                        <ng-container *ngFor="let info of currentTab.info">
+                            <p class="decoration-slider__info decoration-slider__info_{{info.mod}}"
+                               *ngIf="info.name">{{info.name}}</p>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+</section>

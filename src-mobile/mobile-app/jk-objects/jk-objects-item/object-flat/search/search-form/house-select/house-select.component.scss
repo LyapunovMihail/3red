@@ -1,0 +1,31 @@
+@import '../../../../../../../styles/modules/mixins/mixin';
+
+.search-form__list {
+    position: absolute;
+    width: 260px;
+    max-height: 50px * 7;
+    background: #fff;
+    left: 0;
+    top: calc(100% + 10px);
+    border: 1px solid $col-border;
+    z-index: 12;
+    box-sizing: border-box;
+    transition: .2s linear;
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: default;
+
+    &-item {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 16px;
+        border-bottom: 1px solid $col-border;
+        font: $font-18;
+        cursor: pointer;
+        &:last-child { border-bottom: 0; }
+        &--active { color: $col-red; }
+    }
+}

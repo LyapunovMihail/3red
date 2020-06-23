@@ -1,0 +1,33 @@
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flats_item-description {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 11.5vh;
+    transform: translateY(-50%);
+    left: calc(100% + 50px);
+
+    &_section {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+
+        &_name {
+            font: 15px 'Montserrat', sans-serif;
+            color: #606060;
+            @include font-smoothing();
+            white-space: nowrap;
+        }
+
+        &_value {
+            font: 18px 'Montserrat', sans-serif;
+            color: #1c1c1c;
+            @include font-smoothing();
+            white-space: nowrap;
+        }
+    }
+}

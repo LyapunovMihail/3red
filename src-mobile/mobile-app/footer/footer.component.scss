@@ -1,4 +1,14 @@
-@import "../../styles/modules/mixins/mixin.scss";
+@import '../../styles/modules/mixins/mixin';
+//:host {
+//    width: 100%;
+//    height: 93px;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    position: absolute;
+//    bottom: 93px;
+//    left: 0;
+//}
 
 .footer {
     width: 100%;
@@ -8,8 +18,9 @@
     align-items: center;
     position: absolute;
     bottom: 0;
-    left: 0;
-
+    left: 0; 
+    &--hidden { display: none; }
+    
     &__container {
         width: calc(100% - 64px);
         display: flex;
@@ -18,6 +29,7 @@
     }
     &__wrap {
         display: flex;
+        align-items: center;
         margin-right: 20px;
     }
     &__socials {
@@ -32,8 +44,20 @@
             background: center no-repeat;
             &:last-child { margin: 0; }
 
-            &_insta { background-image: url(/assets/img/footer/insta.svg); }
-            &_fb { background-image: url(/assets/img/footer/fbook.svg); }
+            &_insta { 
+                background-image: url(/assets/img/footer/insta.svg); 
+                transition: background 0.4s ease;
+                &:hover {
+                    background-image: url(/assets/img/footer/insta-hover.svg); 
+                }
+            }
+            &_fb {
+                 background-image: url(/assets/img/footer/fbook.svg);
+                 transition: background 0.4s ease;
+                 &:hover {
+                    background-image: url(/assets/img/footer/fb-hover.svg); 
+                }
+                 }
         }
     }
     &__copyright {
@@ -56,29 +80,6 @@
             width: 16px;
             height: 20px;
             background: url(/assets/img/footer/background.svg) center no-repeat;
-        }
-    }
-}
-
-@media (max-width: 564px) {
-    .footer {
-        height: 104px;
-        &__container {
-            width: calc(100% - 40px);
-            align-items: flex-end;
-        }
-        &__wrap {
-            flex-flow: column-reverse nowrap;
-            align-items: flex-start;
-        }
-        &__copyright {
-            margin: 0 0 12px;
-            white-space: nowrap;
-        }
-        &__background-link {
-            position: absolute;
-            right: 0;
-            bottom: 0;
         }
     }
 }

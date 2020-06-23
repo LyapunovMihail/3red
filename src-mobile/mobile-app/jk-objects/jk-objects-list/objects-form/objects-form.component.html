@@ -1,0 +1,53 @@
+<div class="objects__utilities" [formGroup]="form" *ngIf="form">
+
+    <div class="objects__utilities__container">
+        <p class="objects__utilities__section-name">Стоимость</p>
+        <div class="objects__utilities__range">
+
+            <div class="objects__utilities__range-text objects__utilities__text">
+                <p><span #minPrice></span> &#8381;</p>
+                <span></span>
+                <p><span #maxPrice></span> &#8381;</p>
+            </div>
+            <ghm-range-number
+                [formControl]="form.controls['price']"
+                [min]="minPriceConfig"
+                [max]="maxPriceConfig"
+                [toFixed]="true"
+                (move)="minPrice.innerHTML = jkObjectsNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = jkObjectsNumberPipe.transform(($event.max).toFixed(0))">
+            </ghm-range-number>
+        </div>
+    </div>
+
+    <div class="objects__utilities-lock">
+        <button class="objects__utilities-search" [class.active]="showDistrictsPopup"
+            (click)="showDistrictsPopup = !showDistrictsPopup">{{ form.controls['districts'].value | mySearchFormPipe:btnList }}
+        </button>
+        <div class="objects__utilities-wrap" *ngIf="showDistrictsPopup">
+            <div class="objects__close-area" (click)="showDistrictsPopup = !showDistrictsPopup"></div>
+            <app-checkbox-list
+                [btnList]="btnList"
+                [formControlName]="'districts'"
+                [name]="'districts'">
+            </app-checkbox-list>
+        </div>
+    </div>
+
+    <div class="objects__utilities-lock">
+        <button class="objects__utilities-search" [class.active]="showStatusesPopup"
+                (click)="showStatusesPopup = !showStatusesPopup">{{form.get('status').value}}
+        </button>
+        <div class="objects__utilities-wrap" *ngIf="showStatusesPopup">
+            <div class="objects__close-area" (click)="showStatusesPopup = !showStatusesPopup"></div>
+
+            <ul class="offer__complex-list">
+                <div class="offer__complex-item" [class.offer__complex-item-active]="form.get('status').value === link"
+                     (click)="form.get('status').setValue(link)"
+                     *ngFor="let link of ['Все', 'В проекте', 'В строительстве', 'Готовые']; let i = index">
+                    <span class="offer__complex-text">{{link}}</span>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,92 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+:host {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.object-purchase__list {
+
+    &-btn {
+        color: $col-red;
+        padding-right: 22px;
+        position: relative;
+        &::before {
+            content: '';
+            width: 14px;
+            height: 100%;
+            position: absolute;
+            top: 0; right: 0;
+            background: url(/assets/img/about/product/arrow-down.svg) left 50% no-repeat;
+            transition: top .2s linear;
+        }
+        &:hover::before { top: 3px; }
+        &.active{
+            &:hover::before { top: -3px; }
+            &::before { transform: rotate(180deg); }
+        }
+    }
+
+    &-container {
+        width: 916px;
+        overflow: hidden;
+        transition: height .4s ease;
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+    }
+    &-head { display: flex; }
+    &-text {
+        font: 18px/23px $font-proba;
+        color: $col-black;
+
+        &_head {
+            color: $col-black-5;
+            padding: 8px 0;
+            &:nth-child(1) { width: 36px + 246px; }
+            &:nth-child(2) { width: 75px + 88px; }
+            &:nth-child(3) { width: 41px + 172px; }
+            &:nth-child(4) { width: 170px; }
+
+            &.no-percent:nth-child(2) { display: none; }
+            &.no-deadline:nth-child(3) { display: none; }
+            &.no-initial:nth-child(4) { display: none; }
+        }
+        &_grey { color: $col-black-5; }
+    }
+
+    &-item {
+        width: 100%;
+        height: 98px;
+        min-height: 98px;
+        box-sizing: border-box;
+        border-top: 1px solid #d8d8d8;
+        display: flex;
+        align-items: center;
+        &.no-percent .object-purchase__list-rate { display: none; }
+        &.no-deadline .object-purchase__list-date { display: none; }
+        &.no-initial .object-purchase__list-payment { display: none; }
+
+        &.no-percent,
+        &.no-deadline,
+        &.no-initial { width: auto; }
+    }
+
+    &-image {
+        width: 64px;
+        height: 64px;
+        margin-right: 16px;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 100%;
+            max-height: 100%;
+        }
+    }
+    &-name { width: 164px + 38px; }
+    &-rate { width: 32px + 131px; }
+    &-date { width: 74px + 139px; }
+    &-payment { width: 170px; }
+}

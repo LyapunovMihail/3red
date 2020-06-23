@@ -1,0 +1,49 @@
+<div class="floor" *ngIf="jk">
+
+    <div class="floor__nav">
+        <a [routerLink]="'/objects/list/' + this.jk._id + '/flats/house/' + houseNumber" class="floor__nav-link">Секции</a>
+    </div>
+
+    <div class="floor__container">
+
+        <div class="floor__head">
+
+            <app-floor-info-window
+                [infoWindow]="infoWindow">
+            </app-floor-info-window>
+
+            <!--<app-house-selector-->
+                <!--[jk]="jk"-->
+                <!--[housesBtnList]="housesBtnList"-->
+                <!--[floorCount]="floorCount"-->
+                <!--[houseNumber]="houseNumber"-->
+                <!--[sectionNumber]="sectionNumber"-->
+                <!--[floorNumber]="floorNumber">-->
+            <!--</app-house-selector>-->
+        </div>
+
+        <div class="floor__wrap">
+
+            <div class="floor__description">
+                <div [innerHTML]="floorSvg | houseSVGSanitizePipe" class="floor__description-scheme" *ngIf="floorSvg"></div>
+                <div class="floor__description-error g-3red" *ngIf="!floorSvg"></div>
+            </div>
+
+            <app-floor-selector
+                [jk]="jk"
+                [floorSelector]="floorSelector"
+                [houseNumber]="houseNumber"
+                [sectionNumber]="sectionNumber"
+                [floorNumber]="floorNumber">
+            </app-floor-selector>
+        </div>
+    </div>
+</div>
+
+<app-flats-apartment-modal *ngIf="showApartmentWindow"
+    [jk]="jk"
+    [showApartmentWindow]="showApartmentWindow"
+    [flatsList]="floorFlats"
+    [flatIndex]="selectedFlatIndex"
+    (close)="showApartmentWindow = false; windowScrollLocker.unblock()">
+</app-flats-apartment-modal>

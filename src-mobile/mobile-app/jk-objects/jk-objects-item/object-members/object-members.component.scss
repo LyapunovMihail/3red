@@ -1,0 +1,41 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.object-members {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 96px;
+
+    &__head { margin: 0 0 32px; }
+
+    &__options {
+        margin: 0 0 16px;
+        .btn__admin-setting { margin-right: 8px; }
+    }
+    &__title { margin: 0 0 24px; }
+
+    &__wrap {
+        width: 100%;
+        display: flex;
+
+        &_members {
+            display: block;
+            width: auto;
+            max-width: 205px;
+            margin-right: 40px;
+        }
+    }
+    &__text {
+        display: block;
+        font: 18px/24px $font-proba;
+        color: $col-red;
+        margin: 0 0 8px;
+        
+        &_black { color: $col-black }
+        &_for-title {
+            font-size: 16px;
+            line-height: 24px;
+            color: $col-black-5;
+        }
+    }
+}

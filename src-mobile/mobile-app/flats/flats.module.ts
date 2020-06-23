@@ -1,49 +1,40 @@
-import { SearchFormPipe } from './search-form/search-form.pipe';
-import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
-import { SectionsSelectComponent } from './search-form/sections-select/sections-select.component';
-import { GHMRangeNumberModule } from './search-form/ghm-range-number/ghm-range-number.module';
-import { SearchFormComponent } from './search-form/search-form.component';
+import { GHMRangeNumberModule } from './search/search-form/ghm-range-number/ghm-range-number.module';
 import { FlatsComponent } from './flats.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FormsRequestModule } from '../forms-request/forms-request.module';
-import { ModalApartamenModule } from './modal-apartament/modal-apartament.module';
-import { SearchSortingComponent } from './search-sorting/search-sorting.component';
-import { SearchOutputModule } from './search-output/search-output.module';
-import { SearchOutputComponent } from './search-output/search-output.component';
+import { SearchComponent } from './search/search.component';
+import { FlatsListModule } from './search/search-output/flats-list/flats-list.module';
 
 const FlatsComponents = [
     FlatsComponent,
-    SearchFormComponent,
-    SectionsSelectComponent,
-    CheckboxListComponent,
-    SearchFormPipe,
-    SearchSortingComponent
+
+    ...SearchComponents,
 ];
 
 @NgModule({
     exports: [
-        ...FlatsComponents,
-        SearchOutputComponent
-
+        ...FlatsComponents
     ],
     declarations: [
         ...FlatsComponents
     ],
     imports: [
-        FormsRequestModule,
-        ModalApartamenModule,
-        SearchOutputModule,
-        CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule,
         GHMRangeNumberModule,
+        FlatsListModule,
+
+        CommonModule,
+        RouterModule,
         RouterModule.forChild([
-            { path: 'flats', redirectTo: '/flats/search', pathMatch: 'full' },
-            { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' }
+            { path: '', component: FlatsComponent,
+                children: [
+                    { path: 'search', component: SearchComponent}
+                ]
+            }
         ])
     ]
 })

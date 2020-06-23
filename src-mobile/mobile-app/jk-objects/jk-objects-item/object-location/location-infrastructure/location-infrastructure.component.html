@@ -1,0 +1,8 @@
+<div class="location__infrastructure-filter">
+    <ul class="location__infrastructure-list">
+        <li (click)="openToolTip(item.type)" *ngFor="let item of navList" class="location__infrastructure-list-item location__infrastructure-list-item_active location__infrastructure-list-item_{{item.type}}">
+            <div class="location__infrastructure-checkbox location__infrastructure-checkbox_{{item.type}}"></div>
+            <p class="location__infrastructure-text">{{item.name}}</p>
+        </li>
+    </ul>
+</div>

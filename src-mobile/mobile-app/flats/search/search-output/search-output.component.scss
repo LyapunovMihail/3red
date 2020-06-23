@@ -1,0 +1,75 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+:host { height: 100%; }
+
+.search-output {
+    width: 1216px;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    background-color: $col-white;
+    padding: 40px 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    &__empty {
+        @include f16-24(rgba(0, 1, 5, .8));
+        margin: 0 56px;
+    }
+
+    &__title {
+        font: 500 24px/29px $font-mus;
+        @include font-smoothing;
+        color: $col-black;
+        user-select: none;
+        margin: 0 0 90px;
+    }
+
+    &__head {
+        width: calc(100% - 112px);
+        border-bottom: 1px solid $col-border;
+        padding: 0 0 16px;
+        margin: 0 56px;
+
+        &-title { font: $font-18; }
+    }
+
+    &__btn {
+        width: 100%;
+        max-width: $container;
+        display: flex;
+        justify-content: flex-end;
+
+        &-show {
+            height: 48px;
+            margin: 24px auto 0;
+        }
+        &-up {
+            height: 48px;
+            color: $col-red;
+            position: relative;
+            padding-right: 20px;
+            margin: 24px 0 0;
+            &::before {
+                content: '';
+                width: 12px;
+                height: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+                background: url(/assets/img/flats/red_arrow_up.svg) center no-repeat;
+                transition: all 0.2s ease-out;
+            }
+
+            &:hover:before {
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    &__result {
+        width: 100%;
+    }
+}

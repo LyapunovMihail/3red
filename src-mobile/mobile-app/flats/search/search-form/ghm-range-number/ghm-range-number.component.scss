@@ -1,0 +1,46 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.ghm-range {
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.ghm-range-number {
+    user-select: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ghm-slider {
+    width: 100%;
+    height: 1px;
+    background: #d4d4d4;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.ghm-fill {
+    left: 0;
+    width: 318px;
+    background: $col-red;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+}
+
+.ghm-runner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: $col-red;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    cursor: pointer;
+}

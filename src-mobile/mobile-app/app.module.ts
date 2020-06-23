@@ -10,63 +10,58 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ROUTES } from './app.routes';
 
 import { WindowEventsService } from './commons/window-events.observer.service';
-import { AuthorizationObserverService } from './authorization/authorization.observer.service';
-import { FavoritesService } from './commons/favorites.service';
+import { EventsService } from './commons/events.service';
 import { PlatformDetectService } from './platform-detect.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
+import { JkService } from './commons/jk.service';
+import { WindowScrollLocker } from './commons/window-scroll-block';
+import { FavoritesService } from './favorites/favorites.service';
+
 // App is our top level component
 import { AppComponent } from './app.component';
-import { ImgModalService } from './modal/img-modal/img-modal.service';
-import { ImgModalComponent } from './modal/img-modal/img-modal.component';
-import { OverlayService } from './modal/overlay.service';
-import { OverlayComponent } from './modal/overlay.component';
 import { HomeModule } from './home/home.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
 import { AboutModule } from './about/about.module';
-import { PurchaseModule } from './purchase/purchase.module';
-import { FavoritesModule } from './favorites/favorites.module';
-import { FlatsModule } from './flats/flats.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
-import { DecorationModule } from './decoration/decoration.module';
-import { LocationModule } from './location/location.module';
+import { FlatsModule } from './flats/flats.module';
 import { JkObjectsModule } from './jk-objects/jk-objects.module';
+import { ServiceModule } from './service/service.module';
+import { ContactsModule } from './contacts/contacts.module';
+import { FavoritesModule } from './favorites/favorites.module';
 
-// import { ErrorPageModule } from './error-page/error-page.module';
-import { AuthorizationModule } from './authorization/authorization.module';
+import { ErrorPageModule } from './error-page/error-page.module';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-
+import { FlatsListComponent } from './flats/search/search-output/flats-list/flats-list.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
     ...APP_RESOLVER_PROVIDERS,
     AppState,
-    ImgModalService,
-    OverlayService,
     WindowEventsService,
-    AuthorizationObserverService,
-    FavoritesService,
+    EventsService,
     PlatformDetectService,
-    FlatsDiscountService
+    FlatsDiscountService,
+    WindowScrollLocker,
+    JkService,
+    FavoritesService
 ];
 
 const APP_MODULES = [
-    //  ErrorPageModule,
-    AuthorizationModule,
+    // ErrorPageModule,
     HomeModule,
-    LocationModule,
     FooterModule,
     HeaderModule,
     AboutModule,
-    PurchaseModule,
     NewsSharesModule,
-    FavoritesModule,
     FlatsModule,
-    DecorationModule,
     JkObjectsModule,
+    ServiceModule,
+    ContactsModule,
+    FavoritesModule,
 
     BrowserModule,
     BrowserAnimationsModule,
@@ -74,7 +69,11 @@ const APP_MODULES = [
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
         useHash: Boolean(history.pushState) === false,
-        preloadingStrategy: PreloadAllModules
+        preloadingStrategy: PreloadAllModules,
+        anchorScrolling: 'enabled',
+        onSameUrlNavigation: 'reload',
+        scrollPositionRestoration: 'enabled',
+        scrollOffset: [0, 64]
     })
 ];
 
@@ -85,11 +84,9 @@ interface StoreType {
 }
 
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     declarations: [
-        AppComponent,
-        ImgModalComponent,
-        OverlayComponent,
+        AppComponent
     ],
     imports: [
         ...APP_MODULES
@@ -98,4 +95,5 @@ interface StoreType {
         ...APP_PROVIDERS
     ]
 })
-export class AppModule {}
+export class AppModule {
+}

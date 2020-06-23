@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { AuthorizationObserverService } from './../../../../authorization/authorization.observer.service';
-// import { IDynamicObject } from '../../../../serv-files/serv-modules/dynamic-api/dynamic.interfaces';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { IObjectDynamicSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { DynamicService } from '../dynamic-admin-content.service';
 
 @Component({
     selector: 'app-object-dynamic-date',
@@ -8,20 +8,25 @@ import { AuthorizationObserverService } from './../../../../authorization/author
     styleUrls: [ 'object-dynamic-date.component.scss' ]
 })
 
-export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy {
+export class ObjectDynamicDateComponent implements OnInit, OnChanges {
 
     @Input() month: number;
     @Input() year: number;
-    // @Input() objectsArray: IDynamicObject[] = [];
+    @Input() objectId: number;
+    @Input() description: number;
 
     @Output() monthChange: EventEmitter<number> = new EventEmitter();
     @Output() yearChange: EventEmitter<number> = new EventEmitter();
 
     public date = new Date();
-    public tooltipOpen = false;
+    public tooltipYear = false;
+
+    public snippets: IObjectDynamicSnippet[] = [];
 
     public realYear: number = Number(this.date.getFullYear());
     public realMonth: number = Number(this.date.getMonth()) + 1;
+
+    public visibleYears = [];
 
     public monthArray: any[] = [
         {
@@ -75,61 +80,79 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
         }
     ];
 
-    public AuthorizationEvent;
-    public isAuthorizated: boolean = false;
-
     public yearsArray: number[] = [];
 
     constructor(
-        private authorization: AuthorizationObserverService,
-        public ref: ChangeDetectorRef
+        public ref: ChangeDetectorRef,
+        public dynamicService: DynamicService
     ) {}
 
     ngOnInit() {
-        // подписка на авторизацию
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
-            this.isAuthorizated = val;
-            // this.monthParser(this.year);
-            this.ref.detectChanges();
-        });
+        this.getSnippets();
         this.yearsArray = this.yearsArrayGenerate();
+        this.getNotEmptyYears();
     }
 
-    ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+    getSnippets() {
+        this.dynamicService.getContentSnippets(this.objectId).subscribe(
+            (data) => {
+                this.snippets = data;
+                this.monthParser(this.year);
+                this.ref.detectChanges();
+            },
+            (err) => console.error(err)
+        );
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        // if ( 'objectsArray' in changes ) {
-        //     this.monthParser(this.year);
-        //     this.ref.detectChanges();
-        // }
+        this.getSnippets();
+
+        setTimeout(() => {
+            if ('year' in changes) {
+                this.afterChangeYear();
+            }
+        }, 100);
     }
 
-    // monthParser(year) {
-    //     const activeYear = year;
-    //     this.monthArray.forEach((item) => {
-    //         item.disabled =
-    //             // если пользователь авторизован, то все месяца будут активны
-    //             (this.isAuthorizated) ? false : (
-    //                 // иначе
-    //                 // если из массива объектов ни один не равен значению месяца и выбранного года
-    //                 !this.objectsArray.some((obj) => {
-    //                     return (obj.year === activeYear && obj.month === item.value);
-    //                 }) // ||
-    //                 // или значение месяца больше месяца реальной даты
-    //                 // (item.value > this.realMonth && activeYear === this.realYear)
-    //             );
-    //     });
-    // }
+    monthParser(year) {
+        const activeYear = year;
+        this.monthArray.forEach((item) => {
+            item.disabled = !this.snippets.some((obj) => obj.year === activeYear && obj.month === item.value );
+        });
+    }
+
+    public afterChangeYear() {
+        let month = 1;
+        if (this.monthArray.find((item) => item.value === this.month).disabled) {
+            this.monthArray.forEach((item, i) => {
+                if (!item.disabled) {
+                    month = item.value;
+                }
+                if (i === this.monthArray.length - 1) {
+                    this.monthChange.emit(month);
+                }
+            });
+        }
+    }
 
     private yearsArrayGenerate(): number[] {
-        let from = 2019;
+        let from = 2005;
         let to = Number(this.date.getFullYear());
         let result = [];
         for ( let i = from ; i <= to ; i ++ ) {
             result.push(i);
         }
-        return result;
+        return result.sort( (year1, year2) => year1 > year2 ? -1 : 1);
+    }
+
+    public getNotEmptyYears() {
+        this.dynamicService.getContentSnippets(this.objectId).subscribe(
+            (data) => {
+                const objecs = data.sort( (obj1, obj2) => obj1.year > obj2.year ? -1 : 1);
+                objecs.forEach( (item) => {
+                    this.visibleYears.push(item.year);
+                });
+            }
+        );
     }
 }

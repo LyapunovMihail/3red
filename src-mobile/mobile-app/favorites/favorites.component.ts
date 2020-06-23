@@ -1,137 +1,19 @@
-import { FavoritesService } from './../commons/favorites.service';
-import { Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
-import { IAddressItemFlat } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { mockFlats } from './mockFlats';
-import { WindowScrollLocker } from '../commons/window-scroll-block';
+import { Component, OnInit } from '@angular/core';
+import { FavoritesService } from './favorites.service';
 
 @Component({
     selector: 'app-favorites',
     templateUrl: './favorites.component.html',
-    styleUrls: ['./favorites.component.scss'],
-    providers: [
-        WindowScrollLocker
-    ]
+    styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
 
-    public flats: IAddressItemFlat[] = [];
-    public testFlats = mockFlats;
-    public directionSort = false;
-    public sortType = '';
-
-    public formIsOpen = false;
-
-    public selectedFlatIndex: number;
-    public showApartmentWindow = false;
-
     constructor(
-        public windowScrollLocker: WindowScrollLocker,
-        private favoritesService: FavoritesService,
-        private router: Router
-    ) {}
+        public favoritesService: FavoritesService
+    ) { }
 
-    public ngOnInit() {
-        this.initFavoriteFlats();
-        console.log(this.testFlats);
+    ngOnInit() {
+
     }
 
-    public getDecorationText(dec: string): string {
-        if (dec === '00') {
-            return 'без отделки';
-        } else if (dec === '01') {
-            return 'с черновой отделкой';
-        } else if (dec === '02') {
-            return 'без отделки с перегородками';
-        } else if (dec === '03') {
-            return 'с чистовой отделкой';
-        } else if (dec === '04') {
-            return 'с чистовой(светлой) отделкой';
-        } else if (dec === '05') {
-            return 'с чистовой(темной) отделкой';
-        } else if (dec === '06') {
-            return 'с чистовой отделкой «Ялта»';
-        } else if (dec === '07') {
-            return 'с чистовой отделкой «Сочи»';
-        } else if (dec === '08') {
-            return 'с чистовой отделкой «Классика»';
-        } else if (dec === '09') {
-            return 'с чистовой отделкой «Модерн»';
-        } else if (dec === '10') {
-            return 'с финишной отделкой';
-        } else if (dec === '12') {
-            return 'с черновой отделкой без перегородок';
-        } else if (dec === '13') {
-            return 'некондиция';
-        } else if (dec === '14') {
-            return 'венеция';
-        }
-        return '';
-    }
-
-    public getHouseName(h: string): string {
-        if (h === '11' || h === '12') {
-            return 'Флокс';
-        } else if (h === '13' || h === '14') {
-            return 'Пион';
-        } else if (h === '15' || h === '16') {
-            return 'Астильба';
-        } else if (h === '17' || h === '18') {
-            return 'Ирис';
-        } else if (h === '19') {
-            return 'Сирень';
-        } else if (h === '20') {
-            return 'Гортензия';
-        } else if (h === '21') {
-            return 'Жасмин';
-        }
-        return '';
-    }
-
-    public removeFromFavorite(apartment: IAddressItemFlat): void {
-        this.favoritesService.toFavorite(apartment);
-        this.initFavoriteFlats();
-    }
-
-    public initFavoriteFlats(): void {
-        const flats = this.favoritesService.favoriteFlatsString;
-
-        if (flats) {
-            const options = {
-                flats
-            };
-            this.favoritesService.getFavoriteFlats(options)
-                .subscribe((flatsData) => this.flats = flatsData,
-                    (error) => {
-                        console.log(error);
-                    });
-        } else {
-            this.flats = [];
-            this.router.navigate(['/']);
-        }
-    }
-
-    public sort(type: 'floor' | 'space' | 'price' | 'section') {
-        this.directionSort = type !== this.sortType ? true : !this.directionSort;
-        const flats = this.favoritesService.favoriteFlatsString;
-        const options = {
-            flats,
-            sort: `${type}${this.directionSort ? 'Up' : 'Down'}`
-        };
-
-        this.sortType = type;
-
-        this.favoritesService.getFavoriteFlats(options)
-            .subscribe((flatsData) => this.flats = flatsData);
-    }
-
-    get pdfUrls() {
-        return this.flats.map((flat) => `https://oblakadom.ru/api/pdf?id=${flat._id}`);
-    }
-
-    public openApartmentModal(index) {
-        this.selectedFlatIndex = index;
-        this.windowScrollLocker.block();
-        this.showApartmentWindow = true;
-    }
 }

@@ -1,0 +1,44 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.object-filter {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 96px 0 96px;
+    padding: 48px 0;
+    background-color: $col-white;
+
+    @media (max-width: 760px) {
+        margin: 64px 0 64px;
+    }
+
+    &__container {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        box-sizing: border-box;
+
+        @media (min-width: 761px) {
+            padding: 0 12px 0;
+        }
+    }
+
+    &__btn-link {
+        display: block;
+        width: 258px;
+        height: 48px;
+        margin: 40px 0 0;
+        text-align: center;
+        box-sizing: border-box;
+        line-height: 48px;
+        cursor: pointer;
+
+        &--disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+}

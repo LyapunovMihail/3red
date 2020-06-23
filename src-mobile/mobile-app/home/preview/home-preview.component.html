@@ -1,58 +1,28 @@
-<section class="home__preview" *ngIf="gallerySlides">
-    <div class="home__preview-wrap home__preview-wrap_slider">
+<section class="about">
+    <div class="about-wrap">
+        <div class="about__img"></div>
+    </div>
 
-        <div class="home__preview-controls">
-            <p class="home__preview-count">
-                <span>{{currentSlide + 1 < 10 ? '0' : ''}}{{currentSlide + 1}}</span>/<span class="home__preview-count_span">{{gallerySlides.length < 10 ? '0' : ''}}{{gallerySlides.length}}</span>
-            </p>
+    <div class="about-container">
+        <div class="about__helper">
+            <div class="about-wrapper">
+                <ng-container *ngIf="snippet">
+                    <h2 class="about__title">{{snippet.title}}</h2>
+                    <p class="about__text">{{snippet.text}}</p>
 
-            <div class="home__preview-btns">
-                <button class="home__preview-btn home__preview-btn_prev" (click)="prevBtn()"></button>
-                <button class="home__preview-btn home__preview-btn_next" (click)="nextBtn()"></button>
-            </div>
-        </div>
+                    <div class="about__news" *ngIf="snippet.showNews">
 
-        <div class="home__preview-slider-wrap">
-            <ul class="home__preview-slider-list"  [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * this.slideWidth ) + 'px)') }">
-                <li  *ngFor="let item of gallerySlides; let i = index" class="home__preview-slider-item">
-                    <div class="home__preview-slider-item-img">
-                        <img alt="" [src]="uploadsPath + item.image">
+                        <a [routerLink]="news.title ?
+                            ['/news-shares/news/list/' + news._id]
+                            : ['/news-shares/shares/list/' + news._id]"
+                           class="about__news-item" *ngFor="let news of newsSnippet; let i = index"
+                           [class.active]="currentNews === i">
+                            <div class="about__news-date">{{parseDate(news.created_at)}}</div>
+                            <p class="about__news-title">{{news.title ? news.title : news.name}}</p>
+                        </a>
                     </div>
-                </li>
-            </ul>
-        </div>
-
-        <ng-container *ngFor="let item of gallerySlides; let i = index">
-            <div class="home__preview-slider-descr" *ngIf="currentSlide === i">
-                <h1 class="home__preview-slider-title g-title-path">{{item.name}}</h1>
-                <p class="home__preview-slider-text">{{item.description}}</p>
+                </ng-container>
             </div>
-        </ng-container>
+        </div>
     </div>
-
-   <div class="home__preview-wrap home__preview-wrap_news">
-       <div class="home__preview-stock-container" *ngIf="shareSnippets">
-           <ng-container *ngFor="let shareSnippet of shareSnippets; let i = index">
-                <div class="home__preview-stock"
-                     [class.home__preview-stock--active]="i === activeShare"
-                     [routerLink]="['/news-shares/shares/list/1', shareSnippet._id]">
-                    <h1 class="home__preview-stock-title">Акция</h1>
-                    <p class="g-link_white home__preview-stock-text">{{shareSnippet.name}}</p>
-                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date >= 0" class="home__preview-stock-paragraf">До конца акции {{shareSnippet.finish_date | sharesDayPipe}}</p>
-                    <p *ngIf="shareSnippet.countdown && +shareSnippet.finish_date < 0"  class="home__preview-stock-paragraf">Акция закончилась</p>
-                </div>
-           </ng-container>
-       </div>
-       <div class="home__preview-news-container" *ngIf="newsSnippets">
-           <ng-container *ngFor="let newsSnippet of newsSnippets; let i = index">
-                <div class="home__preview-news"
-                     [class.home__preview-news--active]="i === activeNews"
-                     [routerLink]="['/news-shares/news/list/' + newsSnippet._id]">
-                    <h1 class="home__preview-news-title">Новость</h1>
-                    <p class="g-link_white home__preview-news-text">{{newsSnippet.title}}</p>
-                </div>
-           </ng-container>
-       </div>
-    </div>
-
 </section>

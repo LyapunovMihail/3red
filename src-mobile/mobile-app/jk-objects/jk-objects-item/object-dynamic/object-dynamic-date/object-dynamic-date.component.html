@@ -1,21 +1,41 @@
 <section class="dynamic-header">
-    <div class="dynamic-header__active" (click)="tooltipOpen = true">Декабрь, 2019</div>
 
-    <div class="dynamic-header__tooltip" *ngIf="tooltipOpen">
+    <p class="dynamic-header__start">{{description}}</p>
 
-        <div class="dynamic-header__tooltip-cls" (click)="tooltipOpen = false"></div>
+    <ul class="dynamic-header__months">
+    
+        <li *ngFor="let item of monthArray; let i = index; let last = last"
+            [ngClass]="{
+                'dynamic-header__months-item_disabled': item.disabled,
+                'dynamic-header__months-item_current': (i + 1) == month
+            }"
+            (click)="monthChange.emit(i + 1)"
+            class="dynamic-header__months-item">
+            {{item.name}}
+        </li>
+    
+    </ul>
 
-        <ul class="dynamic-header__tooltip-list">
+    <div class="dynamic-header__years">
+        <div class="dynamic-header__years-active" (click)="tooltipYear = true">{{year}}</div>
         
-            <li *ngFor="let item of monthArray; let i = index; let last = last"
-                [ngClass]="{
-                    'dynamic-header__tooltip-item_disabled': item.disabled,
-                    'dynamic-header__tooltip-item_current': (i + 1) == month || last
-                }"
-                (click)="monthChange.emit(i + 1)"
-                class="dynamic-header__tooltip-item">
-                {{item.name}}, 2019
-            </li>
-        </ul>
+        <div class="dynamic-header__years-tooltip" *ngIf="tooltipYear">
+
+            <ul class="dynamic-header__years-list">
+                <li class="dynamic-header__years-cls" (click)="tooltipYear = false"></li>
+    
+                <ng-container>
+                    <li *ngFor="let item of visibleYears"
+                        [ngClass]="{
+                            'dynamic-header__years-item_active': item == year
+                        }"
+                        (click)="yearChange.emit(item); monthParser(item)"
+                        class="dynamic-header__years-item">
+                        {{item}}
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
     </div>
+    
 </section>

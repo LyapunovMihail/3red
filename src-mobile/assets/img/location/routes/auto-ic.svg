@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <filter id="a" width="265.6%" height="265.6%" x="-82.8%" y="-79.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <circle id="c" cx="16" cy="16" r="16"/>
+        <filter id="b" width="140.6%" height="140.6%" x="-20.3%" y="-17.2%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="3.5" result="shadowSpreadOuter1"/>
+            <feOffset dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd" filter="url(#a)">
+        <use fill="#000" filter="url(#b)" xlink:href="#c"/>
+        <circle cx="16" cy="16" r="17.5" fill="#5A31C5" stroke="#FFF" stroke-width="3"/>
+        <g fill="#FFF" fill-rule="nonzero">
+            <path d="M24 16.777c0-.333-.071-.65-.2-.94a3.212 3.212 0 0 0-.047-.223l-1.39-3.637-.01-.033C21.869 10.415 21.177 9 19.422 9h-6.708c-1.797 0-2.433 1.45-2.93 2.936L8.33 15.582c-.21.356-.33.762-.33 1.195v1.132c0 .175.02.346.057.51a.934.934 0 0 0-.057.32v3.367c0 .494.379.894.846.894h1.757c.467 0 .846-.4.846-.894v-1.683h9.202v1.683c0 .494.38.894.847.894h1.656c.467 0 .846-.4.846-.894V18.74a.94.94 0 0 0-.057-.32c.037-.165.057-.336.057-.51v-1.132zM10.815 12.3c.553-1.649.998-2.152 1.898-2.152h6.708c.893 0 1.39.561 1.896 2.145l1.014 2.17a2.958 2.958 0 0 0-1.078-.201H10.747c-.345 0-.674.058-.978.164l1.046-2.126zm.871 6.037H9.833c-.334 0-.604-.286-.604-.638 0-.352.27-.638.604-.638h1.853c.334 0 .605.286.605.638 0 .352-.271.638-.605.638zm6.547-.127h-4.311a.394.394 0 0 1-.383-.404c0-.224.172-.405.383-.405h4.31c.212 0 .383.181.383.405a.394.394 0 0 1-.382.404zm3.887.127h-1.853c-.334 0-.604-.286-.604-.638 0-.352.27-.638.604-.638h1.853c.334 0 .605.286.605.638 0 .352-.27.638-.605.638z"/>
+        </g>
+    </g>
+</svg>

@@ -33,13 +33,11 @@ import { ServiceModule } from './service/service.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { FavoritesModule } from './favorites/favorites.module';
 
-// import { ErrorPageModule } from './error-page/error-page.module';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { FlatsListComponent } from './flats/search/search-output/flats-list/flats-list.component'
 
 // Application wide providers
 const APP_PROVIDERS = [
