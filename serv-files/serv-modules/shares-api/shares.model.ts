@@ -90,7 +90,7 @@ export class SharesModel {
         ) {
             let path = SHARES_UPLOADS_PATH;
             let image = await imageSaver(req, path, 50);
-            let thumbnail = await thumbnailSaver(req, path, {width: '300', height: '200'});
+            let thumbnail = await thumbnailSaver(req, path, {width: '352', height: '264'});
             return ({
                 image,
                 thumbnail

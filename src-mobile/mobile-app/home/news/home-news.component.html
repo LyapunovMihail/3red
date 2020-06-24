@@ -15,50 +15,41 @@
                 </ul>
                 <a class="g-all-object" routerLink="/news-shares/all">Все новости</a>
             </nav>
-
-            <div class="object-news__slider">
-
-                <button (click)="prevBtn()" *ngIf="currentSlide > 0"
-                    class="object-news__slider-btn object-news__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
-                    <span></span>
-                </button>
-                <button (click)="nextBtn()" *ngIf="currentSlide + 3 < this.currentSnippets.length"
-                    class="object-news__slider-btn object-news__slider-btn_next btn-slider btn-slider_next btn-slider_white">
-                    <span></span>
-                </button>
-
-                <ng-container>
-                    <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 376 ) ) + 'px)') }">
-
-                        <div class="slider-list__item" *ngFor="let snippet of currentSnippets; let i = index"
-                            [ngClass]="{'current-slide': currentSlide === i }" id="slider-item-{{i}}">
-
-                            <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.title">
-                                <p class="slider-list__house-name">{{snippet.objectName}}</p>
-                                <div class="slider-list__image">
-                                    <img [src]="newsUploadsPath + snippet.thumbnail" alt="news-image" *ngIf="snippet.thumbnail">
-                                </div>
-                                <p class="slider-list__title" *ngIf="snippet.title">{{snippet.title}}</p>
-                                <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
-
-                            </a>
-
-                            <a [routerLink]="['/news-shares/shares/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.name">
-                                <p class="slider-list__house-name">{{snippet.objectName}}</p>
-                                <div class="slider-list__image">
-                                    <img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">
-                                </div>
-                                <p class="slider-list__title" *ngIf="snippet.text">{{snippet.text}}</p>
-                                <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
-
-                                <div class="slider-list__type" *ngIf="snippet.name">Акция</div>
-                            </a>
-
-                        </div>
-
-                    </div>
-                </ng-container>
-            </div>
-
     </div>
+
+    <div class="object-news__slider">
+        <div class="object-news__slider-item slider-list">
+            <div class="slider-list__item" *ngFor="let snippet of currentSnippets; let i = index" id="slider-item-{{i}}">
+
+                <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.title">
+                    <p class="slider-list__house-name">{{snippet.objectName}}</p>
+                    <div class="slider-list__image">
+                        <img [src]="newsUploadsPath + snippet.thumbnail" alt="news-image" *ngIf="snippet.thumbnail">
+                    </div>
+                    <p class="slider-list__title" *ngIf="snippet.title">{{snippet.title}}</p>
+                    <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
+
+                </a>
+
+                <a [routerLink]="['/news-shares/shares/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.name">
+                    <p class="slider-list__house-name">{{snippet.objectName}}</p>
+                    <div class="slider-list__image">
+                        <img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">
+                    </div>
+                    <p class="slider-list__title" *ngIf="snippet.text">{{snippet.text}}</p>
+                    <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
+
+                    <div class="slider-list__type" *ngIf="snippet.name">Акция</div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="object-news__container">
+        <a routerLink="/news-shares/all" class="object-news__link">
+            <span class="g-all-object">Все новости</span>
+        </a>
+    </div>
+
 </section>

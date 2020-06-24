@@ -26,11 +26,29 @@
         display: flex;
         justify-content: space-between;
         position: relative;
+
+        @media(max-width: 585px) {
+            align-items: flex-end;
+        }
     }
     &__wrap {
         display: flex;
         align-items: center;
         margin-right: 20px;
+
+        @media(max-width: 585px) {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            height: 64px;
+
+            .footer__socials {
+                order: 2;
+            }
+            .footer__copyright {
+                order: 1;
+            }
+        }
     }
     &__socials {
         display: flex;

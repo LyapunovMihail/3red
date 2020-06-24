@@ -23,7 +23,11 @@
     text-align: center;
     box-sizing: border-box;
 }
-.offer__complex_mock-label {
+.offer__complex_mock-label_count {
+    position: relative;
+    font-size: 12px;
+    line-height: 14px;
+    bottom: 12px;
 }
 .offer__complex-checkbox:checked + .offer__complex_mock-label {
     border-color: #ee4237;

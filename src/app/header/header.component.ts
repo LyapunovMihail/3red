@@ -7,7 +7,7 @@ import { HeaderService } from './header.service';
 import { JkService } from '../commons/jk.service';
 import set = Reflect.set;
 import { FavoritesService } from '../favorites/favorites.service';
-import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
+import { PlatformDetectService } from '../platform-detect.service';
 
 @Component({
     selector : 'app-header',

@@ -2,16 +2,36 @@
 
 .object-news {
     width: 100%;
+    height: auto;
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
+    justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    margin: 0 0 96px;
+    background: #f5f5f5;
     overflow: hidden;
 
+    @media (max-width: 760px) {
+        margin: 0 0 64px;
+    }
+
     &__container {
-        width: 1280px;
-        margin: auto;
-        padding: 0 88px 96px;
+        position: relative;
+        width: $mobileContainer;
+        max-width: $tabletContainer;
         box-sizing: border-box;
+
+        @media(min-width: 761px) {
+            padding: 0 12px 0;
+        }
+
+        @media(max-width: 760px) {
+            .object-news__nav .g-all-object {
+                display: none;
+            }
+        }
 
         &--about {
             padding-top: 96px;
@@ -34,6 +54,10 @@
         justify-content: space-between;
         align-items: flex-end;
         margin: 0 0 24px;
+
+        @media(max-width: 760px) {
+            margin: 0 0 16px;
+        }
 
         &-list {
             display: flex;
@@ -65,52 +89,66 @@
         }
     }
 
+    &__link {
+        display: none;
+
+        @media(max-width: 760px) {
+            display: block;
+            border: solid 1px #ee4237;
+            line-height: 48px;
+            text-align: center;
+            margin-top: 32px;
+
+            .g-all-object {
+                color: #000000;
+                &:after {
+                    background: url(/assets/img/home/right-arrow-black.svg) no-repeat;
+                }
+            }
+        }
+    }
+
     &__slider {
         width: 100%;
-        position: relative;
-        padding: 20px 0 0;
+        max-width: $tabletContainer;
+        overflow-y: hidden;
+        height: calc(54.7vw + 60px);
+        min-height: 228px;
+        max-height: 338px;
+        box-sizing: border-box;
+        @media (min-width: 761px) {
+            padding: 0 12px 0;
+            align-self: inherit;
+        }
 
-        &-btn {
-            position: absolute;
-            top: calc((264px / 2) + 20px ); // где 20px - это padding у ".object-news__slider", а 264 высота блока с картинкой
-            transform: translateY(-50%);
-            z-index: 1;
-
-            &_prev { left: -24px; }
-            &_next { right: -24px; }
+        @media(max-width: 760px) {
+            padding-left: 20px;
+            align-self: flex-start;
         }
     }
 }
 
-.current-slide,
-.current-slide + div,
-.current-slide + div + div {
-    opacity: 1 !important;
-    pointer-events: all !important;
-}
-
 .slider-list {
-    display: flex;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
     position: relative;
-    transition: transform .5s ease;
+    padding: 21px 0 0;
+    overflow-x: auto;
+    height: 100%;
+
+    //@media(min-width: 761px) {
+    //    overflow: hidden;
+    //}
 
     &__item {
-        width: 352px;
-        min-width: 352px;
         position: relative;
+        display: inline-block;
+        width: 67vw;
+        max-width: 340px;
         margin-right: 24px;
-        transition: opacity .2s linear;
-        opacity: 0;
         pointer-events: none;
         cursor: pointer;
-        &:hover {
-            .slider-list__image::after {
-                opacity: .1;
-            }
-            .slider-list__title {
-                color: $col-red;
-            }
-        }
 
         &-link {
             width: 100%;
@@ -130,9 +168,10 @@
     }
     &__image {
         width: 100%;
-        height: 264px;
+        height: 100%;
         margin: 0 0 8px;
         position: relative;
+
         &::after {
             content: '';
             position: absolute;
@@ -149,6 +188,8 @@
         img {
             width: 100%;
             height: 100%;
+            min-height: 154px;
+            max-height: 254px;
             object-fit: cover;
         }
     }
@@ -163,10 +204,18 @@
         line-clamp: 2;
         overflow: hidden;
         transition: color .2s linear;
+
+        @media(max-width: 760px) {
+            font: 16px/22px $font-proba;
+        }
     }
     &__date {
         font: 16px/19px $font-proba;
         color: $col-black-5;
+
+        @media(max-width: 760px) {
+            font: 14px/18px $font-proba;
+        }
     }
     &__type {
         padding: 0 12px;
@@ -180,70 +229,5 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    &__edit {
-        width: 38px;
-        height: 38px;
-        position: absolute;
-        top: 16px;
-        right: 16px;
-
-        &-item {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background-color: $col-white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-    
-            span {
-                display: block;
-                width: 4px;
-                height: 4px;
-                border-radius: 50%;
-                position: relative;
-                background-color: $col-black;
-                &::before,
-                &::after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: $col-black;
-                    border-radius: 50%;
-                }
-                &::before { left: -8px; }
-                &::after { right: -8px; }
-            }
-            &_active {
-                &+ .slider-list__tooltip {
-                    display: block;
-                }
-            }
-        }
-    }
-    &__tooltip {
-        display: none;
-        width: 188px;
-        position: absolute;
-        top: calc(100% + 4px);
-        right: 0;
-        background-color: $col-white;
-        &-item {
-            width: 100%;
-            height: 39px;
-            padding-left: 16px;
-            box-sizing: border-box;
-            font: 18px/23px $font-proba;
-            color: $col-black;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #d8d8d8;
-            &:last-child { border-bottom: 0; }
-            &:hover { background-color: $col-fa; }
-        }
     }
 }

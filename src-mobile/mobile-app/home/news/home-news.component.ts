@@ -74,14 +74,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         );
     }
 
-    public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.currentSnippets.length - 3 ) ? this.currentSlide + 1 : this.currentSnippets.length - 3;
-    }
-
-    public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
-    }
-
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }

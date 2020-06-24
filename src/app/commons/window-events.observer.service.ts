@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { fromEvent } from 'rxjs';
-import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
+import { PlatformDetectService } from '../platform-detect.service';
 
 @Injectable()
 
