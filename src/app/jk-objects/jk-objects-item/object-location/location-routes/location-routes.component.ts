@@ -7,6 +7,13 @@ import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../
 import { IObjectLocationTab } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 declare let ymaps: any;
 declare let $: any;
+import {
+    trigger,
+    animate,
+    transition,
+    style,
+    query
+  } from '@angular/animations';
 
 // Приветствую тебя любознательный разработчик
 // Этот компонент я делал в условиях крайне сжатых сроков
@@ -19,7 +26,16 @@ declare let $: any;
     styleUrls: [
         './../object-location.component.scss',
         './location-routes.component.scss'
-    ]
+    ],
+    animations: [
+        trigger('expandedPanel', [
+            transition('void => *', [
+                style({ height: 0 }),
+                animate('.2s', style({ height: '*' }))
+              ]),
+              transition('* => void', [animate('.2s', style({ height: 0 }))])
+        ])
+      ]
 })
 
 export class LocationRoutesComponent implements OnDestroy, OnChanges {

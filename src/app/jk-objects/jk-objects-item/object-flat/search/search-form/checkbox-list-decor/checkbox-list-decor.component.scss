@@ -20,6 +20,9 @@
 .g-checkbox {
     display: flex;
     align-items: center;
+    span {
+        padding-top: 0;
+    }
     div {
         width: 18px;
          height: 18px;
