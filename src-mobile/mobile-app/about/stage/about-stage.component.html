@@ -1,73 +1,107 @@
-
-
-<section class="stage" id="stage" #stage>
+<section class="stage" id="stage">
     <div class="stage__container">
-        <h2 class="stage__title">Этапы реализации проекта</h2>
-        <p class="stage__text">
-            Каждый наш объект реализован по индивидуальному проекту, разработанному 
-            с учетом максимальных возможностей площадок. Девелопмент в 3-RED — это 
-            творческая работа, основанная на тщательном анализе, подробных исследованиях 
-            и расчетах. Результатом такой работы становятся жилые комплексы с идеальным 
-            балансом экономических, эстетических, функциональных характеристик.</p>
-        <div class="stage__parallax-wrap">
-
-            <img src="/assets/img/about/product/all-arrow.svg" alt="arrows" class="stage__parallax-img1">
-
-            <div class="stage__parallax-wrapper">
-                <img src="/assets/img/about/product/parallax-img.png" alt="image" class="stage__parallax-img2"
-                     [style.transform]="stage.getBoundingClientRect().top < 200 ? 'translateY(' + stage.getBoundingClientRect().top * - 0.06333 + 'px)' : img.style.transform" #img>
+        <div class="stage__slider">
+            <div class="stage__wrap">
+                <h2 class="stage__title">Этапы реализации проекта</h2>
+                <button class="stage__btn"><img src="assets/img/about/arrow-for-blue.svg" alt="arrow" class="stage__img"></button>
             </div>
-            <div class="stage__grid-container">
-                <div class="stage__grid-item">
-                    <p class="stage__num">1</p>
-                    <p class="stage__parallax-text"> Маркетинговые исследования</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">2</p>
-                    <p class="stage__parallax-text">Расчет экономики
-                        проектов и построение финансовых моделей</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">3</p>
-                    <p class="stage__parallax-text">Подбор и оформление
-                        земельных участков</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">4</p>
-                    <p class="stage__parallax-text"> Привлечение
-                        финансирования</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">5</p>
-                    <p class="stage__parallax-text">Формирование
-                        архитектурной концепции</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">6</p>
-                    <p class="stage__parallax-text">Разработка
-                        градостроительной доументации</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">7</p>
-                    <p class="stage__parallax-text"> Проектно-
-                        изыскательские работы</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">8</p>
-                    <p class="stage__parallax-text"> Огранизация
-                        строительства, строительный контроль</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">9</p>
-                    <p class="stage__parallax-text"> Ввод в эксплуатацию
-                        и передача готового объекта</p>
-                </div>
-                <div class="stage__grid-item">
-                    <p class="stage__num">10</p>
-                    <p class="stage__parallax-text"> Коммерческое управление
-                        и техническая эксплуатация объекта</p>
+            <p class="stage__text">Каждый наш объект реализован по индивидуальному проекту, разработанному
+                с учетом максимальных
+                возможностей площадок. Девелопмент в 3-RED — это творческая работа, основанная
+                на тщательном анализе, подробных исследованиях и расчетах. Результат такой
+                работы экономических, эстетических, функциональных характеристик</p>
+        </div>
+
+
+        <div class="stage__slider-items">
+            <div class="stage__slider-helper">
+                <div class="stage__slider-wrapper">
+
+                    <div class="stage__slider-num">1/10</div>
+                    <div class="stage__slider-dots">
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot"></div>
+                    </div>
                 </div>
 
+                <div class="stage__slider-arrows">
+                    <button class="slider__button-left"><img src="assets/img/about/slider/left.svg" alt="arrow" class="stage__slider-left"></button><button class="slider__button-right"><img src="assets/img/about/slider/right.svg" alt="arrow" class="stage__slider-right"></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stage__slider-wrap">
+
+            <div class="stage__slider-container">
+
+
+
+                <h2 class="stage__title">Маркетинговые исследования</h2>
+                <img src="assets/img/about/slider/ribbon.png" alt="ribbon" class="stage__slider-img1">
+            </div>
+
+
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Расчет экономики проектов
+                    и построение финансовых моделей</h2>
+
+            </div>
+
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Подбор и оформление земельных участков</h2>
+
+            </div>
+
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Привлечение финансирования</h2>
+                <img src="assets/img/about/slider/triangle.png" alt="ribbon" class="stage__slider-img4">
+            </div>
+
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Формирование архитектурной
+                    концепции</h2>
+                <img src="assets/img/about/slider/hook.png" alt="hook" class="stage__slider-img5">
+            </div>
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Разработка градостроительной
+                    доументации</h2>
+
+            </div>
+
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Проектно изыскательские работы</h2>
+                <img src="assets/img/about/slider/comment.png" alt="hook" class="stage__slider-img7">
+            </div>
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Огранизация строительства, строительный контроль</h2>
+                <img src="assets/img/about/slider/eye.png" alt="eye" class="stage__slider-img8">
+            </div>
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Ввод в эксплуатацию и передача готового объекта</h2>
+                <img src="assets/img/about/slider/key.png" alt="key" class="stage__slider-img9">
+            </div>
+
+            <div class="stage__slider-container">
+
+                <h2 class="stage__title">Ввод в эксплуатацию и передача готового объекта</h2>
+                <img src="assets/img/about/slider/cog.png" alt="cog" class="stage__slider-img10">
             </div>
         </div>
     </div>

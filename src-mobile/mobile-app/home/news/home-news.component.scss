@@ -21,7 +21,7 @@
         position: relative;
         width: $mobileContainer;
         max-width: $tabletContainer;
-        box-sizing: border-box;
+        //box-sizing: border-box;
 
         @media(min-width: 761px) {
             padding: 0 12px 0;
@@ -115,7 +115,7 @@
         height: calc(54.7vw + 60px);
         min-height: 228px;
         max-height: 338px;
-        box-sizing: border-box;
+        //box-sizing: border-box;
         @media (min-width: 761px) {
             padding: 0 12px 0;
             align-self: inherit;

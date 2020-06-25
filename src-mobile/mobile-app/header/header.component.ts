@@ -85,14 +85,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.ngUnsubscribe.complete();
     }
 
-    // если расстояние скролла больше высоты хедера
-    // хедер фиксируется
     public openBurger() {
         if (this.openMenu) {
-            this.openMenu = !this.openMenu;
+            this.openMenu = false;
+            this.isFixed = true;
             this.scrollLocker.unblock();
         } else {
-            this.openMenu = !this.openMenu;
+            this.openMenu = true;
             this.scrollLocker.block();
         }
     }

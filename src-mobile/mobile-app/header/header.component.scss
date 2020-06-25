@@ -8,9 +8,23 @@
     flex-flow: column;
     // justify-content: center;
     align-items: center;
-    height: 86px + 34px;
+    height: 86px;
     background: #F5F5F5;
     box-sizing: border-box;
+
+    &-fixed {
+        position: fixed !important;
+        top: 0;
+        transform: translateY(0);
+        left: 0;
+        width: 100%;
+        z-index: 51;
+        transition: transform .2s linear;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        &--hide {
+            transform: translateY(-86px);
+        }
+    }
 
     &_open {
         .header__container { justify-content: flex-end; }

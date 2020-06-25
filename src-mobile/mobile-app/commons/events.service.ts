@@ -29,5 +29,4 @@ export class EventsService {
 
         }, 400);
     }
-
 }

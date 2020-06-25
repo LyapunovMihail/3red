@@ -56,7 +56,7 @@
 .about-container {
     width: $mobileContainer;
     max-width: $tabletContainer;
-    box-sizing: border-box;
+    //box-sizing: border-box;
 
     @media(min-width: 761px) {
         padding: 0 12px 0;
