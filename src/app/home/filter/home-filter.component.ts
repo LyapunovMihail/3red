@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormConfig } from '../../flats/search/search-form/search-form.config';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
     providers: [
         HomeFilterService,
         GHMNumberPipe
-    ]
+    ],
+    host: {
+        '(document:click)': 'onClick($event)',
+      }
 })
 
 export class HomeFilterComponent implements OnInit, OnDestroy {
@@ -26,6 +29,8 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     public modsBtnList;
     public showMods = false;
     public hideMods = false;
+    isExpanded: boolean = false;
+    @ViewChild('myDiv') myDivElementRef: ElementRef;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -43,6 +48,12 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
             },
             (err) => console.error(err)
         );
+    }
+
+    onClick(event) {
+        if (!this.myDivElementRef.nativeElement.contains(event.target) ) {
+            this.isExpanded = null;
+        }
     }
 
     public getConfig(params) {
@@ -135,11 +146,11 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         this.formEvents.unsubscribe();
     }
 
-    public switchPopup() {
-        this.hideMods = true;
-        setTimeout(() => {
-            this.showMods = false;
-            this.hideMods = false;
-        }, 400);
-    }
+    // public switchPopup() {
+    //     this.hideMods = true;
+    //     setTimeout(() => {
+    //         this.showMods = false;
+    //         this.hideMods = false;
+    //     }, 400);
+    // }
 }

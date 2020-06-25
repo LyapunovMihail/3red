@@ -3,6 +3,13 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
 import { FavoritesService } from './favorites/favorites.service';
+import {
+    trigger,
+    animate,
+    transition,
+    style,
+    query
+  } from '@angular/animations';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -20,13 +27,30 @@ export const ROOT_SELECTOR = 'app-root';
 
           <app-header></app-header>
 
-          <router-outlet></router-outlet>
+            <div [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+                <router-outlet #o="outlet"  style= 'position: relative'></router-outlet>
+            </div>
 
           <app-footer></app-footer>
 
       </section>
   `,
-    providers: []
+    providers: [],
+    animations: [
+        trigger('fadeAnimation', [
+
+            transition('* <=> *', [
+                style({height: '!', position: 'relative'}),
+
+              query(':enter', [style({ opacity: 0, position: 'absolute', top: 0, left: 0,  width: '100%'})], { optional: true }),
+              query(
+                ':enter',
+                [style({ opacity: 0 }), animate('0.3s', style({ opacity: 1 }))],
+                { optional: true }
+              )
+            ])
+          ])
+    ]
 })
 export class AppComponent implements OnInit {
 

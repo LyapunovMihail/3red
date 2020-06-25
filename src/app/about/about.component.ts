@@ -14,8 +14,8 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild('container')
     public container: ElementRef;
-    @ViewChild('helper')
-    public helper: ElementRef;
+    // @ViewChild('helper')
+    // public helper: ElementRef;
 
     public windowScrollEvent;
     public scrollTop;
@@ -37,27 +37,27 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         this.eventsService.checkHeightResize(this, this.container);
-        this.fixBlock();
+        // this.fixBlock();
     }
 
-    fixBlock() {
-        this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
-            this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    // fixBlock() {
+    //     this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
+    //         this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-            const helper = this.helper.nativeElement;
-            const functions = document.getElementById('functions').firstElementChild as HTMLElement;
-            if (this.scrollTop > functions.offsetTop  - 77) {
-                functions.classList.add('functions--fixed');
-                helper.style.marginTop = `${functions.getBoundingClientRect().height + 400}px`;
-            }
-            if (this.scrollTop < functions.offsetTop + functions.getBoundingClientRect().height + 500) {
-                functions.classList.remove('functions--fixed');
-            }
-        });
-    }
+    //         const helper = this.helper.nativeElement;
+    //         const functions = document.getElementById('functions').firstElementChild as HTMLElement;
+    //         if (this.scrollTop > functions.offsetTop  - 77) {
+    //             functions.classList.add('functions--fixed');
+    //             helper.style.marginTop = `${functions.getBoundingClientRect().height + 400}px`;
+    //         }
+    //         if (this.scrollTop < functions.offsetTop + functions.getBoundingClientRect().height + 500) {
+    //             functions.classList.remove('functions--fixed');
+    //         }
+    //     });
+    // }
 
     public ngOnDestroy() {
         this.authorizationEvent.unsubscribe();
-        this.windowScrollEvent.unsubscribe();
+        // this.windowScrollEvent.unsubscribe();
     }
 }

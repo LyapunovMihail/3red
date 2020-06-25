@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
     selector: 'app-filter-mod-list',
@@ -11,12 +12,22 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
             useExisting: forwardRef(() => ModListComponent),
             multi: true
         }
-    ]
+    ],
+    animations: [
+        trigger('expandedPanel', [
+            transition('void => *', [
+                style({ opacity: 0 }),
+                animate('.2s', style({ opacity: 1 }))
+              ]),
+              transition('* => void', [animate('.2s', style({ opacity: 0 }))])
+        ])
+      ]
 })
 
 export class ModListComponent {
 
     @Input() public btnList: any[] = [];
+    @Input() public isExpanded: boolean = false;
 
     public activeList: string[] = [];
 
