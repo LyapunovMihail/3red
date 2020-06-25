@@ -17,6 +17,14 @@
     }
 }
 
+.g-checkbox {
+    display: flex;
+    align-items: center;
+    div {
+        width: 18px;
+         height: 18px;
+    }
+}
 .g-checkbox:not(first-child) {
     margin-left: 15px;
 }
