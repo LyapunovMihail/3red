@@ -1,108 +1,46 @@
 <section class="stage" id="stage">
     <div class="stage__container">
-        <div class="stage__slider">
-            <div class="stage__wrap">
-                <h2 class="stage__title">Этапы реализации проекта</h2>
-                <button class="stage__btn"><img src="assets/img/about/arrow-for-blue.svg" alt="arrow" class="stage__img"></button>
-            </div>
-            <p class="stage__text">Каждый наш объект реализован по индивидуальному проекту, разработанному
-                с учетом максимальных
-                возможностей площадок. Девелопмент в 3-RED — это творческая работа, основанная
-                на тщательном анализе, подробных исследованиях и расчетах. Результат такой
-                работы экономических, эстетических, функциональных характеристик</p>
-        </div>
 
-
-        <div class="stage__slider-items">
+        <div class="stage__slider-items" *ngIf="showSlider">
             <div class="stage__slider-helper">
                 <div class="stage__slider-wrapper">
 
-                    <div class="stage__slider-num">1/10</div>
+                    <div class="stage__slider-num">{{activeSlide + 1}}/10</div>
                     <div class="stage__slider-dots">
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
-                        <div class="stage__slider-dot"></div>
+                        <div class="stage__slider-dot" [class.stage__slider-dot--active]="activeSlide === i" *ngFor="let slide of slides; let i = index"></div>
                     </div>
                 </div>
 
                 <div class="stage__slider-arrows">
-                    <button class="slider__button-left"><img src="assets/img/about/slider/left.svg" alt="arrow" class="stage__slider-left"></button><button class="slider__button-right"><img src="assets/img/about/slider/right.svg" alt="arrow" class="stage__slider-right"></button>
+                    <button class="slider__button-left" (click)="prevSlide()"><img src="assets/img/about/slider/left.svg" alt="arrow" class="stage__slider-left" ></button>
+                    <button class="slider__button-right" (click)="nextSlide()"><img src="assets/img/about/slider/right.svg" alt="arrow" class="stage__slider-right"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage__slider_overflow-hidden" (scroll)="scroll($event)">
+
+            <div class="stage__slider" [class.show]="!showSlider">
+                <div class="stage__wrap">
+                    <h2 class="stage__title">Этапы реализации проекта</h2>
+                    <button class="stage__btn"><img src="assets/img/about/arrow-for-blue.svg" alt="arrow" class="stage__img" (click)="showSlider = true"></button>
+                </div>
+                <p class="stage__text">Каждый наш объект реализован по индивидуальному проекту, разработанному
+                    с учетом максимальных
+                    возможностей площадок. Девелопмент в 3-RED — это творческая работа, основанная
+                    на тщательном анализе, подробных исследованиях и расчетах. Результат такой
+                    работы экономических, эстетических, функциональных характеристик</p>
+            </div>
+
+            <div class="stage__slider-switch" [class.show]="showSlider">
+                <div class="stage__slider-wrap" [ngStyle]="{ 'transform' : ('translateX(-' + ( activeSlide * ( slideWidth ) ) + 'px)') }">
+                    <div class="stage__slider-container" [class.show]="activeSlide === i && slideWidth === 704" *ngFor="let slide of slides; let i = index">
+                        <h2 class="stage__title">{{slide.text}}</h2>
+                        <img [src]="slide.image" class="stage__slider-img{{i + 1}}" *ngIf="slide.image">
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="stage__slider-wrap">
-
-            <div class="stage__slider-container">
-
-
-
-                <h2 class="stage__title">Маркетинговые исследования</h2>
-                <img src="assets/img/about/slider/ribbon.png" alt="ribbon" class="stage__slider-img1">
-            </div>
-
-
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Расчет экономики проектов
-                    и построение финансовых моделей</h2>
-
-            </div>
-
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Подбор и оформление земельных участков</h2>
-
-            </div>
-
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Привлечение финансирования</h2>
-                <img src="assets/img/about/slider/triangle.png" alt="ribbon" class="stage__slider-img4">
-            </div>
-
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Формирование архитектурной
-                    концепции</h2>
-                <img src="assets/img/about/slider/hook.png" alt="hook" class="stage__slider-img5">
-            </div>
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Разработка градостроительной
-                    доументации</h2>
-
-            </div>
-
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Проектно изыскательские работы</h2>
-                <img src="assets/img/about/slider/comment.png" alt="hook" class="stage__slider-img7">
-            </div>
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Огранизация строительства, строительный контроль</h2>
-                <img src="assets/img/about/slider/eye.png" alt="eye" class="stage__slider-img8">
-            </div>
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Ввод в эксплуатацию и передача готового объекта</h2>
-                <img src="assets/img/about/slider/key.png" alt="key" class="stage__slider-img9">
-            </div>
-
-            <div class="stage__slider-container">
-
-                <h2 class="stage__title">Ввод в эксплуатацию и передача готового объекта</h2>
-                <img src="assets/img/about/slider/cog.png" alt="cog" class="stage__slider-img10">
-            </div>
         </div>
     </div>
 
