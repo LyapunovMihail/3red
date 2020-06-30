@@ -1,16 +1,8 @@
-<section class="object-flat" [class.object-item--margin]="switchOn || isAuthorizated">
-
-    <div class="object-item__container" *ngIf="isAuthorizated" [class.object-flat__container]="switchOn">
-        <div class="project__wrap">
-            <input type="checkbox" name="switch" id="chooseHouse-switch" class="switch" (change)="switchBlock($event)" [checked]="switchOn">
-            <label *ngIf="isAuthorizated" for="chooseHouse-switch" class="object-item__title">Выберите дом</label>
-        </div>
-        <p *ngIf="switchOn && isAuthorizated" class='object-flat__text'>Данный блок не настраивается и не заполняется с помощью админки</p>
-    </div>
+<section class="object-flat" [class.object-item--margin]="switchOn">
 
     <ng-container *ngIf="switchOn">
 
-        <h2 class="object-flat__title" *ngIf="!isAuthorizated">Выберите дом</h2>
+        <h2 class="object-flat__title">Выберите дом</h2>
 
         <nav class="object-flat__nav">
             <ul class="object-flat__nav-list">

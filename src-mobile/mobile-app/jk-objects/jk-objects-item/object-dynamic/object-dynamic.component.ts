@@ -28,9 +28,6 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     public contentSnippet: IObjectDynamicSnippet;
     public tabSnippet: IObjectTabsSnippet;
 
-    public closeTabsModal = true;
-    public closeContentModal = true;
-
     public uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
     constructor(

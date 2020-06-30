@@ -7,7 +7,7 @@
     <div class="object-dynamic__container">
 
         <h2 class="object-dynamic__title" *ngIf="jk">Фотоотчет ЖК {{jk.name}}</h2>
-        <button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
+        <!--<button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>-->
 
         <nav class="object-dynamic__nav">
             <ul class="object-dynamic__nav-list">
@@ -36,8 +36,8 @@
 
                 <div class="object-dynamic__content-gallery">
 
-                    <button *ngIf="isAuthorizated" class="btn__admin-content btn_var-2"
-                        (click)="closeContentModal = false">Контент</button>
+                    <!--<button class="btn__admin-content btn_var-2"-->
+                        <!--(click)="closeContentModal = false">Контент</button>-->
 
                     <!-- Раздел с изображениями динамики -->
                     <app-object-dynamic-gallery
