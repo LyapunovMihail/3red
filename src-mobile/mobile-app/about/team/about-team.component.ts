@@ -21,6 +21,7 @@ export class AboutTeamComponent implements OnInit {
     public currentTeam: ITeamSnippet;
     public currentTab: string;
     public teams: any;
+    public activeSlide = 0;
 
     public uploadsPath = `/${ABOUT_TEAM_UPLOADS_PATH}`;
 
@@ -62,5 +63,13 @@ export class AboutTeamComponent implements OnInit {
         this.tabSnippet.team.forEach((item) => {
            this.teams[item.name] = { unlimit: false, team: this.contentSnippets.find((team) => team.tab === item.name ) };
         });
+    }
+
+    public nextSlide() {
+        this.activeSlide = this.activeSlide === 9 ? 0 : this.activeSlide + 1;
+    }
+
+    public prevSlide() {
+        this.activeSlide = this.activeSlide === 0 ? 0 : this.activeSlide - 1;
     }
 }

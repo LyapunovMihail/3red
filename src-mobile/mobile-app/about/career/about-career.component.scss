@@ -1,105 +1,18 @@
 @import "../../../styles/modules/mixins/mixin";
 
+.career--padding {
+    padding-top: 96px;
+}
 .career__container {
     margin:  auto;
-    width: 1280px;
-    box-sizing: border-box;
-
-    &--margin {
-        padding: 96px 88px 0;
-    }
+    //padding: 0 32px 96px;
+    max-width: 704px;
 }
-
-.career__head {
-    margin: 0 0 16px;
-}
-
-.btn {
-
-    padding: 10px 16px ;
-    background: #ee4237;
-    color: #fff;
-    font-size: 18px;
-    outline: none;
-    font-family: inherit;
-    border:none;
-    display: inline-block;
-    cursor: pointer;
-    &:hover {
-        background: #ee534a
-    }
-    &::before {
-        content:url(/assets/img/jk-object/content_icon.svg);
-        margin-right:5px ;
-    }
-}
-
-.btn--settings {
-    background: #454545;
-    &:hover {
-        background: rgba(0, 0, 0, 0.7);
-    }
-    &::before {
-        content:url(/assets/img/jk-object/settings.svg);
-        margin-right:5px ;
-    }
-}
-.switch {
-    display: none;
-}
-.career__label {
-    display: block;
-    font: 36px/43px $font-proba;
-    color: $col-black;
-    position: relative;
-    padding-left: 40px;
-    transform: translateX(-40px);
-}
-.career__label::after {
-    content: '';
-    width: 32px;
-    height: 20px;
-    background: #787878 ;
-    position: absolute;
-    border-radius: 20px;
-    top: 7px;
-    left: 0;
-    z-index: 1;
-
-}
-.career__label::before {
-    content: '';
-    width: 16px;
-    height: 16px;
-    background: #fff ;
-    position: absolute;
-    border-radius: 50%;
-    top: 9px;
-    left: 3px;
-    z-index: 2;
-    cursor: pointer;
-    transition: .3s;
-}
-.switch {
-    display: none;
-
-    &:checked + .career__label {
-        &::before { left: 13px; }
-        &::after { background: #ee4237; }
-    }
-}
-
-
 .career__title {
     font-size: 36px;
     margin-bottom: 32px;
     line-height: 1.25;
 }
-
-.career__options {
-    margin: 0 0 16px;
-}
-
 .career__wrap {
     display: grid;
     grid-template-columns: 352px 352px;
@@ -114,15 +27,29 @@
     font-size: 18px;
     line-height: 1.25;
     margin-top: 8px;
-    position: relative;
-    &::after {
-        content: '';
-        width: 0%;
-        height: 1px;
-        position: absolute;
-        top: 100%; left: 0;
-        background-color: $col-red;
-        transition: width .3s ease;
+}
+
+@media(max-width: 760px) {
+    .career--padding {
+        padding-top: 64px;
     }
-    &:hover::after { width: 100%; }
+    .career__container {
+        //padding: 44px 20px 64px;
+        min-width: 320px;
+    }
+    .career__title {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+    .career__wrap {
+        grid-template-columns: 280px ;
+    }
+    .career__prof {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .career__link {
+        font-size: 16px;
+        line-height: 22px;
+    }
 }

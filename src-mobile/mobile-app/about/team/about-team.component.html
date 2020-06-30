@@ -1,28 +1,28 @@
-<section class="team__container" [class.team__container--margin]="switchOn">
+<section class="team" [class.team--padding]="switchOn">
 
         <ng-container *ngIf="switchOn && teams">
 
-            <h2 class="team__title">Команда</h2>
-
-            <div class="team__divisions" *ngFor="let tab of tabSnippet.team; let i = index">
+            <h3 class="team__title">Команда</h3>
+            <div class="team__item" *ngFor="let tab of tabSnippet.team; let i = index">
                 <ng-container *ngIf="tab.show">
-                    <div class="team__item">
-                        <div class="team__wrapper">
-                            <h4 class="team__item-title">{{tab.name}}</h4>
-                            <button class="team__btn" [class.team__btn--active]="teams[tab.name].unlimit" (click)="teams[tab.name].unlimit = !teams[tab.name].unlimit" *ngIf="teams[tab.name].team?.data.length > 4">Все сотрудники</button>
-                        </div>
-                        <div class="team__wrap" *ngIf="teams[tab.name].team" [ngStyle]="{'height': (teams[tab.name].unlimit ? getHeight.clientHeight + 'px' : '')}">
-                            <div class="team__wrap--height" #getHeight>
-                                <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
-                                    <div class="team__list">
-                                        <div class="team__list-item">
-                                            <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
-                                            <div class="team__list-name">{{employee.fio}}</div>
-                                            <div class="team__list-prof">{{employee.position}}</div>
-                                        </div>
+                    <div class="team__wrapper">
+                        <h4 class="team__item-title">{{tab.name}}</h4>
+                        <img class="team__item-arrow" src="assets/img/about/arrow-team.svg" alt="arrow">
+                    </div>
+
+                    <div class="team__wrap-overflow">
+                        <div class="team__wrap team__wrap--building">
+
+                            <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
+                                <div class="team__list">
+                                    <div class="team__list-item">
+                                        <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
+                                        <div class="team__list-name">{{employee.fio}}</div>
+                                        <div class="team__list-prof">{{employee.position}}</div>
                                     </div>
-                                </ng-container>
-                            </div>
+                                </div>
+                            </ng-container>
+
                         </div>
                     </div>
                 </ng-container>
