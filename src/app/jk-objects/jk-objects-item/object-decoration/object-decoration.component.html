@@ -16,12 +16,22 @@
 
             <nav class="object-decoration__nav" *ngIf="contentSnippet?.data?.length && this.currentTab">
                 <ul class="object-decoration__nav-list">
+                    <li class="object-decoration__nav-line" 
+                        [style.left.px]="navActive.offsetLeftActive"
+                        [style.width.px]="navActive.widthActive"></li>
+
                     <ng-container *ngFor="let data of contentSnippet.data">
                         <li class="object-decoration__nav-item" *ngIf="data.tab.show && !data.tab.decorationType"
                             [ngClass]="{'object-decoration__nav-item_active': data.tab.name === currentTab.tab.name}"
-                            (click)="changeTab(data)">{{data.tab.name}}</li>
+                            (click)="changeTab(data); getActiveElement($event)">{{data.tab.name}}</li>
                     </ng-container>
                 </ul>
+                <!-- <nav-menu
+                    [navType]="'decoration'"
+                    [navList]="contentSnippet.data"
+                    [linkType]="'else'"
+                    (routeNavigate)="changeTab($event)"
+                ></nav-menu> -->
             </nav>
 
             <div class="object-decoration__slider">

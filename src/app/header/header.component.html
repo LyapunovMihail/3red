@@ -2,6 +2,8 @@
         [ngClass]="{
             'header-fixed' : isFixed,
             'header-fixed--hide' : isHidden}">
+
+    <div class="header-loader" *ngIf="preloader"></div>
     
     <div class="header__container">
         <nav class="nav">

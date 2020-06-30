@@ -5,6 +5,21 @@
     position: relative;
     // z-index: 10;
 }
+.modlist-show,
+.modlist-hide {
+    position: relative;
+    z-index: 12;
+}
+.modlist-show { animation: showpopup .4s ease forwards; }
+.modlist-hide { animation: hidepopup .4s ease forwards; }
+@keyframes showpopup {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes hidepopup {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
 
 .search {
     width: 100%;
@@ -197,24 +212,12 @@
         &_floor { width: 98px; }
         &_corpus {
             width: 71px + 12px + 28px;
-            position: relative;
             display: flex;
             align-items: center;
             padding-right: 38px;
             box-sizing: border-box;
             overflow: hidden;
-            &:before {
-                content: '';
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                position: absolute;
-                right: 0;
-                top: auto;
-                background: url(/assets/img/flats/search/arrow_select_list.svg) 45% no-repeat rgba($color: $col-border, $alpha: .31);
-                background-size: 8px 10px;
-                transform: rotate(-90deg);
-            }
+            &::after { right: 0; }
 
             &-for-schema { width: 112px + 12px + 28px;  }
         }
@@ -229,18 +232,16 @@
         position: relative;
         &:before {
             content: '';
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+            width: 14px;
+            height: 100%;
             position: absolute;
-            right: -9px;
-            top: 9px;
-            background: url(/assets/img/arrow_select_list_red.svg) 45% no-repeat;
-            background-size: 8px 13px;
-            transform: rotate(-90deg);
+            top: 0; right: 0;
+            background: url(/assets/img/about/product/arrow-down.svg) left 50% no-repeat;
+            transition: top .2s linear;
         }
-
-        &_open::before { transform: rotate(90deg); }
+        &:hover::before { top: 3px; }
+        &_open:hover::before { top: -3px; }
+        &_open::before {  transform: rotate(180deg);}
     }
     &__reset-filter {
         font: $font-18;

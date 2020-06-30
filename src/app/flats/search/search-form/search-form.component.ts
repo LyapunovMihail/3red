@@ -18,6 +18,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public form: FormGroup;
     public moreFilter = false;
     public showCorpus = false;
+    public hideCorpus = false;
     public sort: string;
     public decorList = FormConfig.decorationList;
 
@@ -134,5 +135,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.formEvents.unsubscribe();
         this.routerEvents.unsubscribe();
+    }
+
+    public switchPopup() {
+        this.hideCorpus = true;
+        setTimeout(() => {
+            this.showCorpus = false;
+            this.hideCorpus = false;
+        }, 400);
     }
 }

@@ -1,21 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="58px" viewBox="0 0 58 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>минииконка_школа</title>
+    <desc>Created with Sketch.</desc>
     <defs>
-        <filter id="a" width="253.1%" height="253.1%" x="-76.6%" y="-76.6%" filterUnits="objectBoundingBox">
-            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
-            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        <filter x="-76.6%" y="-76.6%" width="253.1%" height="253.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
             <feMerge>
-                <feMergeNode in="shadowMatrixOuter1"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
             </feMerge>
         </filter>
     </defs>
-    <g fill="none" fill-rule="evenodd" filter="url(#a)">
-        <circle cx="16" cy="16" r="17.5" fill="#5C4FCD" stroke="#FFF" stroke-width="3"/>
-        <g fill="#FFF">
-            <path d="M12 14.932l4 1.5 4-1.5v4.287a1 1 0 0 1-.757.97l-2.758.69a2 2 0 0 1-.97 0l-2.758-.69a1 1 0 0 1-.757-.97v-4.287z"/>
-            <path d="M8 12.932l8-3 8 3-8 3z"/>
-            <path d="M22 12.932h1v4h-1z"/>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3red_UI" transform="translate(-107.000000, -6360.000000)">
+            <g id="Инфраструктура/иконки/школа" transform="translate(120.000000, 6372.000000)">
+                <g id="Group-5-Copy-8" filter="url(#filter-1)">
+                    <circle id="Oval" stroke="#FFFFFF" stroke-width="3" fill="#5C4FCD" cx="16" cy="16" r="17.5"></circle>
+                    <g id="Group" transform="translate(8.000000, 10.000000)" fill="#FFFFFF">
+                        <path d="M4,4.93199953 L8,6.43199953 L12,4.93199953 L12,9.21922359 C12,9.67809124 11.6877026,10.0780743 11.2425356,10.1893661 L8.48507125,10.8787322 C8.16659125,10.9583522 7.83340875,10.9583522 7.51492875,10.8787322 L4.75746437,10.1893661 C4.31229737,10.0780743 4,9.67809124 4,9.21922359 L4,4.93199953 L4,4.93199953 Z" id="Rectangle"></path>
+                        <polygon id="Rectangle" points="-3.01980663e-14 2.93199953 8 -0.0680004682 16 2.93199953 8 5.93199953"></polygon>
+                        <rect id="Rectangle" x="14" y="2.93199953" width="1" height="4"></rect>
+                    </g>
+                </g>
+            </g>
         </g>
     </g>
 </svg>

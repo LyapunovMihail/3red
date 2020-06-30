@@ -102,13 +102,15 @@
                     <div class="search-form__wrap-item search-form__wrap-item_corpus">
                         <p class="search-form__subtitle">Номер дома</p>
         
-                        <div class="search-form__range search-form__range_corpus" (click)="showCorpus = true">
+                        <div class="search-form__range search-form__range_corpus g-tooltip-area" (click)="showCorpus = true" [class.active]="showCorpus">
                             <p class="search-form__text">
                                 {{ form.controls['housesMods'].value | mySearchFormPipe:housesBtnList }}
                             </p>
                         </div>
-                        <div class="close-area" *ngIf="showCorpus" (click)="showCorpus = false"></div>
+                        <div class="close-area" *ngIf="showCorpus" (click)="switchPopup()"></div>
                         <app-search-checkbox-list *ngIf="showCorpus"
+                            [class.modlist-show]="showCorpus"
+                            [class.modlist-hide]="hideCorpus"
                             [btnList]="housesBtnList"
                             [formControl]="form.controls['housesMods']">
                         </app-search-checkbox-list>

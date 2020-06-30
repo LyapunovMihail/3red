@@ -1,6 +1,6 @@
 import { WindowEventsService } from '../commons/window-events.observer.service';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input } from '@angular/core';
+import { NavigationEnd, Router, NavigationStart } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HeaderService } from './header.service';
@@ -32,6 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
+   public preloader = false;
+
     @ViewChild('header')
     public header: ElementRef;
 
@@ -54,7 +56,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.router.events
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
+                if (event instanceof NavigationStart) { this.preloader = true; }
                 if (event instanceof NavigationEnd) {
+                    setTimeout( () => this.preloader = false, 2000);
                     this.pageName = this.router.url.split('/')[1];
                     if (this.pageName === 'about' || (this.pageName === 'objects' && this.router.url.split('/')[3]
                         && !this.router.url.split('/')[4])) { // если страница о компании или конкретного объекта, устанавливаем массив якорей для панели навигации

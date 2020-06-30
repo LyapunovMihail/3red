@@ -28,6 +28,12 @@ export class SharesListComponent implements OnInit, OnDestroy {
     public isCreateRedactForm: boolean = false;
     public isDeleteForm: boolean = false;
 
+    public navList = [
+        { name: 'Все', link: '/news-shares/all' },
+        { name: 'Новости', link: '/news-shares/news' },
+        { name: 'Акции', link: '/news-shares/shares' }
+    ];
+
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,

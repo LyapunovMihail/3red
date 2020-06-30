@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { slider } from './mockSlider';
 import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 import {
@@ -22,7 +22,7 @@ import { Uploader } from 'angular2-http-file-upload/uploader/uploader';
     ]
 })
 
-export class ObjectDecorationComponent implements OnInit, OnChanges {
+export class ObjectDecorationComponent implements OnInit, OnChanges, AfterViewInit {
 
     @Input()
     public isAuthorizated = false;
@@ -45,13 +45,23 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
 
     public uploadsPath = `/${OBJECTS_DECORATION_UPLOADS_PATH}`;
 
+    public navList;
+    public navActive = {
+        widthActive: 0,
+        offsetLeftActive: 0
+    };
+
     constructor(
+        public elRef: ElementRef,
         private decorationService: ObjectDecorationAdminService,
         public ref: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
         this.getTypesThanContent();
+    }
+    ngAfterViewInit() {
+        setTimeout( () => this.defaultElem(), 2000);
     }
 
 
@@ -98,6 +108,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
             this.currentTab = this.contentSnippet.data.find((item) => item.tab.show && ('turnOnDecorationTypes' in item.tab));
             if (this.typesSnippet && this.typesSnippet.decorationType && this.typesSnippet.decorationType.length && this.currentTab) {
                 this.changeTab(this.currentTab);
+                // this.buildTabForNav(this.contentSnippet);
             }
         }
     }
@@ -112,6 +123,20 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
             this.currentType = null;
         }
         this.currentSlide = 0;
+    }
+    public buildTabForNav(list) {
+        let result = [];
+        list.data.forEach( (item, i) => {
+            result.push({
+                name: item.tab.name,
+                show: item.tab.show,
+                decorationType: item.tab.decorationType
+            });
+        });
+        // this.navList = result.filter( (item, i) => result.indexOf(item.name.trim()) === i);
+        this.navList = result.filter((thing, index, self) =>
+            index === self.findIndex((t) => ( t.name === thing.name ))
+        );
     }
 
     public checkTabImages(type) {
@@ -144,5 +169,23 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
             () => console.log('success'),
             (err) => console.error(err)
         );
+    }
+
+
+    public getActiveElement(event) {
+        const elem = event.target;
+
+        this.navActive.widthActive = elem.offsetWidth;
+        this.navActive.offsetLeftActive = elem.offsetLeft;
+    }
+    public defaultElem() {
+        if (this.elRef.nativeElement.querySelector('.object-decoration__nav-item_active')) {
+            const el = this.elRef.nativeElement.querySelector('.object-decoration__nav-item_active');
+            this.navActive.widthActive = el.offsetWidth;
+            this.navActive.offsetLeftActive = el.offsetLeft;
+            this.ref.detectChanges();
+        } else {
+            setTimeout(() => this.defaultElem(), 2000);
+        }
     }
 }

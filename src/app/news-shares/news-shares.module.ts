@@ -8,6 +8,7 @@ import { NewsModule } from './news/news.module';
 import { SharesModule } from './shares/shares.module';
 import { SharesEditFormsModule } from './shares/shares-edit/shares-edit-forms.module';
 import { NewsSharesAllItemsComponent } from './all/news-shares-all-items/news-shares-all-items.component';
+import { NavMenuModule } from '../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -28,6 +29,7 @@ import { NewsSharesAllItemsComponent } from './all/news-shares-all-items/news-sh
         CommonModule,
         CreateRedactFormsModule,
         SharesEditFormsModule,
+        NavMenuModule,
         RouterModule.forChild([
             { path: 'news-shares', component: NewsSharesComponent
                 , children : [

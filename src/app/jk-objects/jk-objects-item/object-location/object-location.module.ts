@@ -11,6 +11,7 @@ import { ObjectLocationAdminComponent } from './object-location-content-admin/ob
 import { RoutesAdminComponent } from './object-location-content-admin/routes-admin/routes-admin.component';
 import { InfrastructureAdminComponent } from './object-location-content-admin/infrastructure-admin/infrastructure-admin.component';
 import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
+import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -38,7 +39,8 @@ import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
         ReactiveFormsModule,
         FormsModule,
         AdminModalModule,
-        SlideTopLabelModule
+        SlideTopLabelModule,
+        NavMenuModule
     ]
 })
 export class ObjectLocationModule {

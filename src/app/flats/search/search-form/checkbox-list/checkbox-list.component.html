@@ -3,7 +3,7 @@
 
         <span class="search-form__list-item-title" *ngIf="btn.jk">{{btn.jk}}</span>
 
-        <label class="g-checkbox" *ngIf="!btn.jk">
+        <label class="g-checkbox g-checkbox--flats" *ngIf="!btn.jk">
             <input [id]="btn.value"
                 (change)="checkBtn($event.target.checked, btn)"
                 [value]="btn.value"

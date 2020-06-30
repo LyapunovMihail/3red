@@ -9,6 +9,7 @@ import { NewsComponent } from './news.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 
 const NewsComponents = [
     NewsComponent,
@@ -32,6 +33,7 @@ const NewsComponents = [
     imports: [
         CommonModule,
         CreateRedactFormsModule,
+        NavMenuModule,
         RouterModule.forChild([
             { path: '', component: NewsComponent
                 , children : [

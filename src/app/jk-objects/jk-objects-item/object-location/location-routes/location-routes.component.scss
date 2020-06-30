@@ -120,11 +120,15 @@
                 background: url('/assets/img/location/routes/aside/caret-down.svg') center no-repeat;
                 width: 18px;
                 height: 10px;
-            }
+                transition: top .2s linear;
 
+            }
+            &:hover::after { top: 3px; }
             &--open {
+                &:hover::after { top: -3px; }
                 &:after {
-                    background: url('/assets/img/location/routes/aside/caret-up.svg') center no-repeat;
+                     transform: rotate(180deg); 
+                    // background: url('/assets/img/location/routes/aside/caret-up.svg') center no-repeat;
                 }
             }
 

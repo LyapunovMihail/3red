@@ -10,6 +10,7 @@ import { ObjectCreditAdminComponent } from './credit-admin/object-credit-admin.c
 import { AdminModalModule } from '../../../admin-modal/admin-modal.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label.module';
+import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -31,7 +32,8 @@ import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label
         GHMRangetNumberModule,
         AdminModalModule,
         ReactiveFormsModule,
-        SlideTopLabelModule
+        SlideTopLabelModule,
+        NavMenuModule,
     ],
     providers: [
         ObjectInstallmentService

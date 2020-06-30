@@ -62,6 +62,7 @@ export class SearchOutputComponent implements OnInit {
     public scrollToTop() {
         if (!this.platform.isBrowser) { return; }
 
-        window.scrollTo(0, this.container.nativeElement.offsetTop);
+        window.scrollTo(0, 0);
+        // window.scrollTo(0, this.container.nativeElement.offsetTop);
     }
  }

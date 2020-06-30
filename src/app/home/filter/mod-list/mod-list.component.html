@@ -1,4 +1,4 @@
-<ul class="search-form__list">
+<ul class="search-form__list" [@expandedPanel] *ngIf="isExpanded">
     <li *ngFor="let btn of btnList" class="search-form__list-item">
         <!--<input [id]="btn.value"-->
             <!--(change)="checkBtn($event)"-->
@@ -8,7 +8,7 @@
         <!--<label [for]="btn.value" class="g-checkbox search-form__list-checkbox"></label>-->
         <!--<label [for]="btn.value" class="search-form__list-text">{{btn.name}}</label>-->
 
-        <label class="g-checkbox">
+        <label class="g-checkbox g-checkbox--flats">
             <input [id]="btn.value"
                    (change)="checkBtn($event)"
                    [value]="btn.value"

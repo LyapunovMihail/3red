@@ -96,20 +96,15 @@
     }
 
     &__main {
-        width: 56px;
-        height: 56px;
-
-        &:after {
-            content: '';
-            width: 56px;
-            height: 56px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            border-radius: 50%;
-            background: url(/assets/img/location/main_marker.svg) center no-repeat $col-orange;
-            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
-            
+        width: 64px;
+        height: 64px;
+        border: 3px solid $col-white;
+        box-sizing: border-box;
+        border-radius: 50%;
+        &> img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 

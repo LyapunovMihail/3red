@@ -37,18 +37,21 @@
     
             <div class="object-filter__wrap-item object-filter__wrap-item_mod">
                 <p class="object-filter__subtitle">Жилой комплекс</p>
-    
-                <div class="object-filter__range object-filter__range_mod g-tooltip-area" (click)="showMods = true" [class.active]="showMods">
-                    <p class="object-filter__text">
-                        {{ form.controls['mod'].value | mySearchFormPipe:modsBtnList }}
-                    </p>
+                <div  #myDiv>
+                    <div class="object-filter__range object-filter__range_mod g-tooltip-area" (click)="isExpanded = !isExpanded; onClick($event);" [class.active]="isExpanded">
+                        <p class="object-filter__text">
+                            {{ form.controls['mod'].value | mySearchFormPipe:modsBtnList }}
+                        </p>
+                    </div>
+        
+                    <!-- <div class="close-area" *ngIf="showMods" (click)="switchPopup()"></div> -->
+                    <app-filter-mod-list [isExpanded] = 'isExpanded'
+                        [class.modlist-show]="showMods"
+                        [class.modlist-hide]="hideMods"
+                        formControlName="mod"
+                        [btnList]="modsBtnList">
+                    </app-filter-mod-list>
                 </div>
-    
-                <div class="close-area" *ngIf="showMods" (click)="showMods = false"></div>
-                <app-filter-mod-list  *ngIf="showMods"
-                    formControlName="mod"
-                    [btnList]="modsBtnList">
-                </app-filter-mod-list>
             </div>
         </div>
 

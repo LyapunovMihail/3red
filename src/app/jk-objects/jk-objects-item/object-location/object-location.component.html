@@ -22,13 +22,12 @@
                         [ngClass]="{'object-location__nav-item_active': tab === openTab}"
                         (click)="openTab = tab">{{tab}}</li>
                 </ul>
-                <ul class="object-location__nav-list" *ngIf="isTabSet">
-                    <ng-container *ngFor="let tab of tabSnippet.location">
-                        <li class="object-location__nav-item" *ngIf="tab.show"
-                            [ngClass]="{'object-location__nav-item_active': tab.name === openTab}"
-                            (click)="openTab = tab.name">{{tab.name}}</li>
-                    </ng-container>
-                </ul>
+
+                <nav-menu *ngIf="isTabSet"
+                    [navList]="tabSnippet.location"
+                    [linkType]="'else'"
+                    (routeNavigate)="openTab = $event"
+                ></nav-menu>
 
                 <div class="object-location__address">
                     <p class="object-location__address-title">ЖК распологается по адресу</p>

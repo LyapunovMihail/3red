@@ -188,18 +188,16 @@
         position: relative;
         &:before {
             content: '';
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+            width: 14px;
+            height: 100%;
             position: absolute;
-            right: -9px;
-            top: 9px;
-            background: url(/assets/img/arrow_select_list_red.svg) 45% no-repeat;
-            background-size: 8px 13px;
-            transform: rotate(-90deg);
+            top: 0; right: 0;
+            background: url(/assets/img/about/product/arrow-down.svg) left 50% no-repeat;
+            transition: top .2s linear;
         }
-
-        &_open::before { transform: rotate(90deg); }
+        &:hover::before { top: 3px; }
+        &_open:hover::before { top: -3px; }
+        &_open::before {  transform: rotate(180deg);}
     }
     &__reset-filter {
         font: $font-18;

@@ -30,6 +30,12 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
     public isCreateRedactForm = false;
     public isDeleteForm = false;
 
+    public navList = [
+        { name: 'Все', link: '/news-shares/all' },
+        { name: 'Новости', link: '/news-shares/news' },
+        { name: 'Акции', link: '/news-shares/shares' }
+    ];
+
     constructor(
         private authorization: AuthorizationObserverService,
         public windowScrollLocker: WindowScrollLocker,

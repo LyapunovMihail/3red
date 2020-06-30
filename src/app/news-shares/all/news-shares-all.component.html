@@ -6,11 +6,9 @@
         <button class="btn-admin-2 btn-admin-2--settings" (click)="createSharesSnippet()" *ngIf="isAuthorizated">Добавить акцию</button>
 
         <nav class="news__nav">
-            <ul class="news__nav-list">
-                <li routerLink="/news-shares/all" [routerLinkActive]="['active']" class="news__nav-item">Все</li>
-                <li routerLink="/news-shares/news" [routerLinkActive]="['active']" class="news__nav-item">Новости</li>
-                <li routerLink="/news-shares/shares" [routerLinkActive]="['active']" class="news__nav-item">Акции</li>
-            </ul>
+            <nav-menu
+                [navList]="navList"
+            ></nav-menu>
         </nav>
 
         <app-news-shares-all-items
