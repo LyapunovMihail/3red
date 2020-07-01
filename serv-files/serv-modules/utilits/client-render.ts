@@ -20,12 +20,12 @@ export function clientRender(req: Request, res: Response, status: number, sessio
             );
         } else {
             res.status(status).sendFile(
-              join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'index.html'), {
+                join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'index.html'), {
                   req,
                   res,
                   async: true,
                   preboot: true,
-              },
+                },
             );
         }
     } else {

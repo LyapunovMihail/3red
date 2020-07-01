@@ -31,7 +31,7 @@ export class ObjectsCreditController extends ObjectsCreditModel {
         }));
 
         const multipartMiddleware = multipart();
-        this.router.post('/admin/jk-object/credit/image/', multipartMiddleware, responseHandler(async(req: IFileRequest) => {
+        this.router.post('/admin/jk-object/credit/image/', multipartMiddleware, responseHandler(async (req: IFileRequest) => {
             return await this.uploadImage(req);
         }));
 

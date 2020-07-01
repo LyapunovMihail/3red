@@ -25,31 +25,51 @@ export class ObjectTriggerComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.flatsService.getFlats({ mod: this.mod, type: 'КВ,АП' })
+        this.flatsService.getFlats({ mod: this.mod})
             .subscribe((flats) => {
                 this.buildTriggersData(flats);
             });
+
+        // this.flatsService.getFlats({ mod: this.mod, type: 'КЛ,ММ' })
+        //     .subscribe((flats) => {
+        //         this.buildTriggersData(flats);
+        //     });
     }
 
     private buildTriggersData(flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
         if (flats.length) {
             for (let i = 0; i < 4; i++) {
-                const filteredFlats = flats.filter((flat) => Number(flat.rooms) === i);
+                const filteredFlats = flats.filter((flat) => Number(flat.rooms) === i && (flat.type === 'КВ' || flat.type === 'АП'));
                 if (filteredFlats.length) {
-                    this.triggerSnippets[i] = {rooms: i, space: '', price: 0};
-                    this.triggerSnippets[i].price = Math.min.apply(Math, filteredFlats.map((flat) => flat.price));
-                    this.triggerSnippets[i].price = Number((this.triggerSnippets[i].price / 1000000).toFixed(2));
-
-                    let spaceMin = Math.min.apply(Math, filteredFlats.map((flat) => flat.space));
-                    spaceMin =  Math.round(spaceMin);
-
-                    let spaceMax = Math.max.apply(Math, filteredFlats.map((flat) => flat.space));
-                    spaceMax =  Math.round(spaceMax);
-
-                    this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
+                    this.setParams(filteredFlats, i, 'КВ');
                 }
             }
+
+            let filteredFlats = flats.filter((flat) => flat.type === 'КЛ');
+            if (filteredFlats.length) {
+                this.setParams(filteredFlats, 5, 'КЛ');
+            }
+
+            filteredFlats = flats.filter((flat) => flat.type === 'КЛ');
+            if (filteredFlats.length) {
+                this.setParams(filteredFlats, 6, 'ММ');
+            }
         }
+    }
+
+    private setParams(filteredFlats, i, type) {
+        this.triggerSnippets[i] = {rooms: i, space: '', price: 0, type};
+
+        this.triggerSnippets[i].price = Math.min.apply(Math, filteredFlats.map((flat) => flat.price));
+        this.triggerSnippets[i].price = Number((this.triggerSnippets[i].price / 1000000).toFixed(2));
+
+        let spaceMin = Math.min.apply(Math, filteredFlats.map((flat) => flat.space));
+        spaceMin =  Math.round(spaceMin);
+
+        let spaceMax = Math.max.apply(Math, filteredFlats.map((flat) => flat.space));
+        spaceMax =  Math.round(spaceMax);
+
+        this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
     }
 }

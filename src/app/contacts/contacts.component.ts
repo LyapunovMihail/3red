@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
+import { PlatformDetectService } from '../platform-detect.service';
 
 declare let ymaps: any;
 

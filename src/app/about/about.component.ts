@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { EventsService } from '../commons/events.service';
 import { WindowEventsService } from '../commons/window-events.observer.service';
 import { AuthorizationObserverService } from '../authorization/authorization.observer.service';
-import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
+import { PlatformDetectService } from '../platform-detect.service';
 
 @Component({
     selector: 'app-about',

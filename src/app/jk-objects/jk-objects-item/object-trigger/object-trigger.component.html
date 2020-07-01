@@ -5,8 +5,11 @@
 
         <ng-container *ngFor="let trigger of triggerSnippets">
             <div class="object-trigger__item object-trigger__item_stud" *ngIf="trigger">
-                <a class="object-trigger__item-anchor" [routerLink]="'/objects/list/' + objectId + '/flats/house/all'" [queryParams]="{'rooms' : trigger.rooms}" skipLocationChange></a>
-                <p class="object-trigger__item-text">{{trigger.rooms === 0 ? 'Студии' : trigger.rooms + ' комнатные'}}</p>
+                <a class="object-trigger__item-anchor" *ngIf="trigger.type === 'КВ'" [routerLink]="'/objects/list/' + objectId + '/flats/house/all'" [queryParams]="{'rooms' : trigger.rooms}" skipLocationChange></a>
+                <a class="object-trigger__item-anchor" *ngIf="trigger.type === 'КЛ'" [routerLink]="'/objects/list/' + objectId + '/storerooms'" skipLocationChange></a>
+                <a class="object-trigger__item-anchor" *ngIf="trigger.type === 'ММ'" [routerLink]="'/objects/list/' + objectId + '/parking'" skipLocationChange></a>
+                <p class="object-trigger__item-text" *ngIf="trigger.type === 'КВ'">{{trigger.rooms === 0 ? 'Студии' : trigger.rooms + ' комнатные'}}</p>
+                <p class="object-trigger__item-text" *ngIf="trigger.type === 'КЛ' || trigger.type === 'ММ'">{{trigger.type === 'КЛ' ? 'Кладовые' : 'Машиноместа'}}</p>
                 <p class="object-trigger__item-text object-trigger__item-text_for-space">({{ trigger.space }})</p>
                 <p class="object-trigger__item-text object-trigger__item-text_price">
                     от

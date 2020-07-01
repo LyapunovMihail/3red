@@ -1,17 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="58px" viewBox="0 0 58 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>минииконка_дет сад</title>
+    <desc>Created with Sketch.</desc>
     <defs>
-        <filter id="a" width="253.1%" height="253.1%" x="-76.6%" y="-76.6%" filterUnits="objectBoundingBox">
-            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
-            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        <filter x="-76.6%" y="-76.6%" width="253.1%" height="253.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
             <feMerge>
-                <feMergeNode in="shadowMatrixOuter1"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
             </feMerge>
         </filter>
     </defs>
-    <g fill="none" fill-rule="evenodd" filter="url(#a)">
-        <circle cx="16" cy="16" r="17.5" fill="#FFCB0D" stroke="#FFF" stroke-width="3"/>
-        <path fill="#FFF" fill-rule="nonzero" d="M23.772 18.19c-.295-.238-.738-.238-.984.048 0 0-.492.476-1.377 1-.295-.81-.984-2.571-1.918-3.762.196-.19.59-.476.983-.428.689.095 1.574 1 1.574 1l.837-1.238s-1.033-.905-2.214-1c-1.18-.096-1.77 1-1.77 1-1.624-1.381-4.133-.334-4.33-1.429C13.983 9.952 11.13 10 11.13 10l.05.381s-2.165 1.524-1.722 2.19c.492.81 2.066-.095 2.066-.095s1.033 1.334.393 3.143c-.393 1.143-.984 2.905-1.279 3.667-.934-.524-1.426-1.048-1.426-1.048-.246-.286-.689-.286-.984-.048-.295.239-.295.667-.05.953C8.279 19.238 10.885 22 16 22s7.723-2.714 7.821-2.857c.246-.238.246-.667-.049-.953zM13 20.46c.092-.433.83-3.46 3-3.46 2.308 0 3 3.514 3 3.514-.83.27-1.8.486-2.908.486A11.509 11.509 0 0 1 13 20.46z"/>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3red_UI" transform="translate(-211.000000, -6360.000000)">
+            <g id="Инфраструктура/иконки/дет-сад" transform="translate(224.000000, 6372.000000)">
+                <g id="Group-22-Copy-3" filter="url(#filter-1)">
+                    <g id="Group-5-Copy">
+                        <circle id="Oval" stroke="#FFFFFF" stroke-width="3" fill="#FFCB0D" cx="16" cy="16" r="17.5"></circle>
+                        <g id="Shape-2" transform="translate(8.000000, 10.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <path d="M15.7720748,8.19048183 C15.4769327,7.95238694 15.0342196,7.95238694 14.7882679,8.2381008 C14.7882679,8.2381008 14.2963644,8.71429057 13.4109382,9.23809932 C13.1157961,8.42857671 12.4271312,6.66667456 11.4925146,5.47620013 C11.689276,5.28572422 12.0827988,5.00001035 12.4763216,5.04762933 C13.1649864,5.14286729 14.0504127,6.04762785 14.0504127,6.04762785 L14.8866486,4.80953444 C14.8866486,4.80953444 13.8536513,3.90477388 12.673083,3.80953592 C11.4925146,3.71429797 10.9022305,4.80953444 10.9022305,4.80953444 L10.9022305,4.80953444 L10.9022305,4.80953444 C9.27894902,3.42858411 6.77024132,4.4762016 6.57347994,3.38096513 C5.98319577,-0.047601228 3.13015564,0 3.13015564,0 L3.17934599,0.380969567 C3.17934599,0.380969567 1.01497072,1.90477684 1.45768385,2.57144252 C1.94958732,3.38096513 3.52367842,2.47620456 3.52367842,2.47620456 C3.52367842,2.47620456 4.55667571,3.80953592 3.9172012,5.61905706 C3.52367842,6.76191251 2.93339426,8.52381467 2.63825217,9.2857183 C1.70363558,8.76190955 1.21173211,8.2381008 1.21173211,8.2381008 C0.965780376,7.95238694 0.523067252,7.95238694 0.22792517,8.19048183 C-0.067216912,8.42857671 -0.067216912,8.85714751 0.178734823,9.14286137 C0.277115517,9.23809932 2.88420391,12 8,12 C13.1157961,12 15.7228845,9.2857183 15.8212652,9.14286137 C16.0672169,8.90476648 16.0672169,8.47619569 15.7720748,8.19048183 Z M5,10.4594595 C5.09230769,10.027027 5.83076923,7 8,7 C10.3076923,7 11,10.5135135 11,10.5135135 C10.1692308,10.7837838 9.2,11 8.09230769,11 C6.84615385,10.9459459 5.83076923,10.7297297 5,10.4594595 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
     </g>
 </svg>
