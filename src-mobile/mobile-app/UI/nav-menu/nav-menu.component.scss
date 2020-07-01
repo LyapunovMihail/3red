@@ -1,0 +1,40 @@
+@import '../../../styles/modules/mixins/mixin';
+
+:host { display: block; }
+
+.nav-menu {
+
+    &__list {
+        display: flex;
+        position: relative;
+        font: 18px/23px $font-proba;
+        color: $col-black-5;
+        position: relative;
+        padding: 0 0 5px;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #d8d8d8;
+        }
+
+        &-line {
+            height: 1px;
+            bottom: -1px;
+            position: absolute;
+            background-color: $col-red;
+            transition: left .5s ease, width .5s ease;
+            z-index: 1;
+        }
+
+        &-item {
+            cursor: pointer;
+            &:hover { color: $col-red_hover; }
+            &+ .nav-menu__list-item { margin-left: 16px; }
+            &.active { color: $col-red; }
+            &.default { color: $col-red; }
+        }
+    }
+}

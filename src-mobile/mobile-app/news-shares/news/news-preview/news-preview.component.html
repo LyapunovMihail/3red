@@ -3,16 +3,14 @@
         <h2 class="news__title">Новости</h2>
 
         <nav class="news__nav">
-            <ul class="news__nav-list">
-                <li routerLink="/news-shares/all" [routerLinkActive]="['active']" class="news__nav-item">Все</li>
-                <li routerLink="/news-shares/news" [routerLinkActive]="['active']" class="news__nav-item">Новости</li>
-                <li routerLink="/news-shares/shares" [routerLinkActive]="['active']" class="news__nav-item">Акции</li>
-            </ul>
+            <nav-menu
+                [navList]="navList"
+                [activePointDefault]="1"
+            ></nav-menu>
         </nav>
 
-        <app-news-list class="news__snippets-list"
+        <app-news-list
             [snippetsArray]="snippetsArray">
         </app-news-list>
-
     </div>
 </section>

@@ -23,6 +23,15 @@ $mobileContainer: calc(100% - 40px);
     -o-font-smoothing: antialiased;
 }
 
+@mixin container() {
+    width: $mobileContainer;
+    max-width: $tabletContainer;
+}
+@mixin font-size($fs, $lh) {
+    font-size: $fs;
+    line-height: $lh;
+}
+
 $font-text: $font-proba;
 $font-14: 14px/18px $font-proba;
 $font-18: 18px/23px $font-proba;

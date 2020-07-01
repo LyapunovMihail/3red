@@ -17,6 +17,11 @@ export class SharesListComponent implements OnInit, OnDestroy {
     public allSnippets: Share[];
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
+    public navList = [
+        { name: 'Все', link: '/news-shares/all' },
+        { name: 'Новости', link: '/news-shares/news' },
+        { name: 'Акции', link: '/news-shares/shares' }
+    ];
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,

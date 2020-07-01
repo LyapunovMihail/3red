@@ -40,5 +40,8 @@
             opacity: 0.5;
             pointer-events: none;
         }
+        @media (max-width: 425px) {
+            width: 100%;
+        }
     }
 }

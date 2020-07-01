@@ -22,7 +22,7 @@
     &--hidden { display: none; }
     
     &__container {
-        width: calc(100% - 64px);
+        @include container();
         display: flex;
         justify-content: space-between;
         position: relative;
@@ -81,6 +81,9 @@
     &__copyright {
         font: 18px/23px $font-proba;
         color: $col-black;
+        @media(max-width: 585px) {
+            @include font-size(16px,22px);
+        }
     }
     &__background-link {
         display: block;
@@ -98,6 +101,10 @@
             width: 16px;
             height: 20px;
             background: url(/assets/img/footer/background.svg) center no-repeat;
+        }
+        @media(max-width: 585px) {
+            position: absolute;
+            bottom: 0; right: 0;
         }
     }
 }

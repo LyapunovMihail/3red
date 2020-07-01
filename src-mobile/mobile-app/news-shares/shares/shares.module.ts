@@ -9,6 +9,7 @@ import { SharesComponent } from './shares.component';
 import { NgModule } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
 import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
+import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -23,6 +24,7 @@ const SHARES_COMPONENTS = [
     exports: [...SHARES_COMPONENTS],
     imports: [
         CommonModule,
+        NavMenuModule,
         FormsRequestModule,
         RouterModule.forChild([
             {
