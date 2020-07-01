@@ -36,6 +36,7 @@ import { ObjectFlatsModule } from './jk-objects-item/object-flat/object-flats.mo
 import { ObjectDynamicModule } from './jk-objects-item/object-dynamic/object-dynamic.module';
 import { ObjectDynamicComponent } from './jk-objects-item/object-dynamic/object-dynamic.component';
 import { NavMenuModule } from '../UI/nav-menu/nav-menu.module';
+import { ObjectStorageComponent } from './jk-objects-item/object-storage/object-storage.component';
 
 const jkObjectsComponents = [
     JkObjectsComponent,
@@ -54,7 +55,8 @@ const jkObjectsComponents = [
     ObjectGalleryAdminComponent,
     ObjectDocumentationAdminComponent,
     ObjectDecorationTabsAdminComponent,
-    ObjectDecorationAdminComponent
+    ObjectDecorationAdminComponent,
+    ObjectStorageComponent
 ];
 
 @NgModule({
