@@ -1,0 +1,56 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.career--padding {
+    padding-top: 96px;
+}
+.career__container {
+    margin:  auto;
+    //padding: 0 32px 96px;
+    max-width: 704px;
+}
+.career__title {
+    font-size: 36px;
+    margin-bottom: 32px;
+    line-height: 1.25;
+}
+.career__wrap {
+    display: grid;
+    grid-template-columns: 352px 352px;
+    grid-row-gap: 24px;
+}
+.career__prof {
+    font-size: 24px;
+    line-height: 1.25;
+}
+.career__link {
+    color: #ee4237;
+    font-size: 18px;
+    line-height: 1.25;
+    margin-top: 8px;
+}
+
+@media(max-width: 760px) {
+    .career--padding {
+        padding-top: 64px;
+    }
+    .career__container {
+        //padding: 44px 20px 64px;
+        padding: 0 20px 0;
+        min-width: 320px;
+    }
+    .career__title {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+    .career__wrap {
+        grid-template-columns: 280px ;
+    }
+    .career__prof {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .career__link {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}

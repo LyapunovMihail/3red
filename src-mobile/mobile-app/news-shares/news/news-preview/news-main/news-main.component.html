@@ -1,0 +1,15 @@
+<ng-container *ngFor="let snippet of snippetsArray">
+    <div class="news_aside_container" *ngIf="snippet.show_on_main == true">
+
+        <div class="news_aside_img">
+            <img class="news_aside_img_content" [src]="uploadsPath + snippet.image">
+        </div>
+
+        <a  [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news_aside_description">
+            <div class="news_aside_description_wrap">
+                <span class="news_aside_description_content" [innerHtml]="snippet.title | lineBreakPipe"></span>
+            </div>
+        </a>
+        
+    </div>
+</ng-container>

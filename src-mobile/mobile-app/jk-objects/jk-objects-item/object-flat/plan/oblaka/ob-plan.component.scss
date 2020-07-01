@@ -1,0 +1,213 @@
+$color: #ffffff;
+$color2: #83d6f4;
+@import "../../../../../../styles/modules/mixins/mixin";
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.plan {
+    width: 100%;
+    height: 50.157vw;
+
+    &_house-select {
+
+        &_svg {
+
+            &_section {
+                opacity: 0;
+                cursor: pointer;
+                fill: rgba(131,214,244,.3);
+                transition: .2s linear;
+            }
+        }
+
+        &_link {
+            position: absolute;
+            font: 40px/23px 'abrade-book', sans-serif;
+            color: $color;
+            @include font-smoothing();
+            cursor: pointer;
+            transition: .2s linear;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: 11;
+            display: flex;
+            flex-direction: column;
+
+            &_floors {
+                margin-top: 20px;
+            }
+
+            &_floors,
+            &_in-sale {
+                font: 18px/23px 'abrade-book', sans-serif;
+                color: $color;
+                @include font-smoothing();
+            }
+
+            &:before {
+                content: '';
+                width: 5px;
+                height: 5px;
+                background: $color;
+                border-radius: 50%;
+                position: absolute;
+                top: 12px;
+                transition: .2s linear;
+            }
+
+            &:after {
+                content: '';
+                width: 32px;
+                height: 1px;
+                background: rgba(255,255,255,.7);
+                position: absolute;
+                top: 14px;
+            }
+
+            &--active {
+                color: $color2;
+                text-shadow: 0 0 8px $color2;
+
+                &:before {
+                    background: $color2;
+                }
+            }
+
+            &--section-1 {
+                bottom: 43%;
+                left: 19%;
+                align-items: flex-end;
+
+                &:before {
+                    right: -22px;
+                }
+
+                &:after {
+                    right: -53px;
+                }
+            }
+
+            &--section-2 {
+                bottom: 43%;
+                left: 81%;
+
+                &:before {
+                    left: -18px;
+                }
+
+                &:after {
+                    left: -49px;
+                }
+            }
+        }
+    }
+    
+    .flats_main__quantity{
+        width: 88px;
+        height: 88px;
+        background: #8AD0EC;
+        border-radius: 50%;
+        position: absolute;
+
+        &--left{
+            left: 25%;
+            top: 50%;
+        }
+
+        &--right{
+            right: 25%;
+            top: 50%;
+        }
+
+        &__number{
+            width: 100%;
+            text-align: center;
+            font: 22px/23px 'abrade-book', sans-serif;
+            margin-top: 14px;
+        }
+
+        &__text{
+            width: 100%;
+            text-align: center;
+            font: 11px/11px 'abrade-book', sans-serif;
+            color: #3f3f3f;
+            margin-top: 4px;
+        }
+    }
+}
+
+// .link__banner{
+//     position: absolute;
+//     display: block;
+//     width: 250px;
+//     height: 150px;
+//     right: 15px;
+//     top: 85px;
+//     background: url('/assets/img/flats/house/banner.jpg') no-repeat;
+//     background-size: 100%;
+//     z-index: 100;
+// }
+
+.flats {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+
+
+    &_main {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    &_wrapper {
+        height: 100vh;
+        min-height: 56.26vw;
+        width: 100%;
+        min-width: 177vh;
+        position: relative;
+    }
+
+    &_bgr {
+        width: 100%;
+        height: 100%;
+    }
+
+    &_svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)
+    }
+}
+
+.object-flat__house-tooltip_house-1 {
+    top: 110%;
+    left: -61%;
+}
+
+.object-flat__house-tooltip_house-2 {
+    top: 110%;
+    left: -61%;
+}
+
+.object-flat__house-wrap_house-2 {
+    top: 50%;
+    left: 62%;
+}
+
+.object-flat__house-wrap_house-1 {
+    top: 30%;
+    left: 39%;
+
+}

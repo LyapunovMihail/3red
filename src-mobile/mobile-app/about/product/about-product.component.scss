@@ -1,0 +1,244 @@
+p {
+    line-height: normal;
+}
+
+.product {
+    max-width: 704px;
+    padding: 0 32px;
+    margin: auto;
+    padding-top: 120px;
+    // padding-bottom: 145px;
+    position: relative;
+}
+.product__shape-img {
+    position: absolute;
+    top: 64px;
+    left: 32px;
+    z-index: 2;
+}
+
+.product__title {
+    font-size: 36px;
+    margin-bottom: 24px;
+}
+.product__text {
+    font-size: 24px;
+    line-height: 30px;
+    width: 612px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+}
+.product__sidetext {
+    // margin-top: 4px;
+    font-size: 18px;
+    line-height: 20px;
+    width: 349px;
+    // padding-right: 60px;
+    margin-left: auto;
+    color: rgba(0, 0, 0, .5);
+    margin-bottom: 64px;
+}
+.product__parallax {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.product__parallax-group1 {
+    width: auto;
+    margin-right: 117px;
+    position: relative;
+
+}
+.product__image {
+    width: 280px;
+    height: 379px;
+    margin-top: 140px;
+}
+.product__parallax-index1,
+.product__parallax-index2,
+.product__parallax-index3 {
+    position: absolute;
+}
+.product__parallax-index1 {
+    top: 110px;
+    left: 75px;
+    z-index: 15;
+}
+.product__parallax-index2 {
+    top: 80px;
+    left: 240px;
+    z-index: 15;
+    color: #fff;
+}
+.product__parallax-index3 {
+    top: 385px;
+    left: 250px;
+    z-index: 3;
+    color: #fff;
+}
+.product__parallax-num {
+    font-size: 72px;
+    font-family: 'Formular';
+}
+.product__parallax-num--mod {
+    position: relative;
+    sup {
+        position: absolute;
+        right: -30px;
+        top: 0px;
+        font-size: 48px;
+    }
+}
+.product__parallax-text {
+    font-size: 24px;
+    line-height: 1.25;
+}
+.product__parallax-item1,
+.product__parallax-item2,
+.product__parallax-item3 {
+    position: absolute;
+    top: 0;
+    left: 160PX;
+    z-index: 1;
+}
+.product__parallax-item2 {
+    top: 250px;
+    left: 16px;
+    z-index: 2;
+}
+.product__parallax-item3 {
+    top: 600px;
+    left: -20px;
+    z-index: 3;
+}
+.product__parallax-group2 {
+    width: 351px;
+    position: relative;
+
+}
+.product__parallax-item4 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    img {
+        height: 772px;
+    }
+}
+.product__parallax-item5 {
+    margin-bottom: 180px;
+    margin-top: 30px;
+}
+.product__parallax-item6,
+.product__parallax-item7,
+.product__parallax-item8 {
+    margin-bottom: 32px;
+
+}
+
+@keyframes parallax {
+    from {opacity: 0;transform: translateY(0);}
+    to{opacity: 1;transform: translateY(-20px);}
+}
+
+.product__parallax-item5,
+.product__parallax-item6,
+.product__parallax-item7,
+.product__parallax-item8 {
+    text-align: left;
+    width: 264px;
+}
+
+.company__year {
+    font-size: 40px;
+    color:  #ee4237;
+    font-family: "Formular";
+    position: relative;
+
+}
+.company__info {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+@media(max-width:760px ) {
+    .product {
+        min-width: 320px;
+        padding: 0 20px;
+        padding-top: 120px;
+
+    }
+    .product__shape-img {
+        left: 20px;
+    }
+
+
+    .product__title {
+        font-size: 28px;
+    }
+    .product__text {
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 16px;
+        width: 100%;
+    }
+    .product__sidetext {
+        font-size: 14px;
+        line-height: 1.25;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .product__image {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 64px;
+        margin-top: 0;
+
+    }
+    .product__parallax {
+        flex-direction: column;
+    }
+
+
+    .product__parallax-text {
+        font-size: 24px;
+        line-height: 1.25;
+    }
+
+    .product__parallax-group2 {
+        width: 100%;
+    }
+    .product__parallax-item4 {
+        right: -20px;
+
+        img {
+            height: 610px;
+        }
+    }
+    .product__parallax-item5 {
+        margin-bottom: 130px;
+        padding-top: 25px;
+    }
+    .product__parallax-item6 {
+        margin-bottom: 10px;
+
+    }
+    .product__parallax-item7 {
+        margin-bottom: 10px;
+    }
+
+    .product__parallax-item5 {
+        padding-top: 0;
+        margin-bottom: 120px;
+    }
+
+    .company__year {
+        font-size: 32px;
+
+    }
+    .company__info {
+        font-size: 16px;
+        line-height: 22px;
+        width: 256px;
+    }
+}

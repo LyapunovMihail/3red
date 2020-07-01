@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { WindowEventsService } from '../../commons/window-events.observer.service';
+import { PlatformDetectService } from '../../platform-detect.service';
 
 @Component({
     selector: 'app-about-product',
@@ -20,6 +21,7 @@ export class AboutProductComponent implements OnInit, OnDestroy, AfterViewInit {
     public year3: ElementRef;
 
     constructor(
+        private platform: PlatformDetectService,
         private windowEventsService: WindowEventsService
     ) {}
 
@@ -27,6 +29,8 @@ export class AboutProductComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        if (!this.platform.isBrowser) { return; }
+
         this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
             this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             if (this.scrollTop > this.year1.nativeElement.offsetTop - 290) {

@@ -3,6 +3,7 @@ import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef }
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { SearchService } from '../search.service';
 import { FavoritesService } from '../../../favorites/favorites.service';
+import { PlatformDetectService } from '../../../../../src-mobile/mobile-app/platform-detect.service';
 
 @Component({
     selector: 'app-search-output',
@@ -25,6 +26,7 @@ export class SearchOutputComponent implements OnInit {
     public isLoading = true;
 
     constructor(
+        private platform: PlatformDetectService,
         private flatsDiscountService: FlatsDiscountService,
         private searchService: SearchService,
         public favoritesService: FavoritesService
@@ -58,7 +60,8 @@ export class SearchOutputComponent implements OnInit {
     }
 
     public scrollToTop() {
-        window.scrollTo(0, 0);
-        // window.scrollTo(0, this.container.nativeElement.offsetTop);
+        if (!this.platform.isBrowser) { return; }
+
+        window.scrollTo(0, this.container.nativeElement.offsetTop);
     }
  }

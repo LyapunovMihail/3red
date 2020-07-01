@@ -1,20 +1,26 @@
-import { HttpClient } from '@angular/common/http';
+import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Share } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 
 @Injectable()
 export class SharesService {
 
-    constructor(
-        private http: HttpClient
-    ) {}
+    constructor(private http: HttpClient) {}
 
-    public getShares(limit: number, skip: number): Observable<{length: number, sharesList: Share[]}> {
-        return this.http.get<{length: number, sharesList: Share[]}>(`/api/shares/list?limit=${limit}&skip=${skip}`);
+    public getShares(): Observable<Share[]> {
+        return this.http.get<Share[]>(`/api/shares/list`);
     }
 
     public getShareById(id): Observable<Share[]> {
         return this.http.get<Share[]>(`/api/shares/id/${id}`);
+    }
+
+    public updateShareCount(id, form, item) {
+        let message = JSON.stringify({ id, form, item });
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post('/api/shares/update/shareCount', message, {headers});
     }
 }

@@ -1,0 +1,31 @@
+<section class="object-members" [class.object-item--margin]="switchOn">
+
+    <div class="object-item__container">
+
+        <ng-container *ngIf="switchOn">
+            <h2 class="object-members__title">Участники проекта</h2>
+
+            <div class="object-members__wrap" *ngIf="snippet?.data">
+
+                <div class="object-members__wrap object-members__wrap_members" *ngFor="let block of snippet.data">
+                    <p class="object-members__text object-members__text_for-title">{{block.name}}</p>
+
+                    <ng-container *ngFor="let member of block.members">
+                        <a class="object-members__text"
+                           href="{{member.url}}"
+                           target="_blank"
+                           *ngIf="member.url">
+                            {{member.name}}
+                        </a>
+                        <p class="object-members__text object-members__text_black"
+                           *ngIf="!member.url">
+                            {{member.name}}
+                        </p>
+                    </ng-container>
+
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+</section>

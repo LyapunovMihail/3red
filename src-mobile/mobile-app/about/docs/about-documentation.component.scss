@@ -1,0 +1,118 @@
+.documentation {
+    margin:  auto;
+    padding: 0px 32px 0;
+    max-width: 704px;
+
+    &--padding {
+        padding-bottom: 96px;
+    }
+}
+.documentation__wrap  {
+    &:last-child .documentation__content{
+        border: 0;
+    }
+}
+.documentation__content {
+    border-bottom: 1px solid  #d8d8d8;
+    margin-bottom: 16px;
+
+}
+.documentation__title {
+    font-size: 36px;
+    margin-bottom: 32px;
+    line-height: 1.25;
+}
+// .documentation__wrap {
+//     display: grid;
+//     grid-template-columns: 446px auto;
+//     grid-column-gap: 24px;
+//     align-items: flex-start;
+
+// }
+.documentation__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.documentation__category {
+    font-size: 24px;
+    line-height: 1.25;
+    margin-bottom: 16px;
+
+}
+
+.doc__file {
+    color: #ee4237;
+    margin-top: 5px;
+    position: relative;
+    line-height: 1.25;
+    padding-left: 27px;
+    &::before {
+        content: url(/assets/img/about/icon-pdf.svg);
+        margin-right: 8px;
+        position: absolute;
+        top: -25%;
+        left: 0px;
+
+    }
+}
+.doc__date {
+    font-size: 18px;
+    color: rgba(0, 0, 0, .5);
+}
+
+@media(max-width: 760px) {
+    .documentation {
+        min-width: 320px;
+        padding: 0 20px 0;
+
+        &--padding {
+            padding-bottom: 64px;
+        }
+    }
+    .documentation__title {
+        font-size: 28px;
+    }
+
+    .documentation__category {
+        font-size: 20px;
+        margin-bottom: 16px;
+        width:100%;
+    }
+    // .documentation__content  {
+    //     margin-bottom: 26px;
+    // }
+    .documentation__item {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 26px;
+    }
+    .doc__file {
+        font-size: 16px;
+    }
+    .doc__date {
+        font-size: 12px;
+        margin-bottom: 11px;
+    }
+
+    .doc__btn {
+        color: #ee4237;
+        font-size: 16px;
+        position: relative;
+        background: none;
+        border: none;
+        font-family: inherit;
+        outline: 0;
+        margin-top: 8px;
+        &::after {
+            content: url(/assets/img/about/arrow-down.svg);
+            margin-right: 11px;
+            position: absolute;
+            top: 0;
+            right: -30px;
+
+        }
+    }
+}

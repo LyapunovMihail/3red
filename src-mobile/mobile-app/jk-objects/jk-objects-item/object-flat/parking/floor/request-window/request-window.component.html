@@ -1,0 +1,51 @@
+<section class="parking-modal">
+
+    <div class="parking-modal__container">
+
+        <button class="parking-modal__btn-cls btn-cls" (click)="close.emit(false)"><span></span></button>
+
+        <h2 class="parking-modal__name">Кладовая, №{{parkingData.flat}}</h2>
+        <div class="parking-modal__image">
+            <img src="/assets/img/flats/parking-modal.jpg" alt="preview-image">
+        </div>
+
+        <ul class="parking-modal__list">
+            <li class="parking-modal__list-item">
+                <span>Дом</span>
+                <span>{{parkingData.house}}</span>
+            </li>
+            <li class="parking-modal__list-item">
+                <span>Секция</span>
+                <span>{{parkingData.section}}</span>
+            </li>
+            <li class="parking-modal__list-item">
+                <span>Площадь</span>
+                <span>{{parkingData.space}}</span>
+            </li>
+            <li class="parking-modal__list-item">
+                <span>Стоимость</span>
+                <span>{{parkingData.price}}</span>
+            </li>
+        </ul>
+
+        <div class="parking-modal__btns">
+            <button class="parking-modal__btns-reserve btn_var-2" (click)="isReserveFormOpen = true">Забронировать кладовую</button>
+            <button class="parking-modal__btns-credit btn_var-3" (click)="isCreditFormOpen = true">Заявка на ипотеку</button>
+        </div>
+    </div>
+</section>
+
+<app-form-credit
+    (close)="isCreditFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isCreditFormOpen"
+    [apartmentPrice]="parkingData.price"
+    [apartmentNumber]="parkingData.flat"
+    [type]="parkingData.type">
+</app-form-credit>
+<app-form-reserve
+    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentPrice]="parkingData.price"
+    [apartmentNumber]="parkingData.flat"
+    [type]="parkingData.type">
+</app-form-reserve>

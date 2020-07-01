@@ -1,0 +1,27 @@
+@import '../../../../../styles/modules/mixins/mixin';
+
+:host { width: $container; }
+
+.search-form__corpus {
+    display: flex;
+    flex-flow: row wrap;
+
+    &-item {
+        padding: 12px 24px;
+        background-color: $col-white;
+        border-radius: 24px;
+        font: $font-18;
+        transition: background-color .5s linear, color .2s linear;
+        margin: 0 0 8px 8px;
+        cursor: pointer;
+        &:hover {
+            background-color: $col-red_hover;
+            color: $col-white;
+        }
+
+        &--active {
+            background-color: $col-red;
+            color: $col-white;
+        }
+    }
+}

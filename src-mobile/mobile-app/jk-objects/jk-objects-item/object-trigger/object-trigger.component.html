@@ -1,0 +1,20 @@
+
+<section class="object-trigger">
+
+    <div class="object-item__container object-trigger__container">
+
+        <ng-container *ngFor="let trigger of triggerSnippets">
+            <div class="object-trigger__item object-trigger__item_stud" *ngIf="trigger">
+                <a class="object-trigger__item-anchor" [routerLink]="'/objects/list/' + objectId + '/flats/house/all'" [queryParams]="{'rooms' : trigger.rooms}" skipLocationChange></a>
+                <p class="object-trigger__item-text">{{trigger.rooms === 0 ? 'Студии' : trigger.rooms + ' комнатные'}}</p>
+                <p class="object-trigger__item-text object-trigger__item-text_for-space">({{ trigger.space }})</p>
+                <p class="object-trigger__item-text object-trigger__item-text_price">
+                    от
+                    <span>{{trigger.price}}</span>
+                    млн &#8381;
+                </p>
+            </div>
+        </ng-container>
+
+    </div>
+</section>

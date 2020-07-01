@@ -1,108 +1,168 @@
-@import "../../../../styles/modules/mixins/mixin.scss";
+@import "../../../../styles/modules/mixins/mixin";
 
-.news-view {
+.btn__container {
+    cursor: pointer;
+    width: 1280px;
+    padding: 13px 32px;
+    padding-top: 83px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+}
+.news__btn {
+    font-size: 24px;
+    padding: 13px 0 13px 36px;
+    color: #000;
     position: relative;
 
-    &__nav {
-        width: calc(100% - 30px);
-        max-width: 1280px;
+    &::before {
+        content: '';
         position: absolute;
-        left: 50%;
-        top: 67px + 30px;
-        transform: translateX(-50%);
-        @media (min-width: 768px) { width: calc(100% - 60px); }
-
-        &-link {
-            @include fw18-24;
-            position: relative;
-            padding: 0 0 0 27px;
-            &:before {
-                content: '';
-                position: absolute;
-                width: 19px;
-                height: 100%;
-                left: 0;
-                top: 0;
-                background: url(/assets/img/arrow-back.svg) center no-repeat;
-                background-size: 19px 20px;
-            }
-        }
+        top: 50%;
+        left: 0;
+        transform: translateY( -50%);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
+        transition: background-color .2s linear;
     }
-    &__wrap {
-        width: calc(100% - 30px);
-        max-width: 1280px;
-        position: relative;
-        @media (min-width: 768px) { width: calc(100% - 60px); 
-        }
+    &:hover::before {
+        background-color: rgba($color: $col-black, $alpha: .5);
     }
-    &__content {
-        width: 100%;
-        padding: 94px 0 0;
-        margin: 0 0 60px;
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: center;
-        @media (max-width: 1279px) { padding: 94px 0 0; }
+}
 
-        &-btn {
-            height: 40px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: -15px;
-            right: -15px;
-            display: flex;
-            justify-content: space-between;
+.news__container {
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 88px 96px;
+    box-sizing: border-box;
+}
+.helper {
+    width: 730px;
+}
 
-            &-prev,
-            &-next {
-                width: 40px;
-                height: 40px;
-                box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
-                border-radius: 50%;
-                &:hover { background-position: 49%; }
-            }
-            &-prev { background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff; }
-            &-next {
-                background: url(/assets/img/btn_next_or.svg) 50% no-repeat #fff;
-                transform: rotate(180deg);
-            }
-            &-inactive {
-                visibility: hidden;
-                pointer-events: none;
-            }
-        }
-        &-img {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-radius: 4px;
-            @media (min-width: 768px) { height: 383px; }
+.news__text {
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 16px;
+    &-link {
+        color: #ee4237;
+        text-decoration: underline;
+    }
+}
+.news__intro {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.news__title {
+    font-size: 36px;
+    line-height: 1.35;
+    width: 560px;
+}
+.news__img {
+    display: block;
+    width: 100%;
+    // height: 410px;
+    object-fit: cover;
+    margin-bottom: 48px;
+}
+.image {
+    width: 100%;
+    // height: 410px;
+    margin-bottom: 20px;
+}
+.news__subtitle {
+    font-size: 24px;
+    margin-bottom: 12px;
+    line-height: 1.25;
+}
+.img__wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.news__image {
+    display: block;
+    width: 100%;
+    &:first-child {
+        margin-right: 24px;
+    }
 
-            &-item {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-        &-title {
-            font: 500 30px/34px "Leksa";
-            @include font-smoothing;
-            color: #000105;
-            box-sizing: border-box;
-            margin: 20px 0 0;
-        }
-        &-text {
-            @include f16-24;
-            color: rgba(0, 1, 5, 0.8);
-            margin: 0 0 10px;
+}
 
-            &_date {
-                font: 12px/18px $font-mus;
-                @include font-smoothing;
-                color: rgba(0, 1, 5, 0.6);
-                letter-spacing: .4px;
-            }
-        }
+
+.news__category {
+    color: #000;
+    font-size: 14px;
+    line-height: 1.25;
+    margin-bottom: 2px;
+    &::before {
+        content: url(/assets/img/build.svg);
+        margin-right: 5px;
+    }
+
+}
+
+.news__date {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+.news__share {
+    margin-top: 64px;
+}
+.news__share-wrap {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+.share {
+    margin-left: 24px;
+}
+.share__count {
+    cursor: pointer;
+    margin-left: 16px;
+    padding-left: 52px;
+    position: relative;
+    &::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        content: '';
+        background-position: center;
+        background-size: 42px 42px; 
+        width: 42px;
+        height: 42px;
+        transition: background .3s linear;
+    }
+}
+.share__count-vk {
+    
+    &::before {
+        background-image:url(/assets/img/news/vk.svg);
+    }
+    &:hover::before {
+        background-image:url(/assets/img/news/vk-hover.svg);
+    }
+}
+.share__count-fb {
+   
+    &::before { 
+        background-image:url(/assets/img/news/fb.svg);
+    }
+    &:hover::before {
+        background-image:url(/assets/img/news/fb-hover.svg);
+    }
+}
+.share__count-odnoclass  {
+    &::before {
+        background-image:url(/assets/img/news/odnoclass.svg);
+    }
+    &:hover::before {
+        background-image:url(/assets/img/news/odnoclass-hover.svg);
     }
 }

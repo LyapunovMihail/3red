@@ -1,0 +1,138 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.team {
+    margin:  auto;
+    //max-width: 704px;
+
+    &--padding {
+        padding-top: 96px;
+    }
+}
+.team__title {
+    font-size: 36px;
+    margin: 0 auto 36px;
+    max-width: 704px;
+}
+.team__item {
+    margin-bottom: 56px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+.team__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 16px;
+    max-width: 704px;
+}
+.team__wrap {
+    display: inline-block;
+    white-space: nowrap;
+    height: calc(100% + 20px);
+    width: 100%;
+    overflow-x: auto;
+
+    &-overflow {
+        overflow: hidden;
+        margin-left: calc((100% - 704px)/2);
+        height: 300px;
+    }
+}
+.team__item-title {
+    font-size: 24px;
+}
+.team__btn {
+    background: url(/assets/img/about/arrow-down.svg) right no-repeat ;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 18px;
+    color: #ee4237;
+    line-height: 23px;
+    padding-right: 22px;
+}
+.btn--active {
+    background: url(/assets/img/about/arrow-top.svg) right no-repeat ;
+}
+
+.team__list {
+    display: inline-block;
+    width: 274px;
+}
+
+.team__list-image {
+    margin-right: 24px;
+
+    img {
+        display: block;
+        width: 100%;
+    }
+}
+.team__list-name {
+    font-size: 18px;
+    line-height: 1.25;
+    margin: 8px 0 4px;
+}
+.team__list-prof {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+@media(max-width: 760px) {
+    .team {
+        margin:  auto;
+        min-width: 320px;
+        padding: 0px 0px 0px 20px;
+
+        &--padding {
+            padding-top: 64px;
+        }
+
+        &__wrap-overflow {
+            margin-left: initial;
+            height: 82vw;
+        }
+
+    }
+    .team__title {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .team__list {
+        width: 75%;
+    }
+    .team__item {
+        margin-bottom: 30px;
+    }
+
+    .team__item-arrow {
+        display: none;
+    }
+    .team__item-title {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+
+    .team__list-image {
+        // width: 220px;
+        // max-width: 100%;
+        margin-right: 16px;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    .team__list-name {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .team__list-prof {
+        font-size: 12px;
+    }
+}

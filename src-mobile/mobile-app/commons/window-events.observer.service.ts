@@ -9,7 +9,7 @@ export class WindowEventsService {
 
     private subjectScroll = new Subject<any>();
     private subjectWheel = new Subject<any>();
-    private subjectResize = new Subject<any>();
+    public subjectResize = new Subject<any>();
     private subjectClick = new Subject<any>();
 
     constructor() {

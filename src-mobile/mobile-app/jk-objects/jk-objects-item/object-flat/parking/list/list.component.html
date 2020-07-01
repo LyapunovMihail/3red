@@ -1,0 +1,34 @@
+<section class="parking-list" *ngIf="jk">
+
+    <div class="parking-list__nav">
+        <div class="parking-list__nav-container">
+
+            <a [routerLink]="'/objects/list/' + jk._id" class="parking-list__nav-back">ЖК {{jk.name}}</a>
+
+            <ul class="parking-list__nav-list">
+                <li><a [routerLink]="'/objects/list/' + jk._id + '/flats'" routerLinkActive="active" class="parking-list__nav-link">Квартиры</a></li>
+                <li *ngIf="isStorerooms"><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" routerLinkActive="active" class="parking-list__nav-link">Кладовые</a></li>
+                <li><a [routerLink]="'/objects/list/' + jk._id + '/parking'" routerLinkActive="active" class="parking-list__nav-link">Машиноместа</a></li>
+                <!--<li><a class="parking-list__nav-link">Коммерческая недвижимость</a></li>-->
+            </ul>
+        </div>
+    </div>
+
+    <div class="parking-list__container">
+
+        <h2 class="parking-list__title">Кладовые в ЖК {{jk.name}}</h2>
+
+        <!-- routerLink=":house/:section/:floor" -->
+        <ng-container *ngFor="let item of parkMas">
+            <div class="parking-list__houses">
+                <h2 class="parking-list__houses-title">Дом {{item.house}}</h2>
+
+                <a [routerLink]="['/objects/list/' + jk._id + '/parking/house/' + item.house + '/section/' + park.section + '/floor/' + park.floor]" class="parking-list__sections" *ngFor="let park of item.parks">
+                    <div class="parking-list__sections-count">Секция  {{park.section}}</div>
+                    <div class="parking-list__sections-floor">Этаж {{park.floor}}</div>
+                    <div class="parking-list__sections-price">от {{park.price | myBitNumberPipe}} ₽</div>
+                </a>
+            </div>
+        </ng-container>
+    </div>
+</section>

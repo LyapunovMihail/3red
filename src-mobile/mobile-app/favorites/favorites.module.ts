@@ -1,34 +1,25 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './favorites.component';
 import { RouterModule } from '@angular/router';
-import { PriceNumberModule } from '../price-number/price-number.module';
-import { FavoritesFormComponent } from './favorites-form/favorites-form.component';
-import { ModalApartamenModule } from '../flats/modal-apartament/modal-apartament.module';
-import { ModalApartamentComponent } from '../flats/modal-apartament/modal-apartament.component';
+import { FlatsListModule } from '../flats/search/search-output/flats-list/flats-list.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild([{
-            path: 'favorites',
-            component: FavoritesComponent,
-            pathMatch: 'full'
-        }]),
-        PriceNumberModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ModalApartamenModule
+    exports: [
+        FavoritesComponent
     ],
     declarations: [
-        FavoritesComponent,
-        FavoritesFormComponent
+        FavoritesComponent
     ],
-    exports: [
-        FavoritesComponent,
-        FavoritesFormComponent,
-        ModalApartamentComponent
+    imports: [
+        CommonModule,
+        FlatsListModule,
+        RouterModule.forChild([
+            {
+                path: '', component: FavoritesComponent
+            }
+        ])
     ]
 })
-export class FavoritesModule {}
+export class FavoritesModule {
+}

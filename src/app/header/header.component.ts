@@ -7,6 +7,7 @@ import { HeaderService } from './header.service';
 import { JkService } from '../commons/jk.service';
 import set = Reflect.set;
 import { FavoritesService } from '../favorites/favorites.service';
+import { PlatformDetectService } from '../platform-detect.service';
 
 @Component({
     selector : 'app-header',
@@ -37,13 +38,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public header: ElementRef;
 
     constructor(
+        private platform: PlatformDetectService,
         private windowEventsService: WindowEventsService,
         private headerService: HeaderService,
         private router: Router,
         private jkService: JkService,
         private favoritesService: FavoritesService
-    ) {
-    }
+    ) {}
 
     public ngOnInit() {
         this.favoritesService.getFavoriteCount().subscribe((value) => this.favoriteCounter = value);
@@ -83,6 +84,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // если расстояние скролла больше высоты хедера
     // хедер фиксируется
     public fixedHeader() {
+        if (!this.platform.isBrowser) { return; }
 
         let prevScrollTop = 0;
         const headerHeight = this.header.nativeElement.clientHeight;

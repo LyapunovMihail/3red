@@ -1,69 +1,71 @@
-<div *ngIf="share" class="news shares-view">
-
-    <div class="shares-view__nav">
-        <a routerLink="/news-shares/shares/list/1" class="shares-view__nav-back">Все новости</a>
-    </div>
-
-    <div class="shares-view__header">
-        <div *ngIf="share.countdown && countDown(share.finish_date) >= 0" class="shares-view__header-finishing">
-            {{countDown(share.finish_date) | sharesDayPipe}} до конца акции
-        </div>
-        <div *ngIf="share.countdown && countDown(share.finish_date) < 0" class="shares-view__header-finishing">
-            Акция закончилась
-        </div>
-        <div class="shares-view__header-wrap">
-            <button class="shares-view__header-btn shares-view__header-prev" [class.shares-view__header-btn-inactive]="!prevId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + prevId]"></button>
-            <button class="shares-view__header-btn shares-view__header-next" [class.shares-view__header-btn-inactive]="!nextId" [routerLink]="['/news-shares/shares/list/' + indexNum + '/' + nextId]"></button>
-            <div class="shares-view__header-img">
-                <img [src]="uploadsPath + share.mainImage">
-            </div>
-        </div>
-        <div class="shares-view__content">
-            <h1 class="shares-view__content-title">{{share.name}}</h1>
-            <p class="shares-view__content-text">{{share.text}}</p>
-            <p class="shares-view__content-date">{{share.created_at | date: 'dd.MM.yyyy' }}</p>
-        </div>
-    </div>
-
-
-    <ul class="shares-view__flat flat-list">
-        <li *ngFor="let b of share.body; index as blockIndex"
-            [ngSwitch]="b.blockType">
-            <ul *ngSwitchCase="'flats'"  class="flat-list__item-info">
-                <li *ngFor="let flat of b.blockFlats; index as flatIndex" class="flat-list__item flat-list__item_info">
-                    <a href="#" class="flat-list__item_link">
-                        <div class="flat-list__item-img">
-                            <!-- Изображение не работает -->
-                            <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image">
-                        </div>
-    
-                        <div class="flat-list__item-wrap">
-                            <div class="flat-list__item-text flat-list__item-text_room">{{flat.room}}</div> <!-- Должна быть "комнатная" а не "комн." -->
-                            <div class="flat-list__item-text flat-list__item-text_corpus">Секция {{flat.section}}</div> <!-- Должен быть корпус -->
-                            <div class="flat-list__item-text flat-list__item-text_floor">Этаж {{flat.floor}}</div>
-                        </div>
-                        <div class="flat-list__item-wrap">
-                            <div class="flat-list__item-text flat-list__item-text_space">{{flat.space}} м&#178;</div>
-                            <div class="flat-list__item-price">
-                                <div class="flat-list__item-text flat-list__item-text_price-not-sale">{{+flat.price - getDiscount(flat)}} &#8381;</div>
-                                <div class="flat-list__item-text flat-list__item-text_price-sale">{{flat.price}} &#8381;</div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="flat-list__item-favorite"></div>
-                </li>
-            </ul>
-        </li>
-    </ul>
+<div class="btn__container">
+    <a class="news__btn" href="javascript:void(0)" (click)="location.back()">Все новости</a>
 </div>
 
-<!-- 
-    TODO: Должны быть модалки квартиры и соответственно ипотека/забронировать (08.08.19)
- -->
-<app-form-reserve *ngIf="setFlatData"
-    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
-    [isOpen]="isReserveFormOpen"
-    [apartmentNumber]="selectFlat.number"
-    [apartmentPrice]="selectFlat.price"
-    [type]="'КВ'">
-</app-form-reserve>
+<section class="news" *ngIf="snippet">
+    <div class="news__container">
+        <div class="helper">
+            <div class="news__intro">
+                <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+                <div class="news__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
+            </div>
+            <h2 class="news__title">{{snippet.name}}</h2>
+            <p class="news__text">{{snippet.text}}</p>
+            <img [src]="uploadsPath + snippet.mainImage" alt="image" class="news__img">
+
+            <ul class="news__wrapper">
+                <li *ngFor="let b of snippet.body"
+                    [ngSwitch]="b.blockType">
+
+                    <article *ngSwitchCase="'title'" class="news__subtitle">{{b.blockTitle}}</article>
+
+                    <article *ngSwitchCase="'description'" class="news__text" [innerHTML]="b.blockDescription"></article>
+
+                    <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image" alt="image" class="image">
+
+                    <!--<div *ngSwitchCase="'flats'" class="client-share__flats">-->
+                        <!--<div class="client-share__flats-wrap">-->
+
+                            <!--<div *ngFor="let flat of b.blockFlats; index as flatIndex" class="client-share__flats__item">-->
+                                <!--<div class="client-share__flats-header">-->
+                                    <!--&lt;!&ndash; <div class="client-share__flats__house">Корпус {{flat.house}}</div> &ndash;&gt;-->
+                                    <!--<div class="client-share__flats__house">Секция {{flat.section}}</div>-->
+                                    <!--<div class="client-share__flats__house">Этаж {{flat.floor}}</div>-->
+                                <!--</div>-->
+                                <!--<div class="client-share__number">№ {{flat.number}}</div>-->
+                                <!--<div class="client-share__room">{{flat.room}}, {{flat.space}} м&#178;</div>-->
+                                <!--<div class="client-share__decoration">{{flat.decoration}}</div>-->
+                                <!--<img [src]="flat.scheme" class="client-share__image">-->
+                                <!--<div class="client-share__total">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>-->
+                                <!--<div class="client-share__price-wrap">-->
+                                    <!--<div class="client-share__price">{{flat.price | bitNumber}} &#8381;</div>-->
+                                    <!--<div class="client-share__discount">− {{+flat.discount | bitNumber}} {{flat.discountType === shareFlatDiscountType.PERCENT ? '%' : '&#8381;'}}</div>-->
+                                <!--</div>-->
+                                <!--<div (click)="isReserveFormOpen = true; setFlatData(flat)" class="client-share__reserve">Забронировать</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="news__share">
+            <div class="news__share-wrap">
+                <p class="share">Поделиться:</p>
+                <div class="share__count share__count-vk" (click)="clickShare('vk')">{{snippet.shareCount.vk}}</div>
+                <div class="share__count share__count-fb" (click)="clickShare('fb')">{{snippet.shareCount.fb}}</div>
+                <div class="share__count share__count-odnoclass" (click)="clickShare('ok')">{{snippet.shareCount.ok}}</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--<app-flats-apartment-modal *ngIf="showApartmentWindow"-->
+    <!--[showApartmentWindow]="showApartmentWindow"-->
+    <!--[flatsList]="share.shareFlats"-->
+    <!--[flatIndex]="selectedFlatIndex"-->
+    <!--(close)="showApartmentWindow = false; windowScrollLocker.unblock()">-->
+<!--</app-flats-apartment-modal>-->

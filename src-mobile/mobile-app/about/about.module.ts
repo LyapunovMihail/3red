@@ -1,24 +1,27 @@
+import { AboutFunctionsComponent } from './functions/about-functions.component';
+import { AboutCareerComponent } from './career/about-career.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GHMTextAreaModule } from './../UI/ghm-textarea/ghm-textarea.module';
 import { AboutComponent } from './about.component';
-import { AboutGalleryComponent } from './gallery/about-gallery.component';
-import { AboutGenplanComponent } from './genplan/about-genplan.component';
-import { AboutProjectComponent } from './project/about-project.component';
-import { AboutBuilderComponent } from './builder/about-builder.component';
-import { AboutDocumentationComponent } from './documentation/about-documentation.component';
-import { AboutMembersComponent } from './members/about-members.component';
+import { NgModule } from '@angular/core';
+import { GHMTextAreaModule } from './../UI/ghm-textarea/ghm-textarea.module';
+import { AboutStageComponent } from './stage/about-stage.component';
+import { AboutProductComponent } from './product/about-product.component';
+import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HomeNewsModule } from '../home/news/home-news.module';
+import { AboutDocumentationComponent } from './docs/about-documentation.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { AboutTeamComponent } from './team/about-team.component';
 
 const AboutComponents = [
     AboutComponent,
-    AboutGenplanComponent,
-    AboutProjectComponent,
-    AboutBuilderComponent,
-    AboutMembersComponent,
+    AboutStageComponent,
+    AboutProductComponent,
+    AboutTeamComponent,
+    AboutCareerComponent,
+    AboutFunctionsComponent,
     AboutDocumentationComponent,
-    AboutGalleryComponent
 ];
 
 @NgModule({
@@ -29,12 +32,14 @@ const AboutComponents = [
         ...AboutComponents
     ],
     imports: [
-        RouterModule,
         CommonModule,
         GHMTextAreaModule,
-        BrowserAnimationsModule,
+        SlideTopLabelModule,
+        ReactiveFormsModule,
+        HomeNewsModule,
+        TextMaskModule,
         RouterModule.forChild([
-            { path: 'about', component: AboutComponent }
+            { path: '', component: AboutComponent }
         ])
     ]
 })

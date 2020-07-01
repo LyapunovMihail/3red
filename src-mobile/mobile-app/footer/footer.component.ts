@@ -1,26 +1,26 @@
-import { WindowScrollLocker } from '../commons/window-scroll-block';
-import { OverlayService } from '../modal/overlay.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector : 'app-footer',
     templateUrl : './footer.component.html',
     styleUrls : ['./footer.component.scss'],
     providers: [
-        WindowScrollLocker
     ]
 })
 
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+
+    public currentYear: number;
 
     constructor(
-        private windowScrollLocker: WindowScrollLocker,
-        private overlayService: OverlayService
     ) { }
 
-    openVideo() {
-        this.overlayService.changeOverlayVisibility(true);
-        this.windowScrollLocker.block();
+    public ngOnInit() {
+        this.currentYear = this.getFullYear();
     }
 
+    public getFullYear() {
+        const date = new Date();
+        return date.getFullYear();
+    }
 }

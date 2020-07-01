@@ -1,0 +1,70 @@
+// New
+
+$col-red: #ee4237;
+$col-red_hover: #ee534a;
+$col-green: #46b757;
+
+$col-white: #fff;
+$col-black: #000;
+$col-black-5: rgba(0, 0, 0, 0.5);
+$col-fa: #fafafa;
+$col-ef: #efefef;
+$col-border: #d8d8d8;
+
+$font-proba: 'ProbaPro', 'sans-serif', 'Arial';
+$font-formular: 'Formular-medium', 'sans-serif', 'Arial';
+$container: 1104px;
+$tabletContainer: 704px;
+$mobileContainer: calc(100% - 40px);
+
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -o-font-smoothing: antialiased;
+}
+
+$font-text: $font-proba;
+$font-14: 14px/18px $font-proba;
+$font-18: 18px/23px $font-proba;
+$font-16: 16px/19px $font-proba;
+
+// old style:
+
+$font-mus: 'Museo Sans Cyrl', sans-serif; 
+$font-leksa: 'Leksa', 'sans-serif';
+// $col-black: #000105;
+$col-black-8: rgba(0, 1, 5, .8);
+$col-black-6: rgba(0, 1, 5, .6);
+$col-orange: #e7490f;
+$col-32: #323232;
+$col-97: #979797;
+$col-blue: #0070c9;
+$w1600: 1600px - (180px *2);
+$w1280: 1240px;
+$w1279: 708px;
+$w768: calc(100% - 30px);
+$transition: .2s linear;
+$trans-link: .6s ease;
+$trans-img: transform .7s linear;
+
+@mixin fw14-20($color: #000105) {
+    font: 500 14px/20px $font-mus;
+    @include font-smoothing();
+    color: $color;
+}
+@mixin f16-24($color: #000105) {
+    font: 16px/24px $font-mus;
+    @include font-smoothing();
+    color: $color;
+}
+@mixin fw16-20($color: #000105) {
+    font: 500 16px/20px $font-mus;
+    @include font-smoothing();
+    letter-spacing: .5px;
+    color: $color;
+}
+@mixin fw18-24($color: #000105) {
+    font: 500 18px/24px $font-mus;
+    @include font-smoothing();
+    color: $color;
+}

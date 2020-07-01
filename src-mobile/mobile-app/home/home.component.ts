@@ -20,28 +20,23 @@ export class HomeComponent implements OnInit {
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
     public allSnippets: any[] = [];
-    public mainNews: INewsSnippet[] = [];
-    public mainShares: Share[] = [];
     public newsLoaded = false;
 
     constructor(
         public platform: PlatformDetectService,
-        private homeService: HomeService
+        private homeService: HomeService,
     ) {}
 
     public ngOnInit() {
-
         if ( !this.platform.isBrowser ) { return false; }
 
         combineLatest(
-            this.homeService.getShares(),
-            this.homeService.getNews()
+            this.homeService.getMainShares(),
+            this.homeService.getMainNews()
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
-                this.shareSnippets = shares.sharesList;
-                this.mainNews = this.makeArrayCopy(this.newsSnippets);
-                this.mainShares = this.makeArrayCopy(this.shareSnippets);
-                return [...shares.sharesList, ...news];
+                this.shareSnippets = shares;
+                return [...shares, ...news];
             })
         ).subscribe(
             (data: any[]) => {
@@ -51,9 +46,4 @@ export class HomeComponent implements OnInit {
             (err) => console.log(err)
         );
     }
-
-    public makeArrayCopy(snippetArr) {
-        return JSON.parse(JSON.stringify(snippetArr));
-    }
-
 }

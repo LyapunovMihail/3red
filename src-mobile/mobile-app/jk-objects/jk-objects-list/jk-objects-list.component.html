@@ -1,3 +1,47 @@
-<p>
-  jk-objects-list works!
-</p>
+<section class="objects">
+    <div class="objects-container" [class.objects-container--main]="isMainPage">
+        <div class="objects-wrap">
+            <div class="objects__title-wrap">
+                <h1 class="objects__title" *ngIf="!isMainPage">Объекты</h1>
+                <h2 class="objects__title-main" *ngIf="isMainPage">Объекты</h2>
+            </div>
+
+            <a routerLink="/objects/list" class="g-all-object" *ngIf="isMainPage">Все объекты</a>
+        </div>
+
+        <div class="objects__label_flex-container">
+            <label class="objects__label-wrapper">
+                <input type="checkbox" name="switch" id="map1" class="switch" (change)="isShowfilter()">
+                <p for="map1" class="objects__label">Фильтрация</p>
+            </label>
+
+            <label class="objects__label-wrapper">
+                <input type="checkbox" name="switch" id="Filters1" class="switch" (change)="isShowMap()">
+                <p for="Filters1" class="objects__label">На карте</p>
+            </label>
+        </div>
+
+        <app-jk-objects-form *ngIf="isLoaded && showFilter"
+            [btnList]="btnList"
+            [minPriceConfig]="minPriceConfig"
+            [maxPriceConfig]="maxPriceConfig"
+            (formChange)="getObjects($event)">
+        </app-jk-objects-form>
+
+        <app-jk-objects-items *ngIf="!showMap"
+            [snippets]="snippets">
+        </app-jk-objects-items>
+
+    </div>
+
+    <app-jk-objects-map *ngIf="showMap"
+        [snippets]="snippets">
+    </app-jk-objects-map>
+
+    <div class="objects-container" *ngIf="isMainPage">
+        <a routerLink="/objects/list" class="objects__link">
+            <span class="g-all-object">Все объекты</span>
+        </a>
+    </div>
+
+</section>

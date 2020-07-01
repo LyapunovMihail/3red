@@ -39,8 +39,7 @@ export class ObjectsFormComponent implements OnInit {
         public activatedRoute: ActivatedRoute,
         public formBuilder: FormBuilder,
         private jkObjectsNumberPipe: JkObjectsNumberPipe
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe((queryParams) => {

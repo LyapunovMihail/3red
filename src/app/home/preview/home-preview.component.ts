@@ -1,9 +1,9 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { INewsSnippet } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { WindowEventsService } from '../../commons/window-events.observer.service';
 import * as moment from 'moment';
 import { HomePreviewService } from './home-preview.service';
 import { IHomePreviewSnippet } from '../../../../serv-files/serv-modules/home/preview-api/home-preview.interfaces';
+import { PlatformDetectService } from '../../platform-detect.service';
 
 @Component({
     selector: 'app-home-preview',
@@ -32,6 +32,7 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
     public currentNews = 0;
 
     constructor(
+        public platform: PlatformDetectService,
         private windowEventsService: WindowEventsService,
         private homePreviewService: HomePreviewService
     ) {}
@@ -47,12 +48,16 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        if ( !this.platform.isBrowser ) { return false; }
+
         this.windowScrollEvent = this.windowEventsService.onScroll.subscribe(() => {
             this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         });
     }
 
     ngOnDestroy() {
+        if ( !this.platform.isBrowser ) { return false; }
+
         this.windowScrollEvent.unsubscribe();
         if (this.newsInterval) {
             clearInterval(this.newsInterval);
@@ -60,7 +65,6 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public changesNews() {
-        console.log(this.newsSnippet);
         const total = this.newsSnippet.length - 1;
         if (total > 0) {
             this.newsInterval = setInterval( () => {

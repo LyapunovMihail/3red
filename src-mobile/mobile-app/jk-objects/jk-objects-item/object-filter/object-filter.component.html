@@ -1,0 +1,40 @@
+<section class="object-filter" *ngIf="form">
+
+    <div [formGroup]="form" class="object-filter__container">
+
+        <h3 class="object-filter__title">Подобрать квартиру</h3>
+    
+        <div class="object-filter__room">
+            <p class="object-filter__text object-filter__text_for-input g-text_sign">Количество комнат</p>
+            <div class="object-filter__room-item" formArrayName="rooms" *ngFor="let control of form.get('rooms')['controls']; let i = index">
+                <input id="room{{i}}" type="checkbox" style="display: none;" formControlName="{{i}}">
+                <label for="room{{i}}">{{(i === 0) ? 'Ст' : (i === 3) ? '3+' : i}}</label>
+            </div>
+        </div>
+        
+        <div class="object-filter__price">
+            <p class="object-filter__text object-filter__text_for-input g-text_sign">Стоимость</p>
+
+            <div class="object-filter__price-range">
+                <p class="object-filter__text object-filter__text_for-price"><span #minPrice></span> &#8381;</p>
+                <p class="object-filter__text object-filter__text_for-price">&mdash;</p>
+                <p class="object-filter__text object-filter__text_for-price"><span #maxPrice></span> &#8381;</p>
+            </div>
+
+            <!-- Он не правильно работает, но я добавил что бы сделать верстку -->
+            <ghm-range-number
+                formControlName="price"
+                [min]="config.price.min"
+                [max]="config.price.max"
+                [toFixed]="true"
+                (move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0))">
+            </ghm-range-number>
+        </div>
+
+        <a class="object-filter__btn-link btn_var-3"
+           [class.object-filter__btn-link--disabled]="!flatsLength"
+           [routerLink]="'/objects/list/' + objectId + '/flats'" [queryParams]="params">
+            {{ flatsLength ? flatsLength + ' ' + parseText(flatsLength) : 'Нет предложений'}}
+        </a>
+    </div>
+</section>

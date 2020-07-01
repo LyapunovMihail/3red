@@ -1,87 +1,78 @@
-<div *ngIf="isOpen" class="g-modal-bg form-modal">
+<div *ngIf="isOpen" class="g-modal-bg">
 
-    <div (click)="close.emit(false)" class="form-request__cls-btn"></div>
+    <div (click)="close.emit(false)" class="form-modal__close-area"></div>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-request">
 
-        <h1 class="form-request__title">Забронировать квартиру №{{apartmentNumber}}</h1>
+        <button (click)="close.emit(false)" class="form-request__cls-btn btn-cls"><span></span></button>
 
-        <input [formControl]="form.controls['price']" type="text" style="display: none;">
-        <input [formControl]="form.controls['number']" type="text" style="display: none;">
+        <h2 class="form-request__title">Забронировать квартиру №{{apartmentNumber}}</h2>
 
-        <div class="form-request__wrap">
-            <p class="form-request__subtitle">Ваше имя</p>
-            <input class="form-request__field"
-                [formControl]="form.controls['name']"
-                type="text">
-        </div>
+        <!--<input [formControl]="form.controls['price']" type="text" style="display: none;">-->
+        <!--<input [formControl]="form.controls['number']" type="text" style="display: none;">-->
 
-        <div class="form-request__wrap">
-            <p class="form-request__subtitle">Телефон</p>
-            <input class="form-request__field" 
-                *ngIf="platform.isBrowser" 
-                [formControl]="form.controls['phone']"
-                [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
-                [textMask]="{mask: phoneMask}" type="text"
-                placeholder="+7 (___) ___-__-__">
-        </div>
+        <div class="form-request__wrap form-request__wrap_areas">
 
-        <div class="form-request__wrap">
-            <p class="form-request__subtitle">Эл. почта</p>
-            <input class="form-request__field"
-                [formControl]="form.controls['mail']"
-                type="text">
-        </div>
-
-        <div class="form-request__wrap">
-
-            <p class="form-request__subtitle">Когда вам позвонить?<br>Мы работаем каждый день с 9 до 21 часа.</p>
-
-            <label class="form-request__radio-wrap">
-                <input [formControl]="form.controls['wait_for_call']" value="now" type="radio" name="time">
-                <div class="form-request__radio"></div>
-                <p class="form-request__radio-text">
-                    В ближайшее время
-                    <span class="form-request__radio-text form-request__radio-text_remark">
-                        Ожидание может составить до 15 минут.
-                    </span>
-                </p>
-            </label>
-
-            <label class="form-request__radio-wrap form-request__radio-wrap_time" (click)="timeFocus()">
-                <input [formControl]="form.controls['wait_for_call']" value="later" type="radio" name="time">
-                <div class="form-request__radio"></div>
-                <p class="form-request__radio-text">Указать время:</p>
-                <input class="form-request__field form-request__field_time"
-                    *ngIf="platform.isBrowser"
+            <div class="form-request__wrap form-request__wrap_size-w3">
+                <input [formControl]="form.controls['lastName']"
+                    class="form-request__field g-input"
+                    type="text" appSlideTopLabel>
+                <label>Фамилия</label>
+            </div>
+            <div class="form-request__wrap form-request__wrap_size-w3">
+                <input [formControl]="form.controls['name']" 
+                    class="form-request__field g-input"
+                    type="text" appSlideTopLabel>
+                <label>Имя</label>
+            </div>
+            <div class="form-request__wrap form-request__wrap_size-w3">
+                <input [formControl]="form.controls['middleName']"
+                    class="form-request__field g-input"
+                    type="text" appSlideTopLabel>
+                <label>Отчество</label>
+            </div>
+    
+            <div class="form-request__wrap form-request__wrap_size-w3">
+                <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']" appSlideTopLabel
+                    [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && form.get('phone').value.length === 0 && form.controls['phone'].touched ) }"
+                    class="form-request__field g-input" type="text" [textMask]="{mask: phoneMask}">
+                <label>Телефон</label>
+                <!--<p class="form-request__notice">Например: +7 (910) 123-45-67</p>-->
+            </div>
+            <div class="form-request__wrap form-request__wrap_size-w2">
+                <input [formControl]="form.controls['mail']" class="form-request__field g-input" appSlideTopLabel
+                       [ngClass]="{'input-invalid': form.controls['mail'].invalid && form.controls['mail'].touched}" type="email">
+                <label>Эл. почта</label>
+            </div>
+            
+    
+            <div class="form-request__wrap form-request__wrap_size-w3 form-request__wrap_last">
+    
+                <input *ngIf="platform.isBrowser"
                     [ngClass]="{'time-input-active' : (form.get('wait_for_call').value === 'later' && isOpen)}"
                     [textMask]="{mask: timeMask}"
                     [formControl]="form.controls['time']"
-                    placeholder="__:__" type="text">
-
-            </label>
-
+                    class="form-request__field g-input form-request__field g-input_time"
+                    type="text" appSlideTopLabel>
+                <label class="form-request_radio-text">Удобное время для звонка</label>
+                <p class="form-request__notice">с 09:00 до 21:00 по мск</p>
+            </div>
         </div>
 
-        <label class="form-request__checkbox-wrap">
+        <label class="g-checkbox form-request__checkbox">
             <input [formControl]="form.controls['agreement']" type="checkbox">
-            <div class="g-checkbox form-request__checkbox" [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }"></div>
-            <span class="form-request__subtitle form-request__subtitle_checkbox">Я соглашаюсь на использование моих персональных данных.</span>
+            <div [ngClass]="{'input-invalid': ( form.get('agreement').value === false ) }"></div>
+            <span>Я соглашаюсь на использование моих персональных данных.</span>
         </label>
 
         <button *ngIf="!isSubmited"
             [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
             [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
-            class="form-request__btn">
-            Отправить заявку
+            class="form-request__btn btn_var-2">
+            Забронировать
         </button>
-    
-        <!-- <div *ngIf="isSubmited" class="form_item_btn">
-            <span class="form_item_btn_text">Готово</span>
-            <svg class="form_item_svg" viewBox="0 0 20.6 17.3">
-                <polyline id="svg-figure" class="form_item_svg_figure" points="1.1,5.5 9.1,14.9 19.3,0.9 "/>
-            </svg>
-        </div> -->
+
+        <!-- <button *ngIf="isSubmited" class="form-request__btn">Забронировать</button> -->
 
     </form>
 

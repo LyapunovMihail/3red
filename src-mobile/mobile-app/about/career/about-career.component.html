@@ -1,0 +1,34 @@
+<!--<div class="career__container" [class.career&#45;&#45;padding]="switchOn">-->
+
+    <!--<ng-container *ngIf="switchOn">-->
+
+        <!--<h2 class="career__title">Карьера</h2>-->
+
+        <!--<div class="career__wrap" *ngIf="snippet?.data">-->
+            <!--<ng-container *ngFor="let block of snippet.data">-->
+                <!--<div class="career__item" *ngIf="block.show">-->
+                    <!--<p class="career__prof">{{block.name}}</p>-->
+                    <!--<a href="{{block.url}}" target="_blank" class="career__link">{{block.text}}</a>-->
+                <!--</div>-->
+            <!--</ng-container>-->
+        <!--</div>-->
+
+    <!--</ng-container>-->
+<!--</div>-->
+
+<section class="career" id="career" [class.career--padding]="switchOn">
+
+    <ng-container *ngIf="switchOn">
+        <div class="career__container">
+            <h2 class="career__title">Карьера</h2>
+            <div class="career__wrap" *ngIf="snippet?.data">
+                <ng-container *ngFor="let block of snippet.data">
+                    <div class="career__item">
+                        <p class="career__prof">{{block.name}}</p>
+                        <a href="{{block.url}}" class="career__link">{{block.text}}</a>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</section>

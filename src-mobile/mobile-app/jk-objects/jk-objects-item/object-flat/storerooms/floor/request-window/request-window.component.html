@@ -1,0 +1,81 @@
+<!--<div class="request-window_modal">-->
+
+    <!--<div class="request-window_modal-close-bgr" (click)="close.emit(false)"></div>-->
+
+    <!--<div class="request-window_container">-->
+
+        <!--<div class="request-window_form">-->
+
+            <!--<img src="assets/img/storerooms/storeroom.jpg" width="300" height="148"/>-->
+
+            <!--<div class="request-window_form_columns">-->
+                <!--<div class="request-window_form_description">-->
+                    <!--<p>Кладовая №{{storeroomData.flat}}</p>-->
+                    <!--<p>{{storeroomData.space}} м²</p>-->
+                <!--</div>-->
+                <!--<div class="request-window_form_price">{{storeroomData.price | myBitNumberPipe}} ₽</div>-->
+            <!--</div>-->
+
+            <!--<ul  class="request-window_form_list">-->
+                <!--<li class="request-window_form_list_item"><a href="javascript:(0)" (click)="isReserveFormOpen = true">Забронировать</a></li>-->
+                <!--<li class="request-window_form_list_item"><a href="javascript:(0)" (click)="isCreditFormOpen = true">Заявка на ипотеку</a></li>-->
+            <!--</ul>-->
+
+        <!--</div>-->
+
+    <!--</div>-->
+
+<!--</div>-->
+
+
+<section class="storage-modal">
+
+    <div class="storage-modal__container">
+
+        <button class="storage-modal__btn-cls btn-cls" (click)="close.emit(false)"><span></span></button>
+
+        <h2 class="storage-modal__name">Кладовая, №{{storeroomData.flat}}</h2>
+        <div class="storage-modal__image">
+            <img src="/assets/img/flats/storage-modal.jpg" alt="preview-image">
+        </div>
+
+        <ul class="storage-modal__list">
+            <li class="storage-modal__list-item">
+                <span>Дом</span>
+                <span>{{storeroomData.house}}</span>
+            </li>
+            <li class="storage-modal__list-item">
+                <span>Секция</span>
+                <span>{{storeroomData.section}}</span>
+            </li>
+            <li class="storage-modal__list-item">
+                <span>Площадь</span>
+                <span>{{storeroomData.space}}</span>
+            </li>
+            <li class="storage-modal__list-item">
+                <span>Стоимость</span>
+                <span>{{storeroomData.price}}</span>
+            </li>
+        </ul>
+
+        <div class="storage-modal__btns">
+            <button class="storage-modal__btns-reserve btn_var-2" (click)="isReserveFormOpen = true">Забронировать кладовую</button>
+            <button class="storage-modal__btns-credit btn_var-3" (click)="isCreditFormOpen = true">Заявка на ипотеку</button>
+        </div>
+    </div>
+</section>
+
+<app-form-credit
+    (close)="isCreditFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isCreditFormOpen"
+    [apartmentPrice]="storeroomData.price"
+    [apartmentNumber]="storeroomData.flat"
+    [type]="storeroomData.type">
+</app-form-credit>
+<app-form-reserve
+    (close)="isReserveFormOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isReserveFormOpen"
+    [apartmentPrice]="storeroomData.price"
+    [apartmentNumber]="storeroomData.flat"
+    [type]="storeroomData.type">
+</app-form-reserve>

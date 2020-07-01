@@ -26,7 +26,6 @@ export class ApartmentComponent implements OnInit {
     @Input() public flatsList: IFlatWithDiscount[];
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
-
     constructor(
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
@@ -38,7 +37,6 @@ export class ApartmentComponent implements OnInit {
         this.flatData.discount = this.getDiscount(this.flatData);
         this.flatData.jkName = this.jk.name;
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
-        console.log('this.flatData: ', this.flatData);
     }
 
     public prevFlat() {

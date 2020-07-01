@@ -1,0 +1,146 @@
+@import "../../../../../styles/modules/mixins/mixin";
+
+.object-installment {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: $col-white;
+    padding: 56px 0;
+
+    &__container {
+        width: calc(100% - 140px);
+    }
+
+    &__type {
+        width: 100%;
+        max-width: 922px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 40px;
+    
+        &-item {
+            width: 287px;
+            cursor: pointer;
+        }
+        &-box {
+            display: flex;
+            box-sizing: border-box;
+        }
+        &-radiobox {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: solid 1px #999a9b;
+            margin-right: 10px;
+            background-color: #fff;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                top: calc(50% - 4px);
+                left: calc(50% - 4px);
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #fff;
+            }
+        }
+        &-text {
+            width: calc(100% - 30px);
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            padding: 2px 0 0;
+        }
+    }
+}
+
+.span-block { display: block; }
+.span-black { color: $col-black; }
+.span-nowrap { white-space: nowrap; }
+
+.span-block,
+.span-black,
+.span-nowrap { padding: 0; }
+
+.installment-calculator {
+    width: 100%;
+    max-width: 922px;
+    display: flex;
+    justify-content: space-between;
+    
+    &__item {
+        width: 287px;
+
+        &-wrap {
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+
+            &_field {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        &-text,
+        &-hint {
+            width: 100%;
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            display: block;
+        }
+        &-text { border-top: 1px solid #fff; }
+        &-hint {
+            margin: 14px 0 0;
+            white-space: normal;
+        }
+        &-field {
+            width: 100%;
+            font: 18px/23px $font-proba;
+            color: $col-black;
+            margin-bottom: 5px;
+            border: none;
+
+            &_percent {
+                text-align: right;
+                color: $col-black-6;
+            }
+        }
+
+        &_result {
+            margin-top: 14px;
+
+            div:first-child {
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &__result {
+        width: 100%;
+        max-width: 922px;
+        box-sizing: border-box;
+        display: flex;
+        margin: 50px 0 0;
+        
+        &-item {
+            width: 287px;
+
+            &+ .installment-calculator__result-item { margin-left: 30px; }
+        }
+        &-title {
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            margin: 0 0 10px;
+            white-space: nowrap;
+        }
+        &-result {
+            font: 18px/23px $font-proba;
+            color: $col-black;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

@@ -7,7 +7,9 @@ import { Component } from '@angular/core';
     providers : []
 })
 
-export class AboutComponent  {
+export class AboutComponent {
 
-    constructor() { }
+
+    constructor(
+    ) { }
 }

@@ -1,58 +1,18 @@
-<section class="news news-all shares-all">
+<section class="news">
+    <div class="news__container">
+        <h1 class="news__title">Новости</h1>
 
-    <div class="news__head">
-        <h1 class="news__head-title">Новости</h1>
         <nav class="news__nav">
             <ul class="news__nav-list">
-                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
-                    <a routerLink="/news-shares/all">Все</a>
-                </li>
-                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
-                    <a routerLink="/news-shares/news">Новости</a>
-                </li>
-                <li [routerLinkActive]="['news__nav-item_active']" class="news__nav-item">
-                    <a routerLink="/news-shares/shares">Акции</a>
-                </li>
+                <li routerLink="/news-shares/all" [routerLinkActive]="['active']" class="news__nav-item">Все</li>
+                <li routerLink="/news-shares/news" [routerLinkActive]="['active']" class="news__nav-item">Новости</li>
+                <li routerLink="/news-shares/shares" [routerLinkActive]="['active']" class="news__nav-item">Акции</li>
             </ul>
         </nav>
-    </div>
-    <!-- 
-        Для сниппетов новостей и акций нужно ограничить высоту описания новости/акции(.news-all__snippet-descr-text/.shares-all__snippet-descr-text)
-        сделать ее не более 3х строк с троеточием на конце (08.08.19)
-     -->
-    <div class="news-all__snippet shares-all__snippet">
-        <ng-container *ngFor="let snippet of allSnippets">
-        
-            <div class="news-all__snippet-item" *ngIf="snippet.category">
-                <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news-all__snippet-item_link">
-                    <div class="news-all__snippet-img">
-                        <img [src]="newsUploadsPath + snippet.image">
-                    </div>
-    
-                    <div class="news-all__snippet-descr">
-                        <h1 class="news-all__snippet-descr-title" [innerHTML]="snippet.title | myLineBreakPipe"></h1>
-                        <p *ngIf="snippet.description" class="news-all__snippet-descr-text" [innerHTML]="snippet.description | myLineBreakPipe"></p>
-                        <p class="news-all__snippet-descr-date">{{snippet.created_at | date: 'dd.MM.yyyy' }}</p>
-                    </div>
-                </a>
-            </div>
-        
-            <div class="shares-all__snippet-item" *ngIf="!snippet.category">
-                <a class="shares-all__snippet-item_link" [routerLink]="['/news-shares/shares/list/1/' + snippet._id]">
-                    <div class="shares-all__snippet-img">
-                        <img [src]="sharesUploadsPath + snippet.mainImage" alt="share">
-                        <div *ngIf="snippet.countdown && countDown(snippet.finish_date) >= 0" class="shares-all__snippet-finishing">{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</div>
-                        <div *ngIf="snippet.countdown && countDown(snippet.finish_date) < 0" class="shares-all__snippet-finishing">Акция закончилась</div>
-                    </div>
-                    <div class="shares-all__snippet-descr">
-                        <h1 class="shares-all__snippet-descr-title g-stok-ic">{{snippet.name}}</h1>
-                        <p class="shares-all__snippet-descr-text">{{snippet.text}}</p>
-                        <p class="shares-all__snippet-descr-date">{{snippet.created_at | date: 'dd.MM.yyyy' }}</p>
-                    </div>
-                </a>
-            </div>
-        
-        </ng-container>
+
+        <app-news-shares-all-items
+            [snippets]="snippets">
+        </app-news-shares-all-items>
+
     </div>
 </section>
-

@@ -1,0 +1,51 @@
+<div class="plan flats_main">
+
+    <h1 class="plan__title">Выберите дом</h1>
+    <div class="plan__rose"></div>
+
+    <div class="plan_house-select flats_wrapper">
+
+        <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/plan.jpg">
+
+        <a *ngFor="let house of houses"
+            class="plan_house-select_link plan_house-select_link--house-{{house.houseNumber}}"
+            [ngClass]="{'plan_house-select_link--active' : house.houseNumber === activeLink,
+                        'plan_house-select_link--z-index-off' : showSearchWindow}"
+            (mouseenter)="activeLink = house.houseNumber"
+            (mouseleave)="activeLink = ''"
+            [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber">
+
+            №{{house.houseNumber}} {{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}
+
+            <div class="plan_house-select_info plan_house-select_info--house-{{house.houseNumber}}">
+                <h5 class="plan_house-select_info_title">Дом №{{house.houseNumber}}</h5>
+                <p class="plan_house-select_info_row" *ngFor="let rooms of house.rooms">
+                    <span class="plan_house-select_info_rooms">{{rooms.name === 0 ? 'Студии' : rooms.name + '-комнатные'}}</span>
+                    <span class="plan_house-select_info_min-price">{{rooms.minPrice ? 'от ' + rooms.minPrice + ' млн Р' : 'не в продаже'}}</span>
+                </p>
+            </div>
+        </a>
+
+        <svg viewBox="0 0 1600 756" preserveAspectRatio="none"
+            class="plan_house-select_svg flats_svg">
+
+            <ng-container *ngFor="let plan of houses">
+                <a (click)="svgRouterLink($event, ('/objects/list/' + objectId + '/flats/house/' + plan.houseNumber))"
+                        [attr.xlink:href]="'/objects/list/' + objectId + '/flats/house/' + plan.houseNumber">
+
+                    <path class="plan_house-select_svg_house"
+                        [attr.transform]="plan.transform"
+                        [attr.style]="('opacity:' + ( activeLink === plan.houseNumber ? '1' : '0' )) | stylePipe"
+                        (mouseenter)="activeLink = plan.houseNumber"
+                        (mouseleave)="activeLink = ''"
+                        [attr.d]="plan.svgPath"
+                          id="k-{{plan.houseNumber}}">
+                    </path>
+                </a>
+            </ng-container>
+
+        </svg>
+
+    </div>
+
+</div>

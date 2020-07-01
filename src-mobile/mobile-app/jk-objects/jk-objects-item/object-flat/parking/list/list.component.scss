@@ -1,0 +1,110 @@
+@import '../../../../../../styles/modules/mixins/mixin';
+
+.parking-list {
+    width: 100%;
+    min-height: calc(100vh - 93px);
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 77px 0 0;
+
+    &__container {
+        width: 100%;
+        max-width: 1104px;
+    }
+    &__nav {
+        width: 100%;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        margin: 0 0 24px;
+
+        &-container {
+            width: 100%;
+            max-width: (1280px - 64px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-back {
+            font: 24px/29px $font-proba;
+            color: $col-black;
+            padding-left: 8px + 28px;
+            position: relative;
+            cursor: pointer;
+            &::before {
+                content: '';
+                position: absolute;
+                top: -2px; left: 0;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
+                transition: background-color .2s linear;
+            }
+            &:hover::before {
+                background-color: rgba($color: $col-black, $alpha: .5);
+            }
+        }
+        &-list {
+            display: flex;
+            li + li { margin-left: 16px; }
+        }
+        &-link {
+            font: 18px/23px $font-proba;
+            color: rgba($color: $col-black, $alpha: .5);
+            transition: color .2s linear;
+            &:hover { color: $col-red_hover; }
+            &.active { color: $col-red; }
+        }
+    }
+
+    &__title {
+        font: 36px/43px $font-proba;
+        color: $col-black;
+        margin: 0 0 40px;
+    }
+
+    &__houses {
+        width: 100%;
+        display: block;
+        margin: 0 0 32px;
+
+        &-title {
+            font: 24px/29px $font-proba;
+            color: $col-black;
+            margin: 0 0 16px;
+        }
+    }
+    &__sections {
+        width: 916px;
+        height: 71px;
+        background-color: $col-white;
+        transition: background-color .2s linear;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 0 24px;
+        margin: 0 0 4px;
+        cursor: pointer;
+        &:hover { background-color: #fef5f5; }
+        &:last-child { margin: 0; }
+
+        &-counter,
+        &-floor,
+        &-price {
+            font: 18px/24px $font-proba;
+            color: $col-black;
+        }
+        &-floor {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba($color: $col-black, $alpha: .5);
+        }
+    }
+}

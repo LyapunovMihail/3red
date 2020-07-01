@@ -1,18 +1,21 @@
-import { MyPipesModule } from '../../pipes/my-pipes.module';
-import { NewsViewComponent } from './news-view/news-view.component';
-import { NewsListComponent } from './news-preview/news-list/news-list.component';
+import { NewsMainComponent } from './news-preview/news-main/news-main.component';
+import { LineBreakPipe } from './line-break.pipe';
 import { NewsService } from './news.service';
 import { NewsPreviewComponent } from './news-preview/news-preview.component';
+import { NewsListComponent } from './news-preview/news-list/news-list.component';
+import { NewsViewComponent } from './news-view/news-view.component';
+import { NewsComponent } from './news.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NewsComponent } from './news.component';
 import { NgModule } from '@angular/core';
 
 const NewsComponents = [
     NewsComponent,
-    NewsPreviewComponent,
+    LineBreakPipe,
+    NewsMainComponent,
+    NewsViewComponent,
     NewsListComponent,
-    NewsViewComponent
+    NewsPreviewComponent,
 ];
 
 @NgModule({
@@ -26,9 +29,7 @@ const NewsComponents = [
         NewsService
     ],
     imports: [
-        MyPipesModule,
         CommonModule,
-        RouterModule,
         RouterModule.forChild([
             { path: '', component: NewsComponent
                 , children : [
@@ -41,4 +42,4 @@ const NewsComponents = [
     ]
 })
 
-export class NewsModule {}
+export class NewsModule { }

@@ -46,7 +46,7 @@ export class FormCallComponent implements OnChanges {
 
     public timeFocus() {
         if (this.platform.isBrowser) {
-            $('.form_item_field--time').focus();
+            $('.form-request_field--time').focus();
         }
     }
 
@@ -54,6 +54,7 @@ export class FormCallComponent implements OnChanges {
         this.service.sendCallForm(form).subscribe(
             (data) => {
                 this.isSubmited = true;
+                this.close.emit(false);
             },
             (error) => {
                 alert('Что-то пошло не так! Ошибка при отправке формы!');

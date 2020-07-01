@@ -1,65 +1,88 @@
-import {Component, Input, OnInit } from '@angular/core';
-import {INewsSnippet, NEWS_UPLOADS_PATH} from '../../../../serv-files/serv-modules/news-api/news.interfaces';
-import {Share, SHARES_UPLOADS_PATH} from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Share, SHARES_UPLOADS_PATH } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
+import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { HomeNewsService } from './home-news.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import * as moment from 'moment';
 
 @Component({
     selector: 'app-home-news',
-    templateUrl: './home-news.component.html',
+    templateUrl: 'home-news.component.html',
     styleUrls: [
-        './home-news.component.scss'
+        'home-news.component.scss'
     ],
     providers: [
+        HomeNewsService
     ]
 })
 
-export class HomeNewsComponent implements OnInit {
+export class HomeNewsComponent implements OnInit, OnChanges {
 
-    public newsUploadsPath: string = `/${NEWS_UPLOADS_PATH}`;
+    @Input()
+    public pageName: string;
 
-    public sharesUploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public currentSnippets = [];
 
-    public currentSlide: number = 0;
+    public showSnippetType = 'all';
 
-    public slideWidth: number;
+    public currentSlide = 0;
 
-    public mainSnippets: any[];
+    public activeTooltip: string;
 
-    public activeSnippets = 'all';
+    public newsSnippets: INewsSnippet[] = [];
+    public shareSnippets: Share[] = [];
+    public allSnippets: any[] = [];
 
-    @Input() public newsSnippets: INewsSnippet[];
-    @Input() public shareSnippets: Share[];
-    @Input() public allSnippets: any[];
+    public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
+    public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
-    constructor() {
-        moment.locale('ru');
+    constructor(
+        public windowScrollLocker: WindowScrollLocker,
+        public objectNewsService: HomeNewsService
+    ) { }
+
+    ngOnInit() {
+        this.getAllSnippets();
     }
 
-    public ngOnInit() {
-        this.mainSnippets = this.allSnippets;
-
-        if (document.documentElement.clientWidth < 370 || window.innerWidth < 370) {
-            this.slideWidth = document.documentElement.clientWidth - 15 || window.innerWidth - 15;
-        } else if (document.documentElement.clientWidth < 767 || window.innerWidth < 767) {
-            this.slideWidth = 340 + 15;
-        } else {
-            this.slideWidth = 340 + 30;
+    ngOnChanges(changes: SimpleChanges) {
+        if ('isAuthorizated' in changes) {
+            this.currentSnippets = this.currentSnippets.filter((item) => item.publish);
         }
     }
 
-    public nextBtn() {
-        this.currentSlide = (this.currentSlide < this.mainSnippets.length - 1 ) ? this.currentSlide + 1 : this.mainSnippets.length - 1;
+    public getAllSnippets() {
+        combineLatest(
+            this.objectNewsService.getMainShares(),
+            this.objectNewsService.getMainNews()
+        ).pipe(map(([shares, news]) => {
+                this.newsSnippets = news;
+                this.shareSnippets = shares;
+                return [...shares, ...news];
+            })
+        ).subscribe(
+            (data: any[]) => {
+                this.allSnippets = data;
+                this.allSnippets.sort((a, b) => {
+                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
+                });
+                this.changeType(this.allSnippets, 'all');
+            },
+            (err) => console.log(err)
+        );
     }
 
-    public prevBtn() {
-        this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0 ;
+    public onSelectItem(item: string): void {
+        this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    public changeSnippets(snippets, activeSnippets) {
-        this.mainSnippets = snippets;
-        this.activeSnippets = activeSnippets;
+    public changeType(snippets, type) {
         this.currentSlide = 0;
+        this.showSnippetType = type;
 
+        this.currentSnippets = snippets.filter((item) => item.publish);
     }
 
     public parseDate(createdAt) {

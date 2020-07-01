@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlatformDetectService } from '../../../src-mobile/mobile-app/platform-detect.service';
 
 declare let ymaps: any;
 
@@ -10,11 +11,15 @@ declare let ymaps: any;
 
 export class ContactsComponent implements OnInit {
 
-    constructor() {
+    constructor(
+        private platform: PlatformDetectService,
+    ) {
 
     }
 
     ngOnInit() {
+        if (!this.platform.isBrowser) { return; }
+
         ymaps.ready(() => {
             const myMap = new ymaps.Map('map', {
                 center: [55.669894, 37.871373],

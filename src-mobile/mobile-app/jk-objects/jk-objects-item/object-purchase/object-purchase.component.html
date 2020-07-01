@@ -1,0 +1,33 @@
+<section class="object-purchase" [class.object-item--margin]="switchOn">
+
+    <div class="object-item__container">
+
+        <ng-container *ngIf="switchOn">
+
+            <h2 class="object-purchase__title">Условия покупки</h2>
+
+            <nav class="object-purchase__nav">
+                <ul class="object-purchase__nav-list">
+                    <li class="object-purchase__nav-item" (click)="showType = 'credit'"
+                        [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
+                    <li class="object-purchase__nav-item" (click)="showType = 'installment'"
+                        [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
+                </ul>
+            </nav>
+
+            <div class="object-purchase__list" *ngIf="showType === 'credit'">
+
+                <app-object-credit-output *ngIf="showType === 'credit' && snippet?.banks"
+                    [bankList]="snippet.banks">
+                </app-object-credit-output>
+
+            </div>
+
+            <app-object-item-installment
+                *ngIf="showType === 'installment'">
+            </app-object-item-installment>
+
+        </ng-container>
+
+    </div>
+</section>

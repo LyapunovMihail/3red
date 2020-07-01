@@ -1,12 +1,13 @@
+import { BitNumberPipe } from './bit-number.pipe';
 import { FormsRequestService } from './forms-request.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormCreditComponent } from './form-credit/form-credit.component';
+import { FormReserveComponent } from './form-reserve/form-reserve.component';
 import { FormCallComponent } from './form-call/form-call.component';
 import { NgModule } from '@angular/core';
 import { TextMaskModule } from 'angular2-text-mask';
-import { FormReserveComponent } from './form-reserve/form-reserve.component';
-import { FormCreditComponent } from './form-credit/form-credit.component';
-import { BitNumberPipe } from './bit-number.pipe';
+import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.module';
 
 let Components = [
     FormCallComponent,
@@ -26,7 +27,8 @@ let Components = [
         TextMaskModule,
         CommonModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        SlideTopLabelModule
     ],
     providers: [
         FormsRequestService

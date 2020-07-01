@@ -1,0 +1,24 @@
+<section class="storage-schema" *ngIf="jk">
+
+    <div class="storage-schema__nav">
+        <div class="storage-schema__nav-container">
+
+            <a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" class="storage-schema__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
+        </div>
+    </div>
+
+    <div class="storage-schema__container">
+
+        <app-storeroom-info-window
+            [infoWindow]="infoWindow">
+        </app-storeroom-info-window>
+
+        <div class="storage-schema__plan" [class.g-3red]="!floorSvg" [innerHTML]="floorSvg | houseSVGSanitizePipe"></div>
+    </div>
+</section>
+
+<app-storeroom-request-window *ngIf="isRequestWindowOpen"
+    (close)="isRequestWindowOpen = $event; windowScrollLocker.unblock()"
+    [isOpen]="isRequestWindowOpen"
+    [storeroomData]="storeroomData">
+</app-storeroom-request-window>

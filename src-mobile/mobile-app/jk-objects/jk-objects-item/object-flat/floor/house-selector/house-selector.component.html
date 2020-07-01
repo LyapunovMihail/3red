@@ -1,0 +1,23 @@
+<div class="house-selector__label house-selector__label_corpus" (click)="showCorpus = !showCorpus" *ngIf="jk.mod === 'МКВ'">
+    <p class="house-selector__label-text">Дом {{houseTranslate[houseNumber]}} №{{sectionNumber}}</p>
+    
+    <div class="house-selector__modal" *ngIf="showCorpus">
+        <p *ngFor="let house of houseData" (click)="navigateMKV(house)"
+            class="house-selector__modal-item"
+           [class.house-selector__modal-item--disabled]="!floorCount[house.house] || !floorCount[house.house][house.section]">
+            Дом {{houseTranslate[house.house]}} №{{house.section}}
+        </p>
+    </div>
+</div>
+
+<div class="house-selector__label house-selector__label_corpus" (click)="showCorpus = !showCorpus" *ngIf="jk.mod !== 'МКВ'">
+    <p class="house-selector__label-text">Дом №{{houseNumber}}</p>
+
+    <div class="house-selector__modal" *ngIf="showCorpus">
+        <p *ngFor="let house of houseData" (click)="navigateAll(house.value)"
+           class="house-selector__modal-item"
+           [class.house-selector__modal-item--disabled]="!floorCount[house.value][sectionNumber]">
+            {{house.name}}
+        </p>
+    </div>
+</div>

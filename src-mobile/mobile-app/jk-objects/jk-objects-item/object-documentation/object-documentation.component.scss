@@ -1,0 +1,72 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.object-documentation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__head { margin: 0 0 16px; }
+
+    &__options {
+        margin: 0 0 16px;
+        .btn__admin-setting { margin-right: 8px; }
+    }
+    &__title { margin: 0 0 24px; }
+
+    &__list {
+        width: 100%;
+
+        &-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #d8d8d8;
+            padding: 16px 0;
+            &:last-child { border-bottom: 0; }
+        }
+
+        &-title { width: 446px; }
+
+        &-wrap {
+            width: calc(100% - (446px + 24px));
+            max-width: 634px;
+            display: flex;
+            flex-direction: column;
+            padding: 2px 0 0;
+
+            &_file {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin: 0 0 12px;
+                &:last-child { margin: 0; }
+            }
+        }
+
+        &-file {
+            display: block;
+            width: 441px + 9px + 19px;
+            font: 18px/23px $font-proba;
+            color: $col-red;
+            padding-left: 19px + 9px;
+            position: relative;
+            &::after {
+                content: '';
+                width: 19px;
+                height: 23px;
+                position: absolute;
+                top: 0; left: 0;
+                background: url(/assets/img/pdf.svg) left center no-repeat;
+                background-size: 19px 23px;
+            }
+            &:hover span { background-size: 100% 1px; }
+        }
+        &-date {
+            max-width: 85px;
+            font: 18px/23px $font-proba;
+            color: $col-black-5;
+            text-align: right;
+        }
+    }
+}

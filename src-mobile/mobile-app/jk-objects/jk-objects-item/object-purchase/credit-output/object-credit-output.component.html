@@ -1,0 +1,38 @@
+<div class="object-purchase__list-container" [style.height.px]="activeBanksLength < 5 ? (98 * activeBanksLength + 39) : moreBanks ? (98 * activeBanksLength + 39) : (98 * 5 + 39)">
+
+    <div class="object-purchase__list-head">
+        <p class="object-purchase__list-text object-purchase__list-text_head">Банк</p>
+        <p class="object-purchase__list-text object-purchase__list-text_head"
+            [class.no-percent]="hideEmptyColums('percent',bankList)">Ставка от</p>
+        <p class="object-purchase__list-text object-purchase__list-text_head"
+            [class.no-deadline]="hideEmptyColums('deadline',bankList)">Срок</p>
+        <p class="object-purchase__list-text object-purchase__list-text_head"
+            [class.no-initial]="hideEmptyColums('initial',bankList)">Минимальный взнос</p>
+    </div>
+
+    <ng-container *ngFor="let bank of bankList">
+        <div class="object-purchase__list-item" *ngIf="bank.show" [ngClass]="{
+            'no-percent': hideEmptyColums('percent',bankList),
+            'no-deadline': hideEmptyColums('deadline',bankList),
+            'no-initial': hideEmptyColums('initial',bankList)
+        }">
+            <div class="object-purchase__list-text object-purchase__list-image">
+                <img [src]="bank.image" alt="bank-logo" *ngIf="!bank.isNew">
+                <img [src]="uploadsPath + bank.image" alt="bank-logo" *ngIf="bank.isNew">
+            </div>
+            <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
+            <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-rate">
+                <span>{{bank.percent}}</span>
+            </p>
+            <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-date">
+                <span>{{bank.deadline}}</span>
+            </p>
+            <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-payment">
+                <span>{{bank.initial}}</span>
+            </p>
+        </div>
+    </ng-container>
+
+</div>
+
+<button class="object-purchase__list-btn btn-empty" [class.active]='moreBanks' (click)="moreBanks = !moreBanks" *ngIf="activeBanksLength > 5">Показать все банки</button>

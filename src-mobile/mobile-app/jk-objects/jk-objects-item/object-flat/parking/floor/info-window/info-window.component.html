@@ -1,0 +1,7 @@
+<div class="parking-schema__info">
+    <ng-container *ngIf="infoWindow">
+        <p class="parking-schema__info-item parking-schema__info-item--type">Машиноместо, <span>>№ {{infoWindow.flat}}</span></p>
+        <p class="parking-schema__info-item parking-schema__info-item--space">{{infoWindow.space}} м²</p>
+        <p class="parking-schema__info-item parking-schema__info-item--price">{{infoWindow.price | myBitNumberPipe}} &#8381;</p>
+    </ng-container>
+</div>

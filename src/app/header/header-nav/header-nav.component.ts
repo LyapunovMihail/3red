@@ -4,6 +4,7 @@ import { HeaderService, IHeaderLink } from '../header.service';
 import { Router } from '@angular/router';
 import { EventsService } from '../../commons/events.service';
 import { ViewportScroller } from '@angular/common';
+import { PlatformDetectService } from '../../platform-detect.service';
 declare let $: any;
 
 interface INavLink extends IHeaderLink {
@@ -39,6 +40,7 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     public month: number;
 
     constructor(
+        public platform: PlatformDetectService,
         private windowEventsService: WindowEventsService,
         private eventsService: EventsService,
         public headerService: HeaderService,
@@ -71,6 +73,8 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
 
     ngAfterViewInit() {
+        if ( !this.platform.isBrowser ) { return false; }
+
         setTimeout(() => {
             this.getLinksSizes();
 
@@ -101,6 +105,8 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
 
     private getLinksSizes() {
+        if ( !this.platform.isBrowser ) { return false; }
+
         this.anchors.forEach((a) => {
             const link = document.getElementById(`a-${a.url}`);
             a.linkWidth = link.clientWidth;
@@ -109,7 +115,9 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
 
     private getBlocksSizes() {
-        this.anchors.forEach((a, i, mas) => {
+        if ( !this.platform.isBrowser ) { return false; }
+
+        this.anchors.forEach((a) => {
             const block = document.getElementById(`${a.url}`);
             if (!block) { // Если блок = undefined, обнуляю offsetTop для скрытия пунктов чьи компоненты отстутствуют
                 return;
@@ -125,6 +133,8 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
 
     // Скролл до якоря
     public scrollLink(link) {
+        if ( !this.platform.isBrowser ) { return false; }
+
         if (!$(`#${link}`).length) { return; }
         const destination = $(`#${link}`).offset().top;
         this.viewportScroller.scrollToPosition([0, destination - 96]);
@@ -132,6 +142,8 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
 
     ngOnDestroy() {
+        if ( !this.platform.isBrowser ) { return false; }
+
         this.windowScrollEvent.unsubscribe();
         this.pageResizeEvent.unsubscribe();
     }
