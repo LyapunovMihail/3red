@@ -8,6 +8,7 @@ import { SlideTopLabelModule } from '../UI/slide-top-label/slide-top-label.modul
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceAdminComponent } from './service-content-admin/service-admin.component';
 import { AutoResizeTextareaModule } from '../UI/auto-resize-textarea/auto-resize-textarea.module';
+import { NavMenuModule } from '../UI/nav-menu/nav-menu.module';
 
 const serviceComponents = [
     ServiceComponent,
@@ -28,6 +29,7 @@ const serviceComponents = [
         SlideTopLabelModule,
         AutoResizeTextareaModule,
         ReactiveFormsModule,
+        NavMenuModule,
         RouterModule.forChild([
             { path: '', component: ServiceComponent }
         ])

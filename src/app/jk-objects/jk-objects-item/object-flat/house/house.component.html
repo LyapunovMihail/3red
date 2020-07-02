@@ -39,6 +39,7 @@
 
     <app-flats-search
         [showChess]="showChess"
+        [chessHeight]="chessHeight"
         (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
 
         <div class="house__sections" #chessContainer *ngIf="showChess">

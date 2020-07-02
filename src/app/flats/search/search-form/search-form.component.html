@@ -19,7 +19,8 @@
                 <app-search-sorting
                     [(ngModel)]="sort"
                     [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="sortChange.emit(sort)">
+                    (ngModelChange)="sortChange.emit(sort)"
+                    [moreFilter]="moreFilter">
                 </app-search-sorting>
         
                 <div class="search-form__wrap">
@@ -119,7 +120,10 @@
                     <button class="search-form__btn" [class.search-form__btn_open]="moreFilter"
                         (click)="moreFilter = !moreFilter">Еще параметры</button>
                     
-                    <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter" #decorCheckbox>
+                    <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter"
+                         [class.modlist-show--params]="moreFilter"
+                         [class.modlist-hide--params]="!moreFilter"
+                         #decorCheckbox>
 
                             <app-search-checkbox-list-decor
                                 [btnList]="decorList"

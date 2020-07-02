@@ -79,6 +79,23 @@
             }
         }
 
+        &-jkLink {
+            margin: 0 0 32px;
+
+            &> a {
+                font: 18px/23px $font-proba;
+                color: $col-red;
+                padding-left: 21px;
+                position: relative;
+                &::after {
+                    content: url(/assets/img/flat-link-jk.svg);
+                    position: absolute;
+                    top: 50%; left: 0;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+
         &-subtitle,
         &-value { font: $font-18; }
         &-value {

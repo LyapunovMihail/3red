@@ -4,13 +4,13 @@
     width: $container;
     position: absolute;
     height: 24px;
-    top: calc(100% + 85px);
+    //top: calc(100% + 85px);
     left: 0;
     right: 0;
     display: flex;
     z-index: 1;
 
-    &_scheme { top: calc(100% + 374px); }
+    //&_scheme { top: calc(100% + 374px); }
 
     &-control {
         position: absolute;

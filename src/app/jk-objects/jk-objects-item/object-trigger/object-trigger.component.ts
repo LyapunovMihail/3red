@@ -29,11 +29,6 @@ export class ObjectTriggerComponent implements OnInit {
             .subscribe((flats) => {
                 this.buildTriggersData(flats);
             });
-
-        // this.flatsService.getFlats({ mod: this.mod, type: 'КЛ,ММ' })
-        //     .subscribe((flats) => {
-        //         this.buildTriggersData(flats);
-        //     });
     }
 
     private buildTriggersData(flats) {

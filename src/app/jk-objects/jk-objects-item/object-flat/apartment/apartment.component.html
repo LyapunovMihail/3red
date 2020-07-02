@@ -55,7 +55,11 @@
             </div>
         </div>
 
-        <a [routerLink]="'/objects/list/' + this.jk._id">ЖК {{jk.name}}</a>
+        <div class="apartment__info-jkLink">
+            <a [routerLink]="'/objects/list/' + this.jk._id">ЖК {{jk.name}}</a>
+        </div>
+
+
         <div class="apartment__btn">
             <button (click)="isReserveFormOpen = true" class="apartment__btn-reserve btn_var-2">Забронировать</button>
             <button (click)="isCreditFormOpen = true;" class="apartment__btn-credit btn_var-3">Заявка на ипотеку</button>

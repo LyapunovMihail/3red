@@ -1,5 +1,5 @@
-<div class="search-form__output-sorting">
-        
+<div class="search-form__output-sorting" [class.search-form__output-sorting--top]="moreFilter">
+
     <div *ngFor="let sort of sortList"
         (click)="sortChange(sort.name, !sort.value)"
         [ngClass]="{

@@ -1,5 +1,5 @@
 import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { SearchService } from '../search.service';
 import { FavoritesService } from '../../../favorites/favorites.service';
@@ -22,6 +22,8 @@ export class SearchOutputComponent implements OnInit {
 
     @ViewChild('container')
     public container: ElementRef;
+    @ViewChild('result')
+    public result: ElementRef;
 
     public isLoading = true;
 
@@ -29,22 +31,41 @@ export class SearchOutputComponent implements OnInit {
         private platform: PlatformDetectService,
         private flatsDiscountService: FlatsDiscountService,
         private searchService: SearchService,
-        public favoritesService: FavoritesService
+        public favoritesService: FavoritesService,
+        private ref: ChangeDetectorRef
     ) {}
 
     public ngOnInit() {
         this.searchService.getOutputFlatsChanged()
-            .subscribe((flats: IFlatWithDiscount[]) => {
-                this.flatsList = flats;
+            .subscribe((changes: {flats: IFlatWithDiscount[], showMore: boolean}) => {
+                this.flatsList = changes.flats;
                 this.flatsList.map((flat) => {
                     flat.discount = this.getDiscount(flat);
                     flat.inFavorite = this.inFavorite(flat);
                     return flat;
                 });
+                if (changes.showMore) {
+                    this.resultAnimate();
+                } else {
+                    this.ref.detectChanges();
+                    this.container.nativeElement.style.height = this.result.nativeElement.clientHeight + 192 + 'px';
+                }
             });
 
         this.searchService.getLoadingIndicator()
             .subscribe((item) => this.isLoading = item);
+    }
+
+    private resultAnimate() {
+        if (!this.platform.isBrowser) { return; }
+
+        this.container.nativeElement.style.height = this.container.nativeElement.clientHeight - 940 + 'px';
+        this.container.nativeElement.classList.add('search-output--animate');
+        this.container.nativeElement.style.height = this.container.nativeElement.clientHeight + 940 + 'px';
+
+        setTimeout(() => {
+            this.container.nativeElement.classList.remove('search-output--animate');
+        }, 1500);
     }
 
     public flatsCount() {

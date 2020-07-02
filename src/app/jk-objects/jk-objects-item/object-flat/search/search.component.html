@@ -2,6 +2,7 @@
 
     <app-search-form
         [showChess]="showChess"
+        [chessHeight]="chessHeight"
         (formChange)="formChange($event)"
         (sortChange)="sortChange($event)">
     </app-search-form>
@@ -13,7 +14,7 @@
         <app-search-output
             [flatsList]="outputFlatsList"
             [count]="count"
-            (loadMore)="loadMore()"
+            (loadMore)="loadMore(true)"
             [showMore]="isLoadMoreBtn">
         </app-search-output>
     </div>

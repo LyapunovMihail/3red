@@ -5,7 +5,7 @@
         <h3 class="search-output__head-title">Найдено {{flatsCount()}} квартир</h3>
     </div>
 
-    <div class="search-output__result">
+    <div class="search-output__result" #result>
         <div class="search-output__empty" *ngIf="flatsList.length === 0 && !isLoading">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</div>
 
         <div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">

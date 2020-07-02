@@ -11,12 +11,17 @@
         <button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
 
         <nav class="object-dynamic__nav">
-            <ul class="object-dynamic__nav-list">
-                <li class="object-dynamic__nav-item" (click)="changeTab('process')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[0].show"
-                    [class.object-dynamic__nav-item_active]="active === 'process'">Ход строительства</li>
-                <li class="object-dynamic__nav-item" (click)="changeTab('ready')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[1].show"
-                    [class.object-dynamic__nav-item_active]="active === 'ready'">Готовые дома</li>
-            </ul>
+            <!--<ul class="object-dynamic__nav-list">-->
+                <!--<li class="object-dynamic__nav-item" (click)="changeTab('process')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[0].show"-->
+                    <!--[class.object-dynamic__nav-item_active]="active === 'process'">Ход строительства</li>-->
+                <!--<li class="object-dynamic__nav-item" (click)="changeTab('ready')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[1].show"-->
+                    <!--[class.object-dynamic__nav-item_active]="active === 'ready'">Готовые дома</li>-->
+            <!--</ul>-->
+            <nav-menu
+                [navList]="navList"
+                [linkType]="'else'"
+                (routeNavigate)="changeTab($event)"
+            ></nav-menu>
         </nav>
 
         <ng-container *ngIf="tabSnippet?.dynamic && (tabSnippet.dynamic[0].show || tabSnippet.dynamic[1].show)">

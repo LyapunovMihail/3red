@@ -12,7 +12,7 @@
 
 }
 .news__btn {
-    font-size: 24px;
+    font-size: 18px;
     padding: 13px 0 13px 36px;
     color: #000;
     position: relative;
@@ -20,8 +20,9 @@
     &::before {
         content: '';
         position: absolute;
-        top: 9px;
+        top: 46%;
         left: 0;
+        transform: translateY( -50%);
         width: 28px;
         height: 28px;
         border-radius: 50%;

@@ -6,6 +6,23 @@
     // z-index: 10;
 }
 
+.modlist-show,
+.modlist-hide {
+    position: relative;
+    z-index: 12;
+}
+.modlist-show { animation: showpopup .4s ease forwards; }
+.modlist-hide { animation: hidepopup .4s ease forwards; }
+.modlist-show--params { animation: showpopup .8s ease forwards; }
+.modlist-hide--params { animation: hidepopup .8s ease forwards; }
+@keyframes showpopup {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes hidepopup {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
 .search {
     width: 100%;
     display: flex;

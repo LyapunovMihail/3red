@@ -11,16 +11,21 @@
 <section class="newss">
     <div class="news__container">
 
-        <ul class="tabs" *ngIf="tabSnippet?.tab?.length">
-            <li *ngIf="tabSnippet?.tab?.length > 1" class="tab" [class.tab--active]="currentTab === 'null'" (click)="changeTab('null')">
-                Все
-            </li>
-            <ng-container *ngFor="let tab of tabSnippet.tab">
-                <li *ngIf="tab.show" class="tab" [class.tab--active]="currentTab === tab.name" (click)="changeTab(tab.name)">
-                    {{tab.name}}
-                </li>
-            </ng-container>
-        </ul>
+        <!--<ul class="tabs" *ngIf="tabSnippet?.tab?.length">-->
+            <!--<li *ngIf="tabSnippet?.tab?.length > 1" class="tab" [class.tab&#45;&#45;active]="currentTab === 'null'" (click)="changeTab('null')">-->
+                <!--Все-->
+            <!--</li>-->
+            <!--<ng-container *ngFor="let tab of tabSnippet.tab">-->
+                <!--<li *ngIf="tab.show" class="tab" [class.tab&#45;&#45;active]="currentTab === tab.name" (click)="changeTab(tab.name)">-->
+                    <!--{{tab.name}}-->
+                <!--</li>-->
+            <!--</ng-container>-->
+        <!--</ul>-->
+        <nav-menu *ngIf="navList.length"
+            [navList]="navList"
+            [linkType]="'else'"
+            (routeNavigate)="changeTab($event)"
+        ></nav-menu>
 
         <ng-container *ngIf="contentSnippet?.uk?.length">
             <a [attr.href]="!uk.url || uk.url === '' ? null : uk.url" target="_blank" *ngFor="let uk of contentSnippet.uk"

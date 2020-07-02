@@ -6,7 +6,8 @@
             [(ngModel)]="sort"
             [ngModelOptions]="{standalone: true}"
             (ngModelChange)="sortChange.emit(sort)"
-            [topPos]="showChess">
+            [showChess]="showChess"
+            [chessHeight]="chessHeight">
         </app-search-sorting>
 
         <div class="search-form__wrap">
@@ -94,8 +95,10 @@
                         {{ houseName }}
                     </p>
                 </div>
-                <div class="close-area" *ngIf="showCorpus" (click)="showCorpus = false"></div>
+                <div class="close-area" *ngIf="showCorpus" (click)="switchPopup()"></div>
                 <app-search-house-select *ngIf="showCorpus"
+                    [class.modlist-show]="showCorpus"
+                    [class.modlist-hide]="hideCorpus"
                     [btnList]="housesBtnList"
                     [formControl]="form.controls['houses']">
                 </app-search-house-select>
@@ -104,7 +107,10 @@
             <button class="search-form__btn" [class.search-form__btn_open]="moreFilter"
                     (click)="moreFilter = !moreFilter">Еще параметры</button>
 
-            <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter" #decorCheckbox>
+            <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter"
+                 [class.modlist-show--params]="moreFilter"
+                 [class.modlist-hide--params]="!moreFilter"
+                 #decorCheckbox>
 
                 <app-search-checkbox-list-decor
                     [btnList]="decorList"

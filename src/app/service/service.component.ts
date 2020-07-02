@@ -25,7 +25,9 @@ export class ServiceComponent implements OnInit, OnDestroy {
     public closeTabsModal = true;
     public closeContentModal = true;
 
-    public currentTab: string = 'null';
+    public currentTab = 'null';
+
+    public navList = [];
 
     constructor(
         private authorization: AuthorizationObserverService,
@@ -36,7 +38,13 @@ export class ServiceComponent implements OnInit, OnDestroy {
         this.authorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
         });
+
         this.getTabsThanContent();
+    }
+
+    private setTabs() {
+        this.navList = [{ name: 'Все', link: 'null', show: true }, ...this.tabSnippet.tab];
+        console.log('this.navList: ', this.navList);
     }
 
     public getTabsThanContent() {
@@ -52,6 +60,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
         if (this.tabSnippet) {
             if (this.tabSnippet.tab && this.tabSnippet.tab.length && this.tabSnippet.tab.some((tab) => tab.show)) {
                 // this.currentTab = this.tabSnippet.tab.find((tab) => tab.show).name;
+                this.setTabs();
                 this.getContent();
             }
         }

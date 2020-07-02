@@ -17,7 +17,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SearchSortingComponent {
 
     public activeSort: string;
-    @Input() public topPos = false;
+    @Input() public showChess = false;
+    @Input() public chessHeight;
 
     public sortList = [
         {

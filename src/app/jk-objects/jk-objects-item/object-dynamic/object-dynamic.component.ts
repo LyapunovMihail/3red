@@ -36,6 +36,11 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     public uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
+    public navList = [
+        { name: 'Ход строительства', link: 'process', show: this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show },
+        { name: 'Готовые дома', link: 'ready', show: this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show }
+    ];
+
     constructor(
         public location: Location,
         private router: Router,

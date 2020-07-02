@@ -9,7 +9,11 @@
     right: 0;
     display: flex;
     z-index: 1;
+    transition: 0.2s linear;
 
+    &--top {
+        top: calc(100% + 85px);
+    }
     &_scheme { top: calc(100% + 374px); }
 
     &-control {

@@ -46,6 +46,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public scrollStep = 300;
     public lastScrollStep: number;
     public showChess = false;
+    public chessHeight: number;
 
     public isStorerooms = false;
     public isParking = false;
@@ -217,6 +218,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public scrollCalculate() {
         setTimeout(() => {
+            this.chessHeight = this.chessContainer.nativeElement.clientHeight;
+            console.log('this.chessHeight: ', this.chessHeight);
             this.scroll = 0;
             this.chessMaxScroll = this.chess.nativeElement.clientWidth - this.chessContainer.nativeElement.clientWidth;
             if (this.chessMaxScroll > 0 ) {

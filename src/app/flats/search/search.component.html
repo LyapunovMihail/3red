@@ -15,9 +15,8 @@
         <app-search-output
             [flatsList]="outputFlatsList"
             [count]="count"
-            (loadMore)="loadMore()"
-            [showMore]="isLoadMoreBtn"
-            >
+            (loadMore)="loadMore(true)"
+            [showMore]="isLoadMoreBtn">
         </app-search-output>
     </div>
 </div>

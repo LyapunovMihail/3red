@@ -18,14 +18,16 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public routerEvents: any;
     public formEvents: any;
     public form: FormGroup;
-    public moreFilter: boolean = false;
-    public showCorpus: boolean = false;
+    public moreFilter = false;
+    public showCorpus = false;
+    public hideCorpus = false;
     public decorList = FormConfig.decorationList;
     public sort: string;
     public housesBtnList: any[] = [];
 
     @Input() public parentPlan: boolean;
     @Input() public showChess;
+    @Input() public chessHeight;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
 
@@ -137,5 +139,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     public get houseName() {
         return this.housesBtnList.find((btn) => btn.value === this.form.get('houses').value).name;
+    }
+
+    public switchPopup() {
+        this.hideCorpus = true;
+        setTimeout(() => {
+            this.showCorpus = false;
+            this.hideCorpus = false;
+        }, 400);
     }
 }

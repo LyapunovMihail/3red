@@ -12,6 +12,8 @@
 }
 .modlist-show { animation: showpopup .4s ease forwards; }
 .modlist-hide { animation: hidepopup .4s ease forwards; }
+.modlist-show--params { animation: showpopup .8s ease forwards; }
+.modlist-hide--params { animation: hidepopup .8s ease forwards; }
 @keyframes showpopup {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -89,6 +91,7 @@
             flex-flow: row nowrap;
             align-items: flex-start;
             justify-content: center;
+            transition: 0.2s linear;
         }
         &--slide { height: 190px; }
         &--container {

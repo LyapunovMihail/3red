@@ -126,6 +126,17 @@
             span::after { background-color: $col-white; }
         }
     }
+    &_gray {
+        background-color: $col-ef;
+        span::before,
+        span::after { background-color: $col-black; }
+
+        &:hover {
+            background-color: $col-red_hover;
+            span::before,
+            span::after { background-color: $col-white; }
+        }
+    }
     &_black {
         background-color: rgba($color: $col-black, $alpha: 0.56);
         span::before,

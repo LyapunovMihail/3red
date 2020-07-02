@@ -14,6 +14,7 @@ import { DynamicAdminContentComponent } from './object-dynamic-admin/dynamic-adm
 import { DynamicService } from './object-dynamic-admin/dynamic-admin-content/dynamic-admin-content.service';
 import { GHMTextAreaModule } from '../../../UI/ghm-textarea/ghm-textarea.module';
 import { RouterModule } from '@angular/router';
+import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -43,7 +44,8 @@ import { RouterModule } from '@angular/router';
         AdminModalModule,
         SlideTopLabelModule,
         GHMTextAreaModule,
-        RouterModule
+        RouterModule,
+        NavMenuModule
     ],
     providers: [
         DynamicService

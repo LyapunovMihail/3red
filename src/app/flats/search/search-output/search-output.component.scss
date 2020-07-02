@@ -13,6 +13,10 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+    height: 100%;
+    &--animate {
+        transition: 1.5s height ease-in-out;
+    }
 
     &__empty {
         @include f16-24(rgba(0, 1, 5, .8));

@@ -33,50 +33,62 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
         {
             name: 'Январь',
             value: 1,
+            link: 1,
             disabled: false
         }, {
             name: 'Февраль',
             value: 2,
+            link: 2,
             disabled: false
         }, {
             name: 'Март',
             value: 3,
+            link: 3,
             disabled: false
         }, {
             name: 'Апрель',
             value: 4,
+            link: 4,
             disabled: false
         }, {
             name: 'Май',
             value: 5,
+            link: 5,
             disabled: false
         }, {
             name: 'Июнь',
             value: 6,
+            link: 6,
             disabled: false
         }, {
             name: 'Июль',
             value: 7,
+            link: 7,
             disabled: false
         }, {
             name: 'Август',
             value: 8,
+            link: 8,
             disabled: false
         }, {
             name: 'Сентябрь',
             value: 9,
+            link: 9,
             disabled: false
         }, {
             name: 'Октябрь',
             value: 10,
+            link: 10,
             disabled: false
         }, {
             name: 'Ноябрь',
             value: 11,
+            link: 11,
             disabled: false
         }, {
             name: 'Декабрь',
             value: 12,
+            link: 12,
             disabled: false
         }
     ];

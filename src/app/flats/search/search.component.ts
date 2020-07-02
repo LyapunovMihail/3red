@@ -142,14 +142,14 @@ export class SearchComponent implements OnInit, OnDestroy {
             }
         );
     }
-    public loadMore() {
+    public loadMore(showMore?: boolean) {
         for (let i = 0; i < 10; i++) {
             if (this.skip < this.searchFlats.length) {
                 this.outputFlatsList.push(this.searchFlats[this.skip++]);
             }
         }
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
-        this.searchService.setOutputFlatsChanged(this.outputFlatsList);
+        this.searchService.setOutputFlatsChanged(this.outputFlatsList, showMore);
     }
     public sortChange(sort) {
         this.sort = sort;

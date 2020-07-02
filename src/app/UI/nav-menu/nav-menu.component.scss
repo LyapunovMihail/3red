@@ -35,6 +35,10 @@
             &+ .nav-menu__list-item { margin-left: 16px; }
             &.active { color: $col-red; }
             &.default { color: $col-red; }
+            &.disabled {
+                opacity: 0.4;
+                pointer-events: none;
+            }
         }
     }
 }

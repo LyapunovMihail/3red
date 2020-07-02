@@ -28,6 +28,7 @@ export class SearchComponent implements OnDestroy {
     public objectId: string;
 
     @Input() public showChess;
+    @Input() public chessHeight;
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
 
     constructor(
@@ -106,14 +107,14 @@ export class SearchComponent implements OnDestroy {
         );
     }
 
-    public loadMore() {
+    public loadMore(showMore?: boolean) {
         for (let i = 0; i < 10; i++) {
             if (this.skip < this.searchFlats.length) {
                 this.outputFlatsList.push(this.searchFlats[this.skip++]);
             }
         }
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
-        this.searchService.setOutputFlatsChanged(this.outputFlatsList);
+        this.searchService.setOutputFlatsChanged(this.outputFlatsList, showMore);
     }
 
     public sortChange(sort) {
