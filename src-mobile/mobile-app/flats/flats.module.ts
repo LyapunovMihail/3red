@@ -1,17 +1,28 @@
-import { GHMRangeNumberModule } from './search/search-form/ghm-range-number/ghm-range-number.module';
-import { FlatsComponent } from './flats.component';
+import { GHMRangeNumberModule } from './search-form/ghm-range-number/ghm-range-number.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SearchComponents } from './search/search';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SearchComponent } from './search/search.component';
-import { FlatsListModule } from './search/search-output/flats-list/flats-list.module';
+import { FlatsComponent } from './flats.component';
+import { SearchFormComponent } from './search-form/search-form.component';
+import { SearchOutputComponent } from './search-output/search-output.component';
+import { SearchSortingComponent } from './search-sorting/search-sorting.component';
+import { ModSelectComponent } from './search-form/mod-select/mod-select.component';
+import { SearchFormPipe } from './search-form/search-form.pipe';
+import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
+import { CheckboxListDecorComponent } from './search-form/checkbox-list-decor/checkbox-list-decor.component';
+import { BitNumberPipe } from './search-output/bit-number.pipe';
 
 const FlatsComponents = [
     FlatsComponent,
-
-    ...SearchComponents,
+    SearchFormComponent,
+    SearchOutputComponent,
+    SearchSortingComponent,
+    ModSelectComponent,
+    SearchFormPipe,
+    BitNumberPipe,
+    CheckboxListComponent,
+    CheckboxListDecorComponent,
 ];
 
 @NgModule({
@@ -25,16 +36,11 @@ const FlatsComponents = [
         ReactiveFormsModule,
         FormsModule,
         GHMRangeNumberModule,
-        FlatsListModule,
 
         CommonModule,
-        RouterModule,
         RouterModule.forChild([
-            { path: '', component: FlatsComponent,
-                children: [
-                    { path: 'search', component: SearchComponent}
-                ]
-            }
+            { path: 'flats', redirectTo: '/flats/search', pathMatch: 'full' },
+            { path: 'flats/search', component: FlatsComponent, pathMatch: 'full' },
         ])
     ]
 })

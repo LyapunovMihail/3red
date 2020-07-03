@@ -10,7 +10,7 @@
         <h2 class="object-dynamic__title" *ngIf="jk">Фотоотчет ЖК {{jk.name}}</h2>
         <button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
 
-        <nav class="object-dynamic__nav">
+        <nav class="object-dynamic__nav" *ngIf="navList.length">
             <!--<ul class="object-dynamic__nav-list">-->
                 <!--<li class="object-dynamic__nav-item" (click)="changeTab('process')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[0].show"-->
                     <!--[class.object-dynamic__nav-item_active]="active === 'process'">Ход строительства</li>-->

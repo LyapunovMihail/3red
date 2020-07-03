@@ -36,10 +36,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     public uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
-    public navList = [
-        { name: 'Ход строительства', link: 'process', show: this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show },
-        { name: 'Готовые дома', link: 'ready', show: this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show }
-    ];
+    public navList = [];
 
     constructor(
         public location: Location,
@@ -87,11 +84,20 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     public getTabSnippet() {
         this.dynamicService.getTabsSnippetById(this.objectId).subscribe(
-            (data) => this.tabSnippet = data,
+            (data) => {
+                this.tabSnippet = data; this.setNavList();
+            },
             (err) => console.error(err)
         );
     }
-
+    private setNavList() {
+        console.log('this.tabsnippet: ', this.tabSnippet);
+        console.log('this.tabSnippet && this.tabSnippet.dynamic: ', this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show ? true : false);
+        this.navList = [
+            { name: 'Ход строительства', link: 'process', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show ? true : false) },
+            { name: 'Готовые дома', link: 'ready', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show ? true : false) }
+        ];
+    }
     public changeTab(tab) {
         this.active = tab;
         this.setContent(this.contentSnippet);

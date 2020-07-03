@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { ObjectFlatsService } from '../../object-flats.service';
-import { GHMNumberPipe } from '../../../../../flats/search/search-form/ghm-range-number/ghm-number.pipe';
+import { GHMNumberPipe } from '../../../../../flats/search-form/ghm-range-number/ghm-number.pipe';
 
 @Component({
     selector: 'app-search-form',

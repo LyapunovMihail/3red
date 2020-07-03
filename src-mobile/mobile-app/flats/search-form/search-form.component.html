@@ -1,0 +1,247 @@
+<!--<div class="search-form__container" [ngClass]="{'search-form__container&#45;&#45;slide' : moreFilter}">-->
+
+    <!--<form [formGroup]="form" class="search-form">-->
+
+        <!--<h1 class="search-form__title">Выбор квартиры</h1>-->
+
+        <!--<div class="search-form__house">-->
+            <!--<app-search-mod-select-->
+                <!--[value]="form.controls['mod'].value"-->
+                <!--[modList]="modsBtnList"-->
+                <!--[formControl]="form.controls['mod']">-->
+            <!--</app-search-mod-select>-->
+        <!--</div>-->
+
+        <!--<div class="search-form__wrap search-form__wrap&#45;&#45;for-filter" [ngClass]="{'search-form__wrap&#45;&#45;slide' : moreFilter}">-->
+
+            <!--<div class="search-form__wrap search-form__wrap&#45;&#45;container">-->
+
+                <!--<app-search-sorting-->
+                    <!--[(ngModel)]="sort"-->
+                    <!--[ngModelOptions]="{standalone: true}"-->
+                    <!--(ngModelChange)="sortChange.emit(sort)">-->
+                <!--</app-search-sorting>-->
+        <!---->
+                <!--<div class="search-form__wrap">-->
+        <!---->
+                    <!--<div class="search-form__wrap-item search-form__wrap-item_room">-->
+                        <!--<p class="search-form__subtitle">Количество комнат</p>-->
+                        <!--<ul class="search-form__rooms">-->
+                            <!--<li formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index"-->
+                                <!--class="search-form__rooms-item">-->
+                                <!--<label class="search-form__rooms-checkbox">-->
+                                    <!--<input [formControl]="control" [style.display]="'none'" name="rooms" type="checkbox">-->
+                                    <!--<div class="search-form__rooms-checkbox_for-click search-form__text"-->
+                                         <!--[class.search-form__rooms-checkbox_for-click-first]="i === 0">-->
+                                        <!--{{(i === 0) ? 'Ст' : (i === 3) ? '3+' : i}}-->
+                                    <!--</div>-->
+                                <!--</label>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+        <!---->
+                    <!--<div class="search-form__wrap-item search-form__wrap-item_price">-->
+                        <!--<p class="search-form__subtitle">Цена</p>-->
+        <!---->
+                        <!--<div class="search-form__range search-form__range_price">-->
+                            <!--<div class="search-form__range-text search-form__text">-->
+                                <!--<p><span #minPrice></span> &#8381;</p>-->
+                                <!--<span></span>-->
+                                <!--<p><span #maxPrice></span> &#8381;</p>-->
+                            <!--</div>-->
+        <!---->
+                            <!--<ghm-range-number-->
+                                <!--[formControl]="form.controls['price']"-->
+                                <!--[min]="config.price.min"-->
+                                <!--[max]="config.price.max"-->
+                                <!--[toFixed]="true"-->
+                                <!--(move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0))">-->
+                            <!--</ghm-range-number>-->
+                        <!--</div>-->
+                    <!--</div>-->
+        <!---->
+                    <!--<div class="search-form__wrap-item search-form__wrap-item_square">-->
+                        <!--<p class="search-form__subtitle">Площадь м²</p>-->
+        <!---->
+                        <!--<div class="search-form__range search-form__range_square">-->
+                            <!--<div class="search-form__range-text search-form__text">-->
+                                <!--<p><span #minSpace></span></p>-->
+                                <!--<span></span>-->
+                                <!--<p><span #maxSpace></span></p>-->
+                            <!--</div>-->
+        <!---->
+                            <!--<ghm-range-number-->
+                                <!--[formControl]="form.controls['space']"-->
+                                <!--[min]="config.space.min"-->
+                                <!--[max]="config.space.max"-->
+                                <!--(move)="minSpace.innerHTML = parseNumberPipe.transform(($event.min).toFixed(1)); maxSpace.innerHTML = parseNumberPipe.transform(($event.max).toFixed(1))">-->
+                            <!--</ghm-range-number>-->
+                        <!--</div>-->
+                    <!--</div>-->
+        <!---->
+                    <!--<div class="search-form__wrap-item search-form__wrap-item_floor">-->
+                        <!--<p class="search-form__subtitle">Этаж</p>-->
+        <!---->
+                        <!--<div class="search-form__range search-form__range_floor">-->
+                            <!--<div class="search-form__range-text search-form__text">-->
+                                <!--<p><span #minFloor></span></p>-->
+                                <!--<span></span>-->
+                                <!--<p><span #maxFloor></span></p>-->
+                            <!--</div>-->
+        <!---->
+                            <!--<ghm-range-number-->
+                                <!--[formControl]="form.controls['floor']"-->
+                                <!--[min]="config.floor.min"-->
+                                <!--[max]="config.floor.max"-->
+                                <!--[toFixed]="true"-->
+                                <!--(move)="minFloor.innerHTML = $event.min; maxFloor.innerHTML = $event.max">-->
+                            <!--</ghm-range-number>-->
+                        <!--</div>-->
+                    <!--</div>-->
+        <!---->
+                    <!--<div class="search-form__wrap-item search-form__wrap-item_corpus">-->
+                        <!--<p class="search-form__subtitle">Номер дома</p>-->
+        <!---->
+                        <!--<div class="search-form__range search-form__range_corpus" (click)="showCorpus = true">-->
+                            <!--<p class="search-form__text">-->
+                                <!--{{ form.controls['housesMods'].value | mySearchFormPipe:housesBtnList }}-->
+                            <!--</p>-->
+                        <!--</div>-->
+                        <!--<div class="close-area" *ngIf="showCorpus" (click)="showCorpus = false"></div>-->
+                        <!--<app-search-checkbox-list *ngIf="showCorpus"-->
+                            <!--[btnList]="housesBtnList"-->
+                            <!--[formControl]="form.controls['housesMods']">-->
+                        <!--</app-search-checkbox-list>-->
+                    <!--</div>-->
+        <!---->
+                    <!--<button class="search-form__btn" [class.search-form__btn_open]="moreFilter"-->
+                        <!--(click)="moreFilter = !moreFilter">Еще параметры</button>-->
+                    <!---->
+                    <!--<div class="search-form__wrap search-form__wrap&#45;&#45;decoration" [class.search-form__wrap&#45;&#45;decoration-show]="moreFilter" #decorCheckbox>-->
+
+                            <!--<app-search-checkbox-list-decor-->
+                                <!--[btnList]="decorList"-->
+                                <!--[formControl]="form.controls['decoration']"-->
+                                <!--[name]="'decoration'">-->
+                            <!--</app-search-checkbox-list-decor>-->
+
+                        <!--<button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+
+
+
+<form [formGroup]="form" class="search-form" [class.search-form_open]="showFilter">
+
+    <div class="search-form__btn-cls btn-cls" (click)="closeSearchForm.emit()"><span></span></div>
+
+    <div class="search-form__wrapper">
+
+        <div class="search-form__container search-form__container_room">
+            <p class="search-form__section-name">Комнат</p>
+            <ul class="search-form__rooms">
+                <li class="search-form__rooms-item" formArrayName="rooms" *ngFor="let control of form.controls['rooms']['controls']; let i = index">
+                    <label class="search-form__rooms-checkbox">
+                        <input [formControl]="control" [style.display]="'none'" name="rooms" [value]="control" type="checkbox">
+                        <div class="search-form__rooms-checkbox_for-click search-form__form-text"
+                             [class.search-form__rooms-checkbox_for-click-first]="i === 0">
+                            {{(i === 0) ? 'Ст' : (i === 3) ? '3+' : i}}
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="search-form__container search-form__container_corpus">
+            <p class="search-form__section-name">Номер корпуса</p>
+
+            <div class="search-form__corpus-wrap" (click)="showCorpus = !showCorpus">
+                <p class="search-form__form-text search-form__form-text_corpus">{{form.controls['houses'].value | mySearchFormPipe}}</p>
+            </div>
+
+            <div class="search-form__corpus" *ngIf="showCorpus">
+                <app-search-checkbox-list *ngIf="showCorpus"
+                    [btnList]="housesBtnList"
+                    [formControl]="form.controls['housesMods']">
+                </app-search-checkbox-list>
+            </div>
+        </div>
+
+        <div class="search-form__container">
+            <p class="search-form__section-name">Цена</p>
+            <div class="search-form__range">
+                <div class="search-form__range-wrap">
+                    <p class="search-form__form-text"><span #minPrice></span></p>
+                    <span></span>
+                    <p class="search-form__form-text"><span #maxPrice></span></p>
+                </div>
+                <ghm-range-number
+                    [formControl]="form.controls['price']"
+                    [min]="config.price.min"
+                    [max]="config.price.max"
+                    [toFixed]="true"
+                    (move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)) + '&#8381;'; maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0)) + '&#8381;'">
+                </ghm-range-number>
+            </div>
+        </div>
+
+        <div class="search-form__container">
+            <p class="search-form__section-name">Площадь, м²</p>
+            <div class="search-form__range">
+                <div class="search-form__range-wrap">
+                    <p class="search-form__form-text" #minSpace></p>
+                    <span></span>
+                    <p class="search-form__form-text" #maxSpace></p>
+                </div>
+                <ghm-range-number
+                    [formControl]="form.controls['space']"
+                    [min]="config.space.min"
+                    [max]="config.space.max"
+                    (move)="minSpace.innerHTML = parseNumberPipe.transform(($event.min).toFixed(1)); maxSpace.innerHTML = parseNumberPipe.transform(($event.max).toFixed(1))">
+                </ghm-range-number>
+            </div>
+        </div>
+
+        <div class="search-form__container">
+            <p class="search-form__section-name">Этаж</p>
+            <div class="search-form__range">
+                <div class="search-form__range-wrap">
+                    <p class="search-form__form-text"><span #minFloor></span> </p>
+                    <span></span>
+                    <p class="search-form__form-text"><span #maxFloor></span></p>
+                </div>
+                <ghm-range-number
+                    [formControl]="form.controls['floor']"
+                    [min]="config.floor.min"
+                    [max]="config.floor.max"
+                    [toFixed]="true"
+                    (move)="minFloor.innerHTML = $event.min; maxFloor.innerHTML = $event.max">
+                </ghm-range-number>
+
+            </div>
+        </div>
+
+        <div class="search-form__container search-form__container_decor">
+
+            <!--<app-search-checkbox-list-->
+                    <!--class="search-form__decoration"-->
+                    <!--[btnList]="config.decorationList"-->
+                    <!--[formControl]="form.controls['decoration']"-->
+                    <!--[mod]="true">-->
+            <!--</app-search-checkbox-list>-->
+
+            <app-search-checkbox-list-decor
+                class="search-form__decoration"
+                [btnList]="decorList"
+                [formControl]="form.controls['decoration']"
+                [name]="'decoration'">
+            </app-search-checkbox-list-decor>
+        </div>
+
+        <button class="search-form__reset-btn" (click)="formReset()">Сбросить фильтры</button>
+    </div>
+</form>

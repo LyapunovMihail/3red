@@ -56,9 +56,8 @@
         </div>
 
         <div class="apartment__info-jkLink">
-            <a [routerLink]="'/objects/list/' + this.jk._id">ЖК {{jk.name}}</a>
+            <a [routerLink]="'/objects/list/' + this.jk._id" (click)="close.emit(false)">ЖК {{jk.name}}</a>
         </div>
-
 
         <div class="apartment__btn">
             <button (click)="isReserveFormOpen = true" class="apartment__btn-reserve btn_var-2">Забронировать</button>

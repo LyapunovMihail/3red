@@ -1,37 +1,97 @@
+@import "../../styles/modules/mixins/mixin.scss";
 
 .flats {
     width: 100%;
-   // min-height: calc(100vh - 146px - 51px);
-    position: relative;
+    min-height: 100vh;
+    padding: 40px 0 96px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    @media (max-width: 760px) { padding: 32px 0 64px; }
 
-    &_main {
-        width: 100%;
-        height: calc(100vh - 146px);
-        overflow: hidden;
+    &__title {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        margin: 0 0 40px;
+        @media (max-width: 760px) {
+            font-size: 28px;
+            line-height: 28px;
+            margin: 0 0 32px;
+        }
+    }
+
+    &__nav {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        height: 48px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-    }
-
-    &_wrapper {
-        height: 100%;
-        min-height: 56.26vw;
-        width: 100%;
-        min-width: 177vh;
         position: relative;
+        @media (max-width: 760px) {
+            height: auto;
+            justify-content: space-between;
+        }
+
+        &-more {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            @media (max-width: 760px) {
+                height: 38px;
+                font: $font-16;
+                margin: 0;
+                transform: none;
+                position: static;
+            }
+        }
+        &-up {
+            color: $col-red;
+            font: $font-18;
+            position: relative;
+            padding-right: 20px;
+            &::before {
+                content: '';
+                width: 12px;
+                height: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+                background: url(/assets/img/flats/red_arrow_up.svg) center no-repeat;
+                transform: rotate(180deg);
+            }
+        }
     }
 
-    &_bgr {
-        width: 100%;
-        height: 100%;
+    &__show-filter {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: url(/assets/img/flats/show_filter.svg) center no-repeat $col-red;
+        position: fixed;
+        bottom: 65px;
+        right: 15px;
+        z-index: 15;
+
+        &_active {
+            background-image: url(/assets/img/check.svg);
+            background-size: 26px 20px;
+            right: 30px;
+            z-index: 110;
+        }
     }
 
-    &_svg {
+    &__sorting {
         width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%)
+        padding: 24px 0;
+        background-color: $col-white;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin: 0 0 4px;
+        @media (max-width: 760px) {
+            padding: 16px 0;
+        }
     }
 }

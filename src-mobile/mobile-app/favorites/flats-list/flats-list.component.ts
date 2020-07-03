@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IFlatWithDiscount } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Component({
     selector: 'app-flats-list',

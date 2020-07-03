@@ -2,7 +2,7 @@ import { FlatsDiscountService } from '../../commons/flats-discount.service';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { SearchService } from '../search/search.service';
+import { FlatsService } from '../flats.service';
 import { FavoritesService } from '../../favorites/favorites.service';
 // declare let chWidget: any; // переменная для работы с чейзером
 
@@ -10,7 +10,7 @@ import { FavoritesService } from '../../favorites/favorites.service';
     selector: 'app-flats-apartment-modal',
     templateUrl: './apartment.component.html',
     styleUrls: ['./apartment.component.scss', '../flats.component.scss'],
-    providers: [SearchService]
+    providers: [FlatsService]
 })
 
 export class ApartmentComponent implements OnInit {
@@ -30,7 +30,7 @@ export class ApartmentComponent implements OnInit {
     constructor(
         public router: Router,
         private flatsDiscountService: FlatsDiscountService,
-        public searchService: SearchService,
+        public searchService: FlatsService,
         private favoritesService: FavoritesService
     ) {}
 

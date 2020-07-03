@@ -1,0 +1,167 @@
+@import "../../../styles/modules/mixins/mixin.scss";
+
+:host {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 0 32px;
+    @media (max-width: 760px) { padding: 0 0 20px; }
+}
+
+.result-gradient {
+    width: 100%;
+    height: 93px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), #ffffff);
+    position: sticky;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.to-favorites {
+    width: 18px;
+    height: 18px;
+    background: url('/assets/img/favorite.svg') no-repeat;
+    background-size: 100%;
+    @media (max-width: 767px) { display: none; }
+    &_active { background: url('/assets/img/favorite_active.svg') no-repeat; }
+}
+
+.result {
+    width: 100%;
+    max-width: $tabletContainer;
+    box-sizing: border-box;
+
+    &__item {
+        width: 100%;
+        height: 121px;
+        box-sizing: border-box;
+        padding: 16px 24px;
+        background-color: $col-white;
+        margin: 0 0 4px;
+        cursor: pointer;
+
+        &-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+        }
+    }
+
+    &__text {
+        font: $font-18;
+        white-space: nowrap;
+
+        &--floor,
+        &--flat,
+        &--house,
+        &--delivery,
+        &--decoration {
+            color: $col-black-5;
+        }
+
+        &--flat,
+        &--floor,
+        &--delivery,
+        &--decoration { margin-right: 24px; }
+
+        &--room,
+        &--price-sale { color: $col-black; }
+
+        &--room span {
+            display: none;
+            @media (min-width: 759px) { display: inline; }
+        }
+        &--flat { display: none; }
+    }
+
+    &__wrap {
+        width: calc(100% - 91px);
+        height: 100%;
+
+        &--head {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: space-between;
+            &-bottom { align-items: flex-end; }
+        }
+        &--info,
+        &--space {
+            width: auto;
+            display: flex;
+            align-items: flex-end;
+        }
+        &--space { justify-content: flex-end; }
+
+        &--scheme {
+            width: 67px;
+            min-width: 67px;
+            height: 67px;
+            margin-right: 24px;
+            align-self: flex-start;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        &-price {
+            display: flex;
+            flex-flow: column;
+        }
+    }
+
+    &__request {
+        position: absolute;
+        right: 20px;
+        top: 5px;
+    }
+
+    &__scheme-error {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+    .result {
+
+        &__item {
+            height: 82px;
+            padding: 12px 20px;
+        }
+
+        &__text {
+            font: $font-16;
+
+            // &--delivery,
+            // &--decoration { display: none; }
+
+            &--flat { display: block; }
+
+            &--flat,
+            &--floor,
+            &--delivery,
+            &--decoration { margin-right: 8px; }
+        }
+        &__wrap {
+            width: calc( 100% - 66px);
+
+            &--head { width: 100%; }
+            &--scheme {
+                width: 58px;
+                min-width: 58px;
+                height: 58px;
+                margin-right: 8px;
+            }
+        }
+    }
+}
+@media (max-width: 460px) {
+    .result__text--delivery,
+    .result__text--decoration { display: none; }
+}

@@ -1,5 +1,35 @@
-<section class="flats">
+<section class="flats" *ngIf="config">
 
-    <router-outlet></router-outlet>
+    <button class="flats__show-filter"
+        (click)="openFilter()"
+        [class.flats__show-filter_active]="showFilter">
+    </button>
+
+    <h1 class="flats__title">Выбор квартиры</h1>
+
+    <app-search-sorting class="flats__sorting"
+        [counter]="count"
+        [(ngModel)]="sort"
+        (ngModelChange)="sortChange($event)">
+    </app-search-sorting>
+
+    <app-search-form
+        [config]="config"
+        [housesBtnList]="housesBtnList"
+        [modsBtnList]="modsBtnList"
+        (formChange)="formChange($event)"
+        (sortChange)="sortChange($event)"
+        [showFilter]="showFilter"
+        (closeSearchForm)="openFilter()">
+    </app-search-form>
+
+    <app-search-output
+        [flatsList]="outputFlatsList">
+    </app-search-output>
+
+    <div class="flats__nav">
+        <button *ngIf="isLoadMoreBtn" (click)="loadMore()" class="flats__nav-more btn_var-3">Показать еще</button>
+        <button class="btn-empty flats__nav-up" (click)="scrollToTop()">Наверх</button>
+    </div>
 
 </section>

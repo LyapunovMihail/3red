@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormConfig } from '../../../flats/search/search-form/search-form.config';
+import { FormConfig } from '../../../flats/search-form/search-form.config';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HouseService } from '../object-flat/house/house.service';
 import { IAddressItemFlat } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { GHMNumberPipe } from '../../../flats/search/search-form/ghm-range-number/ghm-number.pipe';
+import { GHMNumberPipe } from '../../../flats/search-form/ghm-range-number/ghm-number.pipe';
 
 @Component({
     selector: 'app-object-item-filter',

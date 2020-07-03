@@ -35,7 +35,6 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { FlatsListComponent } from './flats/search/search-output/flats-list/flats-list.component';
 
 // Application wide providers
 const APP_PROVIDERS = [

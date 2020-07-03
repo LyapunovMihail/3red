@@ -24,7 +24,9 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
         private router: Router
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        console.log('navList: ', this.navList);
+    }
 
     ngAfterViewInit() {
         setTimeout( () => this.defaultElem() );

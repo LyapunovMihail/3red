@@ -1,10 +1,10 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-search-sorting',
-    templateUrl: './sorting.component.html',
-    styleUrls: ['./sorting.component.scss'],
+    templateUrl: './search-sorting.component.html',
+    styleUrls: ['./search-sorting.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -15,6 +15,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 
 export class SearchSortingComponent {
+
+    @Input() public counter;
 
     public activeSort: string;
 

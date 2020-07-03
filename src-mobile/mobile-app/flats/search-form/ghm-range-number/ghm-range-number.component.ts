@@ -11,7 +11,7 @@ import {
     Inject,
     ViewEncapsulation,
     PLATFORM_ID,
-    forwardRef, ChangeDetectorRef
+    forwardRef
 } from '@angular/core';
 import {
     isPlatformBrowser,
@@ -32,18 +32,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
     template: `
         <div class="ghm-range-number">
-            <div class="ghm-slider">
-                <div class="ghm-fill"></div>
-        
-                <div class="ghm-runner ghm-runner--first"
-                    [style.left.px]="firstLeft" 
-                    (mousedown)="mouseDown($event, 'first')">
+            <div class="ghm-slider parameters-filtering_range_slider">
+
+                <div class="parameters-filtering_range_line ghm-fill"></div>
+
+                <div class="ghm-runner parameters-filtering_range_runner ghm-runner--first"
+                     [style.left.px]="firstLeft"
+                     (touchstart)="mouseDown($event, 'first')">
+                    <div class="parameters-filtering_range_runner-touch"></div>
                 </div>
-                
-                <div class="ghm-runner ghm-runner--second"
-                    [style.left.px]="secondLeft"
-                    (mousedown)="mouseDown($event, 'second')">
+
+                <div class="ghm-runner parameters-filtering_range_runner ghm-runner--second"
+                     [style.left.px]="secondLeft"
+                     (touchstart)="mouseDown($event, 'second')">
+                    <div class="parameters-filtering_range_runner-touch"></div>
                 </div>
+
             </div>
         </div>
     `
@@ -69,8 +73,7 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
 
     constructor(
         private elRef: ElementRef,
-        @Inject(PLATFORM_ID) private platformId: Object,
-        private ref: ChangeDetectorRef
+        @Inject(PLATFORM_ID) private platformId: Object
     ) { }
 
     public ngOnInit() {
@@ -78,11 +81,6 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
             this.elRef.nativeElement.classList.add('ghm-range');
         }
     }
-
-    // public ngOnChanges(changes: SimpleChanges): void {
-    //     this.start(changes.min.currentValue, changes.max.currentValue);
-    //     this.mouseUp(0);
-    // }
 
     public writeValue(control) {
         if (control) {
@@ -142,16 +140,16 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
         let sliderElement = this.elRef.nativeElement.querySelector('.ghm-slider');
         this.buttonCoords = this.getCoords(runnerElement);
         this.sliderCoords = this.getCoords(sliderElement);
-        this.shiftX = e.pageX - this.buttonCoords.left;
+        this.shiftX = e.touches[0].pageX - this.buttonCoords.left;
     }
 
-    @HostListener('document:mousemove', ['$event'])
+    @HostListener('document:touchmove', ['$event'])
     public mouseMove(e) {
         if ( this.isRun ) {
             // runner slide left position
             let sliderElement = this.elRef.nativeElement.querySelector('.ghm-slider');
             let runnerElement = this.elRef.nativeElement.querySelector(`.ghm-runner--${this.type}`);
-            let newLeft = e.pageX - this.shiftX - this.sliderCoords.left;
+            let newLeft = e.touches[0].pageX - this.shiftX - this.sliderCoords.left;
             let rightEdge = sliderElement.clientWidth - runnerElement.clientWidth;
             newLeft = ( newLeft < 0) ? 0 : (newLeft > rightEdge) ? rightEdge : newLeft;
             if ( this.type === 'second' ) {
@@ -191,7 +189,7 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    @HostListener('document:mouseup', ['$event'])
+    @HostListener('document:touchend', ['$event'])
     public mouseUp(e) {
         if ( this.isRun ) {
             this.isRun = false;

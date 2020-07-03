@@ -25,7 +25,7 @@
         transform: translateX(-50%);
 
         &-btn {
-            font: 24px/29px $font-proba;
+            font: 18px/18px $font-proba;
             color: $col-black;
             padding-left: 8px + 28px;
             position: relative;
@@ -33,7 +33,7 @@
             &::before {
                 content: '';
                 position: absolute;
-                top: 0;
+                top: -7px;
                 left: 0;
                 width: 28px;
                 height: 28px;

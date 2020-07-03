@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
-import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { IAddressItemFlat } from '../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IObjectSnippet } from '../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Injectable()
 
-export class SearchService {
+export class FlatsService {
 
     public outputFlatsChanged: Subject<IAddressItemFlat[]> = new Subject();
     public loadingIndicator: Subject<boolean> = new Subject();

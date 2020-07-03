@@ -55,7 +55,7 @@
         </div>
 
         <div class="apartment__info-jkLink">
-            <a routerLink="/objects/list/{{objectLink}}">{{flatData.jkName}}</a>
+            <a routerLink="/objects/list/{{objectLink}}" (click)="close.emit(false)">{{flatData.jkName}}</a>
         </div>
 
         <div class="apartment__btn">

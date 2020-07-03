@@ -1,0 +1,34 @@
+<!--<div class="search-form__output-sorting">-->
+        <!---->
+    <!--<div *ngFor="let sort of sortList"-->
+        <!--(click)="sortChange(sort.name, !sort.value)"-->
+        <!--[ngClass]="{-->
+            <!--'search-form__output-sorting-control_active': (activeSort === sort.name),-->
+            <!--'search-form__output-sorting-control_turn': (activeSort === sort.name && !sort.value )-->
+        <!--}"-->
+        <!--class="search-form__output-sorting-control search-form__output-sorting-control&#45;&#45;{{sort.name}}">-->
+        <!--{{sort.text}}-->
+    <!--</div>-->
+
+<!--</div>-->
+
+<section class="flats-filter">
+
+    <div class="flats-filter__container">
+        <!-- <p *ngIf="counter > 0" class="flats__sorting-find">Найдено {{counter}} квартир</p> -->
+        <h3 *ngIf="counter === 0" class="flats-filter__not-find">Квартир по вашему запросу не найдено.<br>Попробуйте изменить условия поиска.</h3>
+
+        <div class="flats__sorting-wrap" *ngIf="counter > 0">
+            <p class="flats__sorting-find">{{counter}} квартир</p>
+            <p *ngFor="let sort of sortList"
+               (click)="sortChange(sort.name, !sort.value)"
+               [ngClass]="{
+                    'flats__sorting-item--active': (activeSort === sort.name),
+                    'flats__sorting-item--turn': (activeSort === sort.name && !sort.value )
+                }"
+               class="flats__sorting-item">
+                {{sort.text}}
+            </p>
+        </div>
+    </div>
+</section>

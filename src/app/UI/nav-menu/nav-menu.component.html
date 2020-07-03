@@ -9,7 +9,7 @@
                 [class.active]="activePointDefault === i"
                 [class.disabled]="item.disabled"
                 (click)="getActiveElement($event, item); route(linkType, item); activePointDefault = i"
-                *ngIf="!item.show ? (item.show === false ? false : true) : true "
+                *ngIf="!item.show ? (item.show === false ? false : true) : true"
                 >{{item.name}}</li>
         </ng-container>
     </ul>

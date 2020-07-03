@@ -1,8 +1,9 @@
-import { IFlatWithDiscount } from '../../../../../serv-files/serv-modules/addresses-api/addresses.config';
-import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
-import { FlatsDiscountService } from '../../../commons/flats-discount.service';
-import { SearchService } from '../search.service';
-import { FavoritesService } from '../../../favorites/favorites.service';
+import { IFlatWithDiscount } from '../../../../serv-files/serv-modules/addresses-api/addresses.config';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FlatsDiscountService } from '../../commons/flats-discount.service';
+import { FlatsService } from '../flats.service';
+import { FavoritesService } from '../../favorites/favorites.service';
+import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 @Component({
     selector: 'app-search-output',
@@ -14,9 +15,9 @@ import { FavoritesService } from '../../../favorites/favorites.service';
 export class SearchOutputComponent implements OnInit {
 
     @Input() public flatsList: IFlatWithDiscount[] = [];
-    @Input() public count: number;
-    @Input() public showMore: boolean;
-    @Output() public loadMore = new EventEmitter<boolean>();
+
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
 
     @ViewChild('container')
     public container: ElementRef;
@@ -25,8 +26,9 @@ export class SearchOutputComponent implements OnInit {
 
     constructor(
         private flatsDiscountService: FlatsDiscountService,
-        private searchService: SearchService,
-        public favoritesService: FavoritesService
+        private searchService: FlatsService,
+        public favoritesService: FavoritesService,
+        public windowScrollLocker: WindowScrollLocker
     ) {}
 
     public ngOnInit() {
@@ -44,10 +46,6 @@ export class SearchOutputComponent implements OnInit {
             .subscribe((item) => this.isLoading = item);
     }
 
-    public flatsCount() {
-        return this.count;
-    }
-
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
     }
@@ -56,7 +54,9 @@ export class SearchOutputComponent implements OnInit {
         return this.favoritesService.inFavorite(flat);
     }
 
-    public scrollToTop() {
-        window.scrollTo(0, this.container.nativeElement.offsetTop);
+    public openApartmentModal(index) {
+        this.selectedFlatIndex = index;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
  }

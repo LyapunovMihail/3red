@@ -17,7 +17,7 @@
         <span class="search-output__result-item-price">
             <span class="search-output__result-item-content"
                   [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
-                              'search-output__result-item-content_price-not-sale' : flat.discount}">
+                    'search-output__result-item-content_price-not-sale' : flat.discount}">
                   {{flat.price | myBitNumberPipe}} &#8381;
             </span>
             <span *ngIf="flat.discount"

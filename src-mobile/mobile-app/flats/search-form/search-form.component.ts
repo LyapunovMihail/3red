@@ -7,7 +7,7 @@ import { FormConfig } from './search-form.config';
 @Component({
     selector: 'app-search-form',
     templateUrl: './search-form.component.html',
-    styleUrls: ['./../search.component.scss'],
+    styleUrls: ['../flats.component.scss'],
     providers: [ GHMNumberPipe ]
 })
 
@@ -27,7 +27,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public housesBtnList: any[] = [];
     @Input()
     public modsBtnList: any[] = [];
+    @Input() public showFilter: boolean;
 
+    @Output() public closeSearchForm: EventEmitter<any> = new EventEmitter();
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
 
