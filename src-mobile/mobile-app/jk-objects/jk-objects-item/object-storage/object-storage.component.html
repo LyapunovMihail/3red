@@ -1,0 +1,27 @@
+<section class="object-storage" *ngIf="parking || storerooms">
+
+    <div class="object-item__container object-storage__container">
+
+        <div class="object-storage__item object-storage__item_storeroom" *ngIf="storerooms">
+            <a class="object-storage__item-anchor" [routerLink]="'/objects/list/' + objectId + '/storerooms'" skipLocationChange></a>
+            <h2 class="object-storage__item-title">Кладовые</h2>
+            <p class="object-storage__item-descr">
+                Персональные кладовые помещения — это доступный, 
+                экономичный и удобный способ хранения сезонных
+                и крупногабаритных вещей.
+            </p>
+            <p class="object-storage__item-price">от {{storerooms | jkObjectsNumberPipe}} ₽</p>
+        </div>
+        <div class="object-storage__item object-storage__item_parking" *ngIf="parking">
+            <a class="object-storage__item-anchor" [routerLink]="'/objects/list/' + objectId + '/parking'" skipLocationChange></a>
+            <h2 class="object-storage__item-title">Машиноместа</h2>
+            <p class="object-storage__item-descr">
+                Продлите срок жизни вашего автомобиля и обезопасьте 
+                его от угона. Приобретите машиноместо в подземном паркинге
+            </p>
+            <p class="object-storage__item-price">от {{parking | jkObjectsNumberPipe}} ₽</p>
+        </div>
+
+    </div>
+
+</section>

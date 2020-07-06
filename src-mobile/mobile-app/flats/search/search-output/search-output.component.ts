@@ -13,7 +13,6 @@ import { FavoritesService } from '../../../favorites/favorites.service';
 
 export class SearchOutputComponent implements OnInit {
 
-
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
     @Input() public showMore: boolean;

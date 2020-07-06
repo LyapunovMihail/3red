@@ -1,17 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="58px" viewBox="0 0 58 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Минииконка_поликлиника</title>
+    <desc>Created with Sketch.</desc>
     <defs>
-        <filter id="a" width="253.1%" height="253.1%" x="-76.6%" y="-76.6%" filterUnits="objectBoundingBox">
-            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
-            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        <filter x="-76.6%" y="-76.6%" width="253.1%" height="253.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
             <feMerge>
-                <feMergeNode in="shadowMatrixOuter1"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
             </feMerge>
         </filter>
     </defs>
-    <g fill="none" fill-rule="evenodd" filter="url(#a)">
-        <circle cx="16" cy="16" r="17.5" fill="#FA9191" stroke="#FFF" stroke-width="3"/>
-        <path fill="#FFF" fill-rule="nonzero" d="M23.304 11.887h-3.13C20.174 9.749 18.296 8 16 8c-2.296 0-4.174 1.749-4.174 3.887h-3.13c-.418 0-.696.259-.696.647v10.818c0 .389.278.648.696.648h14.608c.418 0 .696-.26.696-.648V12.534c0-.388-.278-.647-.696-.647zM16 9.296c1.46 0 2.783 1.23 2.783 2.59h-5.566c0-1.424 1.253-2.59 2.783-2.59zm3.478 9.327h-2.782v2.592h-1.392v-2.592h-2.782v-1.295h2.782v-2.591h1.392v2.59h2.782v1.296z"/>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="3red_UI" transform="translate(-504.000000, -6360.000000)">
+            <g id="Инфраструктура/иконки/поликлиника" transform="translate(517.000000, 6372.000000)">
+                <g id="Group-24-Copy-3" filter="url(#filter-1)">
+                    <g id="Group-5-Copy-3">
+                        <circle id="Oval" stroke="#FFFFFF" stroke-width="3" fill="#FA9191" cx="16" cy="16" r="17.5"></circle>
+                        <g id="Shape-3" transform="translate(8.000000, 8.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <path d="M15.3043478,3.88663968 L12.173913,3.88663968 C12.173913,1.74898785 10.2956522,0 8,0 C5.70434783,0 3.82608696,1.74898785 3.82608696,3.88663968 L0.695652174,3.88663968 C0.27826087,3.88663968 0,4.14574899 0,4.53441296 L0,15.3522267 C0,15.7408907 0.27826087,16 0.695652174,16 L15.3043478,16 C15.7217391,16 16,15.7408907 16,15.3522267 L16,4.53441296 C16,4.14574899 15.7217391,3.88663968 15.3043478,3.88663968 Z M8,1.29554656 C9.46086957,1.29554656 10.7826087,2.52631579 10.7826087,3.88663968 L5.2173913,3.88663968 C5.2173913,2.46153846 6.46956522,1.29554656 8,1.29554656 Z M11.4782609,10.6234818 L8.69565217,10.6234818 L8.69565217,13.2145749 L7.30434783,13.2145749 L7.30434783,10.6234818 L4.52173913,10.6234818 L4.52173913,9.32793522 L7.30434783,9.32793522 L7.30434783,6.73684211 L8.69565217,6.73684211 L8.69565217,9.32793522 L11.4782609,9.32793522 L11.4782609,10.6234818 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
     </g>
 </svg>

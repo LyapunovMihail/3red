@@ -3,7 +3,7 @@ import { Component, Input, OnInit, EventEmitter, Output, ViewChild, ElementRef }
 import { FlatsDiscountService } from '../../../commons/flats-discount.service';
 import { SearchService } from '../search.service';
 import { FavoritesService } from '../../../favorites/favorites.service';
-import { PlatformDetectService } from '../../../../../src-mobile/mobile-app/platform-detect.service';
+import { PlatformDetectService } from '../../../platform-detect.service';
 
 @Component({
     selector: 'app-search-output',
@@ -62,6 +62,7 @@ export class SearchOutputComponent implements OnInit {
     public scrollToTop() {
         if (!this.platform.isBrowser) { return; }
 
-        window.scrollTo(0, this.container.nativeElement.offsetTop);
+        window.scrollTo(0, 0);
+        // window.scrollTo(0, this.container.nativeElement.offsetTop);
     }
  }
