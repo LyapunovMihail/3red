@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { ObjectGalleryAdminService } from './object-gallery-admin.service';
 import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 import { IObjectGallerySnippet, OBJECTS_GALLERY_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/gallery-api/objects-gallery.interfaces';
+declare const Swiper: any;
 
 @Component({
     selector: 'app-object-item-gallery',
@@ -13,7 +14,7 @@ import { IObjectGallerySnippet, OBJECTS_GALLERY_UPLOADS_PATH } from '../../../..
     providers: [ObjectGalleryAdminService]
 })
 
-export class ObjectGalleryComponent implements OnInit, OnDestroy {
+export class ObjectGalleryComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @Input()
     public objectId: string;
@@ -30,6 +31,9 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
 
     public uploadsPath = `/${OBJECTS_GALLERY_UPLOADS_PATH}`;
 
+    public swiperSlider;
+    public sliderTimeline = false;
+
     constructor(
         private galleryService: ObjectGalleryAdminService,
     ) { }
@@ -37,7 +41,12 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.getTabsThanContent();
 
-        this.slideShow();
+        // this.slideShow();
+    }
+    ngAfterViewInit() {
+        // setTimeout(() => {
+        //     this.swiperInit();
+        // }, 1000);
     }
 
     public getTabsThanContent() {
@@ -67,6 +76,11 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
             this.contentSnippet = data;
             if (this.contentSnippet) {
                 this.switchOn = this.contentSnippet.switchOn;
+                if (!this.swiperSlider) { // Если слайдер не запущен запускаем
+                    setTimeout(() => this.swiperInit(), 1000);
+                } else { // Если запущен то обновляем его
+                    setTimeout(() => this.swiperSlider.update(), 100);
+                }
             } else {
                 this.clearInt();
             }
@@ -103,5 +117,35 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.clearInt();
+    }
+
+    swiperInit() {
+
+        if (this.swiperSlider) { return; }
+
+        this.swiperSlider = new Swiper('.swiper-gallery', {
+            speed: 1000,
+            navigation: {
+              nextEl: '.swiper-gallery__btn--next',
+              prevEl: '.swiper-gallery__btn--prev',
+              disabledClass: 'disabled'
+            },
+            autoplay: {
+                delay: 5000,
+                waitForTransition: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                bulletActiveClass: 'active',
+                renderBullet: function (index, className) {
+                    return `<span class="${className} ${className}--dot-${index}"></span>`;
+                }
+            },
+            on: {
+                autoplayStart: () => this.sliderTimeline = true,
+                autoplayStop: () => this.sliderTimeline = false,
+            }
+        });
     }
 }

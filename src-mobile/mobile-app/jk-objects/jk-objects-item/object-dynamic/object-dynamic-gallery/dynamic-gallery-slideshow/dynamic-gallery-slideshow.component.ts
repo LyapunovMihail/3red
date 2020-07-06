@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { IDynamicImage, IDynamicObject, OBJECTS_DYNAMIC_UPLOADS_PATH } from '../../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
 import { MONTHARRAY } from '../../monthArray';
+declare let Swiper: any;
 
 @Component({
     selector: 'app-object-dynamic-slideshow',
@@ -8,7 +9,7 @@ import { MONTHARRAY } from '../../monthArray';
     styleUrls: ['./dynamic-gallery-slideshow.component.scss']
 })
 
-export class ObjectDynamicSlideshowComponent {
+export class ObjectDynamicSlideshowComponent implements AfterViewInit {
 
     @Input()
     public currentObject: IDynamicObject;
@@ -21,44 +22,33 @@ export class ObjectDynamicSlideshowComponent {
     @Input()
     public year: number;
 
+    public dynamicSlider;
+
     @Output() close: EventEmitter<boolean> = new EventEmitter();
 
     public monthArray: string[] = MONTHARRAY;
     public uploadsPath = `/${OBJECTS_DYNAMIC_UPLOADS_PATH}`;
 
-    prev() {
-        if (this.slideShowCurrent > 0) {
-            this.slideShowCurrent -- ;
-        } else {
-            this.slideShowCurrent = this.slides.length - 1 ;
-        }
+    ngAfterViewInit() {
 
-        if(this.slides[this.slideShowCurrent].type == 'VIDEO') {
-            do {
-                if(this.slideShowCurrent > 0) {
-                    this.slideShowCurrent -- ;
-                } else {
-                    this.slideShowCurrent = this.slides.length - 1 ;
-                }
-            } while (this.slides[this.slideShowCurrent].type == 'VIDEO');
-        }
+        setTimeout(() => {
+
+            this.swiperInit();
+        }, 1200);
     }
 
-    next() {
-        if (this.slideShowCurrent < this.slides.length - 1) {
-            this.slideShowCurrent ++ ;
-        } else {
-            this.slideShowCurrent = 0 ;
-        }
+    public swiperInit() {
+        this.dynamicSlider = new Swiper('.swiper-dynamic', {
+            speed: 700,
+            loop: false,
+            effect: 'fade',
+            slideActiveClass: 'dynamic-slider-current',
+            navigation: {
+              nextEl: '.dynamic-modal__btn_right',
+              prevEl: '.dynamic-modal__btn_left'
+            }
+        });
 
-        if (this.slides[this.slideShowCurrent].type == 'VIDEO') {
-            do {
-                if (this.slideShowCurrent < this.slides.length - 1) {
-                    this.slideShowCurrent ++ ;
-                } else {
-                    this.slideShowCurrent = 0;
-                }
-            } while (this.slides[this.slideShowCurrent].type == 'VIDEO');
-        }
+        this.dynamicSlider.slideTo(this.slideShowCurrent);
     }
 }

@@ -6,12 +6,24 @@
             [style.left.px]="offsetLeftActive"
             [style.width.px]="widthActive"></li>
 
-        <ng-container *ngFor="let item of navList; let i = index">
-            <li class="nav-menu__list-item g-body" 
-                [class.active]="activePointDefault === i"
-                (click)="getActiveElement($event, item); route(linkType, item); activePointDefault = i"
-                *ngIf="!item.show ? (item.show === false ? false : true) : true "
-                >{{item.name}}</li>
+        <ng-container *ngIf="navType !== 'decoration'">
+            <ng-container *ngFor="let item of navList; let i = index">
+                <li class="nav-menu__list-item g-body" 
+                    [class.active]="activePointDefault === i"
+                    (click)="getActiveElement($event, item); route(linkType, item); activePointDefault = i"
+                    *ngIf="!item.show ? (item.show === false ? false : true) : true "
+                    >{{item.name}}</li>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="navType === 'decoration'">
+            <ng-container *ngFor="let item of navList; let i = index">
+                <li class="nav-menu__list-item g-body" 
+                    [class.active]="activePointDefault === i"
+                    (click)="getActiveElement($event, item); route(linkType, item); activePointDefault = i"
+                    *ngIf="item.tab.show && !item.tab.decorationType"
+                    >{{item.tab.name}}</li>
+            </ng-container>
         </ng-container>
     </ul>
 </section>

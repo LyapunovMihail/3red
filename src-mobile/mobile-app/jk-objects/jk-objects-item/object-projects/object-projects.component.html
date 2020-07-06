@@ -1,37 +1,27 @@
 
 <section class="object-project" *ngIf="snippets && snippets.length > 0">
 
-    <div class="object-item__container object-members__container">
+    <div class="object-item__container object-project__container">
 
         <div class="object-project__head">
-            <h2>Посмотрите другие проекты</h2>
+            <h2>Посмотрите другие объекты</h2>
+
+            <a routerLink="/objects/list" class="object-project__head-all g-all-object">Все объекты</a>
         </div>
 
-        <div class="object-project__slider">
+        <div class="swiper-projects">
 
-            <a routerLink="/objects/list" class="object-project__slider-all g-all-object">Все проекты</a>
-            <button (click)="prevBtn()" *ngIf="currentSlide > 0"
-                class="object-project__slider-btn object-project__slider-btn_prev btn-slider btn-slider_prev btn-slider_white">
-                <span></span>
-            </button>
-            <button (click)="nextBtn()" *ngIf="currentSlide + 4 < snippets.length"
-                class="object-project__slider-btn object-project__slider-btn_next btn-slider btn-slider_next btn-slider_white">
-                <span></span>
-            </button>
-
-            <div class="object-project__slider-item slider-list" *ngIf="snippets"
-                [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 282 ) ) + 'px)') }">
+            <div class="swiper-projects__wrap swiper-wrapper" *ngIf="snippets">
                 
                 <ng-container *ngFor="let snippet of snippets; let i = index">
 
-                    <div class="slider-list__item"
-                        [ngClass]="{'current-slide': currentSlide === i }">
+                    <div class="swiper-projects__slide swiper-slide">
                         <a routerLink="/objects/list/{{snippet._id}}" target="_blank">
-                            <div class="slider-list__image">
+                            <div class="swiper-projects__slide-image">
                                 <img [src]="uploadsPath + snippet.image" alt="news-image">
                             </div>
-                            <p class="slider-list__title">{{snippet.name}}</p>
-                            <p *ngIf="objects[i]" class="slider-list__info">
+                            <p class="swiper-projects__slide-title">{{snippet.name}}</p>
+                            <p *ngIf="objects[i]" class="swiper-projects__slide-price">
                                 {{objects[i].minPrice && objects[i].minPrice !== 'Полностью распродан!' ? 
                                   'Квартиры от ' + objects[i].minPrice + ' млн. руб' :
                                   objects[i].minPrice === 'Полностью распродан!' ? objects[i].minPrice : 
@@ -41,6 +31,13 @@
                     </div>
                 </ng-container>
             </div>
+
+            <button class="swiper-projects__btn swiper-projects__btn_prev btn-slider btn-slider_prev btn-slider_white">
+                <span></span>
+            </button>
+            <button class="swiper-projects__btn swiper-projects__btn_next btn-slider btn-slider_next btn-slider_white">
+                <span></span>
+            </button>
         </div>
     </div>
 </section>

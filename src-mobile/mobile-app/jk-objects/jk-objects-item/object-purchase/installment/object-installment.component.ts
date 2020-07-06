@@ -15,7 +15,9 @@ export class ObjectInstallmentComponent implements OnInit {
 
     public isFullPay = false;
 
+    public showTypeInstallment = false;
     public typeInstallment: string = 'Бесплатная рассрочка';
+    public screenWidth = document.body.clientWidth;
 
     public freeInstallment: string = 'Бесплатная рассрочка';
     public payInstallment: string = 'Платная рассрочка';

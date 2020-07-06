@@ -130,11 +130,10 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
         }
     }
 
+    public changeParams(val) {
+        this.router.navigate([`/objects/list/${this.objectId}/dynamic/${val.year}/${val.month}`]);
+    }
     public monthChange(val) {
         this.router.navigate([`/objects/list/${this.objectId}/dynamic/${this.currentYear}/${val}`]);
-    }
-
-    public yearChange(val) {
-        this.router.navigate([`/objects/list/${this.objectId}/dynamic/${val}/${this.currentMonth}`]);
     }
 }

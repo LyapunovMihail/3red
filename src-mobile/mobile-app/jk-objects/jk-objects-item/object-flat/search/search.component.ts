@@ -26,6 +26,7 @@ export class SearchComponent implements OnDestroy {
     public params: any;
     public isLoadMoreBtn = false;
     public objectId: string;
+    public showFilters = false;
 
     @Input() public showChess;
     @Output() public flatsChanged: EventEmitter<IAddressItemFlat[]> = new EventEmitter();
@@ -131,5 +132,11 @@ export class SearchComponent implements OnDestroy {
 
     public ngOnDestroy() {
         this.windowScrollLocker.unblock();
+    }
+
+    public openFilter() {
+        this.showFilters = !this.showFilters;
+        if (this.showFilters) { this.windowScrollLocker.block(); }
+        if (!this.showFilters) { this.windowScrollLocker.unblock(); }
     }
 }

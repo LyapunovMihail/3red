@@ -13,6 +13,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
     @Input() public linkType = 'link'; // Тип ссылки для установки вида перехода
     @Input() public navList = []; // Массив пунктов навигации
     @Input() public activePointDefault = 0; // Активный пункт навигации по умолчанию
+    @Input() public delay = 0; // Задержка отклика
     @Output() public routeNavigate = new EventEmitter<any>(); // Передача ссылки в родительский компонент
 
     public widthActive;
@@ -40,15 +41,15 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
 
     public route(type, item) {
         const value = item.link ? item.link : item.name;
-        if (type === 'link') {
+        if (type === 'link' && this.navType === 'decoration') {
+            this.routeNavigate.emit(item);
+        } else if (type === 'link') {
             setTimeout( () => {
                 // Устанавливаем счетчик для перехода на другой роут после завершения анимации
                 this.router.navigate([value]);
             }, 500);
-        } else if (type === 'link' && this.navType === 'decoration') {
-            this.routeNavigate.emit(item);
         } else {
-            this.routeNavigate.emit(value);
+            setTimeout(() => this.routeNavigate.emit(value), this.delay);
         }
     }
 

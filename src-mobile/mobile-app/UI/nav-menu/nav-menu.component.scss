@@ -1,6 +1,9 @@
 @import '../../../styles/modules/mixins/mixin';
 
-:host { display: block; }
+:host {
+    display: block;
+    @media (max-width: 767px) { padding-right: 20px; }
+}
 
 .nav-menu {
 
@@ -30,6 +33,7 @@
         }
 
         &-item {
+            white-space: nowrap;
             cursor: pointer;
             &:hover { color: $col-red_hover; }
             &+ .nav-menu__list-item { margin-left: 16px; }

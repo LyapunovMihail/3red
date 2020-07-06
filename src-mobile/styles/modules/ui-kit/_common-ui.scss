@@ -44,6 +44,7 @@
     color: $col-black;
     border: solid 1px $col-red;
     transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+    background-color: transparent;
     &:hover {
         background-color: $col-red_hover;
         border-color: $col-red_hover;
@@ -229,9 +230,11 @@
 .g-radiobox {
     display: flex;
     cursor: pointer;
-    &:hover {
-        div  { border-color: $col-red_hover; }
-        span { color: $col-red_hover; }
+    @media (min-width: 1024px) {
+        &:hover {
+            div  { border-color: $col-red_hover; }
+            span { color: $col-red_hover; }
+        }
     }
     input { display: none; }
     span {

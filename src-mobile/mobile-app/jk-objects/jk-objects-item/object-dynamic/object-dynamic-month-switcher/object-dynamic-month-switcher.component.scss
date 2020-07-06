@@ -19,15 +19,20 @@
     &-text {
         font: 24px/29px $font-proba;
         color: $col-black;
+        @media (max-width: 767px) {
+            @include font-size(16px,19px);
+        }
     }
     &_prev .month-switcher__btn-text { margin-left: 24px; }
     &_next .month-switcher__btn-text { margin-right: 24px; }
-
-    &:hover {
+    
+    @media (max-width: 767px) {
         .btn-slider {
-            background-color: $col-red_hover;
-            span::before,
-            span::after { background-color: $col-white; }
+            width: 40px;
+            height: 40px;
         }
+
+        &_prev .month-switcher__btn-text { margin-left: 8px; }
+        &_next .month-switcher__btn-text { margin-right: 8px; }
     }
 }

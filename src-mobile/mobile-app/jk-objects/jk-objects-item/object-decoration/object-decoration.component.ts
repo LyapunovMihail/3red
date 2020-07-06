@@ -6,6 +6,7 @@ import {
     OBJECTS_DECORATION_UPLOADS_PATH
 } from '../../../../../serv-files/serv-modules/jk-objects/decoration-api/objects-decoration.interfaces';
 import { ObjectDecorationAdminService } from './object-decoration-admin.service';
+declare const Swiper: any;
 
 @Component({
     selector: 'app-object-item-decoration',
@@ -35,6 +36,8 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
 
     public uploadsPath = `/${OBJECTS_DECORATION_UPLOADS_PATH}`;
 
+    public swiperSlider;
+
     constructor(
         private decorationService: ObjectDecorationAdminService,
         public ref: ChangeDetectorRef
@@ -60,6 +63,9 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
             if (this.contentSnippet) {
                 this.switchOn = this.contentSnippet.switchOn;
                 this.setCurrentTab();
+                if (!this.swiperSlider) { // Если слайдер не запущен запускаем
+                    setTimeout(() => this.swiperInit(), 1000);
+                }
             }
         }, (error) => {
             console.error(error);
@@ -89,6 +95,9 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
             this.currentType = null;
         }
         this.currentSlide = 0;
+        if (this.swiperSlider) {
+            setTimeout(() => this.swiperSlider.update(), 200);
+        }
     }
 
     public checkTabImages(type) {
@@ -99,6 +108,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
     public changeType(type) { // когда устанавливается новый тип отделки из массива typesSnippet.decorationType, происходит и переключение на таб с таким же decorationType
         this.currentType = type;
         this.currentTab = this.contentSnippet.data.find((item) => item.tab.name === this.currentTab.tab.name && item.tab.decorationType === this.currentType);
+        setTimeout(() => this.swiperSlider.update(), 200);
     }
 
     public nextBtn() {
@@ -107,5 +117,28 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.currentTab.images.length - 1;
+    }
+
+    swiperInit() {
+
+        if (this.swiperSlider) { return; }
+
+        this.swiperSlider = new Swiper('.swiper-decoration', {
+            speed: 700,
+            slideActiveClass: 'active-decoration',
+            navigation: {
+              nextEl: '.swiper-decoration__btn--next',
+              prevEl: '.swiper-decoration__btn--prev',
+              disabledClass: 'disabled'
+            },
+            pagination: {
+                el: '.swiper-decoration__pagination',
+                type: 'bullets',
+                bulletActiveClass: 'active',
+                renderBullet: function (index, className) {
+                    return `<span class="${className} ${className}--dot-${index}"></span>`;
+                }
+            }
+        });
     }
 }

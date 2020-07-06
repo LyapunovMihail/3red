@@ -1,13 +1,21 @@
-<div class="object-purchase__list-container" [style.height.px]="activeBanksLength < 5 ? (98 * activeBanksLength + 39) : moreBanks ? (98 * activeBanksLength + 39) : (98 * 5 + 39)">
+<div class="object-purchase__list-container" 
+    [style.height.px]="(activeBanksLength < 5 ? (72 * activeBanksLength + 39) : moreBanks ? (72 * activeBanksLength + 39) : (72 * 5 + 39))">
+
+    <div class="object-purchase__list-close">
+        <button class="btn-close" (click)="close.emit(false)">
+            <span></span>
+            <span></span>
+        </button>
+    </div>
 
     <div class="object-purchase__list-head">
-        <p class="object-purchase__list-text object-purchase__list-text_head">Банк</p>
-        <p class="object-purchase__list-text object-purchase__list-text_head"
+        <p class="object-purchase__list-text bank-col object-purchase__list-text_head">Банк</p>
+        <p class="object-purchase__list-text percent-col object-purchase__list-text_head"
             [class.no-percent]="hideEmptyColums('percent',bankList)">Ставка от</p>
-        <p class="object-purchase__list-text object-purchase__list-text_head"
+        <p class="object-purchase__list-text deadline-col object-purchase__list-text_head"
             [class.no-deadline]="hideEmptyColums('deadline',bankList)">Срок</p>
-        <p class="object-purchase__list-text object-purchase__list-text_head"
-            [class.no-initial]="hideEmptyColums('initial',bankList)">Минимальный взнос</p>
+        <p class="object-purchase__list-text initial-col object-purchase__list-text_head"
+            [class.no-initial]="hideEmptyColums('initial',bankList)">Мин. взнос</p>
     </div>
 
     <ng-container *ngFor="let bank of bankList">
@@ -16,18 +24,23 @@
             'no-deadline': hideEmptyColums('deadline',bankList),
             'no-initial': hideEmptyColums('initial',bankList)
         }">
-            <div class="object-purchase__list-text object-purchase__list-image">
-                <img [src]="bank.image" alt="bank-logo" *ngIf="!bank.isNew">
-                <img [src]="uploadsPath + bank.image" alt="bank-logo" *ngIf="bank.isNew">
+            <div class="object-purchase__list-bank bank-col">
+                <div class="object-purchase__list-text object-purchase__list-image">
+                    <img [src]="bank.image" alt="bank-logo" *ngIf="!bank.isNew">
+                    <img [src]="uploadsPath + bank.image" alt="bank-logo" *ngIf="bank.isNew">
+                </div>
+                <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
             </div>
-            <p class="object-purchase__list-text object-purchase__list-name">{{bank.name}}</p>
-            <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-rate">
+            <p class="object-purchase__list-text object-purchase__list-text_grey percent-col">
+                <span>Ставка от</span>
                 <span>{{bank.percent}}</span>
             </p>
-            <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-date">
+            <p class="object-purchase__list-text object-purchase__list-text_grey deadline-col">
+                <span>Срок</span>
                 <span>{{bank.deadline}}</span>
             </p>
-            <p class="object-purchase__list-text object-purchase__list-text_grey object-purchase__list-payment">
+            <p class="object-purchase__list-text object-purchase__list-text_grey initial-col">
+                <span>Минимальный взнос</span>
                 <span>{{bank.initial}}</span>
             </p>
         </div>
@@ -35,4 +48,7 @@
 
 </div>
 
-<button class="object-purchase__list-btn btn-empty" [class.active]='moreBanks' (click)="moreBanks = !moreBanks" *ngIf="activeBanksLength > 5">Показать все банки</button>
+<button class="object-purchase__list-btn btn-empty" [class.active]='moreBanks' 
+    (click)="moreBanks = !moreBanks" *ngIf="activeBanksLength > 5 && pageWidth > 767">
+        Показать все банки
+</button>

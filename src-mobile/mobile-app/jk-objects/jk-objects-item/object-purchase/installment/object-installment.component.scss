@@ -1,27 +1,32 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
+:host {
+    width: 100%;
+    display: block;
+}
+
 .object-installment {
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     background-color: $col-white;
-    padding: 56px 0;
+    padding: 48px 0;
 
     &__container {
-        width: calc(100% - 140px);
+        @include container();
+        display: flex;
+        flex-flow: row wrap;
     }
 
     &__type {
-        width: 100%;
-        max-width: 922px;
-        display: flex;
-        justify-content: space-between;
-        margin: 0 0 40px;
+        width: 340px + 8px + 16px;
+        margin: 0 67px 56px 0;
     
         &-item {
-            width: 287px;
             cursor: pointer;
+            margin: 0 0 24px;
+            &:last-child { margin: 0; }
         }
         &-box {
             display: flex;
@@ -64,13 +69,13 @@
 .span-nowrap { padding: 0; }
 
 .installment-calculator {
-    width: 100%;
-    max-width: 922px;
-    display: flex;
-    justify-content: space-between;
+    width: 273px;
+    margin: 0 0 60px;
     
     &__item {
-        width: 287px;
+        width: 100%;
+        margin: 0 0 60px;
+        &:last-child { margin: 0; }
 
         &-wrap {
             width: 100%;
@@ -119,28 +124,129 @@
     }
     &__result {
         width: 100%;
-        max-width: 922px;
-        box-sizing: border-box;
         display: flex;
-        margin: 50px 0 0;
+        box-sizing: border-box;
         
         &-item {
-            width: 287px;
-
-            &+ .installment-calculator__result-item { margin-left: 30px; }
+            margin-right: 48px;
+            &:last-child { margin: 0; }
         }
         &-title {
             font: 18px/23px $font-proba;
             color: $col-black-5;
-            margin: 0 0 10px;
+            margin: 0 0 8px;
             white-space: nowrap;
         }
         &-result {
             font: 18px/23px $font-proba;
             color: $col-black;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    .object-installment {
+        padding: 0;
+
+        &__container { display: block; }
+        &__type {
+            width: 100%;
+            margin: 0 0 24px;
+        }
+
+        &__select {
+            width: 100%;
+            height: 48px;
+            border: solid 1px #f0f0f0;
+            box-sizing: border-box;
+            padding-right: 44px;
+            position: relative;
+            margin: 0 0 16px;
+            user-select: none;
+            input {
+                width: 100%;
+                height: 100%;
+                border: none;
+                padding: 0 0 0 16px;
+                box-sizing: border-box;
+                pointer-events: none;
+                color: $col-black;
+                &::placeholder { color: $col-89; }
+            }
+            &:before {
+                content: '';
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                top: calc(50% - 9px);
+                right: 13px;
+                background: url(/assets/img/jk-object/arrow.svg) center no-repeat;
+            }
+            &--open {
+                &:before { transform: rotate(180deg); }
+            }
+
+            &-tooltip {
+                width: 100%;
+                height: 50px * 3;
+                position: absolute;
+                top: calc(100% + 8px); left: 0;
+                border: 1px solid $col-border;
+                background-color: #fff;
+                box-sizing: border-box;
+                display: flex;
+                flex-flow: column;
+                justify-content: space-between;
+                z-index: 1;
+                &_cls-area {
+                    width: 100%;
+                    height: 100%;
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                    z-index: -1;
+                }
+
+                p {
+                    width: 100%;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-bottom: 1px solid $col-border;
+                    transition: color .2s linear;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    &:hover {
+                        @media (min-width: 1024px) { color: $col-red; }
+                    }
+                    &.tooltip-active { color: $col-red; }
+                    &:last-child { border-bottom: 0; }
+                }
+            }
+
+            &-wrap {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+    }
+    .installment-calculator {
+        width: 100%;
+        margin: 0 0 40px;
+
+        &__item { margin: 0 0 32px; }
+        &__result {
+            width: 100%;
+            display: block;
+
+            &-item { margin: 0 0 16px; }
         }
     }
 }

@@ -1,0 +1,51 @@
+@import "../../../../../../styles/modules/mixins/mixin";
+
+.flats__sorting {
+
+    &-find {
+        font: 16px/23px $font-proba;
+        color: $col-black;
+        @media (max-width: 767px) {
+            width: 100%;
+            @include font-size(16px,19px);
+            margin: 0 0 24px;
+        }
+    }
+    &-wrap {
+        @include container();
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        @media (max-width: 767px) {
+            justify-content: flex-start;
+        }
+    }
+
+    &-item {
+        font: 18px/23px $font-proba;
+        color: $col-black-5;
+        // margin: 15px 0 0;
+        cursor: pointer;
+        @media (max-width: 767px) {
+            @include font-size(16px,19px);
+            margin: 0 32px 16px 0;
+        }
+
+        &_active,
+        &_turn {
+            color: $col-black;
+            position: relative;
+            padding: 0 15px 0 0;
+            &::after {
+                content: '';
+                width: 10px;
+                height: 16px;
+                position: absolute;
+                top: 5px; right: 0;
+                background: url(/assets/img/filter_arrow.svg) no-repeat;
+                background-size: 100%;
+            }
+        }
+        &_turn::after { transform: rotate(180deg); }
+    }
+}
