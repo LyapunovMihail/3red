@@ -126,6 +126,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges {
         this.swiperSlider = new Swiper('.swiper-decoration', {
             speed: 700,
             slideActiveClass: 'active-decoration',
+            watchOverflow: true,
             navigation: {
               nextEl: '.swiper-decoration__btn--next',
               prevEl: '.swiper-decoration__btn--prev',

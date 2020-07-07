@@ -56,12 +56,16 @@
 
         &-item {
             width: 158px;
-            // height: 169px;
+            min-height: 84px;
             margin: 0 24px 24px 0;
             background-color: #fff;
             padding: 12px;
             box-sizing: border-box;
             &:nth-child(4) { margin-right: 0; }
+            &.disabled {
+                pointer-events: none;
+                .object-flat__house-title { opacity: .5; }
+            }
         }
 
         &-title {
