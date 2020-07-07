@@ -45,6 +45,7 @@
     color: $col-black;
     white-space: pre-wrap;
     margin: 0 0 40px;
+    &.margin { margin-top: 16px; }
 }
 .project-indicators__title {
     margin: 0 0 24px;
@@ -64,4 +65,20 @@
 .project-indicators__value {
     font: 24px/29px $font-proba;
     color: #000;
+}
+
+@media (max-width: 767px) {
+    .object-builder--margin {margin: 64px 0 0; }
+    .indicators__grid-container { display: block; }
+    .indicators__grid-item {
+        margin: 0 0 24px;
+        &:last-child { margin: 0; }
+    }
+    
+    .project__description { @include font-size(16px,22px); }
+    .project-indicators__title { @include font-size(28px,34px); }
+    .project-indicators__key {
+        @include font-size(14px,18px);
+        margin: 0 0 8px;
+    }
 }

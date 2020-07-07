@@ -6,56 +6,53 @@
 
         <button (click)="close.emit(false)" class="form-request__cls-btn btn-cls"><span></span></button>
 
-        <h2 class="form-request__title">Заявка на ипотеку для квартиры №{{apartmentNumber}}</h2>
-
-        <!--<input [formControl]="form.controls['price']" type="text" style="display: none;">-->
-        <!--<input [formControl]="form.controls['number']" type="text" style="display: none;">-->
+        <h2 class="form-request__title">Заявка на ипотеку для квартиры №{{apartmentNumber}} в ЖК {{jkName}}</h2>
         
         <div class="form-request__wrap form-request__wrap_areas">
 
-            <div class="form-request__wrap form-request__wrap_size-w3">
+            <div class="form-request__wrap form-request__wrap_size-w2">
                 <input [formControl]="form.controls['lastName']"
                     class="form-request__field g-input"
                     type="text" appSlideTopLabel>
                 <label >Фамилия</label>
             </div>
-            <div class="form-request__wrap form-request__wrap_size-w3">
+            <div class="form-request__wrap form-request__wrap_size-w2">
                 <input [formControl]="form.controls['name']" 
                     class="form-request__field g-input"
                     type="text" appSlideTopLabel>
                 <label >Имя</label>
             </div>
-            <div class="form-request__wrap form-request__wrap_size-w3">
+            <div class="form-request__wrap form-request__wrap_size-w2">
                 <input [formControl]="form.controls['middleName']"
                     class="form-request__field g-input"
                     type="text" appSlideTopLabel>
                 <label >Отчество</label>
             </div>
     
-            <div class="form-request__wrap form-request__wrap_size-w3">
+            <div class="form-request__wrap form-request__wrap_size-w2">
                 <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']" appSlideTopLabel
                     [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
                     class="form-request__field g-input" type="text" [textMask]="{mask: phoneMask}">
                 <label >Телефон</label>
                 <p class="form-request__notice">Например: +7 (910) 123-45-67</p>
             </div>
-            <div class="form-request__wrap form-request__wrap_size-w2">
+            <div class="form-request__wrap form-request__wrap_size-w1">
                 <input [formControl]="form.controls['mail']" appSlideTopLabel
                        [ngClass]="{'input-invalid': form.controls['mail'].invalid && form.controls['mail'].touched}"
                        class="form-request__field g-input" type="text">
                 <label >Эл. почта</label>
             </div>
     
-            <div class="form-request__wrap form-request__wrap_size-w3 form-request__wrap_last">
+            <div class="form-request__wrap form-request__wrap_size-w2">
                 <input [formControl]="form.controls['first_pay']" class="form-request__field g-input" type="text" appSlideTopLabel>
                 <label >Первоначальный взнос</label>
             </div>
-            <div class="form-request__wrap form-request__wrap_size-w3 form-request__wrap_last">
+            <div class="form-request__wrap form-request__wrap_size-w2">
                 <input [formControl]="form.controls['period_pay']" class="form-request__field g-input" type="text" appSlideTopLabel>
                 <label >Планируемый срок выплат</label>
                 <p class="form-request__notice">Количество месяцев</p>
             </div>
-            <div class="form-request__wrap form-request__wrap_size-w3 form-request__wrap_last">
+            <div class="form-request__wrap form-request__wrap_size-w2 form-request__wrap_last">
     
                 <input *ngIf="platform.isBrowser"
                     [ngClass]="{'time-input-active' : (form.get('wait_for_call').value === 'later' && isOpen)}"

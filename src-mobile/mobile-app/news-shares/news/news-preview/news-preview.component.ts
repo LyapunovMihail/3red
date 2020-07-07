@@ -18,6 +18,11 @@ export class NewsPreviewComponent implements OnInit {
 
     public snippetsArray: INewsSnippet[] = [];
     public allSnippets: INewsSnippet[] = [];
+    public navList = [
+        { name: 'Все', link: '/news-shares/all' },
+        { name: 'Новости', link: '/news-shares/news' },
+        { name: 'Акции', link: '/news-shares/shares' }
+    ];
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,

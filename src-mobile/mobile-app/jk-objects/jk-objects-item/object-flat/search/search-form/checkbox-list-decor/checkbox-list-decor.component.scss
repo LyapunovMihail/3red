@@ -4,6 +4,10 @@
     display: flex;
     align-items: flex-end;
     flex-flow: row wrap;
+    @media (max-width: 767px) {
+        flex-flow: column nowrap;
+        align-items: flex-start;
+    }
 
     &--for-filter {
         width: 100%;
@@ -17,6 +21,7 @@
     }
 }
 
-.g-checkbox:not(first-child) {
+.g-checkbox:not(:first-child) {
     margin-left: 15px;
+    @media (max-width: 767px) { margin: 16px 0 0; }
 }

@@ -17,6 +17,7 @@ export class FormCreditComponent implements OnChanges {
     @Input() public apartmentPrice: number;
     @Input() public article: string;
     @Input() public type: string;
+    @Input() public jkName: string;
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
 
     public form: FormGroup = this.formBuilder.group({

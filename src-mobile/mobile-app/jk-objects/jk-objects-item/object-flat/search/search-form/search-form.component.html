@@ -1,13 +1,8 @@
-<div class="search-form__container" [ngClass]="{'search-form__container--slide' : moreFilter}">
+<div class="search-form__container" [class.show]="showFilters">
+
+    <button class="search-form__reset-btn btn-cls" (click)="formReset(); close.emit(false)"><span></span></button>
 
     <form [formGroup]="form" class="search-form" *ngIf="form">
-
-        <app-search-sorting
-            [(ngModel)]="sort"
-            [ngModelOptions]="{standalone: true}"
-            (ngModelChange)="sortChange.emit(sort)"
-            [topPos]="showChess">
-        </app-search-sorting>
 
         <div class="search-form__wrap">
 
@@ -25,6 +20,21 @@
                         </label>
                     </li>
                 </ul>
+            </div>
+
+            <div class="search-form__wrap-item search-form__wrap-item_corpus">
+                <p class="search-form__subtitle">Номер дома</p>
+
+                <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
+                    <p class="search-form__text">
+                        {{ houseName }}
+                    </p>
+                </div>
+                <div class="close-area" *ngIf="showCorpus" (click)="showCorpus = false"></div>
+                <app-search-house-select *ngIf="showCorpus"
+                    [btnList]="housesBtnList"
+                    [formControl]="form.controls['houses']">
+                </app-search-house-select>
             </div>
 
             <div class="search-form__wrap-item search-form__wrap-item_price">
@@ -86,36 +96,14 @@
                 </div>
             </div>
 
-            <div class="search-form__wrap-item search-form__wrap-item_corpus">
-                <p class="search-form__subtitle">Номер дома</p>
-
-                <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
-                    <p class="search-form__text">
-                        {{ houseName }}
-                    </p>
-                </div>
-                <div class="close-area" *ngIf="showCorpus" (click)="showCorpus = false"></div>
-                <app-search-house-select *ngIf="showCorpus"
-                    [btnList]="housesBtnList"
-                    [formControl]="form.controls['houses']">
-                </app-search-house-select>
-            </div>
-
-            <button class="search-form__btn" [class.search-form__btn_open]="moreFilter"
-                    (click)="moreFilter = !moreFilter">Еще параметры</button>
-
-            <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter" #decorCheckbox>
-
+            <div class="search-form__wrap-item search-form__wrap-item_decoration">
                 <app-search-checkbox-list-decor
                     [btnList]="decorList"
                     [formControl]="form.controls['decoration']"
                     [name]="'decoration'">
                 </app-search-checkbox-list-decor>
-
-                <button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>
             </div>
+            <button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>
         </div>
-
     </form>
-
 </div>

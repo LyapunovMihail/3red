@@ -6,52 +6,20 @@
     flex-flow: column nowrap;
     align-items: center;
 
-    &__head { margin: 0 0 16px; }
+    &__container {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+    }
 
     &__options {
         margin: 0 0 16px;
         .btn__admin-setting { margin-right: 8px; }
     }
     &__title { margin: 0 0 24px; }
-
-    &__nav {
-        width: 822px;
-        height: 32px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin: 0 0 16px;
-
-        &-list {
-            display: flex;
-            border-bottom: 1px solid #d8d8d8;
-        }
-        &-item {
-            font: 18px/23px $font-proba;
-            color: $col-black-5;
-            position: relative;
-            padding: 0 0 8px;
-            margin-right: 16px;
-            cursor: pointer;
-            &:last-child { margin-right: 0; }
-            &:hover { color: $col-red_hover; }
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: -1px;
-                left: 0;
-                width: 100%;
-                height: 1px;
-                background-color: #d8d8d8;
-            }
-            &_active {
-                color: $col-red;
-                &::before { background-color: $col-red; }
-            }
-        }
-    }
+    &__nav { margin: 0 0 16px; }
     &__address {
-        min-width: 48px + 327px;
+        margin: 0 0 24px;
 
         &-title {
             font: 14px/18px $font-proba;
@@ -71,6 +39,62 @@
         &-item {
             width: 100%;
             height: 100%;
+        }
+        &-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 32px;
+            bottom: 24px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .object-location {
+        margin: 0;
+
+        &__address {
+            margin: 0 0 16px;
+
+            &-name { @include font-size(16px,19px); }
+        }
+        &__nav {
+            width: 100%;
+            height: 30px;
+            position: relative;
+
+            &-wrap {
+                width: calc(100% + 40px);
+                height: 40px;
+                position: absolute;
+                top: 0;
+                left: -20px;
+                overflow: hidden;
+                
+                &_for-scroll {
+                    height: calc(100% + 20px);
+                    overflow-x: scroll;
+                    overflow-y: hidden;
+                    padding: 0 20px;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+            }
+        }
+        &__head-title { @include font-size(28px,34px); }
+        &__map {
+            height: 420px;
+
+            &-link {
+                width: 280px;
+                right: 20px;
+                bottom: 15px;
+                padding: 0;
+            }
         }
     }
 }

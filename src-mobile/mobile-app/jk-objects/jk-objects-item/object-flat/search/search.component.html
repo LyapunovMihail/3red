@@ -1,12 +1,22 @@
 <div class="search">
 
+    <button (click)="openFilter()" class="search__filter-btn"
+        [class.active]="showFilters"></button>
+
     <app-search-form
         [showChess]="showChess"
+        [showFilters]="showFilters"
         (formChange)="formChange($event)"
-        (sortChange)="sortChange($event)">
+        (sortChange)="sortChange($event)"
+        (close)="openFilter()">
     </app-search-form>
 
-    <ng-content></ng-content>
+    <app-search-sorting class="search__sorting"
+        [counter]="count"
+        [(ngModel)]="sort"
+        [ngModelOptions]="{standalone: true}"
+        (ngModelChange)="sortChange($event)"
+    ></app-search-sorting>
 
     <div class="search__main">
 
@@ -17,5 +27,5 @@
             [showMore]="isLoadMoreBtn">
         </app-search-output>
     </div>
-</div>
 
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector : 'app-footer',
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
     public currentYear: number;
+    @Input() public isContacts = false;
 
     constructor(
     ) { }

@@ -6,6 +6,7 @@ import { LocationInfrastructureComponent } from './location-infrastructure/locat
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label.module';
 import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
+import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -24,7 +25,8 @@ import { LocationRoutesPipe } from './location-routes/location-routes.pipe';
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        SlideTopLabelModule
+        SlideTopLabelModule,
+        NavMenuModule,
     ]
 })
 export class ObjectLocationModule {

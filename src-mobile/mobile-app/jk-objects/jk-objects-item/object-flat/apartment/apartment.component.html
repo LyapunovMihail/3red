@@ -1,13 +1,9 @@
-<div class="g-modal-bg" *ngIf="showApartmentWindow">
+<div class="g-modal-bg apartment-modal" *ngIf="showApartmentWindow">
 
     <div class="apartment">
 
-        <div class="apartment__elements">
-            <button class="apartment__elements-prev btn-slider btn-slider_white btn-slider_prev" 
-                (click)="prevFlat()" *ngIf="flatIndex - 1 >= 0"><span></span></button>
-            <button class="apartment__elements-next btn-slider btn-slider_white btn-slider_next" 
-                (click)="nextFlat()" *ngIf="flatIndex + 1 < flatsList.length"><span></span></button>
-            <button class="apartment__elements-cls btn-cls" (click)="close.emit(false)"><span></span></button>
+        <div class="apartment__close">
+            <button class="apartment__close-btn btn-cls" (click)="close.emit(false)"><span></span></button>
         </div>
 
 
@@ -55,7 +51,7 @@
             </div>
         </div>
 
-        <a [routerLink]="'/objects/list/' + this.jk._id">ЖК {{jk.name}}</a>
+        <a class="apartment__link" [routerLink]="'/objects/list/' + this.jk._id">ЖК {{jk.name}}</a>
         <div class="apartment__btn">
             <button (click)="isReserveFormOpen = true" class="apartment__btn-reserve btn_var-2">Забронировать</button>
             <button (click)="isCreditFormOpen = true;" class="apartment__btn-credit btn_var-3">Заявка на ипотеку</button>
@@ -70,6 +66,7 @@
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
+    [jkName]="jk.name"
     [article]="flatData.article">
 </app-form-credit>
 <app-form-reserve *ngIf="flatData"
@@ -78,5 +75,6 @@
     [apartmentPrice]="flatData.price"
     [apartmentNumber]="flatData.flat"
     [type]="flatData.type"
+    [jkName]="jk.name"
     [article]="flatData.article">
 </app-form-reserve>

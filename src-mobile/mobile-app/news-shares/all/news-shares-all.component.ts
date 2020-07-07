@@ -28,6 +28,12 @@ export class NewsSharesAllComponent implements OnInit {
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
+    public navList = [
+        { name: 'Все', link: '/news-shares/all' },
+        { name: 'Новости', link: '/news-shares/news' },
+        { name: 'Акции', link: '/news-shares/shares' }
+    ];
+
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         public platform: PlatformDetectService,

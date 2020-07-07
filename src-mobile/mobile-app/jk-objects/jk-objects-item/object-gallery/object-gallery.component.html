@@ -7,41 +7,36 @@
             <h2 class="object-gallery__title">Галерея</h2>
 
             <nav class="object-gallery__nav" *ngIf="tabSnippet?.gallery">
-                <ul class="object-gallery__nav-list">
-                    <ng-container *ngFor="let tab of this.tabSnippet.gallery">
-                        <li class="object-gallery__nav-item"
-                            [class.object-gallery__nav-item_active]="currentTab === tab.name"
-                            (click)="changeTab(tab.name)"
-                            *ngIf="tab.show">{{tab.name}}</li>
-                    </ng-container>
-                </ul>
-            </nav>
-
-            <div class="object-gallery__slider">
-
-                <button (click)="prevSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_prev btn-slider btn-slider_prev btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
-                <button (click)="nextSlide(); clearInt()" class="object-gallery__slider-btn object-gallery__slider-btn_next btn-slider btn-slider_next btn-slider_black" *ngIf="contentSnippet?.image_data?.length > 1"><span></span></button>
-
-                <div class="object-gallery__slider-dots" *ngIf="contentSnippet?.image_data?.length > 1"> 
-                    <span *ngFor="let dots of contentSnippet.image_data; let i = index"
-                        [ngClass]="{'current-dots': currentSlide === i}"></span>
-                </div>
-
-                <div [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 1104 ) ) + 'px)') }" class="object-gallery__slider-list gallery-slide" *ngIf="contentSnippet?.image_data?.length; else elseBlock">
-                    <div class="gallery-slide__item" *ngFor="let slide of contentSnippet.image_data; let i = index"
-                        [ngClass]="{'gallery-slide__item_current': currentSlide === i}">
-
-                        <div class="gallery-slide__image">
-                            <img [src]="uploadsPath + slide.image" alt="slide">
-                        </div>
-                        <div class="gallery-slide__timeline" *ngIf="contentSnippet?.image_data.length > 1 && showTimeline"></div>
-
-                        <div class="gallery-slide__content">
-                            <h3 class="gallery-slide__content-title">{{slide.title}}</h3>
-                            <div class="gallery-slide__content-descr">{{slide.description}}</div>
-                        </div>
+                <div class="object-gallery__nav-wrap">
+                    <div class="object-gallery__nav-wrap--scroll">
+                        <nav-menu
+                            [linkType]="'else'"
+                            [navList]="this.tabSnippet.gallery"
+                            (routeNavigate)="changeTab($event)"
+                        ></nav-menu>
                     </div>
                 </div>
+            </nav>
+
+            <div class="object-gallery__slider swiper-gallery">
+
+                <div class="swiper-wrapper swiper-gallery__wrap" *ngIf="contentSnippet?.image_data?.length; else elseBlock">
+                    <div class="swiper-gallery__slide swiper-slide" *ngFor="let slide of contentSnippet.image_data; let i = index">
+
+                        <div class="swiper-gallery__slide-image">
+                            <img [src]="uploadsPath + slide.image" alt="slide">
+                        </div>
+
+                        <h3 class="swiper-gallery__slide-title">{{slide.title}}</h3>
+                        <div class="swiper-gallery__slide-descr">{{slide.description}}</div>
+                        <div class="swiper-gallery__timeline" *ngIf="sliderTimeline"></div>
+                    </div>
+                </div>
+
+                <div class="swiper-pagination swiper-gallery__pagination"></div>
+
+                <button class="swiper-gallery__btn swiper-gallery__btn--next btn-slider btn-slider_next btn-slider_black"><span></span></button>
+                <button class="swiper-gallery__btn swiper-gallery__btn--prev btn-slider btn-slider_prev btn-slider_black"><span></span></button>
 
                 <ng-template #elseBlock>
                     <div class="gallery-slide__image">

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
-import { IObjectDynamicSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { IObjectDynamicSnippet, IDynamicObject } from '../../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
 import { DynamicService } from '../dynamic-admin-content.service';
 
 @Component({
@@ -14,9 +14,11 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
     @Input() year: number;
     @Input() objectId: number;
     @Input() description: number;
+    @Input() objectsArray: IDynamicObject[] = [];
 
     @Output() monthChange: EventEmitter<number> = new EventEmitter();
     @Output() yearChange: EventEmitter<number> = new EventEmitter();
+    @Output() dateChange: EventEmitter<any> = new EventEmitter();
 
     public date = new Date();
     public tooltipYear = false;
@@ -97,6 +99,7 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
         this.dynamicService.getContentSnippets(this.objectId).subscribe(
             (data) => {
                 this.snippets = data;
+                console.log(data);
                 this.monthParser(this.year);
                 this.ref.detectChanges();
             },
@@ -136,7 +139,7 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
     }
 
     private yearsArrayGenerate(): number[] {
-        let from = 2005;
+        let from = 2019;
         let to = Number(this.date.getFullYear());
         let result = [];
         for ( let i = from ; i <= to ; i ++ ) {
@@ -154,5 +157,23 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
                 });
             }
         );
+    }
+
+    public disabledMonth(month, year) {
+        return !this.snippets.some( (obj) => {
+            return ( (obj.year === year && obj.month === month) );
+        });
+    }
+    public selectChange(ev) {
+
+        const arr = ev.target.value.split(';');
+        this.changeDate(arr[0], arr[1]);
+    }
+    public changeDate(month, year) {
+        const date = {
+            month,
+            year
+        };
+        this.dateChange.emit(date);
     }
 }

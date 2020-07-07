@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { project } from './mockProject';
 import { JkObjectsListService } from '../../jk-objects-list/jk-objects-list.service';
 import { OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+declare const Swiper: any;
 
 export interface IObjectSnippet {
     status: string;
@@ -31,6 +32,8 @@ export class ObjectProjectsComponent implements OnInit {
     public snippets;
     public flats;
 
+    public slider;
+
     constructor(
         public objectService: JkObjectsListService
     ) { }
@@ -39,7 +42,7 @@ export class ObjectProjectsComponent implements OnInit {
         this.objectService.getSnippets()
             .subscribe((data) => {
                 const tempObjects = data.filter(item => item._id !== this.objectId && item.publish);
-                this.snippets = this.getRandomObjects(tempObjects);
+                this.snippets = tempObjects.length && tempObjects.length > 5 ? this.getRandomObjects(tempObjects) : tempObjects;
                 this.getFlatsMinPrice(this.snippets);
             });
     }
@@ -69,6 +72,8 @@ export class ObjectProjectsComponent implements OnInit {
             status: obj.status,
             minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : obj.status === 'Готовые' ? 'Полностью распродан!' : false
         };
+
+        setTimeout( () => this.sliderInit(), 1000);
     }
 
     private getRandomObjects(tempObjects) {
@@ -77,6 +82,7 @@ export class ObjectProjectsComponent implements OnInit {
             while (jkMas.length < 5) {
                 const ind = this.getRandomInt(tempObjects.length - 1);
                 if (!jkMas.find((item) => item._id === tempObjects[ind]._id)) {
+                    console.log('1.1-getRandomObjects-push');
                     jkMas.push(tempObjects[ind]);
                 }
             }
@@ -87,5 +93,21 @@ export class ObjectProjectsComponent implements OnInit {
 
    private getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    public sliderInit() {
+
+        if (this.slider) { return; }
+
+        this.slider = new Swiper('.swiper-projects', {
+            slidesPerView: 'auto',
+            watchOverflow: true,
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '.swiper-projects__btn_next',
+                prevEl: '.swiper-projects__btn_prev',
+                disabledClass: 'disabled',
+            },
+        });
     }
 }

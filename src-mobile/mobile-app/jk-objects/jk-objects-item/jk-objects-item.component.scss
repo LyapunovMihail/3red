@@ -8,14 +8,9 @@
 .object-item {
     position: relative;
     width: 100%;
-    padding-top: 132px;
     overflow-x: hidden;
 
-    &__container {
-        width: 100%;
-        max-width: $container;
-    }
-
+    &__container { @include container(); }
     &__wrapper {
         width: 100%;
         display: flex;
@@ -25,6 +20,9 @@
 
     &--margin {
         padding: 96px 0 0;
+        @media (max-width: 767px) {
+            padding: 64px 0 0;
+        }
     }
 
     &__mock-img {

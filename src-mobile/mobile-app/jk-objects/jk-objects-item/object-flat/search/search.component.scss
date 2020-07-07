@@ -20,39 +20,107 @@
         box-sizing: border-box;
         margin-bottom: 96px;
     }
+
+    &__sorting {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $col-white;
+        padding: 24px 0;
+        margin: 0 0 4px;
+        @media (max-width: 767px) {
+            padding: 16px 0 0;
+        }
+    }
+
+    &__filter-btn {
+        width: 64px;
+        height: 64px;
+        position: fixed;
+        border-radius: 50%;
+        background-color: $col-red;
+        bottom: 113px; right: 40px;
+        background: url(/assets/img/flats/show_filter.svg) center no-repeat $col-red;
+        background-size: 22px;
+        z-index: 102;
+        &.active { background-image: url(/assets/img/flats/check_white.svg); }
+        @media (max-width: 767px) {
+            right: 20px;
+            bottom: 24px; 
+        }
+    }
 }
 
 .search-form {
-    width: $container;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     box-sizing: border-box;
     position: relative;
     box-sizing: border-box;
 
     &__container {
         width: 100%;
-        height: 115px;
-        box-sizing: border-box;
-        padding: 19px 0 29px;
+        position: fixed;
+        top: 0; left: 0;
+        bottom: 0;
+        background-color: $col-white;
+        transform: translateX(100%);
+        transition: transform .5s ease;
         display: flex;
         justify-content: center;
-        background-color: $col-white;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: 72px 0 50px;
+        overflow-x: hidden;
+        overflow-y: scroll;
         z-index: 100;
-        transition: 0.2s linear;
-        margin: 0 0 16px;
-        
-        &--slide { height: 190px; }
+        &.show { transform: translateX(0%); }
     }
+
+    &__reset-btn {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 40px; right: 36px;
+        background-size: 100%;
+        @media(max-width: 767px) {
+            top: 18px; right: 20px;
+        }
+    }
+
     &__wrap {
+        @include container();
         display: flex;
-        align-items: flex-end;
         flex-flow: row wrap;
 
         &-item {
-            margin: 0 40px 15px 0;
+            width: 100%;
             position: relative;
+            margin: 0 0 52px;
             &:last-child { margin: 0; }
+            @media (max-width: 767px) { margin: 0 0 44px; }
             
-            &_corpus { cursor: pointer; }
+            &_room {
+                width: 48px * 4;
+                margin-right: 60px;
+                @media (max-width: 767px) { margin: 0 0 32px; }
+            }
+            &_corpus {
+                width: 80px;
+                cursor: pointer;
+                @media (max-width: 767px) {
+                    width: 100%;
+                    margin: 0 0 32px;
+                }
+            }
+            &_floor {
+                margin: 0 0 76px;
+                @media (max-width: 767px) { margin: 0 0 44px; }
+            }
+            &_decoration { margin: 0 0 40px; }
         }
         &--decoration {
             width: 100%;
@@ -151,9 +219,6 @@
             }
         }
 
-        &_price { width: 243px; }
-        &_square,
-        &_floor { width: 98px; }
         &_corpus {
             width: 71px + 12px + 28px;
             position: relative;

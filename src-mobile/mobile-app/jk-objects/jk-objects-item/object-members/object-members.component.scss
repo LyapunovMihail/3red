@@ -6,17 +6,12 @@
     justify-content: center;
     margin-bottom: 96px;
 
-    &__head { margin: 0 0 32px; }
-
-    &__options {
-        margin: 0 0 16px;
-        .btn__admin-setting { margin-right: 8px; }
-    }
-    &__title { margin: 0 0 24px; }
+    &__title { margin: 0 0 32px; }
 
     &__wrap {
         width: 100%;
         display: flex;
+        flex-flow: row wrap;
 
         &_members {
             display: block;
@@ -36,6 +31,18 @@
             font-size: 16px;
             line-height: 24px;
             color: $col-black-5;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    .object-members {
+        margin: 0 0 64px;
+
+        &__title { margin: 0; }
+        &__wrap_members {
+            margin: 24px 24px 0 0;
         }
     }
 }
