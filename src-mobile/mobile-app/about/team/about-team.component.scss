@@ -1,12 +1,14 @@
 @import "../../../styles/modules/mixins/mixin";
 
-.team {
-    margin:  auto;
-    //max-width: 704px;
+// Стили слайдера в файле _swiper-slider.scss
 
-    &--padding {
-        padding-top: 96px;
-    }
+.team {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &--padding { padding-top: 96px; }
+
+    &__container { @include container(); }
 }
 .team__title {
     font-size: 36px;
@@ -86,17 +88,7 @@
     .team {
         margin:  auto;
         min-width: 320px;
-        padding: 0px 0px 0px 20px;
-
-        &--padding {
-            padding-top: 64px;
-        }
-
-        &__wrap-overflow {
-            margin-left: initial;
-            height: 82vw;
-        }
-
+        &--padding { padding-top: 64px; }
     }
     .team__title {
         font-size: 28px;
@@ -116,23 +108,5 @@
     .team__item-title {
         font-size: 20px;
         line-height: 26px;
-    }
-
-
-    .team__list-image {
-        // width: 220px;
-        // max-width: 100%;
-        margin-right: 16px;
-        img {
-            display: block;
-            width: 100%;
-        }
-    }
-    .team__list-name {
-        font-size: 16px;
-        line-height: 22px;
-    }
-    .team__list-prof {
-        font-size: 12px;
     }
 }

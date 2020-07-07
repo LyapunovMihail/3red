@@ -1,6 +1,7 @@
 .functions {
     max-width: 704px;
     padding: 96px 32px;
+    box-sizing: border-box;
     margin: auto;
     &--fixed {
         position: fixed;

@@ -42,9 +42,9 @@ export class ObjectPurchaseComponent implements OnInit {
     ngOnInit() {
         this.creditService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
-            this.buildBank(this.snippet.banks);
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;
+                this.buildBank(this.snippet.banks);
             }
         }, (error) => {
             console.error(error);

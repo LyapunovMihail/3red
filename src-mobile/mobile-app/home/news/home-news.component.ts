@@ -6,6 +6,7 @@ import { combineLatest } from 'rxjs';
 import { HomeNewsService } from './home-news.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
 import * as moment from 'moment';
+declare const Swiper: any;
 
 @Component({
     selector: 'app-home-news',
@@ -118,7 +119,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         this.slider = new Swiper('.swiper-news', {
             slidesPerView: 'auto',
             watchOverflow: true,
-            touchEventsTarget: 'container',
             spaceBetween: 24,
             navigation: {
                 nextEl: '.swiper-news__btn_next',
