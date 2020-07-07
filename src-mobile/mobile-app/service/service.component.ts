@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { IServiceSnippet } from '../../../serv-files/serv-modules/service/service-api/service.interfaces';
 import { IServiceTabsSnippet } from '../../../serv-files/serv-modules/service/tabs-api/service-tabs.interfaces';
 import { ServiceAdminService } from './service-admin.service';
@@ -20,8 +20,12 @@ export class ServiceComponent implements OnInit {
 
     public currentTab = 'null';
 
+    public widthActive = 0;
+    public offsetLeftActive = 0;
+
     constructor(
-        private serviceAdminService: ServiceAdminService
+        private serviceAdminService: ServiceAdminService,
+        private elRef: ElementRef,
     ) { }
 
     ngOnInit() {
@@ -42,6 +46,9 @@ export class ServiceComponent implements OnInit {
             if (this.tabSnippet.tab && this.tabSnippet.tab.length && this.tabSnippet.tab.some((tab) => tab.show)) {
                 // this.currentTab = this.tabSnippet.tab.find((tab) => tab.show).name;
                 this.getContent();
+                setTimeout(() => {
+                    this.defaultElem();
+                }, 1000);
             }
         }
     }
@@ -59,4 +66,17 @@ export class ServiceComponent implements OnInit {
         this.getContent();
     }
 
+    public defaultElem() {
+        const el = this.elRef.nativeElement.querySelector('.active');
+        this.widthActive = el.offsetWidth;
+        this.offsetLeftActive = el.offsetLeft;
+    }
+    public getActiveElement(event, value) {
+        const elem = event.target;
+
+        this.widthActive = elem.offsetWidth;
+        this.offsetLeftActive = elem.offsetLeft;
+
+        this.changeTab(value);
+    }
 }
