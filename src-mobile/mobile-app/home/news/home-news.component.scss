@@ -27,9 +27,26 @@
             padding: 0 12px 0;
         }
 
-        @media(max-width: 760px) {
-            .object-news__nav .g-all-object {
-                display: none;
+        @media(max-width: 767px) {
+            padding-bottom: 80px;
+            
+            .object-news__nav {
+    
+                &-all {
+                    width: 280px;
+                    height: 48px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-sizing: border-box;
+                    border: 1px solid $col-red;
+                    background: url(/assets/img/arrow-next_black.svg) calc(100% - 80px) 49% no-repeat;
+                    background-size: 16px;
+                    position: absolute;
+                    bottom: 0; left: 0;
+                    color: $col-black;
+                    &::after { display: none; }
+                }
             }
         }
 

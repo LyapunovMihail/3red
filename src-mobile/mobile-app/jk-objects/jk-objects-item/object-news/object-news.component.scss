@@ -34,7 +34,7 @@
 
         &__container {
             position: relative;
-            padding-bottom: 80px;
+            &.padding { padding-bottom: 80px; }
         }
 
         &__nav {
