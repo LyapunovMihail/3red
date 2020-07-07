@@ -38,7 +38,8 @@
 @media (max-width: 767px) {
 
     .object-members {
-        margin: 0 0 64px;
+        &--margin { margin: 0 0 64px; }
+        
 
         &__title { margin: 0; }
         &__wrap_members {

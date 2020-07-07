@@ -5,7 +5,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding: 94px 0 0;
+    &--padding{ padding: 94px 0 0; }
 
     &__head {
         display: flex;
@@ -46,7 +46,8 @@
 
     .object-purchase {
         background-color: $col-white;
-        padding: 48px 0 40px;
+        &--padding{ padding: 48px 0 40px; }
+        
 
         &__head { margin: 0 0 24px; }
         &__title {
