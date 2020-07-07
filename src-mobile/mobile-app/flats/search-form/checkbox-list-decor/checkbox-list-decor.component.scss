@@ -1,22 +1,40 @@
-@import "../../../../styles/modules/mixins/mixin";
+@import "../../../../styles/modules/mixins/mixin.scss";
 
-.search-form__wrap {
-    display: flex;
-    align-items: flex-end;
-    flex-flow: row wrap;
+.search-form__list {
 
-    &--for-filter {
-        width: 100%;
-        height: 115px;
+    &-item {
+        border-bottom: 1px solid $col-border;
+        &:last-child { border-bottom: 0; }
+    }
+    &-checkbox {
+        height: 50px;
+        align-items: center;
         box-sizing: border-box;
-        padding: 19px 0 24px;
-        background-color: $col-white;
-        flex-flow: row nowrap;
-        align-items: flex-start;
-        justify-content: center;
+        padding: 0 16px;
     }
 }
 
-.g-checkbox:not(first-child) {
-    margin-left: 15px;
+.search-form__list_decor {
+    display: flex;
+
+    .search-form__list-item {
+        margin-right: 32px;
+        border-bottom: none;
+        &:last-child { margin-right: 0; }
+    }
+    .search-form__list-checkbox {
+        height: 24px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .search-form__list_decor {
+        display: block;
+
+        .search-form__list-item {
+            margin: 0 0 16px;
+            &:Last-child { margin: 0; }
+        }
+    }
 }

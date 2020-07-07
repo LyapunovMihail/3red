@@ -7,6 +7,13 @@
 
     <h1 class="flats__title">Выбор квартиры</h1>
 
+    <app-search-mod-select class="flats__mods"
+        [modList]="modsBtnList"
+        [value]="params.mod"
+        [(ngModel)]="params.mod"
+        (ngModelChange)="modChange()">
+    </app-search-mod-select>
+
     <app-search-sorting class="flats__sorting"
         [counter]="count"
         [(ngModel)]="sort"

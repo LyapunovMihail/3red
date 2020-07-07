@@ -5,15 +5,22 @@
 .search-form__corpus {
     display: flex;
     flex-flow: row wrap;
+    margin: 0 0 -8px -8px;
 
     &-item {
-        padding: 12px 24px;
+        padding: 0 24px;
         background-color: $col-white;
         border-radius: 24px;
-        font: $font-18;
+        font: 18px/48px $font-proba;
         transition: background-color .5s linear, color .2s linear;
         margin: 0 0 8px 8px;
         cursor: pointer;
+        text-align: center;
+
+        @media(max-width: 760px) {
+            font: 16px/32px $font-proba;
+        }
+
         &:hover {
             background-color: $col-red_hover;
             color: $col-white;

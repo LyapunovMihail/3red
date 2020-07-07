@@ -1,4 +1,3 @@
-
 <div class="search-form__corpus">
     <p *ngFor="let mod of modList" (click)="modNavigate(mod.value)"
         [class.search-form__corpus-item--active]="mod.value === value"
@@ -6,4 +5,3 @@
            {{ mod.name || 'Все комплексы'}}
     </p>
 </div>
-

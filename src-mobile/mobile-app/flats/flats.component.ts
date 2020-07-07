@@ -25,7 +25,7 @@ export class FlatsComponent implements OnInit, OnDestroy {
     public skip: number;
     public form: any;
     public sort: string = FormConfig.sort;
-    public params: any;
+    public params: any = {mod: ''};
     public isLoadMoreBtn = false;
     public config: any;
     public housesBtnList: any = [];
@@ -113,20 +113,19 @@ export class FlatsComponent implements OnInit, OnDestroy {
         }
 
         if ( 'mod' in form && form.mod.length) { // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
-            params.mod = form.mod;
+            params.mod = this.params.mod || form.mod;
         }
 
-        if (this.params && this.params.mod !== params.mod) {
-            delete params.housesMods;
-            this.getData(params, false); // При смене таба подгружаем конфиг с параметрами
-            this.params = params;
-            return;
-        }
+        // if (this.params && this.params.mod !== params.mod) {
+        //     delete params.housesMods;
+        //     this.getData(params, false); // При смене таба подгружаем конфиг с параметрами
+        //     this.params = params;
+        //     return;
+        // }
 
         this.params = params;
         this.skip = 0;
         this.outputFlatsList = [];
-
 
         this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
 
@@ -156,6 +155,10 @@ export class FlatsComponent implements OnInit, OnDestroy {
         }
         this.isLoadMoreBtn = this.skip < this.searchFlats.length;
         this.searchService.setOutputFlatsChanged(this.outputFlatsList);
+    }
+    public modChange() {
+        delete this.params.housesMods;
+        this.getData(this.params, false); // При смене таба подгружаем конфиг с параметрами
     }
     public sortChange(sort) {
         this.sort = sort;

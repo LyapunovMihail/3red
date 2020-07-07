@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     ]
 })
 
-export class ModSelectComponent implements OnInit {
+export class ModSelectComponent implements OnInit, OnChanges {
 
     @Input() public modList: { name: string, value: string}[];
     @Input() public value;
@@ -23,6 +23,12 @@ export class ModSelectComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
+    }
+
+    public ngOnChanges(changes): void {
+        if (this.value === undefined) {
+            this.value = '';
+        }
     }
 
     public modNavigate(num) {

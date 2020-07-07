@@ -56,6 +56,7 @@
 
         &--floor,
         &--flat,
+        &--mod,
         &--house,
         &--delivery,
         &--decoration {
@@ -83,7 +84,7 @@
 
         &--head {
             width: 100%;
-            height: 50%;
+            height: 35%;
             display: flex;
             justify-content: space-between;
             &-bottom { align-items: flex-end; }
@@ -136,12 +137,14 @@
         }
 
         &__text {
-            font: $font-16;
+            font: $font-14;
 
             // &--delivery,
             // &--decoration { display: none; }
 
-            &--flat { display: block; }
+            &--flat,
+            &--mod { display: block; }
+            &--mod { font: 12px/14px $font-proba; }
 
             &--flat,
             &--floor,

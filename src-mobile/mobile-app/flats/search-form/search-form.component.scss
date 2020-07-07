@@ -25,9 +25,10 @@
         border-radius: 0;
         position: absolute;
         top: 8px;
-        right: calc((100vw - 704px) / 2 + 20px);
-
+        right: calc((100vw - 704px) / 2);
         span { width: 33.9px; }
+
+        @media (max-width: 760px) { right: calc((100vw - 704px) / 2 + 20px); }
     }
 
     &__wrapper {
@@ -129,7 +130,7 @@
         }
     }
     &__corpus {
-        width: 100vw;
+        //width: 100vw;
         max-width: 300px;
         max-height: 50px * 6.5;
         overflow: hidden;
@@ -159,7 +160,7 @@
                 position: absolute;
                 right: 0;
                 top: auto;
-                background: url(/assets/img/admin_content/arrow_select_list.svg) 45% no-repeat rgba($color: $col-border, $alpha: .31);
+                background: url(/assets/img/flats/search/arrow_select_list.svg) 45% no-repeat rgba($color: $col-border, $alpha: .31);
                 background-size: 8px 10px;
                 transform: rotate(-90deg);
             }

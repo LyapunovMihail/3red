@@ -9,14 +9,24 @@
     align-items: center;
     @media (max-width: 760px) { padding: 32px 0 64px; }
 
-    &__title {
+    &__mods {
         width: $mobileContainer;
         max-width: $tabletContainer;
-        margin: 0 0 40px;
+        margin: 0 0 24px;
         @media (max-width: 760px) {
             font-size: 28px;
             line-height: 28px;
-            margin: 0 0 32px;
+        }
+    }
+
+    &__title {
+        width: $mobileContainer;
+        max-width: $tabletContainer;
+        margin: 0 0 24px;
+        @media (max-width: 760px) {
+            font-size: 28px;
+            line-height: 28px;
+            margin: 0 0 28px;
         }
     }
 
@@ -59,7 +69,6 @@
                 right: 0;
                 top: 0;
                 background: url(/assets/img/flats/red_arrow_up.svg) center no-repeat;
-                transform: rotate(180deg);
             }
         }
     }
