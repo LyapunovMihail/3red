@@ -60,7 +60,7 @@ export class ObPlanComponent implements OnInit {
     private buildHousesData(i, flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
         const prices = flats.map( flat => flat.price);
-        console.log('flats', flats);
+
         this.housesPlanSvg[i].freeFlats = flats.length;
         this.housesPlanSvg[i].minPrice = Number(((Math.min(...prices)) / 1000000).toFixed(2));
         if (flats.length) {

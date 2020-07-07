@@ -8,7 +8,10 @@ import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/a
 @Component({
     selector: 'app-flats-nt-plan-page',
     templateUrl: './nt-plan.component.html',
-    styleUrls: ['./nt-plan.component.scss'],
+    styleUrls: [
+        '../plan.component.scss',
+        './nt-plan.component.scss',
+    ],
     providers: [
         NtPlanService
     ]
@@ -45,7 +48,9 @@ export class NtPlanComponent implements OnInit {
 
     private buildHousesData(i, flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        const prices = flats.map( flat => flat.price);
         this.houses[i].freeFlats = flats.length;
+        this.houses[i].minPrice = Number(((Math.min(...prices)) / 1000000).toFixed(2));
         if (flats.length) {
             this.houses[i].rooms.forEach((room)  => {
                 room.minPrice = flats.filter((flat) => flat.rooms === room.name)

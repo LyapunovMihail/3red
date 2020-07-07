@@ -43,7 +43,7 @@
             <ul class="offer__complex-list">
                 <div class="offer__complex-item" [class.offer__complex-item-active]="form.get('status').value === link"
                      (click)="form.get('status').setValue(link)"
-                     *ngFor="let link of ['Все', 'В проекте', 'В строительстве', 'Готовые']; let i = index">
+                     *ngFor="let link of ['Любой статус', 'В проекте', 'В строительстве', 'Готовые']; let i = index">
                     <span class="offer__complex-text">{{link}}</span>
                 </div>
             </ul>

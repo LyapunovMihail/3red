@@ -41,8 +41,8 @@ export class ObjectDocumentationComponent implements OnInit {
             this.snippet = data;
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;
+                this.setHeight(this.snippet);
             }
-            this.setHeight(this.snippet);
         }, (error) => {
             console.error(error);
         });

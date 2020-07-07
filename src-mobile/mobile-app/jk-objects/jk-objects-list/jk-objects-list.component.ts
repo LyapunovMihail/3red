@@ -74,7 +74,7 @@ export class JkObjectsListComponent implements OnInit {
 
     private getDistricts() {
         this.btnList = [];
-        this.btnList.push({ name: 'Все районы', value: 'Все районы' });
+        this.btnList.push({ name: 'Любой район', value: 'Любой район' });
         this.snippets.forEach((item) => {
             if (!this.btnList.some((btn) => btn.value === item.district)) {
                 this.btnList.push({ name: item.district, value: item.district, count: 1 });

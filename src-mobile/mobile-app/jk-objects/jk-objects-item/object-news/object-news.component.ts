@@ -142,12 +142,14 @@ export class ObjectNewsComponent implements OnInit {
         this.slider = new Swiper('.swiper-news', {
             slidesPerView: 'auto',
             watchOverflow: true,
-            touchEventsTarget: 'container',
             spaceBetween: 24,
             navigation: {
                 nextEl: '.swiper-news__btn_next',
                 prevEl: '.swiper-news__btn_prev',
             },
+            breakpoints: {
+                768: { slidesPerView: 2 }
+            }
         });
     }
 }

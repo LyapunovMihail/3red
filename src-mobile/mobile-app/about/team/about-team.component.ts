@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AboutTeamAdminService } from './about-team-admin.service';
 import { IAboutTeamTabsSnippet } from '../../../../serv-files/serv-modules/about/team-tabs-api/team-tabs.interfaces';
 import { ABOUT_TEAM_UPLOADS_PATH, ITeamSnippet } from '../../../../serv-files/serv-modules/about/team-api/about-team.interfaces';
+declare const Swiper: any;
 
 @Component({
     selector: 'app-about-team',
@@ -25,7 +26,10 @@ export class AboutTeamComponent implements OnInit {
 
     public uploadsPath = `/${ABOUT_TEAM_UPLOADS_PATH}`;
 
+    public slider = [];
+
     constructor(
+        public elRef: ElementRef,
         private aboutTeamService: AboutTeamAdminService,
     ) { }
 
@@ -53,6 +57,7 @@ export class AboutTeamComponent implements OnInit {
         this.aboutTeamService.getContentSnippets().subscribe((data) => {
             this.contentSnippets = data;
             this.setTeams();
+            setTimeout( () => this.swiperInit(), 2000);
         }, (error) => {
             console.error(error);
         });
@@ -71,5 +76,20 @@ export class AboutTeamComponent implements OnInit {
 
     public prevSlide() {
         this.activeSlide = this.activeSlide === 0 ? 0 : this.activeSlide - 1;
+    }
+
+    swiperInit() {
+        if ( !(this.switchOn && this.teams) ) { return; }
+
+        const slider = this.elRef.nativeElement.querySelectorAll('.swiper-team');
+        slider.forEach( slider => {
+            this.slider.push(
+                new Swiper(`#${slider.id}`, {
+                    slidesPerView: 'auto',
+                    watchOverflow: true,
+                    spaceBetween: 24,
+                })
+            );
+        });
     }
 }

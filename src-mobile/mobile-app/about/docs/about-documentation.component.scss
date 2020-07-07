@@ -1,3 +1,5 @@
+@import '../../../styles/modules/mixins/mixin';
+
 .documentation {
     margin:  auto;
     padding: 0px 32px 0;
@@ -6,10 +8,32 @@
     &--padding {
         padding-bottom: 96px;
     }
+
+    &__show-all {
+        color: $col-red;
+        position: relative;
+        padding-right: 22px;
+        margin: 10px 0 0;
+        &::before {
+            content: '';
+            width: 14px;
+            height: 100%;
+            position: absolute;
+            top: 0; right: 0;
+            background: url(/assets/img/about/arrow-down.svg) left 50% no-repeat;
+            transition: top .2s linear;
+        }
+        &.active::before { transform: rotate(180deg); }
+    }
 }
 .documentation__wrap  {
-    &:last-child .documentation__content{
+    &:last-child .documentation__content {
         border: 0;
+    }
+
+    &--overflow {
+        overflow: hidden;
+        transition: height .2s ease;
     }
 }
 .documentation__content {
@@ -22,13 +46,7 @@
     margin-bottom: 32px;
     line-height: 1.25;
 }
-// .documentation__wrap {
-//     display: grid;
-//     grid-template-columns: 446px auto;
-//     grid-column-gap: 24px;
-//     align-items: flex-start;
 
-// }
 .documentation__item {
     display: flex;
     justify-content: space-between;
@@ -52,8 +70,7 @@
         content: url(/assets/img/about/icon-pdf.svg);
         margin-right: 8px;
         position: absolute;
-        top: -25%;
-        left: 0px;
+        top: -4px; left: 0;
 
     }
 }
@@ -93,8 +110,8 @@
         font-size: 16px;
     }
     .doc__date {
-        font-size: 12px;
-        margin-bottom: 11px;
+        @include font-size(12px,14px);
+        margin-bottom: 8px;
     }
 
     .doc__btn {
