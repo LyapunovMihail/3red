@@ -24,7 +24,7 @@ export class CheckboxListComponent {
     constructor() {}
 
     public isChecked(val) {
-        if (val === 'Все районы') {
+        if (val === 'Любой район') {
             return this.isCheckedAll();
         }
         return this.activeList.some((item) => item === val);
@@ -38,7 +38,7 @@ export class CheckboxListComponent {
 
     public checkBtn(event) {
         const value = event.target.value;
-        if (value === 'Все районы') {
+        if (value === 'Любой район') {
             this.checkAll(event);
             this.propagateChange(this.activeList);
             return;
@@ -59,7 +59,7 @@ export class CheckboxListComponent {
     // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
     public checkAll(event) {
         this.btnList.forEach((item) => {
-           if (item.value !== 'Все районы') {
+           if (item.value !== 'Любой район') {
                if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
                    this.activeList.push(item.value);
                } else if (!event.target.checked) {

@@ -12,6 +12,7 @@ import { SearchFormPipe } from './search-form/search-form.pipe';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 import { CheckboxListDecorComponent } from './search-form/checkbox-list-decor/checkbox-list-decor.component';
 import { BitNumberPipe } from './search-output/bit-number.pipe';
+import { ApartmentModule } from './apartment/apartment.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -36,6 +37,7 @@ const FlatsComponents = [
         ReactiveFormsModule,
         FormsModule,
         GHMRangeNumberModule,
+        ApartmentModule,
 
         CommonModule,
         RouterModule.forChild([

@@ -18,6 +18,6 @@ export class SearchFormPipe implements PipeTransform  {
             // text = text.length > 20 ? text.slice(0, 18) + '..' : text;
             return text;
         }
-        return 'Все районы';
+        return 'Любой район';
     }
 }

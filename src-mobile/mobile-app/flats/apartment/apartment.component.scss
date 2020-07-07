@@ -1,46 +1,74 @@
 @import "../../../styles/modules/mixins/mixin";
 
-.apartment {
-    width: 964px;
+.apartment-modal {
+    width: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: scroll;
     background: #fff;
+    z-index: 103;
+}
+
+.apartment {
+    @include container();
     position: relative;
     box-sizing: border-box;
-    padding: 48px 94px;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
     z-index: 1000;
 
-    &__elements {
-        position: absolute;
-        width: 0;  
-        height: 0;
-        left: 0;
-        top: 0;
+    &__close {
+        width: 100%;
+        height: 64px;
+        position: fixed;
+        top: 0; left: 0;
+        background-color: $col-white;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding: 0 32px;
         pointer-events: none;
+        z-index: 1;
+        @media (max-width: 767px) {
+            padding: 0 20px;
+        }
 
-        &-cls {
-            position: fixed;
-            top: 64px;
-            right: calc(((100% - 964px) / 2) - (22px + 48px));
+        &-btn {
+            width: 24px;
+            height: 24px;
             pointer-events: all;
         }
-        &-prev,
-        &-next {
-            position: fixed;
-            top: 50%;
+    }
+
+    &__link {
+        display: block;
+        font: 18px/23px $font-proba;
+        color: #ee4237;
+        padding-left: 21px;
+        position: relative;
+        margin: 0 0 24px;
+        &::after {
+            content: url(/assets/img/flat-link-jk.svg);
+            position: absolute;
+            top: 50%; left: 0;
             transform: translateY(-50%);
-            pointer-events: all;
-        }
-        &-prev {
-            left: calc(((100% - 964px) / 2) - (22px + 48px));
-        }
-        &-next {
-            right: calc(((100% - 964px) / 2) - (22px + 48px));
         }
     }
 
     &__image {
         width: 100%;
-        height: 600px;
-        margin: 24px 0 16px;
+        height: 544px;
+        margin: 0 0 32px;
+        @media (max-width: 767px) {
+            height: 87.5vw;
+            margin: 0 0 16px;
+        }
 
         &-error {
             width: 100%;
@@ -56,41 +84,25 @@
     &__info {
         width: 100%;
         box-sizing: border-box;
-        margin: 0 0 24px;
+        margin: 0 0 16px;
 
         &-title { margin: 0 0 18px; }
+
         &-favorites {
-            font: 16px/22px $font-proba;
+            font: $font-18;
             color: $col-red;
             margin: 0 0 24px;
             position: relative;
-            width: 155px;
             display: block;
+            @media (max-width: 767px) { @include font-size(16px,22px); }
             &:after {
                 content: url(/assets/img/jk-object/header_heart-empty.svg);
                 position: absolute;
                 top: 50%; left: calc(100% + 9px);
                 transform: translateY(-50%);
             }
-
             &-active:after {
                 content: url(/assets/img/jk-object/header_heart.svg);
-            }
-        }
-        &-jkLink {
-            margin: 0 0 32px;
-
-            &> a {
-                font: 18px/23px $font-proba;
-                color: $col-red;
-                padding-left: 21px;
-                position: relative;
-                &::after {
-                    content: url(/assets/img/flat-link-jk.svg);
-                    position: absolute;
-                    top: 50%; left: 0;
-                    transform: translateY(-50%);
-                }
             }
         }
 
@@ -109,15 +121,28 @@
             margin: 0 0 8px;
             border-bottom: 1px solid $col-border;
         }
+        @media (max-width: 767px) {
+            &-title { margin: 0 0 8px; }
+            &-value { @include font-size(16px,22px); }
+        }
     }
     &__btn {
+        width: 100%;
         display: flex;
         justify-content: space-between;
 
         &-reserve,
         &-credit {
-            width: 376px;
+            width: calc((100% - 24px) / 2);
             height: 48px;
+        }
+        @media (max-width: 767px) {
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+
+            &-reserve,
+            &-credit { width: 100%; }
+            &-reserve { margin: 0 0 8px; }
         }
     }
 }
