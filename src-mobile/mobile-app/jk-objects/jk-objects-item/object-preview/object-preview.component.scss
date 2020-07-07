@@ -52,6 +52,7 @@
             background-size: 22px 26px;
             border-radius: 50%;
         }
+        &> span { margin-left: 5px; }
     }
     &__admin-btn { margin: 0 0 16px; }
 
@@ -229,16 +230,20 @@
             line-height: 18px;
             margin: 0 0 16px;
         }
-        &__change-dynamic {
-            width: 113px;
-            height: 28px;
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            padding: 0 37px 0 12px;
-            font-size: 14px;
-            background: url(/assets/img/home-icon_white.svg) calc(100% - 12px) 50% no-repeat $col-red;
-            color: $col-white;
+        &__btns {
+
+            &-flats { display: none; }
+            &-dynamic {
+                width: 113px;
+                height: 28px;
+                position: absolute;
+                top: 16px;
+                right: 20px;
+                padding: 0;
+                font-size: 14px;
+                background: url(/assets/img/home-icon_white.svg) calc(100% - 12px) 50% no-repeat $col-red;
+                color: $col-white;
+            }
         }
     }
     .indicators {

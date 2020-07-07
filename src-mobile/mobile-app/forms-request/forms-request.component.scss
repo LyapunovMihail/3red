@@ -12,8 +12,9 @@
 .form-modal {
     padding: 60px 0;
     box-sizing: border-box;
-    align-items: center;
-    &_credit { align-items: flex-start; }
+    align-items: flex-start;
+    background-color: $col-white;
+    z-index: 104;
     
     &__close-area {
         position: absolute;
@@ -27,17 +28,14 @@
 
 
 .form-request {
-    width: 964px;
-    background-color: #fff;
+    @include container();
     box-sizing: border-box;
-    padding: 48px 94px;
     position: relative;
     z-index: 20;
 
     &__cls-btn {
-        position: fixed;
-        top: 64px;
-        right: calc(((100% - 964px) / 2) - (22px + 48px));
+        position: absolute;
+        top: -54px; right: 0;
         z-index: 11;
     }
 
@@ -57,8 +55,8 @@
         position: relative;
         margin: 0 0 46px;
 
-        &_size-w2 { width: 509px; }
-        &_size-w3 { width: 242px; }
+        &_size-w1 { width: 100%; }
+        &_size-w2 { width: calc((100% - 24px) / 2); }
         &_last { margin: 0; }
         &_areas {
             width: 100%;
@@ -66,6 +64,14 @@
             justify-content: space-between;
             padding: 0;
             margin: 0 0 71px;
+        }
+        @media (max-width: 767px) {
+            &_size-w2 { width: 100%; }
+            &_areas {
+                flex-flow: column nowrap;
+                justify-content: flex-start;
+                margin: 0 0 64px;
+            }
         }
     }
 

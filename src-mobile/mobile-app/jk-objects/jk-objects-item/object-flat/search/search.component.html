@@ -1,5 +1,8 @@
 <div class="search">
 
+    <button (click)="openFilter()" class="search__filter-btn"
+        [class.active]="showFilters"></button>
+
     <app-search-form
         [showChess]="showChess"
         [showFilters]="showFilters"
@@ -25,6 +28,4 @@
         </app-search-output>
     </div>
 
-    <button (click)="openFilter()" class="search__filter-btn"
-        [class.active]="showFilters"></button>
 </div>

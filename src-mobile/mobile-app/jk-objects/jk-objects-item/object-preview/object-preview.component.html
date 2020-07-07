@@ -3,7 +3,7 @@
     <img [src]="uploadsPath + snippet.mainInfo.image" class="object-preview__background-image" alt="background-image" *ngIf="snippet">
 
     <div class="object-preview__wrapper object-preview__wrapper_top">
-        <a [routerLink]="['/objects/list']" class="object-preview__back-btn">Назад к списку объектов</a>
+        <a [routerLink]="['/objects/list']" class="object-preview__back-btn">Назад <span> к списку объектов</span></a>
 
         <div class="object-preview__wrap" *ngIf="snippet">
             <div class="object-preview__item">
