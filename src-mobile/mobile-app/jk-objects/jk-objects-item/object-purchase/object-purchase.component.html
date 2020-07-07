@@ -1,33 +1,51 @@
-<section class="object-purchase" [class.object-item--margin]="switchOn">
+<section class="object-purchase">
+    
+    <ng-container *ngIf="switchOn">
+        <div class="object-item__container">
 
-    <div class="object-item__container">
 
-        <ng-container *ngIf="switchOn">
+            <div class="object-purchase__head">
+                <h2 class="object-purchase__title">Условия покупки</h2>
+    
+                <nav class="object-purchase__nav">
+                    <nav-menu
+                        [navList]="navList"
+                        [linkType]="'else'"
+                        (routeNavigate)="showType = $event"
+                    ></nav-menu>
+                </nav>
+            </div>
 
-            <h2 class="object-purchase__title">Условия покупки</h2>
-
-            <nav class="object-purchase__nav">
-                <ul class="object-purchase__nav-list">
-                    <li class="object-purchase__nav-item" (click)="showType = 'credit'"
-                        [ngClass]="{'object-purchase__nav-item_active': showType === 'credit'}">Ипотека</li>
-                    <li class="object-purchase__nav-item" (click)="showType = 'installment'"
-                        [ngClass]="{'object-purchase__nav-item_active': showType === 'installment'}">Рассрочка</li>
-                </ul>
-            </nav>
 
             <div class="object-purchase__list" *ngIf="showType === 'credit'">
 
-                <app-object-credit-output *ngIf="showType === 'credit' && snippet?.banks"
-                    [bankList]="snippet.banks">
+                <app-object-credit-output *ngIf="pageWidth >= 768 ? (showType === 'credit' && snippet?.banks) : showModal"
+                    [bankList]="snippet.banks"
+                    (close)="showModal = $event; this.scrollBlock.unblock()">
                 </app-object-credit-output>
 
+                <div class="object-purchase__list-wrap" *ngIf="pageWidth <= 767">
+
+                    <div class="object-purchase__list-percent">
+                        <span>Ставка от</span>
+                        <span>{{bankInfo.percent}}%</span>
+                    </div>
+                    <div class="object-purchase__list-deadline">
+                        <span>Срок</span>
+                        <span>от {{bankInfo.deadline}} лет</span>
+                    </div>
+                    <div class="object-purchase__list-initial">
+                        <span>Минимальный взнос</span>
+                        <span>от {{bankInfo.initial}}%</span>
+                    </div>
+                </div>
+
+                <button class="object-purchase__list-banks btn_var-3" (click)="showModal = true; this.scrollBlock.block()">Предложения банков</button>
             </div>
+        </div>
 
-            <app-object-item-installment
-                *ngIf="showType === 'installment'">
-            </app-object-item-installment>
-
-        </ng-container>
-
-    </div>
+        <app-object-item-installment
+            *ngIf="showType === 'installment'">
+        </app-object-item-installment>
+    </ng-container>
 </section>

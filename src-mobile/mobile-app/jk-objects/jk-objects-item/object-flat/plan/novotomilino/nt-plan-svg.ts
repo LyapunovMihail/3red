@@ -3,6 +3,7 @@ export interface IHousePlanItem {
     svgPath: string;
     transform: string;
     freeFlats: number;
+    minPrice: number;
     rooms: IRoomsMinPrices[];
 }
 
@@ -19,6 +20,7 @@ export const PLAN_SVG = [
             7.834v6.696l11.298 5.232 31.221-9.644 29.293 11.532v13.195L132.64 186.729z`,
         transform: 'translate(125,486)',
         freeFlats: 0,
+        minPrice: 0,
         rooms: [
             {
                 name: 0,
@@ -43,6 +45,7 @@ export const PLAN_SVG = [
             1.485 28.299 7.314-1.808 20.872 8.822 25.162-8.822 24.013 11.06V86.95z`,
         transform: 'translate(592,356)',
         freeFlats: 0,
+        minPrice: 0,
         rooms: [
             {
                 name: 0,
@@ -68,6 +71,7 @@ export const PLAN_SVG = [
             9.689-3.465v-5.49L216.75 0l11.3 3.505v3.58c8.804-1.02 13.92.772 15.349 5.375v72.445L25.656 167.247z`,
         transform: 'translate(854,271)',
         freeFlats: 0,
+        minPrice: 0,
         rooms: [
             {
                 name: 0,
@@ -91,6 +95,7 @@ export const PLAN_SVG = [
         svgPath: `M26.06 129.677L.586 121.889 4.887 34 103.602.5l20.236 4.297-7.637 90.896z`,
         transform: 'translate(1368,110)',
         freeFlats: 0,
+        minPrice: 0,
         rooms: [
             {
                 name: 0,

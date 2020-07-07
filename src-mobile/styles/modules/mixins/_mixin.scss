@@ -10,6 +10,7 @@ $col-black-5: rgba(0, 0, 0, 0.5);
 $col-fa: #fafafa;
 $col-ef: #efefef;
 $col-border: #d8d8d8;
+$col-89: #898989;
 
 $font-proba: 'ProbaPro', 'sans-serif', 'Arial';
 $font-formular: 'Formular-medium', 'sans-serif', 'Arial';
@@ -21,6 +22,15 @@ $mobileContainer: calc(100% - 40px);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -o-font-smoothing: antialiased;
+}
+
+@mixin container() {
+    width: $mobileContainer;
+    max-width: $tabletContainer;
+}
+@mixin font-size($fs, $lh) {
+    font-size: $fs;
+    line-height: $lh;
 }
 
 $font-text: $font-proba;

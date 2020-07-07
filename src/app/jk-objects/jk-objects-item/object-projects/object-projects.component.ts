@@ -39,7 +39,7 @@ export class ObjectProjectsComponent implements OnInit {
         this.objectService.getSnippets()
             .subscribe((data) => {
                 const tempObjects = data.filter(item => item._id !== this.objectId && item.publish);
-                this.snippets = this.getRandomObjects(tempObjects);
+                this.snippets = tempObjects.length && tempObjects.length > 5 ? this.getRandomObjects(tempObjects) : tempObjects;
                 this.getFlatsMinPrice(this.snippets);
             });
     }

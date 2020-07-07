@@ -18,8 +18,9 @@ import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/a
 @Component({
     selector: 'app-flats-ob-plan-page',
     templateUrl: './ob-plan.component.html',
-    styleUrls: ['../plan.component.scss',
-                './ob-plan.component.scss',
+    styleUrls: [
+        '../plan.component.scss',
+        './ob-plan.component.scss',
     ],
     providers: [
         ObPlanService
@@ -58,7 +59,10 @@ export class ObPlanComponent implements OnInit {
 
     private buildHousesData(i, flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        const prices = flats.map( flat => flat.price);
+
         this.housesPlanSvg[i].freeFlats = flats.length;
+        this.housesPlanSvg[i].minPrice = Number(((Math.min(...prices)) / 1000000).toFixed(2));
         if (flats.length) {
             this.housesPlanSvg[i].rooms.forEach((room)  => {
                 room.minPrice = flats.filter((flat) => flat.rooms === room.name)

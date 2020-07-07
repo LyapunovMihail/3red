@@ -1,14 +1,17 @@
-p {
-    line-height: normal;
-}
+@import '../../../styles/modules/mixins/mixin';
+
+p { line-height: normal; }
 
 .product {
     max-width: 704px;
     padding: 0 32px;
     margin: auto;
     padding-top: 120px;
-    // padding-bottom: 145px;
     position: relative;
+    display: flex;
+    justify-content: center;
+
+    &__container { @include container(); }
 }
 .product__shape-img {
     position: absolute;
@@ -163,7 +166,7 @@ p {
 @media(max-width:760px ) {
     .product {
         min-width: 320px;
-        padding: 0 20px;
+        padding: 0;
         padding-top: 120px;
 
     }
@@ -212,24 +215,19 @@ p {
         right: -20px;
 
         img {
-            height: 610px;
+            height: 810px;
         }
     }
     .product__parallax-item5 {
-        margin-bottom: 130px;
-        padding-top: 25px;
+        margin-bottom: 202px;
+        padding-top: 0;
     }
     .product__parallax-item6 {
-        margin-bottom: 10px;
+        margin-bottom: 58px;
 
     }
     .product__parallax-item7 {
-        margin-bottom: 10px;
-    }
-
-    .product__parallax-item5 {
-        padding-top: 0;
-        margin-bottom: 120px;
+        margin-bottom: 38px;
     }
 
     .company__year {

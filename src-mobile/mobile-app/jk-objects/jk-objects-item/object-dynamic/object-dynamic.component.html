@@ -6,8 +6,7 @@
 
     <div class="object-dynamic__container">
 
-        <h2 class="object-dynamic__title" *ngIf="jk">Фотоотчет ЖК {{jk.name}}</h2>
-        <!--<button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>-->
+        <h2 class="object-dynamic__title" *ngIf="jk">Фотоотчет <span>ЖК {{jk.name}}</span></h2>
 
         <nav class="object-dynamic__nav">
             <ul class="object-dynamic__nav-list">
@@ -23,21 +22,17 @@
             <div class="object-dynamic__date">
                 <!-- Раздел с выбором месяца и года -->
                 <app-object-dynamic-date *ngIf="active === 'process'"
-                    (monthChange)="monthChange($event)"
-                    (yearChange)="yearChange($event)"
                     [month]="currentMonth"
                     [year]="currentYear"
                     [objectId]="objectId"
-                    [description]="tabSnippet.dynamic[0].description">
+                    [description]="tabSnippet.dynamic[0].description"
+                    (dateChange)="changeParams($event)">
                 </app-object-dynamic-date>
             </div>
 
             <div class="object-dynamic__content">
 
                 <div class="object-dynamic__content-gallery">
-
-                    <!--<button class="btn__admin-content btn_var-2"-->
-                        <!--(click)="closeContentModal = false">Контент</button>-->
 
                     <!-- Раздел с изображениями динамики -->
                     <app-object-dynamic-gallery
@@ -55,14 +50,6 @@
                             [objectId]="objectId">
                         </app-object-dynamic-month-switcher>
                     </div>
-                </div>
-
-                <div class="object-dynamic__content-schema">
-                    <!-- Раздел схемы корпусов(навигация) -->
-                    <app-object-dynamic-schema
-                        [isAuthorizated]="isAuthorizated"
-                        [objectsArray]="objectsArray">
-                    </app-object-dynamic-schema>
                 </div>
             </div>
 

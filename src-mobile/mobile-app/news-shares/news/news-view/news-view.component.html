@@ -1,40 +1,44 @@
-<div class="btn__container">
-    <a class="news__btn" href="javascript:void(0)" (click)="location.back()">Все новости</a>
-</div>
 
-<section class="news" *ngIf="snippet">
-    <div class="news__container">
+<section class="news-view" *ngIf="snippet">
+
+    <div class="news-view__container">
+
+        <div class="news-view__nav">
+            <a class="news-view__nav-link" href="javascript:void(0)" (click)="location.back()">Все новости</a>
+        </div>
+    
         <div class="helper">
-            <div class="news__intro">
-                <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
-                <div class="news__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
+            <div class="news-view__intro">
+                <div class="news-view__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+                <div class="news-view__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
             </div>
-            <h2 class="news__title">{{snippet.title}}</h2>
-            <p class="news__text">{{snippet.description}}</p>
-            <img [src]="uploadsPath + snippet.image" alt="image" class="news__img">
-
-            <ul class="news__wrapper">
+            <h2 class="news-view__title">{{snippet.title}}</h2>
+            <p class="news-view__text">{{snippet.description}}</p>
+            <img [src]="uploadsPath + snippet.image" alt="image" class="news-view__img">
+    
+            <ul class="news-view__wrapper">
                 <li *ngFor="let b of snippet.body"
                     [ngSwitch]="b.blockType">
-
-                    <article *ngSwitchCase="'title'" class="news__subtitle">{{b.blockTitle}}</article>
-
-                    <article *ngSwitchCase="'description'" class="news__text" [innerHTML]="b.blockDescription | lineBreakPipe"></article>
-
-                    <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image" alt="image" class="image">
-
-                    <div *ngSwitchCase="'image2'" class="img__wrap">
-                        <img [src]="uploadsPath + b.blockImg2.thumbnail" alt="image" class="news__image">
-                        <img [src]="uploadsPath + b.blockImg2.thumbnail2" alt="image" class="news__image">
+    
+                    <article *ngSwitchCase="'title'" class="news-view__subtitle">{{b.blockTitle}}</article>
+    
+                    <article *ngSwitchCase="'description'" class="news-view__text" [innerHTML]="b.blockDescription | lineBreakPipe"></article>
+    
+                    <div *ngSwitchCase="'image'" class="news-view__image">
+                        <img [src]="uploadsPath + b.blockImg.image" alt="image">
                     </div>
-
+    
+                    <div *ngSwitchCase="'image2'" class="news-view__image2x">
+                        <img [src]="uploadsPath + b.blockImg2.thumbnail" alt="image">
+                        <img [src]="uploadsPath + b.blockImg2.thumbnail2" alt="image">
+                    </div>
+    
                 </li>
             </ul>
-
         </div>
-
-        <div class="news__share">
-            <div class="news__share-wrap">
+    
+        <div class="news-view__share">
+            <div class="news-view__share-wrap">
                 <p class="share">Поделиться:</p>
                 <div class="share__count share__count-vk" (click)="clickShare('vk')">{{snippet.shareCount.vk}}</div>
                 <div class="share__count share__count-fb" (click)="clickShare('fb')">{{snippet.shareCount.fb}}</div>
@@ -42,5 +46,4 @@
             </div>
         </div>
     </div>
-
 </section>

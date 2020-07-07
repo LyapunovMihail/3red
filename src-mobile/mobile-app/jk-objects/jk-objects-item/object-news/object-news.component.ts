@@ -7,6 +7,7 @@ import { ObjectNewsService } from './object-news.service';
 import { IObjectNewsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/news-api/objects-news.interfaces';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import * as moment from 'moment';
+declare const Swiper: any;
 
 @Component({
     selector: 'app-object-item-news',
@@ -50,6 +51,14 @@ export class ObjectNewsComponent implements OnInit {
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
+    public navList = [
+        { name: 'Все', link: 'all' },
+        { name: 'Новости', link: 'news' },
+        { name: 'Акции', link: 'shares' }
+    ];
+
+    public slider;
+
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         public objectNewsService: ObjectNewsService
@@ -83,7 +92,8 @@ export class ObjectNewsComponent implements OnInit {
                 this.allSnippets.sort((a, b) => {
                     return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
                 });
-                this.changeType(this.allSnippets, 'all');
+                this.changeType('all');
+                setTimeout( () => this.sliderInit(), 2000);
             },
             (err) => console.log(err)
         );
@@ -101,14 +111,45 @@ export class ObjectNewsComponent implements OnInit {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    public changeType(snippets, type) {
+    public changeType(type) {
         this.currentSlide = 0;
         this.showSnippetType = type;
 
-        this.currentSnippets = snippets.filter((item) => item.publish);
+        switch (type) {
+            case 'all':
+                this.currentSnippets = this.allSnippets.filter((item) => item.publish);
+                if (this.slider) { setTimeout(() => this.slider.update(), 200); }
+                break;
+            case 'news':
+                this.currentSnippets = this.newsSnippets.filter((item) => item.publish);
+                if (this.slider) { setTimeout(() => this.slider.update(), 200); }
+                break;
+            case 'shares':
+                this.currentSnippets = this.shareSnippets.filter((item) => item.publish);
+                if (this.slider) { setTimeout(() => this.slider.update(), 200); }
+                break;
+        }
     }
 
     public parseDate(createdAt) {
         return moment(createdAt).format('LL').slice(0, -3);
+    }
+
+    sliderInit() {
+
+        if (this.slider) { return; }
+
+        this.slider = new Swiper('.swiper-news', {
+            slidesPerView: 'auto',
+            watchOverflow: true,
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '.swiper-news__btn_next',
+                prevEl: '.swiper-news__btn_prev',
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 }
+            }
+        });
     }
 }

@@ -1,41 +1,26 @@
-<section class="dynamic-header">
 
-    <p class="dynamic-header__start">{{description}}</p>
+<div class="dynamic-header">
 
-    <ul class="dynamic-header__months">
-    
-        <li *ngFor="let item of monthArray; let i = index; let last = last"
-            [ngClass]="{
-                'dynamic-header__months-item_disabled': item.disabled,
-                'dynamic-header__months-item_current': (i + 1) == month
-            }"
-            (click)="monthChange.emit(i + 1)"
-            class="dynamic-header__months-item">
-            {{item.name}}
-        </li>
-    
-    </ul>
+    <div class="dynamic-header__wrap">
 
-    <div class="dynamic-header__years">
-        <div class="dynamic-header__years-active" (click)="tooltipYear = true">{{year}}</div>
+        <select class="dynamic-header__select"
+        (change)="selectChange($event)">
         
-        <div class="dynamic-header__years-tooltip" *ngIf="tooltipYear">
-
-            <ul class="dynamic-header__years-list">
-                <li class="dynamic-header__years-cls" (click)="tooltipYear = false"></li>
-    
-                <ng-container>
-                    <li *ngFor="let item of visibleYears"
-                        [ngClass]="{
-                            'dynamic-header__years-item_active': item == year
-                        }"
-                        (click)="yearChange.emit(item); monthParser(item)"
-                        class="dynamic-header__years-item">
-                        {{item}}
-                    </li>
+            <ng-container *ngFor="let yearItem of yearsArray">
+        
+                <ng-container *ngFor="let monthItem of monthArray; let i = index">
+        
+                    <option
+                        [disabled]="disabledMonth(monthItem.value, yearItem)"
+                        [attr.selected]="(yearItem === year && month === monthItem.value) ? true : null"
+                        (change)="changeDate((i + 1), yearItem)"
+                        [value]="monthItem.value + ';' + yearItem"
+                        class="dynamic-header__tooltip-item">
+                        {{monthItem.name + ', ' + yearItem}}
+                    </option>
                 </ng-container>
-            </ul>
-        </div>
+            </ng-container>
+        </select>
     </div>
-    
-</section>
+</div>
+

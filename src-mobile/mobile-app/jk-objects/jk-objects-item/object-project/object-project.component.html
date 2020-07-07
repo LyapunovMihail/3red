@@ -6,7 +6,7 @@
 
             <h2>{{objectName}}</h2>
 
-            <div class="object-builder__social" *ngIf="snippet.created_at">
+            <div class="object-builder__social" *ngIf="snippet.created_at && snippet.socials && snippet.socials.length > 0">
                 <a class="object-builder__social-item" target="_blank" [href]="snippet.socials.vk" *ngIf="snippet.socials.vk">
                     <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
                         <g fill="none" fill-rule="evenodd">
@@ -33,7 +33,7 @@
                 </a>
             </div>
 
-            <p class="project__description" *ngIf="snippet.created_at">{{snippet.description}}</p>
+            <p class="project__description" [class.margin]="!(snippet.socials && snippet.socials.length > 0)" *ngIf="snippet.created_at">{{snippet.description}}</p>
 
             <div class="project-indicators" *ngIf="snippet.created_at">
                 <h3 class="project-indicators__title">

@@ -1,44 +1,21 @@
 @import "../../../../../../styles/modules/mixins/mixin";
 
-:host { height: 100%; }
+:host {
+    width: 100%;
+    height: 100%;
+}
 
 .search-output {
-    width: 1216px;
-    min-height: 100%;
+    width: 100%;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
-    background-color: $col-white;
-    padding: 40px 0;
     display: flex;
     flex-flow: column;
     align-items: center;
 
-    &__empty {
-        @include f16-24(rgba(0, 1, 5, .8));
-        margin: 0 56px;
-    }
-
-    &__title {
-        font: 500 24px/29px $font-mus;
-        @include font-smoothing;
-        color: $col-black;
-        user-select: none;
-        margin: 0 0 90px;
-    }
-
-    &__head {
-        width: calc(100% - 112px);
-        border-bottom: 1px solid $col-border;
-        padding: 0 0 16px;
-        margin: 0 56px;
-
-        &-title { font: $font-18; }
-    }
-
     &__btn {
-        width: 100%;
-        max-width: $container;
+        @include container();
         display: flex;
         justify-content: flex-end;
 
@@ -70,41 +47,43 @@
     }
 
     &__result {
-        width: 100%;
+        @include container();
+        @media (max-width: 767px) {
+            width: 100%;
+            max-width: 100%;
+        }
 
         &-wrap {
             width: 100%;
-            height: 86px;
-            box-sizing: border-box;
-            padding: 8px 56px;
-            margin: 0 0 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: background-color $transition;
-            &:hover { background-color: rgba($color: $col-red, $alpha: .1); }
+            margin: 0 0 4px;
         }
-
         &-item {
             width: 100%;
-            height: 100%;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
             box-sizing: border-box;
+            background-color: $col-white;
+            padding: 16px 24px;
+            @media (max-width: 767px) {
+                padding: 12px 20px;
+            }
 
             &-img {
-                width: 70px;
-                min-width: 70px;
-                height: 100%;
+                width: 67px;
+                min-width: 67px;
+                height: 67px;
                 display: flex;
                 align-items: center;
-                margin: 0 33px 0 0;
+                margin-right: 24px;
+                @media (max-width: 767px) {
+                    width: 58px;
+                    height: 58px;
+                    min-width: 58px;
+                    margin-right: 8px;
+                }
 
                 &-error {
                     width: 100%;
                     height: 100%;
-                    background: url(/assets/img/flats/search/lock.svg);
                 }
                 img {
                     width: 100%;
@@ -113,11 +92,52 @@
                 }
             }
 
+            &-wrap {
+                width: calc(100% - (67px + 24px));
+                @media (max-width: 767px) {
+                    width: calc(100% - 66px);
+                }
+
+                &--top {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0 0 16px;
+                    @media (max-width: 767px) {
+                        margin: 0 0 6px;
+                    }
+                }
+                &--bottom {
+                    width: 100%;
+                    display: flex;
+                    position: relative;
+
+                    &> span { margin-right: 24px; }
+                    @media (max-width: 767px) {
+                        &> span { margin-right: 8px; }
+                    }
+                }
+            }
+
             &-content {
                 font: $font-18;
                 color: $col-black-5;
                 white-space: nowrap;
                 user-select: none;
+                @media (max-width: 767px) {
+                    @include font-size(14px,18px);
+                }
+
+                &_room > span {
+                    display: block;
+                    &:first-child {
+                        margin: 0 0 4px;
+                        &> span {
+                            @media (max-width: 767px) { display: none; }
+                        }
+                    }
+                    &:last-child { color: $col-black-5; }
+                }
 
                 &_room,
                 &_price,
@@ -131,27 +151,21 @@
                     text-decoration: line-through;
                 }
                 &_price-sale { color: $col-red; }
-
-                &_number,
-                &_floor,
-                &_house {
-                    width: 9.12%;
-                    min-width: 106px;
+                &_room-media {
+                    display: none;
+                    @media (max-width: 767px) { display: block; }
                 }
-                &_room { 
-                    width: 22%;
-                    min-width: 150px;
+                &_space {
+                    position: absolute;
+                    top: 0; right: 0;
                 }
-                &_space,
-                &_decoration,
-                &_delivery {
-                    width: 11%;
-                    min-width: 75px;
+                @media (max-width: 767px) {
+                    &_delivery,
+                    &_decoration { display: none; }
                 }
             }
 
             &-price {
-                width: 12%;
                 display: flex;
                 flex-flow: column;
             }

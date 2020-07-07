@@ -4,43 +4,81 @@
     <div class="object-installment__container">
 
         <ul class="object-installment__type">
-    
-            <li class="object-installment__type-item">
-                <label class="g-radiobox" (click)="typeInstallment = freeInstallment; formConvert()">
-                    <input type="radio" name="typeInstallment" [style.display]=" 'none' " checked>
-                    <div></div>
-                    <span class="object-installment__type-text">
-                        <span class="span-black span-block">Бесплатная рассрочка сроком до 6 месяцев</span>
+
+            <ng-container *ngIf="screenWidth < 768">
+                <li class="object-installment__type-item">
+                    <div class="object-installment__select" [class.object-installment__select--open]="showTypeInstallment">
+                        <div class="object-installment__select-wrap" (click)="showTypeInstallment = !showTypeInstallment">
+                            <p class="g-body_alt">{{typeInstallment ? typeInstallment : 'Выберите тип рассрочки'}}</p>
+                        </div>
+                        
+                        <div class="object-installment__select-tooltip" *ngIf="showTypeInstallment">
+                            <div class="object-installment__select-tooltip_cls-area" (click)="showTypeInstallment = !showTypeInstallment"></div>
+                            <p [class.tooltip-active]="typeInstallment === freeInstallment" 
+                                (click)="typeInstallment = freeInstallment; formConvert()">Бесплатная рассрочка</p>
+                            <p [class.tooltip-active]="typeInstallment === payInstallment" 
+                                (click)="typeInstallment = payInstallment; formConvert()">Платная рассрочка</p>
+                            <p [class.tooltip-active]="typeInstallment === fullPay" 
+                                (click)="typeInstallment = fullPay; formConvert()">100% оплата</p>
+                        </div>
+                    </div>
+        
+                    <p class="installment__calculator-hint g-body_alt" *ngIf="typeInstallment === freeInstallment">
+                        <span class="span-block span-black">Бесплатная рассрочка сроком <span class="g-text_nowrap">до 6 месяцев</span></span>
                         Первоначальный взнос — не менее 50% от прайсовой цены. 
-                        Погашение задолженности по рассрочке осуществляется 
-                        равными ежемесячными платежами.
-                    </span>
-                </label>
-            </li>
-            <li class="object-installment__type-item">
-                <label class="g-radiobox" (click)="typeInstallment = payInstallment; formConvert()">
-                    <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
-                    <div ></div>
-                    <span class="object-installment__type-text">
+                        Погашение задолжности по рассрочке осуществляется 
+                        <span class="span-black">равными</span> ежемесячными платежами.
+                    </p>
+                    <p class="installment__calculator-hint g-body_alt" *ngIf="typeInstallment === payInstallment">
                         <span class="span-block span-black">Платная рассрочка сроком от 7 до 24 месяцев</span>
                         Первоначальный взнос — не менее 50% от прайсовой цены. 
-                        Погашение задолженности по рассрочке осуществляется 
-                        аннуитетными ежемесячными платежами.
-                    </span>
-                </label>
-            </li>
-            <li class="object-installment__type-item">
-                <label class="g-radiobox" (click)="typeInstallment = fullPay; formConvert()">
-                    <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
-                    <div></div>
-                    <span class="object-installment__type-text">
+                        Погашение задолжности по рассрочке осуществляется ежемесячными 
+                        <span class="span-black">аннуитентными</span> платежами.
+                    </p>
+                    <p class="installment__calculator-hint g-body_alt" *ngIf="typeInstallment === fullPay">
                         <span class="span-block span-black">100% оплата</span>
-                        При 100% оплате предоставляется скидка в размере 3% 
-                        от стоимости квартиры, указанной в прайс-листе.
-                    </span>
-                </label>
-            </li>
+                        При 100% оплате предоставляется индивидуальная скидка.
+                    </p>
+                </li>
+            </ng-container>
     
+            <ng-container *ngIf="screenWidth >= 768">
+                <li class="object-installment__type-item">
+                    <label class="g-radiobox" (click)="typeInstallment = freeInstallment; formConvert()">
+                        <input type="radio" name="typeInstallment" [style.display]=" 'none' " checked>
+                        <div></div>
+                        <span class="object-installment__type-text">
+                            <span class="span-black span-block">Бесплатная рассрочка сроком до 6 месяцев</span>
+                            Первоначальный взнос — не менее 50% от прайсовой цены. 
+                            Погашение задолженности по рассрочке осуществляется 
+                            равными ежемесячными платежами.
+                        </span>
+                    </label>
+                </li>
+                <li class="object-installment__type-item">
+                    <label class="g-radiobox" (click)="typeInstallment = payInstallment; formConvert()">
+                        <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
+                        <div ></div>
+                        <span class="object-installment__type-text">
+                            <span class="span-block span-black">Платная рассрочка сроком от 7 до 24 месяцев</span>
+                            Первоначальный взнос — не менее 50% от прайсовой цены. 
+                            Погашение задолженности по рассрочке осуществляется 
+                            аннуитетными ежемесячными платежами.
+                        </span>
+                    </label>
+                </li>
+                <li class="object-installment__type-item">
+                    <label class="g-radiobox" (click)="typeInstallment = fullPay; formConvert()">
+                        <input type="radio" name="typeInstallment" [style.display]=" 'none' ">
+                        <div></div>
+                        <span class="object-installment__type-text">
+                            <span class="span-block span-black">100% оплата</span>
+                            При 100% оплате предоставляется скидка в размере 3% 
+                            от стоимости квартиры, указанной в прайс-листе.
+                        </span>
+                    </label>
+                </li>
+            </ng-container>
         </ul>
     
         <ul class="object-installment__calculator installment-calculator">

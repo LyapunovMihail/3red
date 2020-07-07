@@ -12,31 +12,35 @@
         .btn__admin-setting { margin-right: 8px; }
     }
     &__title { margin: 0 0 24px; }
+    &__wrap {
+        overflow: hidden;
+        transition: height .5s ease;
+    }
 
     &__list {
         width: 100%;
 
         &-item {
-            display: flex;
-            justify-content: space-between;
             border-bottom: 1px solid #d8d8d8;
             padding: 16px 0;
             &:last-child { border-bottom: 0; }
         }
 
-        &-title { width: 446px; }
+        &-title {
+            max-width: 612px;
+            margin: 0 0 17px;
+        }
 
         &-wrap {
-            width: calc(100% - (446px + 24px));
-            max-width: 634px;
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            flex-flow: row wrap;
+            justify-content: space-between;
             padding: 2px 0 0;
 
             &_file {
                 width: 100%;
                 display: flex;
-                flex-direction: row;
                 justify-content: space-between;
                 align-items: flex-start;
                 margin: 0 0 12px;
@@ -46,7 +50,7 @@
 
         &-file {
             display: block;
-            width: 441px + 9px + 19px;
+            max-width: 520px + 28px;
             font: 18px/23px $font-proba;
             color: $col-red;
             padding-left: 19px + 9px;
@@ -67,6 +71,53 @@
             font: 18px/23px $font-proba;
             color: $col-black-5;
             text-align: right;
+        }
+
+        &-btn {
+            color: $col-red;
+            position: relative;
+            padding-right: 22px;
+            margin: 10px 0 0;
+            &::before {
+                content: '';
+                width: 14px;
+                height: 100%;
+                position: absolute;
+                top: 0; right: 0;
+                background: url(/assets/img/about/arrow-down.svg) left 50% no-repeat;
+                transition: top .2s linear;
+            }
+            &.active::before { transform: rotate(180deg); }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    
+    .object-documentation {
+
+        &__title { @include font-size(28px,34px); }
+        &__list {
+    
+            &-item:first-child { padding-top: 0; }
+            &-wrap_file { flex-flow: column-reverse nowrap; }
+            &-file {
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 16px;
+                line-height: 23px;
+            }
+            &-date {
+                font-size: 12px;
+                line-height: 14px;
+                margin: 0 0 8px;
+            }
+        }
+        &__btn-more {
+            padding-right: 23px;
+            background: url(/assets/img/jk-object/more-bank.svg) right center no-repeat;
+            font: 16px/22px $font-proba;
+            color: $col-red;
         }
     }
 }

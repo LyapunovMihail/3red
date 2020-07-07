@@ -5,50 +5,59 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    padding: 94px 0 0;
 
-    &__head { margin: 0 0 16px; }
-
-    &__options {
-        margin: 0 0 16px;
-        .btn__admin-setting { margin-right: 8px; }
-    }
-    &__title { margin: 0 0 24px; }
-
-    &__nav {
+    &__head {
         display: flex;
-        justify-content: flex-start;
+        flex-flow: column;
+        align-items: flex-start;
         margin: 0 0 16px;
-
-        &-list {
-            display: flex;
-            border-bottom: 1px solid #d8d8d8;
-        }
-        &-item {
-            font: 18px/23px $font-proba;
-            color: $col-black-5;
-            position: relative;
-            padding: 0 0 8px;
-            margin-right: 16px;
-            cursor: pointer;
-            &:last-child { margin-right: 0; }
-            &:hover { color: $col-red_hover; }
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: -1px;
-                left: 0;
-                width: 100%;
-                height: 1px;
-                background-color: #d8d8d8;
-            }
-            &_active {
-                color: $col-red;
-                &::before { background-color: $col-red; }
-            }
-        }
     }
+    
+    &__title { margin: 0 0 24px; }
     &__list {
         background-color: $col-white;
-        padding: 56px 0 40px;
+        padding: 24px 40px;
+
+        &-wrap {
+            display: none;
+            margin: 0 0 16px;
+        }
+        &-percent,
+        &-deadline,
+        &-initial {
+            &+ div { margin: 12px 0 0; }
+            &> span {
+                display: block;
+                font: 18px/23px $font-proba;
+                color: $col-black;
+                &:last-child { color: $col-black-5; }
+            }
+        }
+
+        &-banks {
+            display: none;
+            width: 280px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    .object-purchase {
+        background-color: $col-white;
+        padding: 48px 0 40px;
+
+        &__head { margin: 0 0 24px; }
+        &__title {
+            @include font-size(28px,34px);
+            margin: 0 0 24px;
+        }
+
+        &__list {
+            padding: 0;
+            &-banks,
+            &-wrap { display: block; }
+        }
     }
 }

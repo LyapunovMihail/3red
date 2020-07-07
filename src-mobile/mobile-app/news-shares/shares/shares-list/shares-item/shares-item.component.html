@@ -1,27 +1,32 @@
-<div class="btn__container">
-    <a class="news__btn" href="javascript:void(0)" (click)="location.back()">Все новости</a>
-</div>
 
-<section class="news" *ngIf="snippet">
-    <div class="news__container">
+<section class="news-view" *ngIf="snippet">
+
+    <div class="news-view__container">
+
+        <div class="news-view__nav">
+            <a class="news-view__nav-link" href="javascript:void(0)" (click)="location.back()">Все новости</a>
+        </div>
+
         <div class="helper">
-            <div class="news__intro">
-                <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
-                <div class="news__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
+            <div class="news-view__intro">
+                <div class="news-view__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+                <div class="news-view__category" *ngIf="snippet.objectName">{{snippet.objectName}}</div>
             </div>
-            <h2 class="news__title">{{snippet.name}}</h2>
-            <p class="news__text">{{snippet.text}}</p>
-            <img [src]="uploadsPath + snippet.mainImage" alt="image" class="news__img">
+            <h2 class="news-view__title">{{snippet.name}}</h2>
+            <p class="news-view__text">{{snippet.text}}</p>
+            <img [src]="uploadsPath + snippet.mainImage" alt="image" class="news-view__img">
 
-            <ul class="news__wrapper">
+            <ul class="news-view__wrapper">
                 <li *ngFor="let b of snippet.body"
                     [ngSwitch]="b.blockType">
 
-                    <article *ngSwitchCase="'title'" class="news__subtitle">{{b.blockTitle}}</article>
+                    <article *ngSwitchCase="'title'" class="news-view__subtitle">{{b.blockTitle}}</article>
 
-                    <article *ngSwitchCase="'description'" class="news__text" [innerHTML]="b.blockDescription"></article>
+                    <article *ngSwitchCase="'description'" class="news-view__text" [innerHTML]="b.blockDescription"></article>
 
-                    <img *ngSwitchCase="'image'" [src]="uploadsPath + b.blockImg.image" alt="image" class="image">
+                    <div *ngSwitchCase="'image'" class="news-view__image">
+                        <img [src]="uploadsPath + b.blockImg.image" alt="image">
+                    </div>
 
                     <!--<div *ngSwitchCase="'flats'" class="client-share__flats">-->
                         <!--<div class="client-share__flats-wrap">-->
@@ -45,14 +50,12 @@
                             <!--</div>-->
                         <!--</div>-->
                     <!--</div>-->
-
                 </li>
             </ul>
-
         </div>
 
-        <div class="news__share">
-            <div class="news__share-wrap">
+        <div class="news-view__share">
+            <div class="news-view__share-wrap">
                 <p class="share">Поделиться:</p>
                 <div class="share__count share__count-vk" (click)="clickShare('vk')">{{snippet.shareCount.vk}}</div>
                 <div class="share__count share__count-fb" (click)="clickShare('fb')">{{snippet.shareCount.fb}}</div>

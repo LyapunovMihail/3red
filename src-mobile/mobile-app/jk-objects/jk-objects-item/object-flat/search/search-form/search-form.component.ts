@@ -24,10 +24,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public sort: string;
     public housesBtnList: any[] = [];
 
-    @Input() public parentPlan: boolean;
+    @Input() public showFilters;
     @Input() public showChess;
+    @Input() public parentPlan: boolean;
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
+    @Output() public close: EventEmitter<any> = new EventEmitter();
 
     constructor(
         public formBuilder: FormBuilder,

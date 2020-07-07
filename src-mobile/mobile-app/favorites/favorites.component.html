@@ -1,11 +1,17 @@
-<section class="objects">
-    <div class="objects-container">
-        <h1 class="objects__title">Избранное</h1>
-        <p class="objects__subtitle">{{ favoritesService.favoriteFlats.length ? 'Добавлено ' + favoritesService.favoriteFlats.length + ' квартир' : 'На данный момент в избранное ничего не добавлено' }}</p>
-    </div>
+<section class="favorite">
 
-    <div class="objects__wrapper">
-        <div class="objects__result">
+    <div class="favorite__container">
+
+        <div class="favorite__head">
+            <h1 class="favorite__head-title">Избранное</h1>
+            <p class="favorite__head-subtitle">
+                {{ favoritesService.favoriteFlats.length ? 
+                    'Добавлено ' + favoritesService.favoriteFlats.length + ' квартир'
+                    : 'На данный момент в избранное ничего не добавлено' }}
+            </p>
+        </div>
+    
+        <div class="favorite__objects">
             <app-flats-list
                 [flatsList]="favoritesService.favoriteFlats">
             </app-flats-list>

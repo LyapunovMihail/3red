@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 import { OBJECTS_CREDIT_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/credit-api/objects-credit.interfaces';
 
 @Component({
@@ -10,8 +10,10 @@ import { OBJECTS_CREDIT_UPLOADS_PATH } from '../../../../../../serv-files/serv-m
 export class ObjectCreditOutputComponent implements OnInit, OnChanges {
 
     @Input() public bankList = [];
+    @Output() public close = new EventEmitter<boolean>();
 
     public moreBanks = false;
+    public pageWidth = document.body.clientWidth;
 
     public blockHeight: number;
 

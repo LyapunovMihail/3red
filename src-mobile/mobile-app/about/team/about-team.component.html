@@ -1,33 +1,32 @@
 <section class="team" [class.team--padding]="switchOn">
 
         <ng-container *ngIf="switchOn && teams">
+            <div class="team__container">
 
-            <h3 class="team__title">Команда</h3>
-            <div class="team__item" *ngFor="let tab of tabSnippet.team; let i = index">
-                <ng-container *ngIf="tab.show">
-                    <div class="team__wrapper">
-                        <h4 class="team__item-title">{{tab.name}}</h4>
-                        <img class="team__item-arrow" src="assets/img/about/arrow-team.svg" alt="arrow">
-                    </div>
-
-                    <div class="team__wrap-overflow">
-                        <div class="team__wrap team__wrap--building">
-
-                            <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
-                                <div class="team__list">
-                                    <div class="team__list-item">
-                                        <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
-                                        <div class="team__list-name">{{employee.fio}}</div>
-                                        <div class="team__list-prof">{{employee.position}}</div>
-                                    </div>
-                                </div>
-                            </ng-container>
-
+                <h3 class="team__title">Команда</h3>
+                <div class="team__item" *ngFor="let tab of tabSnippet.team; let i = index">
+                    <ng-container *ngIf="tab.show">
+                        <div class="team__wrapper">
+                            <h4 class="team__item-title">{{tab.name}}</h4>
+                            <img class="team__item-arrow" src="assets/img/about/arrow-team.svg" alt="arrow">
                         </div>
-                    </div>
-                </ng-container>
+    
+                        <div class="swiper-team" id="swiper-team-{{i}}">
+                            <div class="swiper-wrapper swiper-team__wrap">
+    
+                                <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
+                                    <div class="swiper-slide swiper-team__slide">
+                                        <div class="swiper-team__slide-image">
+                                            <img [src]="uploadsPath + employee.thumbnail" alt="photo">
+                                        </div>
+                                        <p class="swiper-team__slide-name">{{employee.fio}}</p>
+                                        <p class="swiper-team__slide-prof">{{employee.position}}</p>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
             </div>
-
         </ng-container>
-
 </section>

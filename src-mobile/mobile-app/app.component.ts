@@ -19,7 +19,7 @@ export const ROOT_SELECTOR = 'app-root';
 
           <router-outlet></router-outlet>
 
-          <app-footer></app-footer>
+          <app-footer [isContacts]="isContacts"></app-footer>
 
       </section>
   `,
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
 
     public previousUrl: string;
     public currentUrl: string;
+    public isContacts = false;
 
     constructor(
         public appState: AppState,
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit {
             if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
                 return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
             }
+            this.isContactPage(this.router.url);
             window.scrollTo(0, 0);
         });
 
@@ -57,5 +59,16 @@ export class AppComponent implements OnInit {
         this.flatsDiscountService.getShares();
         // Загружаем избранные квартиры
         this.favoritesService.getFavoriteFlats();
+    }
+
+    public isContactPage(url) {
+        if (url !== '/contacts') {
+            this.isContacts = false;
+            return;
+        }
+        this.isContacts = true;
+        const body = document.querySelector('body');
+
+        body.style.padding = (this.isContacts && body.clientWidth > 767) ? '86px 0 0' : '';
     }
 }

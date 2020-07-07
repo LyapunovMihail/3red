@@ -2,27 +2,68 @@
 
     <ng-container *ngIf="switchOn">
 
-        <h2 class="object-flat__title">Выберите дом</h2>
+        <div class="object-item__container object-flat__container">
 
-        <nav class="object-flat__nav">
-            <ul class="object-flat__nav-list">
-                <li class="object-flat__nav-item" [class.active]="activeTab === 'flats'" *ngIf="storerooms.length || parking.length" (click)="changeTab('flats')">Квартиры</li>
-                <!--<li class="object-flat__nav-item">Коммерческая недвижимость</li>-->
-                <li class="object-flat__nav-item" [class.active]="activeTab === 'storerooms'" *ngIf="storerooms.length" (click)="changeTab('storerooms')">Кладовые</li>
-                <li class="object-flat__nav-item" [class.active]="activeTab === 'parking'" *ngIf="parking.length" (click)="changeTab('parking')">Машиноместа</li>
-            </ul>
-        </nav>
+            <div class="object-flat__head">
+                <div class="object-flat__head-wrap">
+                    <h2 class="object-flat__head-title">Выберите дом</h2>
+        
+                    <!-- <div class="object-flat__scheme">
+                        <p class="object-flat__scheme-icon" (click)="openTooltipSchema()">Схема</p>
+        
+                        <div class="object-flat__scheme-tooltip" *ngIf="openSchema">
+                            <button class="object-flat__scheme-cls" (click)="openTooltipSchema()"></button>
+        
+                            <img src="/assets/img/jk-object/flat-preview-schema.svg" alt="schema">
+                        </div>
+                    </div> -->
+                </div>
 
-        <div class="object-flat__plan" *ngIf="mod !== 'НТМ' && mod !== 'ОБ'">
+                <nav class="object-flat__nav" *ngIf="storerooms.length || parking.length">
+                    <ul class="object-flat__nav-list">
+                        <li class="object-flat__nav-item" [class.active]="activeTab === 'flats'" *ngIf="storerooms.length || parking.length" (click)="changeTab('flats')">Квартиры</li>
+                        <!--<li class="object-flat__nav-item">Коммерческая недвижимость</li>-->
+                        <li class="object-flat__nav-item" [class.active]="activeTab === 'storerooms'" *ngIf="storerooms.length" (click)="changeTab('storerooms')">Кладовые</li>
+                        <li class="object-flat__nav-item" [class.active]="activeTab === 'parking'" *ngIf="parking.length" (click)="changeTab('parking')">Машиноместа</li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="object-flat__house" *ngIf="mod !== 'НТМ' && mod !== 'ОБ'">
+                <div class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
+                    <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
+                    <p class="object-flat__house-flats">{{house.freeFlats}} квартир</p>
+                    <ul>
+                        <li *ngFor="let room of house.rooms" class="object-flat__house-room">
+                            <span>{{room.name === '0' ? 'Ст' : room.name + 'к'}}{{room.name === '3' ? '+' : ''}}</span>
+                            <span>{{room.minPrice ? 'от ' + room.minPrice + ' млн Р' : 'Продано'}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <app-flats-nt-plan-page *ngIf="mod === 'НТМ'"
+                [objectId]="objectId"
+                [mod]="mod">
+            </app-flats-nt-plan-page>
+
+            <app-flats-ob-plan-page *ngIf="mod === 'ОБ'"
+                [objectId]="objectId"
+                [mod]="mod">
+            </app-flats-ob-plan-page>
+        </div>
+
+
+        <!-- <div class="object-flat__plan" *ngIf="mod !== 'НТМ' && mod !== 'ОБ'">
 
             <img class="object-flat__plan-img" src="/assets/img/jk-object/temp_bg.jpg" alt="">
-    <!-- Места поблизсти -->
+            
             <div class="object-flat__placement">
                 <div class="object-flat__placement-item object-flat__placement-item_{{item.mod}}" *ngFor="let item of genplanPlacement">
                     {{ item.title }}
                 </div>
             </div>
-    <!-- Генплан квартир -->
+            
             <div class="object-flat__house">
                 <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
                     <a class="object-flat__house-item">
@@ -40,17 +81,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <app-flats-nt-plan-page *ngIf="mod === 'НТМ'"
-            [objectId]="objectId"
-            [mod]="mod">
-        </app-flats-nt-plan-page>
-
-        <app-flats-ob-plan-page *ngIf="mod === 'ОБ'"
-            [objectId]="objectId"
-            [mod]="mod">
-        </app-flats-ob-plan-page>
+        </div> -->
 
     </ng-container>
 </section>

@@ -1,28 +1,26 @@
 <section class="object-location" [class.object-item--margin]="switchOn">
 
-    <div class="object-item__container">
+    <div class="object-item__container object-location__container">
 
         <ng-container *ngIf="switchOn">
 
             <h2 class="object-location__title">Местоположение</h2>
 
-            <nav class="object-location__nav">
-                <ul class="object-location__nav-list" *ngIf="!isTabSet">
-                    <li class="object-location__nav-item" *ngFor="let tab of mockTabs"
-                        [ngClass]="{'object-location__nav-item_active': tab === openTab}"
-                        (click)="openTab = tab">{{tab}}</li>
-                </ul>
-                <ul class="object-location__nav-list" *ngIf="isTabSet">
-                    <ng-container *ngFor="let tab of tabSnippet.location">
-                        <li class="object-location__nav-item" *ngIf="tab.show"
-                            [ngClass]="{'object-location__nav-item_active': tab.name === openTab}"
-                            (click)="openTab = tab.name">{{tab.name}}</li>
-                    </ng-container>
-                </ul>
+            <div class="object-location__address">
+                <p class="object-location__address-title">ЖК распологается по адресу</p>
+                <p class="object-location__address-name">{{objectAddress}}</p>
+            </div>
 
-                <div class="object-location__address">
-                    <p class="object-location__address-title">ЖК распологается по адресу</p>
-                    <p class="object-location__address-name">{{objectAddress}}</p>
+            <nav class="object-location__nav">
+                <div class="object-location__nav-wrap">
+                    <div class="object-location__nav-wrap_for-scroll">
+                        <nav-menu
+                            [delay]="500"
+                            [linkType]="'else'"
+                            [navList]="tabSnippet.location"
+                            (routeNavigate)="openTab = $event">
+                        </nav-menu>
+                    </div>
                 </div>
             </nav>
 
@@ -30,9 +28,7 @@
                 [contentSnippet]="contentSnippet"
                 [infraTab]="tabSnippet.location[2]">
             </app-location-infrastructure>
-
         </ng-container>
-
     </div>
 
     <div class="object-location__map" *ngIf="switchOn">
@@ -45,10 +41,9 @@
         </app-location-routes>
 
         <div id="map" class="object-location__map-item" *ngIf="isTabSet; else elseBlock"></div>
+        <a href="#" class="object-location__map-link btn_var-2">Открыть Я.Карты</a>
         <ng-template #elseBlock>
             <div class="object-item__mock-img"></div>
         </ng-template>
-
     </div>
-
 </section>

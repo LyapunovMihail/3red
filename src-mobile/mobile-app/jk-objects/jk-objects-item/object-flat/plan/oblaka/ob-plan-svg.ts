@@ -2,6 +2,7 @@ export interface IPlanSvgItem {
     houseNumber: string;
     svgPath: string;
     freeFlats: number;
+    minPrice: number;
     rooms: IRoomsMinPrices[];
 }
 
@@ -37,6 +38,7 @@ export const PLAN_SVG = [
             l2.2,2.8l-2.2,4.8h-2.2v-3l-3.5,0.2l-3,2.8v5.2l-1.8,1.8l1.8,3.8v2.8h-4l-2.2-1.8v3.8l1.8,2.5l1,4.8l-1.2,2.8l1.2,1.8l-0.2,1.2
             l-23.2,6.2v-4.8l-2.5-3.2`,
         freeFlats: 0,
+        minPrice: 0,
         rooms: [
             {
                 name: 0,
@@ -80,6 +82,7 @@ export const PLAN_SVG = [
             l1.5,5.2l4.5,1.2l0.8-2.8l-1.8-1.8h3.5l2,4.5l1-2.5l1.2-2.2l2-0.2v3l-2,2.8l-1.2,3.2l2,3.5l1.5,6l1.8,4l-2.2,3.5l-6.2-1.8l-3-1.8
             l1.2,2.5l3,2.5l0.5,3l7-1.8l1.2-1.2l0.2-3l2.5-2.5l2.8-1.2l26.5-408.2L1775.5,558.8z`,
         freeFlats: 0,
+        minPrice: 0,
         rooms: [
             {
                 name: 0,

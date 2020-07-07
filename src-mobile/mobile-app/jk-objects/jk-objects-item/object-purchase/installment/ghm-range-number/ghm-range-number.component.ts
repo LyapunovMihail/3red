@@ -7,7 +7,7 @@ import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, HostList
     template: `
         <div class="ghm-range-number">
             <div class="ghm-slider ghm-range-number-slider">
-                <div [style.left]="newLeft + 'px'" (mousedown)="mouseDown($event)" class="ghm-runner ghm-range-number-runner"></div>
+                <div [style.left]="newLeft + 'px'" (touchstart)="mouseDown($event)" class="ghm-runner ghm-range-number-runner"></div>
             </div>
         </div>
     `,
@@ -65,10 +65,10 @@ export class GHMRangetNumberComponent implements OnChanges {
         let sliderElement = this.elRef.nativeElement.querySelector('.ghm-slider');
         this.buttonCoords = this.getCoords(runnerElement);
         this.sliderCoords = this.getCoords(sliderElement);
-        this.shiftX = e.pageX - this.buttonCoords.left;
+        this.shiftX = e.touches[0].pageX - this.buttonCoords.left;
     }
 
-    @HostListener('document:mousemove', ['$event'])
+    @HostListener('document:touchmove', ['$event'])
     mouseMove(e) {
         if (!this.platform.isBrowser) { return; }
         if ( this.isRun ) {
@@ -76,7 +76,7 @@ export class GHMRangetNumberComponent implements OnChanges {
             // runner slide left position
             let sliderElement = this.elRef.nativeElement.querySelector('.ghm-slider');
             let runnerElement = this.elRef.nativeElement.querySelector('.ghm-runner');
-            let newLeft = e.pageX - this.shiftX - this.sliderCoords.left;
+            let newLeft = e.touches[0].pageX - this.shiftX - this.sliderCoords.left;
             let rightEdge = sliderElement.clientWidth - runnerElement.clientWidth;
             newLeft = ( newLeft < 0) ? 0 : (newLeft > rightEdge) ? rightEdge : newLeft;
             this.newLeft = newLeft;
@@ -93,7 +93,7 @@ export class GHMRangetNumberComponent implements OnChanges {
         }
     }
 
-    @HostListener('document:mouseup', ['$event'])
+    @HostListener('document:touchend', ['$event'])
     mouseUp(e) {
         if ( this.isRun ) {
             this.isRun = false;

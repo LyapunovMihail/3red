@@ -8,6 +8,7 @@ import { ObjectInstallmentService } from './installment/object-installment.servi
 import { ObjectCreditOutputComponent } from './credit-output/object-credit-output.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label.module';
+import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
 
 @NgModule({
     exports: [
@@ -26,7 +27,8 @@ import { SlideTopLabelModule } from '../../../UI/slide-top-label/slide-top-label
         CommonModule,
         GHMRangetNumberModule,
         ReactiveFormsModule,
-        SlideTopLabelModule
+        SlideTopLabelModule,
+        NavMenuModule,
     ],
     providers: [
         ObjectInstallmentService

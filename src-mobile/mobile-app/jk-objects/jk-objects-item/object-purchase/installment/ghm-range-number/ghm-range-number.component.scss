@@ -21,7 +21,7 @@
         position: relative;
         height: 1px;
         background: $col-border;
-        margin: 8px 0;
+        margin: 12px 0;
     }
 
     &-runner {
@@ -31,8 +31,8 @@
         margin: 0;
         transform: translateY(-50%);
         border-radius: 50%; 
-        width: 16px;
-        height: 16px;
+        width: 24px;
+        height: 24px;
         background: $col-red;
         cursor: pointer;
 
@@ -45,6 +45,7 @@
             height: 1px;
             width: 300px;
             background: $col-red;
+            @media (max-width: 767px) { width: calc(100vw - 40px); }
         }
     }
 }

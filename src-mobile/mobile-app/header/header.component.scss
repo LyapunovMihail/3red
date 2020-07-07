@@ -115,19 +115,6 @@
             &::before { top: -8px; }
             &::after { top: 8px; }
         }
-
-        //&_open {
-        //    span {
-        //        background-color: transparent;
-        //        &::before,
-        //        &::after {
-        //            top: 0;
-        //            transition: transform .2s ease .2s, top .2s ease;
-        //        }
-        //        &::before { transform: rotate(-45deg); }
-        //        &::after { transform: rotate(45deg); }
-        //    }
-        //}
     }
 
     &__menu {
@@ -237,15 +224,11 @@
         order: 3;
         margin: 0 0 16px;
     }
-    //.header__menu-desktop {
-    //    order: 4;
-    //    margin: 0;
-    //}
 }
 @media (max-width: 425px) {
     .header__logo {
-        width: 148px;
-        height: 40px;
+        width: 118px;
+        height: 29px;
 
         img { width: 100%; }
     }
