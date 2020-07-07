@@ -51,6 +51,8 @@ export class ObjectsMapComponent implements OnChanges, OnDestroy {
                         controls: ['zoomControl']
                     });
 
+                this.map.behaviors.disable('drag');
+
                 this.snippets.forEach((item, index) => {
 
                     this.markers[index] = {};

@@ -59,7 +59,7 @@ export class ObjectsFormComponent implements OnInit {
                 max: Number(queryParams.priceMax) || this.maxPriceConfig
             },
             districts: [queryParams.districts ? queryParams.districts.split(',') : []],
-            status: queryParams.status || 'Все'
+            status: queryParams.status || 'Любой статус'
         });
 
         let params = this.onFormChange(this.form.value);
@@ -81,7 +81,7 @@ export class ObjectsFormComponent implements OnInit {
         params.priceMin = form.price.min;
         params.priceMax = form.price.max;
 
-        if (form.status !== 'Все') {
+        if (form.status !== 'Любой статус') {
             params.status = form.status;
         }
         if (form.districts.length > 0) {
