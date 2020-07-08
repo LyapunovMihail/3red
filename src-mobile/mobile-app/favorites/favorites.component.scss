@@ -2,10 +2,12 @@
 
 .favorite {
     width: 100%;
+    min-height: 100vh;
+    padding: 40px 0 96px;
     display: flex;
     flex-flow: column;
     align-items: center;
-    padding: 40px 0 0;
+    @media (max-width: 760px) { padding: 32px 0 64px; }
 
     &__container { @include container(); }
     &__head {
@@ -20,7 +22,7 @@
 
     &__objects { width: 100%; }
 
-    @media (max-width: 767px) {
+    @media (max-width: 760px) {
         padding: 32px 0 0;
 
         &__head {

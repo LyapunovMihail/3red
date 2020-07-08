@@ -1,35 +1,41 @@
-<div *ngFor="let flat of flatsList; let i = index" class="search-output__result-wrap">
-    <a (click)="openApartmentModal(i)" class="search-output__result-item">
-        <div class="search-output__result-item-img">
-            <img (error)="img.style.display = 'none'"
-                 [src]="'/assets/floor-plans/jk_' + flat.mod + '/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
-            <div *ngIf="img.style.display === 'none'" class="search-output__result-item-img-error g-3red"></div>
-        </div>
-        <span class="search-output__result-item-content search-output__result-item-content_room">
-            {{(flat.rooms === 0) ? 'Студия, ' : flat.rooms + '-комнатная, '}}{{'№ ' + flat.flat}}
-            <br> <span class="search-output__result-item-content_jk-name">ЖК {{flat.jkName}}</span>
-        </span>
-        <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
-        <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
-        <span class="search-output__result-item-content search-output__result-item-content_delivery">{{flat.deliveryDate}}</span>
-        <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
-        <span class="search-output__result-item-content search-output__result-item-content_house">Дом {{flat.house}}</span>
-        <span class="search-output__result-item-price">
-            <span class="search-output__result-item-content"
-                  [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
-                    'search-output__result-item-content_price-not-sale' : flat.discount}">
-                  {{flat.price | myBitNumberPipe}} &#8381;
+<ul>
+    <li *ngFor="let flat of flatsList; let i = index" class="result__item">
+
+        <a class="result__item-wrap" (click)="openApartmentModal(i)">
+            <span class="result__wrap result__wrap--scheme">
+                <img class="result__scheme-content"
+                     [src]="'/assets/floor-plans/jk_' + flat.mod + 'house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'"
+                     (error)="img.style.display = 'none'" #img>
+
+                <div class="result__scheme-error g-3red" *ngIf="img.style.display === 'none'"></div>
             </span>
-            <span *ngIf="flat.discount"
-                  class="search-output__result-item-content search-output__result-item-content_price-sale">
-                  {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
-            </span>
-        </span>
-        <span class="search-output__result-item-content search-output__result-item-favorite">
-            <span class="search-output__result-item-favorite_img" *ngIf="flat.inFavorite"></span>
-        </span>
-    </a>
-</div>
+            <div class="result__wrap">
+
+                <div class="result__wrap result__wrap--head">
+                    <span class="result__text result__text--room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</span>
+                    <p class="result__text result__text--price" [class.result__text--price-sale]="flat.discount">{{flat.price | myBitNumberPipe}} &#8381;</p>
+                </div>
+                <div class="result__wrap result__wrap--head">
+                    <span class="result__text result__text--mod">ЖК {{flat.jkName}}</span>
+                </div>
+                <div class="result__wrap result__wrap--head result__wrap--head-bottom">
+                    <div class="result__wrap result__wrap--info">
+                        <span class="result__text result__text--flat">№{{flat.flat}}</span>
+                        <span class="result__text result__text--floor">Этаж {{flat.floor}}</span>
+                        <div class="result__text result__text--delivery">{{flat.deliveryDate}}</div>
+                        <div class="result__text result__text--decoration">{{flat.decorationName}}</div>
+                        <span class="result__text result__text--house">{{flat.house}}</span>
+                    </div>
+                    <div class="result__wrap result__wrap--space">
+                        <span class="result__text result__text--space">{{flat.space}} м&#178;</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </li>
+
+</ul>
 
 <app-flats-apartment-modal *ngIf="showApartmentWindow"
     [showApartmentWindow]="showApartmentWindow"

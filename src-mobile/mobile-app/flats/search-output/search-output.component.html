@@ -13,7 +13,7 @@
             <div class="result__wrap">
 
                 <div class="result__wrap result__wrap--head">
-                    <span class="result__text result__text--room">{{(flat.rooms < '1') ? 'Студия' : flat.rooms + ' комнатная'}}</span>
+                    <span class="result__text result__text--room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</span>
                     <p class="result__text result__text--price" [class.result__text--price-sale]="flat.discount">{{flat.price | myBitNumberPipe}} &#8381;</p>
                 </div>
                 <div class="result__wrap result__wrap--head">

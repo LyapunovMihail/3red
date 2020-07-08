@@ -1,119 +1,161 @@
 @import "../../../styles/modules/mixins/mixin";
 
-:host {
+.result-gradient {
     width: 100%;
+    height: 93px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), #ffffff);
+    position: sticky;
+    bottom: 0;
+    pointer-events: none;
 }
 
-.search-output__result {
+.to-favorites {
+    width: 18px;
+    height: 18px;
+    background: url('/assets/img/favorite.svg') no-repeat;
+    background-size: 100%;
+    @media (max-width: 767px) { display: none; }
+    &_active { background: url('/assets/img/favorite_active.svg') no-repeat; }
+}
+
+.result {
     width: 100%;
+    max-width: $tabletContainer;
+    box-sizing: border-box;
 
-    &-wrap {
+    &__item {
         width: 100%;
-        height: 86px;
+        height: 121px;
         box-sizing: border-box;
-        padding: 8px 56px;
-        margin: 0 0 8px;
+        padding: 16px 24px;
+        background-color: $col-white;
+        margin: 0 0 4px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        transition: background-color $transition;
-        &:hover { background-color: rgba($color: $col-red, $alpha: .1); }
 
-        &:first-child {
-            margin-top: 16px;
+        &-wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
         }
     }
 
-    &-item {
-        width: 100%;
+    &__text {
+        font: $font-18;
+        white-space: nowrap;
+
+        &--floor,
+        &--flat,
+        &--mod,
+        &--house,
+        &--delivery,
+        &--decoration {
+            color: $col-black-5;
+        }
+
+        &--flat,
+        &--floor,
+        &--delivery,
+        &--decoration { margin-right: 24px; }
+
+        &--room,
+        &--price-sale { color: $col-black; }
+
+        &--room span {
+            display: none;
+            @media (min-width: 759px) { display: inline; }
+        }
+        &--flat { display: none; }
+    }
+
+    &__wrap {
+        width: calc(100% - 91px);
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-sizing: border-box;
 
-        &-img {
-            width: 70px;
-            min-width: 70px;
-            height: 100%;
+        &--head {
+            width: 100%;
+            height: 35%;
             display: flex;
-            align-items: center;
-            margin: 0 33px 0 0;
+            justify-content: space-between;
+            &-bottom { align-items: flex-end; }
+        }
+        &--info,
+        &--space {
+            width: auto;
+            display: flex;
+            align-items: flex-end;
+        }
+        &--space { justify-content: flex-end; }
 
-            &-error {
-                width: 100%;
-                height: 100%;
-                background: url(/assets/img/flats/search/lock.svg);
-            }
+        &--scheme {
+            width: 67px;
+            min-width: 67px;
+            height: 67px;
+            margin-right: 24px;
+            align-self: flex-start;
+
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
             }
         }
-
-        &-content {
-            font: $font-18;
-            color: $col-black-5;
-            white-space: nowrap;
-            user-select: none;
-
-            &_jk-name {
-                opacity: 0.5;
-            }
-            &_room,
-            &_price,
-            &_space { color: $col-black; }
-
-            &_price,
-            &_price-not-sale,
-            &_price-sale { text-align: right; }
-            &_price-not-sale {
-                color: $col-black-5;
-                text-decoration: line-through;
-            }
-            &_price-sale { color: $col-red; }
-
-            &_number,
-            &_floor,
-            &_house {
-                width: 9.12%;
-                min-width: 106px;
-            }
-            &_room {
-                width: 22%;
-                min-width: 150px;
-            }
-            &_space,
-            &_decoration,
-            &_delivery {
-                width: 11%;
-                min-width: 75px;
-            }
-        }
-
         &-price {
-            width: 12%;
             display: flex;
             flex-flow: column;
         }
+    }
 
-        &-favorite {
-            width: 6%;
+    &__request {
+        position: absolute;
+        right: 20px;
+        top: 5px;
+    }
 
-            &_img {
-                display: block;
-                width: 25px;
-                height: 23px;
-                margin-left: 40px;
-                background: url(/assets/img/jk-object/header_heart.svg) no-repeat;
-                background-size: 100%;
+    &__scheme-error {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+    .result {
+
+        &__item {
+            height: 82px;
+            padding: 12px 20px;
+        }
+
+        &__text {
+            font: $font-14;
+
+            // &--delivery,
+            // &--decoration { display: none; }
+
+            &--flat,
+            &--mod { display: block; }
+            &--mod { font: 12px/14px $font-proba; }
+
+            &--flat,
+            &--floor,
+            &--delivery,
+            &--decoration { margin-right: 8px; }
+        }
+        &__wrap {
+            width: calc( 100% - 66px);
+
+            &--head { width: 100%; }
+            &--scheme {
+                width: 58px;
+                min-width: 58px;
+                height: 58px;
+                margin-right: 8px;
             }
-            //
-            //&_active {
-            //    background: url(/assets/img/favorite-active.svg) no-repeat;
-            //    background-size: 100%;
-            //}
         }
     }
+}
+@media (max-width: 460px) {
+    .result__text--delivery,
+    .result__text--decoration { display: none; }
 }

@@ -14,9 +14,7 @@
         </nav>
 
         <div class="swiper-news">
-
             <div class="swiper-wrapper swiper-news__wrap">
-
                 <ng-container *ngFor="let snippet of currentSnippets; let i = index">
 
                     <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="swiper-news__slide swiper-slide" *ngIf="snippet.title">
@@ -40,6 +38,7 @@
                 </ng-container>
             </div>
         </div>
+
     </div>
 
     <!-- <div class="object-news__slider">
