@@ -33,12 +33,13 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public dateNow: string;
 
-    @Input() isForm: boolean = false ;
+    @Input() isForm = false;
 
-    @Input() redactId: any ;
+    @Input() redactId: any;
 
     @Input() objectId = '';
     @Input() objectName = '';
+    @Input() objectMod = '';
 
     // вызывается при изменении сниппета
     @Output() snippetsChange = new EventEmitter();
@@ -159,27 +160,26 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         }));
     }
 
-    public addFlats(order?: number, value?: ShareFlat[]) {
+    public addFlats(order?: number, value?: ShareFlat) {
         this.body.push(new FormControl({
             blockType: 'flats',
             blockOrderNumber: order ? order : this.body.controls.length,
-            blockFlats: value
+            blockFlat: value
                 ? value
-                : [
-                    {
-                        house: null,
-                        number: null,
-                        section: null,
-                        floor: null,
-                        space: null,
-                        room: null,
-                        decoration: null,
-                        scheme: null,
-                        price: null,
-                        discount: null,
-                        discountType: ShareFlatDiscountType.SUM
-                    }
-                ]
+                : {
+                    mod: this.objectMod,
+                    house: null,
+                    number: null,
+                    section: null,
+                    floor: null,
+                    space: null,
+                    room: null,
+                    decoration: null,
+                    scheme: null,
+                    price: null,
+                    discount: null,
+                    discountType: ShareFlatDiscountType.SUM
+                  }
         }));
     }
 
@@ -212,7 +212,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             this.finishDate = data[0].finish_date;
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
                 if (body.blockType === 'flats') {
-                    this.addFlats(body.blockOrderNumber, body.blockFlats);
+                    this.addFlats(body.blockOrderNumber, body.blockFlat);
                 } else if (body.blockType === 'title') {
                     this.addTitle(body.blockOrderNumber, body.blockTitle);
                 } else if (body.blockType === 'image') {

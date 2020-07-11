@@ -17,14 +17,14 @@
             <p class="objects__price-title">Цена</p>
             <label class="objects__price-wrap">
                 <p class="objects__price-hint" [class.not-placeholder]="form.get('priceMin').value.length">от</p>
-                <input type="text" class="objects__price-input" placeholder="{{minPricePlaceholder}} млн"
+                <input type="text" class="objects__price-input" placeholder="{{minPricePlaceholder | jkObjectsNumberPipe}} млн"
                     [value]="form.get('priceMin').value"
                     (input)="removeChars($event, 'priceMin')"
                     (change)="form.get('priceMin').setValue($event.target.value)">
             </label>
             <label class="objects__price-wrap">
                 <p class="objects__price-hint" [class.not-placeholder]="form.get('priceMax').value.length">до</p>
-                <input type="text" class="objects__price-input" placeholder="{{maxPricePlaceholder}} млн"
+                <input type="text" class="objects__price-input" placeholder="{{maxPricePlaceholder | jkObjectsNumberPipe}} млн"
                     [value]="form.get('priceMax').value"
                     (input)="removeChars($event, 'priceMax')"
                     (change)="form.get('priceMax').setValue($event.target.value)">

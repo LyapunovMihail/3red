@@ -23,15 +23,15 @@ export class ObjectsModel {
 
     async getSnippetByParams(query) {
         const request: any = {};
-        const flatsRequest: any = {};
-
-        flatsRequest.type = {$in: ['КВ', 'АП']};
         if ('districts' in query) {
             request.district = { $in: query.districts.split(',') };
         }
         if ( 'status' in query ) {
             request.status = query.status;
         }
+
+        const flatsRequest: any = {};
+        flatsRequest.type = {$in: ['КВ', 'АП']};
         if ( 'priceMin' in query && 'priceMax' in query) {
             flatsRequest.price = { $gte: Number(query.priceMin), $lte: Number(query.priceMax) };
         }
@@ -43,9 +43,13 @@ export class ObjectsModel {
         }
 
         const jkSnippets = await this.collection.find(request).toArray();
-        const flatsSnippets = await this.addressesCollection.find(flatsRequest).toArray();
 
-        return jkSnippets.filter((jk) => flatsSnippets.some((flat) => flat.mod === jk.mod));
+        if (!flatsRequest.price) {
+            return jkSnippets;
+        } else {
+            const flatsSnippets = await this.addressesCollection.find(flatsRequest).toArray();
+            return jkSnippets.filter((jk) => flatsSnippets.some((flat) => flat.mod === jk.mod));
+        }
     }
 
     // async updateSnippet(parameters) {

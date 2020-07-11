@@ -27,7 +27,7 @@ export class FlatsDiscountService {
     }
 
     public getDiscount(flat): number {
-        const shareFlat = this.shareFLats.find((sFlat) => +sFlat.number === flat.flat);
+        const shareFlat = this.shareFLats.find((sFlat) => +sFlat.number === flat.flat && sFlat.mod === flat.mod);
 
         if (shareFlat) {
             if (shareFlat.discountType === ShareFlatDiscountType.PERCENT) {

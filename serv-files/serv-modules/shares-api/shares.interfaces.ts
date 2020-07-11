@@ -34,6 +34,7 @@ export enum ShareFlatDecorationEnum {
 }
 
 export interface ShareFlat {
+    mod: string;
     house: string;
     number: string;
     section: string;
@@ -56,7 +57,7 @@ export interface ShareBodyBlock {
         image: string;
         thumbnail: string;
     };
-    blockFlats?: ShareFlat[];
+    blockFlat?: ShareFlat;
 }
 
 export interface Share {

@@ -131,7 +131,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
             // если в обоих параметрах есть цифры
             if ( month.length > 0 && year.length > 0
                 // проверяем 'year' на соответствие диапазону от 2017го до текущего года
-                && Number(year) >= 2019 && Number(year) <= Number(new Date().getFullYear())
+                && Number(year) >= 2017 && Number(year) <= Number(new Date().getFullYear())
                 // проверяем 'month' на соответствие диапазону от 1 до 12
                 && Number(month) >= 1 && Number(month) <= 12 ) {
 

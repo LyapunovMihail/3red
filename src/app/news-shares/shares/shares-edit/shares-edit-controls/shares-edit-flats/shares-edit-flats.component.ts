@@ -7,8 +7,9 @@ import {
     ShareFlatDiscountType,
     SHARES_UPLOADS_PATH
 } from '../../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { Component, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Output, EventEmitter, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IObjectSnippet } from '../../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-shares-edit-flats',
@@ -28,12 +29,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
+    @Input() public objectId: string;
 
-    public sectionsOptions = ['1', '2', '3', '4'];
+    public housesOptions = [];
+    public sectionsOptions = [];
+    public flatsOptions = [];
 
     public flats = [];
-
-    public flatsOptions = [];
 
     public roomSelectOpen: number;
 
@@ -41,7 +43,9 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     public conf: ShareBodyBlock;
 
-    uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public config: {jk: IObjectSnippet, housesBtnList, floorCount, config};
+
+    uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     constructor(
         private sharesService: SharesService
@@ -49,10 +53,10 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     writeValue(value: any) {
         this.conf = value;
-        if (this.conf.blockFlats.length > 0) {
-            this.conf.blockFlats.forEach((flat: ShareFlat, i: number) => {
-                this.changeSection(flat.section, i);
-            });
+        console.log('this.conf: ', this.conf);
+        if (this.conf.blockFlat) {
+            this.getConfig();
+            console.log('flat: ', this.conf.blockFlat);
         }
     }
 
@@ -64,112 +68,106 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     registerOnTouched() {}
 
-    changeText() {
-        this.propagateChange(this.conf);
-    }
-
-    public removeItem(i) {
-        if (this.conf.blockFlats.length > 1) {
-            if (confirm('Удалить квартиру?')) {
-                this.conf.blockFlats.splice(i, 1);
-                this.flats.splice(i, 1);
-                this.flatsOptions.splice(i, 1);
-            }
-        } else {
-            this.remove.next();
-        }
-    }
-
-    addFlat() {
-        const flat = {
-            house: null,
-            number: null,
-            section: null,
-            floor: null,
-            space: null,
-            room: null,
-            decoration: null,
-            scheme: null,
-            price: null,
-            discount: null,
-            discountType: ShareFlatDiscountType.SUM
-        };
-        this.conf.blockFlats.push(flat);
-    }
-
-    changeSection(e, i) {
-        this.sharesService.getFlatsBySectionNum(e)
+    public getConfig() {
+        this.sharesService.getFlatsDataByObjectId(this.objectId)
             .subscribe((data) => {
-                this.flats.splice(i, 0, data);
-                this.initFlatsOptions(i);
-            });
+                    console.log('data: ', data);
+                    this.config = data;
+                    this.initHousesOptions();
+                },
+                (err) => console.error(err)
+            );
     }
 
-    changeFlat(e, i) {
-        const flat = this.flats[i].find((flatItem) => flatItem.flat === Number(e));
+    initHousesOptions() {
+        this.housesOptions = Object.keys(this.config.floorCount);
+        console.log('this.housesOptions: ', this.housesOptions);
+    }
+    changeHouse(house) {
+        this.initSectionsOptions(house);
+    }
+
+
+    initSectionsOptions(house) {
+        this.sectionsOptions = Object.keys(this.config.floorCount[house]);
+        console.log('this.sectionsOptions: ', this.sectionsOptions);
+    }
+
+    changeSection(section) {
+        this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section})
+            .subscribe((data) => {
+                this.flats = data;
+                this.initFlatsOptions();
+                console.log('data: ', data);
+            },
+                (err) => console.error(err)
+            );
+    }
+
+    initFlatsOptions() {
+        if (!this.flats.length) {
+            return;
+        }
+
+        this.flatsOptions = this.flats.map((flat) => flat.flat);
+    }
+
+    changeFlat(e) {
+        const flat = this.flats.find((flatItem) => flatItem.flat === Number(e));
         if (flat == null) {
             return;
         }
-        this.conf.blockFlats[i].house = flat.house;
-        this.conf.blockFlats[i].floor = flat.floor;
-        this.conf.blockFlats[i].space = flat.space;
+        this.conf.blockFlat.house = flat.house;
+        this.conf.blockFlat.floor = flat.floor;
+        this.conf.blockFlat.space = flat.space;
         switch (flat.rooms) {
             case 0:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.STUDIO;
+                this.conf.blockFlat.room = ShareFlatRoomEnum.STUDIO;
                 break;
             case 1:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.ONE_ROOM;
+                this.conf.blockFlat.room = ShareFlatRoomEnum.ONE_ROOM;
                 break;
             case 2:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.TWO_ROOM;
+                this.conf.blockFlat.room = ShareFlatRoomEnum.TWO_ROOM;
                 break;
             case 3:
-                this.conf.blockFlats[i].room = ShareFlatRoomEnum.THREE_ROOM;
+                this.conf.blockFlat.room = ShareFlatRoomEnum.THREE_ROOM;
                 break;
             default:
-                this.conf.blockFlats[i].room = null;
+                this.conf.blockFlat.room = null;
         }
         switch (flat.decoration) {
             case '00':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.WITHOUT;
+                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.WITHOUT;
                 break;
             case '01':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.ROUGHING;
+                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.ROUGHING;
                 break;
             case '02':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
+                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
                 break;
             case '03':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.CLEAN;
+                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.CLEAN;
                 break;
             case '04':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.LIGHT;
+                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.LIGHT;
                 break;
             case '05':
-                this.conf.blockFlats[i].decoration = ShareFlatDecorationEnum.DARK;
+                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.DARK;
                 break;
             default:
-                this.conf.blockFlats[i].decoration = null;
+                this.conf.blockFlat.decoration = null;
         }
-        this.conf.blockFlats[i].scheme = `/assets/floor-plans/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
-        this.conf.blockFlats[i].price = flat.price;
+        this.conf.blockFlat.scheme = `/assets/floor-plans/jk_${flat.mod}/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
+        this.conf.blockFlat.price = flat.price;
     }
 
-    initFlatsOptions(i) {
-        if (this.flats[i] == null || this.flats[i].length === 0) {
-            return;
-        }
 
-        this.flatsOptions.splice(i, 0, this.flats[i].map((flat) => {
-            return flat.flat;
-        }));
-    }
-
-    getDiscount(i): number {
-        if (this.conf.blockFlats[i].discountType === ShareFlatDiscountType.PERCENT) {
-            const discount = +this.conf.blockFlats[i].price * (+this.conf.blockFlats[i].discount / 100);
+    getDiscount(): number {
+        if (this.conf.blockFlat.discountType === ShareFlatDiscountType.PERCENT) {
+            const discount = +this.conf.blockFlat.price * (+this.conf.blockFlat.discount / 100);
             return +discount.toFixed(2);
         }
-        return +this.conf.blockFlats[i].discount;
+        return +this.conf.blockFlat.discount;
     }
 }

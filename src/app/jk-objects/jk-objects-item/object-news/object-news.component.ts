@@ -28,6 +28,8 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
     public objectId: string;
     @Input()
     public objectName: string;
+    @Input()
+    public objectMod: string;
 
     public currentSnippets = [];
 

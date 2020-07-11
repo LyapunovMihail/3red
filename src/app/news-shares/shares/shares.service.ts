@@ -5,6 +5,8 @@ import { adminHeaders } from '../../commons/admin-headers.utilit';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Injectable()
 export class SharesService {
@@ -44,8 +46,12 @@ export class SharesService {
         return this.http.post('/api/admin/shares/delete', {id}, adminHeaders());
     }
 
-    public getFlatsBySectionNum(num) {
-        return this.http.get(`/api/search?sections=${num}`);
+    public getFlats(options): Observable<IAddressItemFlat[]> {
+        return this.http.post<IAddressItemFlat[]>('/api/search/object', { search: options });
+    }
+
+    public getFlatsDataByObjectId(id): Observable<{jk: IObjectSnippet, housesBtnList, floorCount, config}> {
+        return this.http.get<{jk: IObjectSnippet, housesBtnList, floorCount, config}>(`/api/search/object-data/${id}`);
     }
 
     public imageUpload(file) {

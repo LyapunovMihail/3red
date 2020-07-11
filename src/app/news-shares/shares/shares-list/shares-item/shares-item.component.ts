@@ -33,6 +33,7 @@ export class SharesItemComponent implements OnInit, OnDestroy {
     public routerEvent;
 
     public selectFlat = {
+        mod: '',
         house: '0',
         number: '0',
         space: '0',
@@ -53,7 +54,6 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         this.id = this.activatedRoute.snapshot.params.id;
         this.getSnippets(this.id);
     }
-
 
     public changeIdSubscribe() {
         this.routerEvent = this.activatedRoute.params.subscribe((params) => {
@@ -102,6 +102,7 @@ export class SharesItemComponent implements OnInit, OnDestroy {
 
     public setFlatData(flat) {
         this.selectFlat = {
+            mod: flat.mod,
             house: flat.house,
             number: flat.number,
             space: flat.space,

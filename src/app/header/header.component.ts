@@ -1,5 +1,5 @@
 import { WindowEventsService } from '../commons/window-events.observer.service';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { NavigationEnd, Router, NavigationStart } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-   public preloader = false;
+    public preloader = false;
 
     @ViewChild('header')
     public header: ElementRef;

@@ -33,6 +33,7 @@ export class AddressesModel {
             const flatSnippet = await this.flatCollection.findOne({ objectId: jk._id.toString() });
             if (flatSnippet && flatSnippet.switchOn) {
                 const data: any = this.parseRequest(query);
+                console.log('query: ', query);
                 return await this.collection.find(data.request, data.parameters).toArray();
             } else {
                 return [];

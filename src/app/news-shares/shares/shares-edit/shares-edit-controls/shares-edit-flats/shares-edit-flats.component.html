@@ -1,7 +1,7 @@
 <ul class="form-flats-list">
-    <li class="form-flats-list__item" *ngFor="let item of conf.blockFlats; index as i">
+    <li class="form-flats-list__item">
         <div class="create-shares__wrap create-shares__wrap_path">
-            
+
             <h3 class="create-shares__typografy-title create-shares__typografy-title_in-path">Квартира</h3>
 
             <div class="create-shares__wrap create-shares__wrap_btn">
@@ -12,17 +12,17 @@
 
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_select create-shares__wrap_w3">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Дом</p>
-                <select [(ngModel)]="conf.blockFlats[i].house"
-                        (ngModelChange)="changeFlat($event, i)"
+                <select [(ngModel)]="conf.blockFlat.house"
+                        (ngModelChange)="changeHouse($event)"
                         class="create-shares__input create-shares__input_status">
-                    <option *ngFor="let flat of flatsOptions[i]"
-                            [value]="flat">Дом {{house}}</option>
+                    <option *ngFor="let house of housesOptions"
+                            [value]="house">Дом {{house}}</option>
                 </select>
             </div>
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_select create-shares__wrap_w3">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Секция</p>
-                <select [(ngModel)]="conf.blockFlats[i].section"
-                        (ngModelChange)="changeSection($event, i)"
+                <select [(ngModel)]="conf.blockFlat.section"
+                        (ngModelChange)="changeSection($event)"
                         class="create-shares__input create-shares__input_status">
                     <option *ngFor="let section of sectionsOptions"
                             [value]="section">Секция {{section}}</option>
@@ -30,16 +30,16 @@
             </div>
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_select create-shares__wrap_w3">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Квартира</p>
-                <select [(ngModel)]="conf.blockFlats[i].number"
-                        (ngModelChange)="changeFlat($event, i)"
+                <select [(ngModel)]="conf.blockFlat.number"
+                        (ngModelChange)="changeFlat($event)"
                         class="create-shares__input create-shares__input_status">
-                    <option *ngFor="let flat of flatsOptions[i]"
+                    <option *ngFor="let flat of flatsOptions"
                             [value]="flat">Квартира {{flat}}</option>
                 </select>
             </div>
 
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_w3">
-                <input type="text" [value]="!conf.blockFlats[i].price ? '' : (conf.blockFlats[i].price | bitNumber) + ' &#8381;'"
+                <input type="text" [value]="!conf.blockFlat.price ? '' : (conf.blockFlat.price | bitNumber) + ' &#8381;'"
                     class="create-shares__input create-shares__input_title" disabled #price>
                 <p class="create-shares__typografy-subtitle"
                     [ngClass]="{'create-shares__typografy-subtitle_placeholder': price.value.length > 0}">Стоимость</p>

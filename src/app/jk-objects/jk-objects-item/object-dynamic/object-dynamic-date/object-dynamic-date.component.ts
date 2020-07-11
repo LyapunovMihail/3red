@@ -154,7 +154,6 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
                     // (item.value > this.realMonth && activeYear === this.realYear)
                 );
         });
-
     }
 
     public afterChangeYear() {
@@ -172,7 +171,7 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     private yearsArrayGenerate(): number[] {
-        let from = 2005;
+        let from = 2017;
         let to = Number(this.date.getFullYear());
         let result = [];
         for ( let i = from ; i <= to ; i ++ ) {
@@ -182,14 +181,15 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges, OnDestroy 
     }
 
     public getNotEmptyYears() {
-
         this.dynamicService.getContentSnippets(this.objectId).subscribe(
             (data) => {
-                const objecs = data.sort( (obj1, obj2) => obj1.year > obj2.year ? -1 : 1);
-                objecs.forEach( (item) => {
-                    this.visibleYears.push(item.year);
+                const objects = data.sort( (obj1, obj2) => obj1.year > obj2.year ? -1 : 1);
+                objects.forEach( (item) => {
+                    if (this.visibleYears.every((year) => year !== item.year)) {
+                        this.visibleYears.push(item.year);
+                    }
                 });
             }
-        )
+        );
     }
 }
