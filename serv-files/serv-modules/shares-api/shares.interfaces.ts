@@ -27,7 +27,7 @@ export enum ShareFlatDecorationEnum {
     WITHOUT = 'Без отделки',
     ROUGHING = 'Черновая отделка',
     WITHOUT_WITH_WALLS = 'Б/о с перегородками',
-    CLEAN = 'Чистовая',
+    CLEAN = 'Чистовая отделка',
     FINISH = 'Финишная отделка',
     LIGHT = 'Светлая',
     DARK = 'Темная'
@@ -35,6 +35,8 @@ export enum ShareFlatDecorationEnum {
 
 export interface ShareFlat {
     mod: string;
+    jkName: string;
+    deliveryDate: string;
     house: string;
     number: string;
     section: string;
@@ -42,6 +44,7 @@ export interface ShareFlat {
     space: string;
     room: ShareFlatRoomEnum;
     decoration: ShareFlatDecorationEnum;
+    decorationName: ShareFlatDecorationEnum;
     scheme: string;
     price: string;
     discountType: ShareFlatDiscountType;

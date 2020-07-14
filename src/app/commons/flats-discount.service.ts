@@ -17,7 +17,7 @@ export class FlatsDiscountService {
                 data.forEach((share: Share) => {
                     share.body.forEach((block: ShareBodyBlock) => {
                         if (block.blockType === 'flats') {
-                            this.shareFLats = [...this.shareFLats, ...block.blockFlats];
+                            this.shareFLats = [...this.shareFLats, block.blockFlat];
                         }
                     });
                 });

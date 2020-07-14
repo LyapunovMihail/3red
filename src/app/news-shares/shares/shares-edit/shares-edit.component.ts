@@ -168,6 +168,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 ? value
                 : {
                     mod: this.objectMod,
+                    jkName: this.objectName,
+                    deliveryDate: null,
                     house: null,
                     number: null,
                     section: null,

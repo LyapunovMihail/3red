@@ -39,10 +39,9 @@ export class SearchOutputComponent implements OnInit {
         this.searchService.getOutputFlatsChanged()
             .subscribe((changes: {flats: IFlatWithDiscount[], showMore: boolean}) => {
                 this.flatsList = changes.flats;
-                this.flatsList.map((flat) => {
+                this.flatsList.forEach((flat) => {
                     flat.discount = this.getDiscount(flat);
                     flat.inFavorite = this.inFavorite(flat);
-                    return flat;
                 });
                 if (changes.showMore) {
                     this.resultAnimate();

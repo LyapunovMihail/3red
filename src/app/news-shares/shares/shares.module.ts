@@ -12,6 +12,7 @@ import { Uploader } from 'angular2-http-file-upload';
 import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
 import { SharesEditFormsModule } from './shares-edit/shares-edit-forms.module';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
+import { ApartmentModule } from '../../flats/apartment/apartment.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -29,6 +30,7 @@ const SHARES_COMPONENTS = [
         FormsRequestModule,
         SharesEditFormsModule,
         NavMenuModule,
+        ApartmentModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

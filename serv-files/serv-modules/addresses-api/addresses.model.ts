@@ -33,7 +33,6 @@ export class AddressesModel {
             const flatSnippet = await this.flatCollection.findOne({ objectId: jk._id.toString() });
             if (flatSnippet && flatSnippet.switchOn) {
                 const data: any = this.parseRequest(query);
-                console.log('query: ', query);
                 return await this.collection.find(data.request, data.parameters).toArray();
             } else {
                 return [];
@@ -145,15 +144,19 @@ export class AddressesModel {
     private async setModBtns() { // утсанавливаем список табов жилищных комплексов
         const objects = await this.objectCollection.find().toArray();
         const modsBtnList = [];
-        modsBtnList.push({ name: 'Все комплексы', value: '' });
-        for (const item of objects) {
-            const flatSnippet = await this.flatCollection.findOne({ objectId: item._id.toString() }); // Проверяем включен ли блок квартир в объекте, если включен, то добавляем таб этого объекта
-            if (flatSnippet && flatSnippet.switchOn) {
-                if (!modsBtnList.some((btn) => btn.value === item.mod )) {
-                    modsBtnList.push({ name: item.name, value: item.mod });
+        if (objects.length) {
+            modsBtnList.push({ name: 'Все комплексы', value: '' });
+            for (const item of objects) {
+                const flatSnippet = await this.flatCollection.findOne({ objectId: item._id.toString() }); // Проверяем включен ли блок квартир в объекте, если включен, то добавляем таб этого объекта
+                const flatsCount = await this.collection.find({mod: item.mod}).count();
+                if (flatSnippet && flatSnippet.switchOn && flatsCount) {
+                    if (!modsBtnList.some((btn) => btn.value === item.mod )) {
+                        modsBtnList.push({ name: item.name, value: item.mod });
+                    }
                 }
             }
         }
+
         return modsBtnList;
     }
     private async setHousesBtns(mod, flatsOfMod, modsBtnList) { // Устанавливаем спсиок домов жилищных комплексов

@@ -25,8 +25,8 @@ export class SharesListComponent implements OnInit, OnDestroy {
     public AuthorizationEvent;
 
     public redactId: string;
-    public isCreateRedactForm: boolean = false;
-    public isDeleteForm: boolean = false;
+    public isCreateRedactForm = false;
+    public isDeleteForm = false;
 
     public navList = [
         { name: 'Все', link: '/news-shares/all' },

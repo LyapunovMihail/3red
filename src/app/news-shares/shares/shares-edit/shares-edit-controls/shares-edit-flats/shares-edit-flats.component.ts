@@ -1,7 +1,6 @@
 import { SharesService } from '../../../shares.service';
 import {
     ShareBodyBlock,
-    ShareFlat,
     ShareFlatRoomEnum,
     ShareFlatDecorationEnum,
     ShareFlatDiscountType,
@@ -37,10 +36,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     public flats = [];
 
-    public roomSelectOpen: number;
-
-    public shareFlatDiscountType = ShareFlatDiscountType;
-
     public conf: ShareBodyBlock;
 
     public config: {jk: IObjectSnippet, housesBtnList, floorCount, config};
@@ -53,10 +48,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     writeValue(value: any) {
         this.conf = value;
-        console.log('this.conf: ', this.conf);
         if (this.conf.blockFlat) {
             this.getConfig();
-            console.log('flat: ', this.conf.blockFlat);
         }
     }
 
@@ -71,7 +64,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     public getConfig() {
         this.sharesService.getFlatsDataByObjectId(this.objectId)
             .subscribe((data) => {
-                    console.log('data: ', data);
                     this.config = data;
                     this.initHousesOptions();
                 },
@@ -81,7 +73,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     initHousesOptions() {
         this.housesOptions = Object.keys(this.config.floorCount);
-        console.log('this.housesOptions: ', this.housesOptions);
     }
     changeHouse(house) {
         this.initSectionsOptions(house);
@@ -90,15 +81,12 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     initSectionsOptions(house) {
         this.sectionsOptions = Object.keys(this.config.floorCount[house]);
-        console.log('this.sectionsOptions: ', this.sectionsOptions);
     }
-
     changeSection(section) {
         this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section})
             .subscribe((data) => {
                 this.flats = data;
                 this.initFlatsOptions();
-                console.log('data: ', data);
             },
                 (err) => console.error(err)
             );
@@ -111,7 +99,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
         this.flatsOptions = this.flats.map((flat) => flat.flat);
     }
-
     changeFlat(e) {
         const flat = this.flats.find((flatItem) => flatItem.flat === Number(e));
         if (flat == null) {
@@ -138,26 +125,36 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         }
         switch (flat.decoration) {
             case '00':
-                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.WITHOUT;
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.WITHOUT;
                 break;
             case '01':
-                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.ROUGHING;
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.ROUGHING;
                 break;
             case '02':
-                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.WITHOUT_WITH_WALLS;
                 break;
             case '03':
-                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.CLEAN;
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.CLEAN;
                 break;
             case '04':
-                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.LIGHT;
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.LIGHT;
                 break;
             case '05':
-                this.conf.blockFlat.decoration = ShareFlatDecorationEnum.DARK;
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.DARK;
+                break;
+            case '08':
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.CLEAN;
+                break;
+            case '09':
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.CLEAN;
+                break;
+            case '14':
+                this.conf.blockFlat.decorationName = ShareFlatDecorationEnum.CLEAN;
                 break;
             default:
-                this.conf.blockFlat.decoration = null;
+                this.conf.blockFlat.decorationName = null;
         }
+        this.conf.blockFlat.deliveryDate = flat.deliveryDate;
         this.conf.blockFlat.scheme = `/assets/floor-plans/jk_${flat.mod}/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
         this.conf.blockFlat.price = flat.price;
     }

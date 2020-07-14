@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType, ShareFlat } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../../shares.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
@@ -18,12 +18,11 @@ import { Meta } from '@angular/platform-browser';
 export class SharesItemComponent implements OnInit, OnDestroy {
 
     public sharesList: Share[];
+    public shareFlats: ShareFlat[];
 
     public snippet: Share;
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
-
-    public shareFlatDiscountType = ShareFlatDiscountType;
 
     public prevId = '';
     public nextId = '';
@@ -32,14 +31,8 @@ export class SharesItemComponent implements OnInit, OnDestroy {
 
     public routerEvent;
 
-    public selectFlat = {
-        mod: '',
-        house: '0',
-        number: '0',
-        space: '0',
-        room: '0',
-        price: 0
-    };
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
@@ -77,11 +70,21 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         this.sharesService.getShareById(id)
             .subscribe((share: Share[]) => {
                 this.snippet = share[0];
+                this.setShareFlats();
                 this.checkPrevAndNext(id);
                 this.setMetaTags();
             }, (err) => {
                 console.error(err);
             });
+    }
+
+    private setShareFlats() {
+        this.shareFlats = this.snippet.body.map((item) => {
+            if (item.blockType === 'flats') {
+                return item.blockFlat;
+            }
+        });
+        console.log('this.shareFlats: ', this.shareFlats);
     }
 
     public checkPrevAndNext(id) {
@@ -98,17 +101,6 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         const finishDateVal = moment(finishDate);
         const duration = moment.duration(createdDateVal.diff(finishDateVal));
         return Math.ceil(duration.asDays() * -1);
-    }
-
-    public setFlatData(flat) {
-        this.selectFlat = {
-            mod: flat.mod,
-            house: flat.house,
-            number: flat.number,
-            space: flat.space,
-            room: (flat.room === 'Студия') ? '0' : (flat.room === 'Однокомнатная') ? '1' : (flat.room === 'Двухкомнатная') ? '2' : '3',
-            price: +flat.price - +flat.discount
-        };
     }
 
     public getDiscount(flat): number {
@@ -160,6 +152,12 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         this.meta.updateTag({property : 'og:title', content: this.snippet.name});
         this.meta.updateTag({property : 'og:description', content: this.snippet.text});
         this.meta.updateTag({property : 'og:image', content: this.snippet.mainImage});
+    }
+
+    public openApartmentModal(index) {
+        this.selectedFlatIndex = index;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
 
     public ngOnDestroy() {
