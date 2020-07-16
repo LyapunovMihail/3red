@@ -167,18 +167,22 @@
             left: 0;
             top: 0;
         }
-        
-        &_roof::before     { content: url(/assets/img/jk-object/decoration-icon/invalid-name-28.svg); }
-        &_laminate::before { content: url(/assets/img/jk-object/decoration-icon/invalid-name-29.svg); }
-        &_tile::before     { content: url(/assets/img/jk-object/decoration-icon/invalid-name-30.svg); }
-        &_plinth::before   { content: url(/assets/img/jk-object/decoration-icon/invalid-name-31.svg); }
-        &_door::before     { content: url(/assets/img/jk-object/decoration-icon/invalid-name-32.svg); }
-        &_wall::before     { content: url(/assets/img/jk-object/decoration-icon/invalid-name-33.svg); }
-        &_air::before      { content: url(/assets/img/jk-object/decoration-icon/invalid-name-34.svg); }
-        &_toilet::before   { content: url(/assets/img/jk-object/decoration-icon/invalid-name-35.svg); }
-        &_socket::before   { content: url(/assets/img/jk-object/decoration-icon/invalid-name-36.svg); }
-        &_bathroom::before { content: url(/assets/img/jk-object/decoration-icon/invalid-name-37.svg); }
-        &_dry::before      { content: url(/assets/img/jk-object/decoration-icon/invalid-name-38.svg); }
-        &_sink::before     { content: url(/assets/img/jk-object/decoration-icon/invalid-name-39.svg); }
+
+        &_roof::before     { content: url(/assets/img/jk-object/decoration-icon/roof.svg); }
+        &_laminate::before { content: url(/assets/img/jk-object/decoration-icon/laminate.svg); }
+        &_floor::before     { content: url(/assets/img/jk-object/decoration-icon/floor.svg); }
+        &_floor-g::before     { content: url(/assets/img/jk-object/decoration-icon/floor-g.svg); }
+        &_plinth::before   { content: url(/assets/img/jk-object/decoration-icon/plinth.svg); }
+        &_door::before     { content: url(/assets/img/jk-object/decoration-icon/door.svg); }
+        &_wall::before     { content: url(/assets/img/jk-object/decoration-icon/wall.svg); }
+        &_border::before     { content: url(/assets/img/jk-object/decoration-icon/border.svg); }
+        &_air::before      { content: url(/assets/img/jk-object/decoration-icon/air.svg); }
+        &_toilet::before   { content: url(/assets/img/jk-object/decoration-icon/toilet.svg); }
+        &_socket::before   { content: url(/assets/img/jk-object/decoration-icon/socket.svg); }
+        &_bathroom::before { content: url(/assets/img/jk-object/decoration-icon/bathroom.svg); }
+        &_dry::before      { content: url(/assets/img/jk-object/decoration-icon/dry.svg); }
+        &_sink::before     { content: url(/assets/img/jk-object/decoration-icon/sink.svg); }
+        &_mixer::before     { content: url(/assets/img/jk-object/decoration-icon/mixer.svg); }
+        &_tile::before     { content: url(/assets/img/jk-object/decoration-icon/tile.svg); }
     }
 }

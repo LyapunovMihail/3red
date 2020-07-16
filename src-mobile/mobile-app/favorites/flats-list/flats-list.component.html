@@ -13,10 +13,12 @@
 
                 <div class="result__wrap result__wrap--head">
                     <span class="result__text result__text--room">{{(flat.rooms === 0) ? 'Студия' : flat.rooms + ' комнатная'}}</span>
-                    <p class="result__text result__text--price" [class.result__text--price-sale]="flat.discount">{{flat.price | myBitNumberPipe}} &#8381;</p>
+                    <p class="result__text result__text--price" *ngIf="!flat.discount">{{flat.price | myBitNumberPipe}} &#8381;</p>
+                    <p class="result__text result__text--price-sale" *ngIf="flat.discount">{{+flat.price - flat.discount | myBitNumberPipe}} &#8381;</p>
                 </div>
                 <div class="result__wrap result__wrap--head">
                     <span class="result__text result__text--mod">ЖК {{flat.jkName}}</span>
+                    <span class="result__text result__text--coming-soon" *ngIf="flat.status === '1'">Скоро в продаже</span>
                 </div>
                 <div class="result__wrap result__wrap--head result__wrap--head-bottom">
                     <div class="result__wrap result__wrap--info">

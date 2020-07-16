@@ -38,7 +38,7 @@
                 <p class="apartment__info-subtitle">Отделка</p>
                 <p class="apartment__info-value">{{flatData.decorationName}}</p>
             </div>
-            <div class="apartment__info-item">
+            <div class="apartment__info-item" *ngIf="flatData.status !== '1'">
                 <p class="apartment__info-subtitle">Стоимость</p>
                 <p class="apartment__info-value"
                    [class.apartment__info-value--sale]="flatData.discount">
@@ -52,6 +52,9 @@
         </div>
 
         <a class="apartment__link" routerLink="/objects/list/{{objectLink}}">ЖК {{flatData.jkName}}</a>
+
+        <a class="apartment__coming-soon" *ngIf="flatData.status === '1'">Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж.</a>
+
         <div class="apartment__btn">
             <button (click)="isReserveFormOpen = true" class="apartment__btn-reserve btn_var-2">Забронировать</button>
             <button (click)="isCreditFormOpen = true;" class="apartment__btn-credit btn_var-3">Заявка на ипотеку</button>

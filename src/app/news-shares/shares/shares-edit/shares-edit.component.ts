@@ -212,6 +212,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
             this.form.reset(data[0]);
             this.finishDate = data[0].finish_date;
+            console.log('start');
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
                 if (body.blockType === 'flats') {
                     this.addFlats(body.blockOrderNumber, body.blockFlat);
@@ -223,6 +224,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     this.addDescription(body.blockOrderNumber, body.blockDescription);
                 }
             });
+            console.log('this.body: ', this.body.value);
+            console.log('finish');
             this.countDown();
         });
     }

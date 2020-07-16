@@ -95,6 +95,11 @@
                 }
             }
         }
+        &-coming-soon {
+            margin: 0 0 32px;
+            font: $font-18;
+            opacity: 0.5;
+        }
 
         &-subtitle,
         &-value { font: $font-18; }

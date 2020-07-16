@@ -1,48 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
-    <defs>
-        <path id="prefix__a" d="M0 0L1 0 1 18 0 18z"/>
-        <path id="prefix__c" d="M0 0L1 0 1 32 0 32z"/>
-        <path id="prefix__e" d="M0 1L1 0.5 1 6 0 6z"/>
-        <path id="prefix__g" d="M0 0L9 0 9 1 0 1z"/>
-        <path id="prefix__i" d="M0 0L31 0 31 1 0 1z"/>
-        <path id="prefix__k" d="M0 0c0 6.075 4.925 11 11 11S22 6.075 22 0h-1c0 5.523-4.477 10-10 10S1 5.523 1 0H0z"/>
-    </defs>
-    <g fill="none" fill-rule="evenodd">
-        <g transform="translate(10)">
-            <mask id="prefix__b" fill="#fff">
-                <use xlink:href="#prefix__a"/>
-            </mask>
-            <path fill="#EE4237" fill-rule="nonzero" d="M0 0v-1h-1v1h1zm1 0h1v-1H1v1zm0 18v1h1v-1H1zm-1 0h-1v1h1v-1zM0 1h1v-2H0v2zm0-1v18h2V0H0zm1 17H0v2h1v-2zm0 1V0h-2v18h2z" mask="url(#prefix__b)"/>
-        </g>
-        <mask id="prefix__d" fill="#fff">
-            <use xlink:href="#prefix__c"/>
-        </mask>
-        <path fill="#EE4237" fill-rule="nonzero" d="M0 0v-1h-1v1h1zm1 0h1v-1H1v1zm0 32v1h1v-1H1zm-1 0h-1v1h1v-1zM0 1h1v-2H0v2zm0-1v32h2V0H0zm1 31H0v2h1v-2zm0 1V0h-2v32h2z" mask="url(#prefix__d)"/>
-        <g transform="translate(25 26)">
-            <mask id="prefix__f" fill="#fff">
-                <use xlink:href="#prefix__e"/>
-            </mask>
-            <path fill="#EE4237" fill-rule="nonzero" d="M0 1L-.447.106-1 .382V1h1zm1-.5h1v-1.618L.553-.394 1 .5zM1 6v1h1V6H1zM0 6h-1v1h1V6zm.447-4.106l1-.5L.553-.394l-1 .5.894 1.788zM0 .5V6h2V.5H0zM1 5H0v2h1V5zm0 1V1h-2v5h2z" mask="url(#prefix__f)"/>
-        </g>
-        <g transform="translate(1)">
-            <mask id="prefix__h" fill="#fff">
-                <use xlink:href="#prefix__g"/>
-            </mask>
-            <path fill="#EE4237" fill-rule="nonzero" d="M0 0v-1h-1v1h1zm9 0h1v-1H9v1zm0 1v1h1V1H9zM0 1h-1v1h1V1zm0 0h9v-2H0v2zm8-1v1h2V0H8zm1 0H0v2h9V0zM1 1V0h-2v1h2z" mask="url(#prefix__h)"/>
-        </g>
-        <g transform="translate(1 31)">
-            <mask id="prefix__j" fill="#fff">
-                <use xlink:href="#prefix__i"/>
-            </mask>
-            <path fill="#EE4237" fill-rule="nonzero" d="M0 0v-1h-1v1h1zm31 0h1v-1h-1v1zm0 1v1h1V1h-1zM0 1h-1v1h1V1zm0 0h31v-2H0v2zm30-1v1h2V0h-2zm1 0H0v2h31V0zM1 1V0h-2v1h2z" mask="url(#prefix__j)"/>
-        </g>
-        <path fill="#FFF" d="M10 17c0 6.075 4.925 11 11 11s11-4.925 11-11h-1c0 5.523-4.477 10-10 10s-10-4.477-10-10h-1z"/>
-        <g transform="translate(10 17)">
-            <mask id="prefix__l" fill="#fff">
-                <use xlink:href="#prefix__k"/>
-            </mask>
-            <path fill="#EE4237" fill-rule="nonzero" d="M0 0v-1h-1v1h1zm22 0h1v-1h-1v1zm-1 0v-1h-1v1h1zM1 0h1v-1H1v1zm-2 0c0 6.627 5.373 12 12 12v-2C5.477 10 1 5.523 1 0h-2zm12 12c6.627 0 12-5.373 12-12h-2c0 5.523-4.477 10-10 10v2zM22-1h-1v2h1v-2zM11 11c6.075 0 11-4.925 11-11h-2c0 4.97-4.03 9-9 9v2zM0 0c0 6.075 4.925 11 11 11V9C6.03 9 2 4.97 2 0H0zm1-1H0v2h1v-2z" mask="url(#prefix__l)"/>
-        </g>
-        <path stroke="#EE4237" stroke-width=".5" d="M10.25 16.25H31.75V17.25H10.25z"/>
-    </g>
+<svg width="32" height="34" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.301 17.5134H7.26878H7.09674V33H14.4086V27.6952C14.8387 27.7807 16.5591 27.7807 16.9892 27.7807C22.6666 27.7807 28 23.1604 28 17.5134H16.301Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M10.3656 3.31015H4V17.5134H10.3656V3.31015Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M7.09674 19.2246H28" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M7.26877 7.50266C7.83887 7.50266 8.30103 7.04298 8.30103 6.47593C8.30103 5.90887 7.83887 5.44919 7.26877 5.44919C6.69867 5.44919 6.23651 5.90887 6.23651 6.47593C6.23651 7.04298 6.69867 7.50266 7.26877 7.50266Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M11.914 1H4V3.2246H11.914V1Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
 </svg>

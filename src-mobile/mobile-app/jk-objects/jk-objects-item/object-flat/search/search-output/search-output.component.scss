@@ -139,6 +139,15 @@
                     &:last-child { color: $col-black-5; }
                 }
 
+                &_coming-soon {
+                    margin: 4px 0 0;
+                    color: $col-black-5;
+
+                    @media (max-width: 767px) {
+                        @include font-size(14px,18px);
+                    }
+                }
+
                 &_room,
                 &_price,
                 &_space { color: $col-black; }

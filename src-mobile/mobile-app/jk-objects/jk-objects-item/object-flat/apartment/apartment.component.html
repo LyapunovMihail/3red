@@ -6,7 +6,6 @@
             <button class="apartment__close-btn btn-cls" (click)="close.emit(false)"><span></span></button>
         </div>
 
-
         <h2 class="apartment__info-title">
             {{(flatData.rooms < 1) ? '' : flatData.rooms }} {{((flatData.rooms < 1) ? 'Студия' : 'комнатная')}}, №&nbsp;{{flatData.flat}}
         </h2>
@@ -38,7 +37,7 @@
                 <p class="apartment__info-subtitle">Отделка</p>
                 <p class="apartment__info-value">{{flatData.decorationName}}</p>
             </div>
-            <div class="apartment__info-item">
+            <div class="apartment__info-item" *ngIf="flatData.status !== '1'">
                 <p class="apartment__info-subtitle">Стоимость</p>
                 <p class="apartment__info-value"
                     [class.apartment__info-value--sale]="flatData.discount">
@@ -52,6 +51,9 @@
         </div>
 
         <a class="apartment__link" [routerLink]="'/objects/list/' + this.jk._id">ЖК {{jk.name}}</a>
+
+        <a class="apartment__coming-soon" *ngIf="flatData.status === '1'">Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж.</a>
+
         <div class="apartment__btn">
             <button (click)="isReserveFormOpen = true" class="apartment__btn-reserve btn_var-2">Забронировать</button>
             <button (click)="isCreditFormOpen = true;" class="apartment__btn-credit btn_var-3">Заявка на ипотеку</button>

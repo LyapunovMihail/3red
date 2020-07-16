@@ -149,7 +149,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private buildSectionData(flats, sectionNumber) {
-        const sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
+        let sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
             if (!section[flat.floor]) {
                 section[flat.floor] = [];
             }
@@ -159,11 +159,26 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
         sectionData.reverse();
 
-        sectionData.map((floor: IFLatDisabled[]) => {
-            floor.sort();
-        });
+        for (let i = 0; i < sectionData.length - 1; i++) {
+            if (sectionData[i] == null) {
+                sectionData[i] = [];
+            } else {
+                sectionData[i].sort();
+            }
+        }
 
+        const lengths = [];
+        sectionData.forEach((floor) => lengths.push(floor.length));
+        const floorMaxLength = Math.max(...lengths);
+
+        sectionData.forEach((floor, j) => {
+            const floorLength = floor.length;
+            for (let i = 0; i < (floorMaxLength - floorLength); i++) {
+               floor.push({status : '-1', section: sectionNumber, floor: sectionData.length - 1 - j});
+            }
+        });
         this.sectionsData[sectionNumber - 1] = sectionData;
+        console.log('this.sectionsData: ', this.sectionsData);
     }
 
     public searchFlatsSelection() {
@@ -219,7 +234,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public scrollCalculate() {
         setTimeout(() => {
             this.chessHeight = this.chessContainer.nativeElement.clientHeight;
-            console.log('this.chessHeight: ', this.chessHeight);
             this.scroll = 0;
             this.chessMaxScroll = this.chess.nativeElement.clientWidth - this.chessContainer.nativeElement.clientWidth;
             if (this.chessMaxScroll > 0 ) {

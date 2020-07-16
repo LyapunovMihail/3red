@@ -42,7 +42,7 @@
                 <p class="apartment__info-subtitle">Отделка</p>
                 <p class="apartment__info-value">{{flatData.decorationName}}</p>
             </div>
-            <div class="apartment__info-item">
+            <div class="apartment__info-item" *ngIf="flatData.status !== '1'">
                 <p class="apartment__info-subtitle">Стоимость</p>
                 <p class="apartment__info-value"
                     [class.apartment__info-value--sale]="flatData.discount">
@@ -57,6 +57,10 @@
 
         <div class="apartment__info-jkLink">
             <a [routerLink]="'/objects/list/' + this.jk._id" (click)="close.emit(false)">ЖК {{jk.name}}</a>
+        </div>
+
+        <div class="apartment__info-coming-soon" *ngIf="flatData.status === '1'">
+            Квартира пока не в продаже. Вы можете забронировать ее на индивидуальных условиях, связавшись с менеджером отдела продаж.
         </div>
 
         <div class="apartment__btn">

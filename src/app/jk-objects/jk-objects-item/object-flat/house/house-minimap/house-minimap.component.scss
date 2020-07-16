@@ -24,6 +24,7 @@
             &:last-child { margin-right: 0; }
 
             &_free,
+            &_coming-soon,
             &_sale,
             &_reserve {
                 width: 18px;
@@ -40,6 +41,10 @@
                 }
             }
             &_free { background-color: rgba(0, 0, 0, .1); }
+            &_coming-soon {
+                padding: 3px 0 0;
+                border: solid 1px #d8d8d8;
+            }
             &_sale {
                 color: $col-red;
                 border: 1px solid $col-red;

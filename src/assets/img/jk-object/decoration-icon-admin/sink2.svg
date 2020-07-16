@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="21" viewBox="0 0 32 21">
-    <g fill="none" fill-rule="evenodd">
-        <path stroke="#EE4237" d="M.5 9.5h31V12c0 4.694-3.806 8.5-8.5 8.5H8.96C4.286 20.5.5 16.713.5 12.04V9.5z"/>
-        <path fill="#EE4237" d="M19 3v1h1V3c0-1.657-1.343-3-3-3s-3 1.343-3 3v7h6V9h-5V3c0-1.105.895-2 2-2s2 .895 2 2z"/>
-        <path stroke="#EE4237" d="M6.5 7.5H9.5V8.5H6.5zM22.5 7.5H25.5V8.5H22.5z"/>
-    </g>
+<svg width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.9995 15.9255V6.25532C16.9995 4.43617 18.4452 3 20.2764 3C22.1077 3 23.5534 4.43617 23.5534 6.25532V7.69149" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M18.9271 30H15.0718C7.36123 30 1 23.6809 1 15.9255H32.9989C33.0953 23.6809 26.7341 30 18.9271 30Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M26.8305 13.9149H22.1077V15.9255H26.8305V13.9149Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
+<path d="M12.1804 13.9149H7.45764V15.9255H12.1804V13.9149Z" stroke="#EE4237" stroke-width="0.75" stroke-miterlimit="10"/>
 </svg>

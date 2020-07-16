@@ -1,4 +1,3 @@
-
 <section class="object-dynamic">
 
     <div class="object-dynamic__back">
@@ -81,7 +80,7 @@
 <app-dynamic-admin-settings *ngIf="!closeTabsModal"
     [id]="objectId"
     [snippet]="tabSnippet"
-    (snippetChange)="tabSnippet = $event"
+    (snippetChange)="tabSnippet = $event; setNavList()"
     (closeModal)="closeTabsModal = $event">
 </app-dynamic-admin-settings>
 

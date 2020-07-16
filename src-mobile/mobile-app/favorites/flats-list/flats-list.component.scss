@@ -48,6 +48,7 @@
         &--floor,
         &--flat,
         &--mod,
+        &--coming-soon,
         &--house,
         &--delivery,
         &--decoration {
@@ -136,6 +137,8 @@
             &--flat,
             &--mod { display: block; }
             &--mod { font: 12px/14px $font-proba; }
+            &--coming-soon { display: block; }
+            &--coming-soon { font: 12px/14px $font-proba; }
 
             &--flat,
             &--floor,

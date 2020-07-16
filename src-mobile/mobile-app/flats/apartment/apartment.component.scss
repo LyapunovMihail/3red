@@ -61,6 +61,12 @@
         }
     }
 
+    &__coming-soon {
+        font: 18px/23px $font-proba;
+        opacity: 0.5;
+        margin: 0 0 24px;
+    }
+
     &__image {
         width: 100%;
         height: 544px;

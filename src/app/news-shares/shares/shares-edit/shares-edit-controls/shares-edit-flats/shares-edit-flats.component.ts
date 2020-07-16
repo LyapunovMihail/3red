@@ -34,6 +34,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     public sectionsOptions = [];
     public flatsOptions = [];
 
+    public ShareFlatDiscountType = ShareFlatDiscountType;
+
     public flats = [];
 
     public conf: ShareBodyBlock;
@@ -73,6 +75,9 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     initHousesOptions() {
         this.housesOptions = Object.keys(this.config.floorCount);
+        if (this.conf.blockFlat.house) {
+            this.changeHouse(this.conf.blockFlat.house);
+        }
     }
     changeHouse(house) {
         this.initSectionsOptions(house);
@@ -81,6 +86,9 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     initSectionsOptions(house) {
         this.sectionsOptions = Object.keys(this.config.floorCount[house]);
+        if (this.conf.blockFlat.section) {
+            this.changeSection(this.conf.blockFlat.section);
+        }
     }
     changeSection(section) {
         this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section})

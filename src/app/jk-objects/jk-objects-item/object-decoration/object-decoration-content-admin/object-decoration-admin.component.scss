@@ -263,7 +263,7 @@
 .modal__items {
     margin-top: 10px;
     margin-bottom: 40px;
-    &:nth-child(6),&:nth-child(12) {
+    &:nth-child(8),&:nth-child(16) {
         margin-bottom: 9px;
     }
 }
@@ -286,19 +286,25 @@
     }
     &::after {
         position: absolute;
-        top: -3px;
+        top: -9px;
         left: 30px;
     }
 }
 
+.decoration__label--border::after  {
+    content: url(/assets/img/jk-object/decoration-icon-admin/border.svg) ;
+}
 .decoration__label--roof::after  {
     content: url(/assets/img/jk-object/decoration-icon-admin/roof.svg) ;
 }
 .decoration__label--laminate::after  {
     content: url(/assets/img/jk-object/decoration-icon-admin/laminate.svg) ;
 }
-.decoration__label--tile::after  {
-    content: url(/assets/img/jk-object/decoration-icon-admin/tile.svg) ;
+.decoration__label--floor::after  {
+    content: url(/assets/img/jk-object/decoration-icon-admin/floor.svg) ;
+}
+.decoration__label--floor-g::after  {
+    content: url(/assets/img/jk-object/decoration-icon-admin/floor-g.svg) ;
 }
 .decoration__label--plinth::after  {
     content: url(/assets/img/jk-object/decoration-icon-admin/plinth.svg) ;
@@ -308,6 +314,9 @@
 }
 .decoration__label--wall::after  {
     content: url(/assets/img/jk-object/decoration-icon-admin/wall.svg) ;
+}
+.decoration__label--border::after  {
+    content: url(/assets/img/jk-object/decoration-icon-admin/border.svg) ;
 }
 .decoration__label--air::after  {
     content: url(/assets/img/jk-object/decoration-icon-admin/air.svg) ;
@@ -327,30 +336,45 @@
 .decoration__label--sink::after  {
     content: url(/assets/img/jk-object/decoration-icon-admin/sink.svg) ;
 }
+.decoration__label--mixer::after  {
+    content: url(/assets/img/jk-object/decoration-icon-admin/mixer.svg) ;
+}
+.decoration__label--tile::after  {
+    content: url(/assets/img/jk-object/decoration-icon-admin/tile.svg) ;
+}
 
 .decoration__checkbox:checked + .decoration__label::before {
     background: url(/assets/img/jk-object/decoration-icon-admin/checkbox.svg) center;
+}
+.decoration__checkbox:checked + .decoration__label--border::after {
+    content: url(/assets/img/jk-object/decoration-icon-admin/border2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--roof::after {
     content: url(/assets/img/jk-object/decoration-icon-admin/roof2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--laminate::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/floor_L2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/laminate2.svg) ;
 }
-.decoration__checkbox:checked + .decoration__label--tile::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/floor_P2.svg) ;
+.decoration__checkbox:checked + .decoration__label--floor::after {
+    content: url(/assets/img/jk-object/decoration-icon-admin/floor2.svg) ;
+}
+.decoration__checkbox:checked + .decoration__label--floor-g::after {
+    content: url(/assets/img/jk-object/decoration-icon-admin/floor-g2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--plinth::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/baseboard2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/plinth2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--door::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/doors2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/door2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--wall::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/walls2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/wall2.svg) ;
+}
+.decoration__checkbox:checked + .decoration__label--border::after {
+    content: url(/assets/img/jk-object/decoration-icon-admin/border2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--air::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/conditioning2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/air2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--toilet::after {
     content: url(/assets/img/jk-object/decoration-icon-admin/toilet2.svg) ;
@@ -359,11 +383,17 @@
     content: url(/assets/img/jk-object/decoration-icon-admin/socket2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--bathroom::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/bath2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/bathroom2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--dry::after {
-    content: url(/assets/img/jk-object/decoration-icon-admin/dryer2.svg) ;
+    content: url(/assets/img/jk-object/decoration-icon-admin/dry2.svg) ;
 }
 .decoration__checkbox:checked + .decoration__label--sink::after {
     content: url(/assets/img/jk-object/decoration-icon-admin/sink2.svg) ;
+}
+.decoration__checkbox:checked + .decoration__label--mixer::after {
+    content: url(/assets/img/jk-object/decoration-icon-admin/mixer2.svg) ;
+}
+.decoration__checkbox:checked + .decoration__label--tile::after {
+    content: url(/assets/img/jk-object/decoration-icon-admin/tile2.svg) ;
 }

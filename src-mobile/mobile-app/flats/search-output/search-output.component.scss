@@ -57,6 +57,7 @@
         &--floor,
         &--flat,
         &--mod,
+        &--coming-soon,
         &--house,
         &--delivery,
         &--decoration {
@@ -69,7 +70,8 @@
         &--decoration { margin-right: 24px; }
 
         &--room,
-        &--price-sale { color: $col-black; }
+        &--price { color: $col-black; }
+        &--price-sale { color: $col-red; }
 
         &--room span {
             display: none;
@@ -145,6 +147,8 @@
             &--flat,
             &--mod { display: block; }
             &--mod { font: 12px/14px $font-proba; }
+            &--coming-soon { display: block; }
+            &--coming-soon { font: 12px/14px $font-proba; }
 
             &--flat,
             &--floor,

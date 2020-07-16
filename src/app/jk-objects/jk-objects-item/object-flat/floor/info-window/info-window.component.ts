@@ -1,4 +1,4 @@
-import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { IAddressItemFlat, IFlatWithDiscount } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 
 export class InfoWindowComponent {
 
-    @Input() public infoWindow: IAddressItemFlat;
+    @Input() public infoWindow: IFlatWithDiscount;
 
     constructor() {}
 }

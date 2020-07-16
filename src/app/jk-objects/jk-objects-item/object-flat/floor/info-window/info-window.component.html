@@ -15,4 +15,7 @@
             {{infoWindow.price - infoWindow.discount | myBitNumberPipe}} &#8381;
         </p>
     </div>
+
+    <p class="flats-item__description-section-text" *ngIf="infoWindow.status === '1'">Скоро в продаже</p>
+
 </div>

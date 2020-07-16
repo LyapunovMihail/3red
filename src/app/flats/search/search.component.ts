@@ -132,7 +132,6 @@ export class SearchComponent implements OnInit, OnDestroy {
                 flats = flats.filter((flat) => flat.status !== '8');
                 this.count = flats.length;
                 this.searchFlats = flats;
-                console.log('this.searchFlats: ', this.searchFlats);
                 this.sortFlats(this.sort);
                 this.loadMore();
                 this.searchService.setLoadingIndicator(false);

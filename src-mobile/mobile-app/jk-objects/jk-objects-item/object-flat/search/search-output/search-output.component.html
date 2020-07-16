@@ -25,6 +25,7 @@
                                   class="search-output__result-item-content search-output__result-item-content_price-sale">
                                   {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
                             </span>
+                            <span class="search-output__result-item-content_coming-soon" *ngIf="flat.status === '1'">Скоро в продаже</span>
                         </span>
                     </div>
                     <div class="search-output__result-item-wrap search-output__result-item-wrap--bottom">

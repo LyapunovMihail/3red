@@ -23,6 +23,7 @@
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Секция</p>
                 <select [(ngModel)]="conf.blockFlat.section"
                         (ngModelChange)="changeSection($event)"
+                        [value]="conf.blockFlat.section"
                         class="create-shares__input create-shares__input_status">
                     <option *ngFor="let section of sectionsOptions"
                             [value]="section">Секция {{section}}</option>
@@ -32,6 +33,7 @@
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Квартира</p>
                 <select [(ngModel)]="conf.blockFlat.number"
                         (ngModelChange)="changeFlat($event)"
+                        [value]="conf.blockFlat.number"
                         class="create-shares__input create-shares__input_status">
                     <option *ngFor="let flat of flatsOptions"
                             [value]="flat">Квартира {{flat}}</option>
@@ -42,23 +44,27 @@
                 <input type="text" [value]="!conf.blockFlat.price ? '' : (conf.blockFlat.price | bitNumber) + ' &#8381;'"
                     class="create-shares__input create-shares__input_title" disabled #price>
                 <p class="create-shares__typografy-subtitle"
-                    [ngClass]="{'create-shares__typografy-subtitle_placeholder': price.value.length > 0}">Стоимость</p>
+                    [ngClass]="{'create-shares__typografy-subtitle_placeholder': conf.blockFlat.price}">Стоимость</p>
             </div>
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_w3">
                 <input type="text" class="create-shares__input"
-                    (click)="conf.blockFlat.discountType = 'sum'"
-                    [(ngModel)]="salePercent.value.length > 0 ? null : conf.blockFlat.discount"
-                    [ngClass]="{'create-shares__input_disabled': salePercent.value.length > 0}" #saleRub>
+                    (click)="conf.blockFlat.discountType = ShareFlatDiscountType.SUM"
+                    [value]="conf.blockFlat.discountType === ShareFlatDiscountType.SUM ? conf.blockFlat.discount : ''"
+                    (input)="conf.blockFlat.discount = $event.target.value"
+                    (change)="conf.blockFlat.discount = $event.target.value"
+                    [ngClass]="{'create-shares__input_disabled': conf.blockFlat.discount !== '' && conf.blockFlat.discountType === ShareFlatDiscountType.PERCENT }">
                 <p class="create-shares__typografy-subtitle"
-                    [ngClass]="{'create-shares__typografy-subtitle_placeholder': saleRub.value.length > 0}">Скидка, руб</p>
+                    [ngClass]="{'create-shares__typografy-subtitle_placeholder': conf.blockFlat.discountType === ShareFlatDiscountType.SUM && conf.blockFlat.discount !== ''}">Скидка, руб</p>
             </div>
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_w3">
                 <input type="text" class="create-shares__input"
-                    (click)="conf.blockFlat.discountType = 'percent'"
-                    [(ngModel)]="saleRub.value.length > 0 ? null : conf.blockFlat.discount"
-                    [ngClass]="{'create-shares__input_disabled': saleRub.value.length > 0}" #salePercent>
+                    (click)="conf.blockFlat.discountType = ShareFlatDiscountType.PERCENT"
+                    [value]="conf.blockFlat.discountType === ShareFlatDiscountType.PERCENT ? conf.blockFlat.discount : ''"
+                    (input)="conf.blockFlat.discount = $event.target.value"
+                    (change)="conf.blockFlat.discount = $event.target.value"
+                    [ngClass]="{'create-shares__input_disabled': conf.blockFlat.discount !== '' && conf.blockFlat.discountType === ShareFlatDiscountType.SUM }">
                 <p class="create-shares__typografy-subtitle"
-                    [ngClass]="{'create-shares__typografy-subtitle_placeholder': salePercent.value.length > 0}">Скидка, %</p>
+                    [ngClass]="{'create-shares__typografy-subtitle_placeholder': conf.blockFlat.discountType === ShareFlatDiscountType.PERCENT && conf.blockFlat.discount !== ''}">Скидка, %</p>
             </div>
 
         </div>

@@ -7,7 +7,7 @@
     <div class="hover-flat__info">
         <p class="hover-flat__info-text hover-flat__info-text_room">{{(bubbleData.rooms < 1) ? '' : bubbleData.rooms }} {{(bubbleData.rooms < 1) ? 'Студия' : 'комнатная'}}</p>
         <p class="hover-flat__info-text hover-flat__info-text_space">{{bubbleData.space}} м²</p>
-        <div>
+        <div *ngIf="bubbleData.status !== '1'">
             <p class="hover-flat__info-text hover-flat__info-text_price"
                [class.hover-flat__info-text_price_not-sale]="bubbleData.discount">
                 {{bubbleData.price | myBitNumberPipe}} &#8381;

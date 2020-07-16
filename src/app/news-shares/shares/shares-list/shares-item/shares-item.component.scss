@@ -9,7 +9,6 @@
     display: flex;
     align-items: center;
     box-sizing: border-box;
-
 }
 .news__btn {
     font-size: 18px;
@@ -68,6 +67,9 @@
     line-height: 1.35;
     width: 560px;
 }
+.news__wrapper {
+    padding: 0 32px;
+}
 .news__img {
     padding: 0 88px;
     display: block;
@@ -100,7 +102,6 @@
     &:first-child {
         margin-right: 24px;
     }
-
 }
 
 
@@ -122,8 +123,7 @@
 
 
 .news__assets-container {
-    width: 1280px;
-    padding: 8px 32px;
+    padding: 8px 0;
     background: #fff;
     margin: 0 auto 86px;
 
@@ -135,6 +135,7 @@
     padding: 0 120px 0 55px ;
 }
 .news__assets-item {
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -177,6 +178,7 @@
 .news__price-new,
 .news__price-old {
     font-size: 18px;
+    line-height: 23px;
     color: rgba(0, 0, 0, 0.5);
 }
 

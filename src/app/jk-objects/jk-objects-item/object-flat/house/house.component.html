@@ -51,21 +51,22 @@
                     <div class="house__sections-chess" *ngIf="section && section.length">
                         <ul class="house__sections-chess_section" #sectionContainer>
                             <p class="house__sections-chess_section_title">{{jk.mod === 'МКВ' ? 'Дом № ' : 'Секция ' + section[0][0].section}}</p>
-                            <ng-container *ngFor="let floor of section">
+                            <ng-container *ngFor="let floor of section; let j = index">
                                 <li *ngIf="floor" class="house__sections-chess_section_floor">
                                     <ul>
                                         <li *ngFor="let flat of floor; let i = index"
                                             class="house__sections-chess_section_flat"
                                             [ngClass]="{'house__sections-chess_section_flat--free' : flat.status === '4' && !flat.discount,
-                                                        'house__sections-chess_section_flat--reserved' : flat.status === '8' && !flat.discount,
-                                                        'house__sections-chess_section_flat--discount' : flat.discount,
+                                                        'house__sections-chess_section_flat--coming-soon' : flat.status === '1' && !flat.discount,
+                                                        'house__sections-chess_section_flat--reserved' : flat.status === '8',
+                                                        'house__sections-chess_section_flat--discount' : flat.discount && flat.status !== '8',
                                                         'house__sections-chess_section_flat--disabled' : flat.status !== '-1' && flat.disabled,
                                                         'house__sections-chess_section_flat--no-sale' : flat.status === '-1'}">
                                             <a class="house__sections-chess_section_flat_link"
                                                 (click)="openApartmentModal(i, floor)"
                                                 (mouseenter)="showFlatBubble($event, flat, sectionContainer)"
                                                 (mouseleave)="showBubble = false">
-                                                {{flat.status !== '4' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
+                                                {{flat.status !== '4' && flat.status !== '1' ? '' : flat.rooms === 0 ? 'С' : flat.rooms}}
                                             </a>
                                         </li>
                                         <li class="house__sections-chess_section_floor-button">

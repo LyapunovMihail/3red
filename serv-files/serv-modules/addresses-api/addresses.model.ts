@@ -53,14 +53,14 @@ export class AddressesModel {
     }
     private setFloorCount(flats): {housesBtnList, floorCount} {      // устанавливаем схему домов-секций-этажей и список домов
         const housesBtnList = [];
-        housesBtnList.push({ name: 'Все дома', value: '' });
+        housesBtnList.push({ name: 'Все корпуса', value: '' });
         const floorCount: any = {};
 
         flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1); // сортировка по возрастанию номера дома
 
         flats.forEach((flat: IAddressItemFlat) => {
             if (!housesBtnList.some((btn) => btn.value === flat.house)) {
-                housesBtnList.push({ name: 'Дом № ' + flat.house, value: flat.house });    // формируем список домов
+                housesBtnList.push({ name: 'Корпус № ' + flat.house, value: flat.house });    // формируем список домов
             }
 
             if (!floorCount[flat.house]) {
@@ -161,7 +161,7 @@ export class AddressesModel {
     }
     private async setHousesBtns(mod, flatsOfMod, modsBtnList) { // Устанавливаем спсиок домов жилищных комплексов
         const housesBtnList = [];
-        housesBtnList.push({ name: 'Все дома', value: 'all' }); // Добавляем название жк в массив
+        housesBtnList.push({ name: 'Все корпуса', value: 'all' }); // Добавляем название жк в массив
         if (mod && mod.split(',').length === 1) {
             const jk = modsBtnList.find((item) => item.value === mod);
             housesBtnList.push({jk : jk.name});
@@ -171,7 +171,7 @@ export class AddressesModel {
 
             flats.forEach((item) => {
                 if (!housesBtnList.some((btn) => btn.value === item.house)) {
-                    housesBtnList.push({ name: 'Дом № ' + item.house, value: item.house, mod: jk.value });
+                    housesBtnList.push({ name: 'Корпус № ' + item.house, value: item.house, mod: jk.value });
                 }
             });
         } else {
@@ -183,7 +183,7 @@ export class AddressesModel {
                         housesBtnList.push({ jk: jk.name });        // При появлении нового жк, добавлять его название в массив
                         flats.forEach((item) => {
                             if (!housesBtnList.some((btn) => btn.value === item.house && btn.mod === item.mod)) {
-                                housesBtnList.push({ name: 'Дом № ' + item.house, value: item.house, mod: jk.value});
+                                housesBtnList.push({ name: 'Корпус № ' + item.house, value: item.house, mod: jk.value});
                             }
                         });
                     }

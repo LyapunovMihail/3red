@@ -18,6 +18,6 @@ export class SearchFormPipe implements PipeTransform  {
             text = text.length > 15 ? text.slice(0, 13) + '..' : text;
             return text;
         }
-        return 'Все дома';
+        return 'Все корпуса';
     }
 }
