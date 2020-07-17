@@ -60,6 +60,10 @@ export class SearchComponent implements OnDestroy {
             params['decoration'] = (form.decoration).join(',');
         }
 
+        if (form.status.length > 0) {
+            params['status'] = (form.status).join(',');
+        }
+
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
             params['rooms'] = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
@@ -69,7 +73,7 @@ export class SearchComponent implements OnDestroy {
         }
 
         if ( 'houses' in form && form.houses.length > 0 ) {
-            params['houses'] = form.houses;
+            params['houses'] = (form.houses).join(',');
         }
 
         if ('mod' in form) {

@@ -21,6 +21,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public hideCorpus = false;
     public sort: string;
     public decorList = FormConfig.decorationList;
+    public statusList = FormConfig.statusList;
 
     @Input()
     public config: any = {};
@@ -45,6 +46,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         });
         setTimeout( () => {
         }, 1000);
+        console.log('housesBtnList: ', this.housesBtnList);
     }
 
     public buildForm(params) {
@@ -92,6 +94,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 }
                 return [];
             })(params.decoration)],
+            status: [((status) => {
+                if (status && status.split(',').every((item) => this.statusList.some((i) => item === i.value))) {
+                    return status.split(',');
+                }
+                return [];
+            })(params.status)],
             rooms: this.formBuilder.array(roomsFormArray) as FormArray,
             sections: [
                 ((sections) => {
@@ -115,6 +123,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.formChange.emit(this.form.value);
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
+            console.log('form: ', form);
             this.formChange.emit(form);
         });
 

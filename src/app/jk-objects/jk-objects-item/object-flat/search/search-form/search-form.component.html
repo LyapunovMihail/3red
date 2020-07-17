@@ -92,33 +92,38 @@
 
                 <div class="search-form__range search-form__range_corpus" (click)="showCorpus = !showCorpus">
                     <p class="search-form__text">
-                        {{ houseName }}
+                        {{ form.controls['houses'].value | mySearchFormPipe:housesBtnList }}
                     </p>
                 </div>
                 <div class="close-area" *ngIf="showCorpus" (click)="switchPopup()"></div>
-                <app-search-house-select *ngIf="showCorpus"
+                <app-search-checkbox-list-popup *ngIf="showCorpus"
                     [class.modlist-show]="showCorpus"
                     [class.modlist-hide]="hideCorpus"
                     [btnList]="housesBtnList"
                     [formControl]="form.controls['houses']">
-                </app-search-house-select>
+                </app-search-checkbox-list-popup>
             </div>
 
-            <button class="search-form__btn" [class.search-form__btn_open]="moreFilter"
-                    (click)="moreFilter = !moreFilter">Еще параметры</button>
+            <!--<button class="search-form__btn" [class.search-form__btn_open]="moreFilter"-->
+                    <!--(click)="moreFilter = !moreFilter">Еще параметры</button>-->
+            <button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>
 
-            <div class="search-form__wrap search-form__wrap--decoration" [class.search-form__wrap--decoration-show]="moreFilter"
-                 [class.modlist-show--params]="moreFilter"
-                 [class.modlist-hide--params]="!moreFilter"
+            <div class="search-form__wrap search-form__wrap--decoration"
                  #decorCheckbox>
 
-                <app-search-checkbox-list-decor
-                    [btnList]="decorList"
-                    [formControl]="form.controls['decoration']"
-                    [name]="'decoration'">
-                </app-search-checkbox-list-decor>
+                <div class="search-form__wrap-checkboxes">
+                    <app-search-checkbox-list
+                            [btnList]="statusList"
+                            [formControl]="form.controls['status']"
+                            [name]="'status'">
+                    </app-search-checkbox-list>
+                    <app-search-checkbox-list
+                            [btnList]="decorList"
+                            [formControl]="form.controls['decoration']"
+                            [name]="'decoration'">
+                    </app-search-checkbox-list>
+                </div>
 
-                <button class="search-form__reset-filter btn-empty" (click)="formReset()">Сбросить фильтры</button>
             </div>
         </div>
 

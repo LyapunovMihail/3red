@@ -50,6 +50,16 @@ export const FormConfig = {
             value: '14'
         }
     ],
+    statusList: [
+        {
+            name: 'В продаже',
+            value: '4'
+        },
+        {
+            name: 'Скоро в продаже',
+            value: '1'
+        }
+    ],
     housesList: [
         {
             name: 'Все корпуса',

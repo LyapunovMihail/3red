@@ -6,7 +6,8 @@ import { SearchFormPipe } from './search-form/search-form.pipe';
 import { SearchOutputPipe } from './search-output/search-output.pipe';
 import { BitNumberPipe } from './search-output/bit-number.pipe';
 import { HouseSelectComponent } from './search-form/house-select/house-select.component';
-import { CheckboxListDecorComponent } from './search-form/checkbox-list-decor/checkbox-list-decor.component';
+import { CheckboxListPopupComponent } from './search-form/checkbox-list-popup/checkbox-list-popup.component';
+import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 
 export const SearchComponents = [
     SearchComponent,
@@ -14,7 +15,8 @@ export const SearchComponents = [
     SearchOutputComponent,
     SearchSortingComponent,
     HouseSelectComponent,
-    CheckboxListDecorComponent,
+    CheckboxListPopupComponent,
+    CheckboxListComponent,
     SearchOutputPipe,
     SearchFormPipe,
     BitNumberPipe

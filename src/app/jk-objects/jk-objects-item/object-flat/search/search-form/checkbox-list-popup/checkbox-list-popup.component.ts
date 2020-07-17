@@ -2,19 +2,19 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'app-search-checkbox-list-decor',
-    templateUrl: './checkbox-list-decor.component.html',
-    styleUrls: ['./checkbox-list-decor.component.scss'],
+    selector: 'app-search-checkbox-list-popup',
+    templateUrl: './checkbox-list-popup.component.html',
+    styleUrls: ['./checkbox-list-popup.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => CheckboxListDecorComponent),
+            useExisting: forwardRef(() => CheckboxListPopupComponent),
             multi: true
         }
     ]
 })
 
-export class CheckboxListDecorComponent {
+export class CheckboxListPopupComponent {
 
     @Input() public btnList: any[] = [];
     @Input() public name: string;
@@ -24,7 +24,7 @@ export class CheckboxListDecorComponent {
     constructor() {}
 
     public isChecked(val) {
-        if (val === 'all') {
+        if (val === '') {
             return this.isCheckedAll();
         }
         return this.activeList.some((item) => item === val);
@@ -38,7 +38,7 @@ export class CheckboxListDecorComponent {
 
     public checkBtn(event) {
         const value = event.target.value;
-        if (value === 'all') {
+        if (value === '') {
             this.checkAll(event);
             this.propagateChange(this.activeList);
             return;
@@ -59,16 +59,16 @@ export class CheckboxListDecorComponent {
     // Если включили чекбокс 'выбрать всё' - добавляем в массив активных значений все значения кроме чекбокса 'выбрать всё', если выключили - удаляем все значения из масиива
     public checkAll(event) {
         this.btnList.forEach((item) => {
-           if (item.value !== 'all') {
-               if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
-                   this.activeList.push(item.value);
-               } else if (!event.target.checked) {
-                   const index = this.activeList.findIndex((value) => value === item.value);
-                   if (index >= 0) {
-                       this.activeList.splice(index, 1);
-                   }
-               }
-           }
+            if (item.value !== '') {
+                if (event.target.checked && !this.activeList.some((value) => value === item.value)) {
+                    this.activeList.push(item.value);
+                } else if (!event.target.checked) {
+                    const index = this.activeList.findIndex((value) => value === item.value);
+                    if (index >= 0) {
+                        this.activeList.splice(index, 1);
+                    }
+                }
+            }
         });
     }
 

@@ -1,17 +1,12 @@
-<ul class="search-form__list">
-    <li *ngFor="let btn of btnList" class="search-form__list-item">
 
-        <span class="search-form__list-item-title" *ngIf="btn.jk">{{btn.jk}}</span>
-
-        <label class="g-checkbox g-checkbox--flats" *ngIf="!btn.jk">
-            <input [id]="btn.value"
-                (change)="checkBtn($event.target.checked, btn)"
-                [value]="btn.value"
-                [checked]="isChecked(btn)"
-                type="checkbox">
-            <div></div>
-            <span>{{btn.name}}</span>
-        </label>
-
-    </li>
-</ul>
+<div class="search-form__wrap">
+    <label *ngFor="let btn of btnList">
+        <input
+            (change)="checkBtn($event)"
+            [value]="btn.value"
+            [checked]="isChecked(btn.value)"
+            type="checkbox">
+        <div class="search-form__wrap-item">{{btn.name}}</div>
+        <!--<span>{{btn.name}}</span>-->
+    </label>
+</div>

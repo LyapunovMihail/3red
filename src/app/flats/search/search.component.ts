@@ -92,6 +92,10 @@ export class SearchComponent implements OnInit, OnDestroy {
             params.decoration = (form.decoration).join(',');
         }
 
+        if (form.status.length > 0) {
+            params.status = (form.status).join(',');
+        }
+
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
             params.rooms = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }

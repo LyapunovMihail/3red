@@ -179,7 +179,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            margin-right: 65px;
+            margin-right: 60px;
 
             &:last-child {
                 margin-right: 35px;
@@ -187,14 +187,14 @@
 
             &_section {
                 position: relative;
-                padding: 10px 0 10px 10px;
+                padding: 8px 0 8px 8px;
                 border: solid 1px #efefef;
                 background-color: $col-white;
 
                 &_title {
-                    font: $font-18;
+                    font: $font-16;
                     position: absolute;
-                    top: -32px;
+                    top: -24px;
                     left: 0;
                     white-space: nowrap;
                 }
@@ -209,10 +209,10 @@
 
                     &-button {
                         position: absolute;
-                        right: -35px;
+                        right: -29px;
                         width: 24px;
                         height: 18px;
-                        margin: -1px 0 0;
+                        //margin: -1px 0 0;
                         border: 1px solid $col-border;
                         font: 14px/16px $font-text;
                         transition: color .2s linear, background-color .2s linear;
@@ -244,7 +244,7 @@
                     font: 14px/16px $font-text;
                     box-sizing: border-box;
                     transition: background-color 0.2s linear;
-                    margin-right: 10px;
+                    margin-right: 8px;
                     position: relative;
                     cursor: pointer;
                     &:hover { background-color: $col-red; }

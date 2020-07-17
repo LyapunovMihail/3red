@@ -258,6 +258,9 @@ export class AddressesModel {
             }
             request.decoration = { $in: decMas};
         }
+        if ('status' in query && query.status.split(',').every((item) => FormConfig.statusList.some((i) => item === i.value))) {
+            request.status = { $in: query.status.split(',')};
+        }
 
         let parameters = {};
 

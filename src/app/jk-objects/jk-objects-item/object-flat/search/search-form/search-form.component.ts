@@ -22,6 +22,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public showCorpus = false;
     public hideCorpus = false;
     public decorList = FormConfig.decorationList;
+    public statusList = FormConfig.statusList;
     public sort: string;
     public housesBtnList: any[] = [];
 
@@ -42,6 +43,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         setTimeout(() => {
             this.housesBtnList = this.objectFlatsService.getData().housesBtnList;
+            console.log('this.housesBtnList: ', this.housesBtnList);
             this.config = this.objectFlatsService.getData().config;
             this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
                 this.buildForm(queryParams);
@@ -94,21 +96,29 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 }
                 return [];
             })(params.decoration)],
-            rooms: this.formBuilder.array(roomsFormArray) as FormArray,
-            sections: [((sections) => {
-                /**
-                 * if there are sections in the url's params,
-                 * then split them into an array,
-                 * otherwise pass an empty array
-                 */
-                if (sections) {
-                    const result = parseQueryParams(sections);
-                    const test = result.every((item) => (/^[1|2|3|4|5|6|7]$/).exec((item).toString()) ? true : false);
-                    return (test) ? result : [];
+            status: [((status) => {
+                if (status && status.split(',').every((item) => this.statusList.some((i) => item === i.value))) {
+                    return status.split(',');
                 }
                 return [];
-            })(params.sections)],
-            houses: params.houses || '',
+            })(params.status)],
+            rooms: this.formBuilder.array(roomsFormArray) as FormArray,
+            sections: [
+                ((sections) => {
+                    if (sections) {
+                        return sections.split(','); // для квартир объектов надо отдавать sections ( один дом ), или пустую строку '';
+                    }
+                    return [];
+                })(params.sections)
+            ],
+            houses: [
+                ((sections) => {
+                    if (sections) {
+                        return sections.split(','); // для квартир объектов надо отдавать sections ( один дом ), или пустую строку '';
+                    }
+                    return [];
+                })(params.houses)
+            ],
             mod: this.objectFlatsService.getData().jk.mod || ''
         });
 
@@ -137,9 +147,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.routerEvents.unsubscribe();
     }
 
-    public get houseName() {
-        return this.housesBtnList.find((btn) => btn.value === this.form.get('houses').value).name;
-    }
+    // public get houseName() {
+    //     return this.housesBtnList.find((btn) => btn.value === this.form.get('houses').value).name;
+    // }
 
     public switchPopup() {
         this.hideCorpus = true;

@@ -29,9 +29,8 @@ interface IFLatDisabled extends IFlatWithDiscount {
 export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public jk: IObjectSnippet;
-    public houseNumber: string;
-    public sectionNumbers: string[] = [];
-    public sectionsData: IFLatDisabled[][][] = [];
+    // public houseNumber: string;
+    public housesData: IFLatDisabled[][][][] = [];
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
     public routerEvent;
@@ -45,7 +44,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public chessMaxScroll: number;
     public scrollStep = 300;
     public lastScrollStep: number;
-    public showChess = false;
+    public showChess = true;
     public chessHeight: number;
 
     public isStorerooms = false;
@@ -113,42 +112,54 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
             setTimeout(() => {
-                if (this.floorCount[params.house]) {
-                    this.houseNumber = params.house;
-                    this.sectionsData = [];
-                    this.sectionNumbers = Object.keys(this.floorCount[this.houseNumber]); // создаём массив из номеров секций по выбранному дому.
-                    if (this.platform.isBrowser) {
-                        // получение квартир для нужных секций
-                        this.sectionNumbers.forEach((sectionNumber) => {
-                            this.getFlats(sectionNumber).subscribe(
-                                (flats) => {
-                                    this.buildSectionData(flats, sectionNumber);
-                                },
-                                (err) => console.log(err)
-                            );
+                // тут сделать цикл по params.house.forEach((item) => this.floorCount[item]);
+                this.housesData = [];
+                const houseNumbers = params.house === 'all' ? Object.keys(this.floorCount) : params.house.split(',');
+                houseNumbers.forEach((houseNumber) => {
+                    // if (this.floorCount[item]) {
+                    //
+                    // }
+                    if (this.floorCount[houseNumber]) {
+                        // this.houseNumber = house;
+                        const houseData = [];
+                        this.housesData[houseNumber] = houseData;
+                        const sectionNumbers = Object.keys(this.floorCount[houseNumber]); // создаём массив из номеров секций по выбранному дому.
+                        if (this.platform.isBrowser) {
+                            // получение квартир для нужных секций
+                            sectionNumbers.forEach((sectionNumber) => {
+                                this.getFlats(sectionNumber, houseNumber).subscribe(
+                                    (flats) => {
+                                        this.buildSectionData(flats, sectionNumber, houseData);
+                                    },
+                                    (err) => console.log(err)
+                                );
+                            });
+
+                        }
+                    } else if (houseNumber === 'all') {
+                        // this.showChess = false;
+                        // // this.houseNumber = null;
+                    } else {
+                        this.router.navigate(['/error-404'], {
+                            skipLocationChange: true
                         });
-                        if (this.searchFlats) {
-                            setTimeout(() => {
-                                this.searchFlatsSelection();
-                            }, 250);
-                        }
-                        if (this.showChess) {
-                            this.scrollCalculate();
-                        }
                     }
-                } else if (params.house === 'all') {
-                    this.showChess = false;
-                    this.houseNumber = null;
-                } else {
-                    this.router.navigate(['/error-404'], {
-                        skipLocationChange: true
-                    });
+                });
+
+                if (this.searchFlats) {
+                    setTimeout(() => {
+                        this.searchFlatsSelection();
+                    }, 250);
                 }
+                if (this.showChess) {
+                    this.scrollCalculate();
+                }
+
             }, 200);
         });
     }
 
-    private buildSectionData(flats, sectionNumber) {
+    private buildSectionData(flats, sectionNumber, houseData) {
         let sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
             if (!section[flat.floor]) {
                 section[flat.floor] = [];
@@ -177,33 +188,36 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                floor.push({status : '-1', section: sectionNumber, floor: sectionData.length - 1 - j});
             }
         });
-        this.sectionsData[sectionNumber - 1] = sectionData;
-        console.log('this.sectionsData: ', this.sectionsData);
+        houseData[sectionNumber - 1] = sectionData;
+        // console.log('this.sectionsData: ', houseData);
     }
 
     public searchFlatsSelection() {
-        this.sectionsData.forEach((section: IFLatDisabled[][]) => {
-            section.forEach((floor: IFLatDisabled[]) => {
-                floor.forEach((flat: IFLatDisabled) => {
-                    flat.disabled = true;
-                    this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
-                        if ((searchFlat.house === this.houseNumber
-                            && searchFlat.section === flat.section
-                            && searchFlat.flat === flat.flat)
-                            || flat.status === '8') {
-                            flat.disabled = false;
-                        }
+        this.housesData.forEach((house) => {
+            house.forEach((section: IFLatDisabled[][]) => {
+                section.forEach((floor: IFLatDisabled[]) => {
+                    floor.forEach((flat: IFLatDisabled) => {
+                        flat.disabled = true;
+                        this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
+                            if ((searchFlat.house === flat.house
+                                && searchFlat.section === flat.section
+                                && searchFlat.flat === flat.flat)
+                                || flat.status === '8') {
+                                flat.disabled = false;
+                            }
+                        });
                     });
                 });
             });
         });
+        console.log('this.housesData: ', this.housesData);
         this.ref.detectChanges();
     }
 
-    public getFlats(section) {
+    public getFlats(section, house) {
         return this.service.getFlats({
             mod: this.jk.mod,
-            houses: this.houseNumber,
+            houses: house,
             sections: section,
             type: 'КВ,АП'
         });

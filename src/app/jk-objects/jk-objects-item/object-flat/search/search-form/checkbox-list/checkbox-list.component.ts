@@ -2,19 +2,19 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'app-search-checkbox-list-decor',
-    templateUrl: './checkbox-list-decor.component.html',
-    styleUrls: ['./checkbox-list-decor.component.scss'],
+    selector: 'app-search-checkbox-list',
+    templateUrl: './checkbox-list.component.html',
+    styleUrls: ['./checkbox-list.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => CheckboxListDecorComponent),
+            useExisting: forwardRef(() => CheckboxListComponent),
             multi: true
         }
     ]
 })
 
-export class CheckboxListDecorComponent {
+export class CheckboxListComponent {
 
     @Input() public btnList: any[] = [];
     @Input() public name: string;
