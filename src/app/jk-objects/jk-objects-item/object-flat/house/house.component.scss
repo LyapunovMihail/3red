@@ -157,14 +157,48 @@
                 top: 0;
                 bottom: 0;
                 margin: auto;
-                width: 40px;
-                height: 40px;
+                width: 48px;
+                height: 48px;
                 border-radius: 50%;
                 box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-                background: url(/assets/img/btn_next_white.svg) 50% no-repeat;
-                transition: background-position $transition;
-                background-color: #e74911;
-                &:hover { background-position: calc(50% - 3px); }
+                //background: url(/assets/img/group-3-copy-2.svg) 50% no-repeat;
+                background-color: #000000;
+                opacity: 0.3;
+                &:hover:before { right: 7px; }
+                &:hover:after { right: 7px; }
+
+                &:before {
+                    content: '';
+                    width: 1px;
+                    height: 16px;
+                    /* color: white; */
+                    background-color: white;
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                    display: block;
+                    top: 0;
+                    bottom: 22%;
+                    margin: auto;
+                    left: 0;
+                    right: 3px;
+                    position: absolute;
+                    transition: right .1s linear;
+                }
+                &:after {
+                    content: '';
+                    width: 1px;
+                    height: 16px;
+                    -webkit-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
+                    top: 23%;
+                    bottom: 0;
+                    margin: auto;
+                    left: 0;
+                    right: 3px;
+                    position: absolute;
+                    background-color: white;
+                    transition: right .1s linear;
+                }
             }
             &_prev {
                 left: 40px;

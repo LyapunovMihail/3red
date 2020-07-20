@@ -255,7 +255,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             } else {
                 this.chessMaxScroll = 0;
             }
-        }, 400); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
+        }, 600); // даём время отрендериться шаблону чтобы оценить ширину блока с секциями
     }
 
     public scrollPrev() {
