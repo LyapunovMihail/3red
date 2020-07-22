@@ -1,9 +1,9 @@
 <div class="object-flat__plan">
-
-    <img class="object-flat__plan-img" src="/assets/img/flats/plan/plan-ob.jpg">
+    
+    <img class="object-flat__plan-img" src="/assets/img/flats/plan/plan-nk.jpg">
 
     <div class="object-flat__house" #parentContainer>
-        <div class="object-flat__house-wrap object-flat__house-wrap--ob-house-{{house.houseNumber}}" *ngFor="let house of housesPlanSvg"
+        <div class="object-flat__house-wrap object-flat__house-wrap--nk-house-{{house.houseNumber}}" *ngFor="let house of houses"
           [class.disabled]="!house.freeFlats">
             <a class="object-flat__house-item" #link
                 [class.active]="activeLink === house.houseNumber"
@@ -13,10 +13,8 @@
                 <span>№{{house.houseNumber}}</span>
                 <span>{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</span>
             </a>
-            <div class="object-flat__house-tooltip" #tooltip
-                [ngStyle]="activeLink === house.houseNumber ? 
-                    this.service.setTooltipStyle(true, parentContainer, tooltip, link)
-                    : this.service.setTooltipStyle(false, parentContainer, tooltip, link)"
+            <div class="object-flat__house-tooltip object-flat__house-tooltip--nk-house-{{house.houseNumber}}" #tooltip
+                [ngStyle]="activeLink === house.houseNumber ? this.service.setTooltipStyle(true, parentContainer, tooltip, link) : this.service.setTooltipStyle(false, parentContainer, tooltip, link)"
                 [class.active]="activeLink === house.houseNumber">
                 <h3>Дом №{{house.houseNumber}}</h3>
                 <ul>
@@ -32,7 +30,7 @@
     <svg viewBox="0 0 1280 642" preserveAspectRatio="none"
         class="object-flat__svg">
 
-        <ng-container *ngFor="let plan of housesPlanSvg">
+        <ng-container *ngFor="let plan of houses">
             <a (click)="svgRouterLink($event, ('/objects/list/' + objectId + '/flats/house/' + plan.houseNumber))"
                     [attr.xlink:href]="'/objects/list/' + objectId + '/flats/house/' + plan.houseNumber"
                     [style.pointerEvents]="plan.freeFlats ? 'all' : 'none'">
@@ -47,6 +45,5 @@
                 </path>
             </a>
         </ng-container>
-
     </svg>
 </div>

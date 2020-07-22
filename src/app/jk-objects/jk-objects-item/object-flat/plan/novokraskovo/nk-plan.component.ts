@@ -1,65 +1,65 @@
-import {
-    Router
-} from '@angular/router';
-import {
-    PLAN_SVG,
-    IPlanSvgItem
-} from './ob-plan-svg';
-import {
-    ObPlanService
-} from './ob-plan.service';
-import {
-    Component, Input,
-    OnInit
-} from '@angular/core';
+import { Router } from '@angular/router';
+import { PLAN_SVG, IHousePlanItem } from './nk-plan-svg';
+import { NkPlanService } from './nk-plan.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { PlanService } from '../plan.service';
 
 @Component({
-    selector: 'app-flats-ob-plan-page',
-    templateUrl: './ob-plan.component.html',
+    selector: 'app-flats-nk-plan-page',
+    templateUrl: './nk-plan.component.html',
     styleUrls: [ '../plan.component.scss' ],
     providers: [
-        ObPlanService
+        NkPlanService
     ]
 })
 
-export class ObPlanComponent implements OnInit {
-
-    public housesPlanSvg: IPlanSvgItem[] = PLAN_SVG;
-    public houseOneFreeFlats: number;
-    public houseTwoFreeFlats: number;
-    public activeLink = '';
+export class NkPlanComponent implements OnInit {
 
     @Input()
     public objectId: string;
     @Input()
     public mod: string;
+    public houses: IHousePlanItem[] = PLAN_SVG;
+    public activeLink = '';
+    public tooltipStyle = {
+        top: '',
+        bottom: '',
+        zIndex: '',
+        opacity: ''
+    };
 
     constructor(
         public router: Router,
-        private planService: ObPlanService,
+        private planService: NkPlanService,
         public service: PlanService
     ) {}
 
     ngOnInit() {
+
         combineLatest(
-            this.planService.getHouseOne(this.mod),
-            this.planService.getHouseTwo(this.mod)
-        ).subscribe(([houseOne, houseTwo]) => {
-            this.houseOneFreeFlats = houseOne.filter((flat: IAddressItemFlat) => flat.status === '4').length;
-            this.houseTwoFreeFlats = houseTwo.filter((flat: IAddressItemFlat) => flat.status === '4').length;
+            this.planService.getHouse('1', this.mod),
+            this.planService.getHouse('2', this.mod),
+            this.planService.getHouse('3', this.mod),
+            this.planService.getHouse('4', this.mod),
+            this.planService.getHouse('5', this.mod),
+            this.planService.getHouse('6', this.mod)
+        ).subscribe(([houseOne, houseTwo, houseThree, houseFour, houseFive, houseSix]) => {
             this.buildHousesData(0, houseOne);
             this.buildHousesData(1, houseTwo);
+            this.buildHousesData(2, houseThree);
+            this.buildHousesData(3, houseFour);
+            this.buildHousesData(4, houseFive);
+            this.buildHousesData(5, houseSix);
         });
     }
 
     private buildHousesData(i, flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
-        this.housesPlanSvg[i].freeFlats = flats.length;
+        this.houses[i].freeFlats = flats.length;
         if (flats.length) {
-            this.housesPlanSvg[i].rooms.forEach((room)  => {
+            this.houses[i].rooms.forEach((room)  => {
                 room.minPrice = flats.filter((flat) => flat.rooms === room.name)
                     .reduce((minPrice, flat) => {
                         return flat.price < minPrice ? flat.price : minPrice;

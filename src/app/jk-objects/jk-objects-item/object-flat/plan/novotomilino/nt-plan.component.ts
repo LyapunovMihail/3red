@@ -4,11 +4,12 @@ import { NtPlanService } from './nt-plan.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { PlanService } from '../plan.service';
 
 @Component({
     selector: 'app-flats-nt-plan-page',
     templateUrl: './nt-plan.component.html',
-    styleUrls: ['./nt-plan.component.scss'],
+    styleUrls: [ '../plan.component.scss' ],
     providers: [
         NtPlanService
     ]
@@ -25,7 +26,8 @@ export class NtPlanComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private planService: NtPlanService
+        private planService: NtPlanService,
+        public service: PlanService
     ) {}
 
     ngOnInit() {
