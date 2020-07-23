@@ -1,60 +1,23 @@
-<div class="plan flats_main">
+<div class="object-flat__plan">
 
-    <div class="plan_house-select flats_wrapper">
+    <img class="object-flat__plan-img" src="/assets/img/flats/plan/plan-ob.jpg">
 
-        <img class="plan_house-select_bgr flats_bgr" src="/assets/img/flats/plan/1_korpus.jpg">
-
-        <!--<a *ngFor="let link of links"-->
-            <!--class="plan_house-select_link plan_house-select_link&#45;&#45;section-{{link}}"-->
-            <!--(mouseenter)="activeLink = link" -->
-            <!--(mouseleave)="activeLink = ''" -->
-            <!--[ngClass]="{'plan_house-select_link&#45;&#45;active' : link === activeLink }"-->
-            <!--[routerLink]="'/objects/list/' + objectId + '/flats/house/' + link">-->
-
-            <!--Секции {{link === '1' ? '1-3' : '4-6'}} -->
-
-            <!--<span class="plan_house-select_link_floors">{{ link === '1' ? '25 этажей' : '14-18 этажей'}}</span>-->
-            <!--&lt;!&ndash; <span class="plan_house-select_link_in-sale">Квартир в продаже: 1236</span> &ndash;&gt;-->
-        <!--</a>-->
-
-        <!--<svg class="plan_house-select_svg flats_svg" viewBox="0 0 2560 1440" preserveAspectRatio="xMidYMid slice">-->
-
-            <!--<ng-container *ngFor="let plan of housesPlanSvg; let i = index">-->
-
-                <!--<a (click)="svgRouterLink($event, ( '/objects/list/' + objectId + '/flats/house/' + plan.houseNumber ))"-->
-                        <!--[attr.xlink:href]="'/objects/list/' + objectId + '/flats/house/' + plan.houseNumber">-->
-    <!---->
-                    <!--<path class="plan_house-select_svg_section"-->
-                        <!--[attr.style]="('opacity:' + ( activeLink == plan.houseNumber ? '1' : '0' )) | stylePipe"-->
-                        <!--(mouseenter)="activeLink = plan.houseNumber" -->
-                        <!--(mouseleave)="activeLink = ''"-->
-                        <!--[attr.d]="plan.svgPath"-->
-                        <!--id="k-{{plan.houseNumber}}"/>-->
-                <!--</a>-->
-
-            <!--</ng-container>-->
-
-        <!--</svg>-->
-    
-    </div>
-    <!-- <a href="https://exporealty.ru/visit/registration/" class="link__banner"></a> -->
-
-    <!--<div class="flats_main__quantity flats_main__quantity&#45;&#45;left">-->
-        <!--<div class="flats_main__quantity__number">{{houseOneFreeFlats}}</div>-->
-        <!--<div class="flats_main__quantity__text">квартир<br> в продаже</div>-->
-    <!--</div>-->
-    <!--<div class="flats_main__quantity flats_main__quantity&#45;&#45;right">-->
-        <!--<div class="flats_main__quantity__number">{{houseTwoFreeFlats}}</div>-->
-        <!--<div class="flats_main__quantity__text">квартир<br> в продаже</div>-->
-    <!--</div>-->
-
-    <div class="object-flat__house">
-        <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of housesPlanSvg">
-            <a class="object-flat__house-item" [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}">
+    <div class="object-flat__house" #parentContainer>
+        <div class="object-flat__house-wrap object-flat__house-wrap--ob-house-{{house.houseNumber}}" *ngFor="let house of housesPlanSvg"
+          [class.disabled]="!house.freeFlats">
+            <a class="object-flat__house-item" #link
+                [class.active]="activeLink === house.houseNumber"
+                (mouseenter)="activeLink = house.houseNumber" 
+                (mouseleave)="activeLink = ''"
+                [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}">
                 <span>№{{house.houseNumber}}</span>
                 <span>{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</span>
             </a>
-            <div class="object-flat__house-tooltip object-flat__house-tooltip_house-{{house.houseNumber}}">
+            <div class="object-flat__house-tooltip" #tooltip
+                [ngStyle]="activeLink === house.houseNumber ? 
+                    this.service.setTooltipStyle(true, parentContainer, tooltip, link)
+                    : this.service.setTooltipStyle(false, parentContainer, tooltip, link)"
+                [class.active]="activeLink === house.houseNumber">
                 <h3>Дом №{{house.houseNumber}}</h3>
                 <ul>
                     <li *ngFor="let room of house.rooms" class="object-flat__house-room">
@@ -65,4 +28,25 @@
             </div>
         </div>
     </div>
+
+    <svg viewBox="0 0 1280 642" preserveAspectRatio="none"
+        class="object-flat__svg">
+
+        <ng-container *ngFor="let plan of housesPlanSvg">
+            <a (click)="svgRouterLink($event, ('/objects/list/' + objectId + '/flats/house/' + plan.houseNumber))"
+                    [attr.xlink:href]="'/objects/list/' + objectId + '/flats/house/' + plan.houseNumber"
+                    [style.pointerEvents]="plan.freeFlats ? 'all' : 'none'">
+
+                <path class="object-flat__svg-house"
+                    [attr.transform]="plan.transform"
+                    [attr.style]="('opacity:' + ( activeLink === plan.houseNumber ? '1' : '0' )) | stylePipe"
+                    (mouseenter)="activeLink = plan.houseNumber"
+                    (mouseleave)="activeLink = ''"
+                    [attr.d]="plan.svgPath"
+                      id="k-{{plan.houseNumber}}">
+                </path>
+            </a>
+        </ng-container>
+
+    </svg>
 </div>

@@ -1,7 +1,7 @@
 <div class="hover-flat" *ngIf="showBubble" [style.left.px]="coords.left" [style.top.px]="coords.top">
     <div class="hover-flat__img">
         <img (error)="img.style.display = 'none'"
-             [src]="'/assets/floor-plans/house_' + bubbleData.house + '/section_' + bubbleData.section + '/floor_' + bubbleData.floor + '/' + bubbleData.floor + 'floor_' + bubbleData.flat + 'flat.svg'" alt="" #img>
+             [src]="'/assets/floor-plans/jk_' + bubbleData.mod + '/house_' + bubbleData.house + '/section_' + bubbleData.section + '/floor_' + bubbleData.floor + '/' + bubbleData.floor + 'floor_' + bubbleData.flat + 'flat.svg'" alt="" #img>
         <div *ngIf="img.style.display === 'none'" class="hover-flat__img-error g-3red"></div>
     </div>
     <div class="hover-flat__info">

@@ -47,7 +47,7 @@ export class NtPlanComponent implements OnInit {
     }
 
     private buildHousesData(i, flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         const prices = flats.map( flat => flat.price);
         this.houses[i].freeFlats = flats.length;
         this.houses[i].minPrice = Number(((Math.min(...prices)) / 1000000).toFixed(2));

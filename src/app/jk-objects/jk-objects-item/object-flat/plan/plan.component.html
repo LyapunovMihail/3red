@@ -24,7 +24,7 @@
             </ul>
         </nav>
 
-        <div class="object-flat__plan" *ngIf="mod !== 'НТМ' && mod !== 'ОБ'">
+        <div class="object-flat__plan" *ngIf="mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'НК' && mod !== 'МКВ'">
 
             <img class="object-flat__plan-img" src="/assets/img/jk-object/temp_bg.jpg" alt="">
     <!-- Места поблизсти -->
@@ -34,8 +34,8 @@
                 </div>
             </div>
     <!-- Генплан квартир -->
-            <div class="object-flat__house">
-                <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
+            <div class="object-flat__house g-3red">
+                <!-- <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
                     <a class="object-flat__house-item">
                         <span>№{{house.houseNumber}}</span>
                         <span>{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</span>
@@ -49,16 +49,30 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
+        <app-flats-nk-plan-page *ngIf="mod === 'НК'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-nk-plan-page>
+
+        <app-flats-mkv-plan-page *ngIf="mod === 'МКВ'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-mkv-plan-page>
+
         <app-flats-nt-plan-page *ngIf="mod === 'НТМ'"
+            class="object-flat__template"
             [objectId]="objectId"
             [mod]="mod">
         </app-flats-nt-plan-page>
 
         <app-flats-ob-plan-page *ngIf="mod === 'ОБ'"
+            class="object-flat__template"
             [objectId]="objectId"
             [mod]="mod">
         </app-flats-ob-plan-page>
