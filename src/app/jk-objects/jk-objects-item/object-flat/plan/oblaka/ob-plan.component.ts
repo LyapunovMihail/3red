@@ -48,15 +48,15 @@ export class ObPlanComponent implements OnInit {
             this.planService.getHouseOne(this.mod),
             this.planService.getHouseTwo(this.mod)
         ).subscribe(([houseOne, houseTwo]) => {
-            this.houseOneFreeFlats = houseOne.filter((flat: IAddressItemFlat) => flat.status === '4').length;
-            this.houseTwoFreeFlats = houseTwo.filter((flat: IAddressItemFlat) => flat.status === '4').length;
+            this.houseOneFreeFlats = houseOne.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1').length;
+            this.houseTwoFreeFlats = houseTwo.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1').length;
             this.buildHousesData(0, houseOne);
             this.buildHousesData(1, houseTwo);
         });
     }
 
     private buildHousesData(i, flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         this.housesPlanSvg[i].freeFlats = flats.length;
         if (flats.length) {
             this.housesPlanSvg[i].rooms.forEach((room)  => {

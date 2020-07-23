@@ -46,7 +46,7 @@ export class NtPlanComponent implements OnInit {
     }
 
     private buildHousesData(i, flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         this.houses[i].freeFlats = flats.length;
         if (flats.length) {
             this.houses[i].rooms.forEach((room)  => {
