@@ -1,23 +1,21 @@
 import { Router } from '@angular/router';
-import { PLAN_SVG, IHousePlanItem } from './nt-plan-svg';
-import { NtPlanService } from './nt-plan.service';
+import { PLAN_SVG, IHousePlanItem } from './nk-plan-svg';
+import { NkPlanService } from './nk-plan.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { PlanService } from '../plan.service';
 
 @Component({
-    selector: 'app-flats-nt-plan-page',
-    templateUrl: './nt-plan.component.html',
-    styleUrls: [
-        '../plan.component.scss',
-        './nt-plan.component.scss',
-    ],
+    selector: 'app-flats-nk-plan-page',
+    templateUrl: './nk-plan.component.html',
+    styleUrls: [ '../plan.component.scss' ],
     providers: [
-        NtPlanService
+        NkPlanService
     ]
 })
 
-export class NtPlanComponent implements OnInit {
+export class NkPlanComponent implements OnInit {
 
     @Input()
     public objectId: string;
@@ -25,10 +23,17 @@ export class NtPlanComponent implements OnInit {
     public mod: string;
     public houses: IHousePlanItem[] = PLAN_SVG;
     public activeLink = '';
+    public tooltipStyle = {
+        top: '',
+        bottom: '',
+        zIndex: '',
+        opacity: ''
+    };
 
     constructor(
         public router: Router,
-        private planService: NtPlanService
+        private planService: NkPlanService,
+        public service: PlanService
     ) {}
 
     ngOnInit() {
@@ -37,18 +42,23 @@ export class NtPlanComponent implements OnInit {
             this.planService.getHouse('1', this.mod),
             this.planService.getHouse('2', this.mod),
             this.planService.getHouse('3', this.mod),
-            this.planService.getHouse('9', this.mod)
-        ).subscribe(([houseOne, houseTwo, houseThree, houseNine]) => {
+            this.planService.getHouse('4', this.mod),
+            this.planService.getHouse('5', this.mod),
+            this.planService.getHouse('6', this.mod)
+        ).subscribe(([houseOne, houseTwo, houseThree, houseFour, houseFive, houseSix]) => {
             this.buildHousesData(0, houseOne);
             this.buildHousesData(1, houseTwo);
             this.buildHousesData(2, houseThree);
-            this.buildHousesData(3, houseNine);
+            this.buildHousesData(3, houseFour);
+            this.buildHousesData(4, houseFive);
+            this.buildHousesData(5, houseSix);
         });
     }
 
     private buildHousesData(i, flats) {
         flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         const prices = flats.map( flat => flat.price);
+
         this.houses[i].freeFlats = flats.length;
         this.houses[i].minPrice = Number(((Math.min(...prices)) / 1000000).toFixed(2));
         if (flats.length) {
@@ -67,17 +77,5 @@ export class NtPlanComponent implements OnInit {
             event.preventDefault();
         }
         this.router.navigate([url]);
-    }
-
-    public parseText(num) {
-
-        num = Math.abs(num) % 100;
-        const words = ['квартира', 'квартиры', 'квартир'];
-        const sum = num % 10;
-
-        if (num > 10 && num < 20) { return words[2]; }
-        if (sum > 1 && sum < 5) { return words[1]; }
-        if (sum === 1) { return words[0]; }
-        return words[2];
     }
 }
