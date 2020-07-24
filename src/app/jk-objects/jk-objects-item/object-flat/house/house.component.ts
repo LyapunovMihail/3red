@@ -115,14 +115,14 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 // тут сделать цикл по params.house.forEach((item) => this.floorCount[item]);
                 this.housesData = [];
                 const houseNumbers = params.house === 'all' ? Object.keys(this.floorCount) : params.house.split(',');
-                houseNumbers.forEach((houseNumber) => {
+                houseNumbers.forEach((houseNumber, i) => {
                     // if (this.floorCount[item]) {
                     //
                     // }
                     if (this.floorCount[houseNumber]) {
                         // this.houseNumber = house;
                         const houseData = [];
-                        this.housesData[houseNumber] = houseData;
+                        this.housesData[i] = houseData;
                         const sectionNumbers = Object.keys(this.floorCount[houseNumber]); // создаём массив из номеров секций по выбранному дому.
                         if (this.platform.isBrowser) {
                             // получение квартир для нужных секций

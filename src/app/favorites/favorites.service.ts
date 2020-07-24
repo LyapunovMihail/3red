@@ -10,7 +10,7 @@ export class FavoritesService {
     public favoriteEmitter = new Subject<number>();
     public favoriteFlats: IFlatWithDiscount[];
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     public getFavoriteFlats() {
         this.http.get<IFlatWithDiscount[]>('/api/favorites/get')

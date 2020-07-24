@@ -52,7 +52,7 @@
                         <ng-container *ngFor="let section of house">
                             <div class="house__sections-chess" *ngIf="section && section.length">
                                 <ul class="house__sections-chess_section" #sectionContainer>
-                                    <p class="house__sections-chess_section_title">{{jk.mod === 'МКВ' ? 'Дом ' + section[0][0].section : 'Дом ' + section[0][0].house + '. Секция ' + section[0][0].section}}</p>
+                                    <p class="house__sections-chess_section_title">{{jk.mod === 'МКВ' ? 'Тип дома ' + section[0][0].house + '. Дом ' + section[0][0].section : 'Дом ' + section[0][0].house + '. Секция ' + section[0][0].section}}</p>
                                     <ng-container *ngFor="let floor of section; let j = index">
                                         <li *ngIf="floor" class="house__sections-chess_section_floor">
                                             <ul>

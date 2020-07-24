@@ -14,7 +14,6 @@ import { PlatformDetectService } from '../../../platform-detect.service';
 
 export class SearchOutputComponent implements OnInit {
 
-
     @Input() public flatsList: IFlatWithDiscount[] = [];
     @Input() public count: number;
     @Input() public showMore: boolean;

@@ -102,13 +102,13 @@
             display: block;
             @media (max-width: 767px) { @include font-size(16px,22px); }
             &:after {
-                content: url(/assets/img/jk-object/header_heart-empty.svg);
+                content: url(/assets/img/header_heart-empty.svg);
                 position: absolute;
                 top: 50%; left: calc(100% + 9px);
                 transform: translateY(-50%);
             }
             &-active:after {
-                content: url(/assets/img/jk-object/header_heart.svg);
+                content: url(/assets/img/header_heart.svg);
             }
         }
 
