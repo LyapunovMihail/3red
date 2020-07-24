@@ -51,12 +51,11 @@
         position: relative;
 
         &-img {
-            position: absolute;
-            left: 0;
-            top: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            // object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
         }
     }
 
@@ -109,33 +108,35 @@
             }
         }
     }
+    &__template {
+        display: block;
+        width: 100%;
+    }
     &__house  {
         width: 100%;
         height: 100%;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 1;
 
         &-item {
             width: 100%;
             height: 100%;
             display: flex;
-            justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            padding: 0 12px;
+            justify-content: center;
             background-color: $col-red;
             clip-path: polygon(100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 0);
+            transition: color .2s linear, background-color .2s linear;
             font: 18px/23px $font-proba;
             color: $col-white;
             cursor: pointer;
-            transition: color .2s linear, background-color .2s linear;
-            &:hover {
+            padding: 0 12px;
+            &.active {
                 background-color: $col-white;
                 color: $col-black;
-                &+ .object-flat__house-tooltip {
-                    opacity: 1;
-                }
             }
 
             span:first-child { margin-right: 8px; }
@@ -143,42 +144,51 @@
 
         &-tooltip { // Окно появляющееся при наведении на иконку дома
             width: 250px;
-            height: 211px;
+            min-height: 211px;
             background-color: $col-white;
             box-sizing: border-box;
             padding: 16px;
             position: absolute;
+            top: 100%; bottom: 100%;
             left: calc(0px - (125px / 2));
             opacity: 0;
-            transition: opacity .2s linear;
+            transition: opacity .2s linear, top .2s linear, bottom .2s linear;
             pointer-events: none;
             box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+            .active {
+                transition: opacity .2s linear, top .2s linear .3s, bottom .2s linear .3s;
+            }
 
             h3 { color: $col-red; }
-            // модификаторы для домов, что бы регулировать направление тултипа( сверху/снизу )
-            &_house-2 { top: calc(100% + 8px); }
-            &_house-3 { top: calc(100% + 8px); }
-            &_house-4 { bottom: calc(100% + 8px); }
         }
 
         &-wrap { // Блок с иконкой дома и тултипом
             min-width: 109px;
             height: 31px;
             position: absolute;
-            top: 50%;
-            left: 50%;
+            bottom: 50%; left: 50%;
+            pointer-events: all;
+            &.disabled {
+                pointer-events: none;
+                transform: translateX(-30%);
+            }
 
-            &_house-2 {
-                top: 30%;
-                left: 30%;
-            }
-            &_house-3 {
-                top: 50%;
-                left: 50%;
-            }
-            &_house-4 {
-                top: 70%;
-                left: 70%;
+            $mkv-house: ('1a-1',53%,38%), ('1a-2',68%,53%), ('1a-3',77%,61%), ('1a-4',83%,68%), ('1a-5',51%,79%), ('1a-6',63%,85%), ('1a-7',73%,90%), ('1b-1',35%,8%), ('1b-2',54%,24%), ('1b-3',66%,36%), ('1b-4',75%,45.5%), ('1b-5',44%,51.5%), ('2a-1',25%,66%), ('2b-1',82%,53%), ('2b-2',88%,59.5%), ('2b-3',55%,62%), ('2b-4',65%,68%), ('2b-5',72%,74%), ('2b-6',79%,79%);
+            $nk-house: (1,30%,19%), (2,47%,37%), (3,43%,47%), (4,39%,60%), (5,64%,43%), (6,60%,61%);
+            $nt-house: (1,21%,20%), (2,40%,42%), (3,52%,58%), (9,75%,86%);
+            $ob-house: (1,70%,30%), (2,50%,60%);
+
+            $houses: (nk, $nk-house), (nt, $nt-house), (ob, $ob-house), (mkv, $mkv-house);
+
+            @each $mod, $house-object in $houses {
+
+                @each $i, $bottom, $left in $house-object {
+
+                    &--#{$mod}-house-#{$i} {
+                        bottom: #{$bottom};
+                        left: #{$left};
+                    }
+                }
             }
         }
 
@@ -192,6 +202,21 @@
             color: $col-black;
             &:last-child { border-bottom: 0; }
             span:last-child { color: $col-black-5; }
+        }
+    }
+
+    &__svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+
+        &-house {
+            opacity: 0;
+            cursor: pointer;
+            transition: fill .2s linear, opacity .2s linear;
+            fill: rgba(238, 66, 55, 0.15);
         }
     }
 }

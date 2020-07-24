@@ -14,13 +14,12 @@ import {
 } from '@angular/core';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
+import { PlanService } from '../plan.service';
 
 @Component({
     selector: 'app-flats-ob-plan-page',
     templateUrl: './ob-plan.component.html',
-    styleUrls: ['../plan.component.scss',
-                './ob-plan.component.scss',
-    ],
+    styleUrls: [ '../plan.component.scss' ],
     providers: [
         ObPlanService
     ]
@@ -29,10 +28,9 @@ import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/a
 export class ObPlanComponent implements OnInit {
 
     public housesPlanSvg: IPlanSvgItem[] = PLAN_SVG;
-    public links: string[] = this.planService.links();
-    public activeLink = '';
     public houseOneFreeFlats: number;
     public houseTwoFreeFlats: number;
+    public activeLink = '';
 
     @Input()
     public objectId: string;
@@ -41,7 +39,8 @@ export class ObPlanComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private planService: ObPlanService
+        private planService: ObPlanService,
+        public service: PlanService
     ) {}
 
     ngOnInit() {
@@ -49,15 +48,15 @@ export class ObPlanComponent implements OnInit {
             this.planService.getHouseOne(this.mod),
             this.planService.getHouseTwo(this.mod)
         ).subscribe(([houseOne, houseTwo]) => {
-            this.houseOneFreeFlats = houseOne.filter((flat: IAddressItemFlat) => flat.status === '4').length;
-            this.houseTwoFreeFlats = houseTwo.filter((flat: IAddressItemFlat) => flat.status === '4').length;
+            this.houseOneFreeFlats = houseOne.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1').length;
+            this.houseTwoFreeFlats = houseTwo.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1').length;
             this.buildHousesData(0, houseOne);
             this.buildHousesData(1, houseTwo);
         });
     }
 
     private buildHousesData(i, flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4' || flat.status === '1');
         this.housesPlanSvg[i].freeFlats = flats.length;
         if (flats.length) {
             this.housesPlanSvg[i].rooms.forEach((room)  => {
