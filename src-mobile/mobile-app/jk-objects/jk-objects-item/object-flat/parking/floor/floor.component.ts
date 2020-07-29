@@ -34,6 +34,11 @@ export class FloorComponent implements OnInit, OnDestroy {
     public isRequestWindowOpen = false;
     public jk: IObjectSnippet;
 
+    public parking;
+    public outputParking = [];
+    public skip = 0;
+    public showLoadBtn = true;
+
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
@@ -46,6 +51,15 @@ export class FloorComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
+        this.parkingService.getFlats({
+            _id: this.objectFlatsService.getId(),
+            status: '4',
+            type: 'ММ'
+        }).subscribe( data => {
+            this.parking = data;
+            this.loadMore();
+        });
+
         this.jkObjectsItemService.getSnippets(this.objectFlatsService.getId())
             .subscribe(
                 (data) => {
@@ -56,6 +70,20 @@ export class FloorComponent implements OnInit, OnDestroy {
             );
     }
 
+    public loadMore() {
+        const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        for (let i = 0; i < 10; i++) {
+            if (this.skip < this.parking.length) {
+                this.outputParking.push(this.parking[this.skip++]);
+            }
+        }
+        setTimeout( () => window.scrollTo(0, scrollPos) );
+        this.showLoadBtn = this.skip < this.parking.length;
+    }
+    public scrollTop() {
+        window.scrollTo(0, 0);
+    }
+
     public ngOnDestroy() {
         this.routerEvents.unsubscribe();
     }
@@ -63,48 +91,19 @@ export class FloorComponent implements OnInit, OnDestroy {
     public routerChange() {
         return this.activatedRoute.params
             .subscribe((params: any) => {
-                // if ( (params['section'] === '1' && params['floor'] === '1') ||
-                //     (params['section'] === '2,3,4' && params['floor'] === '0')) {
-                    this.houseNumber = params['house'];
-                    this.sectionNumber = params['section'];
-                    this.floorNumber = params['floor'];
-                    this.getFloorSvg(`/assets/floor-plans/jk_${this.jk.mod}/house_${this.houseNumber}/section_${this.sectionNumber}/floor_${this.floorNumber}/sect_${this.sectionNumber}_fl_${this.floorNumber}_parking.svg`)
-                        .subscribe(
-                            (data: string) => {
-                                this.floorSvg = data;
-                                this.parkingService.getFlats({
-                                    house: this.houseNumber,
-                                    sections: this.sectionNumber,
-                                    floor: this.floorNumber,
-                                    mod: this.jk.mod,
-                                    type: 'ММ',
-                                }).subscribe(
-                                    (flats: IAddressItemFlat[]) => {
-                                        console.log('parks: ', flats);
-                                        if ( this.platform.isBrowser ) {
-                                            this.parkingService.flatsHover(flats, {
-                                                hover: (flat) => this.infoWindow = flat,
-                                                click: (flat) => { this.parkingData = flat; this.isRequestWindowOpen = true; }
-                                            });
-                                        }
-                                    },
-                                    (err) => {
-                                        console.log(err);
-                                    }
-                                );
-                            },
-                            (err) => {
-                                this.floorSvg = null;
-                                console.log(err);
-                            }
-                        );
-                // } else {
-                //     this.router.navigate(['/error-404'], { skipLocationChange: true });
-                // }
+                this.houseNumber = params['house'];
+                this.sectionNumber = params['section'];
+                this.floorNumber = params['floor'];
             });
     }
 
     public getFloorSvg(url): Observable<string> {
         return this.http.get<string>(url, { responseType: 'text' as 'json' });
+    }
+
+    public openModal(data) {
+        this.parkingData = data;
+        this.windowScrollLocker.block();
+        this.isRequestWindowOpen = true;
     }
 }

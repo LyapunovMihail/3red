@@ -27,10 +27,10 @@ export class PlanService {
         return this.http.post<IAddressItemFlat[]>('/api/search/object', { search: options });
     }
 
-    public parseText(num) {
+    public parseText(num, arr?) {
 
         num = Math.abs(num) % 100;
-        const words = ['квартира', 'квартиры', 'квартир'];
+        const words = arr ? arr : ['квартира', 'квартиры', 'квартир'];
         const sum = num % 10;
 
         if (num > 10 && num < 20) { return words[2]; }

@@ -1,0 +1,21 @@
+<div class="plan">
+
+    <div class="object-flat__house">
+        <a class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of houses"
+          (click)="svgRouterLink($event, house.houseNumber)" [class.disabled]="!house.freeFlats">
+            <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
+            <ng-container *ngIf="menuMod === 'flats'">
+                <p class="object-flat__house-flats">{{house.freeFlats ? house.freeFlats + ' ' + this.service.parseText(house.freeFlats) : 'Нет квартир в продаже'}}</p>
+                <p class="object-flat__house-price" *ngIf="house.freeFlats">от {{house.minPrice}} млн Р</p>
+            </ng-container>
+            <ng-container *ngIf="menuMod === 'storerooms'">
+                <p class="object-flat__house-flats">{{house.freeStorage ? house.freeStorage + ' ' + this.service.parseText(house.freeStorage, words[0]) : 'Нет квартир в продаже'}}</p>
+                <p class="object-flat__house-price" *ngIf="house.freeStorage">{{'от ' + house.storageMinPrice + ' ' + (house.storageMinPrice < 100 ? 'млн' : 'тыс') + ' Р'}}</p>
+            </ng-container>
+            <ng-container *ngIf="menuMod === 'parking'">
+                <p class="object-flat__house-flats">{{house.freeParking ? house.freeParking + ' ' + this.service.parseText(house.freeParking, words[1]) : 'Нет квартир в продаже'}}</p>
+                <p class="object-flat__house-price" *ngIf="house.freeParking">{{'от ' + house.parkingMinPrice + ' ' + (house.parkingMinPrice < 100 ? 'млн' : 'тыс') + ' Р'}}</p>
+            </ng-container>
+        </a>
+    </div>
+</div>

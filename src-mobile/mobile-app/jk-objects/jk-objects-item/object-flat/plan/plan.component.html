@@ -29,7 +29,7 @@
                 </nav>
             </div>
             
-            <div class="object-flat__house" *ngIf="mod !== 'МКВ' && mod !== 'НК' && mod !== 'НТМ' && mod !== 'ОБ'">
+            <div class="object-flat__house" *ngIf="mod !== 'ЯР' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'МКВ' && mod !== 'НК' && mod !== 'НТМ' && mod !== 'ОБ'">
                 <div class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
                     <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
                     <p class="object-flat__house-flats">{{house.freeFlats}} квартир</p>
@@ -46,6 +46,24 @@
                 [objectId]="objectId"
                 [mod]="mod">
             </app-flats-mkv-plan-page>
+
+            <app-flats-yar-plan-page *ngIf="mod === 'ЯР'"
+                [objectId]="objectId"
+                [mod]="mod">
+            </app-flats-yar-plan-page>
+
+            <app-flats-vb2-plan-page *ngIf="mod === 'ВБ2'"
+                [objectId]="objectId"
+                [mod]="mod">
+            </app-flats-vb2-plan-page>
+
+            <app-flats-br-plan-page *ngIf="mod === 'БР'"
+                [objectId]="objectId"
+                [mod]="mod"
+                [menuMod]="activeTab"
+                [parking]="parking"
+                [storerooms]="storerooms">
+            </app-flats-br-plan-page>
 
             <app-flats-nk-plan-page *ngIf="mod === 'НК'"
                 [objectId]="objectId"

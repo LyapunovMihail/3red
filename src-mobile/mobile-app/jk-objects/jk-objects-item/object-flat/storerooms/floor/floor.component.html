@@ -2,18 +2,33 @@
 
     <div class="storage-schema__nav">
         <div class="storage-schema__nav-container">
-
-            <a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" class="storage-schema__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
+            <a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" class="storage-schema__nav-back">Кладовые</a>
         </div>
     </div>
 
     <div class="storage-schema__container">
+        <h2 class="storage-schema__title">Дом {{houseNumber}}, Секция {{sectionNumber}}</h2>
 
-        <app-storeroom-info-window
-            [infoWindow]="infoWindow">
-        </app-storeroom-info-window>
+    </div>
+    
+    <div class="storage-schema__item" *ngFor="let item of outputStorerooms" (click)="openModal(item)">
+        <div class="storage-schema__item-container">
+            <div class="storage-schema__item-wrap storage-schema__item-wrap--top">
+                <p class="storage-schema__item-text storage-schema__item-text--number">Кладовая, №{{item.flat}}</p>
+                <p class="storage-schema__item-text storage-schema__item-text--price">{{(item.price | myBitNumberPipe)}} P</p>
+            </div>
+            <div class="storage-schema__item-wrap storage-schema__item-wrap--bottom">
+                <div class="storage-schema__item-text storage-schema__item-text--house">Дом {{item.house}}</div>
+                <div class="storage-schema__item-text storage-schema__item-text--section">Секция {{item.section}}</div>
+                <div class="storage-schema__item-text storage-schema__item-text--floor">Этаж {{item.floor}}</div>
+                <div class="storage-schema__item-text storage-schema__item-text--space">{{item.space}} м²</div>
+            </div>
+        </div>
+    </div>
 
-        <div class="storage-schema__plan" [class.g-3red]="!floorSvg" [innerHTML]="floorSvg | houseSVGSanitizePipe"></div>
+    <div class="storage-schema__btn">
+        <button class="storage-schema__btn-load btn_var-3" (click)="loadMore()">Показать еще</button>
+        <button class="storage-schema__btn-up btn-empty" (click)="scrollTop()">Наверх</button>
     </div>
 </section>
 
