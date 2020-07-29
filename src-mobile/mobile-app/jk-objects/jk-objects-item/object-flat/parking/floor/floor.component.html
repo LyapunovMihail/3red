@@ -3,17 +3,33 @@
 
     <div class="parking-schema__nav">
         <div class="parking-schema__nav-container">
-            <a [routerLink]="'/objects/list/' + jk._id + '/parking'" class="parking-schema__nav-back">Дом {{houseNumber}}, секция {{sectionNumber}}, этаж {{floorNumber}}</a>
+            <a [routerLink]="'/objects/list/' + jk._id + '/parking'" class="parking-schema__nav-back">Машиноместа</a>
         </div>
     </div>
 
     <div class="parking-schema__container">
+        <h2 class="parking-schema__title">Дом {{houseNumber}}, Секция {{sectionNumber}}</h2>
 
-        <app-parking-info-window
-            [infoWindow]="infoWindow">
-        </app-parking-info-window>
+    </div>
+    
+    <div class="parking-schema__item" *ngFor="let item of outputParking" (click)="openModal(item)">
+        <div class="parking-schema__item-container">
+            <div class="parking-schema__item-wrap parking-schema__item-wrap--top">
+                <p class="parking-schema__item-text parking-schema__item-text--number">Машиноместо, №{{item.flat}}</p>
+                <p class="parking-schema__item-text parking-schema__item-text--price">{{(item.price | myBitNumberPipe)}} P</p>
+            </div>
+            <div class="parking-schema__item-wrap parking-schema__item-wrap--bottom">
+                <div class="parking-schema__item-text parking-schema__item-text--house">Дом {{item.house}}</div>
+                <div class="parking-schema__item-text parking-schema__item-text--section">Секция {{item.section}}</div>
+                <div class="parking-schema__item-text parking-schema__item-text--floor">Этаж {{item.floor}}</div>
+                <div class="parking-schema__item-text parking-schema__item-text--space">{{item.space}} м²</div>
+            </div>
+        </div>
+    </div>
 
-        <div class="parking-schema__plan" [class.g-3red]="!floorSvg" [innerHTML]="floorSvg | houseSVGSanitizePipe"></div>
+    <div class="parking-schema__btn">
+        <button class="parking-schema__btn-load btn_var-3" (click)="loadMore()">Показать еще</button>
+        <button class="parking-schema__btn-up btn-empty" (click)="scrollTop()">Наверх</button>
     </div>
 </section>
 

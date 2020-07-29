@@ -5,12 +5,16 @@
 
             <a [routerLink]="'/objects/list/' + jk._id" class="storage-list__nav-back">ЖК {{jk.name}}</a>
 
-            <ul class="storage-list__nav-list">
-                <li><a [routerLink]="'/objects/list/' + jk._id + '/flats'" routerLinkActive="active" class="storage-list__nav-link">Квартиры</a></li>
-                <li><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" routerLinkActive="active" class="storage-list__nav-link">Кладовые</a></li>
-                <li *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'" routerLinkActive="active" class="storage-list__nav-link">Машиноместа</a></li>
-                <!--<li><a class="storage-list__nav-link">Коммерческая недвижимость</a></li>-->
-            </ul>
+            <div class="storage-list__nav-wrap">
+                <div class="storage-list__nav-wrap--scroll">
+                    <ul class="storage-list__nav-list">
+                        <li><a [routerLink]="'/objects/list/' + jk._id + '/flats'" routerLinkActive="active" class="storage-list__nav-link">Квартиры</a></li>
+                        <li><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'" routerLinkActive="active" class="storage-list__nav-link">Кладовые</a></li>
+                        <li *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'" routerLinkActive="active" class="storage-list__nav-link">Машиноместа</a></li>
+                        <!--<li><a class="storage-list__nav-link">Коммерческая недвижимость</a></li>-->
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 

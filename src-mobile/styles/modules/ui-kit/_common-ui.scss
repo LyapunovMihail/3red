@@ -45,10 +45,12 @@
     border: solid 1px $col-red;
     transition: background-color .2s linear, border-color .2s linear, color .2s linear;
     background-color: transparent;
-    &:hover {
-        background-color: $col-red_hover;
-        border-color: $col-red_hover;
-        color: $col-white;
+    @media(min-width: 1024px) {
+        &:hover {
+            background-color: $col-red_hover;
+            border-color: $col-red_hover;
+            color: $col-white;
+        }
     }
     &:disabled { color: rgba($color: $col-black, $alpha: 0.5); }
 }
@@ -201,11 +203,13 @@
         }
         &::after { transform: rotate(-45deg); }
     }
-    &:hover {
-        background-color: $col-red_hover;
-        span {
-            &::before,
-            &::after { background-color: $col-white; }
+    @media (min-width: 1024px) {
+        &:hover {
+            background-color: $col-red_hover;
+            span {
+                &::before,
+                &::after { background-color: $col-white; }
+            }
         }
     }
 }

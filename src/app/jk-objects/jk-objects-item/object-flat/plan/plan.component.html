@@ -24,7 +24,7 @@
             </ul>
         </nav>
 
-        <div class="object-flat__plan" *ngIf="mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'НК' && mod !== 'МКВ'">
+        <div class="object-flat__plan" *ngIf="mod !== 'ЯР' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'НК' && mod !== 'МКВ'">
 
             <img class="object-flat__plan-img" src="/assets/img/jk-object/temp_bg.jpg" alt="">
     <!-- Места поблизсти -->
@@ -34,23 +34,7 @@
                 </div>
             </div>
     <!-- Генплан квартир -->
-            <div class="object-flat__house g-3red">
-                <!-- <div class="object-flat__house-wrap object-flat__house-wrap_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
-                    <a class="object-flat__house-item">
-                        <span>№{{house.houseNumber}}</span>
-                        <span>{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</span>
-                    </a>
-                    <div class="object-flat__house-tooltip object-flat__house-tooltip_house-{{house.houseNumber}}">
-                        <h3>Дом №{{house.houseNumber}}</h3>
-                        <ul>
-                            <li *ngFor="let room of house.rooms" class="object-flat__house-room">
-                                <span>{{room.name === 0 ? 'Студии' : room.name + '-комнатные'}}</span>
-                                <span>{{room.minPrice ? 'от ' + room.minPrice + ' млн Р' : 'не в продаже'}}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-            </div>
+            <div class="object-flat__house g-3red"></div>
         </div>
 
         <app-flats-nk-plan-page *ngIf="mod === 'НК'"
@@ -58,6 +42,27 @@
             [objectId]="objectId"
             [mod]="mod">
         </app-flats-nk-plan-page>
+
+        <app-flats-yar-plan-page *ngIf="mod === 'ЯР'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-yar-plan-page>
+
+        <app-flats-vb2-plan-page *ngIf="mod === 'ВБ2'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-vb2-plan-page>
+
+        <app-flats-br-plan-page *ngIf="mod === 'БР'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [menuMod]="activeTab"
+            [parking]="parking"
+            [storerooms]="storerooms"
+            [mod]="mod">
+        </app-flats-br-plan-page>
 
         <app-flats-mkv-plan-page *ngIf="mod === 'МКВ'"
             class="object-flat__template"
