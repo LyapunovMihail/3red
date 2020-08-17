@@ -15,6 +15,8 @@ export class ObjectPreviewComponent implements OnInit {
     public isAuthorizated = false;
     @Input()
     public objectId: string;
+    @Input()
+    public hasFlats: boolean;
 
     public closeModal = true;
 

@@ -67,7 +67,6 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
         this.dynamicService.getContentSnippet(this.objectId, this.currentYear, this.currentMonth).subscribe(
             (data) => {
                 this.setContent(data);
-                console.log('dynamic objects!', data);
             },
             (err) => console.error(err)
         );
@@ -91,8 +90,6 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
         );
     }
     private setNavList() {
-        console.log('this.tabsnippet: ', this.tabSnippet);
-        console.log('this.tabSnippet && this.tabSnippet.dynamic: ', this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show ? true : false);
         this.navList = [
             { name: 'Ход строительства', link: 'process', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show ? true : false) },
             { name: 'Готовые дома', link: 'ready', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show ? true : false) }

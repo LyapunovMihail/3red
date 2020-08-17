@@ -75,6 +75,7 @@ export class NewsPreviewComponent implements OnInit, OnDestroy {
 
     public createSnippet() {
         if ( this.isAuthorizated ) {
+            this.redactId = null;
             this.isCreateRedactForm = true ;
             this.windowScrollLocker.block();
         }

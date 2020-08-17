@@ -17,6 +17,8 @@ export class ObjectPreviewComponent implements OnInit {
 
     @Input()
     public objectId: string;
+    @Input()
+    public hasFlats: boolean;
 
     public closeModal = true;
 
@@ -30,7 +32,6 @@ export class ObjectPreviewComponent implements OnInit {
     constructor(
         private previewService: ObjectPreviewAdminService,
         public headerService: HeaderService,
-        
     ) { }
 
     ngOnInit() {

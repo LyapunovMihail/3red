@@ -104,6 +104,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
     public createNewsSnippet() {
         if ( this.isAuthorizated ) {
+            this.redactId = null;
             this.isNewsCreateRedactForm = true;
             this.windowScrollLocker.block();
         }

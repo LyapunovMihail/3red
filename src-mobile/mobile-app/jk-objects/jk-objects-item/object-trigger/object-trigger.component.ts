@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SearchService } from '../object-flat/search/search.service';
 import { IAddressItemFlat } from '../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { ITriggerSnippet } from '../../../../../serv-files/serv-modules/jk-objects/trigger-api/trigger.interfaces';
 
@@ -9,26 +8,20 @@ import { ITriggerSnippet } from '../../../../../serv-files/serv-modules/jk-objec
     styleUrls: [
         'object-trigger.component.scss',
         '../jk-objects-item.component.scss'
-    ],
-    providers: [ SearchService ]
+    ]
 })
 
 export class ObjectTriggerComponent implements OnInit {
 
     public triggerSnippets: ITriggerSnippet[] = [];
 
-    @Input() public mod: string;
     @Input() public objectId: string;
+    @Input() public flats: IAddressItemFlat[];
 
-    constructor(
-        public flatsService: SearchService
-    ) {}
+    constructor() {}
 
     ngOnInit() {
-        this.flatsService.getFlats({ mod: this.mod, type: 'КВ,АП' })
-            .subscribe((flats) => {
-                this.buildTriggersData(flats);
-            });
+        this.buildTriggersData(this.flats);
     }
 
     private buildTriggersData(flats) {

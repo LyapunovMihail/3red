@@ -5,6 +5,7 @@ import { adminHeaders } from '../../../../commons/admin-headers.utilit';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, forwardRef, Inject } from '@angular/core';
 import { IObjectDocSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/documentation-api/objects-documentation.interfaces';
+import { ObjectDecorationAdminUpload } from '../../object-decoration/object-decoration-content-admin/object-decoration-admin.upload';
 
 @Injectable()
 export class ObjectDocumentationAdminService {
@@ -32,31 +33,25 @@ export class ObjectDocumentationAdminService {
         return this.subject.asObservable();
     }
 
-    public fileUpload(fileList: FileList) {
+    public fileUpload(file) {
         return new Promise((resolve, reject) => {
-            let index = 0;
 
-            const upload = (i) => {
-                this.setCurrentLoadedFile(i + 1);
-                const myUploadItem = new ObjectDocumentationAdminUpload(fileList[i]);
-                myUploadItem.formData = {FormDataKey: 'Form Data Value'};
-                this.uploaderService.upload(myUploadItem);
-            };
+            const uploadFile: File = file;
 
-            upload(index);
+            const myUploadItem = new ObjectDocumentationAdminUpload(uploadFile);
+            myUploadItem.formData = {FormDataKey: 'Form Data Value'};
 
             this.uploaderService.onSuccessUpload = (item, response, status, headers) => {
-                if (index < fileList.length - 1) {
-                    index++;
-                    upload(index);
-                } else {
-                    resolve(response);
-                }
+                resolve(response);
             };
-
             this.uploaderService.onErrorUpload = (item, response, status, headers) => {
                 reject(response);
             };
+            // this.uploaderService.onCompleteUpload = (item, response, status, headers) => {};
+            this.uploaderService.onProgressUpload = (item, percentComplete) => {
+                this.setCurrentLoadedFile(percentComplete);
+            };
+            this.uploaderService.upload(myUploadItem);
         });
     }
 }

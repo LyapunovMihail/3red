@@ -1,11 +1,11 @@
 <div class="object-item" #container>
     <ng-container *ngIf="jk">
 
-        <app-object-item-preview [objectId]="objectId"></app-object-item-preview>
+        <app-object-item-preview [objectId]="objectId" [hasFlats]="flats.length"></app-object-item-preview>
 
-        <!-- <app-object-item-filter [objectId]="objectId" [mod]="jk.mod"></app-object-item-filter> -->
+        <!-- <app-object-item-filter [objectId]="objectId" [mod]="jk.mod" *ngIf=flats.length></app-object-item-filter> -->
 
-        <app-object-item-trigger [objectId]="objectId" [mod]="jk.mod"></app-object-item-trigger>
+        <app-object-item-trigger [objectId]="objectId" [flats]="flats"></app-object-item-trigger>
 
         <app-object-item-storage [objectId]="objectId" [mod]="jk.mod"></app-object-item-storage>
 

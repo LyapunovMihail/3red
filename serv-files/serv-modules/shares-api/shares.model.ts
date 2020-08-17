@@ -21,19 +21,6 @@ export class SharesModel {
         return await this.collection.find({}).sort({ created_at: -1 }).toArray();
     }
 
-    // public async getShares(limit: number, skip: number) {
-    //     let options = {
-    //         limit,
-    //         skip
-    //     };
-    //     let length = await this.collection.count();
-    //     let sharesList = await this.collection.find({}, options).sort({ created_at: -1 }).toArray();
-    //     return ({
-    //         length,
-    //         sharesList
-    //     });
-    // }
-
     public async getShareById(id) {
         if ( (ObjectId.isValid(id)) ) {
             return await this.collection.find({ _id: ObjectId(id) }).sort({ created_at: -1 }).toArray();
@@ -52,8 +39,7 @@ export class SharesModel {
 
     public async updateShare(_id, obj: Share) {
         if ( '_id' in obj ) { delete obj._id; }
-        await this.collection.updateOne({ _id: ObjectId(_id) }, { $set: obj });
-        return this.getShareById(_id);
+        return this.collection.updateOne({ _id: ObjectId(_id) }, { $set: obj });
     }
 
     async updateShareCount(id, parameters, item, session) {

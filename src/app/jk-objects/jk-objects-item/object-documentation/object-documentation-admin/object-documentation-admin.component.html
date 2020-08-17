@@ -22,8 +22,8 @@
                             <button class="documentation__object-btn documentation__object-btn_controls btn-empty"
                                 (click)="popBlock(i)">Удалить
                             </button>
-                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="i > 0">Вверх</button>
-                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="!last">Вниз</button>
+                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="i !== 0" (click)="moveBlock(form.get('block')['controls'], i, -1)">Вверх</button>
+                            <button class="documentation__object-btn documentation__object-btn_controls btn-empty" *ngIf="!last" (click)="moveBlock(form.get('block')['controls'], i, 1)">Вниз</button>
                         </div>
                     </div>
 
@@ -54,13 +54,13 @@
                             </a>
                             <div class="upload-file__date">
 
-                                <input class="upload-file__date-area" type="text" id="dateUpload"
+                                <input class="upload-file__date-area" type="text" id="dateUpload{{i}}{{j}}"
                                     [class.upload-file__date-area--no-empty]="inputDate.value.length > 0"
                                     [value]="parseDate(doc.date)"
                                     (change)="doc.date = $event.target.value"
                                     [textMask]="{mask: dataMask}"
                                     #inputDate>
-                                <label for="dateUpload">Дата документа</label>
+                                <label for="dateUpload{{i}}{{j}}">Дата документа</label>
                                 <div></div>
                             </div>
                         </li>

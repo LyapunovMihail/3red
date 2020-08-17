@@ -54,7 +54,6 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
         this.dynamicService.getContentSnippet(this.objectId, this.currentYear, this.currentMonth).subscribe(
             (data) => {
                 this.setContent(data);
-                console.log('dynamic objects!', data);
             },
             (err) => console.error(err)
         );

@@ -43,7 +43,7 @@ export class NewsModel {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
             const created = await this.collection.updateOne({ _id : ObjectId(id) }, { $set : options });
-        }, id);
+        });
     }
 
     async updateShareCount(id, parameters, item, session) {
@@ -91,14 +91,10 @@ export class NewsModel {
     }
 
     // обертка для возврата ошибки о неверно переданных параметрах
-    async errorParamsCatcher(val, fn, id?) {
+    async errorParamsCatcher(val, fn) {
         if ( val ) {
             await fn();
-            if (id) {
-                return await this.getSnippet(id);
-            } else {
-                return await this.getSnippet();
-            }
+            return await this.getSnippet();
         } else {
             throw new Error(ErrorNotCorrectArguments);
         }

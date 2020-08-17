@@ -101,34 +101,39 @@ export class ObjectDocumentationAdminComponent implements OnInit {
 
     public fileUpload(e, i) {
         const fileList: FileList = e.target.files;
+
         this.progressCount = fileList.length;
         this.progressLoaded = true;
         this.progressEvent = this.documentationService.getCurrentLoadedFile().subscribe((val) => {
             this.progressCurrent = val + 1;
         });
-        this.documentationService.fileUpload(fileList)
-            .then((data: IDocUploadItem[]) => {
-                this.progressCount = 0;
-                this.progressLoaded = false;
-                this.progressEvent.unsubscribe();
-                this.pushDoc(data, i);
-            })
-            .catch((err) => {
-                console.error(err);
-                this.progressEvent.unsubscribe();
-                alert('Что-то пошло не так!');
-            });
+
+        let chain = Promise.resolve();
+
+        for (let j = 0; j < fileList.length; j++) {
+            chain = chain
+                .then(() => this.documentationService.fileUpload(fileList[j]))
+                .then((data: IDocUploadItem[]) => {
+                    if (j === fileList.length - 1) {
+                        this.progressCount = 0;
+                    }
+                    this.progressLoaded = false;
+                    this.progressEvent.unsubscribe();
+                    this.pushDoc(data, i);
+                })
+                .catch((err) => {
+                    console.error(err);
+                    this.progressEvent.unsubscribe();
+                    alert('Что-то пошло не так!');
+                });
+        }
     }
 
-    moveUp(question, array) {
-        // для кнопки вверх, но не получилось задать массив
-        // console.log(this.form .get(['block', index,  'questions']) as FormArray);
+    public moveBlock(array, i, dir) {
+        let arr = this.form.get('block').value;
 
-        const index = array.indexOf(question);
-        array.splice(index, 1);
-        array.splice(index + 1, 0, question);
-        return array;
-
+        array[i] = array.splice((i + dir), 1, array[i])[0];
+        arr[i] = arr.splice((i + dir), 1, arr[i])[0];
     }
 
     public save() {

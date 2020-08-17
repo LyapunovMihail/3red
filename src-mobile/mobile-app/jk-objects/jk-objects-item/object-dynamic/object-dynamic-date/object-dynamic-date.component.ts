@@ -16,17 +16,11 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
     @Input() description: number;
     @Input() objectsArray: IDynamicObject[] = [];
 
-    @Output() monthChange: EventEmitter<number> = new EventEmitter();
-    @Output() yearChange: EventEmitter<number> = new EventEmitter();
     @Output() dateChange: EventEmitter<any> = new EventEmitter();
 
     public date = new Date();
-    public tooltipYear = false;
 
     public snippets: IObjectDynamicSnippet[] = [];
-
-    public realYear: number = Number(this.date.getFullYear());
-    public realMonth: number = Number(this.date.getMonth()) + 1;
 
     public visibleYears = [];
 
@@ -99,7 +93,6 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
         this.dynamicService.getContentSnippets(this.objectId).subscribe(
             (data) => {
                 this.snippets = data;
-                console.log(data);
                 this.monthParser(this.year);
                 this.ref.detectChanges();
             },
@@ -132,7 +125,7 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
                     month = item.value;
                 }
                 if (i === this.monthArray.length - 1) {
-                    this.monthChange.emit(month);
+                    this.dateChange.emit({month, year: this.year});
                 }
             });
         }
@@ -165,7 +158,6 @@ export class ObjectDynamicDateComponent implements OnInit, OnChanges {
         });
     }
     public selectChange(ev) {
-
         const arr = ev.target.value.split(';');
         this.changeDate(arr[0], arr[1]);
     }

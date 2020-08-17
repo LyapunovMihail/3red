@@ -31,7 +31,7 @@
 
         <div class="object-preview__btns">
             <a [routerLink]="'/objects/list/' + objectId +  '/dynamic/' + year + '/' + month" class="object-preview__btns-dynamic btn_var-3"><span>Фотоотчет</span></a>
-            <a class="object-preview__btns-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'">Выбрать квартиру</a>
+            <a class="object-preview__btns-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'" *ngIf="hasFlats">Выбрать квартиру</a>
         </div>
     </div>
 </section>
