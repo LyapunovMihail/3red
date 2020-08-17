@@ -3,19 +3,19 @@
     <h2 class="gallery-settings__title">Настройка вкладок «Галереи»</h2>
     <section class="tabs">
         <form [formGroup]="form">
-            <div class="tabs__wrap" formArrayName="gallery" *ngFor="let tab of form.controls['gallery']['controls']; let i = index">
+            <div class="tabs__wrap" formArrayName="gallery" *ngFor="let tab of form.controls['gallery']['controls']; let i = index; last as last">
                 <ng-container formGroupName="{{i}}">
                     <div class="tabs__container">
                         <h2 class="tabs__title">Вкладка {{i + 1}}</h2>
                         <div class="tabs__nav">
                             <label class="tabs__nav-link"><input hidden type="checkbox" formControlName="show">{{tab.controls.show.value ? 'Выключить' : 'Включить'}}</label>
                             <a class="tabs__nav-link" (click)="popTab(i)">Удалить</a>
-                            <a class="tabs__nav-link">Вверх</a>
-                            <a class="tabs__nav-link">Вниз</a>
+                            <a class="tabs__nav-link" href="javascript:void(0)" *ngIf="i !== 0" (click)="moveBlock(form.get('gallery')['controls'], i, -1)">Вверх</a>
+                            <a class="tabs__nav-link" href="javascript:void(0)" *ngIf="!last" (click)="moveBlock(form.get('gallery')['controls'], i, 1)">Вниз</a>
                         </div>
 
                     </div>
-                    <div class="form">
+                    <div class="form" [class.disabled]='!tab.controls.show.value'>
                         <div class="form-item">
                             <input type="text" class="form-input info-input" appSlideTopLabel formControlName="name">
                             <label class="form-label info-suptitle">Название вкладки</label>

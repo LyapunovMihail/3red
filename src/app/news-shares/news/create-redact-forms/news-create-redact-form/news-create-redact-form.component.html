@@ -1,6 +1,6 @@
 <div *ngIf="(isForm && isAuthorizated)" class="admin-controll g-modal-bg">
 
-    <div class="create-form__container" >
+    <div class="create-form__container">
 
         <div class='admin-news_progress-loader' *ngIf="isLoad">
             <div class='admin-news_progress-loader-title'>Загрузка изображения {{imageUploadPercent}}%</div>
@@ -175,6 +175,7 @@
     </div>
 
 </div>
+
 
 <app-news-edit-anchor *ngIf="showModal"
     [data]="modalAnchorData"

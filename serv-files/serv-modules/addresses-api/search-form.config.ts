@@ -38,6 +38,14 @@ export const FormConfig = {
     ],
     extraDecorationList: [
         {
+            name: 'рассвет',
+            value: '03'
+        },
+        {
+            name: 'ялта',
+            value: '06'
+        },
+        {
             name: 'классика',
             value: '08'
         },
@@ -48,6 +56,10 @@ export const FormConfig = {
         {
             name: 'венеция',
             value: '14'
+        },
+        {
+            name: 'милан',
+            value: '15'
         }
     ],
     statusList: [

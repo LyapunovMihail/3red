@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ObjectGalleryAdminService } from './object-gallery-admin.service';
 import { IObjectGallerySnippet, OBJECTS_GALLERY_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/gallery-api/objects-gallery.interfaces';
 import { IObjectTabsSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
@@ -87,10 +87,10 @@ export class ObjectGalleryAdminComponent implements OnInit {
 
     public pushImageData() {
         (this.form.controls.image_data as FormArray).push(this.formBuilder.group({
-            image: ['', Validators.required],
-            thumbnail: ['', Validators.required],
+            image: '',
+            thumbnail: '',
             tab: this.tabSnippet.gallery && this.tabSnippet.gallery.length ? this.tabSnippet.gallery[0].name : 'no-tab',
-            title:  ['', Validators.required],
+            title:  '',
             description: ''
         }));
     }

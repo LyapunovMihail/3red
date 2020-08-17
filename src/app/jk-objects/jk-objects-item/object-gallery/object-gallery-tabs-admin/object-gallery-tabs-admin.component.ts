@@ -63,11 +63,18 @@ export class ObjectGalleryTabsAdminComponent implements OnInit {
     }
 
     public pushTab() {
-        (this.form.controls.gallery as FormArray).push(this.formBuilder.group( {name: ['', Validators.required], show: true}));
+        (this.form.controls.gallery as FormArray).push(this.formBuilder.group( {name: '', show: true}));
     }
 
     public popTab(i) {
         (this.form.controls.gallery as FormArray).removeAt(i);
+    }
+
+    public moveBlock(array, i, dir) {
+        let arr = this.form.get('gallery').value;
+
+        array[i] = array.splice((i + dir), 1, array[i])[0];
+        arr[i] = arr.splice((i + dir), 1, arr[i])[0];
     }
 
     public save() {

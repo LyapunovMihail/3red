@@ -10,6 +10,8 @@ import { PlatformDetectService } from '../../../../platform-detect.service';
 import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { ObjectFlatsService } from '../object-flats.service';
 import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 interface IFLatDisabled extends IFlatWithDiscount {
     disabled: boolean;
@@ -68,7 +70,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         private objectFlatsService: ObjectFlatsService,
         public windowScrollLocker: WindowScrollLocker,
         private platform: PlatformDetectService,
-        private ref: ChangeDetectorRef
+        private ref: ChangeDetectorRef,
+        public http: HttpClient
     ) {
     }
 
@@ -78,8 +81,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.objectFlatsService.setData(data);
                 this.jk = data.jk;
                 this.floorCount = data.floorCount;
+                // this.setFloorCount();
                 this.routerEvent = this.routerChange();
-
+                console.log('this.floorCount: ', this.floorCount);
                 this.service.getFlats({ // запрос кладовых
                     mod: this.jk.mod,
                     type: 'КЛ'
@@ -108,6 +112,37 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             }
         );
     }
+    private getFloorSvg(url): Observable<string> {
+        return this.http.get<string>(url, { responseType: 'text' as 'json' });
+    }
+
+    private setFloorCount() { // перепроектирую структуру домов на основе имеющихся схем квартир, а не квартир в бд (для шахматки)
+        for (let i = 0; i < 20; i++) {
+            for (let j = 0; j < 20; j++) {
+                for (let k = 0; k < 50; k++) {
+                    // this.getFloorSvg(`/assets/floor-plans/jk_${this.jk.mod}/house_${i}/section_${j}/floor_${k}/${k}floor_${1}flat.svg`);
+                    // for (let f = 0; f < 20; f++) {
+                    //     this.getFloorSvg(`/assets/floor-plans/jk_${this.jk.mod}/house_${i}/section_${j}/floor_${k}/${k}floor_${f}flat.svg`).subscribe(
+                    //         (data: string) => {
+                    //             // let floorSvg = data;
+                    //             // floorSvg = floorSvg.slice(1, 4) !== 'svg' ? '' : floorSvg;
+                    //             // if (f === 20) {
+                    //             //     console.log('floorSvg: ', floorSvg);
+                    //             // }
+                    //             // if (!this.floorCount[i][j][k]) {
+                    //             //     this.floorCount[i][j][k] = [];
+                    //             // }
+                    //             // this.floorCount[i][j][k].push(f);
+                    //             // console.log('');
+                    //             },
+                    //         (err) => {
+                    //             console.log('');
+                    //         });
+                    // }
+                }
+            }
+        }
+    }
 
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
@@ -129,12 +164,11 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                             sectionNumbers.forEach((sectionNumber) => {
                                 this.getFlats(sectionNumber, houseNumber).subscribe(
                                     (flats) => {
-                                        this.buildSectionData(flats, sectionNumber, houseData);
+                                        this.buildSectionData(flats, houseNumber, sectionNumber, houseData);
                                     },
                                     (err) => console.log(err)
                                 );
                             });
-
                         }
                     } else if (houseNumber === 'all') {
                         // this.showChess = false;
@@ -159,18 +193,30 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
 
-    private buildSectionData(flats, sectionNumber, houseData) {
+    private buildSectionData(flats, houseNumber, sectionNumber, houseData) {
         let sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
             if (!section[flat.floor]) {
                 section[flat.floor] = [];
             }
+
+            // Object.keys(this.floorCount[]);
             section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat), disabled: true});
             return section;
         }, []);
 
-        sectionData.reverse();
-
-        for (let i = 0; i < sectionData.length - 1; i++) {
+        let sectionFloors = sectionData.length; // ToDo Временное решение
+        switch (this.jk.mod) {
+            case 'МКВ':
+                sectionFloors = 6;
+                break;
+            case 'МАЙ':
+                sectionFloors = 4;
+                break;
+            case 'АИБ':
+                sectionFloors = 5;
+                break;
+        }
+        for (let i = 1; i < sectionFloors; i++) {
             if (sectionData[i] == null) {
                 sectionData[i] = [];
             } else {
@@ -178,14 +224,34 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             }
         }
 
+        sectionData.reverse();
+
         const lengths = [];
         sectionData.forEach((floor) => lengths.push(floor.length));
-        const floorMaxLength = Math.max(...lengths);
+
+        let floorMaxLength = this.jk.mod === 'ОБ' || this.jk.mod === 'НК' || this.jk.mod === 'МКВ' ? 8 : Math.max(...lengths); // ToDo Временное решение
+        switch (this.jk.mod) {
+            case 'НК':
+                floorMaxLength = 7;
+                break;
+            case 'ОБ':
+                floorMaxLength = 8;
+                break;
+            case 'МКВ':
+                floorMaxLength = 7;
+                break;
+            case 'МАЙ':
+                floorMaxLength = 4;
+                break;
+            case 'АИБ':
+                floorMaxLength = 9;
+                break;
+        }
 
         sectionData.forEach((floor, j) => {
             const floorLength = floor.length;
             for (let i = 0; i < (floorMaxLength - floorLength); i++) {
-               floor.push({status : '-1', section: sectionNumber, floor: sectionData.length - 1 - j});
+               floor.push({status : '-1', house: houseNumber, section: sectionNumber, floor: sectionData.length - 1 - j});
             }
         });
         houseData[sectionNumber - 1] = sectionData;

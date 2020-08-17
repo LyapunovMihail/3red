@@ -188,7 +188,7 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
 
                         // созддаем на карте маршруты для каждого маркера
                         ymaps.route([
-                            ...item.route.origin, destination
+                            ...item.route.origin, that.mainMarker.coords
                         ]).then((route) => {
                             route.getPaths().options.set({
                                 strokeColor: (item.content === 1) ? item.route.activeColor : item.route.color,
