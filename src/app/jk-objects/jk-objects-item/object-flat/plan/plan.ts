@@ -7,6 +7,8 @@ import { MkvPlanComponent } from './malahovski/mkv-plan.component';
 import { BrPlanComponent } from './barviha/br-plan.component';
 import { Vb2PlanComponent } from './vbereg2/vb2-plan.component';
 import { YarPlanComponent } from './yaroslavl/yar-plan.component';
+import { MayPlanComponent } from './may/may-plan.component';
+import { DablPlanComponent } from './dabl/dabl-plan.component';
 
 export const PlanComponents = [
     StylePipe,
@@ -18,4 +20,6 @@ export const PlanComponents = [
     BrPlanComponent,
     Vb2PlanComponent,
     YarPlanComponent,
+    MayPlanComponent,
+    DablPlanComponent
 ];

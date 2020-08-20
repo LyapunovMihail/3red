@@ -1,15 +1,13 @@
 import { adminHeaders } from '../../../../commons/admin-headers.utilit';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IObjectFlatSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/flat-api/objects-flat.interfaces';
 import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 
 @Injectable()
 
 export class PlanService {
-
-    public subject = new BehaviorSubject<number>(0);
 
     constructor(
         private http: HttpClient

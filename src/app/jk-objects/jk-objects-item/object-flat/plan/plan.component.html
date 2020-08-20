@@ -24,8 +24,7 @@
             </ul>
         </nav>
 
-        <div class="object-flat__plan" *ngIf="mod !== 'ЯР' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'НК' && mod !== 'МКВ'">
-
+        <div class="object-flat__plan" *ngIf="mod !== 'СЯ' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'НК' && mod !== 'МКВ' && mod !== 'МАЙ' && mod !== 'АИБ'">
             <img class="object-flat__plan-img" src="/assets/img/jk-object/temp_bg.jpg" alt="">
     <!-- Места поблизсти -->
             <div class="object-flat__placement">
@@ -43,7 +42,7 @@
             [mod]="mod">
         </app-flats-nk-plan-page>
 
-        <app-flats-yar-plan-page *ngIf="mod === 'ЯР'"
+        <app-flats-yar-plan-page *ngIf="mod === 'СЯ'"
             class="object-flat__template"
             [objectId]="objectId"
             [mod]="mod">
@@ -81,6 +80,18 @@
             [objectId]="objectId"
             [mod]="mod">
         </app-flats-ob-plan-page>
+
+        <app-flats-may-plan-page *ngIf="mod === 'МАЙ'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-may-plan-page>
+
+        <app-flats-dabl-plan-page *ngIf="mod === 'АИБ'"
+            class="object-flat__template"
+            [objectId]="objectId"
+            [mod]="mod">
+        </app-flats-dabl-plan-page>
 
     </ng-container>
 </section>

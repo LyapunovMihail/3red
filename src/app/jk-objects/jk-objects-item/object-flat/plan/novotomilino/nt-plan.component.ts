@@ -59,10 +59,10 @@ export class NtPlanComponent implements OnInit {
         }
     }
 
-    public svgRouterLink(event: Event, url) {
+    public svgRouterLink(event: Event, url, house) {
         if (event) {
             event.preventDefault();
         }
-        this.router.navigate([url]);
+        this.router.navigate([url], {queryParams: {houses: house}});
     }
 }

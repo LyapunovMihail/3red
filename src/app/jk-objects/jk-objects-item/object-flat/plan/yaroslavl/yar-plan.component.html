@@ -31,7 +31,7 @@
         class="object-flat__svg">
 
         <ng-container *ngFor="let plan of houses">
-            <a (click)="svgRouterLink($event, ('/objects/list/' + objectId + '/flats/house/' + plan.houseNumber))"
+            <a (click)="svgRouterLink($event, ('/objects/list/' + objectId + '/flats/house/' + plan.houseNumber), plan.houseNumber)"
                     [attr.xlink:href]="'/objects/list/' + objectId + '/flats/house/' + plan.houseNumber"
                     [style.pointerEvents]="plan.freeFlats ? 'all' : 'none'">
 

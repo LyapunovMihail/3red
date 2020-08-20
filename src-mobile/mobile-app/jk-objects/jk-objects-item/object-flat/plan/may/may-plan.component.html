@@ -1,8 +1,8 @@
 <div class="plan">
     <div class="object-flat__house">
         <a class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of houses"
-          [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}"
-          [class.disabled]="!house.freeFlats">
+           [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}"
+           [class.disabled]="!house.freeFlats">
             <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
             <p class="object-flat__house-flats">{{house.freeFlats ? house.freeFlats + ' ' + service.parseText(house.freeFlats) : 'Нет квартир в продаже'}}</p>
             <p class="object-flat__house-price" *ngIf="house.freeFlats">от {{house.minPrice}} млн Р</p>
