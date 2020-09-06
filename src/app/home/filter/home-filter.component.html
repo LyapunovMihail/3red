@@ -32,7 +32,6 @@
                         (move)="minPrice.innerHTML = parseNumberPipe.transform(($event.min).toFixed(0)); maxPrice.innerHTML = parseNumberPipe.transform(($event.max).toFixed(0))">
                     </ghm-range-number>
                 </div>
-    
             </div>
     
             <div class="object-filter__wrap-item object-filter__wrap-item_mod">
@@ -54,12 +53,10 @@
                 </div>
             </div>
         </div>
-
-
         <a class="object-filter__btn-link btn_var-2"
            [class.object-filter__btn-link--disabled]="!flatsLength"
             (click)="getHousesAndRout()">
-            {{ flatsLength ? flatsLength + ' ' + parseText(flatsLength) : 'Нет предложений'}}
+            {{ this.availableFlats ? this.availableFlats.length + ' ' + parseText(this.availableFlats.length) : 'Нет предложений'}}
         </a>
     </div>
 </section>

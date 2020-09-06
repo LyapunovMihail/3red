@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
     ],
     host: {
         '(document:click)': 'onClick($event)',
-      }
+    }
 })
 
 export class HomeFilterComponent implements OnInit, OnDestroy {
@@ -29,7 +29,8 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     public modsBtnList;
     public showMods = false;
     public hideMods = false;
-    isExpanded: boolean = false;
+    public isExpanded = false;
+    public availableFlats: IAddressItemFlat[];
     @ViewChild('myDiv') myDivElementRef: ElementRef;
 
     constructor(
@@ -37,7 +38,8 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         public homeFilterService: HomeFilterService,
         public parseNumberPipe: GHMNumberPipe,
         public router: Router
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.getConfig({}).subscribe(
@@ -51,7 +53,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     }
 
     onClick(event) {
-        if (!this.myDivElementRef.nativeElement.contains(event.target) ) {
+        if (!this.myDivElementRef.nativeElement.contains(event.target)) {
             this.isExpanded = null;
         }
     }
@@ -66,9 +68,15 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         const words = ['предложение', 'предложения', 'предложений'];
         const sum = num % 10;
 
-        if (num > 10 && num < 20) { return words[2]; }
-        if (sum > 1 && sum < 5) { return words[1]; }
-        if (sum === 1) { return words[0]; }
+        if (num > 10 && num < 20) {
+            return words[2];
+        }
+        if (sum > 1 && sum < 5) {
+            return words[1];
+        }
+        if (sum === 1) {
+            return words[0];
+        }
         return words[2];
     }
 
@@ -98,7 +106,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
             priceMax: form.price.max,
             mod: form.mod.join(',')
         };
-        if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
+        if ('rooms' in form && form.rooms.some((i) => i === true)) {
             this.params.rooms = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
 
@@ -111,6 +119,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         }
         this.homeFilterService.getFlats(this.params).subscribe(
             (data: IAddressItemFlat[]) => {
+                this.availableFlats = data.filter((flat: IAddressItemFlat) => flat.statusName === 'Свободно');
                 this.flatsLength = data.length;
             },
             (err) => {
@@ -128,17 +137,22 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
                         data.housesBtnList.forEach((item, i) => { // приходится создавать массив со всеми домами разных модов, так как на странице квартир предусмотрен поиск только по одному моду или по домам разных модов
                             if (i > 0) {
                                 if (!item.jk) {
-                                    housesMods.push(JSON.stringify({ value: item.value, mod: item.mod }));
+                                    housesMods.push(JSON.stringify({value: item.value, mod: item.mod}));
                                 }
                             }
                         });
                         delete this.params.mod;
-                        this.router.navigate(['/flats/search'], { queryParams: { ...this.params, housesMods: housesMods.join('nzt;') } });
+                        this.router.navigate(['/flats/search'], {
+                            queryParams: {
+                                ...this.params,
+                                housesMods: housesMods.join('nzt;')
+                            }
+                        });
                     },
                     (err) => console.error(err)
                 );
         } else {
-            this.router.navigate(['/flats/search'], { queryParams: this.params });
+            this.router.navigate(['/flats/search'], {queryParams: this.params});
         }
     }
 
