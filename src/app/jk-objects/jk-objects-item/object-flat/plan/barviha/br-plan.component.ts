@@ -56,6 +56,7 @@ export class BrPlanComponent implements OnInit {
                     }, 9999999999);
                 room.minPrice = room.minPrice === 9999999999 ? 0 : Number((room.minPrice / 1000000).toFixed(2));
             });
+            this.houses[i].rooms = this.houses[i].rooms.filter(item => item.minPrice !== 0);
         }
         if (this.storerooms && this.storerooms.length) {
             this.houses[i].freeStorage = this.storerooms.filter( flat => flat.status === '4').length;

@@ -66,6 +66,7 @@ export class ObPlanComponent implements OnInit {
                     }, 9999999999);
                 room.minPrice = room.minPrice === 9999999999 ? 0 : Number((room.minPrice / 1000000).toFixed(2));
             });
+            this.housesPlanSvg[i].rooms = this.housesPlanSvg[i].rooms.filter(item => item.minPrice !== 0);
         }
     }
 

@@ -22,7 +22,7 @@
                 <ul>
                     <li *ngFor="let room of house.rooms" class="object-flat__house-room">
                         <span>{{room.name === 0 ? 'Студии' : room.name + '-комнатные'}}</span>
-                        <span>{{room.minPrice ? 'от ' + room.minPrice + ' млн Р' : 'не в продаже'}}</span>
+                        <span>{{'от ' + room.minPrice + ' млн Р'}}</span>
                     </li>
                 </ul>
             </div>

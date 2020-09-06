@@ -50,6 +50,7 @@ export class DablPlanComponent implements OnInit {
                     }, 9999999999);
                 room.minPrice = room.minPrice === 9999999999 ? 0 : Number((room.minPrice / 1000000).toFixed(2));
             });
+            this.houses[i].rooms = this.houses[i].rooms.filter(item => item.minPrice !== 0);
         }
     }
 
