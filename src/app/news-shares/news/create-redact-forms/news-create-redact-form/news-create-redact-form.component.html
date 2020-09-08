@@ -47,7 +47,7 @@
                 </div>
                 <div class="create-form__form-wrap create-form__form-wrap_select create-form__form-wrap_w2">
                     <p class="create-form__form-title create-form__form-title_for-select">Статус</p>
-                    <select name="status" class="create-form__form-select create-form__form-select_type" [formControl]="form.controls['publish']">
+                    <select name="status" class="create-form__form-select create-form__form-select_type" [formControl]="form.controls['publish']" (change)="checkShowOnMain($event)">
                         <option [value]="false">Черновик</option>
                         <option [value]="true">Чистовик</option>
                     </select>
@@ -74,7 +74,7 @@
                 </div>
     
                 <div class="create-form__form-wrap create-form__form-wrap_full">
-                    <label class="g-checkbox">
+                    <label *ngIf="publishVal()" class="g-checkbox">
                         <input class="admin-news_checkbox_content"
                             [formControl]="form.controls['show_on_main']"
                             type="checkbox" name="show_on_main">

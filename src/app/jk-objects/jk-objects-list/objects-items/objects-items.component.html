@@ -16,8 +16,8 @@
                 <div class="objects__item__tooltip">
                     <div class="objects__item__tooltip-item" (click)="redactSnippet.emit(snippet._id)">Редактировать</div>
                     <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
-                    <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = true; updateSnippet.emit(snippet)" *ngIf="!snippet.show_on_main">На главную</div>
-                    <div class="objects__item__tooltip-item" (click)="snippet.publish = false; updateSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
+                    <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = true; updateSnippet.emit(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
+                    <div class="objects__item__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
                     <div class="objects__item__tooltip-item" (click)="snippet.publish = true; updateSnippet.emit(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
                     <div class="objects__item__tooltip-item" (click)="deleteSnippet.emit(snippet._id)">Удалить</div>
                 </div>

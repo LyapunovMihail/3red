@@ -11,14 +11,15 @@ import {
     ShareFlat,
     ShareFlatDiscountType
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-shares-edit',
     templateUrl: './shares-edit.component.html',
-    styleUrls: ['./shares-edit.component.scss']
+    styleUrls: ['./shares-edit.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class SharesEditComponent implements OnInit, OnDestroy {
@@ -58,7 +59,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         private flatsDiscountService: FlatsDiscountService
     ) {
         this.uploadsPath = SHARES_UPLOADS_PATH;
-        this.form  = new FormGroup({
+        this.form = new FormGroup({
             name: new FormControl('', Validators.compose([Validators.required])),
             text: new FormControl('', Validators.required),
             mainImage: new FormControl(null, Validators.required),
@@ -131,7 +132,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         this.modalAnchorData = obj;
     }
 
-    public get body(): FormArray { return this.form.get('body') as FormArray; }
+    public get body(): FormArray {
+        return this.form.get('body') as FormArray;
+    }
 
     public addDescription(order?: number, value?: string) {
         this.body.push(new FormControl({
@@ -181,7 +184,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     price: null,
                     discount: null,
                     discountType: ShareFlatDiscountType.SUM
-                  }
+                }
         }));
     }
 
@@ -201,6 +204,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             this.body.removeAt(cnt);
         }
     }
+
     public moveBlock(array, i, dir) {
         let arr = this.form.value.body;
 
@@ -288,6 +292,28 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                         alert('Что-то пошло не так!');
                     }
                 );
+        }
+    }
+
+    get publish(): FormControl {
+        return this.form.get('publish') as FormControl;
+    }
+
+    get showOnMain(): FormControl {
+        return this.form.get('show_on_main') as FormControl;
+    }
+
+    publishVal(): boolean {
+        return this.publish.value === 'true';
+    }
+
+    checkShowOnMain(val) {
+        const switchOffShowOnMain = () => {
+            this.showOnMain.setValue(false);
+            this.form.updateValueAndValidity();
+        };
+        if (val.currentTarget.value === 'false') {
+            switchOffShowOnMain();
         }
     }
 

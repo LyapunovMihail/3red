@@ -1,10 +1,8 @@
 <div class="g-modal-bg create-shares" *ngIf="isForm">
-
     <form class="create-shares__container" [formGroup]="form">
 
         <button class="create-shares__cls-btn btn-cls" (click)="close.emit()"><span></span></button>
         <button class="create-shares__cls-success btn-success" [disabled]="!form.valid" [class.btn-disabled]="!form.valid" (click)="onSave(form.value)"><span></span></button>
-
         <h2 class="create-shares__typografy-title">Добавить акцию</h2>
         <!-- <p class="shares-edit-form__typografy-date">{{dateNow}}</p> -->
 
@@ -41,7 +39,7 @@
             </div>
             <div class="create-shares__wrap create-shares__wrap_select create-shares__wrap_input create-shares__wrap_w2">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Статус</p>
-                <select name="publish" class="create-shares__input create-shares__input_status" [formControlName]="'publish'">
+                <select name="publish" class="create-shares__input create-shares__input_status" [formControlName]="'publish'" (change)="checkShowOnMain($event)">
                     <option [value]="false">Черновик</option>
                     <option [value]="true">Чистовик</option>
                 </select>
@@ -84,9 +82,8 @@
 
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_preview">Загрузите фото для превью</p>
             </div>
-
             <div class="create-shares__wrap create-shares__wrap_full">
-                <label class="g-checkbox">
+                <label *ngIf="publishVal()" class="g-checkbox">
                     <input type="checkbox" name="public" id="public" style="display: none;" [formControlName]="'show_on_main'">
                     <div></div>
                     <span>Показать акцию на главной</span>

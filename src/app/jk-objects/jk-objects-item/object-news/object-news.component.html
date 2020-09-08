@@ -71,16 +71,16 @@
                                 <div class="slider-list__tooltip" *ngIf="snippet.title">
                                     <div class="slider-list__tooltip-item" (click)="redactNewsSnippet(snippet._id)" *ngIf="snippet.title">Редактировать</div>
                                     <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = false; updateNewsSnippet(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
-                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = true; updateNewsSnippet(snippet)" *ngIf="!snippet.show_on_main">На главную</div>
-                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = false; updateNewsSnippet(snippet)" *ngIf="snippet.publish">В черновик</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = true; updateNewsSnippet(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateNewsSnippet(snippet)" *ngIf="snippet.publish">В черновик</div>
                                     <div class="slider-list__tooltip-item" (click)="snippet.publish = true; updateNewsSnippet(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
                                     <div class="slider-list__tooltip-item" (click)="deleteNewsSnippet(snippet._id)" *ngIf="snippet.title">Удалить</div>
                                 </div>
                                 <div class="slider-list__tooltip" *ngIf="snippet.name">
                                     <div class="slider-list__tooltip-item" (click)="redactShareSnippet(snippet._id)" *ngIf="snippet.name">Редактировать</div>
                                     <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = false; updateShareSnippet(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
-                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = true; updateShareSnippet(snippet)" *ngIf="!snippet.show_on_main">На главную</div>
-                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = false; updateShareSnippet(snippet)" *ngIf="snippet.publish">В черновик</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.show_on_main = true; updateShareSnippet(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
+                                    <div class="slider-list__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateShareSnippet(snippet)" *ngIf="snippet.publish">В черновик</div>
                                     <div class="slider-list__tooltip-item" (click)="snippet.publish = true; updateShareSnippet(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
                                     <div class="slider-list__tooltip-item" (click)="deleteShareSnippet(snippet._id)" *ngIf="snippet.name">Удалить</div>
                                 </div>

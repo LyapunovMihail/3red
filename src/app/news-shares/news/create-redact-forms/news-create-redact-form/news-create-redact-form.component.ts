@@ -7,10 +7,10 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import * as moment from 'moment';
 
 @Component({
-    selector : 'app-news-create-redact-form',
-    templateUrl : './news-create-redact-form.component.html',
-    styleUrls : [ './../news-form.component.scss' ],
-    providers : [
+    selector: 'app-news-create-redact-form',
+    templateUrl: './news-create-redact-form.component.html',
+    styleUrls: ['./../news-form.component.scss'],
+    providers: [
         Uploader,
         NewsCreateRedactFormService
     ]
@@ -32,7 +32,7 @@ import * as moment from 'moment';
 
 export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChanges {
 
-    @Input() isForm = false ;
+    @Input() isForm = false;
     @Input() objectId = '';
     @Input() objectName = '';
     @Input() snippetsArray: INewsSnippet[] = [];
@@ -52,7 +52,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
     form: FormGroup;
 
     // подписка на авторизацию
-    isAuthorizated = false ;
+    isAuthorizated = false;
     AuthorizationEvent;
 
     public imageUploadEvent;
@@ -69,10 +69,11 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         private authorization: AuthorizationObserverService,
         private newsCreateService: NewsCreateRedactFormService,
         public ref: ChangeDetectorRef
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
+        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
         });
 
@@ -84,14 +85,14 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
 
     public setNewForm() {
         this.form = this.formBuilder.group({
-            created_at : '',
-            last_modifyed : '',
-            title : ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
-            description : '',
-            show_on_main : false,
+            created_at: '',
+            last_modifyed: '',
+            title: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
+            description: '',
+            show_on_main: false,
             publish: false,
-            image : ['', Validators.required],
-            thumbnail : ['', Validators.required],
+            image: ['', Validators.required],
+            thumbnail: ['', Validators.required],
             objectId: this.objectId,
             objectName: this.objectName,
             shareCount: {vk: 0, fb: 0, ok: 0},
@@ -101,14 +102,14 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
 
     public setFormFromSnippet() {
         this.form = this.formBuilder.group({
-            created_at : this.snippet.created_at,
-            last_modifyed : this.snippet.last_modifyed,
-            title : [this.snippet.title, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
-            description : this.snippet.description,
-            show_on_main : this.snippet.show_on_main,
+            created_at: this.snippet.created_at,
+            last_modifyed: this.snippet.last_modifyed,
+            title: [this.snippet.title, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
+            description: this.snippet.description,
+            show_on_main: this.snippet.show_on_main,
             publish: this.snippet.publish,
-            image : [this.snippet.image, Validators.required],
-            thumbnail : [this.snippet.thumbnail, Validators.required],
+            image: [this.snippet.image, Validators.required],
+            thumbnail: [this.snippet.thumbnail, Validators.required],
             objectId: this.snippet.objectId,
             objectName: this.snippet.objectName,
             shareCount: this.snippet.shareCount,
@@ -126,7 +127,9 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         this.modalAnchorData = obj;
     }
 
-    public get body(): FormArray { return this.form.get('body') as FormArray; }
+    public get body(): FormArray {
+        return this.form.get('body') as FormArray;
+    }
 
     public addDescription(order?: number, value?: string) {
         this.body.push(new FormControl({
@@ -221,10 +224,10 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
     ngOnChanges(changes: SimpleChanges) {
         // при открытии формы
         console.log('this.redactId: ', this.redactId);
-        if ( this.isForm ) {
+        if (this.isForm) {
             // при открытии формы расставляются значения редактируемого сниппета
             this.snippet = this.snippetsArray.find((item) => item._id === this.redactId);
-            if ( this.snippet ) {
+            if (this.snippet) {
                 this.setFormFromSnippet();
                 this.form.get('last_modifyed').setValue(new Date().toISOString());
                 if (this.snippet.body.length) {
@@ -254,8 +257,8 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
     }
 
     // добавление картинок в форму
-    imageUpload(e: Event, type: string,  i?: number, isFirst?: number) {
-        if ( this.isAuthorizated ) {
+    imageUpload(e: Event, type: string, i?: number, isFirst?: number) {
+        if (this.isAuthorizated) {
             this.isLoad = true;
             this.imageUploadEvent = this.newsCreateService.getPercentLoadedImage().subscribe(
                 (val) => {
@@ -269,7 +272,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
             );
 
             this.newsCreateService.imageUpload(e)
-                .then( (data: any) => {
+                .then((data: any) => {
                     this.isLoad = false;
                     this.imageUploadEvent.unsubscribe();
 
@@ -302,12 +305,37 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         this.form.patchValue({thumbnail: ''});
     }
 
+    get publish(): FormControl {
+        return this.form.get('publish') as FormControl;
+    }
+
+    get showOnMain(): FormControl {
+        return this.form.get('show_on_main') as FormControl;
+    }
+
+    publishVal(): boolean {
+        return this.publish.value === 'true';
+    }
+
+    checkShowOnMain(val) {
+        const switchOffShowOnMain = () => {
+            this.showOnMain.setValue(false);
+            this.form.updateValueAndValidity();
+        };
+        if (val.currentTarget.value === 'false') {
+            switchOffShowOnMain();
+        }
+    }
+
     onSubmit(form) {
         form.publish = !(form.publish === 'false' || form.publish === false);
         if (!this.redactId) {
             this.newsCreateService.createSnippet(form).subscribe(
                 // а в общий компонент передается новый массив сниппетов
-                (data) => { this.snippetsChange.emit(data); this.close.emit(); },
+                (data) => {
+                    this.snippetsChange.emit(data);
+                    this.close.emit();
+                },
                 (err) => {
                     alert('Что-то пошло не так!');
                     console.error(err);
@@ -316,7 +344,10 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         } else {
             this.newsCreateService.updateSnippet(this.redactId, form).subscribe(
                 // а в общий компонент передается новый массив сниппетов
-                (data) => { this.snippetsChange.emit(data); this.close.emit(); },
+                (data) => {
+                    this.snippetsChange.emit(data);
+                    this.close.emit();
+                },
                 (err) => {
                     alert('Что-то пошло не так!');
                     console.error(err);
