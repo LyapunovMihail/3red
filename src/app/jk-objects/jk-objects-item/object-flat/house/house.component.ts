@@ -155,16 +155,13 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                     //
                     // }
                     if (this.floorCount[houseNumber]) {
-                        // this.houseNumber = house;
-                        const houseData = [];
-                        this.housesData[i] = houseData;
                         const sectionNumbers = Object.keys(this.floorCount[houseNumber]); // создаём массив из номеров секций по выбранному дому.
                         if (this.platform.isBrowser) {
                             // получение квартир для нужных секций
                             sectionNumbers.forEach((sectionNumber) => {
                                 this.getFlats(sectionNumber, houseNumber).subscribe(
                                     (flats) => {
-                                        this.buildSectionData(flats, houseNumber, sectionNumber, houseData);
+                                        this.buildSectionData(flats, houseNumber, sectionNumber, this.housesData[i]);
                                     },
                                     (err) => console.log(err)
                                 );
@@ -194,7 +191,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private buildSectionData(flats, houseNumber, sectionNumber, houseData) {
-        let sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
+        const sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
             if (!section[flat.floor]) {
                 section[flat.floor] = [];
             }
