@@ -14,6 +14,7 @@ import { HomeFilterService } from './home-filter.service';
 export class HomeFilterComponent implements OnInit {
 
     public flatsLength: number;
+    public availableFlats: IAddressItemFlat[];
 
     constructor(
         public homeFilterService: HomeFilterService
@@ -26,6 +27,7 @@ export class HomeFilterComponent implements OnInit {
     public getFlats() {
         this.homeFilterService.getFlats({type: 'КВ,АП'}).subscribe(
             (data: IAddressItemFlat[]) => {
+                this.availableFlats = data.filter((flat: IAddressItemFlat) => flat.statusName === 'Свободно');
                 this.flatsLength = data.length;
                 console.log('this.flatsLength: ', this.flatsLength);
             },
