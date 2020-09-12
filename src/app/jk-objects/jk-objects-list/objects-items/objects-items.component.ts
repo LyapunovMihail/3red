@@ -16,6 +16,8 @@ export class ObjectsItemsComponent implements OnInit {
     public isAuthorizated = false;
     @Input()
     public snippets: IObjectSnippet[];
+    @Input()
+    public isMainPage = false;
 
     @Output() public deleteSnippet = new EventEmitter();
     @Output() public redactSnippet = new EventEmitter();
@@ -38,4 +40,7 @@ export class ObjectsItemsComponent implements OnInit {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
+    checkForShowItem(isAuthorizated: boolean, isPublished: boolean, isShowOnMain: boolean): boolean {
+        return this.isMainPage ? isShowOnMain && isPublished : isAuthorizated || isPublished;
+    }
 }

@@ -1,25 +1,26 @@
 <div class="objects-inner">
     <div class="objects__item-container">
-        <div class="objects__item" *ngFor="let snippet of snippets">
-            <a routerLink="/objects/list/{{snippet._id}}" class="objects__item-link"></a>
-            <img [src]="uploadsPath + snippet.image" alt="img" class="objects__item-img">
-            <div class="objects__item-location">{{snippet.address}}</div>
-            <div class="objects__item-wrapper">
-                <p class="objects__item-title">{{snippet.name}}</p>
-                <p class="objects__item-status">{{snippet.subtext}}</p>
-            </div>
+        <div *ngFor="let snippet of snippets">
+            <div *ngIf="checkForShowItem(isAuthorizated, snippet.publish, snippet.show_on_main)" class="objects__item">
+                <a routerLink="/objects/list/{{snippet._id}}" class="objects__item-link"></a>
+                <img [src]="uploadsPath + snippet.image" alt="img" class="objects__item-img">
+                <div class="objects__item-location">{{snippet.address}}</div>
+                <div class="objects__item-wrapper">
+                    <p class="objects__item-title">{{snippet.name}}</p>
+                    <p class="objects__item-status">{{snippet.subtext}}</p>
+                </div>
+                <div class="objects__item__edit" *ngIf="isAuthorizated">
+                    <button class="objects__item__edit-item" (click)="onSelectItem(snippet._id)"
+                            [class.objects__item__edit-item_active]="snippet._id == activeTooltip"><span></span></button>
 
-            <div class="objects__item__edit" *ngIf="isAuthorizated">
-                <button class="objects__item__edit-item" (click)="onSelectItem(snippet._id)"
-                        [class.objects__item__edit-item_active]="snippet._id == activeTooltip"><span></span></button>
-
-                <div class="objects__item__tooltip">
-                    <div class="objects__item__tooltip-item" (click)="redactSnippet.emit(snippet._id)">Редактировать</div>
-                    <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
-                    <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = true; updateSnippet.emit(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
-                    <div class="objects__item__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
-                    <div class="objects__item__tooltip-item" (click)="snippet.publish = true; updateSnippet.emit(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
-                    <div class="objects__item__tooltip-item" (click)="deleteSnippet.emit(snippet._id)">Удалить</div>
+                    <div class="objects__item__tooltip">
+                        <div class="objects__item__tooltip-item" (click)="redactSnippet.emit(snippet._id)">Редактировать</div>
+                        <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
+                        <div class="objects__item__tooltip-item" (click)="snippet.show_on_main = true; updateSnippet.emit(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
+                        <div class="objects__item__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
+                        <div class="objects__item__tooltip-item" (click)="snippet.publish = true; updateSnippet.emit(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
+                        <div class="objects__item__tooltip-item" (click)="deleteSnippet.emit(snippet._id)">Удалить</div>
+                    </div>
                 </div>
             </div>
         </div>

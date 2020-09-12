@@ -9,6 +9,8 @@ import { IObjectSnippet, OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/
 export class ObjectsItemsComponent implements OnInit {
 
     @Input()
+    public isMainPage = false;
+    @Input()
     public snippets: IObjectSnippet[];
 
     uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
@@ -26,4 +28,7 @@ export class ObjectsItemsComponent implements OnInit {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
+    checkForShowItem(isPublished: boolean, isShowOnMain: boolean): boolean {
+        return this.isMainPage ? isShowOnMain && isPublished : isPublished;
+    }
 }

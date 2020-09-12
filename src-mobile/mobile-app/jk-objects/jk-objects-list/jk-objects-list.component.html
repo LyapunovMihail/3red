@@ -29,7 +29,8 @@
         </app-jk-objects-form>
 
         <app-jk-objects-items *ngIf="!showMap"
-            [snippets]="snippets">
+            [snippets]="snippets"
+            [isMainPage] = isMainPage>
         </app-jk-objects-items>
 
     </div>

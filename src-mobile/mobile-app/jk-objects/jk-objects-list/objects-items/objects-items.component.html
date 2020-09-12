@@ -1,12 +1,14 @@
 <div class="objects-inner">
     <div class="objects__item-container">
-        <div class="objects__item" *ngFor="let snippet of snippets">
-            <a routerLink="/objects/list/{{snippet._id}}" class="objects__item-link"></a>
-            <img [src]="uploadsPath + snippet.image" alt="img" class="objects__item-img">
-            <div class="objects__item-location">{{snippet.address}}</div>
-            <div class="objects__item-wrapper">
-                <p class="objects__item-title">{{snippet.name}}</p>
-                <p class="objects__item-status">{{snippet.subtext}}</p>
+        <div *ngFor="let snippet of snippets">
+            <div *ngIf="checkForShowItem(snippet.publish, snippet.show_on_main)" class="objects__item">
+                <a routerLink="/objects/list/{{snippet._id}}" class="objects__item-link"></a>
+                <img [src]="uploadsPath + snippet.image" alt="img" class="objects__item-img">
+                <div class="objects__item-location">{{snippet.address}}</div>
+                <div class="objects__item-wrapper">
+                    <p class="objects__item-title">{{snippet.name}}</p>
+                    <p class="objects__item-status">{{snippet.subtext}}</p>
+                </div>
             </div>
         </div>
     </div>
