@@ -18,15 +18,18 @@ export class ObjectTriggerComponent implements OnInit {
     @Input() public objectId: string;
     @Input() public flats: IAddressItemFlat[];
 
-    constructor() {}
+    constructor() {
+    }
 
     ngOnInit() {
         this.buildTriggersData(this.flats);
     }
 
     private buildTriggersData(flats) {
-        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
-        if (flats.length) {
+        if (flats && Array.isArray(flats)) {
+            flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        }
+        if (flats && flats.length) {
             for (let i = 0; i < 4; i++) {
                 const filteredFlats = flats.filter((flat) => Number(flat.rooms) === i);
                 if (filteredFlats.length) {
@@ -35,10 +38,10 @@ export class ObjectTriggerComponent implements OnInit {
                     this.triggerSnippets[i].price = Number((this.triggerSnippets[i].price / 1000000).toFixed(2));
 
                     let spaceMin = Math.min.apply(Math, filteredFlats.map((flat) => flat.space));
-                    spaceMin =  Math.round(spaceMin);
+                    spaceMin = Math.round(spaceMin);
 
                     let spaceMax = Math.max.apply(Math, filteredFlats.map((flat) => flat.space));
-                    spaceMax =  Math.round(spaceMax);
+                    spaceMax = Math.round(spaceMax);
 
                     this.triggerSnippets[i].space = spaceMin + '-' + spaceMax + ' м²';
                 }

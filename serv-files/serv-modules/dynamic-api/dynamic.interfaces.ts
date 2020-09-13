@@ -24,7 +24,7 @@ export interface IDynamicImageSnippet {
 
 export enum EnumDynamicImageType {
     VIDEO = 'VIDEO',
-    IMAGE = 'IMAGE'
+    IMAGE = 'IMAGE',
 }
 
 export interface IDynamicObjectCreateParameters {

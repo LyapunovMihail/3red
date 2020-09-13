@@ -1,7 +1,7 @@
 <div class="object-item" #container>
     <ng-container *ngIf="jk">
 
-        <app-object-item-preview [objectId]="objectId" [hasFlats]="flats.length"></app-object-item-preview>
+        <app-object-item-preview [objectId]="objectId" [hasFlats]="!!flats?.length"></app-object-item-preview>
 
         <!-- <app-object-item-filter [objectId]="objectId" [mod]="jk.mod" *ngIf=flats.length></app-object-item-filter> -->
 

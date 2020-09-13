@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { EventsService } from '../../commons/events.service';
 import { ViewportScroller } from '@angular/common';
 import { PlatformDetectService } from '../../platform-detect.service';
+import { IObjectDynamicSnippet } from '../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
+import { Subscription } from 'rxjs';
+
 declare let $: any;
 
 interface INavLink extends IHeaderLink {
@@ -36,8 +40,13 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     public windowScrollEvent;
     public pageResizeEvent;
 
-    public year: number;
-    public month: number;
+    // public year: number;
+    // public month: number;
+    public hasPhotos = false;
+    public lastMothWithPhotos: number;
+    public lastYearWithPhotos: number;
+    public isAuthorized = false;
+    private subs: Subscription[] = [];
 
     constructor(
         public platform: PlatformDetectService,
@@ -46,34 +55,64 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
         public headerService: HeaderService,
         public router: Router,
         private changeDetectorRef: ChangeDetectorRef,
-        private viewportScroller: ViewportScroller
-    ) { }
+        private viewportScroller: ViewportScroller,
+        private authorization: AuthorizationObserverService,
+    ) {
+    }
 
     ngOnInit() {
-        if (this.pageName === 'objects') {
-            this.getDynamicLink();
-        }
+        this.getDynamicLink();
+        this.checkAuth();
     }
 
     private getDynamicLink() {
-        this.headerService.getDynamicLink()
-            .subscribe(
-                (data) => {
-                    const date = new Date();
-                    this.year = data.year ? data.year : date.getFullYear();
-                    this.month = data.month ? data.month : ( date.getMonth() + 1 );
-                },
-                (err) => {
-                    console.error(err);
-                    const date = new Date();
-                    this.year = date.getFullYear();
-                    this.month = date.getMonth() + 1;
+        if (this.pageName === 'objects') {
+            this.subs.push(this.headerService.getDynamicLink().subscribe((data: IObjectDynamicSnippet[]) => {
+                if (data.length > 0) {
+                    this.hasPhotos = true;
+                    this.lastMothWithPhotos = 0;
+                    this.lastYearWithPhotos = 0;
+                    data.forEach((item) => {
+                        if (item && item.year && item.year > this.lastYearWithPhotos) {
+                            this.lastYearWithPhotos = item.year;
+                        }
+                        if (item && item.month && item.month > this.lastMothWithPhotos) {
+                            this.lastMothWithPhotos = item.month;
+                        }
+                    });
                 }
-            );
+            }));
+        }
     }
 
+    private checkAuth() {
+        this.subs.push(this.authorization.getAuthorization().subscribe((val) => {
+            this.isAuthorized = val;
+        }));
+
+    }
+
+    // private getDynamicLink() {
+    //     this.headerService.getDynamicLink()
+    //         .subscribe(
+    //             (data) => {
+    //                 const date = new Date();
+    //                 this.year = data.year ? data.year : date.getFullYear();
+    //                 this.month = data.month ? data.month : (date.getMonth() + 1);
+    //             },
+    //             (err) => {
+    //                 console.error(err);
+    //                 const date = new Date();
+    //                 this.year = date.getFullYear();
+    //                 this.month = date.getMonth() + 1;
+    //             }
+    //         );
+    // }
+
     ngAfterViewInit() {
-        if ( !this.platform.isBrowser ) { return false; }
+        if (!this.platform.isBrowser) {
+            return false;
+        }
 
         setTimeout(() => {
             this.getLinksSizes();
@@ -98,14 +137,14 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
                 this.changeDetectorRef.detectChanges();
             }, 200);
 
-            if (this.pageName === 'objects') {
-                this.getDynamicLink();
-            }
+            this.getDynamicLink();
         }
     }
 
     private getLinksSizes() {
-        if ( !this.platform.isBrowser ) { return false; }
+        if (!this.platform.isBrowser) {
+            return false;
+        }
 
         this.anchors.forEach((a) => {
             const link = document.getElementById(`a-${a.url}`);
@@ -115,7 +154,9 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
 
     private getBlocksSizes() {
-        if ( !this.platform.isBrowser ) { return false; }
+        if (!this.platform.isBrowser) {
+            return false;
+        }
 
         this.anchors.forEach((a) => {
             const block = document.getElementById(`${a.url}`);
@@ -133,18 +174,25 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
 
     // Скролл до якоря
     public scrollLink(link) {
-        if ( !this.platform.isBrowser ) { return false; }
+        if (!this.platform.isBrowser) {
+            return false;
+        }
 
-        if (!$(`#${link}`).length) { return; }
+        if (!$(`#${link}`).length) {
+            return;
+        }
         const destination = $(`#${link}`).offset().top;
         this.viewportScroller.scrollToPosition([0, destination - 96]);
         return false;
     }
 
     ngOnDestroy() {
-        if ( !this.platform.isBrowser ) { return false; }
+        if (!this.platform.isBrowser) {
+            return false;
+        }
 
         this.windowScrollEvent.unsubscribe();
         this.pageResizeEvent.unsubscribe();
+        this.subs.forEach(item => item.unsubscribe());
     }
 }

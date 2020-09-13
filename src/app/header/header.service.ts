@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { NAVANCHORS } from './navAnchors';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { Observable } from 'rxjs';
+import { IObjectSnippet } from '../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { IObjectDynamicSnippet } from '../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
 
 export interface IHeaderLink {
     name: string;
@@ -26,8 +28,11 @@ export class HeaderService {
         this.objectId = id;
     }
 
-    public getDynamicLink(): Observable<{year: number, month: number}> {
-        return this.http.get<{year: number, month: number}>(`/jk-object/dynamic/last/link/${this.objectId}`);
+    // public getDynamicLink(): Observable<{year: number, month: number}> {
+    //     return this.http.get<{year: number, month: number}>(`/jk-object/dynamic/last/link/${this.objectId}`);
+    // }
+  public getDynamicLink(): Observable<IObjectDynamicSnippet[]>  {
+        return this.http.get<IObjectDynamicSnippet[]>(`/api/jk-object/dynamic/id/${this.objectId}`);
     }
 
     public links(): IHeaderLink[] {

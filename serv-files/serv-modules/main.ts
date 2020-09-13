@@ -16,7 +16,7 @@ async function bootstrap() {
     appExpress.use(session({
         secret: '3red',
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
     }));
     ExpressAppService.app = appExpress;
     const db = await MongoConnectionService.connect();

@@ -68,8 +68,8 @@ export class ServiceComponent implements OnInit {
 
     public defaultElem() {
         const el = this.elRef.nativeElement.querySelector('.active');
-        this.widthActive = el.offsetWidth;
-        this.offsetLeftActive = el.offsetLeft;
+        this.widthActive = el && el.offsetWidth ? el.offsetWidth : null;
+        this.offsetLeftActive = el && el.offsetLeft ? el.offsetLeft : null;
     }
     public getActiveElement(event, value) {
         const elem = event.target;

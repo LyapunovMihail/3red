@@ -10,6 +10,7 @@ export const SERVER_CONFIGURATIONS = {
     HOST: (process.env && process.env.HOST) || 'localhost',
     IS_DEVELOPMENT_MODE,
     MONGODB_CONNECTION:  `mongodb://localhost:27017/${(process.env && process.env.BASE_NAME) || '3red'}`,
+    // tslint:disable-next-line:max-line-length
     // MONGODB_CONNECTION:  'mongodb+srv://pichuser:RJDRGJwA6M1yPWjH@cluster0-ikucm.mongodb.net/test?retryWrites=true', //`mongodb://localhost:27017/${(process.env && process.env.BASE_NAME)}`,
     DIST_FOLDER: process.cwd(),
     // ...(() => {

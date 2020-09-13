@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, EventEmitter, Output, AfterViewIn
 import { Router } from '@angular/router';
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'nav-menu',
     templateUrl: 'nav-menu.component.html',
     styleUrls: ['./nav-menu.component.scss']
@@ -23,12 +24,14 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
         private elRef: ElementRef,
         private ref: ChangeDetectorRef,
         private router: Router
-    ) { }
+    ) {
+    }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 
     ngAfterViewInit() {
-        setTimeout( () => this.defaultElem() );
+        setTimeout(() => this.defaultElem());
         this.ref.detectChanges();
     }
 
@@ -44,7 +47,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
         if (type === 'link' && this.navType === 'decoration') {
             this.routeNavigate.emit(item);
         } else if (type === 'link') {
-            setTimeout( () => {
+            setTimeout(() => {
                 // Устанавливаем счетчик для перехода на другой роут после завершения анимации
                 this.router.navigate([value]);
             }, 500);
@@ -55,7 +58,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
 
     public defaultElem() {
         const el = this.elRef.nativeElement.querySelector('.active');
-        this.widthActive = el.offsetWidth;
-        this.offsetLeftActive = el.offsetLeft;
+        this.widthActive = el && el.offsetWidth ? el.offsetWidth : null;
+        this.offsetLeftActive = el && el.offsetLeft ? el.offsetLeft : null;
     }
 }

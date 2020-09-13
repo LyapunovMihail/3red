@@ -14,7 +14,7 @@
                 </a>
             </li>
         </ul>
-        <a *ngIf="pageName === 'objects'" class="photo__btn" [routerLink]="'/objects/list/' + headerService.objectId +  '/dynamic/' + year + '/' + month">Фотоотчет</a>
+        <a *ngIf="pageName === 'objects' && (hasPhotos || isAuthorized)" class="photo__btn" [routerLink]="'/objects/list/' + headerService.objectId +  '/dynamic/' + lastYearWithPhotos + '/' + lastMothWithPhotos">Фотоотчет</a>
         <div class="project__nav-progress"
             [ngStyle]="{'width' : progressWidth}"></div>
     </div>

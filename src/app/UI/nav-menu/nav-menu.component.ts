@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, EventEmitter, Output, AfterViewIn
 import { Router } from '@angular/router';
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'nav-menu',
     templateUrl: 'nav-menu.component.html',
     styleUrls: ['./nav-menu.component.scss']
@@ -60,7 +61,7 @@ export class NavMenuComponent implements OnInit, OnChanges, AfterViewInit {
 
     public defaultElem() {
         const el = this.elRef.nativeElement.querySelector('.active');
-        this.widthActive = el.offsetWidth;
-        this.offsetLeftActive = el.offsetLeft;
+        this.widthActive = el && el.offsetWidth ? el.offsetWidth : null;
+        this.offsetLeftActive = el && el.offsetLeft ? el.offsetLeft : null;
     }
 }
