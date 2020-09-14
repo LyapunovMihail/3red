@@ -57,7 +57,7 @@ export class ObjectPreviewComponent implements OnInit, OnDestroy {
     }
 
     private getDynamicLink() {
-        this.subs.push(this.headerService.getDynamicLink(this.objectId).subscribe((data: IObjectDynamicSnippet[]) => {
+        this.subs.push(this.headerService.getDynamicLinkForPhotos(this.objectId).subscribe((data: IObjectDynamicSnippet[]) => {
             if (data.length > 0) {
                 this.hasPhotos = true;
                 this.lastMothWithPhotos = 0;
