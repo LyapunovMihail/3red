@@ -29,10 +29,10 @@ export class DbCronUpdate {
 
     public start() {
         this.requestBase();
-        // const task = new CronJob('0 13,19 * * *', () => {
-        //     this.requestBase();
-        // }, false);
-        // task.start();
+        const task = new CronJob('0 13,19 * * *', () => {
+            this.requestBase();
+        }, false);
+        task.start();
     }
 
     public async requestBase() {
