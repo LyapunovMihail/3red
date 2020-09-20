@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IObjectSnippet, OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import {
+    IObjectSnippet,
+    OBJECTS_UPLOADS_PATH
+} from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-jk-objects-items',
@@ -28,7 +31,19 @@ export class ObjectsItemsComponent implements OnInit {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    checkForShowItem(isPublished: boolean, isShowOnMain: boolean): boolean {
-        return this.isMainPage ? isShowOnMain && isPublished : isPublished;
+    getFilteredSnippet() {
+        const filteredSnippets: IObjectSnippet[] = [];
+        this.snippets.forEach((item) => {
+            if (this.isMainPage) {
+                if (item.show_on_main && item.publish) {
+                    filteredSnippets.push(item);
+                }
+            } else {
+                if (item.publish) {
+                    filteredSnippets.push(item);
+                }
+            }
+        });
+        return filteredSnippets;
     }
 }

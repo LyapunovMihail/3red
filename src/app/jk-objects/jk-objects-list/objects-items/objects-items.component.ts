@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { JkObjectsListService } from '../jk-objects-list.service';
-import { IObjectSnippet, OBJECTS_UPLOADS_PATH } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import {
+    IObjectSnippet,
+    OBJECTS_UPLOADS_PATH
+} from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-jk-objects-items',
@@ -28,7 +31,6 @@ export class ObjectsItemsComponent implements OnInit {
     public activeTooltip: string;
 
     constructor(
-        private objectsListService: JkObjectsListService
     ) {
     }
 
@@ -40,7 +42,19 @@ export class ObjectsItemsComponent implements OnInit {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    checkForShowItem(isAuthorizated: boolean, isPublished: boolean, isShowOnMain: boolean): boolean {
-        return this.isMainPage ? isShowOnMain && isPublished : isAuthorizated || isPublished;
+    getFilteredSnippet() {
+        const filteredSnippets: IObjectSnippet[] = [];
+        this.snippets.forEach((item) => {
+            if (this.isMainPage) {
+                if (item.show_on_main && item.publish) {
+                    filteredSnippets.push(item);
+                }
+            } else {
+                if(item.publish || this.isAuthorizated){
+                    filteredSnippets.push(item);
+                }
+            }
+        });
+        return filteredSnippets;
     }
 }
