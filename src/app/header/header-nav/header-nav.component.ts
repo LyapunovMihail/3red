@@ -66,12 +66,13 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
 
     private getDynamicLink() {
+        const date = new Date();
+        this.lastMothWithPhotos = date.getMonth() + 1;
+        this.lastYearWithPhotos = date.getFullYear();
         if (this.pageName === 'objects') {
             this.subs.push(this.headerService.getDynamicLink().subscribe((data: IObjectDynamicSnippet[]) => {
                 if (data.length > 0) {
                     this.hasPhotos = true;
-                    this.lastMothWithPhotos = 0;
-                    this.lastYearWithPhotos = 0;
                     data.forEach((item) => {
                         if (item && item.year && item.year > this.lastYearWithPhotos) {
                             this.lastYearWithPhotos = item.year;

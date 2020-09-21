@@ -44,17 +44,20 @@ export class ObjectsItemsComponent implements OnInit {
 
     getFilteredSnippet() {
         const filteredSnippets: IObjectSnippet[] = [];
-        this.snippets.forEach((item) => {
-            if (this.isMainPage) {
-                if (item.show_on_main && item.publish) {
-                    filteredSnippets.push(item);
+        if(this.snippets && this.snippets.length>0){
+            this.snippets.forEach((item) => {
+                if (this.isMainPage) {
+                    if (item.show_on_main && item.publish) {
+                        filteredSnippets.push(item);
+                    }
+                } else {
+                    if (item.publish || this.isAuthorizated) {
+                        filteredSnippets.push(item);
+                    }
                 }
-            } else {
-                if(item.publish || this.isAuthorizated){
-                    filteredSnippets.push(item);
-                }
-            }
-        });
+            });
+        }
+
         return filteredSnippets;
     }
 }
