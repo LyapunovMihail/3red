@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const ROUTES: Routes = [
     { path: '', loadChildren : './home/home.module#HomeModule' },
     { path: 'about', loadChildren: './about/about.module#AboutModule' },
-    { path: 'service', loadChildren: './service/service.module#ServiceModule' },
+    { path: 'partners', loadChildren: './service/service.module#ServiceModule' },
     { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsModule' },
     { path: 'news-shares', loadChildren: './news-shares/news-shares.module#NewsSharesModule' },
     { path: 'flats', loadChildren: './flats/flats.module#FlatsModule' },
