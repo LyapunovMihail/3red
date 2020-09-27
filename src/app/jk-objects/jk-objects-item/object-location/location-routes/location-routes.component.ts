@@ -107,7 +107,7 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
             tooltip: '',
             title: '',
             text: '',
-            type: 'main'
+            type: 'main',
         };
         this.markersConfig.push(this.mainMarker);
     }
@@ -250,9 +250,6 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
     // и при клике на ссылки боковой панели навигации
     // меняет активный маршрут
     changeRoute(val) {
-        console.log(`%c${'!!!'}`, `color: #00aa00; font-size: 20px`);
-        console.log('val', val);
-        console.log('markers', this.markers);
         const markerContent = $('.marker-content');
         const markerContentArr = Array.prototype.slice.call(markerContent);
 

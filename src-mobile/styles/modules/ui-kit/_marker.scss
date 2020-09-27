@@ -114,6 +114,7 @@
     }
 
     &__img {
+        border: 3px solid $col-red;
         z-index: 9999;
         border-radius: 50%;
     }
