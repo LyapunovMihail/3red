@@ -42,6 +42,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges, AfterViewIn
 
     public closeTabsModal = true;
     public closeContentModal = true;
+    public interval;
 
     public uploadsPath = `/${OBJECTS_DECORATION_UPLOADS_PATH}`;
 
@@ -59,6 +60,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges, AfterViewIn
 
     ngOnInit() {
         this.getTypesThanContent();
+        this.slideShow();
     }
     ngAfterViewInit() {
         setTimeout( () => this.defaultElem(), 2000);
@@ -155,6 +157,14 @@ export class ObjectDecorationComponent implements OnInit, OnChanges, AfterViewIn
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.currentTab.images.length - 1;
+    }
+
+    public slideShow() {
+        this.interval = setInterval(() => {
+            this.currentSlide < this.contentSnippet.data.length - 1
+                ? this.nextBtn()
+                : this.currentSlide = 0;
+        }, 5000);
     }
 
     public changeNav(num) {

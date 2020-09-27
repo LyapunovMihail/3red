@@ -23,6 +23,7 @@
         top: 91px;
         left: 50%;
         transform: translateX(-50%);
+        display: flex;
 
         &-btn {
             font: 18px/18px $font-proba;

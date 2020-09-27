@@ -25,6 +25,7 @@
         position: absolute;
         top: 24px; left: 50%;
         transform: translateX(-50%);
+        display: flex;
 
         &-btn {
             font: 24px/29px $font-proba;
@@ -35,7 +36,7 @@
             &::before {
                 content: '';
                 position: absolute;
-                top: -5px;
+                top: 0;
                 left: 0;
                 width: 28px;
                 height: 28px;
