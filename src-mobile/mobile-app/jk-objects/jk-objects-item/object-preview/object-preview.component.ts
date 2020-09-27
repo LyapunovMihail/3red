@@ -74,6 +74,21 @@ export class ObjectPreviewComponent implements OnInit, OnDestroy {
         }));
     }
 
+    concatTitle(titleFragments: string[]): string {
+        let retval: string = '';
+        if (titleFragments) {
+            titleFragments.forEach((fragment) => {
+                if (fragment.length > 0) {
+                    if (retval.length > 0) {
+                        fragment = ' - ' + fragment;
+                    }
+                    retval = retval + fragment
+                }
+            })
+        }
+        return retval;
+    }
+
     // private getDynamicLink() {
     //     this.headerService.getDynamicLink()
     //         .subscribe(

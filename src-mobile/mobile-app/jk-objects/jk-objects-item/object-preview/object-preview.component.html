@@ -9,7 +9,7 @@
             <div class="object-preview__item">
                 <p class="object-preview__info"
                     [ngClass]="{'object-preview__info_success': limit.realized}" *ngFor="let limit of snippet.deadlines">
-                    {{ limit.corpusId + ' — ' + limit.deadline }}
+                    {{concatTitle([limit.corpusId, limit.deadline])}}
                 </p>
             </div>
             <div class="object-preview__item object-preview__item--link" *ngIf="snippet.mainInfo.webcamLink">

@@ -40,7 +40,7 @@ export class ObjectPreviewComponent implements OnInit {
         });
     }
 
-    concatTitle(titleFragments: string[]) {
+    concatTitle(titleFragments: string[]): string {
         let retval: string = '';
         if (titleFragments) {
             titleFragments.forEach((fragment) => {
