@@ -48,8 +48,8 @@ export class HeaderService {
                 name: 'Новости',
                 url: '/news-shares'
             }, {
-                name: '3-comfort',
-                url: '/service'
+                name: 'Партнеры',
+                url: '/partners'
             }, {
                 name: 'Избранное',
                 url: '/favorites'
