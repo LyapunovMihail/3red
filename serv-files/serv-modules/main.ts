@@ -14,7 +14,7 @@ async function bootstrap() {
     const appExpress: Express = express();
     appExpress.use(bodyParser.json());
     appExpress.use(session({
-        secret: '3-red_dev',
+        secret: '3red',
         resave: false,
         saveUninitialized: true,
     }));

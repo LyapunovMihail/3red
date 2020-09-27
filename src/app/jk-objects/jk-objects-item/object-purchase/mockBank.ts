@@ -135,5 +135,13 @@ export const banks = [
         date: '30',
         payment: '8',
         isNew: false
+    }, {
+        name: 'Альфа Банк',
+        cssclass: 'alphaBank',
+        image: '/assets/img/purchase/credit/alfa_logo.svg',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
     }
 ];

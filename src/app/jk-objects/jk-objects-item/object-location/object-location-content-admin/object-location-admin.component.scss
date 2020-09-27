@@ -11,6 +11,7 @@
     &__item {
         margin-right: 16px;
         position: relative;
+        cursor: pointer;
         &:last-child { margin-right: 0; }
         &.active {
             color: $col-black;
