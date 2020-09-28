@@ -16,6 +16,7 @@ import { JkObjectsListModule } from '../jk-objects/jk-objects-list/jk-objects-li
 import { HomeNewsModule } from './news/home-news.module';
 import { HomeInfoComponent } from './info/home-info.component';
 import { HomeInfoAdminComponent } from './info/home-info-admin/home-info-admin.component';
+import { HomeIlikeComponent } from './ilike/home-ilike.component';
 
 @NgModule({
     exports: [
@@ -27,6 +28,7 @@ import { HomeInfoAdminComponent } from './info/home-info-admin/home-info-admin.c
         HomePreviewAdminComponent,
         HomeInfoComponent,
         HomeInfoAdminComponent,
+        HomeIlikeComponent,
         SharesDayPipe,
         LineBreakPipe
     ],
