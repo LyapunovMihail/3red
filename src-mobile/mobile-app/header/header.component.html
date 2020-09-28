@@ -27,16 +27,23 @@
                             {{link.name}}
                         </a>
                     </li>
+                    <li class="header__menu-item header__menu-item--enter">
+                        <a href="http://www.portal.3-red.com/" target="_blank">
+                            Вход
+                        </a>
+                    </li>
                 </ul>
 
-                <div class="header__menu-info">
-                    <p class="header__menu-address">г. Люберцы, Новорязанское ш., д 7 <br> Торгово-офисный центр Гренада</p>
-                    <div class="header__menu-social">
-                        <a href="#" target="_blank" class="header__menu-link header__menu-link_insta"></a>
-                        <a href="#" target="_blank" class="header__menu-link header__menu-link_fb"></a>
+                <div class="header__menu-info menu-info">
+                    <div class="menu-info__wrap">
+                        <p class="header__menu-address">г. Люберцы, Новорязанское ш., д 7 <br> Торгово-офисный центр Гренада</p>
+                        <div class="header__menu-social">
+                            <a href="https://www.instagram.com/3red.official/" target="_blank" class="header__menu-link header__menu-link_insta"></a>
+                            <a href="https://www.facebook.com/3red.official/" target="_blank" class="header__menu-link header__menu-link_fb"></a>
+                        </div>
+                        <button class="header__menu-desktop" (click)="showFullVersion()">Полная версия сайта</button>
                     </div>
                     <a [href]="'tel: +7 (499) 211 22 33'" class="header__menu-number">+7 (499) 211 22 33</a>
-                    <!--<button class="header__menu-desktop" (click)="showFullVersion()">Полная версия сайта</button>-->
                 </div>
             </div>
         </div>
