@@ -67,3 +67,31 @@ $trans-img: transform .7s linear;
     @include font-smoothing();
     color: $color;
 }
+
+// ссылка на внешний ресурс с иконкой-стрелкой
+@mixin external-link {
+    position: relative;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 0 22px 0 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      right: 0;
+      top: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3762 3.22381L11.3152 8.03656C11.3109 8.37185 11.0386 8.64418 10.7033 8.64843C10.368 8.65269 10.1025 8.38717 10.1068 8.05188L10.1493 4.69903L3.65917 11.1891C3.41866 11.4296 3.03448 11.4345 2.8 11.2C2.56552 10.9655 2.57039 10.5814 2.81089 10.3409L9.29746 3.85429L5.94461 3.8968C5.60932 3.90105 5.3438 3.63553 5.34805 3.30025C5.3523 2.96496 5.62464 2.69262 5.95993 2.68837L10.7727 2.62735C10.9403 2.62523 11.0897 2.68968 11.2 2.80002C11.3103 2.91037 11.3783 3.05617 11.3762 3.22381Z' fill='%23E52628'/%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: rotate(0);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover {
+        &::before {
+            transform: rotate(45deg);
+        }
+    }
+}
