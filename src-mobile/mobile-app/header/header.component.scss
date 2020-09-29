@@ -120,11 +120,11 @@
 
     &__menu {
         position: fixed;
+        overflow: scroll;
         left: 0;
         top: 60px;
         width: 100%;
         height: calc(100% - 64px);
-        //min-height: 682px;
         display: flex;
         justify-content: center;
         background-color: #F5F5F5;
@@ -138,6 +138,7 @@
             width: calc(100% - 64px);
             max-width: 704px;
             height: 100%;
+            min-height: 640px;
             display: flex;
             flex-flow: column;
             justify-content: space-between;
@@ -148,6 +149,7 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
+            align-items: flex-end;
         }
 
         &-list {
@@ -165,6 +167,7 @@
             &--enter {
                 position: relative;
                 padding-left: 29px;
+                width: calc(100% - 29px);
 
                 &::before {
                     content: "";
@@ -183,7 +186,7 @@
         &-address {
             width: 100%;
             font: 16px/19px $font-proba;
-            margin: 0 0 13px;
+            margin: 0 0 24px;
         }
         &-wrap {
             width: 100%;
@@ -217,42 +220,38 @@
         &-number {
             font: 24px/32px $font-proba;
             color: $col-red;
-            order: 4;
         }
         &-desktop {
             display: inline-block;
             font: 16px/19px $font-proba;
-            //width: 100%;
-            margin: 16px 0;
+            margin: 24px 0 0 0;
             opacity: .6;
             background-color: transparent;
             text-align: left;
-            order: 3;
         }
     }
 }
 
-@media (max-width: 760px) {
-    .header__menu-info { flex-flow: column nowrap; }
-    .header__menu-number {
-        order: 1;
-        margin: 0 0 16px;
-    }
-    .header__menu-address {
-        order: 2;
-        margin: 0 0 16px;
-    }
-    .header__menu-social {
-        order: 3;
-        margin: 0 0 16px;
-    }
-}
-@media (max-width: 425px) {
-    .header__logo {
-        width: 118px;
-        height: 29px;
+@media (max-width: 454px) {
+    .header{
+        &__logo {
+            width: 118px;
+            height: 29px;
+    
+            img { width: 100%; }
+        }
 
-        img { width: 100%; }
+        &__menu {
+            padding: 0 20px 20px;
+        }
+
+        &__menu-info {
+            flex-flow: column-reverse wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        &__menu-number {
+            margin: 0 0 16px 0;
+        }
     }
-    .header__menu-info { transform: translateY(-60px); }
 }
