@@ -95,3 +95,26 @@ $trans-img: transform .7s linear;
         }
     }
 }
+
+// ссылка «Назад» для разделов
+@mixin back-link {
+    font: 18px/22px $font-proba;
+    color: $col-black;
+    padding-left: 8px + 28px;
+    position: relative;
+    cursor: pointer;
+        
+    &::before {
+        content: '';
+        position: absolute;
+        top: -5px; left: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
+        transition: background-color .2s linear;
+    }
+    &:hover::before {
+        background-color: rgba($color: $col-black, $alpha: .5);
+    }
+}
