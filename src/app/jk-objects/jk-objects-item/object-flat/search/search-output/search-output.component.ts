@@ -33,6 +33,7 @@ export class SearchOutputComponent implements OnInit {
     public container: ElementRef;
     @ViewChild('result')
     public result: ElementRef;
+    flatData: IFlatWithDiscount;
 
     constructor(
         private platform: PlatformDetectService,
@@ -101,5 +102,10 @@ export class SearchOutputComponent implements OnInit {
     public scrollToTop() {
         window.scrollTo(0, 0);
         // window.scrollTo(0, this.container.nativeElement.offsetTop);
+    }
+
+    public setFavorite(flat): void {
+        flat.inFavorite = !flat.inFavorite;
+        this.favoritesService.setFavorite(flat);
     }
  }
