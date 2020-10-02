@@ -1,7 +1,6 @@
 @import "../../../../../styles/modules/mixins/mixin";
 
 .btn__container {
-    cursor: pointer;
     width: 1280px;
     padding: 13px 32px;
     padding-top: 83px;
@@ -11,26 +10,7 @@
     box-sizing: border-box;
 }
 .news__btn {
-    font-size: 18px;
-    padding: 13px 0 13px 36px;
-    color: #000;
-    position: relative;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 46%;
-        left: 0;
-        transform: translateY( -50%);
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
-        transition: background-color .2s linear;
-    }
-    &:hover::before {
-        background-color: rgba($color: $col-black, $alpha: .5);
-    }
+    @include back-link;
 }
 
 .news__container {
