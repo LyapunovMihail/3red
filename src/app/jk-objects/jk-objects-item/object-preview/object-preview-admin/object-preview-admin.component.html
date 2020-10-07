@@ -23,7 +23,7 @@
                     <input style='display: none;' type="file" placeholder="Upload file" accept=".jpg" (change)="imageUpload($event)">
                 </label>
                 <div class="preview__wrap" *ngIf="loadedImage.length > 0">
-                    <button class="button__delete" (click)="delImg()"><img class="preiew__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                    <button class="button__delete" (click)="delImg()"><img class="preview__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
                     <img class='bg-img' [src]="uploadsPath + loadedImage" alt="image" width="164" height="108">
                 </div>
                 <input hidden="true" type="text" formControlName="image">
