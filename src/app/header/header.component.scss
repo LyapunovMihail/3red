@@ -39,14 +39,7 @@
     height: 77px;
     background: #f5f5f5;
     box-sizing: border-box;
-    z-index: 10;
-
-    &__container {
-        width: 100%;
-        max-width: calc(1280px - 64px);
-        display: flex;
-        justify-content: space-between;
-    }
+    z-index: 101;
 
     &__container {
         width: 100%;
@@ -61,9 +54,9 @@
         transform: translateY(0);
         left: 0;
         width: 100%;
-        z-index: 51;
         background: #f5f5f5;
         transition: transform 0.2s linear;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
         &--hide {
             transform: translateY(-77px);
@@ -74,21 +67,45 @@
         margin-right: 41px;
     }
 
-    &__phone {
-        color: #ee4237;
-        font-size: 24px;
-        transition: color .2s linear;
-        position: relative;
-    &::after {
-        content: ''; 
-        width: 0px;
-        height: 1px;
-        position: absolute;
-        top: 100%; left: 0;
-        background-color: $col-red;
-        transition: width .2s ease;
+    &__another-nav {
+        align-self: center;
     }
-    &:hover::after { width: 100%; }
+
+    &__phone,
+    &__enter {
+        font-size: 20px;
+        line-height: 24px;
+        color: #000;
+        transition: color .2s linear;
+        &:hover { color: $col-red_hover !important; }
+    }
+
+    &__phone {
+        margin-right: 16px;
+    }
+
+    &__enter {
+        position: relative;
+        padding: 0 0 0 29px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: 0;
+            top: -4px;
+            background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z' fill='black'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: background-image .2s linear;
+        }
+
+        &:hover {
+            &::before {
+                background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z' fill='%23EE534A'/%3E%3C/svg%3E");
+            }
+        }
     }
 }
 

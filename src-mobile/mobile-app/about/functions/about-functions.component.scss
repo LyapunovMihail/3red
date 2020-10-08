@@ -1,3 +1,5 @@
+@import "../../../styles/modules/mixins/mixin";
+
 .functions {
     max-width: 704px;
     padding: 96px 32px;
@@ -17,7 +19,6 @@
 .functions__title {
     font-size: 36px;
     margin-bottom: 24px;
-
 }
 .functions__text {
     font-size: 24px;
@@ -31,9 +32,26 @@
     width: 704px;
     margin-top: 48px;
 }
+.function__image {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+
+    img {
+        max-width: 100%;
+        object-fit: contain;
+    }
+}
 .function__title {
     font-size: 24px;
     margin-bottom: 8px;
+}
+.function__link {
+    @include external-link;
+    color: $col-red;
+}
+.function__link + .function__text {
+    margin-top: 8px;
 }
 .function__text {
     font-size: 18px;

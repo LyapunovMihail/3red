@@ -46,6 +46,27 @@
         }
     }
 
+    &__wrapper {
+        display: flex;
+
+        &--col {
+            flex-flow: column nowrap;
+
+            &-price {
+                @media (max-width: 400px) {
+                    margin-top: -15px;
+                }
+            }
+        }
+        &--row {
+            flex-flow: row nowrap;
+
+            span {
+                margin-right: 8px;
+            }
+        }
+    }
+
     &__result {
         @include container();
         @media (max-width: 767px) {
@@ -54,6 +75,7 @@
         }
 
         &-wrap {
+            position: relative;
             width: 100%;
             margin: 0 0 4px;
         }
@@ -75,9 +97,9 @@
                 align-items: center;
                 margin-right: 24px;
                 @media (max-width: 767px) {
-                    width: 58px;
-                    height: 58px;
-                    min-width: 58px;
+                    width: 48px;
+                    height: 48px;
+                    min-width: 48px;
                     margin-right: 8px;
                 }
 
@@ -95,7 +117,7 @@
             &-wrap {
                 width: calc(100% - (67px + 24px));
                 @media (max-width: 767px) {
-                    width: calc(100% - 66px);
+                    width: calc(100% - 58px);
                 }
 
                 &--top {
@@ -103,18 +125,24 @@
                     display: flex;
                     justify-content: space-between;
                     margin: 0 0 16px;
+
                     @media (max-width: 767px) {
-                        margin: 0 0 6px;
+                        margin: 0 0 8px;
                     }
+                    
                 }
                 &--bottom {
                     width: 100%;
                     display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
                     position: relative;
 
-                    &> span { margin-right: 24px; }
-                    @media (max-width: 767px) {
-                        &> span { margin-right: 8px; }
+                    & > span { margin-right: 8px; }
+
+                    @media (max-width: 400px) {
+                        flex-flow: column nowrap;
+                        align-items: revert;
                     }
                 }
             }
@@ -125,32 +153,46 @@
                 white-space: nowrap;
                 user-select: none;
                 @media (max-width: 767px) {
-                    @include font-size(14px,18px);
+                    @include font-size(12px,14px);
                 }
 
                 &_room > span {
                     display: block;
                     &:first-child {
                         margin: 0 0 4px;
-                        &> span {
-                            @media (max-width: 767px) { display: none; }
-                        }
                     }
                     &:last-child { color: $col-black-5; }
                 }
 
                 &_coming-soon {
-                    margin: 4px 0 0;
+                    margin: 4px 0 4px;
                     color: $col-black-5;
 
                     @media (max-width: 767px) {
-                        @include font-size(14px,18px);
+                        @include font-size(12px,14px);
                     }
                 }
 
-                &_room,
+                &_appart,
+                &_space,
+                &_num,
+                &_floor,
+                &_house,
+                &_price {
+                    @media (max-width: 767px) {
+                        @include font-size(14px,16px);
+                    }
+                }
+
+                &_appart,
                 &_price,
-                &_space { color: $col-black; }
+                &_space,
+                &_delivery--black { color: $col-black; }
+
+                &_delivery {
+                    margin-top: 5px;
+                }
+                
 
                 &_price,
                 &_price-not-sale,
@@ -164,37 +206,47 @@
                     display: none;
                     @media (max-width: 767px) { display: block; }
                 }
-                &_space {
-                    position: absolute;
-                    top: 0; right: 0;
-                }
-                @media (max-width: 767px) {
-                    &_delivery,
-                    &_decoration { display: none; }
-                }
             }
 
             &-price {
                 display: flex;
                 flex-flow: column;
+                align-items: flex-end;
+                @include font-size(14px,16px);
+            }
+            &-jk {
+                @include font-size(18px,18px);
+                color: $col-black-5;
+                margin-top: 4px;
+                text-align: right;
+
+                @media (max-width: 767px) {
+                    @include font-size(12px,12px);
+                }
+                @media (max-width: 400px) {
+                    margin-top: 8px;
+                }
             }
 
             &-favorite {
-                width: 6%;
+                position: absolute;
+                top: 16px;
+                right: 24px;
 
                 &_img {
-                    display: block;
-                    width: 25px;
-                    height: 23px;
-                    margin-left: 40px;
-                    background: url(/assets/img/jk-object/header_heart.svg) no-repeat;
-                    background-size: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 24px;
+                    height: 24px;
+                    background-color: transparent;
+                    z-index: 1;
+
+                    &:active {
+                        transform: scale(0.95);
+                    }
                 }
-                //
-                //&_active {
-                //    background: url(/assets/img/favorite-active.svg) no-repeat;
-                //    background-size: 100%;
-                //}
+
             }
         }
     }
