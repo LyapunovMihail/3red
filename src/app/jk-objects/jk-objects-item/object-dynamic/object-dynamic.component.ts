@@ -1,5 +1,5 @@
-import { PlatformDetectService } from './../../../platform-detect.service';
-import { AuthorizationObserverService } from './../../../authorization/authorization.observer.service';
+import { PlatformDetectService } from '../../../platform-detect.service';
+import { AuthorizationObserverService } from '../../../authorization/authorization.observer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
@@ -84,15 +84,23 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     public getTabSnippet() {
         this.dynamicService.getTabsSnippetById(this.objectId).subscribe(
             (data) => {
-                this.tabSnippet = data; this.setNavList();
+                this.tabSnippet = data;
+                this.setNavList();
+                this.setNavList();
+                this.navList.forEach((navItem) => {
+                    if (navItem.link === 'process' && !navItem.show) {
+                        this.changeTab('ready');
+                        this.active = 'ready';
+                    }
+                })
             },
             (err) => console.error(err)
         );
     }
     private setNavList() {
         this.navList = [
-            { name: 'Ход строительства', link: 'process', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show ? true : false) },
-            { name: 'Готовые дома', link: 'ready', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show ? true : false) }
+            { name: 'Ход строительства', link: 'process', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show) },
+            { name: 'Готовые дома', link: 'ready', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show) }
         ];
     }
     public changeTab(tab) {
