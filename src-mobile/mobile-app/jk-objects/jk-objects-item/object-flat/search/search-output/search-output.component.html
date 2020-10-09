@@ -9,38 +9,56 @@
                          [src]="'/assets/floor-plans/jk_' + jk.mod + '/house_' + flat.house + '/section_' + flat.section + '/floor_' + flat.floor + '/' + flat.floor + 'floor_' + flat.flat + 'flat.svg'" alt="" #img>
                     <div *ngIf="img.style.display === 'none'" class="search-output__result-item-img-error g-3red"></div>
                 </div>
+
                 <div class="search-output__result-item-wrap">
                     <div class="search-output__result-item-wrap search-output__result-item-wrap--top">
                         <span class="search-output__result-item-content search-output__result-item-content_room">
-                            <span>{{(flat.rooms === 0) ? 'Студия, ' : flat.rooms + '-комнатная'}}<span>{{', № ' + flat.flat}}</span></span>
-                            <span>{{'ЖК ' + jk.name}}</span>
-                        </span>
-                        <span class="search-output__result-item-price">
-                            <span class="search-output__result-item-content"
-                                  [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
-                                              'search-output__result-item-content_price-not-sale' : flat.discount}">
-                                  {{flat.price | myBitNumberPipe}} &#8381;
+
+                            <span class="search-output__result-item-content_appart">{{(flat.rooms === 0) ? 'Студия, ' : flat.rooms + '-комнатная'}}
+                                <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
                             </span>
-                            <span *ngIf="flat.discount"
-                                  class="search-output__result-item-content search-output__result-item-content_price-sale">
-                                  {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
-                            </span>
-                            <span class="search-output__result-item-content_coming-soon" *ngIf="flat.status === '1'">Скоро в продаже</span>
+
+                            <div class="search-output__wrapper search-output__wrapper--row">
+                                <span class="search-output__result-item-content search-output__result-item-content_num" >{{'№ ' + flat.flat}}</span>
+                                <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
+                                <span class="search-output__result-item-content search-output__result-item-content_house">Дом {{flat.house}}</span>
+                            </div>
                         </span>
+                        
                     </div>
                     <div class="search-output__result-item-wrap search-output__result-item-wrap--bottom">
-                        <span class="search-output__result-item-content search-output__result-item-content_room-media">{{'№ ' + flat.flat}}</span>
-                        <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
-                        <span class="search-output__result-item-content search-output__result-item-content_delivery">{{flat.deliveryDate}}</span>
-                        <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
-                        <span class="search-output__result-item-content search-output__result-item-content_house">Дом {{flat.house}}</span>
-                        <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
+                        <div class="search-output__wrapper search-output__wrapper--col">
+                            <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
+                            <span class="search-output__result-item-content search-output__result-item-content_delivery"><span class="search-output__result-item-content_delivery--black">Срок сдачи: </span>{{flat.deliveryDate}}</span>
+                        </div>
+                        
+                        <div class="search-output__wrapper search-output__wrapper--col search-output__wrapper--col-price">
+                            <span class="search-output__result-item-price">
+                                <span class="search-output__result-item-content"
+                                      [ngClass]="{'search-output__result-item-content_price' : !flat.discount,
+                                                  'search-output__result-item-content_price-not-sale' : flat.discount}">
+                                      {{flat.price | myBitNumberPipe}} &#8381;
+                                </span>
+                                <span *ngIf="flat.discount"
+                                      class="search-output__result-item-content search-output__result-item-content_price-sale">
+                                      {{+flat.price - flat.discount | myBitNumberPipe}} &#8381;
+                                </span>
+                                <span class="search-output__result-item-content_coming-soon" *ngIf="flat.status === '1'">Скоро в продаже</span>
+                            </span>
+                            <span class="search-output__result-item-jk">{{'ЖК ' + jk.name}}</span>
+                        </div>
                     </div>
-                    <span class="search-output__result-item-content search-output__result-item-favorite">
-                        <span class="search-output__result-item-favorite_img" *ngIf="flat.inFavorite"></span>
-                    </span>
                 </div>
+
             </a>
+            <span class="search-output__result-item-content search-output__result-item-favorite">
+                <button class="search-output__result-item-favorite_img" (click)="setFavorite(flat)">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#E52628" d="M14.8326 1.57174C14.0435 0.558179 12.9487 0 11.75 0C10.0641 0 8.99678 1.1397 8.39828 2.09582C8.243 2.34393 8.11091 2.5927 8 2.8268C7.88909 2.5927 7.75703 2.34393 7.60172 2.09582C7.00322 1.1397 5.93587 0 4.25 0C3.05131 0 1.95653 0.558214 1.16734 1.57178C0.414594 2.53865 0 3.83357 0 5.21798C0 6.72496 0.519781 8.1266 1.63578 9.62894C2.63319 10.9717 4.06809 12.3557 5.72969 13.9584C6.34884 14.5557 6.98913 15.1733 7.67078 15.8484L7.69125 15.8687C7.77962 15.9562 7.88981 16 8 16C8.11019 16 8.22038 15.9562 8.30875 15.8687L8.32922 15.8484C9.01087 15.1733 9.65116 14.5557 10.2704 13.9584C11.9319 12.3558 13.3668 10.9717 14.3642 9.62894C15.4802 8.12656 16 6.72496 16 5.21798C16 3.83357 15.5854 2.53865 14.8326 1.57174Z" />
+                        <path fill="#FFF" [attr.opacity]="+(!flat.inFavorite)" d="M9.66228 13.1507C9.12853 13.6655 8.57922 14.1954 8 14.7653C7.42081 14.1954 6.87147 13.6656 6.33763 13.1507C3.08578 10.0141 0.9375 7.9419 0.9375 5.21796C0.9375 4.09205 1.26891 3.0463 1.87069 2.27337C2.47938 1.49168 3.32434 1.06116 4.25 1.06116C5.53528 1.06116 6.36613 1.95743 6.83675 2.70931C7.25891 3.38365 7.47919 4.06344 7.55431 4.32438C7.61716 4.54281 7.79706 4.69063 8 4.69063C8.20294 4.69063 8.38284 4.54281 8.44569 4.32438C8.52081 4.06344 8.74109 3.38365 9.16325 2.70927C9.63387 1.95743 10.4647 1.06116 11.75 1.06116C12.6757 1.06116 13.5206 1.49168 14.1293 2.27337C14.7311 3.0463 15.0625 4.09205 15.0625 5.21796C15.0625 7.9419 12.9142 10.0141 9.66228 13.1507Z"/>
+                    </svg>                    
+                </button>
+            </span>
         </div>
     </div>
     <div class="search-output__btn">

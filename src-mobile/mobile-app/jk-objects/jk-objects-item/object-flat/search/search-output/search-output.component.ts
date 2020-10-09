@@ -75,4 +75,9 @@ export class SearchOutputComponent implements OnInit {
     public scrollToTop() {
         window.scrollTo(0, this.container.nativeElement.offsetTop);
     }
+
+    public setFavorite(flat): void {
+        flat.inFavorite = !flat.inFavorite;
+        this.favoritesService.setFavorite(flat);
+    }
  }

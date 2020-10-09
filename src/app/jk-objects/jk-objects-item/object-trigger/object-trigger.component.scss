@@ -8,7 +8,7 @@
 
     &__container {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     &__item {
@@ -19,6 +19,7 @@
         transition: background-color .2s linear;
         box-sizing: border-box;
         padding: 16px 24px;
+        margin: 0 24px 0 0;
         cursor: pointer;
         box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
         &:hover { background-color: rgba(238, 66, 55, 0.1); }
@@ -48,6 +49,10 @@
                     line-height: 58px;
                 }
             }
+        }
+
+        &:last-child {
+            margin: 0;
         }
     }
 }
