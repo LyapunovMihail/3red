@@ -15,9 +15,10 @@ export class FormCreditComponent implements OnChanges {
     @Input() public isOpen: boolean = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
-    @Input() public article: string;
+    @Input() public articleId: string;
     @Input() public type: string;
     @Output() public close: EventEmitter<boolean> = new EventEmitter();
+    @Output() public isSubmited = new EventEmitter<boolean>();
 
     public form: FormGroup = this.formBuilder.group({
         first_pay: '',
@@ -25,22 +26,21 @@ export class FormCreditComponent implements OnChanges {
         // price: '',
         // number: '',
         type: '',
-        mail: ['', Validators.compose([Validators.required, Validators.email])],
+        mail: '',
         name: '',
         lastName: '',
         middleName: '',
-        phone: ['', Validators.required],
+        phone: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]+(?!.)/), Validators.maxLength(11), Validators.minLength(11)])],
         time: '',
         wait_for_call: 'now',
         agreement: true,
-        article: '',
+        articleId: '',
+        description: ''
     });
 
     // public phoneMask = ['+', '7', ' ', '(', /[1-6,9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
     public phoneMask = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
     public timeMask = [/\d/, /\d/, ':', /\d/, /\d/];
-
-    public isSubmited: boolean = false;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -60,8 +60,8 @@ export class FormCreditComponent implements OnChanges {
             // this.form.controls['price'].setValue(this.apartmentPrice);
             // this.form.controls['number'].setValue(this.apartmentNumber);
             this.form.controls['type'].setValue(this.type);
-            this.form.controls['article'].setValue(this.article);
-            this.isSubmited = false;
+            this.form.controls['articleId'].setValue(this.articleId);
+            this.form.controls['description'].setValue('');
         }
     }
 
@@ -74,7 +74,7 @@ export class FormCreditComponent implements OnChanges {
     public onSubmit(form) {
         this.service.sendCreditForm(form).subscribe(
             (data) => {
-                this.isSubmited = true;
+                this.isSubmited.emit(true);
                 this.close.emit(false);
             },
             (error) => {
