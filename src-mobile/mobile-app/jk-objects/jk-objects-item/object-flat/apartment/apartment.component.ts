@@ -14,8 +14,9 @@ import { FavoritesService } from '../../../../favorites/favorites.service';
 
 export class ApartmentComponent implements OnInit {
 
-    public isCreditFormOpen: boolean = false;
-    public isReserveFormOpen: boolean = false;
+    public isCreditFormOpen = false;
+    public isReserveFormOpen = false;
+    public isFormConfirmOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
     // public chWidget = chWidget; // переменная для работы с чейзером
@@ -37,7 +38,7 @@ export class ApartmentComponent implements OnInit {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
         this.flatData.jkName = this.jk.name;
-        this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        this.pdfLink = `/api/pdf?id=${this.flatData._id}`;
         console.log('this.flatData: ', this.flatData);
     }
 
