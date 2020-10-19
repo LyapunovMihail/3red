@@ -1,19 +1,21 @@
-.services__intro {
+@import '../../../styles/modules/mixins/mixin';
+
+.partners__intro {
     margin-bottom: 40px;
 }
-.services-settings__title {
+.partners-settings__title {
     font-size: 36px;
     font-weight: normal;
     margin-bottom: 24px;
 }
-.services__title {
+.partners__title {
     font-weight: normal;
     font-size: 24px;
 }
-.services__title {
+.partners__title {
     margin-bottom: 16px;
 }
-.services-item {
+.partners-item {
     display: block;
     position: relative;
     margin-top: 50px;
@@ -128,7 +130,6 @@
 
 .btn {
     display: inline-block;
-    background:  rgba(0, 0, 0, 0.56);
     padding:10px 16px;
     font-family: inherit;
     color: #fff;
@@ -155,4 +156,33 @@
     &--margin {
         margin-bottom: 40px;
     }
+
+    &--camera {
+        padding: 8px 16px;
+        background: rgba(0, 0, 0, 0.7);
+        &::before {
+            content: url(/assets/img/jk-object/admin-modal/camera.svg) ;
+            vertical-align: center;
+            margin-right:5px ;
+
+        }
+    }
+    &--camera:hover  {
+        background: rgba(0, 0, 0, 0.56);
+    }
+
+    &__wrap {
+        display: flex;
+        margin: 32px 0 0;
+    }
+    &__hint {
+        margin: 8px 0 0 16px;
+        opacity: 0.5;
+        color: $col-black;
+    }
+}
+
+.wrap {
+    position: relative;
+    margin-top: 16px;
 }

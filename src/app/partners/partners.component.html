@@ -14,7 +14,7 @@
                 </p>
             </div>
             <figure class="intro__image">
-                <img src="/assets/img/service/service_intro.png" alt="">
+                <img src="/assets/img/partners/partners_intro.png" alt="">
             </figure>
         </div>
 
@@ -24,16 +24,6 @@
 <section class="newss">
     <div class="news__container">
 
-        <!--<ul class="tabs" *ngIf="tabSnippet?.tab?.length">-->
-            <!--<li *ngIf="tabSnippet?.tab?.length > 1" class="tab" [class.tab&#45;&#45;active]="currentTab === 'null'" (click)="changeTab('null')">-->
-                <!--Все-->
-            <!--</li>-->
-            <!--<ng-container *ngFor="let tab of tabSnippet.tab">-->
-                <!--<li *ngIf="tab.show" class="tab" [class.tab&#45;&#45;active]="currentTab === tab.name" (click)="changeTab(tab.name)">-->
-                    <!--{{tab.name}}-->
-                <!--</li>-->
-            <!--</ng-container>-->
-        <!--</ul>-->
         <nav-menu *ngIf="navList.length"
             [navList]="navList"
             [linkType]="'else'"
@@ -44,29 +34,35 @@
             <a [attr.href]="!uk.url || uk.url === '' ? null : uk.url" target="_blank" *ngFor="let uk of contentSnippet.uk"
                 class="news__item" [class.not-hover]="!uk.url || uk.url === ''">
                 
-                <div class="news__item-title">{{uk.title}}</div>
-                <div class="news__item-text">{{uk.description}}</div>
-                
-                <ng-container *ngIf="uk.jk && uk.jk.length">
-                    <p class="news__info-title">Жилые комплексы:</p>
-                    <div class="news__item-info">
-                        <a [routerLink]="'/objects/list/' +  jk.id" class="news__link" *ngFor="let jk of uk.jk">{{jk.name}}</a>
-                    </div>
-                </ng-container>
+                <div class="news__item-icon">
+                    <img [src]="uploadsPath + uk.icon" alt="logo" width="64" height="64" *ngIf="uk.icon">
+                </div>
+
+                <div class="news__item-body">
+                    <div class="news__item-title">{{uk.title}}</div>
+                    <div class="news__item-text">{{uk.description}}</div>
+
+                    <ng-container *ngIf="uk.jk && uk.jk.length">
+                        <p class="news__info-title">Жилые комплексы:</p>
+                        <div class="news__item-info">
+                            <a [routerLink]="'/objects/list/' +  jk.id" class="news__link" *ngFor="let jk of uk.jk">{{jk.name}}</a>
+                        </div>
+                    </ng-container>
+                </div>
             </a>
         </ng-container>
 
     </div>
 </section>
 
-<app-service-tabs-admin *ngIf="!closeTabsModal"
+<app-partners-tabs-admin *ngIf="!closeTabsModal"
     [snippet]="tabSnippet"
     (snippetChange)="refreshTabs($event)"
     (closeModal)="closeTabsModal = $event">
-</app-service-tabs-admin>
+</app-partners-tabs-admin>
 
-<app-service-content-admin *ngIf="!closeContentModal"
+<app-partners-content-admin *ngIf="!closeContentModal"
     [tabSnippet]="tabSnippet"
     (snippetChange)="getContent()"
     (closeModal)="closeContentModal = $event">
-</app-service-content-admin>
+</app-partners-content-admin>

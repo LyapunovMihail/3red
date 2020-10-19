@@ -1,15 +1,15 @@
-export const SERVICE_TABS_COLLECTION_NAME = 'ServiceTabs';
+export const PARTNERS_TABS_COLLECTION_NAME = 'PartnersTabs';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface IServiceTabsSnippet {
+export interface IPartnersTabsSnippet {
     _id?: any;
-    tab: IServiceTabs[];
+    tab: IPartnersTabs[];
     created_at: any;
     last_modifyed: any;
 }
 
-export interface IServiceTabs {
+export interface IPartnersTabs {
     name: string;
     show: boolean;
 }

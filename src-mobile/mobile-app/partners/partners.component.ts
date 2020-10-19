@@ -1,21 +1,21 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { IServiceSnippet } from '../../../serv-files/serv-modules/service/service-api/service.interfaces';
-import { IServiceTabsSnippet } from '../../../serv-files/serv-modules/service/tabs-api/service-tabs.interfaces';
-import { ServiceAdminService } from './service-admin.service';
+import { IPartnersSnippet, PARTNERS_UPLOADS_PATH } from '../../../serv-files/serv-modules/partners/partners-api/partners.interfaces';
+import { IPartnersTabsSnippet } from '../../../serv-files/serv-modules/partners/tabs-api/partners-tabs.interfaces';
+import { PartnersAdminService } from './partners-admin.service';
 
 @Component({
-    selector: 'app-service',
-    templateUrl: './service.component.html',
-    styleUrls: ['./service.component.scss'],
+    selector: 'app-partners',
+    templateUrl: './partners.component.html',
+    styleUrls: ['./partners.component.scss'],
     providers : [
-        ServiceAdminService
+        PartnersAdminService
     ]
 })
 
-export class ServiceComponent implements OnInit {
+export class PartnersComponent implements OnInit {
 
-    public contentSnippet: IServiceSnippet;
-    public tabSnippet: IServiceTabsSnippet;
+    public contentSnippet: IPartnersSnippet;
+    public tabSnippet: IPartnersTabsSnippet;
     public switchOn = false;
 
     public currentTab = 'null';
@@ -23,8 +23,10 @@ export class ServiceComponent implements OnInit {
     public widthActive = 0;
     public offsetLeftActive = 0;
 
+    public uploadsPath = `/${PARTNERS_UPLOADS_PATH}`;
+
     constructor(
-        private serviceAdminService: ServiceAdminService,
+        private partnersAdminService: PartnersAdminService,
         private elRef: ElementRef,
     ) { }
 
@@ -33,7 +35,7 @@ export class ServiceComponent implements OnInit {
     }
 
     public getTabsThanContent() {
-        this.serviceAdminService.getTabsSnippet().subscribe((data) => {
+        this.partnersAdminService.getTabsSnippet().subscribe((data) => {
             this.refreshTabs(data);
         }, (error) => {
             console.error(error);
@@ -54,7 +56,7 @@ export class ServiceComponent implements OnInit {
     }
 
     public getContent() {
-        this.serviceAdminService.getContentSnippetByTab(this.currentTab)
+        this.partnersAdminService.getContentSnippetByTab(this.currentTab)
             .subscribe(
                 (data) => this.contentSnippet = data,
                 (error) => console.error(error)

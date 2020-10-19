@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ServiceAdminService } from '../service-content-admin/service-admin.service';
-import { IServiceTabsSnippet } from '../../../../serv-files/serv-modules/service/tabs-api/service-tabs.interfaces';
+import { PartnersAdminService } from '../partners-content-admin/partners-admin.service';
+import { IPartnersTabsSnippet } from '../../../../serv-files/serv-modules/partners/tabs-api/partners-tabs.interfaces';
 
 @Component({
-    selector: 'app-service-tabs-admin',
-    templateUrl: './service-tabs-admin.component.html',
-    styleUrls: ['./service-tabs-admin.component.scss']
+    selector: 'app-partners-tabs-admin',
+    templateUrl: './partners-tabs-admin.component.html',
+    styleUrls: ['./partners-tabs-admin.component.scss']
 })
-export class ServiceTabsAdminComponent implements OnInit {
+export class PartnersTabsAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
@@ -16,14 +16,14 @@ export class ServiceTabsAdminComponent implements OnInit {
     public snippetChange = new EventEmitter();
 
     @Input()
-    public snippet: IServiceTabsSnippet;
+    public snippet: IPartnersTabsSnippet;
 
     public form: FormGroup;
 
     constructor(
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
-        private serviceAdminService: ServiceAdminService
+        private partnersAdminService: PartnersAdminService
     ) { }
 
     ngOnInit() {
@@ -72,7 +72,7 @@ export class ServiceTabsAdminComponent implements OnInit {
     }
 
     public save() {
-        this.serviceAdminService.setTabsSnippetData(this.form.value).subscribe(
+        this.partnersAdminService.setTabsSnippetData(this.form.value).subscribe(
             (data) => {
                 this.snippetChange.emit(data);
                 this.closeModal.emit(true);

@@ -1,26 +1,28 @@
-export const SERVICE_COLLECTION_NAME = 'service';
+export const PARTNERS_COLLECTION_NAME = 'partners';
 
 export const ErrorNotCorrectArguments = 'Параметры переданы не корректно.';
 
-export interface IServiceSnippet {
+export const PARTNERS_UPLOADS_PATH = 'uploads/partners/';
+
+export interface IPartnersSnippet {
     _id?: any;
     created_at: any;
     last_modifyed: any;
     blackPart: string;
     greyPart: string;
-    uk: IServiceUk[];
+    uk: IPartnersUk[];
 }
 
-export interface IServiceUk {
+export interface IPartnersUk {
     tab: string;
     title: string;
     description: string;
     url: string;
-    jk: IServiceJk[];
-
+    jk: IPartnersJk[];
+    icon: string;
 }
 
-export interface IServiceJk {
+export interface IPartnersJk {
     name: string;
     id: string;
 }

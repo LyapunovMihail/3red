@@ -1,9 +1,9 @@
-<section class="service">
+<section class="partners">
 
-    <div class="service__container">
+    <div class="partners__container">
 
-        <div class="service__head">
-            <!--<h2 class="service__head-title">
+        <div class="partners__head">
+            <!--<h2 class="partners__head-title">
                 <span>{{contentSnippet.blackPart}}</span>
                 <span>{{contentSnippet.greyPart}}</span>
             </h2>-->
@@ -19,19 +19,19 @@
                 <img src="/assets/img/service/service_intro.png" alt="">
             </figure>
         </div>
-            <nav class="service__nav" *ngIf="tabSnippet?.tab?.length">
-                <div class="service__nav-wrap service__nav-wrap--overflow">
-                    <div class="service__nav-wrap service__nav-wrap--scroll">
-                        <ul class="service__nav-list">
-                            <li class="service__nav-item service__nav-item--line"
+            <nav class="partners__nav" *ngIf="tabSnippet?.tab?.length">
+                <div class="partners__nav-wrap partners__nav-wrap--overflow">
+                    <div class="partners__nav-wrap partners__nav-wrap--scroll">
+                        <ul class="partners__nav-list">
+                            <li class="partners__nav-item partners__nav-item--line"
                                 [ngStyle]="{'width': widthActive + 'px', 'left': offsetLeftActive + 'px'}"></li>
 
-                            <li class="service__nav-item" *ngIf="tabSnippet?.tab?.length > 1" 
+                            <li class="partners__nav-item" *ngIf="tabSnippet?.tab?.length > 1"
                                 [class.active]="currentTab === 'null'" (click)="getActiveElement($event, 'null')">
                                 Все
                             </li>
                             <ng-container *ngFor="let tab of tabSnippet.tab">
-                                <li *ngIf="tab.show" class="service__nav-item" [class.active]="currentTab === tab.name" (click)="getActiveElement($event, tab.name)">
+                                <li *ngIf="tab.show" class="partners__nav-item" [class.active]="currentTab === tab.name" (click)="getActiveElement($event, tab.name)">
                                     {{tab.name}}
                                 </li>
                             </ng-container>
@@ -43,17 +43,24 @@
 
         <ng-container *ngIf="contentSnippet?.uk?.length">
             <a [attr.href]="!uk.url || uk.url === '' ? null : uk.url" target="_blank" *ngFor="let uk of contentSnippet.uk"
-                class="service-snippet" [class.not-hover]="!uk.url || uk.url === ''">
-                
-                <h3 class="service-snippet__title">{{uk.title}}</h3>
-                <p class="service-snippet__text">{{uk.description}}</p>
-                
-                <div class="service-snippet__objects" *ngIf="uk.jk && uk.jk.length">
-                    <p class="service-snippet__objects-title">Жилые комплексы:</p>
-                    <div class="service-snippet__objects-item">
-                        <a [routerLink]="'/objects/list/' +  jk.id" class="news__link" *ngFor="let jk of uk.jk">{{jk.name}}</a>
+                class="partners-snippet" [class.not-hover]="!uk.url || uk.url === ''">
+
+                <div class="partners-snippet__icon">
+                    <img [src]="uploadsPath + uk.icon" alt="logo" width="64" height="64" *ngIf="uk.icon">
+                </div>
+
+                <div class="partners-snippet__body">
+                    <h3 class="partners-snippet__title">{{uk.title}}</h3>
+                    <p class="partners-snippet__text">{{uk.description}}</p>
+
+                    <div class="partners-snippet__objects" *ngIf="uk.jk && uk.jk.length">
+                        <p class="partners-snippet__objects-title">Жилые комплексы:</p>
+                        <div class="partners-snippet__objects-item">
+                            <a [routerLink]="'/objects/list/' +  jk.id" class="news__link" *ngFor="let jk of uk.jk">{{jk.name}}</a>
+                        </div>
                     </div>
                 </div>
+
             </a>
         </ng-container>
     </div>

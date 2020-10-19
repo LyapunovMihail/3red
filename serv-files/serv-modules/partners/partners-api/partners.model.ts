@@ -1,10 +1,11 @@
-import { ErrorNotCorrectArguments, IServiceSnippet, SERVICE_COLLECTION_NAME } from './service.interfaces';
+import { ErrorNotCorrectArguments, IPartnersSnippet, PARTNERS_COLLECTION_NAME, PARTNERS_UPLOADS_PATH } from './partners.interfaces';
+import { iconSaver, fileExtension } from '../../utilits/image-saver.utilits';
 
 const ObjectId = require('mongodb').ObjectID;
 
-export class ServiceModel {
+export class PartnersModel {
 
-    collectionName = SERVICE_COLLECTION_NAME;
+    collectionName = PARTNERS_COLLECTION_NAME;
 
     collection: any;
 
@@ -24,7 +25,7 @@ export class ServiceModel {
     }
 
     async updateSnippet(parameters) {
-        const options: IServiceSnippet = parameters;
+        const options: IPartnersSnippet = parameters;
         return await this.errorParamsCatcher(this.valuesReview(options), async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
@@ -34,6 +35,19 @@ export class ServiceModel {
 
     async deleteSnippet(objectId) {
         return await this.collection.deleteOne({objectId});
+    }
+
+    async uploadImage(req) {
+        console.log('req: ', req.files);
+        if (fileExtension(req.files.file.originalFilename) === '.png'  || fileExtension(req.files.file.originalFilename) === '.svg') {
+            const path = PARTNERS_UPLOADS_PATH;
+            const icon = await iconSaver(req, path);
+            return ({
+                icon
+            });
+        } else {
+            throw new Error('Не допустимое расширение файла.');
+        }
     }
 
     // обертка для возврата ошибки о неверно переданных параметрах

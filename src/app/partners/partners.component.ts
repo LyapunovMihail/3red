@@ -1,25 +1,25 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthorizationObserverService } from '../authorization/authorization.observer.service';
-import { IServiceSnippet } from '../../../serv-files/serv-modules/service/service-api/service.interfaces';
-import { IServiceTabsSnippet } from '../../../serv-files/serv-modules/service/tabs-api/service-tabs.interfaces';
-import { ServiceAdminService } from './service-content-admin/service-admin.service';
+import { IPartnersSnippet, PARTNERS_UPLOADS_PATH } from '../../../serv-files/serv-modules/partners/partners-api/partners.interfaces';
+import { IPartnersTabsSnippet } from '../../../serv-files/serv-modules/partners/tabs-api/partners-tabs.interfaces';
+import { PartnersAdminService } from './partners-content-admin/partners-admin.service';
 
 @Component({
-    selector: 'app-service',
-    templateUrl: './service.component.html',
-    styleUrls: ['./service.component.scss'],
+    selector: 'app-partners',
+    templateUrl: './partners.component.html',
+    styleUrls: ['./partners.component.scss'],
     providers : [
-        ServiceAdminService
+        PartnersAdminService
     ]
 })
 
-export class ServiceComponent implements OnInit, OnDestroy {
+export class PartnersComponent implements OnInit, OnDestroy {
 
     public authorizationEvent;
     public isAuthorizated = false;
 
-    public contentSnippet: IServiceSnippet;
-    public tabSnippet: IServiceTabsSnippet;
+    public contentSnippet: IPartnersSnippet;
+    public tabSnippet: IPartnersTabsSnippet;
     public switchOn = false;
 
     public closeTabsModal = true;
@@ -29,9 +29,11 @@ export class ServiceComponent implements OnInit, OnDestroy {
 
     public navList = [];
 
+    uploadsPath = `/${PARTNERS_UPLOADS_PATH}`;
+
     constructor(
         private authorization: AuthorizationObserverService,
-        private serviceAdminService: ServiceAdminService
+        private partnersAdminService: PartnersAdminService
     ) { }
 
     ngOnInit() {
@@ -48,7 +50,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     }
 
     public getTabsThanContent() {
-        this.serviceAdminService.getTabsSnippet().subscribe((data) => {
+        this.partnersAdminService.getTabsSnippet().subscribe((data) => {
             this.refreshTabs(data);
         }, (error) => {
             console.error(error);
@@ -67,7 +69,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
     }
 
     public getContent() {
-        this.serviceAdminService.getContentSnippetByTab(this.currentTab)
+        this.partnersAdminService.getContentSnippetByTab(this.currentTab)
             .subscribe(
                 (data) => this.contentSnippet = data,
                 (error) => console.error(error)

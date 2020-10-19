@@ -1,5 +1,5 @@
 import { responseHandler } from '../../utilits/response-handler.utilits';
-import { ServiceModel } from './service.model';
+import { PartnersTabsModel } from './partners-tabs.model';
 import { Express } from 'express-serve-static-core';
 import * as express from 'express';
 import { Controller } from '@nestjs/common';
@@ -7,7 +7,7 @@ import { MongoConnectionService } from '../../mongo-connection.service';
 import { ExpressAppService } from '../../express-app.service';
 
 @Controller('/api')
-export class ServiceController extends ServiceModel {
+export class PartnersTabsController extends PartnersTabsModel {
 
     public router = express.Router();
 
@@ -20,12 +20,12 @@ export class ServiceController extends ServiceModel {
     }
 
     routing() {
-        this.router.get('/service/tab/:tab', responseHandler(async(req) => {
-            return await this.getSnippet(req.params.tab);
+        this.router.get('/partners/tabs', responseHandler(async (req) => {
+            return await this.getTeamTabs();
         }));
 
-        this.router.post('/admin/service/create-update', responseHandler(async(req) => {
-            return await this.updateSnippet(req.body);
+        this.router.post('/admin/partners/tabs/create-update', responseHandler(async (req) => {
+            return await this.updateTeamTabs(req.body);
         }));
 
         const app: Express = this.expressAppService.getApp();

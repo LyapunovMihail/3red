@@ -1,38 +1,44 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ServiceAdminService } from './service-admin.service';
-import { IServiceJk, IServiceSnippet } from '../../../../serv-files/serv-modules/service/service-api/service.interfaces';
-import { IServiceTabsSnippet } from '../../../../serv-files/serv-modules/service/tabs-api/service-tabs.interfaces';
+import { PartnersAdminService } from './partners-admin.service';
+import { IPartnersJk, IPartnersSnippet, PARTNERS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/partners/partners-api/partners.interfaces';
+import { IPartnersTabsSnippet } from '../../../../serv-files/serv-modules/partners/tabs-api/partners-tabs.interfaces';
 import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
-    selector: 'app-service-content-admin',
-    templateUrl: './service-admin.component.html',
-    styleUrls: ['./service-admin.component.scss']
+    selector: 'app-partners-content-admin',
+    templateUrl: './partners-admin.component.html',
+    styleUrls: ['./partners-admin.component.scss']
 })
 
-export class ServiceAdminComponent implements OnInit {
+export class PartnersAdminComponent implements OnInit {
 
     @Output()
     public closeModal = new EventEmitter<boolean>();
     @Output()
     public snippetChange = new EventEmitter();
     @Input()
-    public tabSnippet: IServiceTabsSnippet;
+    public tabSnippet: IPartnersTabsSnippet;
 
-    public snippet: IServiceSnippet;
+    public snippet: IPartnersSnippet;
     public jkArray: IObjectSnippet[];
     public form: FormGroup;
+
+    public imageUploadEvent;
+    public imageUploadPercent: number;
+    public isLoad = true;
+
+    uploadsPath = `/${PARTNERS_UPLOADS_PATH}`;
 
     constructor(
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
-        private serviceAdminService: ServiceAdminService
+        private partnersAdminService: PartnersAdminService
     ) { }
 
     ngOnInit() {
         this.getJk();
-        this.serviceAdminService.getContentSnippetByTab(null)
+        this.partnersAdminService.getContentSnippetByTab(null)
             .subscribe(
                 (data) => {
                     this.snippet = data;
@@ -48,7 +54,7 @@ export class ServiceAdminComponent implements OnInit {
     }
 
     private getJk() {
-        this.serviceAdminService.getJkSnippets()
+        this.partnersAdminService.getJkSnippets()
             .subscribe(
                 (data) => this.jkArray = data,
                 (err) => console.error(err)
@@ -82,12 +88,13 @@ export class ServiceAdminComponent implements OnInit {
                 title: uk.title,
                 description: uk.description,
                 url: uk.url,
+                icon: uk.icon,
                 jk: this.parseJkArray(uk.jk)
             });
         }));
     }
 
-    private parseJkArray(jk: IServiceJk[]) {
+    private parseJkArray(jk: IPartnersJk[]) {
         return this.formBuilder.array(jk.map((item) => {
             return this.formBuilder.control({
                 name: item.name,
@@ -103,6 +110,7 @@ export class ServiceAdminComponent implements OnInit {
                 title: '',
                 description: '',
                 url: '',
+                icon: '',
                 jk: this.formBuilder.array([])
             })
         );
@@ -119,6 +127,7 @@ export class ServiceAdminComponent implements OnInit {
                 id: this.jkArray[0]._id
             })
         );
+        console.log('this.form.value: ', this.form.value);
     }
 
     public popJk(i, j) {
@@ -128,6 +137,40 @@ export class ServiceAdminComponent implements OnInit {
     public setJkValue(val, item) {
         const jk = this.jkArray.find((tempJk) => tempJk._id === val);
         item.setValue({ name: jk.name, id: jk._id });
+        console.log('this.form.value: ', this.form.value);
+    }
+
+    imageUpload(e, i) {
+        this.isLoad = true;
+        this.imageUploadEvent = this.partnersAdminService.getPercentLoadedImage().subscribe(
+            (val) => {
+                this.imageUploadPercent = val;
+                this.ref.detectChanges();
+            },
+            (err) => {
+                this.isLoad = false;
+                this.imageUploadEvent.unsubscribe();
+            }
+        );
+        console.log('event: ', e);
+        this.partnersAdminService.imageUpload(e)
+            .then( (data: any) => {
+                this.isLoad = false;
+                this.imageUploadEvent.unsubscribe();
+                // сразу сохраняется на сервере
+                // значение подставляетс в текстовые (скрытые) инпуты формы
+                (this.form.controls.uk as FormArray).at(i).get('icon').setValue(data.icon);
+            })
+            .catch((err) => {
+                this.isLoad = false;
+                this.imageUploadEvent.unsubscribe();
+                alert('Что-то пошло не так!');
+                console.error(err);
+            });
+    }
+
+    public delIcon(i) {
+        (this.form.controls.uk as FormArray).at(i).get('icon').setValue('');
     }
 
     public moveBlock(array, i, dir) {
@@ -137,7 +180,7 @@ export class ServiceAdminComponent implements OnInit {
     }
 
     public save() {
-        this.serviceAdminService.setContentSnippetData(this.form.value).subscribe(
+        this.partnersAdminService.setContentSnippetData(this.form.value).subscribe(
             (data) => {
                 this.snippetChange.emit(data);
                 this.closeModal.emit(true);

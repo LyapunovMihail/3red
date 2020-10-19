@@ -1,13 +1,15 @@
 import { responseHandler } from '../../utilits/response-handler.utilits';
-import { ServiceTabsModel } from './service-tabs.model';
+import { PartnersModel } from './partners.model';
 import { Express } from 'express-serve-static-core';
 import * as express from 'express';
+import * as multipart from 'connect-multiparty';
 import { Controller } from '@nestjs/common';
 import { MongoConnectionService } from '../../mongo-connection.service';
 import { ExpressAppService } from '../../express-app.service';
+import { IFileRequest } from '../../utilits/image-saver.utilits';
 
 @Controller('/api')
-export class ServiceTabsController extends ServiceTabsModel {
+export class PartnersController extends PartnersModel {
 
     public router = express.Router();
 
@@ -20,12 +22,17 @@ export class ServiceTabsController extends ServiceTabsModel {
     }
 
     routing() {
-        this.router.get('/service/tabs', responseHandler(async (req) => {
-            return await this.getTeamTabs();
+        this.router.get('/partners/tab/:tab', responseHandler(async(req) => {
+            return await this.getSnippet(req.params.tab);
         }));
 
-        this.router.post('/admin/service/tabs/create-update', responseHandler(async (req) => {
-            return await this.updateTeamTabs(req.body);
+        this.router.post('/admin/partners/create-update', responseHandler(async(req) => {
+            return await this.updateSnippet(req.body);
+        }));
+
+        const multipartMiddleware = multipart();
+        this.router.post('/admin/partners/image', multipartMiddleware, responseHandler(async(req: IFileRequest) => {
+            return await this.uploadImage(req);
         }));
 
         const app: Express = this.expressAppService.getApp();

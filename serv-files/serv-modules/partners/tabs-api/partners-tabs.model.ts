@@ -1,17 +1,17 @@
-import { ErrorNotCorrectArguments, SERVICE_TABS_COLLECTION_NAME, IServiceTabsSnippet } from './service-tabs.interfaces';
-import { SERVICE_COLLECTION_NAME } from '../service-api/service.interfaces';
+import { ErrorNotCorrectArguments, PARTNERS_TABS_COLLECTION_NAME, IPartnersTabsSnippet } from './partners-tabs.interfaces';
+import { PARTNERS_COLLECTION_NAME } from '../partners-api/partners.interfaces';
 const ObjectId = require('mongodb').ObjectID;
 
-export class ServiceTabsModel {
+export class PartnersTabsModel {
 
-    collectionName = SERVICE_TABS_COLLECTION_NAME;
+    collectionName = PARTNERS_TABS_COLLECTION_NAME;
     collection: any;
-    serviceCollectionName = SERVICE_COLLECTION_NAME;
-    serviceCollection: any;
+    partnersCollectionName = PARTNERS_COLLECTION_NAME;
+    partnersCollection: any;
 
     constructor( public db: any ) {
         this.collection = db.collection(this.collectionName);
-        this.serviceCollection = db.collection(this.serviceCollectionName);
+        this.partnersCollection = db.collection(this.partnersCollectionName);
     }
 
     async getTeamTabs() {
@@ -19,7 +19,7 @@ export class ServiceTabsModel {
     }
 
     async updateTeamTabs(parameters) {
-        const options: IServiceTabsSnippet = parameters;
+        const options: IPartnersTabsSnippet = parameters;
         return await this.errorParamsCatcher(this.valuesReview(options), async () => {
             // удаление _id из параметров если он там есть
             if ('_id' in options) {
@@ -32,7 +32,7 @@ export class ServiceTabsModel {
 
     private async deleteUk(options) {
         const tabs = options.tabs.map((item) => item.name);
-        await this.serviceCollection.remove({$pull : {uk: {tab : {$nin: tabs} }}});
+        await this.partnersCollection.remove({$pull : {uk: {tab : {$nin: tabs} }}});
     }
 
     async deleteSnippet() {
