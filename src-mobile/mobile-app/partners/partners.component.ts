@@ -20,6 +20,8 @@ export class PartnersComponent implements OnInit {
 
     public currentTab = 'null';
 
+    public navList = [];
+
     public widthActive = 0;
     public offsetLeftActive = 0;
 
@@ -32,6 +34,11 @@ export class PartnersComponent implements OnInit {
 
     ngOnInit() {
         this.getTabsThanContent();
+    }
+
+    private setTabs() {
+        this.navList = [{ name: 'Все', link: 'null', show: true }, ...this.tabSnippet.tab];
+        console.log('this.navList: ', this.navList);
     }
 
     public getTabsThanContent() {
@@ -47,10 +54,8 @@ export class PartnersComponent implements OnInit {
         if (this.tabSnippet) {
             if (this.tabSnippet.tab && this.tabSnippet.tab.length && this.tabSnippet.tab.some((tab) => tab.show)) {
                 // this.currentTab = this.tabSnippet.tab.find((tab) => tab.show).name;
+                this.setTabs();
                 this.getContent();
-                setTimeout(() => {
-                    this.defaultElem();
-                }, 1000);
             }
         }
     }

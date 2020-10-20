@@ -15,30 +15,17 @@
                         Успех в&nbsp;реализации полного цикла застройки стал возможен во&nbsp;многом благодаря нашим партнерам.
                     </p>
                 </div>
-            <figure class="intro__image">
-                <img src="/assets/img/service/service_intro.png" alt="">
-            </figure>
-        </div>
-            <nav class="partners__nav" *ngIf="tabSnippet?.tab?.length">
-                <div class="partners__nav-wrap partners__nav-wrap--overflow">
-                    <div class="partners__nav-wrap partners__nav-wrap--scroll">
-                        <ul class="partners__nav-list">
-                            <li class="partners__nav-item partners__nav-item--line"
-                                [ngStyle]="{'width': widthActive + 'px', 'left': offsetLeftActive + 'px'}"></li>
+                <figure class="intro__image">
+                    <img src="/assets/img/service/service_intro.png" alt="">
+                </figure>
+            </div>
 
-                            <li class="partners__nav-item" *ngIf="tabSnippet?.tab?.length > 1"
-                                [class.active]="currentTab === 'null'" (click)="getActiveElement($event, 'null')">
-                                Все
-                            </li>
-                            <ng-container *ngFor="let tab of tabSnippet.tab">
-                                <li *ngIf="tab.show" class="partners__nav-item" [class.active]="currentTab === tab.name" (click)="getActiveElement($event, tab.name)">
-                                    {{tab.name}}
-                                </li>
-                            </ng-container>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <nav-menu *ngIf="navList.length"
+                [navList]="navList"
+                [linkType]="'else'"
+                (routeNavigate)="changeTab($event)"
+            ></nav-menu>
+
         </div>
 
         <ng-container *ngIf="contentSnippet?.uk?.length">
