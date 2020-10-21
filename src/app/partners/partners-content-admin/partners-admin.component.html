@@ -1,0 +1,85 @@
+<app-admin-modal [formValid]="form.valid" (closeModal)="close($event)" *ngIf="form">
+
+    <h2 class="partners-settings__title">Настройка контента «Партнёры»</h2>
+
+    <form [formGroup]="form">
+        <div class="partners__intro">
+            <div class="tabs__wrap">
+                <h2 class="partners__title">Заголовок страницы</h2>
+                <div class="form">
+                    <div class="partners-item">
+                        <input type="text" class="form-input info-input" appSlideTopLabel formControlName="blackPart">
+                        <label class="form-label info-suptitle">Черная часть заголовка</label>
+                    </div>
+                </div>
+                <div class="form">
+                    <div class="partners-item">
+                        <input type="text" class="form-input info-input" appSlideTopLabel formControlName="greyPart">
+                        <label class="form-label info-suptitle">Серая часть заголовка</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h2 class="partners__title">Управляющие компании</h2>
+        <section class="tabs">
+            <div class="tabs__wrap" formArrayName="uk" *ngFor="let uk of form.get('uk')['controls']; let i = index">
+                <ng-container formGroupName="{{i}}">
+                    <div class="tabs__container">
+                        <h2 class="tabs__title">Карточка {{i + 1}}</h2>
+                        <a href="javascript:void(0)" class="tabs__nav-link" (click)="popUk(i)">Удалить</a>
+                    </div>
+                    <div class="form">
+                        <div class="form-item">
+                            <select class="form-input info-input info-select" appSlideTopLabel formControlName="tab">
+                                <option [value]="tab.name" *ngFor="let tab of tabSnippet.tab">{{tab.name}}</option>
+                            </select>
+                            <label class="form-label info-suptitle">Вкладка фильтрации</label>
+                        </div>
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="title">
+                            <label class="form-label info-suptitle">Заголовок</label>
+                        </div>
+                        <div class="form-item">
+                            <textarea type="text" class="form-input info-input" rows="1" appSlideTopLabel appAutoResizeTextarea formControlName="description"></textarea>
+                            <label class="form-label info-suptitle">Описание</label>
+                        </div>
+                        <div class="form-item">
+                            <input type="text" class="form-input info-input" appSlideTopLabel formControlName="url">
+                            <label class="form-label info-suptitle">Ссылка на партнёра</label>
+                        </div>
+                    </div>
+
+                    <div class="form">
+                        <div class="btn__wrap">
+                            <label class="btn btn--camera">Загрузить логотип
+                                <input style='display: none;' type="file" placeholder="Upload file" accept=".png, .svg" (change)="imageUpload($event, i)">
+                            </label>
+                            <p class="btn__hint">Загрузите логотип партнера (png, svg. 64x64px)</p>
+                        </div>
+                        <div class="wrap" *ngIf="uk.get('icon').value">
+                            <button class="button__delete" (click)="delIcon(i)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                            <img class='bg-img' [src]="uploadsPath + uk.get('icon').value" alt="image" width="64" height="64">
+                        </div>
+                    </div>
+
+                    <button class="btn btn--settings btn--complex" (click)="pushJk(i)">Добавить жилой комплекс</button>
+
+                    <div class="form">
+                        <div class="form-item form-item--mr" formArrayName="jk" *ngFor="let item of uk.get('jk')['controls']; let j = index">
+                            <button class=" button__delete button__delete--textarea" (click)="popJk(i, j)"><img class="tab__img" src="/assets/img/jk-object/admin-modal/tab_delete.svg" alt="delete"></button>
+                            <select class="form-input info-input info-select" appSlideTopLabel [value]="item.value.id" (change)="setJkValue($event.target.value, item)">
+                                <option [value]="jk._id" *ngFor="let jk of jkArray">{{jk.name}}</option>
+                            </select>
+                            <label class="form-label info-suptitle">Выберите жилой комплекс</label>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <button class="btn btn--settings btn--margin" (click)="pushUk()">Добавить карточку</button>
+
+        </section>
+    </form>
+</app-admin-modal>

@@ -26,7 +26,7 @@ import { AboutModule } from './about/about.module';
 import { NewsSharesModule } from './news-shares/news-shares.module';
 import { FlatsModule } from './flats/flats.module';
 import { JkObjectsModule } from './jk-objects/jk-objects.module';
-import { ServiceModule } from './service/service.module';
+import { PartnersModule } from './partners/partners.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { FavoritesModule } from './favorites/favorites.module';
 
@@ -58,7 +58,7 @@ const APP_MODULES = [
     NewsSharesModule,
     FlatsModule,
     JkObjectsModule,
-    ServiceModule,
+    PartnersModule,
     ContactsModule,
     FavoritesModule,
 

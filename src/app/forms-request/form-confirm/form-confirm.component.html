@@ -1,0 +1,12 @@
+<div *ngIf="isOpen" class="g-modal-bg form-confirm__modal">
+
+    <div (click)="close.emit(false)" class="form-confirm__modal__close-area"></div>
+
+    <div class="form-confirm">
+        <button (click)="close.emit(false)" class="form-confirm__cls-btn  btn-cls"><span></span></button>
+
+        <h2 class="form-confirm__title">Заявка отправлена</h2>
+        <p class="form-confirm__subtitle">Мы свяжемся с вами и уточним необходимые детали</p>
+    </div>
+
+</div>

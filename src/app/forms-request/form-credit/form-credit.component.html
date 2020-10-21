@@ -10,7 +10,7 @@
 
         <!--<input [formControl]="form.controls['price']" type="text" style="display: none;">-->
         <!--<input [formControl]="form.controls['number']" type="text" style="display: none;">-->
-        
+
         <div class="form-request__wrap form-request__wrap_areas">
 
             <div class="form-request__wrap form-request__wrap_size-w3">
@@ -31,17 +31,16 @@
                     type="text" appSlideTopLabel>
                 <label >Отчество</label>
             </div>
-    
+
             <div class="form-request__wrap form-request__wrap_size-w3">
                 <input *ngIf="platform.isBrowser" [formControl]="form.controls['phone']" appSlideTopLabel
-                    [ngClass]="{'input-invalid': ( (form.get('phone').value != null) && (form.get('phone').value.indexOf('_') !== -1 || form.get('phone').value.length === 0) && form.controls['phone'].touched ) }" 
-                    class="form-request__field g-input" type="text" [textMask]="{mask: phoneMask}">
-                <label >Телефон</label>
-                <p class="form-request__notice">Например: +7 (910) 123-45-67</p>
+                       [ngClass]="{'input-invalid':  !form.get('phone').valid && form.get('phone').touched }"
+                       class="form-request__field g-input" type="text" maxlength="11">
+                <label>Номер телефона*</label>
+                <p class="form-request__notice">Например: 79991105522</p>
             </div>
             <div class="form-request__wrap form-request__wrap_size-w2">
                 <input [formControl]="form.controls['mail']" appSlideTopLabel
-                       [ngClass]="{'input-invalid': form.controls['mail'].invalid && form.controls['mail'].touched}"
                        class="form-request__field g-input" type="text">
                 <label >Эл. почта</label>
             </div>
@@ -55,6 +54,14 @@
                 <label >Планируемый срок выплат</label>
                 <p class="form-request__notice">Количество месяцев</p>
             </div>
+
+            <div class="form-request__wrap form-request__wrap_size-w3">
+                <input [formControl]="form.controls['description']"
+                       class="form-request__field g-input"
+                       type="text" appSlideTopLabel>
+                <label>Комментарий</label>
+            </div>
+
             <div class="form-request__wrap form-request__wrap_size-w3 form-request__wrap_last">
     
                 <input *ngIf="platform.isBrowser"
@@ -74,9 +81,9 @@
             <span>Я соглашаюсь на использование моих персональных данных.</span>
         </label>
 
-        <button *ngIf="!isSubmited"
-            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)}" 
-            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null) || (form.get('phone').value.indexOf('_') !== -1)" 
+        <button
+            [ngClass]="{'disabled-submit-btn': (!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null)}"
+            [disabled]="(!form.valid || form.get('agreement').value === false ) || (form.get('phone').value == null)"
             class="form-request__btn btn_var-2">
             Забронировать
         </button>

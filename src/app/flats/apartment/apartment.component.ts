@@ -17,6 +17,7 @@ export class ApartmentComponent implements OnInit {
 
     public isCreditFormOpen = false;
     public isReserveFormOpen = false;
+    public isFormConfirmOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
     public objectLink;

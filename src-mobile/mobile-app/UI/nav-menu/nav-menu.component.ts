@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, EventEmitter, Output, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, EventEmitter, Output, AfterViewInit, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./nav-menu.component.scss']
 })
 
-export class NavMenuComponent implements OnInit, AfterViewInit {
+export class NavMenuComponent implements  OnInit, OnChanges, AfterViewInit {
 
     @Input() public navType = 'common'; // Тип навигации
     @Input() public linkType = 'link'; // Тип ссылки для установки вида перехода
@@ -27,11 +27,12 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
     ) {
     }
 
-    ngOnInit() {
+    ngOnChanges(changes: SimpleChanges) {
+        setTimeout( () => this.defaultElem());
     }
 
     ngAfterViewInit() {
-        setTimeout(() => this.defaultElem());
+        setTimeout(() => this.defaultElem(), 500);
         this.ref.detectChanges();
     }
 

@@ -1,5 +1,6 @@
 import * as mongodb from 'mongodb';
 import * as nodemailer from 'nodemailer';
+import * as request from 'request';
 
 export class EmailerModel {
 
@@ -29,43 +30,38 @@ export class EmailerModel {
     }
 
     async creditRequest(data) {
-        let mails = await this.mailsFind();
-        console.log('sending mail to: ' + mails);
-
-        const time = data.wait_for_call === 'now' ? 'ожидает сейчас' : data.time;
-        let config = {
-            mails,
-            subject: 'Заявка на ипотеку.',
-            text:  `
-                <b>Имя :</b> ${data.name},<br>
-                <b>Телефон :</b> ${data.phone},<br>
-                <b>Эл. почта :</b> ${data.mail},<br>
-                <b>Время для звонка :</b> ${time},<br>
-                <b>Номер квартиры :</b> ${data.number},<br>
-                <b>Стоимость квартиры :</b> ${data.price},<br>
-                <b>Первый взнос :</b> ${data.first_pay},<br>
-                <b>Срок выплат :</b> ${data.period_pay}`
+        var options = {
+            uri: 'http://incrm.ru/Export-TRED/ImportFromSite.svc/Integration',
+            method: 'POST',
+            json: data
         };
-        this.sendMail(config);
+
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body); // Print the shortened url.
+            } else {
+                console.log(error);
+            }
+        });
+
         return ({message: 'ok'});
     }
 
     async reserveRequest(data) {
-        let mails = await this.mailsFind();
-        console.log('sending mail to: ' + mails);
-
-        const time = data.wait_for_call === 'now' ? 'ожидает сейчас' : data.time;
-        let config = {
-            mails,
-            subject: 'Заявка на бронирование.',
-            text:  `
-                <b>Имя :</b> ${data.name},<br>
-                <b>Телефон :</b> ${data.phone},<br>
-                <b>Время для звонка :</b> ${time},<br>
-                <b>Номер квартиры :</b> ${data.number},<br>
-                <b>Стоимость квартиры :</b> ${data.price},<br>`
+        var options = {
+            uri: 'http://incrm.ru/Export-TRED/ImportFromSite.svc/Integration',
+            method: 'POST',
+            json: data
         };
-        this.sendMail(config);
+
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body); // Print the shortened url.
+            } else {
+                console.log(error);
+            }
+        });
+
         return ({message: 'ok'});
     }
 

@@ -12,12 +12,13 @@ declare let $: any;
 
 export class FormReserveComponent implements OnChanges {
 
-    @Input() isOpen: boolean = false;
+    @Input() isOpen = false;
     @Input() public apartmentNumber: string;
     @Input() public apartmentPrice: number;
-    @Input() public article: string;
+    @Input() public articleId: string;
     @Input() public type: string;
     @Output() close: EventEmitter<boolean> = new EventEmitter();
+    @Output() public isSubmited = new EventEmitter<boolean>();
 
     public form: FormGroup = this.formBuilder.group({
         name: '',
@@ -26,19 +27,18 @@ export class FormReserveComponent implements OnChanges {
         // price: '',
         // number: '',
         type: '',
-        mail: ['', Validators.compose([Validators.required, Validators.email])],
-        phone: ['', Validators.required],
+        mail: '',
+        phone: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]+(?!.)/), Validators.maxLength(11), Validators.minLength(11)])],
         time: '',
         wait_for_call: 'now',
         agreement: true,
-        article: '',
+        articleId: '',
+        description: ''
     });
 
     // public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
     public phoneMask = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
     public timeMask = [/\d/, /\d/, ':', /\d/, /\d/];
-
-    public isSubmited: boolean = false;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -49,15 +49,15 @@ export class FormReserveComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         if ( 'isOpen' in changes && this.isOpen === true ) {
             this.form.reset();
-            this.form.controls['wait_for_call'].setValue('now');
-            this.form.controls['agreement'].setValue(true);
-            this.form.controls['phone'].setValue('');
-            this.form.controls['mail'].setValue('');
+            this.form.controls.wait_for_call.setValue('now');
+            this.form.controls.agreement.setValue(true);
+            this.form.controls.phone.setValue('');
+            this.form.controls.mail.setValue('');
             // this.form.controls['price'].setValue(this.apartmentPrice);
             // this.form.controls['number'].setValue(this.apartmentNumber);
-            this.form.controls['type'].setValue(this.type);
-            this.form.controls['article'].setValue(this.article);
-            this.isSubmited = false;
+            this.form.controls.type.setValue(this.type);
+            this.form.controls.articleId.setValue(this.articleId);
+            this.form.controls.description.setValue('');
         }
     }
 
@@ -74,7 +74,7 @@ export class FormReserveComponent implements OnChanges {
     public onSubmit(form) {
         this.service.sendReserveForm(form).subscribe(
             (data) => {
-                this.isSubmited = true;
+                this.isSubmited.emit(true);
                 this.close.emit(false);
             },
             (error) => {

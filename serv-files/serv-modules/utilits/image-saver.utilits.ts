@@ -45,6 +45,7 @@ export const imageSaver = (req: IFileRequest,  path: string, quality: number ) =
             if (err) { reject(err); }
 
             // обработка файла утилитой graphicsmagic
+
             gm(`${path}${fullName}`).strip().interlace('Line').quality(quality).write(`${path}/${fullName}`, async (error: any) => {
                 if (error) { reject(error); }
 
@@ -76,6 +77,27 @@ export const thumbnailSaver = ( req: IFileRequest,  path: string, size: IThumbna
 
                 resolve(fullName);
             });
+        });
+    });
+};
+
+export const iconSaver = ( req: IFileRequest,  path: string ) => {
+    // генерация названия файла
+    // будет иметь вид 2017-9-19-13-17-13-260.jpg
+    let name = fileName();
+    // расширение в нижнем регистре
+    let fileFormat = fileExtension(req.files['file'].originalFilename);
+    // полное имя файла
+    let fullName = `${name}${fileFormat}`;
+    // чтение файла из реквеста
+    let data = fs.readFileSync(req.files['file'].path);
+
+    return new Promise((resolve, reject) => {
+        // запись файла
+        writeFile(`${path}${fullName}`, data, (err: any) => {
+            if (err) { reject(err); }
+
+            resolve(fullName);
         });
     });
 };

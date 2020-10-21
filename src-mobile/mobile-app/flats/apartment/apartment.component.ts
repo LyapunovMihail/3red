@@ -17,6 +17,7 @@ export class ApartmentComponent implements OnInit {
 
     public isCreditFormOpen = false;
     public isReserveFormOpen = false;
+    public isFormConfirmOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
     public objectLink;
@@ -37,7 +38,7 @@ export class ApartmentComponent implements OnInit {
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
-        this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
+        this.pdfLink = `/api/pdf?id=${this.flatData._id}`;
         this.searchService.getObjects().subscribe(
             (data) => {
                 data.forEach( (obj) => {

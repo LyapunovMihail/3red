@@ -1,0 +1,188 @@
+@import '../../../styles/modules/mixins/mixin';
+
+.partners__intro {
+    margin-bottom: 40px;
+}
+.partners-settings__title {
+    font-size: 36px;
+    font-weight: normal;
+    margin-bottom: 24px;
+}
+.partners__title {
+    font-weight: normal;
+    font-size: 24px;
+}
+.partners__title {
+    margin-bottom: 16px;
+}
+.partners-item {
+    display: block;
+    position: relative;
+    margin-top: 50px;
+}
+.tabs__wrap {
+    background: #efefef;
+    padding: 20px 24px 32px;
+    margin-bottom: 8px;
+}
+.tabs__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tabs__title {
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.tabs__nav-link {
+    color: #000;
+    margin-left: 16px;
+    font-size: 18px;
+    &:hover {
+        color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.info-input {
+    width: 100%;
+    border: 0;
+    height: 40px;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    background: transparent;
+    outline: none;
+    padding-bottom: 8px;
+    font-size: 18px;
+}
+.info-suptitle, .info-input {
+    display: block;
+    font-family: inherit;
+}
+.info-suptitle {
+    font-size: 18px;
+    color: #000;
+    opacity: .5;
+}
+
+.info-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    background-image: url(/assets/img/jk-object/admin-modal/arrow.svg) !important;
+    background-repeat: no-repeat !important;
+    background-position: center right !important;
+}
+
+.form-label {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    left: 0;
+    top: 0;
+    line-height: 40px;
+    transition: .3s;
+}
+
+.form__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 32px;
+}
+.form-item {
+    display: block;
+    position: relative;
+    margin-top: 46px;
+    &--mr {
+        margin-right: 24px;
+    }
+}
+
+.form-item--inline {
+    width: 50%;
+}
+
+.button__delete {
+    position: absolute;
+    border-radius: 50%;
+    background: #ee4237;
+    width: 17px;
+    height: 17px;
+    top: -8px;
+    left: -8px;
+    z-index: 2;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        background: #ee534a;
+    }
+    &--textarea {
+        top: 50%;
+        left: 100% ;
+        margin-left: 15px;
+    }
+}
+.btn--complex {
+    margin: 40px 0 0;
+}
+
+.btn {
+    display: inline-block;
+    padding:10px 16px;
+    font-family: inherit;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &--settings {
+        background: #454545;
+        padding: 7px 12px 7px 34px;
+        position: relative;
+        &:hover {
+            background: rgba(0, 0, 0, .7);
+        }
+        &::before {
+            content: url(/assets/img/jk-object/admin-modal/plus.svg);
+            // margin-right:7px ;
+            position: absolute;
+            top: 28%;
+            left: 12px;
+        }
+    }
+
+    &--margin {
+        margin-bottom: 40px;
+    }
+
+    &--camera {
+        padding: 8px 16px;
+        background: rgba(0, 0, 0, 0.7);
+        &::before {
+            content: url(/assets/img/jk-object/admin-modal/camera.svg) ;
+            vertical-align: center;
+            margin-right:5px ;
+
+        }
+    }
+    &--camera:hover  {
+        background: rgba(0, 0, 0, 0.56);
+    }
+
+    &__wrap {
+        display: flex;
+        margin: 32px 0 0;
+    }
+    &__hint {
+        margin: 8px 0 0 16px;
+        opacity: 0.5;
+        color: $col-black;
+    }
+}
+
+.wrap {
+    position: relative;
+    margin-top: 16px;
+}
