@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./nav-menu.component.scss']
 })
 
-export class NavMenuComponent implements  OnInit, OnChanges, AfterViewInit {
+export class NavMenuComponent implements  OnChanges, AfterViewInit {
 
     @Input() public navType = 'common'; // Тип навигации
     @Input() public linkType = 'link'; // Тип ссылки для установки вида перехода

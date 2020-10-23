@@ -15,5 +15,7 @@ export interface DbJsonObject {
     TerrasesCount: string;
     IsEuro: string;
     ArticleTypeCode: string;
+    articleSubTypeCode: string;
     DeliveryPeriodDate: string;
+    planid: string;
 }

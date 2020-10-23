@@ -10,19 +10,20 @@ export class FavoritesService {
     public favoriteEmitter = new Subject<number>();
     public favoriteFlats: IFlatWithDiscount[];
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+    }
 
     public getFavoriteFlats() {
         this.http.get<IFlatWithDiscount[]>('/api/favorites/get')
             .subscribe(
                 (data) => {
-                        this.favoriteFlats = data;
-                        if (!this.favoriteFlats.length) {
-                            this.favoriteFlats = JSON.parse(localStorage.getItem('favorite')) || [];
-                            this.refreshFavorite(this.favoriteFlats);
-                        }
-                        this.setFavoriteCount();
-                    },
+                    this.favoriteFlats = data;
+                    if (!this.favoriteFlats.length) {
+                        this.favoriteFlats = JSON.parse(localStorage.getItem('favorite')) || [];
+                        this.refreshFavorite(this.favoriteFlats);
+                    }
+                    this.setFavoriteCount();
+                },
                 (err) => console.error(err)
             );
     }
@@ -39,10 +40,10 @@ export class FavoritesService {
         this.http.post<IFlatWithDiscount[]>('/api/favorites/set', {flat})
             .subscribe(
                 (data) => {
-                        this.favoriteFlats = data;
-                        localStorage.setItem('favorite', JSON.stringify(this.favoriteFlats));
-                        this.setFavoriteCount();
-                    },
+                    this.favoriteFlats = data;
+                    localStorage.setItem('favorite', JSON.stringify(this.favoriteFlats));
+                    this.setFavoriteCount();
+                },
                 (err) => console.error(err)
             );
     }

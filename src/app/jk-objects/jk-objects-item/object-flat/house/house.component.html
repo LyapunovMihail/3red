@@ -42,17 +42,17 @@
         [chessHeight]="chessHeight"
         (flatsChanged)="searchFlats = $event; searchFlatsSelection()">
 
-        <div class="house__sections" #chessContainer *ngIf="showChess">
+        <div class="house__sections" *ngIf="showChess" #chessParent>
             <app-house-minimap>
             </app-house-minimap>
 
-            <div class="house__sections-plan" [ngStyle]="{'transform' : 'translateX(-' + scroll + 'px)'}" #chess>
-                <ng-container *ngFor="let house of housesData">
-                    <ng-container *ngIf="house && house.length">
-                        <ng-container *ngFor="let section of house">
+            <div class="house__sections-plan" [ngStyle]="{'transform' : 'translate3d(-' + scroll + 'px,0,0)'}" *ngIf="houseNumbers?.length" #chessChild>
+                <ng-container *ngFor="let h of houseNumbers">
+                    <ng-container *ngIf="chess[h] && chess[h].length">
+                        <ng-container *ngFor="let section of chess[h]; let s = index">
                             <div class="house__sections-chess" *ngIf="section && section.length">
                                 <ul class="house__sections-chess_section" #sectionContainer>
-                                    <p class="house__sections-chess_section_title">{{jk.mod === 'МКВ' ? 'Тип дома ' + section[0][0].house + '. Дом ' + section[0][0].section : 'Дом ' + section[0][0].house + '. Секция ' + section[0][0].section}}</p>
+                                    <p class="house__sections-chess_section_title">{{jk.mod === 'МКВ' ? 'Тип дома ' + h + '. Дом ' + s : 'Дом ' + h + '. Секция ' + s}}</p>
                                     <ng-container *ngFor="let floor of section; let j = index">
                                         <li *ngIf="floor" class="house__sections-chess_section_floor">
                                             <ul>
@@ -73,8 +73,8 @@
                                                 </li>
                                                 <li class="house__sections-chess_section_floor-button">
                                                     <a class="house__sections-chess_section_floor-link"
-                                                        [routerLink]="'/objects/list/' + this.jk._id + '/flats/house/' + floor[0].house + '/section/' + floor[0].section + '/floor/' + floor[0].floor"> <!-- этаж и секция прописаны в любой квартире -->
-                                                        {{floor[0].floor}}
+                                                        [routerLink]="'/objects/list/' + this.jk._id + '/flats/house/' + h + '/section/' + s + '/floor/' + (section.length - j)"> <!-- этаж и секция прописаны в любой квартире -->
+                                                        {{section.length - j}}
                                                     </a>
                                                 </li>
                                             </ul>

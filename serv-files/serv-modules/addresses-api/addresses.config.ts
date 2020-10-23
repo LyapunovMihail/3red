@@ -23,6 +23,8 @@ export interface IAddressItemFlat {
     article: string;
     articleId: string;
     inFavorite?: boolean;
+    floorsInSection: number;
+    flatsInFloor: number;
     _id?: any;
 }
 
