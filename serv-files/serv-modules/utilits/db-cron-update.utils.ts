@@ -120,6 +120,9 @@ export class DbCronUpdate {
     }
 
     private parseType(articleType, subArticleType) {
+
+        subArticleType = subArticleType ? subArticleType.toString() : null;
+
         switch (articleType) {
             case '2':
                 return 'КВ';
@@ -136,6 +139,7 @@ export class DbCronUpdate {
                     case '16':
                         return 'КН';
                 }
+                break;
         }
     }
 
