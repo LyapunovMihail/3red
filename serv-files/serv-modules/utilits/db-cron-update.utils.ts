@@ -29,7 +29,7 @@ export class DbCronUpdate {
 
     public start() {
         this.requestBase();
-        const task = new CronJob('0 13,19 * * *', () => {
+        const task = new CronJob('0 8,13,19,23 * * *', () => {
             this.requestBase();
         }, false);
         task.start();
@@ -88,10 +88,8 @@ export class DbCronUpdate {
         if (('Article' in object) && !this.objects.some((jk) => jk.mod === object.Article.split('-')[0])) { // Если жилой комплекс этой квартиры создан, она добавляется в бд
             return;
         }
-        const {mod, house, section, floor, flat, type} = this.parseArticle(object.Article);
-        // if (type !== 'КВ' && type !== 'АП') {
-        //     return;
-        // }
+        const {mod, house, section, floor, flat} = this.parseArticle(object.Article);
+        const type = this.parseType(object.ArticleTypeCode, object.articleSubTypeCode);
 
         const itemflat: IAddressItemFlat = {
             mod,
@@ -113,10 +111,36 @@ export class DbCronUpdate {
             price: Number(object.Sum),
             deliveryDate: object.DeliveryPeriodDate,
             article: object.Article,
-            articleId: object.ArticleID
+            articleId: object.ArticleID,
+            floorsInSection: Number(object.planid.split('/')[0]),
+            flatsInFloor: Number(object.planid.split('/')[1]),
         };
         this.counter++;
         return itemflat;
+    }
+
+    private parseType(articleType, subArticleType) {
+
+        subArticleType = subArticleType ? subArticleType.toString() : null;
+
+        switch (articleType) {
+            case '2':
+                return 'КВ';
+            case '4':
+                return 'ММ';
+            case '8':
+                switch (subArticleType) {
+                    case '2':
+                        return 'АП';
+                    case '4':
+                        return 'КЛ';
+                    case '8':
+                        return 'ММ';
+                    case '16':
+                        return 'КН';
+                }
+                break;
+        }
     }
 
     private parseArticle(article: string) {
@@ -131,10 +155,9 @@ export class DbCronUpdate {
                 section,
                 floor,
                 flat,
-                type: 'КВ',
             };
         } else if (article.startsWith('БР')) {
-            const [mod, type, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [mod, sectionStr, floorStr, , flatStr] = article.split('-');
             const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
             return {
                 mod,
@@ -142,10 +165,9 @@ export class DbCronUpdate {
                 section,
                 floor,
                 flat,
-                type,
             };
         } else if (article.startsWith('ОБ')) {
-            const [mod, type, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [mod, , sectionStr, floorStr, , flatStr] = article.split('-');
             const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
             return {
                 mod,
@@ -153,7 +175,6 @@ export class DbCronUpdate {
                 section,
                 floor,
                 flat,
-                type,
             };
         } else {
             const [mod, houseStr, sectionStr, floorStr, , flatStr] = article.split('-');
@@ -164,7 +185,6 @@ export class DbCronUpdate {
                 section,
                 floor,
                 flat,
-                type: 'КВ',
             };
         }
     }

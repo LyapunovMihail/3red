@@ -14,7 +14,7 @@ export class HouseService {
         return this.http.post<IAddressItemFlat[]>('/api/search/object', { search: options });
     }
 
-    public getFlatsDataByObjectId(id): Observable<{jk: IObjectSnippet, housesBtnList, floorCount, config}> {
-        return this.http.get<{jk: IObjectSnippet, housesBtnList, floorCount, config}>(`/api/search/object-data/${id}`);
+    public getFlatsDataByObjectId(id): Observable<{jk: IObjectSnippet, housesBtnList, floorCount, chess, config}> {
+        return this.http.get<{jk: IObjectSnippet, housesBtnList, floorCount, chess, config}>(`/api/search/object-data/${id}`);
     }
 }

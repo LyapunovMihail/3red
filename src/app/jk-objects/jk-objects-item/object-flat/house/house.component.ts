@@ -10,7 +10,6 @@ import { PlatformDetectService } from '../../../../platform-detect.service';
 import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { ObjectFlatsService } from '../object-flats.service';
 import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 interface IFLatDisabled extends IFlatWithDiscount {
@@ -33,6 +32,8 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public jk: IObjectSnippet;
     // public houseNumber: string;
     public housesData: IFLatDisabled[][][][] = [];
+    public chess: IFLatDisabled[][][][];
+    public houseNumbers: string[];
     public bubbleData: IFlatWithDiscount;
     public showBubble = false;
     public routerEvent;
@@ -57,10 +58,10 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         top: 100
     };
 
-    @ViewChild('chess')
-    public chess: ElementRef;
-    @ViewChild('chessContainer')
-    public chessContainer: ElementRef;
+    @ViewChild('chessChild')
+    public chessChild: ElementRef;
+    @ViewChild('chessParent')
+    public chessParent: ElementRef;
 
     constructor(
         public router: Router,
@@ -81,9 +82,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.objectFlatsService.setData(data);
                 this.jk = data.jk;
                 this.floorCount = data.floorCount;
-                // this.setFloorCount();
+                this.chess = data.chess;
                 this.routerEvent = this.routerChange();
-                console.log('this.floorCount: ', this.floorCount);
+
                 this.service.getFlats({ // запрос кладовых
                     mod: this.jk.mod,
                     type: 'КЛ'
@@ -112,65 +113,15 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
             }
         );
     }
-    private getFloorSvg(url): Observable<string> {
-        return this.http.get<string>(url, { responseType: 'text' as 'json' });
-    }
-
-    private setFloorCount() { // перепроектирую структуру домов на основе имеющихся схем квартир, а не квартир в бд (для шахматки)
-        for (let i = 0; i < 20; i++) {
-            for (let j = 0; j < 20; j++) {
-                for (let k = 0; k < 50; k++) {
-                    // this.getFloorSvg(`/assets/floor-plans/jk_${this.jk.mod}/house_${i}/section_${j}/floor_${k}/${k}floor_${1}flat.svg`);
-                    // for (let f = 0; f < 20; f++) {
-                    //     this.getFloorSvg(`/assets/floor-plans/jk_${this.jk.mod}/house_${i}/section_${j}/floor_${k}/${k}floor_${f}flat.svg`).subscribe(
-                    //         (data: string) => {
-                    //             // let floorSvg = data;
-                    //             // floorSvg = floorSvg.slice(1, 4) !== 'svg' ? '' : floorSvg;
-                    //             // if (f === 20) {
-                    //             //     console.log('floorSvg: ', floorSvg);
-                    //             // }
-                    //             // if (!this.floorCount[i][j][k]) {
-                    //             //     this.floorCount[i][j][k] = [];
-                    //             // }
-                    //             // this.floorCount[i][j][k].push(f);
-                    //             // console.log('');
-                    //             },
-                    //         (err) => {
-                    //             console.log('');
-                    //         });
-                    // }
-                }
-            }
-        }
-    }
 
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
             setTimeout(() => {
                 // тут сделать цикл по params.house.forEach((item) => this.floorCount[item]);
                 this.housesData = [];
-                const houseNumbers = params.house === 'all' ? Object.keys(this.floorCount) : params.house.split(',');
-                houseNumbers.forEach((houseNumber, i) => {
-                    // if (this.floorCount[item]) {
-                    //
-                    // }
-                    if (this.floorCount[houseNumber]) {
-                        const sectionNumbers = Object.keys(this.floorCount[houseNumber]); // создаём массив из номеров секций по выбранному дому.
-                        if (this.platform.isBrowser) {
-                            // получение квартир для нужных секций
-                            sectionNumbers.forEach((sectionNumber) => {
-                                this.getFlats(sectionNumber, houseNumber).subscribe(
-                                    (flats) => {
-                                        this.buildSectionData(flats, houseNumber, sectionNumber, this.housesData[i]);
-                                    },
-                                    (err) => console.log(err)
-                                );
-                            });
-                        }
-                    } else if (houseNumber === 'all') {
-                        // this.showChess = false;
-                        // // this.houseNumber = null;
-                    } else {
+                this.houseNumbers = params.house === 'all' ? Object.keys(this.chess) : params.house.split(',');
+                this.houseNumbers.forEach((houseNumber) => {
+                    if (!this.floorCount[houseNumber]) {
                         this.router.navigate(['/error-404'], {
                             skipLocationChange: true
                         });
@@ -191,76 +142,31 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private buildSectionData(flats, houseNumber, sectionNumber, houseData) {
-        const sectionData = flats.reduce((section: IFLatDisabled[][], flat: IAddressItemFlat) => {
-            if (!section[flat.floor]) {
-                section[flat.floor] = [];
-            }
+        let sectionData = [];
 
-            // Object.keys(this.floorCount[]);
-            section[flat.floor].push({...flat, discount: this.flatsDiscountService.getDiscount(flat), disabled: true});
-            return section;
-        }, []);
-
-        let sectionFloors = sectionData.length; // ToDo Временное решение
-        switch (this.jk.mod) {
-            case 'МКВ':
-                sectionFloors = 6;
-                break;
-            case 'МАЙ':
-                sectionFloors = 4;
-                break;
-            case 'АИБ':
-                sectionFloors = 5;
-                break;
-        }
-        for (let i = 1; i < sectionFloors; i++) {
-            if (sectionData[i] == null) {
-                sectionData[i] = [];
-            } else {
-                sectionData[i].sort();
-            }
-        }
-
-        sectionData.reverse();
-
-        const lengths = [];
-        sectionData.forEach((floor) => lengths.push(floor.length));
-
-        let floorMaxLength = this.jk.mod === 'ОБ' || this.jk.mod === 'НК' || this.jk.mod === 'МКВ' ? 8 : Math.max(...lengths); // ToDo Временное решение
-        switch (this.jk.mod) {
-            case 'НК':
-                floorMaxLength = 7;
-                break;
-            case 'ОБ':
-                floorMaxLength = 8;
-                break;
-            case 'МКВ':
-                floorMaxLength = 7;
-                break;
-            case 'МАЙ':
-                floorMaxLength = 4;
-                break;
-            case 'АИБ':
-                floorMaxLength = 9;
-                break;
-        }
-
-        sectionData.forEach((floor, j) => {
-            const floorLength = floor.length;
-            for (let i = 0; i < (floorMaxLength - floorLength); i++) {
-               floor.push({status : '-1', house: houseNumber, section: sectionNumber, floor: sectionData.length - 1 - j});
-            }
+        sectionData = new Array(flats[0].floorsInSection).fill([]);
+        sectionData.forEach((floor, i) => {
+            sectionData[i] = new Array(flats[0].flatsInFloor).fill({status : '-1', house: houseNumber, section: sectionNumber, floor: sectionData.length - i});
         });
+
+        flats.forEach((flat: IAddressItemFlat) => {
+            const floor = sectionData[sectionData.length - flat.floor];
+            floor[floor.findIndex((mockFlat) => mockFlat.status === '-1')] = flat;
+        });
+
         houseData[sectionNumber - 1] = sectionData;
         // console.log('this.sectionsData: ', houseData);
     }
 
     public searchFlatsSelection() {
-        this.housesData.forEach((house) => {
-            house.forEach((section: IFLatDisabled[][]) => {
+        console.log('this.chess: ', this.chess);
+        this.houseNumbers.forEach((house) => {
+            this.chess[house].forEach((section: IFLatDisabled[][]) => {
+                if (!section) { return; }
                 section.forEach((floor: IFLatDisabled[]) => {
                     floor.forEach((flat: IFLatDisabled) => {
                         flat.disabled = true;
+                        flat.discount = this.flatsDiscountService.getDiscount(flat);
                         this.searchFlats.forEach((searchFlat: IFlatWithDiscount) => {
                             if ((searchFlat.house === flat.house
                                 && searchFlat.section === flat.section
@@ -310,9 +216,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public scrollCalculate() {
         setTimeout(() => {
-            this.chessHeight = this.chessContainer.nativeElement.clientHeight;
+            this.chessHeight = this.chessParent.nativeElement.clientHeight;
             this.scroll = 0;
-            this.chessMaxScroll = this.chess.nativeElement.clientWidth - this.chessContainer.nativeElement.clientWidth;
+            this.chessMaxScroll = this.chessChild.nativeElement.clientWidth - this.chessParent.nativeElement.clientWidth;
             if (this.chessMaxScroll > 0 ) {
                 this.lastScrollStep = this.chessMaxScroll % this.scrollStep;
             } else {

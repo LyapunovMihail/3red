@@ -21,18 +21,19 @@ export class AddressesController extends AddressesModel {
         this.router.post('/search/object', responseHandler(async(req) => {
             return await this.getObjectsFlats(req.body.search);
         }));
+
         this.router.get('/search/object-data/:objectId', responseHandler(async(req) => {
             return await this.getObjectFlatsData(req.params.objectId);
         }));
+
         this.router.post('/search/common', responseHandler(async(req) => {
             return await this.getCommonFlats(req.body.search);
         }));
+
         this.router.get('/search/common-data', responseHandler(async(req) => {
             return await this.getCommonFlatsData(req.query);
         }));
-        this.router.post('/search/with_count', responseHandler(async(req) => {
-            return await this.getObjectsWithCount(req.body.search);
-        }));
+
         this.router.get('/search-config', responseHandler(async(req) => {
             return await this.getSearchConfig();
         }));
