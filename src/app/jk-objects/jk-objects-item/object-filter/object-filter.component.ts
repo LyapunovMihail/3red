@@ -25,7 +25,7 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
     public config = FormConfig;
     public form: FormGroup;
     public formEvents: any;
-    public params: { priceMin: string, priceMax: string, rooms?: string, mod: string };
+    public params: { priceMin: string, priceMax: string, rooms?: string, mod: string, status: string };
     public flatsLength: number;
 
     constructor(
@@ -84,7 +84,8 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
         this.params = {
             priceMin: form.price.min,
             priceMax: form.price.max,
-            mod: form.mod
+            mod: form.mod,
+            status: '4'
         };
         if ( 'rooms' in form && form.rooms.some((i) => i === true) ) {
             this.params.rooms = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
@@ -97,6 +98,7 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
         this.service.getFlats(this.params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.flatsLength = data.length;
+                console.log(data);
             },
             (err) => {
                 console.log(err);
