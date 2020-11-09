@@ -55,6 +55,11 @@
     }
     &__admin-btn { margin: 0 0 16px; }
 
+    &__ilike {
+        width: 110px;
+        display: block;
+        margin: 0 0 16px;
+    }
     &__wrapper {
         position: relative;
         z-index: 2;

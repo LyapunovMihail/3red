@@ -4,6 +4,7 @@ import {
     IObjectPreviewSnippet,
     OBJECTS_PREVIEW_UPLOADS_PATH
 } from '../../../../../serv-files/serv-modules/jk-objects/preview-api/objects-preview.interfaces';
+import { IObjectSnippet } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-object-item-preview',
@@ -24,6 +25,7 @@ export class ObjectPreviewComponent implements OnInit {
     public closeModal = true;
 
     public snippet: IObjectPreviewSnippet;
+    public object: IObjectSnippet;
 
     uploadsPath = `/${OBJECTS_PREVIEW_UPLOADS_PATH}`;
 
@@ -38,6 +40,13 @@ export class ObjectPreviewComponent implements OnInit {
         }, (error) => {
             console.error(error);
         });
+        this.previewService.getObjectById(this.objectId).subscribe(
+            data => {
+                this.object = data[0];
+                console.log(this.object);
+            },
+            err => console.error(err)
+        );
     }
 
     concatTitle(titleFragments: string[]): string {

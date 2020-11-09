@@ -5,6 +5,7 @@ import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { IObjectPreviewSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/preview-api/objects-preview.interfaces';
+import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Injectable()
 
@@ -19,6 +20,9 @@ export class ObjectPreviewAdminService {
 
     public getSnippetById(objectID): Observable<IObjectPreviewSnippet> {
         return this.http.get<IObjectPreviewSnippet>(`/api/jk-object/preview/id/${objectID}`);
+    }
+    public getObjectById(objectID): Observable<IObjectSnippet> {
+        return this.http.get<IObjectSnippet>(`/api/jk-object/object/id/${objectID}`);
     }
 
     public formSubmit(form) {
