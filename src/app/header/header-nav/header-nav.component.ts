@@ -70,9 +70,14 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
         this.lastMothWithPhotos = date.getMonth() + 1;
         this.lastYearWithPhotos = date.getFullYear();
         if (this.pageName === 'objects') {
-            this.subs.push(this.headerService.getDynamicLink().subscribe((data: IObjectDynamicSnippet[]) => {
+            this.setLastDateWithPhotos();
+            this.setVisibilityForDynamicBtn();
+        }
+    }
+    private setLastDateWithPhotos() {
+        this.subs.push(
+            this.headerService.getDynamicLink().subscribe((data: IObjectDynamicSnippet[]) => {
                 if (data.length > 0) {
-                    this.hasPhotos = true;
                     data.forEach((item) => {
                         if (item && item.year && item.year > this.lastYearWithPhotos) {
                             this.lastYearWithPhotos = item.year;
@@ -82,8 +87,16 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
                         }
                     });
                 }
-            }));
-        }
+            })
+        );
+    }
+    private setVisibilityForDynamicBtn() {
+        this.subs.push(
+            this.headerService.getTabsSnippetById().subscribe(data => {
+                if (!data || !data.dynamic) { return; }
+                this.hasPhotos = data.dynamic.some(el => el.show);
+            })
+        );
     }
 
     private checkAuth() {

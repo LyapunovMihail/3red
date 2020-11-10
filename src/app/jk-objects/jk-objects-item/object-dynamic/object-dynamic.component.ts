@@ -23,6 +23,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     public objectId: string;
     public jk: IObjectSnippet;
     public objectsArray: IDynamicObject[] = [];
+    public completedObjectsArray: IDynamicObject[] = [];
     // public objectsArray: any = [];
     public routerEvent;
     public AuthorizationEvent;
@@ -47,11 +48,21 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
         public platform: PlatformDetectService
     ) { }
 
+    public get showNavList() {
+        if (this.tabSnippet && this.tabSnippet.dynamic) {
+            return this.tabSnippet.dynamic.some(el => el.show);
+        }
+        return false;
+    }
+
     ngOnInit() {
         if ( this.platform.isBrowser ) {
             // подписка на авторизацию
             this.AuthorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
                 this.isAuthorizated = val;
+                if (this.navList.length) {
+                    this.navList[1].disabled = val;
+                }
             });
 
             this.routerEvent = this.activatedRoute.params.subscribe((params) => {
@@ -65,10 +76,16 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     public getSnippet() {
         this.dynamicService.getContentSnippet(this.objectId, this.currentYear, this.currentMonth).subscribe(
-            (data) => {
-                this.setContent(data);
-            },
+            (data) => this.getCompletedSnippet(data),
             (err) => console.error(err)
+        );
+    }
+    private getCompletedSnippet(allSnippets?) {
+        this.dynamicService.getCompletedSnippets(this.objectId).subscribe(
+            data => {
+                this.completedObjectsArray = data;
+                this.setContent(allSnippets);
+            }
         );
     }
 
@@ -86,21 +103,20 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
             (data) => {
                 this.tabSnippet = data;
                 this.setNavList();
-                this.setNavList();
                 this.navList.forEach((navItem) => {
                     if (navItem.link === 'process' && !navItem.show) {
                         this.changeTab('ready');
                         this.active = 'ready';
                     }
-                })
+                });
             },
             (err) => console.error(err)
         );
     }
     private setNavList() {
         this.navList = [
-            { name: 'Ход строительства', link: 'process', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show) },
-            { name: 'Готовые дома', link: 'ready', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show) }
+            { name: 'Ход строительства', link: 'process', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[0].show), disabled: false },
+            { name: 'Готовые дома', link: 'ready', show: (this.tabSnippet && this.tabSnippet.dynamic && this.tabSnippet.dynamic[1].show), disabled: this.isAuthorizated }
         ];
     }
     public changeTab(tab) {
@@ -111,7 +127,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     setContent(data) {
         this.contentSnippet = data;
         if (this.contentSnippet && this.contentSnippet.objects) {
-            this.objectsArray = this.active === 'process' ? this.contentSnippet.objects : this.contentSnippet.objects.filter((item) => item.ready === 100 && item.show);
+            this.objectsArray = this.active === 'process' ? this.contentSnippet.objects.filter((item) => item.ready < 100 && item.show) : this.completedObjectsArray;
         } else {
             this.objectsArray = [];
         }

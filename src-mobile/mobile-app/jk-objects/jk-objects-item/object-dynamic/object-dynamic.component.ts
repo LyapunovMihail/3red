@@ -22,6 +22,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     public objectId: string;
     public jk: IObjectSnippet;
     public objectsArray: IDynamicObject[] = [];
+    public completedObjectsArray: IDynamicObject[] = [];
     // public objectsArray: any = [];
     public routerEvent;
 
@@ -52,10 +53,16 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     public getSnippet() {
         this.dynamicService.getContentSnippet(this.objectId, this.currentYear, this.currentMonth).subscribe(
-            (data) => {
-                this.setContent(data);
-            },
+            (data) => this.getCompletedSnippet(data),
             (err) => console.error(err)
+        );
+    }
+    private getCompletedSnippet(allSnippets?) {
+        this.dynamicService.getCompletedSnippets(this.objectId).subscribe(
+            data => {
+                this.completedObjectsArray = data;
+                this.setContent(allSnippets);
+            }
         );
     }
 
@@ -83,7 +90,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     setContent(data) {
         this.contentSnippet = data;
         if (this.contentSnippet && this.contentSnippet.objects) {
-            this.objectsArray = this.active === 'process' ? this.contentSnippet.objects : this.contentSnippet.objects.filter((item) => item.ready === 100 && item.show);
+            this.objectsArray = this.active === 'process' ? this.contentSnippet.objects.filter((item) => item.ready < 100 && item.show) : this.completedObjectsArray;
         } else {
             this.objectsArray = [];
         }

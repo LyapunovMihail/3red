@@ -10,13 +10,8 @@
         <button *ngIf="isAuthorizated" class="btn__admin-setting" (click)="closeTabsModal = false">Настройки</button>
 
         <nav class="object-dynamic__nav" *ngIf="navList.length">
-            <!--<ul class="object-dynamic__nav-list">-->
-                <!--<li class="object-dynamic__nav-item" (click)="changeTab('process')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[0].show"-->
-                    <!--[class.object-dynamic__nav-item_active]="active === 'process'">Ход строительства</li>-->
-                <!--<li class="object-dynamic__nav-item" (click)="changeTab('ready')" *ngIf="tabSnippet?.dynamic && tabSnippet.dynamic[1].show"-->
-                    <!--[class.object-dynamic__nav-item_active]="active === 'ready'">Готовые дома</li>-->
-            <!--</ul>-->
             <nav-menu
+                *ngIf="showNavList"
                 [navList]="navList"
                 [linkType]="'else'"
                 (routeNavigate)="changeTab($event)"
@@ -41,7 +36,7 @@
 
                 <div class="object-dynamic__content-gallery">
 
-                    <button *ngIf="isAuthorizated" class="btn__admin-content btn_var-2"
+                    <button *ngIf="isAuthorizated && active === 'process'" class="btn__admin-content btn_var-2"
                         (click)="closeContentModal = false">Контент</button>
 
                     <!-- Раздел с изображениями динамики -->
@@ -67,7 +62,7 @@
                     <!-- Раздел схемы корпусов(навигация) -->
                     <app-object-dynamic-schema
                         [isAuthorizated]="isAuthorizated"
-                        [objectsArray]="objectsArray">
+                        [objectsArray]="contentSnippet?.objects || []">
                     </app-object-dynamic-schema>
                 </div>
             </div>
