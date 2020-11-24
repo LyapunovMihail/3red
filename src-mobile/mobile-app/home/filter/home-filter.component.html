@@ -3,9 +3,9 @@
         <h2>Подбор квартиры по параметрам</h2>
 
         <a class="object-filter__btn-link btn_var-2"
-           [class.object-filter__btn-link--disabled]="!flatsLength"
-            routerLink="/flats/search">
-            {{ this.availableFlats ? this.availableFlats.length + ' ' + parseText(this.availableFlats.length) : 'Нет предложений'}}
+          [class.object-filter__btn-link--disabled]="!flatsLength"
+          routerLink="/flats/search" [queryParams]="{status:'4'}">
+            {{ flatsLength ? flatsLength + ' ' + parseText(flatsLength) : 'Нет предложений'}}
         </a>
     </div>
 </section>

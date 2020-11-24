@@ -24,7 +24,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     public config = FormConfig;
     public form: FormGroup;
     public formEvents: any;
-    public params: { priceMin: string, priceMax: string, rooms?: string, mod: string };
+    public params: { priceMin: string, priceMax: string, rooms?: string, mod: string, status: string };
     public flatsLength: number;
     public modsBtnList;
     public showMods = false;
@@ -104,8 +104,10 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         this.params = {
             priceMin: form.price.min,
             priceMax: form.price.max,
-            mod: form.mod.join(',')
+            mod: form.mod.join(','),
+            status: '4',
         };
+        console.log(this.params);
         if ('rooms' in form && form.rooms.some((i) => i === true)) {
             this.params.rooms = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }
@@ -119,7 +121,6 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         }
         this.homeFilterService.getFlats(this.params).subscribe(
             (data: IAddressItemFlat[]) => {
-                this.availableFlats = data.filter((flat: IAddressItemFlat) => flat.statusName === 'Свободно');
                 this.flatsLength = data.length;
             },
             (err) => {
@@ -141,7 +142,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
                                 }
                             }
                         });
-                        delete this.params.mod;
+                        // delete this.params.mod;
                         this.router.navigate(['/flats/search'], {
                             queryParams: {
                                 ...this.params,

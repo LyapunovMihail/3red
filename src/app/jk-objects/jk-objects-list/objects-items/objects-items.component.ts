@@ -35,14 +35,13 @@ export class ObjectsItemsComponent implements OnInit {
     }
 
     ngOnInit() {
-
     }
 
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    getFilteredSnippet() {
+    public get filteredSnippet() {
         const filteredSnippets: IObjectSnippet[] = [];
         if(this.snippets && this.snippets.length>0){
             this.snippets.forEach((item) => {
@@ -59,5 +58,10 @@ export class ObjectsItemsComponent implements OnInit {
         }
 
         return filteredSnippets;
+    }
+
+    public setIlike(ev, snippet) {
+        snippet.ilike = ev.target.checked;
+        this.updateSnippet.emit(snippet);
     }
 }

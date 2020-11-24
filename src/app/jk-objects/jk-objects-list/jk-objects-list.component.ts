@@ -145,7 +145,9 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     }
 
     private getMinMaxPrice(flats) {
-        const price = flats.map((el) => el.price);
+        const price = flats
+            .filter(el => el.status === '4')
+            .map((el) => el.price);
 
         this.minPricePlaceholder = price.length > 0 ? Math.min(...price).toFixed(0) : '0';
         this.maxPricePlaceholder = price.length > 0 ? Math.max(...price).toFixed(0) : '0';

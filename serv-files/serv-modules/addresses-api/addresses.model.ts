@@ -113,20 +113,21 @@ export class AddressesModel {
     }
 
     private setMinMaxParams(flats) {
+        flats = flats.filter(el => el.status = '4');
         return {
             price: {
                 min: Math.min(...flats.map((flat) => flat.price)),
-                max: Math.max(...flats.map((flat) => flat.price))
+                max: Math.max(...flats.map((flat) => flat.price)),
             },
             floor: {
                 min: Math.min(...flats.map((flat) => flat.floor)),
-                max: Math.max(...flats.map((flat) => flat.floor))
+                max: Math.max(...flats.map((flat) => flat.floor)),
             },
             space: {
                 min: Math.floor(Math.min(...flats.map((flat) => flat.space))),
-                max: Math.ceil(Math.max(...flats.map((flat) => flat.space)))
+                max: Math.ceil(Math.max(...flats.map((flat) => flat.space))),
             },
-            sort: 'floor_1'
+            sort: 'floor_1',
         };
     }
 

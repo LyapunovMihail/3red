@@ -25,11 +25,9 @@ export class HomeFilterComponent implements OnInit {
     }
 
     public getFlats() {
-        this.homeFilterService.getFlats({type: 'КВ,АП'}).subscribe(
+        this.homeFilterService.getFlats({type: 'КВ,АП', status: '4'}).subscribe(
             (data: IAddressItemFlat[]) => {
-                this.availableFlats = data.filter((flat: IAddressItemFlat) => flat.statusName === 'Свободно');
                 this.flatsLength = data.length;
-                console.log('this.flatsLength: ', this.flatsLength);
             },
             (err) => {
                 console.log(err);

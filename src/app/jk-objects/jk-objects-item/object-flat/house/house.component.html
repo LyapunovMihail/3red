@@ -4,7 +4,7 @@
 
         <div class="house__nav">
             <div class="object__flat-list-wrap">
-                <a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">ЖК {{jk.name}}</a>
+                <a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">К объекту</a>
 
                 <ul class="object__flat-list" *ngIf="isParking || isStorerooms">
                     <li class="object__flat-item object__flat-item_active">Квартиры</li>
@@ -28,12 +28,12 @@
 <!--&gt;>>>>>> 3red/develop-->
             </div>
 
-            <ul class="house__nav-list">
+            <!--<ul class="house__nav-list">
                 <li class="house__nav-item" [ngClass]="{'house__nav-item_active' : !showChess}"
                     (click)="showChess = false">Поиск по параметрам</li>
                 <li class="house__nav-item" [ngClass]="{'house__nav-item_active' : showChess}"
                     (click)="showChess = true; scrollCalculate()">Схемой</li>
-            </ul>
+            </ul>-->
         </div>
     </div>
 

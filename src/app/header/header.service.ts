@@ -5,6 +5,7 @@ import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { Observable } from 'rxjs';
 import { IObjectSnippet } from '../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 import { IObjectDynamicSnippet } from '../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { IObjectTabsSnippet } from '../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 
 export interface IHeaderLink {
     name: string;
@@ -31,8 +32,11 @@ export class HeaderService {
     // public getDynamicLink(): Observable<{year: number, month: number}> {
     //     return this.http.get<{year: number, month: number}>(`/jk-object/dynamic/last/link/${this.objectId}`);
     // }
-  public getDynamicLink(): Observable<IObjectDynamicSnippet[]>  {
+    public getDynamicLink(): Observable<IObjectDynamicSnippet[]>  {
         return this.http.get<IObjectDynamicSnippet[]>(`/api/jk-object/dynamic/id/${this.objectId}`);
+    }
+    public getTabsSnippetById(): Observable<IObjectTabsSnippet> {
+        return this.http.get<IObjectTabsSnippet>(`/api/jk-object/tabs/id/${this.objectId}/dynamic`);
     }
 
     public links(): IHeaderLink[] {

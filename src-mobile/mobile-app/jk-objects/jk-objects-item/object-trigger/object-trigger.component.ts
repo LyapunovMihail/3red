@@ -26,10 +26,8 @@ export class ObjectTriggerComponent implements OnInit {
     }
 
     private buildTriggersData(flats) {
-        if (flats && Array.isArray(flats)) {
-            flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
-        }
-        if (flats && flats.length) {
+        flats = flats.filter((flat: IAddressItemFlat) => flat.status === '4');
+        if (flats.length) {
             for (let i = 0; i < 4; i++) {
                 const filteredFlats = flats.filter((flat) => Number(flat.rooms) === i);
                 if (filteredFlats.length) {

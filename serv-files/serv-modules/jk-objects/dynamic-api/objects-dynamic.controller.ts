@@ -29,6 +29,9 @@ export class ObjectsDynamicController extends ObjectsDynamicModel {
         this.router.get('/jk-object/dynamic/id/:id/', responseHandler(async(req) => {
             return await this.getSnippets(req.params.id);
         }));
+        this.router.get('/jk-object/dynamic/completed-object/:id/', responseHandler(async(req) => {
+            return await this.getCompletedObject(req.params.id);
+        }));
 
         this.router.post('/admin/jk-object/dynamic/create-update', responseHandler(async(req) => {
             return await this.updateSnippet(req.body);

@@ -5,7 +5,7 @@
 
         <!-- <app-object-item-filter [objectId]="objectId" [mod]="jk.mod" *ngIf=flats.length></app-object-item-filter> -->
 
-        <app-object-item-trigger [objectId]="objectId" [flats]="flats"></app-object-item-trigger>
+        <app-object-item-trigger *ngIf="flats" [objectId]="objectId" [flats]="flats"></app-object-item-trigger>
 
         <app-object-item-storage [objectId]="objectId" [mod]="jk.mod"></app-object-item-storage>
 

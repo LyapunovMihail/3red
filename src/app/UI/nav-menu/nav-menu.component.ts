@@ -26,7 +26,9 @@ export class NavMenuComponent implements OnInit, OnChanges, AfterViewInit {
     ) { }
 
     ngOnInit() {
-        this.activePointDefault = this.navList.findIndex(item => item.show);
+        if (this.navList.some(el => el.show)) {
+            this.activePointDefault = this.navList.findIndex(item => item.show);
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -38,9 +40,9 @@ export class NavMenuComponent implements OnInit, OnChanges, AfterViewInit {
         this.ref.detectChanges();
     }
 
-    public getActiveElement(event) {
+    public getActiveElement(event, i) {
         const elem = event.target;
-
+        this.activePointDefault = i;
         this.widthActive = elem.offsetWidth;
         this.offsetLeftActive = elem.offsetLeft;
     }
@@ -55,7 +57,9 @@ export class NavMenuComponent implements OnInit, OnChanges, AfterViewInit {
         } else if (type === 'link' && this.navType === 'decoration') {
             this.routeNavigate.emit(item);
         } else {
-            this.routeNavigate.emit(value);
+            setTimeout(() => {
+                this.routeNavigate.emit(value);
+            }, 500);
         }
     }
 

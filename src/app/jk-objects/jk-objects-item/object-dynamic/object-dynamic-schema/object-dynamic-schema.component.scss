@@ -2,26 +2,30 @@
 
 .dynamic-schema {
     width: 248px;
-    height: 326px;
+    //height: 326px;
     display: flex;
     flex-flow: row wrap;
 
     &__item {
-        width: 56px;
+        min-width: 64px;
         height: 32px;
         background-color: $col-white;
+        overflow: hidden;
         position: relative;
         box-sizing: border-box;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0 0 2px;
+        padding: 0 16px;
         margin: 0 8px 8px 0;
         cursor: pointer;
-        &:last-child,
-        &:nth-last-child(2),
-        &:nth-last-child(3),
-        &:nth-last-child(4) { margin-bottom: 0; }
+
+        //&:last-child,
+        //&:nth-last-child(2),
+        //&:nth-last-child(3),
+        //&:nth-last-child(4) { margin-bottom: 0; }
+
         &::before {
             content: '';
             position: absolute;
@@ -33,15 +37,30 @@
         }
         &-name,
         &-progress {
+            display: block;
+            //position: absolute;
             font: 14px/18px $font-proba;
-            transition: opacity .2s linear;
-            position: absolute;
+            transition: transform .2s ease, opacity .1s ease;
         }
 
-        &-progress { opacity: 0; }
+        &-name {
+            margin: 0 0 32px;
+            transform: translateY(25px);
+        }
+        &-progress {
+            transform: translateY(0);
+            opacity: 0;
+        }
         &:hover {
-            .dynamic-schema__item-name { opacity: 0; }
-            .dynamic-schema__item-progress { opacity: 1; }
+            .dynamic-schema__item-name {
+                transform: translateY(0);
+                opacity: 0;
+
+            }
+            .dynamic-schema__item-progress {
+                transform: translateY(-25px);
+                opacity: 1;
+            }
         }
 
         &-bar {

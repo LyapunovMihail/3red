@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IObjectDynamicSnippet } from '../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
+import { IDynamicObject, IObjectDynamicSnippet } from '../../../../../serv-files/serv-modules/jk-objects/dynamic-api/objects-dynamic.interfaces';
 import { IObjectTabsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 import { IObjectSnippet } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
@@ -19,6 +19,9 @@ export class DynamicService {
 
     public getContentSnippets(id): Observable<IObjectDynamicSnippet[]> {
         return this.http.get<IObjectDynamicSnippet[]>(`/api/jk-object/dynamic/id/${id}`);
+    }
+    public getCompletedSnippets(id): Observable<IDynamicObject[]> {
+        return this.http.get<IDynamicObject[]>(`/api/jk-object/dynamic/completed-object/${id}`);
     }
 
 

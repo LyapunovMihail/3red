@@ -60,7 +60,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges, AfterViewIn
 
     ngOnInit() {
         this.getTypesThanContent();
-        this.slideShow();
+        // this.slideShow();
     }
     ngAfterViewInit() {
         setTimeout( () => this.defaultElem(), 2000);
@@ -125,6 +125,7 @@ export class ObjectDecorationComponent implements OnInit, OnChanges, AfterViewIn
             this.currentType = null;
         }
         this.currentSlide = 0;
+        this.slideShow();
     }
     public buildTabForNav(list) {
         let result = [];

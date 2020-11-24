@@ -19,4 +19,5 @@ export interface IObjectSnippet {
     thumbnail: string;
     created_at: any;
     last_modifyed: any;
+    ilike?: boolean;
 }

@@ -2,10 +2,11 @@
 
     <div class="object-flat__house">
         <a class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of housesPlanSvg"
-          [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}">
+          [routerLink]="'/objects/list/' + objectId + '/flats/house/' + house.houseNumber" [queryParams]="{'houses' : house.houseNumber}"
+          [class.disabled]="!house.freeFlats">
             <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
             <p class="object-flat__house-flats">{{house.freeFlats ? house.freeFlats + ' кв' : 'не в продаже'}}</p>
-            <p class="object-flat__house-price">от {{house.minPrice}} млн Р</p>
+            <p class="object-flat__house-price" *ngIf="house.freeFlats">от {{house.minPrice}} млн Р</p>
         </a>
     </div>
 </div>
