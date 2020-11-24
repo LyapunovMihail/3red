@@ -4,7 +4,6 @@ import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { IFlatWithDiscount } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 import { FavoritesService } from '../../../../favorites/favorites.service';
-// declare let chWidget: any; // переменная для работы с чейзером
 
 @Component({
     selector: 'app-flats-apartment-modal',
@@ -19,7 +18,8 @@ export class ApartmentComponent implements OnInit {
     public isFormConfirmOpen = false;
     public flatData: IFlatWithDiscount;
     public pdfLink: string;
-    // public chWidget = chWidget; // переменная для работы с чейзером
+    public prevFlat: IFlatWithDiscount;
+    public nextFlat: IFlatWithDiscount;
 
     @Input() public jk: IObjectSnippet;
     @Input() public showApartmentWindow = false;
@@ -37,17 +37,25 @@ export class ApartmentComponent implements OnInit {
         this.flatData = this.flatsList[this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
         this.flatData.jkName = this.jk.name;
+        this.setPrevAndNextFlats();
         this.pdfLink = `/api/pdf?id=${this.flatData._id}`;
     }
 
-    public prevFlat() {
-        this.flatData = this.flatsList[--this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
+    private setPrevAndNextFlats() {
+        this.prevFlat = this.flatsList[this.flatIndex - 1];
+        this.nextFlat = this.flatsList[this.flatIndex + 1];
     }
 
-    public nextFlat() {
+    public toPrevFlat() {
+        this.flatData = this.flatsList[--this.flatIndex];
+        this.flatData.discount = this.getDiscount(this.flatData);
+        this.setPrevAndNextFlats();
+    }
+
+    public toNextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
         this.flatData.discount = this.getDiscount(this.flatData);
+        this.setPrevAndNextFlats();
     }
 
     public getDiscount(flat): number {

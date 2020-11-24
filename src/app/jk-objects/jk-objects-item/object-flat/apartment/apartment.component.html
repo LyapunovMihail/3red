@@ -3,10 +3,10 @@
     <div class="apartment">
 
         <div class="apartment__elements">
-            <button class="apartment__elements-prev btn-slider btn-slider_white btn-slider_prev" 
-                (click)="prevFlat()" *ngIf="flatIndex - 1 >= 0"><span></span></button>
+            <button class="apartment__elements-prev btn-slider btn-slider_white btn-slider_prev"
+                (click)="toPrevFlat()" *ngIf="prevFlat && prevFlat.articleId"><span></span></button>
             <button class="apartment__elements-next btn-slider btn-slider_white btn-slider_next" 
-                (click)="nextFlat()" *ngIf="flatIndex + 1 < flatsList.length"><span></span></button>
+                (click)="toNextFlat()" *ngIf="nextFlat && nextFlat.articleId"><span></span></button>
             <button class="apartment__elements-cls btn-cls" (click)="close.emit(false)"><span></span></button>
         </div>
 
