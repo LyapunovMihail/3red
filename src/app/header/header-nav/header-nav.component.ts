@@ -9,8 +9,6 @@ import { IObjectDynamicSnippet } from '../../../../serv-files/serv-modules/jk-ob
 import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
 import { Subscription } from 'rxjs';
 
-declare let $: any;
-
 interface INavLink extends IHeaderLink {
     blockOffsetTop: number;
     blockHeight: number;
@@ -179,11 +177,10 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
             return false;
         }
 
-        if (!$(`#${link}`).length) {
+        if (!document.querySelector(`#${link}`)) {
             return;
         }
-        const destination = $(`#${link}`).offset().top;
-        this.viewportScroller.scrollToPosition([0, destination - 96]);
+        this.viewportScroller.scrollToAnchor(link);
         return false;
     }
 

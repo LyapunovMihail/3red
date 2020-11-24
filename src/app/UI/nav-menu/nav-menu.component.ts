@@ -27,7 +27,6 @@ export class NavMenuComponent implements OnInit, OnChanges, AfterViewInit {
 
     ngOnInit() {
         this.activePointDefault = this.navList.findIndex(item => item.show);
-        console.log('navList: ', this.navList);
     }
 
     ngOnChanges(changes: SimpleChanges) {

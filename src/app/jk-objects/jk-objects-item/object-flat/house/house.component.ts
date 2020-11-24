@@ -7,7 +7,6 @@ import { HouseService } from './house.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { PlatformDetectService } from '../../../../platform-detect.service';
-import { IAddressItemFlat } from '../../../../../../serv-files/serv-modules/addresses-api/addresses.config';
 import { ObjectFlatsService } from '../object-flats.service';
 import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 import { HttpClient } from '@angular/common/http';
@@ -117,7 +116,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
             setTimeout(() => {
-                // тут сделать цикл по params.house.forEach((item) => this.floorCount[item]);
                 this.housesData = [];
                 this.houseNumbers = params.house === 'all' ? Object.keys(this.chess) : params.house.split(',');
                 this.houseNumbers.forEach((houseNumber) => {
@@ -139,23 +137,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
             }, 200);
         });
-    }
-
-    private buildSectionData(flats, houseNumber, sectionNumber, houseData) {
-        let sectionData = [];
-
-        sectionData = new Array(flats[0].floorsInSection).fill([]);
-        sectionData.forEach((floor, i) => {
-            sectionData[i] = new Array(flats[0].flatsInFloor).fill({status : '-1', house: houseNumber, section: sectionNumber, floor: sectionData.length - i});
-        });
-
-        flats.forEach((flat: IAddressItemFlat) => {
-            const floor = sectionData[sectionData.length - flat.floor];
-            floor[floor.findIndex((mockFlat) => mockFlat.status === '-1')] = flat;
-        });
-
-        houseData[sectionNumber - 1] = sectionData;
-        // console.log('this.sectionsData: ', houseData);
     }
 
     public searchFlatsSelection() {
@@ -181,15 +162,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         });
         console.log('this.housesData: ', this.housesData);
         this.ref.detectChanges();
-    }
-
-    public getFlats(section, house) {
-        return this.service.getFlats({
-            mod: this.jk.mod,
-            houses: house,
-            sections: section,
-            type: 'КВ,АП'
-        });
     }
 
     public openApartmentModal(index, floorFlats) {

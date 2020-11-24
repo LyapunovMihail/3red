@@ -71,14 +71,16 @@ const jkObjectsComponents = [
         NavMenuModule,
 
         RouterModule.forChild([
-            { path: '', component: JkObjectsComponent
-                , children : [
-                    { path: 'list', component: JkObjectsListComponent },
-                    { path: 'list/:id', component: JkObjectsItemComponent },
-                    { path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent }
+            {
+                path: '', component: JkObjectsComponent
+                , children: [
+                    {path: 'list', component: JkObjectsListComponent},
+                    {path: 'list/:id', component: JkObjectsItemComponent},
+                    {path: 'list/:id/dynamic/:year/:month', component: ObjectDynamicComponent}
                 ]
             }
         ])
     ]
 })
-export class JkObjectsModule { }
+export class JkObjectsModule {
+}
