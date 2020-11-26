@@ -34,8 +34,8 @@ export class AddressesController extends AddressesModel {
             return await this.getCommonFlatsData(req.query);
         }));
 
-        this.router.get('/search-config', responseHandler(async(req) => {
-            return await this.getSearchConfig();
+        this.router.get('/search/config', responseHandler(async(req) => {
+            return await this.getConfig(req.query);
         }));
 
         this.router.get('/favorites/get', responseHandler(async(req) => {

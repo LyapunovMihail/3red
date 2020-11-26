@@ -42,7 +42,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.getConfig({}).subscribe(
+        this.getConfig({type: 'КВ, АП', status: '4'}).subscribe(
             (data) => {
                 this.config = data.config;
                 this.modsBtnList = data.modsBtnList;
@@ -107,7 +107,6 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
             mod: form.mod.join(','),
             status: '4',
         };
-        console.log(this.params);
         if ('rooms' in form && form.rooms.some((i) => i === true)) {
             this.params.rooms = (form.rooms).map((index, i) => (index) ? i : false).filter((i) => i !== false).join(',');
         }

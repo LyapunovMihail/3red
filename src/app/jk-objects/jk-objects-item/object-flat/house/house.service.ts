@@ -17,4 +17,9 @@ export class HouseService {
     public getFlatsDataByObjectId(id): Observable<{jk: IObjectSnippet, housesBtnList, floorCount, chess, config}> {
         return this.http.get<{jk: IObjectSnippet, housesBtnList, floorCount, chess, config}>(`/api/search/object-data/${id}`);
     }
+
+    public getConfig(options): Observable<{config}> {
+        console.log('options: ', options);
+        return this.http.get<{config}>(`/api/search/config`, {params: options});
+    }
 }

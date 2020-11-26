@@ -45,7 +45,7 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
     }
 
     public getConfig() {
-        return this.service.getFlatsDataByObjectId(this.objectId);
+        return this.service.getConfig({mod: this.mod, type: 'КВ,АП', status: '4'});
     }
 
     public parseText(num) {

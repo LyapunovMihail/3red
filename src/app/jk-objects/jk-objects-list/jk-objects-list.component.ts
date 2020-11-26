@@ -39,8 +39,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         public router: Router,
         private authorization: AuthorizationObserverService,
         private objectService: JkObjectsListService,
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         this.authorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
@@ -54,7 +53,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
                 this.getDistricts();
             });
 
-        this.objectService.getFlats({type: 'КВ,АП'})
+        this.objectService.getFlats({type: 'КВ,АП', status: '4'})
             .subscribe((data) => {
                 this.getMinMaxPrice(data);
             });
@@ -65,7 +64,6 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false, skipLocationChange: true});
         }
 
-        console.log('params: ', params);
         if (params.priceMin === '') {
             delete params.priceMin;
         }
@@ -145,9 +143,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     }
 
     private getMinMaxPrice(flats) {
-        const price = flats
-            .filter(el => el.status === '4')
-            .map((el) => el.price);
+        const price = flats.map((flat) => flat.price);
 
         this.minPricePlaceholder = price.length > 0 ? Math.min(...price).toFixed(0) : '0';
         this.maxPricePlaceholder = price.length > 0 ? Math.max(...price).toFixed(0) : '0';

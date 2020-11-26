@@ -52,15 +52,6 @@ export class ObjectsModel {
         }
     }
 
-    // async updateSnippet(parameters) {
-    //     const options: IObjectSnippet = parameters;
-    //     return await this.errorParamsCatcher(this.valuesReview(options), async () => {
-    //         // удаление _id из параметров если он там есть
-    //         if ( '_id' in options ) { delete options._id; }
-    //         await this.collection.update({}, { $set : options }, {upsert: true});
-    //     });
-    // }
-
     async setSnippet(parameters) {
         const options: IObjectSnippet = parameters;
         return await this.errorParamsCatcher( this.valuesReview(options), async () => {

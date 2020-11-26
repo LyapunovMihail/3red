@@ -113,7 +113,6 @@ export class AddressesModel {
     }
 
     private setMinMaxParams(flats) {
-        flats = flats.filter(el => el.status = '4');
         return {
             price: {
                 min: Math.min(...flats.map((flat) => flat.price)),
@@ -162,6 +161,7 @@ export class AddressesModel {
     }
 
     public async getCommonFlatsData(query) {
+        console.log('query: ', query);
         const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
         const mods = modsBtnList.map((item, i) => {
             if (i > 0) {
@@ -169,9 +169,17 @@ export class AddressesModel {
             }
         });
 
-        const findByMod: any = query.mod ? {mod: {$in: query.mod.split(',')}} : mods.length ? {mod: {$in: mods}} : {};
-        findByMod.type = {$in: ['КВ', 'АП']};
-        const flatsOfMod = await this.collection.find(findByMod).toArray();
+        const findCriteria: any = {};
+        if (query.mod || mods.length) {
+            findCriteria.mod = query.mod ? {$in: query.mod.split(',')} : {$in: mods};
+        }
+        if (query.status) {
+            findCriteria.status = {$in: query.status.split(',')};
+        }
+        if (query.type) {
+            findCriteria.type = {$in: query.type.split(',')};
+        }
+        const flatsOfMod = await this.collection.find(findCriteria).toArray();
         const config = this.setMinMaxParams(flatsOfMod); // устанавливаем мин-макс параметры для формы фильтрации
         const housesBtnList = await this.setHousesBtns(query.mod, flatsOfMod, modsBtnList); // Устанавливаем спсиок домов жилищных комплексов
 
@@ -229,6 +237,13 @@ export class AddressesModel {
             });
         }
         return housesBtnList;
+    }
+
+    public async getConfig(query) {
+        const data = this.parseRequest(query);
+        const flats = await this.collection.find(data.request, data.parameters).toArray();
+        const config = this.setMinMaxParams(flats);
+        return {config};
     }
 
     public async getSearchConfig() {

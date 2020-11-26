@@ -36,7 +36,7 @@
     
             <div class="object-filter__wrap-item object-filter__wrap-item_mod">
                 <p class="object-filter__subtitle">Жилой комплекс</p>
-                <div  #myDiv>
+                <div #myDiv>
                     <div class="object-filter__range object-filter__range_mod g-tooltip-area" (click)="isExpanded = !isExpanded; onClick($event);" [class.active]="isExpanded">
                         <p class="object-filter__text">
                             {{ form.controls['mod'].value | mySearchFormPipe:modsBtnList }}

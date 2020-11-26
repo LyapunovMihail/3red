@@ -30,7 +30,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public jk: IObjectSnippet;
     // public houseNumber: string;
-    public housesData: IFLatDisabled[][][][] = [];
     public chess: IFLatDisabled[][][][];
     public houseNumbers: string[];
     public bubbleData: IFlatWithDiscount;
@@ -83,6 +82,7 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.floorCount = data.floorCount;
                 this.chess = data.chess;
                 this.routerEvent = this.routerChange();
+                console.log('this.chess: ', this.chess);
 
                 this.service.getFlats({ // запрос кладовых
                     mod: this.jk.mod,
@@ -116,7 +116,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     public routerChange() {
         return this.activatedRoute.params.subscribe((params) => {
             setTimeout(() => {
-                this.housesData = [];
                 this.houseNumbers = params.house === 'all' ? Object.keys(this.chess) : params.house.split(',');
                 this.houseNumbers.forEach((houseNumber) => {
                     if (!this.floorCount[houseNumber]) {
@@ -140,7 +139,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public searchFlatsSelection() {
-        console.log('this.chess: ', this.chess);
         this.houseNumbers.forEach((house) => {
             this.chess[house].forEach((section: IFLatDisabled[][]) => {
                 if (!section) { return; }
@@ -160,7 +158,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 });
             });
         });
-        console.log('this.housesData: ', this.housesData);
         this.ref.detectChanges();
     }
 

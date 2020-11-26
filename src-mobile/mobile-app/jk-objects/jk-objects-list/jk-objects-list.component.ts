@@ -47,7 +47,7 @@ export class JkObjectsListComponent implements OnInit {
                 this.snippets = data;
                 this.getDistricts();
 
-                this.objectService.getFlats({type: 'КВ,АП'})
+                this.objectService.getFlats({type: 'КВ,АП', status: '4'})
                     .subscribe((flats) => {
                         this.getMinMaxPrice(flats);
                         this.isLoaded = true;
@@ -85,9 +85,7 @@ export class JkObjectsListComponent implements OnInit {
     }
 
     private getMinMaxPrice(flats) {
-        const price = flats
-            .filter(el => el.status === '4')
-            .map((el) => el.price);
+        const price = flats.map((flat) => flat.price);
 
         this.minPriceConfig = price.length > 0 ? Number(Math.min(...price).toFixed(0)) : 0;
         this.maxPriceConfig = price.length > 0 ? Number(Math.max(...price).toFixed(0)) : 0;

@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     public getData(params, firstBoot) {
-        this.searchService.getFlatsData({mod: params.mod || ''}).subscribe(
+        this.searchService.getFlatsData({mod: params.mod || '', type: 'КВ, АП'}).subscribe(
             (data) => {
                 this.modsBtnList = data.modsBtnList;
                 this.housesBtnList = data.housesBtnList;

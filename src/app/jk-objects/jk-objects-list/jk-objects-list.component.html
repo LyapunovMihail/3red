@@ -16,31 +16,31 @@
         </div>
 
         <app-jk-objects-form *ngIf="isLoaded"
-                             [btnList]="btnList"
-                             [minPricePlaceholder]="minPricePlaceholder"
-                             [maxPricePlaceholder]="maxPricePlaceholder"
-                             (formChange)="getObjects($event)">
+            [btnList]="btnList"
+            [minPricePlaceholder]="minPricePlaceholder"
+            [maxPricePlaceholder]="maxPricePlaceholder"
+            (formChange)="getObjects($event)">
         </app-jk-objects-form>
     </div>
 
     <app-jk-objects-map *ngIf="showMap"
-                        [snippets]="snippets">
+        [snippets]="snippets">
     </app-jk-objects-map>
 
     <app-jk-objects-items *ngIf="!showMap"
-                          (deleteSnippet)="deleteSnippet($event)"
-                          (redactSnippet)="redactSnippet($event)"
-                          (updateSnippet)="updateSnippet($event)"
-                          [isAuthorizated]="isAuthorizated"
-                          [isMainPage]=isMainPage
-                          [snippets]="snippets">
+        (deleteSnippet)="deleteSnippet($event)"
+        (redactSnippet)="redactSnippet($event)"
+        (updateSnippet)="updateSnippet($event)"
+        [isAuthorizated]="isAuthorizated"
+        [isMainPage]=isMainPage
+        [snippets]="snippets">
     </app-jk-objects-items>
 
 </section>
 
 <app-objects-admin *ngIf="!closeModal"
-                   (closeModal)="closeModal = $event; redactId = null"
-                   [snippets]="snippets"
-                   (snippetsChange)="snippetsChange($event)"
-                   [id]="redactId">
+    (closeModal)="closeModal = $event; redactId = null"
+    [snippets]="snippets"
+    (snippetsChange)="snippetsChange($event)"
+    [id]="redactId">
 </app-objects-admin>
