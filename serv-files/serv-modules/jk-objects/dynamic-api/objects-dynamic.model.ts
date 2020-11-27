@@ -28,16 +28,16 @@ export class ObjectsDynamicModel {
         return await this.collection.find(findCriteria).toArray();
     }
     public async getCompletedObject(objectId) {
-        let objects = await this.collection.find({ objectId }).sort({ year: -1, month: -1 }).toArray();
-        objects = await [].concat.apply([], objects.map(el => el.objects)); // Объединяем в один массив все созданые объекты
-        objects = await objects.filter((el, i, arr) => {
-            if (el.ready === 100 && el.show) {
-                const newArr = arr.map(item => item.title).filter((item, j, list) => list.indexOf(item) === j);
-                return el.title === newArr[i];
+        const snippets = await this.collection.find({ objectId }).sort({ year: -1, month: -1 }).toArray();
+        const objects = [].concat(...snippets.map(el => el.objects)); // Объединяем в один массив все созданые объекты
+
+        const readyObjects = [];
+        objects.forEach((item) => {
+            if (item.ready === 100 && item.show && !readyObjects.includes(item)) {
+                readyObjects.push(item);
             }
-            return false;
-        }); // Отфильтровываем не готовые и дубликаты
-        return objects;
+        });
+        return readyObjects;
     }
 
     async updateSnippet(parameters) {

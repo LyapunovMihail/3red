@@ -73,8 +73,7 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
         }
     }
     private setLastDateWithPhotos() {
-        this.subs.push(
-            this.headerService.getDynamicLink().subscribe((data: IObjectDynamicSnippet[]) => {
+        this.headerService.getDynamicLink().subscribe((data: IObjectDynamicSnippet[]) => {
                 if (data.length > 0) {
                     data.forEach((item) => {
                         if (item && item.year && item.year > this.lastYearWithPhotos) {
@@ -85,16 +84,13 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
                         }
                     });
                 }
-            })
-        );
+            });
     }
     private setVisibilityForDynamicBtn() {
-        this.subs.push(
-            this.headerService.getTabsSnippetById().subscribe(data => {
-                if (!data || !data.dynamic) { return; }
-                this.hasPhotos = data.dynamic.some(el => el.show);
-            })
-        );
+        this.headerService.getTabsSnippetById().subscribe(data => {
+            if (!data || !data.dynamic) { return; }
+            this.hasPhotos = data.dynamic.some(el => el.show);
+        });
     }
 
     private checkAuth() {
