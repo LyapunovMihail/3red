@@ -73,15 +73,39 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
 
         if (this.isAuthorizated) {
             this.objectService.getSnippets().subscribe(
-                (data) => this.snippets = data,
+                (data) => {
+                    this.snippets = data;
+                    this.filterSnippets();
+                },
                 (err) => console.log(err)
             );
         } else {
             this.objectService.getSnippetsByParams(params).subscribe(
-                (data) => this.snippets = data,
+                (data) => {
+                    this.snippets = data;
+                    this.filterSnippets();
+                },
                 (err) => console.log(err)
             );
         }
+    }
+
+    public filterSnippets() {
+        const filteredSnippets: IObjectSnippet[] = [];
+        if (this.snippets && this.snippets.length > 0) {
+            this.snippets.forEach((item) => {
+                if (this.isMainPage) {
+                    if (item.show_on_main && item.publish) {
+                        filteredSnippets.push(item);
+                    }
+                } else {
+                    if (item.publish || this.isAuthorizated) {
+                        filteredSnippets.push(item);
+                    }
+                }
+            });
+        }
+        this.snippets = filteredSnippets;
     }
 
     ngOnDestroy() {

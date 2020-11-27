@@ -30,23 +30,4 @@ export class ObjectsItemsComponent implements OnInit {
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
-
-    getFilteredSnippet() {
-        const filteredSnippets: IObjectSnippet[] = [];
-        if (this.snippets && this.snippets.length > 0) {
-            this.snippets.forEach((item) => {
-                if (this.isMainPage) {
-                    if (item.show_on_main && item.publish) {
-                        filteredSnippets.push(item);
-                    }
-                } else {
-                    if (item.publish) {
-                        filteredSnippets.push(item);
-                    }
-                }
-            });
-        }
-
-        return filteredSnippets;
-    }
 }

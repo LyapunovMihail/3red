@@ -371,6 +371,9 @@ $decorationIcon:
                 object-fit: cover;
             }
         }
+        &-ilike {
+            position: absolute;
+        }
         &-title {
             font: 18px/23px $font-proba;
             color: $col-black;

@@ -41,25 +41,6 @@ export class ObjectsItemsComponent implements OnInit {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
-    public get filteredSnippet() {
-        const filteredSnippets: IObjectSnippet[] = [];
-        if(this.snippets && this.snippets.length>0){
-            this.snippets.forEach((item) => {
-                if (this.isMainPage) {
-                    if (item.show_on_main && item.publish) {
-                        filteredSnippets.push(item);
-                    }
-                } else {
-                    if (item.publish || this.isAuthorizated) {
-                        filteredSnippets.push(item);
-                    }
-                }
-            });
-        }
-
-        return filteredSnippets;
-    }
-
     public setIlike(ev, snippet) {
         snippet.ilike = ev.target.checked;
         this.updateSnippet.emit(snippet);

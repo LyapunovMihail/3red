@@ -59,6 +59,11 @@
             .slider-list__image::after { opacity: .1; }
         }
     }
+
+    &__ilike {
+        position: absolute;
+    }
+
     &__image {
         width: 100%;
         height: 200px;
