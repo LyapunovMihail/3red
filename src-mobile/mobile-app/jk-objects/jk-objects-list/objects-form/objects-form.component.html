@@ -20,8 +20,14 @@
     </div>
 
     <div class="objects__utilities-lock">
-        <button class="objects__utilities-search" [class.active]="showDistrictsPopup"
-            (click)="showDistrictsPopup = !showDistrictsPopup">{{ form.controls['districts'].value | mySearchFormPipe:btnList }}
+        <button
+            class="objects__utilities-search"
+            [class.active]="showDistrictsPopup"
+            (click)="showDistrictsPopup = !showDistrictsPopup"
+        >
+            <span class="objects__utilities-btntext">
+                {{ form.controls['districts'].value | mySearchFormPipe:btnList }}
+            </span>
         </button>
         <div class="objects__utilities-wrap" *ngIf="showDistrictsPopup">
             <div class="objects__close-area" (click)="showDistrictsPopup = !showDistrictsPopup"></div>
@@ -34,8 +40,14 @@
     </div>
 
     <div class="objects__utilities-lock">
-        <button class="objects__utilities-search" [class.active]="showStatusesPopup"
-                (click)="showStatusesPopup = !showStatusesPopup">{{form.get('status').value}}
+        <button
+            class="objects__utilities-search"
+            [class.active]="showStatusesPopup"
+            (click)="showStatusesPopup = !showStatusesPopup"
+        >
+            <span class="objects__utilities-btntext">
+                {{form.get('status').value}}
+            </span>
         </button>
         <div class="objects__utilities-wrap" *ngIf="showStatusesPopup">
             <div class="objects__close-area" (click)="showStatusesPopup = !showStatusesPopup"></div>
