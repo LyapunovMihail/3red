@@ -60,7 +60,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
         this.links = this.headerService.links();
-        this.getDynamicLink();
+
+        setTimeout(() => {
+            this.getDynamicLink();
+        }, 50);
     }
 
     private getDynamicLink() {

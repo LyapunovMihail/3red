@@ -100,23 +100,6 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
 
     }
 
-    // private getDynamicLink() {
-    //     this.headerService.getDynamicLink()
-    //         .subscribe(
-    //             (data) => {
-    //                 const date = new Date();
-    //                 this.year = data.year ? data.year : date.getFullYear();
-    //                 this.month = data.month ? data.month : (date.getMonth() + 1);
-    //             },
-    //             (err) => {
-    //                 console.error(err);
-    //                 const date = new Date();
-    //                 this.year = date.getFullYear();
-    //                 this.month = date.getMonth() + 1;
-    //             }
-    //         );
-    // }
-
     ngAfterViewInit() {
         if (!this.platform.isBrowser) {
             return false;

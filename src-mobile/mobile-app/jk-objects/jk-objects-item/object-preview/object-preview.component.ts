@@ -11,8 +11,7 @@ import { IObjectSnippet } from '../../../../../serv-files/serv-modules/jk-object
     templateUrl: 'object-preview.component.html',
     styleUrls: ['object-preview.component.scss'],
     providers: [
-        ObjectPreviewAdminService,
-        HeaderService
+        ObjectPreviewAdminService
     ]
 })
 
@@ -39,7 +38,6 @@ export class ObjectPreviewComponent implements OnInit, OnDestroy {
 
     constructor(
         private previewService: ObjectPreviewAdminService,
-        public headerService: HeaderService,
     ) {
     }
 
@@ -64,11 +62,16 @@ export class ObjectPreviewComponent implements OnInit, OnDestroy {
     }
 
     private getDynamicLink() {
-        this.subs.push(this.headerService.getDynamicLinkForPhotos(this.objectId).subscribe((data: IObjectDynamicSnippet[]) => {
+        const date = new Date();
+        this.lastMothWithPhotos = date.getMonth() + 1;
+        this.lastYearWithPhotos = date.getFullYear();
+        this.setLastDateWithPhotos();
+        this.setVisibilityForDynamicBtn();
+    }
+
+    private setLastDateWithPhotos() {
+        this.subs.push(this.previewService.getDynamicLinkForPhotos(this.objectId).subscribe((data: IObjectDynamicSnippet[]) => {
             if (data.length > 0) {
-                this.hasPhotos = true;
-                this.lastMothWithPhotos = 0;
-                this.lastYearWithPhotos = 0;
                 data.forEach((item) => {
                     if (item && item.year && item.year > this.lastYearWithPhotos) {
                         this.lastYearWithPhotos = item.year;
@@ -81,37 +84,29 @@ export class ObjectPreviewComponent implements OnInit, OnDestroy {
         }));
     }
 
+    private setVisibilityForDynamicBtn() {
+        this.previewService.getTabsSnippetById(this.objectId).subscribe(data => {
+            if (!data || !data.dynamic) {
+                return;
+            }
+            this.hasPhotos = data.dynamic.some(el => el.show);
+        });
+    }
+
     concatTitle(titleFragments: string[]): string {
-        let retval: string = '';
+        let retval = '';
         if (titleFragments) {
             titleFragments.forEach((fragment) => {
                 if (fragment.length > 0) {
                     if (retval.length > 0) {
                         fragment = ' - ' + fragment;
                     }
-                    retval = retval + fragment
+                    retval = retval + fragment;
                 }
-            })
+            });
         }
         return retval;
     }
-
-    // private getDynamicLink() {
-    //     this.headerService.getDynamicLink()
-    //         .subscribe(
-    //             (data) => {
-    //                 const date = new Date();
-    //                 this.year = data.year ? data.year : date.getFullYear();
-    //                 this.month = data.month ? data.month : ( date.getMonth() + 1 );
-    //             },
-    //             (err) => {
-    //                 console.error(err);
-    //                 const date = new Date();
-    //                 this.year = date.getFullYear();
-    //                 this.month = date.getMonth() + 1;
-    //             }
-    //         );
-    // }
 
     ngOnDestroy() {
         this.subs.forEach(item => item.unsubscribe());

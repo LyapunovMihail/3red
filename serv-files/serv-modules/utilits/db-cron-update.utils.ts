@@ -116,9 +116,6 @@ export class DbCronUpdate {
             flatsInFloor: Number(object.planid.split('/')[1]),
         };
 
-        if (itemflat.articleId === '87e9c10a-0d35-e911-80ee-001dd8bb025e') {
-            console.log('itemflat status: ', itemflat.status);
-        }
         this.counter++;
         return itemflat;
     }
