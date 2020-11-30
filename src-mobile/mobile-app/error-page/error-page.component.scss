@@ -2,36 +2,51 @@
 
 .error-page {
     width: 100%;
-    height: calc(100vh - 93px);
-    min-height: 630px;
+    min-height: calc(100vh - 93px);
     box-sizing: border-box;
     position: relative;
-    padding: 77px 0 0;
+    padding: 56px 0;
     display: flex;
     justify-content: center;
+    @media (max-width: 767px) {
+        padding: 24px 0;
+    }
 
     &__container {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: $container;
-        display: flex;
         align-items: center;
-        justify-content: center;
     }
     &__image {
-        width: 446px ;
-        height: 452px;
+        max-width: 446px;
+        @media (max-width: 767px) {
+            max-width: 264px;
+        }
     }
     &__content {
-        margin-left: 24px;
+        margin: 40px 0 0;
+        padding: 0 20px;
+        & > * {
+            text-align: center;
+        }
         
-        &-title { margin-bottom: 24px; }
+        &-title {
+            margin: 0 0 24px;
+            @media (max-width: 767px) {
+                margin: 0 0 16px;
+            }
+        }
         &-text {
             font: 24px/32px $font-proba;
+            @media (max-width: 767px) {
+                font: 20px/26px $font-proba;
+            }
             a {
                 color: $col-red;
                 border-bottom: 1px solid transparent;
                 transition: border-color .2s linear;
-                &:hover { border-color: $col-red; }
             }
         }
     }

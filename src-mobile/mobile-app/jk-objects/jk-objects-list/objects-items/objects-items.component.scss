@@ -84,7 +84,8 @@
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
 
-    @media(max-width: 760px) {
+    @media(max-width: 767px) {
+        top: 16px;
         left: 16px;
         max-width: calc(100% - 40px - 12px);
     }
@@ -100,7 +101,10 @@
     left: 30px;
     z-index: 11;
     color: #fff;
-
+    @media(max-width: 767px) {
+        bottom: 16px;
+        left: 16px;
+    }
 }
 .objects__item-title {
     font-size: 24px;

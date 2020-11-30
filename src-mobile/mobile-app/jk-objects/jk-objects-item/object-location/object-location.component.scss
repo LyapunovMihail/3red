@@ -45,8 +45,9 @@
             justify-content: center;
             align-items: center;
             position: absolute;
-            right: 32px;
-            bottom: 24px;
+            width: calc(100% - 16px);
+            right: 8px;
+            bottom: 8px;
         }
     }
 }
@@ -90,9 +91,9 @@
             height: 420px;
 
             &-link {
-                width: 280px;
-                right: 20px;
-                bottom: 15px;
+                //width: calc(100% - 40px);
+                //right: 20px;
+                //bottom: 15px;
                 padding: 0;
             }
         }
