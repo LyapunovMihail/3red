@@ -89,6 +89,7 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     setContent(data) {
         this.contentSnippet = data;
+        console.log('this.contentSnippet: ', this.contentSnippet);
         if (this.contentSnippet && this.contentSnippet.objects) {
             this.objectsArray = this.active === 'process' ? this.contentSnippet.objects.filter((item) => item.ready < 100 && item.show) : this.completedObjectsArray;
         } else {

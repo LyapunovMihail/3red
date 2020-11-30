@@ -28,6 +28,11 @@
             "styles": [
                 "src/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles/modules/mixins"
+              ]
+            },
             "scripts": [
                 "src/assets/js/jquery-3.3.1.js"
             ],
@@ -135,6 +140,11 @@
             "styles": [
                 "src-mobile/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src-mobile/styles/modules/mixins"
+              ]
+            },
             "scripts": [
                 "src-mobile/assets/js/jquery-3.3.1.js",
                 "src-mobile/assets/js/swiper.min.js"

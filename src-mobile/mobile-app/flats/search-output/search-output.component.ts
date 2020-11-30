@@ -54,6 +54,11 @@ export class SearchOutputComponent implements OnInit {
         return this.favoritesService.inFavorite(flat);
     }
 
+    public setFavorite(flat): void {
+        flat.inFavorite = !flat.inFavorite;
+        this.favoritesService.setFavorite(flat);
+    }
+
     public openApartmentModal(index) {
         this.selectedFlatIndex = index;
         this.windowScrollLocker.block();

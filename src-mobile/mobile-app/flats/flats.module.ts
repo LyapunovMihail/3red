@@ -11,8 +11,8 @@ import { ModSelectComponent } from './search-form/mod-select/mod-select.componen
 import { SearchFormPipe } from './search-form/search-form.pipe';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
 import { CheckboxListDecorComponent } from './search-form/checkbox-list-decor/checkbox-list-decor.component';
-import { BitNumberPipe } from './search-output/bit-number.pipe';
 import { ApartmentModule } from './apartment/apartment.module';
+import { FlatSnippetModule } from './flat-snippet/flat-snippet.module';
 
 const FlatsComponents = [
     FlatsComponent,
@@ -21,7 +21,7 @@ const FlatsComponents = [
     SearchSortingComponent,
     ModSelectComponent,
     SearchFormPipe,
-    BitNumberPipe,
+
     CheckboxListComponent,
     CheckboxListDecorComponent,
 ];
@@ -38,6 +38,7 @@ const FlatsComponents = [
         FormsModule,
         GHMRangeNumberModule,
         ApartmentModule,
+        FlatSnippetModule,
 
         CommonModule,
         RouterModule.forChild([

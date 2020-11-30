@@ -54,10 +54,6 @@ export class SearchOutputComponent implements OnInit {
             .subscribe((item) => this.isLoading = item);
     }
 
-    public flatsCount() {
-        return this.count;
-    }
-
     public getDiscount(flat): number {
         return this.flatsDiscountService.getDiscount(flat);
     }

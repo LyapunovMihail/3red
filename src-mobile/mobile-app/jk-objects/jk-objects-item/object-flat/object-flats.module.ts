@@ -15,6 +15,7 @@ import { StoreroomsModule } from './storerooms/storerooms.module';
 import { HouseComponent } from './house/house.component';
 import { FloorComponent } from './floor/floor.component';
 import { ApartmentComponent } from './apartment/apartment.component';
+import { FlatSnippetModule } from '../../../flats/flat-snippet/flat-snippet.module';
 
 const FlatsComponents = [
     ObjectFlatsComponent,
@@ -40,6 +41,7 @@ const FlatsComponents = [
         FormsModule,
         GHMRangeNumberModule,
         ApartmentModule,
+        FlatSnippetModule,
         ParkingModule,
         StoreroomsModule,
 
