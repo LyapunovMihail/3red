@@ -18,7 +18,7 @@
         transform: translateY(0);
         left: 0;
         width: 100%;
-        z-index: 51;
+        z-index: 101;
         transition: transform .2s linear;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
         
@@ -205,16 +205,10 @@
             &_insta {
                 background-image: url(/assets/img/footer/insta.svg);
                 transition: background 0.4s ease;
-                &:hover {
-                    background-image: url(/assets/img/footer/insta-hover.svg);
-                }
             }
             &_fb {
                 background-image: url(/assets/img/footer/fbook.svg);
                 transition: background 0.4s ease;
-                &:hover {
-                    background-image: url(/assets/img/footer/fb-hover.svg);
-                }
             }
         }
         &-number {

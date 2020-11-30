@@ -19,6 +19,7 @@
     position: absolute;
     bottom: 0;
     left: 0; 
+    background-color: #f5f5f5;
     &--hidden { display: none; }
     &--isContacts { background-color: transparent; }
     
@@ -66,16 +67,10 @@
             &_insta { 
                 background-image: url(/assets/img/footer/insta.svg); 
                 transition: background 0.4s ease;
-                &:hover {
-                    background-image: url(/assets/img/footer/insta-hover.svg); 
-                }
             }
             &_fb {
                  background-image: url(/assets/img/footer/fbook.svg);
                  transition: background 0.4s ease;
-                 &:hover {
-                    background-image: url(/assets/img/footer/fb-hover.svg); 
-                }
                  }
         }
     }
