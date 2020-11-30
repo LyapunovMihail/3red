@@ -235,8 +235,6 @@
             margin: 0 0 16px;
         }
         &__btns {
-
-            &-flats { display: none; }
             &-dynamic {
                 width: 113px;
                 height: 28px;
@@ -244,6 +242,7 @@
                 top: 16px;
                 right: 20px;
                 padding: 0;
+                margin-right: 0;
                 font-size: 14px;
                 background: url(/assets/img/home-icon_white.svg) calc(100% - 12px) 50% no-repeat $col-red;
                 color: $col-white;
