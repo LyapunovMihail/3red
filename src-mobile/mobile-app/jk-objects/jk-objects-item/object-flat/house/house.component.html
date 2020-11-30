@@ -5,18 +5,18 @@
         <div class="house__nav">
             <a [routerLink]="'/objects/list/' + jk._id" class="house__nav-back">Назад</a>
 
-            <div class="object__flat-nav" *ngIf="isParking || isStorerooms">
-                <div class="object__flat-nav--overflow-hidden">
-                    <div class="object__flat-nav--scroll">
-                        <ul class="object__flat-list">
-                            <li class="object__flat-item object__flat-item_active">Квартиры</li>
-                            <li class="object__flat-item" *ngIf="isStorerooms"><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'">Кладовые</a></li>
-                            <li class="object__flat-item" *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'">Машиноместа</a></li>
-                            <!-- <li class="object__flat-item">Коммерческая недвижимость</li> -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="object__flat-nav" *ngIf="isParking || isStorerooms">-->
+                <!--<div class="object__flat-nav&#45;&#45;overflow-hidden">-->
+                    <!--<div class="object__flat-nav&#45;&#45;scroll">-->
+                        <!--<ul class="object__flat-list">-->
+                            <!--<li class="object__flat-item object__flat-item_active">Квартиры</li>-->
+                            <!--<li class="object__flat-item" *ngIf="isStorerooms"><a [routerLink]="'/objects/list/' + jk._id + '/storerooms'">Кладовые</a></li>-->
+                            <!--<li class="object__flat-item" *ngIf="isParking"><a [routerLink]="'/objects/list/' + jk._id + '/parking'">Машиноместа</a></li>-->
+                             <!--<li class="object__flat-item">Коммерческая недвижимость</li> -->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <h2 class="house__nav-title">Квартиры в ЖК {{jk.name}}</h2>
         </div>

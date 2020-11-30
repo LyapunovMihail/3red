@@ -56,6 +56,7 @@ export interface IAddressItemFlat {
     terrasescount: boolean;
     roofexit: boolean;
     twolevel: boolean;
+    isEuro: boolean;
     space: number;
     price: number;
     deliveryDate: string;

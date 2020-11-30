@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeInfoService } from './home-info.service';
 import { IHomeInfoSnippet } from '../../../../serv-files/serv-modules/home/info-api/home-info.interfaces';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
     selector: 'app-home-info',
@@ -18,7 +19,8 @@ export class HomeInfoComponent implements OnInit {
     public snippet: IHomeInfoSnippet;
 
     constructor(
-        private homeInfoService: HomeInfoService
+        private homeInfoService: HomeInfoService,
+        public viewPortScroller: ViewportScroller
     ) {}
 
     ngOnInit() {
@@ -29,5 +31,9 @@ export class HomeInfoComponent implements OnInit {
             );
     }
 
-
+    toCareer() {
+        setTimeout(() => {
+            this.viewPortScroller.scrollToAnchor('career');
+        }, 150);
+    }
 }

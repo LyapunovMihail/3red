@@ -106,6 +106,7 @@ export class DbCronUpdate {
             terrasescount: (Number(object.TerrasesCount) > 0),
             roofexit: (object.RoofExit === '1'),
             twolevel: (object['2level'] === '1'),
+            isEuro: object.IsEuro === '1',
             space: Number(object.Quantity),
             price: Number(object.Sum),
             deliveryDate: object.DeliveryPeriodDate,

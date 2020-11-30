@@ -113,6 +113,27 @@ export class AddressesModel {
     }
 
     private setMinMaxParams(flats) {
+        // const prices: number[];
+        // const floors: number[];
+        // const spaces: number[];
+        // const statusFree: string[];
+        // const statusСomingSoon: string[];
+        // const decorationWithout: string[];
+        // const decorationBlack: string[];
+        // const decorationWhite: string[];
+        // const separateentrance: boolean[];
+        // const terrasescount: boolean[];
+        // const roofexit: boolean[];
+        // const twolevel: boolean[];
+        // const IsEuro: boolean[];
+        //
+        // flats.forEach((flat) => {
+        //     prices.push(flat.price);
+        //     floors.push(flat.floor);
+        //     spaces.push(flat.space);
+        //     statusFree.push(flat.status === '4');
+        // });
+
         return {
             price: {
                 min: Math.min(...flats.map((flat) => flat.price)),

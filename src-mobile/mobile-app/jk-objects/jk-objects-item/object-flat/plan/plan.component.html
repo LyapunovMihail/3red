@@ -19,14 +19,14 @@
                     </div> -->
                 </div>
 
-                <nav class="object-flat__nav" *ngIf="storerooms.length || parking.length">
-                    <ul class="object-flat__nav-list">
-                        <li class="object-flat__nav-item" [class.active]="activeTab === 'flats'" *ngIf="storerooms.length || parking.length" (click)="changeTab('flats')">Квартиры</li>
+                <!--<nav class="object-flat__nav" *ngIf="storerooms.length || parking.length">-->
+                    <!--<ul class="object-flat__nav-list">-->
+                        <!--<li class="object-flat__nav-item" [class.active]="activeTab === 'flats'" *ngIf="storerooms.length || parking.length" (click)="changeTab('flats')">Квартиры</li>-->
                         <!--<li class="object-flat__nav-item">Коммерческая недвижимость</li>-->
-                        <li class="object-flat__nav-item" [class.active]="activeTab === 'storerooms'" *ngIf="storerooms.length" (click)="changeTab('storerooms')">Кладовые</li>
-                        <li class="object-flat__nav-item" [class.active]="activeTab === 'parking'" *ngIf="parking.length" (click)="changeTab('parking')">Машиноместа</li>
-                    </ul>
-                </nav>
+                        <!--<li class="object-flat__nav-item" [class.active]="activeTab === 'storerooms'" *ngIf="storerooms.length" (click)="changeTab('storerooms')">Кладовые</li>-->
+                        <!--<li class="object-flat__nav-item" [class.active]="activeTab === 'parking'" *ngIf="parking.length" (click)="changeTab('parking')">Машиноместа</li>-->
+                    <!--</ul>-->
+                <!--</nav>-->
             </div>
             
             <div class="object-flat__house" *ngIf="mod !== 'СЯ' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'МКВ' && mod !== 'НК' && mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'МАЙ' && mod !== 'АИБ'">

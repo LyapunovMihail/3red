@@ -78,6 +78,7 @@ export class PartnersComponent implements OnInit, OnDestroy {
 
     public changeTab(tab) {
         this.currentTab = tab;
+        console.log('this.currentTab: ', this.currentTab);
         this.getContent();
     }
 
