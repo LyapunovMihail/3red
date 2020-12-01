@@ -1,7 +1,7 @@
 
 // New
 
-$col-red: #ee4237;
+$col-red: #E52628;
 $col-red_hover: #ee534a;
 $col-green: #46b757;
 
@@ -26,10 +26,11 @@ $font-text: $font-proba;
 $font-14: 14px/18px $font-proba;
 $font-18: 18px/23px $font-proba;
 $font-16: 16px/19px $font-proba;
+$font-24: 24px/28px $font-proba;
 
 // old style:
 
-$font-mus: 'Museo Sans Cyrl', sans-serif; 
+$font-mus: 'Museo Sans Cyrl', sans-serif;
 $font-leksa: 'Leksa', 'sans-serif';
 // $col-black: #000105;
 $col-black-8: rgba(0, 1, 5, .8);
@@ -103,7 +104,7 @@ $trans-img: transform .7s linear;
     padding-left: 8px + 28px;
     position: relative;
     cursor: pointer;
-        
+
     &::before {
         content: '';
         position: absolute;
@@ -111,7 +112,7 @@ $trans-img: transform .7s linear;
         width: 28px;
         height: 28px;
         border-radius: 50%;
-        background: url(/assets/img/arrow.svg) center no-repeat rgba($color: $col-black, $alpha: .03);
+        background: url("/assets/img/arrow.svg") center no-repeat rgba($color: $col-black, $alpha: .03);
         transition: background-color .2s linear;
     }
     &:hover::before {

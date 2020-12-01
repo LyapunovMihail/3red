@@ -1,0 +1,46 @@
+@import "../../styles/modules/mixins/mixin";
+
+.back-link-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 100px 32px 0;
+    box-sizing: border-box;
+}
+
+.back-link {
+    @include back-link;
+}
+
+.apartment {
+    padding: 40px 64px;
+
+    & > * {
+        box-sizing: border-box;
+    }
+
+    &__container {
+        max-width: 1184px;
+        margin: 0 auto;
+        padding: 0 40px;
+    }
+
+    &__wrapper {
+        display: flex;
+    }
+
+    &__schema,
+    &__info {
+        display: flex;
+    }
+
+    &__schema {
+        flex: 100% 1 4;
+        margin-right: 24px;
+    }
+
+    &__info {
+        flex: 100% 1 6;
+    }
+}
+
+
