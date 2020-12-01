@@ -20,15 +20,15 @@
                     <span class="search-output__result-item-content search-output__result-item-content_num">{{'№ ' + flatData.flat}}</span>
                     <span class="search-output__result-item-content search-output__result-item-content_floor">{{flatData.floor}}
                         этаж</span>
-                    <span class="search-output__result-item-content search-output__result-item-content_house">Дом {{flatData.house}}</span>
+                    <span class="search-output__result-item-content search-output__result-item-content_house">{{flatData.mod === 'МКВ' ? 'Дом ' + flatData.house + '-' + flatData.section : 'Дом ' + flatData.house}}</span>
                 </div>
             </span>
         </div>
         <div class="search-output__result-item-wrap search-output__result-item-wrap--bottom">
             <div class="search-output__wrapper search-output__wrapper--col">
                 <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flatData.decorationName}}</span>
-                <span class="search-output__result-item-content search-output__result-item-content_delivery"><span
-                        class="search-output__result-item-content_delivery--black">Срок сдачи: </span>{{flatData.deliveryDate}}</span>
+                <!--<span class="search-output__result-item-content search-output__result-item-content_delivery"><span-->
+                        <!--class="search-output__result-item-content_delivery&#45;&#45;black">Срок сдачи: </span>{{flatData.deliveryDate}}</span>-->
             </div>
 
             <div class="search-output__wrapper search-output__wrapper--col search-output__wrapper--col-price">

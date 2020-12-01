@@ -28,7 +28,7 @@
             </div>
             <div class="apartment__info-item">
                 <p class="apartment__info-subtitle">Секция</p>
-                <p class="apartment__info-value apartment__info-value--house">{{flatData.section}}</p>
+                <p class="apartment__info-value apartment__info-value--house">{{flatData.mod === 'МКВ' ? '1' : flatData.section}}</p>
             </div>
             <div class="apartment__info-item">
                 <p class="apartment__info-subtitle">Этаж</p>
@@ -45,10 +45,10 @@
                     {{ (flatData.discount ?  (flatData.price - flatData.discount) : flatData.price) | myBitNumberPipe }} &#8381;
                 </p>
             </div>
-            <div class="apartment__info-item">
-                <p class="apartment__info-subtitle">Срок сдачи</p>
-                <p class="apartment__info-value">{{flatData.deliveryDate}}</p>
-            </div>
+            <!--<div class="apartment__info-item">-->
+                <!--<p class="apartment__info-subtitle">Срок сдачи</p>-->
+                <!--<p class="apartment__info-value">{{flatData.deliveryDate}}</p>-->
+            <!--</div>-->
         </div>
 
         <a class="apartment__link" routerLink="/objects/list/{{objectLink}}">ЖК {{flatData.jkName}}</a>

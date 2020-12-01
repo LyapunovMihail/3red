@@ -11,9 +11,9 @@
         </span>
         <span class="search-output__result-item-content search-output__result-item-content_space">{{flat.space}} м²</span>
         <span class="search-output__result-item-content search-output__result-item-content_floor">{{flat.floor}} этаж</span>
-        <span class="search-output__result-item-content search-output__result-item-content_delivery">{{flat.deliveryDate}}</span>
+        <!--<span class="search-output__result-item-content search-output__result-item-content_delivery">{{flat.deliveryDate}}</span>-->
         <span class="search-output__result-item-content search-output__result-item-content_decoration">{{flat.decorationName}}</span>
-        <span class="search-output__result-item-content search-output__result-item-content_house">Дом {{flat.house}}</span>
+        <span class="search-output__result-item-content search-output__result-item-content_house">{{flat.mod === 'МКВ' ? 'Дом ' + flat.house + '-' + flat.section : 'Дом ' + flat.house}}</span>
         <span class="search-output__result-item-price">
             <span class="search-output__result-item-content"
                 [ngClass]="{'search-output__result-item-content_price' : !flat.discount,

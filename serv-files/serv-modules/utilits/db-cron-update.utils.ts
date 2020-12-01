@@ -158,7 +158,7 @@ export class DbCronUpdate {
                 flat,
             };
         } else if (article.startsWith('БР')) {
-            const [mod, sectionStr, floorStr, , flatStr] = article.split('-');
+            const [mod, , sectionStr, floorStr, , flatStr] = article.split('-');
             const [section, floor, flat] = [sectionStr, floorStr, flatStr].map(Number);
             return {
                 mod,
