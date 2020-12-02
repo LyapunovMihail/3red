@@ -39,7 +39,7 @@
             </div>
             <div class="create-shares__wrap create-shares__wrap_select create-shares__wrap_input create-shares__wrap_w2">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Статус</p>
-                <select name="publish" class="create-shares__input create-shares__input_status" [formControlName]="'publish'" (change)="checkShowOnMain($event)">
+                <select name="publish" class="create-shares__input create-shares__input_status" [formControlName]="'publish'" (change)="setShowOnMain({ isPublishChange: true })">
                     <option [value]="false">Черновик</option>
                     <option [value]="true">Чистовик</option>
                 </select>
@@ -48,12 +48,12 @@
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_w2">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Срок акции до</p>
                 <div class="create-shares__input create-shares__input_datepicker">
-                    <app-ghm-date-picker [formControlName]="'finish_date'"></app-ghm-date-picker>
+                    <app-ghm-date-picker [formControlName]="'finish_date'" (ngModelChange)="setShowOnMain({ isFinishDateChange: true })"></app-ghm-date-picker>
                 </div>
             </div>
             <div class="create-shares__wrap create-shares__wrap_checkbox create-shares__wrap_w2">
                 <label class="g-checkbox">
-                    <input type="checkbox" name="countdown" id="countdown" [formControlName]="'countdown'">
+                    <input type="checkbox" name="countdown" id="countdown" [formControlName]="'countdown'" (change)="setShowOnMain({ isCountDownChange: true })">
                     <div></div>
                     <span>Обратный отсчет</span>
                 </label>
@@ -83,7 +83,7 @@
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_preview">Загрузите фото для превью</p>
             </div>
             <div class="create-shares__wrap create-shares__wrap_full">
-                <label *ngIf="publishVal()" class="g-checkbox">
+                <label *ngIf="(publish.value === 'true' || publish.value === true) && (!countdown.value || (countdown.value && countdownDays > 0))" class="g-checkbox">
                     <input type="checkbox" name="public" id="public" style="display: none;" [formControlName]="'show_on_main'">
                     <div></div>
                     <span>Показать акцию на главной</span>

@@ -81,8 +81,8 @@
 }
 
 .current-slide,
-.current-slide + div,
-.current-slide + div + div {
+.current-slide + app-news-shares-snippet,
+.current-slide + app-news-shares-snippet + app-news-shares-snippet {
     opacity: 1 !important;
     pointer-events: all !important;
 }
@@ -114,135 +114,6 @@
             width: 100%;
             height: 100%;
             display: block;
-        }
-    }
-
-    &__house-name {
-        position: absolute;
-        bottom: calc(100% + 4px);
-        left: 0;
-        padding-left: 20px;
-        font: 14px/18px $font-proba;
-        color: $col-black;
-        background: url(/assets/img/build.svg) 0% 20% no-repeat;
-    }
-    &__image {
-        width: 100%;
-        height: 264px;
-        margin: 0 0 8px;
-        position: relative;
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: $col-red;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .2s linear;
-        }
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-    }
-    &__title {
-        font: 18px/23px $font-proba;
-        max-height: 46px;
-        color: $col-black;
-        margin: 0 0 4px;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        overflow: hidden;
-        transition: color .2s linear;
-    }
-    &__date {
-        font: 16px/19px $font-proba;
-        color: $col-black-5;
-    }
-    &__type {
-        padding: 0 12px;
-        height: 32px;
-        background-color: $col-red;
-        position: absolute;
-        top: 16px;
-        left: 0;
-        font: 18px/23px $font-proba;
-        color: $col-white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    &__edit {
-        width: 38px;
-        height: 38px;
-        position: absolute;
-        top: 16px;
-        right: 16px;
-
-        &-item {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background-color: $col-white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-    
-            span {
-                display: block;
-                width: 4px;
-                height: 4px;
-                border-radius: 50%;
-                position: relative;
-                background-color: $col-black;
-                &::before,
-                &::after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: $col-black;
-                    border-radius: 50%;
-                }
-                &::before { left: -8px; }
-                &::after { right: -8px; }
-            }
-            &_active {
-                &+ .slider-list__tooltip {
-                    display: block;
-                }
-            }
-        }
-    }
-    &__tooltip {
-        display: none;
-        width: 188px;
-        position: absolute;
-        top: calc(100% + 4px);
-        right: 0;
-        background-color: $col-white;
-        &-item {
-            width: 100%;
-            height: 39px;
-            padding-left: 16px;
-            box-sizing: border-box;
-            font: 18px/23px $font-proba;
-            color: $col-black;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #d8d8d8;
-            &:last-child { border-bottom: 0; }
-            &:hover { background-color: $col-fa; }
         }
     }
 }

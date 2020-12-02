@@ -28,8 +28,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
 
     public uploadsPath: string;
 
-    public finishDate;
-
     public days: number;
 
     public dateNow: string;
@@ -106,16 +104,15 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         } else {
             this.getObjectById();
         }
-        this.finishDate = this.form.value['finish_date'];
 
-        this.countDown();
+        this.setShowOnMain({isFinishDateChange: true});
 
-        this.subs.push(this.form.get('finish_date').valueChanges
-            .pipe(takeUntil(this._ngUnsubscribe))
-            .subscribe((value) => {
-                this.finishDate = this.form.get('finish_date').value;
-                this.countDown();
-            }));
+        // this.subs.push(this.form.get('finish_date').valueChanges
+        //     .pipe(takeUntil(this._ngUnsubscribe))
+        //     .subscribe((value) => {
+        //         this.countDays();
+        //         this.setShowOnMain({isFinishDateChange: true});
+        //     }));
 
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
     }
@@ -214,7 +211,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     public getObjectById() {
         this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
             this.form.reset(data[0]);
-            this.finishDate = data[0].finish_date;
             console.log('start');
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
                 if (body.blockType === 'flats') {
@@ -227,7 +223,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     this.addDescription(body.blockOrderNumber, body.blockDescription);
                 }
             });
-            this.countDown();
+            this.setShowOnMain({ isFinishDateChange: true });
+            console.log('form.value: ', this.form.value);
         });
     }
 
@@ -255,13 +252,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     deleteImage() {
         this.form.patchValue({mainImage: ''});
         this.form.patchValue({mainThumbnail: ''});
-    }
-
-    public countDown() {
-        const createdDateVal = moment(Date.now());
-        const finishDateVal = moment(this.finishDate);
-        const duration = moment.duration(createdDateVal.diff(finishDateVal));
-        this.days = Math.ceil(duration.asDays() * -1);
     }
 
     public onSave(form): void {
@@ -300,17 +290,40 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         return this.form.get('show_on_main') as FormControl;
     }
 
-    publishVal(): boolean {
-        return this.publish.value === 'true';
+    get countdown(): FormControl {
+        return this.form.get('countdown') as FormControl;
     }
 
-    checkShowOnMain(val) {
-        const switchOffShowOnMain = () => {
+    get finishDate(): FormControl {
+        return this.form.get('finish_date') as FormControl;
+    }
+
+    get countdownDays() {
+        const createdDateVal = moment(Date.now());
+        const finishDateVal = moment(this.finishDate.value);
+        const duration = moment.duration(createdDateVal.diff(finishDateVal));
+        console.log('this.days: ', this.days);
+        return Math.ceil(duration.asDays() * -1);
+    }
+
+    public setShowOnMain(options: {isCountDownChange?: boolean, isFinishDateChange?: boolean, isPublishChange?: boolean }) {
+        if (options.isFinishDateChange) {
+            this.countDownOrFinishDateChange();
+        }
+        if (options.isPublishChange) {
+            this.publishChange();
+        }
+    }
+
+    private countDownOrFinishDateChange() {
+        if (this.countdown.value && this.countdownDays < 0) {
+            this.showOnMain.setValue(false);
+        }
+    }
+    private publishChange() {
+        if (this.publish.value === 'false') {
             this.showOnMain.setValue(false);
             this.form.updateValueAndValidity();
-        };
-        if (val.currentTarget.value === 'false') {
-            switchOffShowOnMain();
         }
     }
 

@@ -74,7 +74,7 @@
                 </div>
     
                 <div class="create-form__form-wrap create-form__form-wrap_full">
-                    <label *ngIf="publishVal()" class="g-checkbox">
+                    <label *ngIf="publishVal" class="g-checkbox">
                         <input class="admin-news_checkbox_content"
                             [formControl]="form.controls['show_on_main']"
                             type="checkbox" name="show_on_main">

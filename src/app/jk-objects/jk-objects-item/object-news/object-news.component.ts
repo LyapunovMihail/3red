@@ -149,6 +149,7 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
 
     public createNewsSnippet() {
         if ( this.isAuthorizated ) {
+            this.redactId = null;
             this.isNewsCreateRedactForm = true;
             this.windowScrollLocker.block();
         }

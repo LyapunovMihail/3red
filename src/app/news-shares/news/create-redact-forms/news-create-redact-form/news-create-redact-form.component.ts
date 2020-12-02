@@ -313,17 +313,14 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         return this.form.get('show_on_main') as FormControl;
     }
 
-    publishVal(): boolean {
+    get publishVal(): boolean {
         return this.publish.value === 'true';
     }
 
     checkShowOnMain(val) {
-        const switchOffShowOnMain = () => {
+        if (val.currentTarget.value === 'false') {
             this.showOnMain.setValue(false);
             this.form.updateValueAndValidity();
-        };
-        if (val.currentTarget.value === 'false') {
-            switchOffShowOnMain();
         }
     }
 

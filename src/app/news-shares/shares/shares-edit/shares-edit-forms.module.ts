@@ -10,7 +10,7 @@ import { SharesEditImageComponent } from './shares-edit-controls/shares-edit-ima
 import { SharesEditFlatsComponent } from './shares-edit-controls/shares-edit-flats/shares-edit-flats.component';
 import { SharesEditAnchorComponent } from './shares-edit-controls/shares-edit-anchor/shares-edit-anchor.component';
 import { BitNumberPipe } from '../bit-number.pipe';
-import { SharesDeleteComponent } from '../shares-delete/shares-delete.component';
+import { SharesDeleteComponent } from './shares-delete/shares-delete.component';
 
 @NgModule({
     exports: [

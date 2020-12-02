@@ -5,15 +5,15 @@ import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-news-preview',
-    templateUrl: './news-preview.component.html',
-    styleUrls: ['./news-preview.component.scss'],
+    selector: 'app-news-list',
+    templateUrl: './news-list.component.html',
+    styleUrls: ['./news-list.component.scss'],
     providers: [
         WindowScrollLocker
     ]
 })
 
-export class NewsPreviewComponent implements OnInit, OnDestroy {
+export class NewsListComponent implements OnInit, OnDestroy {
 
     public uploadsPath = `/${NEWS_UPLOADS_PATH}`;
 

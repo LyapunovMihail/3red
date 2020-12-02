@@ -8,7 +8,6 @@ import { SharesComponent } from './shares.component';
 import { NgModule } from '@angular/core';
 import { AuthorizationGuard } from '../../authorization/authorization-guard.service';
 import { Uploader } from 'angular2-http-file-upload';
-import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
 import { SharesEditFormsModule } from './shares-edit/shares-edit-forms.module';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 import { ApartmentModule } from '../../flats/apartment/apartment.module';
@@ -17,7 +16,6 @@ import { NewsSharesSnippetModule } from '../news-shares-snippet/news-shares-snip
 const SHARES_COMPONENTS = [
     SharesComponent,
     SharesListComponent,
-    SharesItemsComponent,
     SharesItemComponent
 ];
 

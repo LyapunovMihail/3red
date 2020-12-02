@@ -1,7 +1,7 @@
-import { AuthorizationObserverService } from '../../../authorization/authorization.observer.service';
+import { AuthorizationObserverService } from '../../../../authorization/authorization.observer.service';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { SharesService } from '../shares.service';
-import { Share } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { SharesService } from '../../shares.service';
+import { Share } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 
 @Component({
     selector : 'app-shares-delete',

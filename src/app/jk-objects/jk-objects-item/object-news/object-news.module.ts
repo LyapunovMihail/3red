@@ -5,6 +5,7 @@ import { SharesEditFormsModule } from '../../../news-shares/shares/shares-edit/s
 import { CreateRedactFormsModule } from '../../../news-shares/news/create-redact-forms/create-redact-forms.module';
 import { RouterModule } from '@angular/router';
 import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
+import { NewsSharesSnippetModule } from '../../../news-shares/news-shares-snippet/news-shares-snippet.module';
 
 @NgModule({
     exports: [
@@ -18,6 +19,7 @@ import { NavMenuModule } from '../../../UI/nav-menu/nav-menu.module';
         RouterModule,
         SharesEditFormsModule,
         CreateRedactFormsModule,
+        NewsSharesSnippetModule,
         NavMenuModule
     ]
 })
