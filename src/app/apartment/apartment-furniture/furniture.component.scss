@@ -15,39 +15,23 @@
     }
 
     &__switch {
-        display: inline-block;
-        width: 49px;
-        height: 28px;
-        border-radius: 20px;
-        background-color: #E2E2E2;
-        z-index: 0;
-        margin: 0;
-        padding: 0;
-        border: none;
-        position: relative;
-        transition: background-color .2s;
+        @include big-switch();
+    }
 
-        &::after {
-            content: "";
-            position: absolute;
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            background-color: #616161;
-            top: 5px;
-            left: 5px;
-            transition-duration: 300ms;
-            z-index: 1;
-            transition: background-color .2s, left .2s;
-        }
+    &__toggle-content {
+        margin: 16px 0 0;
+    }
 
-        &--active {
-            background-color: $col-red;
+    &__wrapper {
+        display: flex;
+    }
 
-            &::after {
-                background-color: $col-white;
-                left: 26px;
-            }
-        }
+    &__examples {
+        flex: 100% 1 6;
+        margin-right: 32px;
+    }
+
+    &__list {
+        flex: 100% 1 4;
     }
 }

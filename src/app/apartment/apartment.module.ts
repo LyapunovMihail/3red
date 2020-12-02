@@ -7,6 +7,7 @@ import { FurnitureComponent } from './apartment-furniture/furniture.component';
 import { SchemaComponent } from './apartment-schema/schema.component';
 import { InfoComponent } from './apartment-info/info.component';
 import { ActionsComponent } from './appartment-actions/actions.component';
+import { FurnitureModule } from './apartment-furniture/furniture.module';
 
 const AgreementComponents = [
     ApartmentComponent,
@@ -29,7 +30,8 @@ const AgreementComponents = [
         BrowserAnimationsModule,
         RouterModule.forChild([
             {path: 'apartment', component: ApartmentComponent}
-        ])
+        ]),
+        FurnitureModule
     ]
 })
 
