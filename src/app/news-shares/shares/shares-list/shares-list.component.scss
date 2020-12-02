@@ -55,6 +55,14 @@
     box-sizing: border-box;
 
 }
+
+.news__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 24px;
+    grid-row-gap: 64px;
+}
+
 .news__title {
     font: 500 48px $font-proba;
     margin-bottom: 24px;

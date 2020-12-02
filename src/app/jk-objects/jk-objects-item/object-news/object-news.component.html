@@ -20,8 +20,8 @@
                 <nav-menu
                     [navList]="navList"
                     [linkType]="'else'"
-                    (routeNavigate)="changeType($event)"
-                ></nav-menu>
+                    (routeNavigate)="changeType($event)">
+                </nav-menu>
                 <a class="g-all-object" routerLink="/news-shares/all">Все новости</a>
             </nav>
 
@@ -57,6 +57,7 @@
                                 <div class="slider-list__image">
                                     <img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">
                                 </div>
+
                                 <p class="slider-list__title" *ngIf="snippet.text">{{snippet.text}}</p>
                                 <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
 

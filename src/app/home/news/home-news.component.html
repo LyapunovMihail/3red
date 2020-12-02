@@ -45,7 +45,8 @@
                                 <div class="slider-list__image">
                                     <img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">
                                 </div>
-                                <p class="slider-list__title" *ngIf="snippet.text">{{snippet.text}}</p>
+
+                                <p class="slider-list__title" *ngIf="snippet.name">{{snippet.name}}</p>
                                 <p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>
 
                                 <div class="slider-list__type" *ngIf="snippet.name">Акция</div>

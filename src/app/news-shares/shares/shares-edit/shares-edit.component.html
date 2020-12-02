@@ -15,7 +15,7 @@
                     class="create-shares__input create-shares__input_area create-shares__input_title"
                     [ngClass]="{'invalid-value': form.get('name').invalid && form.get('name').dirty}"
                     [placeholder]="'Заголовок'"
-                    [invalid]="form.get('name').invalid && form.get('name').dirty ? true : false">
+                    [invalid]="form.get('name').invalid && form.get('name').dirty">
                 </ghm-textarea>
                 <p class="create-shares__typografy-error">Поле обязательно для заполнения</p>
             </div>
@@ -26,7 +26,7 @@
                     [ngClass]="{'invalid-value': form.get('text').invalid && form.get('text').dirty}"
                     [placeholder]="'Краткое описание'"
                     [link]="false"
-                    [invalid]="form.get('text').invalid && form.get('text').dirty ? true : false">
+                    [invalid]="form.get('text').invalid && form.get('text').dirty">
                 </ghm-textarea>
                 <p class="create-shares__typografy-error">Поле обязательно для заполнения</p>
             </div>

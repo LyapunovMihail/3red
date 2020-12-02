@@ -11,16 +11,18 @@
             ></nav-menu>
         </nav>
 
-        <app-news-shares-all-items
-            [isAuthorizated]="isAuthorizated"
-            [snippets]="snippets"
-            (deleteNewsSnippet)="deleteNewsSnippet($event)"
-            (redactNewsSnippet)="redactNewsSnippet($event)"
-            (updateNewsSnippet)="updateNewsSnippet($event)"
-            (deleteShareSnippet)="deleteShareSnippet($event)"
-            (redactShareSnippet)="redactShareSnippet($event)"
-            (updateShareSnippet)="updateShareSnippet($event)">
-        </app-news-shares-all-items>
+        <div class="news__list">
+            <app-news-shares-snippet *ngFor="let snippet of snippets"
+                [isAuthorizated]="isAuthorizated"
+                [snippet]="snippet"
+                (deleteNewsSnippet)="deleteNewsSnippet($event)"
+                (redactNewsSnippet)="redactNewsSnippet($event)"
+                (updateNewsSnippet)="updateNewsSnippet($event)"
+                (deleteShareSnippet)="deleteShareSnippet($event)"
+                (redactShareSnippet)="redactShareSnippet($event)"
+                (updateShareSnippet)="updateShareSnippet($event)">
+            </app-news-shares-snippet>
+        </div>
 
     </div>
 </section>

@@ -15,7 +15,6 @@ import {
         </div>
         <div class="btn-right" (click)="incrementMonth()"></div>
 
-
         <div class="month_list" *ngIf="isOpen">
             <div class="year_switch">
                 <div (click)="decrementYear()" class="year_switch-btn-left">&#706;</div>

@@ -80,7 +80,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         moment.locale('ru');
     }
 
-
     public createDynamicNewsObj(): Share {
         return ({
             name: '',
@@ -228,8 +227,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     this.addDescription(body.blockOrderNumber, body.blockDescription);
                 }
             });
-            console.log('this.body: ', this.body.value);
-            console.log('finish');
             this.countDown();
         });
     }

@@ -1,0 +1,48 @@
+<div  class="news__list-item">
+    <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__item" *ngIf="snippet.title">
+        <div class="news__category" [class.news__category--exist]="snippet.objectName">{{snippet.objectName}}</div>
+        <div class="news__img-wrap">
+            <img [src]="newsUploadsPath + snippet.thumbnail" height="264" alt="news" class="news__image">
+        </div>
+        <p class="news__list-title">{{snippet.title}}</p>
+        <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+    </a>
+
+    <a [routerLink]="['/news-shares/shares/list/' + snippet._id]" class="news__item" *ngIf="snippet.name">
+        <div class="news__category" [class.news__category--exist]="snippet.objectName">{{snippet.objectName}}</div>
+        <div class="news__img-wrap--stock">
+            <p class="news__stock">Акция</p>
+            <div class="news__timing" *ngIf="countDown(snippet.finish_date) >= 0">
+                <img src="/assets/img/news/clock.svg" alt="clock">
+                <p>{{countDown(snippet.finish_date) | sharesDayPipe}} до конца акции</p>
+            </div>
+            <p class="news__propose" *ngIf="countDown(snippet.finish_date) < 0"> Акция закончилась</p>
+            <img [src]="sharesUploadsPath + snippet.mainThumbnail" height="264" alt="news" class="news__image">
+        </div>
+        <p class="news__list-title">{{snippet.name}}</p>
+        <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
+    </a>
+
+    <div class="news__list__edit" *ngIf="isAuthorizated">
+
+        <button class="news__list__edit-item" (click)="onSelectItem(snippet._id)"
+                [class.news__list__edit-item_active]="snippet._id == activeTooltip"><span></span></button>
+
+        <div class="news__list__tooltip" *ngIf="snippet.title">
+            <div class="news__list__tooltip-item" (click)="redactNewsSnippet.emit(snippet._id)">Редактировать</div>
+            <div class="news__list__tooltip-item" (click)="snippet.show_on_main = false; updateNewsSnippet.emit(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
+            <div class="news__list__tooltip-item" (click)="snippet.show_on_main = true; updateNewsSnippet.emit(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
+            <div class="news__list__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateNewsSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
+            <div class="news__list__tooltip-item" (click)="snippet.publish = true; updateNewsSnippet.emit(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
+            <div class="news__list__tooltip-item" (click)="deleteNewsSnippet.emit(snippet._id)">Удалить</div>
+        </div>
+        <div class="news__list__tooltip" *ngIf="snippet.name">
+            <div class="news__list__tooltip-item" (click)="redactShareSnippet.emit(snippet._id)">Редактировать</div>
+            <div class="news__list__tooltip-item" (click)="snippet.show_on_main = false; updateShareSnippet.emit(snippet)" *ngIf="snippet.show_on_main">Убрать с главной</div>
+            <div class="news__list__tooltip-item" (click)="snippet.show_on_main = true; updateShareSnippet.emit(snippet)" *ngIf="!snippet.show_on_main && snippet.publish">На главную</div>
+            <div class="news__list__tooltip-item" (click)="snippet.publish = false; snippet.show_on_main = false; updateShareSnippet.emit(snippet)" *ngIf="snippet.publish">В черновик</div>
+            <div class="news__list__tooltip-item" (click)="snippet.publish = true; updateShareSnippet.emit(snippet)" *ngIf="!snippet.publish">Опубликовать</div>
+            <div class="news__list__tooltip-item" (click)="deleteShareSnippet.emit(snippet._id)">Удалить</div>
+        </div>
+    </div>
+</div>

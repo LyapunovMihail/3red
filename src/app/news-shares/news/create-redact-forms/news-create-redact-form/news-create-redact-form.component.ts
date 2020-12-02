@@ -87,7 +87,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         this.form = this.formBuilder.group({
             created_at: '',
             last_modifyed: '',
-            title: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
+            title: ['', Validators.compose([Validators.required])],
             description: '',
             show_on_main: false,
             publish: false,
@@ -104,7 +104,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         this.form = this.formBuilder.group({
             created_at: this.snippet.created_at,
             last_modifyed: this.snippet.last_modifyed,
-            title: [this.snippet.title, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
+            title: [this.snippet.title, Validators.compose([Validators.required])],
             description: this.snippet.description,
             show_on_main: this.snippet.show_on_main,
             publish: this.snippet.publish,

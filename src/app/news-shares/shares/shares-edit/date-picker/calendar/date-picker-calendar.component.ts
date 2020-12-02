@@ -16,16 +16,18 @@ import { DatePickerReviewService } from '../services/date-picker.review.service'
     selector: 'app-date-picker-calendar',
     styleUrls: ['./date-picker-calendar.component.scss'],
     template: `
-        <div *ngFor="let item of datePickerService.getDaysArray(selectedMonth, selectedYear)"
-            class="day calendar-day"
-            [ngClass]="{
-                'clicked-day': reviewService.isSelected(item, selectedDate),
-                'today-day': reviewService.isToday(item, date),
-                'disabled-day': item === null
-            }"
-            (click)="selectDate(item)">
-            {{ item ? item.day : '' }}
-        </div>
+        <ng-container *ngIf="daysArray">
+            <div *ngFor="let item of daysArray"
+                class="day calendar-day"
+                [ngClass]="{
+                    'clicked-day': reviewService.isSelected(item, selectedDate),
+                    'today-day': reviewService.isToday(item, date),
+                    'disabled-day': item === null
+                }"
+                (click)="selectDate(item)">
+                {{ item ? item.day : '' }}
+            </div>
+        </ng-container>
     `
 })
 
@@ -37,6 +39,7 @@ export class DatePickerCalendarComponent implements OnInit {
     @Output() public checkSelect: EventEmitter<any> = new EventEmitter();
 
     public date: Date;
+    public daysArray: ICalendarDay[];
 
     constructor(
         public ref: ChangeDetectorRef,
@@ -53,6 +56,8 @@ export class DatePickerCalendarComponent implements OnInit {
             year: this.date.getFullYear(),
             full: this.date
         };
+
+        this.daysArray = this.datePickerService.getDaysArray(this.selectedMonth, this.selectedYear);
     }
 
     public selectDate(date) {
