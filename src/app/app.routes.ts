@@ -9,7 +9,7 @@ export const ROUTES: Routes = [
     { path: 'flats', loadChildren: './flats/flats.module#FlatsModule' },
     { path: 'objects', loadChildren: './jk-objects/jk-objects.module#JkObjectsModule' },
     { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
-    { path: 'apartment-test-rout', loadChildren: './apartment/apartment.module#ApartmentModule' },
+    { path: 'apartment', loadChildren: './apartment/apartment.module#ApartmentModule' },
 
     { path: 'error-404', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' },
     { path: '**', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' }

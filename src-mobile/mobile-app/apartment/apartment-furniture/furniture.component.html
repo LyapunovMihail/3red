@@ -1,0 +1,19 @@
+<div class="furniture">
+    <div class="furniture__head">
+        <h2 class="furniture__title">Меблировка</h2>
+
+        <!-- При включении меблировки вешаем активный класс на кнопку -->
+        <!-- class: furniture__switch--active -->
+        <button class="furniture__switch furniture__switch--active"></button>
+    </div>
+
+    <!-- Блок toggle-content показывается по включению Меблировки -->
+    <div class="furniture__toggle-content">
+        <app-tabs></app-tabs>
+
+        <div class="furniture__wrapper">
+            <app-examples class="furniture__examples"></app-examples>
+            <app-list class="furniture__list"></app-list>
+        </div>
+    </div>
+</div>
