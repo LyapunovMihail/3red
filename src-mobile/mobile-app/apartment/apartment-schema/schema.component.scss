@@ -12,10 +12,17 @@
         padding: 12px 24px;
         background-color: rgba($col-red, 0.05);
 
+        @media (max-width: 767px) {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 16px;
+        }
+
         &-title {
             position: relative;
             font: $font-18;
             padding-left: 28px;
+            margin: 0 0 16px;
 
             &::before {
                 content: '';
@@ -35,6 +42,9 @@
         &-item {
             color: $col-black-5;
             margin-left: 16px;
+            @media (max-width: 767px) {
+                margin: 0 16px 0 0;
+            }
 
             &--active {
                 color: $col-red;
@@ -55,6 +65,10 @@
         position: relative;
         height: 382px;
         padding: 24px;
+        @media (max-width: 767px) {
+            height: 280px;
+            padding: 12px;
+        }
 
         .schema__image {
             position: absolute;
@@ -68,6 +82,12 @@
             opacity: 0;
             transform: translateX(20px);
             transition: opacity .2s ease, transform .2s ease;
+            @media (max-width: 767px) {
+                top: 12px;
+                left: 12px;
+                width: calc(100% - 28px);
+                height: calc(100% - 28px);
+            }
 
             &--active {
                 visibility: visible;

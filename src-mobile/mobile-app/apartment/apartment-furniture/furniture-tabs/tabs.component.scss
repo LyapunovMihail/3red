@@ -11,6 +11,12 @@
         margin: 0 0 8px;
     }
 
+    &-scroll {
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
     &__tab {
         display: flex;
         margin-right: 8px;
@@ -22,6 +28,8 @@
         &-name,
         &-price {
             font: $font-14;
+            display: block;
+            width: max-content;
         }
 
         &-name {

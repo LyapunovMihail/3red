@@ -3,6 +3,9 @@
 .furniture {
     background-color: $col-white;
     padding: 24px;
+    @media (max-width: 767px) {
+        padding: 16px;
+    }
 
     &__head {
         display: flex;
@@ -16,10 +19,14 @@
 
     &__switch {
         @include big-switch();
+        @media (max-width: 767px) {
+            @include small-switch();
+        }
     }
 
     &__toggle-content {
         margin: 16px 0 0;
+        overflow: hidden;
     }
 
     &__wrapper {

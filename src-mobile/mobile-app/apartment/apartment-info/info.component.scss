@@ -5,6 +5,9 @@
     background-color: $col-white;
     padding: 24px;
     width: 100%;
+    @media (max-width: 767px) {
+        padding: 16px;
+    }
 
     &__alert {
         padding: 8px 12px;
