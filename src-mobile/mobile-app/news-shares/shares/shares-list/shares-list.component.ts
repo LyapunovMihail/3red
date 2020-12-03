@@ -13,7 +13,7 @@ import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 })
 export class SharesListComponent implements OnInit, OnDestroy {
 
-    public shares: Share[];
+    public snippetsArray: Share[];
     public allSnippets: Share[];
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
@@ -39,16 +39,16 @@ export class SharesListComponent implements OnInit, OnDestroy {
 
     public getShares() {
         this.sharesService.getShares().subscribe((data: Share[]) => {
-            this.shares = data;
-            this.allSnippets = this.shares;
-            this.subscribeAuth();
+            this.snippetsArray = data;
+            this.allSnippets = this.snippetsArray;
+            this.filterPublish();
         }, (err) => {
             console.log(err);
         });
     }
 
-    subscribeAuth() {
-        this.shares = this.allSnippets.filter((item) => item.publish);
+    filterPublish() {
+        this.snippetsArray = this.allSnippets.filter((item) => item.publish);
     }
 
     public unsubscribe() {

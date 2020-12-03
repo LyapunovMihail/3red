@@ -15,8 +15,6 @@ export class NewsSharesSnippetComponent implements OnInit {
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
-    public activeTooltip: string;
-
     constructor() {
         moment.locale('ru');
     }

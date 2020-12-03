@@ -1,22 +1,19 @@
 import { FormsRequestModule } from '../../forms-request/forms-request.module';
-import { SharesDayPipe } from './shares-day.pipe';
 import { SharesService } from './shares.service';
-import { SharesItemComponent } from './shares-list/shares-item/shares-item.component';
+import { SharesItemComponent } from './shares-item/shares-item.component';
 import { SharesListComponent } from './shares-list/shares-list.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharesComponent } from './shares.component';
 import { NgModule } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
-import { SharesItemsComponent } from './shares-list/shares-items/shares-items.component';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
+import { NewsSharesSnippetModule } from '../news-shares-snippet/news-shares-snippet.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
     SharesListComponent,
-    SharesItemsComponent,
-    SharesItemComponent,
-    SharesDayPipe
+    SharesItemComponent
 ];
 
 @NgModule({
@@ -26,6 +23,7 @@ const SHARES_COMPONENTS = [
         CommonModule,
         NavMenuModule,
         FormsRequestModule,
+        NewsSharesSnippetModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

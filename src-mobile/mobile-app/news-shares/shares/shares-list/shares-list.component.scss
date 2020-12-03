@@ -19,6 +19,13 @@
         margin: 0 0 24px;
     }
     &__nav { margin: 0 0 24px; }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 24px;
+        grid-row-gap: 40px;
+    }
 }
 
 @media (max-width: 760px) {
@@ -26,5 +33,11 @@
         padding: 32px 0 64px;
 
         &__title { @include font-size(28px,28px); }
+    }
+}
+
+@media (max-width: 500px) {
+    .news__list {
+        display: block;
     }
 }

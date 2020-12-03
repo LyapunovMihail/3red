@@ -12,7 +12,7 @@
         </nav>
 
         <div class="news__list">
-            <app-news-shares-snippet *ngFor="let snippet of shares"
+            <app-news-shares-snippet *ngFor="let snippet of snippetsArray"
                 [isAuthorizated]="isAuthorizated"
                 [snippet]="snippet"
                 (deleteShareSnippet)="deleteSnippet($event)"
@@ -35,6 +35,6 @@
     *ngIf="isAuthorizated"
     (snippetsChange)="snippetsChange()"
     (close)="isDeleteForm = false; windowScrollLocker.unblock()"
-    [snippetsArray]="shares"
+    [snippetsArray]="snippetsArray"
     [redactId]="redactId" [isForm]="isDeleteForm">
 </app-shares-delete>

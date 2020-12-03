@@ -6,7 +6,6 @@ import { combineLatest } from 'rxjs';
 import { ObjectNewsService } from './object-news.service';
 import { IObjectNewsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/news-api/objects-news.interfaces';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-object-item-news',
@@ -36,8 +35,6 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
     public showSnippetType = 'all';
 
     public currentSlide = 0;
-
-    public activeTooltip: string;
 
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
@@ -119,10 +116,6 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
-    }
-
-    public onSelectItem(item: string): void {
-        this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
     public changeType(type) {
@@ -213,9 +206,5 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
                 () => console.log('success'),
                 (err) => console.error(err)
             );
-    }
-
-    public parseDate(createdAt) {
-        return moment(createdAt).format('LL').slice(0, -3);
     }
 }

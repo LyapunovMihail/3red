@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { HomeNewsService } from './home-news.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-home-news',
@@ -30,8 +29,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
     public showSnippetType = 'all';
 
     public currentSlide = 0;
-
-    public activeTooltip: string;
 
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
@@ -98,10 +95,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
     }
 
-    public onSelectItem(item: string): void {
-        this.activeTooltip = this.activeTooltip === item ? '' : item;
-    }
-
     public changeType(type) {
         this.currentSlide = 0;
         this.showSnippetType = type;
@@ -117,9 +110,5 @@ export class HomeNewsComponent implements OnInit, OnChanges {
                 this.currentSnippets = this.isAuthorizated ? this.shareSnippets : this.shareSnippets.filter((item) => item.publish);
                 break;
         }
-    }
-
-    public parseDate(createdAt) {
-        return moment(createdAt).format('LL').slice(0, -3);
     }
 }

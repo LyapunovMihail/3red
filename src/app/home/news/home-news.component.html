@@ -27,39 +27,13 @@
                 <ng-container>
                     <div class="object-news__slider-item slider-list" [ngStyle]="{ 'transform' : ('translateX(-' + ( this.currentSlide * ( 376 ) ) + 'px)') }">
 
-                        <!--<div class="slider-list__item" *ngFor="let snippet of currentSnippets; let i = index"-->
-                            <!--[ngClass]="{'current-slide': currentSlide === i }" id="slider-item-{{i}}">-->
-
-                            <!--<a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.title">-->
-                                <!--<p class="slider-list__house-name">{{snippet.objectName}}</p>-->
-                                <!--<div class="slider-list__image">-->
-                                    <!--<img [src]="newsUploadsPath + snippet.thumbnail" alt="news-image" *ngIf="snippet.thumbnail">-->
-                                <!--</div>-->
-                                <!--<p class="slider-list__title" *ngIf="snippet.title">{{snippet.title}}</p>-->
-                                <!--<p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>-->
-
-                            <!--</a>-->
-
-                            <!--<a [routerLink]="['/news-shares/shares/list/' + snippet._id]" class="slider-list__item-link" *ngIf="snippet.name">-->
-                                <!--<p class="slider-list__house-name">{{snippet.objectName}}</p>-->
-                                <!--<div class="slider-list__image">-->
-                                    <!--<img [src]="sharesUploadsPath + snippet.mainThumbnail" alt="news-image" *ngIf="snippet.mainThumbnail">-->
-                                <!--</div>-->
-
-                                <!--<p class="slider-list__title" *ngIf="snippet.name">{{snippet.name}}</p>-->
-                                <!--<p class="slider-list__date">{{parseDate(snippet.created_at)}}</p>-->
-
-                                <!--<div class="slider-list__type" *ngIf="snippet.name">Акция</div>-->
-                            <!--</a>-->
-
-                        <!--</div>-->
-
                         <app-news-shares-snippet *ngFor="let snippet of currentSnippets; let i = index"
                             class="slider-list__item"
                             [ngClass]="{'current-slide': currentSlide === i }" id="slider-item-{{i}}"
                             [isAuthorizated]="isAuthorizated"
                             [snippet]="snippet">
                         </app-news-shares-snippet>
+
                     </div>
                 </ng-container>
             </div>

@@ -9,8 +9,11 @@
             ></nav-menu>
         </nav>
 
-        <app-news-list
-            [snippetsArray]="snippetsArray">
-        </app-news-list>
+        <div class="news__list">
+            <app-news-shares-snippet *ngFor="let snippet of snippetsArray"
+                [snippet]="snippet">
+            </app-news-shares-snippet>
+        </div>
+
     </div>
 </section>

@@ -4,15 +4,15 @@ import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-news-preview',
-    templateUrl: './news-preview.component.html',
-    styleUrls: ['./news-preview.component.scss'],
+    selector: 'app-news-list',
+    templateUrl: './news-list.component.html',
+    styleUrls: ['./news-list.component.scss'],
     providers: [
         WindowScrollLocker
     ]
 })
 
-export class NewsPreviewComponent implements OnInit {
+export class NewsListComponent implements OnInit {
 
     public uploadsPath = `/${NEWS_UPLOADS_PATH}`;
 
@@ -33,7 +33,7 @@ export class NewsPreviewComponent implements OnInit {
         this.getSnippets();
     }
 
-    public subscribeAuth() {
+    public filterPublish() {
         this.snippetsArray = this.allSnippets.filter((item) => item.publish);
     }
 
@@ -42,7 +42,7 @@ export class NewsPreviewComponent implements OnInit {
             (data) => {
                 this.snippetsArray = data;
                 this.allSnippets = data;
-                this.subscribeAuth();
+                this.filterPublish();
             },
             (err) => console.error(err)
         );

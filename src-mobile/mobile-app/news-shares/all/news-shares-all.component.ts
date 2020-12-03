@@ -49,7 +49,7 @@ export class NewsSharesAllComponent implements OnInit {
         this.getAllSnippets();
     }
 
-    public subscribeAuth() {
+    public filterPublish() {
         this.snippets = this.allSnippets.filter((item) => item.publish);
     }
 
@@ -63,14 +63,18 @@ export class NewsSharesAllComponent implements OnInit {
         ).subscribe(
             (data: any[]) => {
                 this.snippets = data;
-                this.snippets.sort((a, b) => {
-                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
-                });
-                this.allSnippets = this.snippets;
-                this.subscribeAuth();
+                this.allSnippets = data;
+                this.sortByDateOfCreate(this.allSnippets);
+                this.filterPublish();
             },
             (err) => console.log(err)
         );
+    }
+
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+        });
     }
 
     // вызывается после создания, удаления, редактирования

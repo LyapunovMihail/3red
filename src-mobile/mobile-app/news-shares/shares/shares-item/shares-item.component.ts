@@ -1,9 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
-import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { SharesService } from '../../shares.service';
+import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { SharesService } from '../shares.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { WindowScrollLocker } from '../../../../commons/window-scroll-block';
+import { WindowScrollLocker } from '../../../commons/window-scroll-block';
 import { Location } from '@angular/common';
 import { Meta } from '@angular/platform-browser';
 

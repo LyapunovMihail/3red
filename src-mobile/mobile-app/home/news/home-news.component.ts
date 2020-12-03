@@ -1,11 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Share, SHARES_UPLOADS_PATH } from '../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/news-api/news.interfaces';
 import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { HomeNewsService } from './home-news.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
-import * as moment from 'moment';
 declare const Swiper: any;
 
 @Component({
@@ -19,7 +18,7 @@ declare const Swiper: any;
     ]
 })
 
-export class HomeNewsComponent implements OnInit, OnChanges {
+export class HomeNewsComponent implements OnInit {
 
     @Input()
     public pageName: string;
@@ -29,8 +28,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
     public showSnippetType = 'all';
 
     public currentSlide = 0;
-
-    public activeTooltip: string;
 
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
@@ -56,12 +53,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         this.getAllSnippets();
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        if ('isAuthorizated' in changes) {
-            this.currentSnippets = this.currentSnippets.filter((item) => item.publish);
-        }
-    }
-
     public getAllSnippets() {
         combineLatest(
             this.objectNewsService.getMainShares(),
@@ -74,9 +65,7 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
-                this.allSnippets.sort((a, b) => {
-                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
-                });
+                this.sortByDateOfCreate(this.allSnippets);
                 this.changeType('all');
                 setTimeout( () => this.sliderInit(), 2000);
             },
@@ -84,8 +73,10 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         );
     }
 
-    public onSelectItem(item: string): void {
-        this.activeTooltip = this.activeTooltip === item ? '' : item;
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+        });
     }
 
     public changeType(type) {
@@ -106,10 +97,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
                 if (this.slider) { setTimeout(() => this.slider.update(), 200); }
                 break;
         }
-    }
-
-    public parseDate(createdAt) {
-        return moment(createdAt).format('LL').slice(0, -3);
     }
 
     sliderInit() {

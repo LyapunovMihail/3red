@@ -1,7 +1,18 @@
 @import "mixin";
 
-.news__list {
+:host {
+    @media (max-width: 500px) {
+        display: block;
+        margin-bottom: 40px;
+    }
 
+    &:last-child {
+        @media (max-width: 500px) {
+            margin-bottom: 0;
+        }
+    }
+}
+.news__list {
     &-title {
         color: #000;
         font-size: 18px;

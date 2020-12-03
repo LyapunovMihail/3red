@@ -6,7 +6,6 @@ import { combineLatest } from 'rxjs';
 import { ObjectNewsService } from './object-news.service';
 import { IObjectNewsSnippet } from '../../../../../serv-files/serv-modules/jk-objects/news-api/objects-news.interfaces';
 import { WindowScrollLocker } from '../../../commons/window-scroll-block';
-import * as moment from 'moment';
 declare const Swiper: any;
 
 @Component({
@@ -33,8 +32,6 @@ export class ObjectNewsComponent implements OnInit {
     public showSnippetType = 'all';
 
     public currentSlide = 0;
-
-    public activeTooltip: string;
 
     public newsSnippets: INewsSnippet[] = [];
     public shareSnippets: Share[] = [];
@@ -89,14 +86,18 @@ export class ObjectNewsComponent implements OnInit {
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
-                this.allSnippets.sort((a, b) => {
-                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
-                });
+                this.sortByDateOfCreate(this.allSnippets);
                 this.changeType('all');
                 setTimeout( () => this.sliderInit(), 2000);
             },
             (err) => console.log(err)
         );
+    }
+
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+        });
     }
 
     public nextBtn() {
@@ -105,10 +106,6 @@ export class ObjectNewsComponent implements OnInit {
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : 0;
-    }
-
-    public onSelectItem(item: string): void {
-        this.activeTooltip = this.activeTooltip === item ? '' : item;
     }
 
     public changeType(type) {
@@ -129,10 +126,6 @@ export class ObjectNewsComponent implements OnInit {
                 if (this.slider) { setTimeout(() => this.slider.update(), 200); }
                 break;
         }
-    }
-
-    public parseDate(createdAt) {
-        return moment(createdAt).format('LL').slice(0, -3);
     }
 
     sliderInit() {

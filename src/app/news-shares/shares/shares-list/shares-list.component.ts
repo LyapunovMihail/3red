@@ -16,7 +16,7 @@ export class SharesListComponent implements OnInit, OnDestroy {
 
     public isAuthorizated: boolean;
 
-    public shares: Share[];
+    public snippetsArray: Share[];
     public allSnippets: Share[];
 
     public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
@@ -52,8 +52,8 @@ export class SharesListComponent implements OnInit, OnDestroy {
 
     public getShares() {
         this.sharesService.getShares().subscribe((data: Share[]) => {
-            this.shares = data;
-            this.allSnippets = this.shares;
+            this.snippetsArray = data;
+            this.allSnippets = this.snippetsArray;
             this.subscribeAuth();
         }, (err) => {
             console.log(err);
@@ -65,9 +65,9 @@ export class SharesListComponent implements OnInit, OnDestroy {
             .subscribe((state: boolean) => {
                 this.isAuthorizated = state;
                 if (this.isAuthorizated) {
-                    this.shares = this.allSnippets;
+                    this.snippetsArray = this.allSnippets;
                 } else {
-                    this.shares = this.allSnippets.filter((item) => item.publish);
+                    this.snippetsArray = this.allSnippets.filter((item) => item.publish);
                 }
             });
     }

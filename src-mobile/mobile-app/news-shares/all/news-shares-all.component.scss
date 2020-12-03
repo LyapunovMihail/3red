@@ -25,11 +25,6 @@
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 24px;
         grid-row-gap: 40px;
-
-        &-wrapper {
-            width: 100%;
-            display: block;
-        }
     }
 }
 
@@ -44,6 +39,5 @@
 @media (max-width: 500px) {
     .news__list {
         display: block;
-
     }
 }
