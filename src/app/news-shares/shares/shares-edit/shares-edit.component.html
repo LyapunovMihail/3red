@@ -83,7 +83,8 @@
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_preview">Загрузите фото для превью</p>
             </div>
             <div class="create-shares__wrap create-shares__wrap_full">
-                <label *ngIf="(publish.value === 'true' || publish.value === true) && (!countdown.value || (countdown.value && countdownDays > 0))" class="g-checkbox">
+                <label [class.create-shares__wrap_checkbox--disabled]="(publish.value === 'false' || publish.value === false) || countdown.value && countdownDays < 0"
+                       class="g-checkbox">
                     <input type="checkbox" name="public" id="public" style="display: none;" [formControlName]="'show_on_main'">
                     <div></div>
                     <span>Показать акцию на главной</span>

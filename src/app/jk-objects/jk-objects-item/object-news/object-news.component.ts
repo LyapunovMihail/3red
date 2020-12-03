@@ -91,7 +91,7 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
     public getAllSnippets() {
         combineLatest(
             this.objectNewsService.getObjectShares(this.objectId),
-            this.objectNewsService.getObjectSnippet(this.objectId)
+            this.objectNewsService.getObjectNews(this.objectId)
         ).pipe(map(([shares, news]) => {
                 this.newsSnippets = news;
                 this.shareSnippets = shares;
@@ -100,13 +100,17 @@ export class ObjectNewsComponent implements OnInit, OnChanges {
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
-                this.allSnippets.sort((a, b) => {
-                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
-                });
+                this.sortByDateOfCreate(this.allSnippets);
                 this.changeType('all');
             },
             (err) => console.log(err)
         );
+    }
+
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+        });
     }
 
     public nextBtn() {

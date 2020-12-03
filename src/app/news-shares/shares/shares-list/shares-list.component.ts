@@ -19,7 +19,7 @@ export class SharesListComponent implements OnInit, OnDestroy {
     public shares: Share[];
     public allSnippets: Share[];
 
-    public uploadsPath: string = `/${SHARES_UPLOADS_PATH}`;
+    public uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     // подписка на авторизацию
     public AuthorizationEvent;

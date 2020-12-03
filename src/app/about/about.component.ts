@@ -20,6 +20,7 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public windowScrollEvent;
     public scrollTop;
+    public intervalTimer;
 
     public authorizationEvent;
     public isAuthorizated = false;
@@ -64,6 +65,9 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
         if (!this.platform.isBrowser) { return; }
 
         this.authorizationEvent.unsubscribe();
+        if (this.intervalTimer) {
+            clearInterval(this.intervalTimer);
+        }
         // this.windowScrollEvent.unsubscribe();
     }
 }

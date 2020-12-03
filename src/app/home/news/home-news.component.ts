@@ -52,7 +52,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-
         this.getAllSnippets();
     }
 
@@ -78,13 +77,17 @@ export class HomeNewsComponent implements OnInit, OnChanges {
         ).subscribe(
             (data: any[]) => {
                 this.allSnippets = data;
-                this.allSnippets.sort((a, b) => {
-                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
-                });
+                this.sortByDateOfCreate(this.allSnippets);
                 this.changeType('all');
             },
             (err) => console.log(err)
         );
+    }
+
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+        });
     }
 
     public nextBtn() {
@@ -115,7 +118,6 @@ export class HomeNewsComponent implements OnInit, OnChanges {
                 break;
         }
     }
-
 
     public parseDate(createdAt) {
         return moment(createdAt).format('LL').slice(0, -3);

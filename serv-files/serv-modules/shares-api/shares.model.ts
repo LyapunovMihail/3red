@@ -1,6 +1,8 @@
 import { fileExtension, imageSaver, thumbnailSaver } from './../utilits/image-saver.utilits';
-import { SHARES_COLLECTION_NAME, Share, SHARES_UPLOADS_PATH } from './shares.iterfaces';
+import { Share, SHARES_COLLECTION_NAME, SHARES_UPLOADS_PATH } from './shares.iterfaces';
 import { INewsSnippet } from '../news-api/news.interfaces';
+import * as moment from 'moment';
+
 const ObjectId = require('mongodb').ObjectID;
 
 export class SharesModel {
@@ -17,7 +19,7 @@ export class SharesModel {
         return await this.collection.insert(obj);
     }
 
-    public async getShares() {
+    public async getShares(withoutExpired = false) {
         return await this.collection.find({}).sort({ created_at: -1 }).toArray();
     }
 
@@ -30,7 +32,9 @@ export class SharesModel {
     }
 
     public async getMainSnippet() {
-        return await this.collection.find({ show_on_main: true }).sort({ created_at: -1 }).toArray();
+        const snippets =  await this.collection.find({ show_on_main: true }).sort({ created_at: -1 }).toArray();
+        const filteredSnippets = SharesModel.filterExpiredShares(snippets);
+        return filteredSnippets;
     }
 
     public async getObjectSnippet(objectId) {
@@ -40,6 +44,18 @@ export class SharesModel {
     public async updateShare(_id, obj: Share) {
         if ( '_id' in obj ) { delete obj._id; }
         return this.collection.updateOne({ _id: ObjectId(_id) }, { $set: obj });
+    }
+
+    private static filterExpiredShares(snippets) {
+        const filteredSnippets = snippets.filter((share: Share) => !share.countdown || (share.countdown && SharesModel.countDaysLeft(share.finish_date) >= 0));
+        return filteredSnippets;
+    }
+
+    private static countDaysLeft(finishDate) {
+        const createdDateVal = moment(Date.now());
+        const finishDateVal = moment(finishDate);
+        const duration = moment.duration(createdDateVal.diff(finishDateVal));
+        return Math.ceil(duration.asDays() * -1);
     }
 
     async updateShareCount(id, parameters, item, session) {

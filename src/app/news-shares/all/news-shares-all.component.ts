@@ -25,7 +25,7 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 export class NewsSharesAllComponent implements OnInit, OnDestroy {
 
     public isAuthorizated = false;
-    public AuthorizationEvent;
+    public authorizationEvent;
     public snippets: any[] = [];
     public allSnippets: any[] = [];
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
@@ -61,7 +61,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     }
 
     public subscribeAuth() {
-        this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
+        this.authorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
             if (this.isAuthorizated) {
                 this.snippets = this.allSnippets;
@@ -72,7 +72,7 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        this.authorizationEvent.unsubscribe();
     }
 
     public getAllSnippets() {
@@ -85,21 +85,18 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
         ).subscribe(
             (data: any[]) => {
                 this.snippets = data;
-                this.snippets.sort((a, b) => {
-                    return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1; // сортируем акции и новости по дате создания
-                });
-                this.allSnippets = this.snippets;
+                this.allSnippets = data;
+                this.sortByDateOfCreate(this.allSnippets);
                 this.subscribeAuth();
             },
             (err) => console.log(err)
         );
     }
 
-    public countDown(finishDate) {
-        const createdDateVal = moment(Date.now());
-        const finishDateVal = moment(finishDate);
-        const duration = moment.duration(createdDateVal.diff(finishDateVal));
-        return Math.ceil(duration.asDays() * -1);
+    private sortByDateOfCreate(snippets) {
+        snippets.sort((a, b) => {
+            return new Date(a.created_at) > new Date(b.created_at) ? -1 : 1;
+        });
     }
 
     public createNewsSnippet() {

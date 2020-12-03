@@ -2,7 +2,7 @@ import { INewsSnippet, NEWS_UPLOADS_PATH } from '../../../../../serv-files/serv-
 import { NewsService } from './../news.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { Meta } from '@angular/platform-browser';
@@ -11,8 +11,7 @@ import { Meta } from '@angular/platform-browser';
     selector: 'app-news-view',
     templateUrl: './news-view.component.html',
     styleUrls: ['./news-view.component.scss'],
-    providers: [NewsService],
-    encapsulation: ViewEncapsulation.None
+    providers: [NewsService]
 })
 
 export class NewsViewComponent implements OnInit, OnDestroy {

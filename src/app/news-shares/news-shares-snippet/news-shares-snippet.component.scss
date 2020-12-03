@@ -1,10 +1,6 @@
 @import "mixin";
 
 .news__list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 24px;
-    grid-row-gap: 64px;
 
     &-title {
         color: #000;

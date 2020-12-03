@@ -8,8 +8,13 @@
             ></nav-menu>
         </nav>
 
-        <app-news-shares-all-items
-            [snippets]="snippets">
-        </app-news-shares-all-items>
+        <div class="news__list-wrapper">
+            <div class="news__list">
+                <app-news-shares-snippet *ngFor="let snippet of snippets"
+                    [snippet]="snippet">
+                </app-news-shares-snippet>
+            </div>
+        </div>
+
     </div>
 </section>

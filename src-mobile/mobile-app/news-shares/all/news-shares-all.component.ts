@@ -73,13 +73,6 @@ export class NewsSharesAllComponent implements OnInit {
         );
     }
 
-    public countDown(finishDate) {
-        const createdDateVal = moment(Date.now());
-        const finishDateVal = moment(finishDate);
-        const duration = moment.duration(createdDateVal.diff(finishDateVal));
-        return Math.ceil(duration.asDays() * -1);
-    }
-
     // вызывается после создания, удаления, редактирования
     public snippetsChange() {
         this.getAllSnippets();

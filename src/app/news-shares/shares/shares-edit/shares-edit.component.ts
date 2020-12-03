@@ -13,7 +13,6 @@ import {
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-shares-edit',
@@ -27,8 +26,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     public form: FormGroup;
 
     public uploadsPath: string;
-
-    public days: number;
 
     public dateNow: string;
 
@@ -73,8 +70,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             body: new FormArray([])
         });
 
-        this.days = 0;
-
         moment.locale('ru');
     }
 
@@ -106,13 +101,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         }
 
         this.setShowOnMain({isFinishDateChange: true});
-
-        // this.subs.push(this.form.get('finish_date').valueChanges
-        //     .pipe(takeUntil(this._ngUnsubscribe))
-        //     .subscribe((value) => {
-        //         this.countDays();
-        //         this.setShowOnMain({isFinishDateChange: true});
-        //     }));
 
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
     }
@@ -302,12 +290,11 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         const createdDateVal = moment(Date.now());
         const finishDateVal = moment(this.finishDate.value);
         const duration = moment.duration(createdDateVal.diff(finishDateVal));
-        console.log('this.days: ', this.days);
         return Math.ceil(duration.asDays() * -1);
     }
 
     public setShowOnMain(options: {isCountDownChange?: boolean, isFinishDateChange?: boolean, isPublishChange?: boolean }) {
-        if (options.isFinishDateChange) {
+        if (options.isCountDownChange || options.isFinishDateChange) {
             this.countDownOrFinishDateChange();
         }
         if (options.isPublishChange) {

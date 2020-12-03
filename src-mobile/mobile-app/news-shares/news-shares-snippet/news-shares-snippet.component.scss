@@ -1,15 +1,6 @@
-@import "../../../../styles/modules/mixins/mixin";
-
-:host {
-    width: 100%;
-    display: block;
-}
+@import "mixin";
 
 .news__list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 24px;
-    grid-row-gap: 40px;
 
     &-title {
         color: #000;
@@ -202,8 +193,6 @@
 }
 @media (max-width: 500px) {
     .news__list {
-        display: block;
-
         &-item {
             border-bottom: 1px solid #d8d8d8;
             padding: 0 0 24px;
