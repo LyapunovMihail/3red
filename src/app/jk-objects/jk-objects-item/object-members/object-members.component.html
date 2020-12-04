@@ -14,7 +14,7 @@
                 <button class="btn__admin-content btn_var-2" (click)="closeModal = false">Контент</button>
             </div>
 
-            <div class="object-members__wrap" *ngIf="snippet?.data">
+            <div class="object-members__wrap" *ngIf="snippet?.data.length">
 
                 <div class="object-members__wrap object-members__wrap_members" *ngFor="let block of snippet.data">
                     <p class="object-members__text object-members__text_for-title">{{block.name}}</p>

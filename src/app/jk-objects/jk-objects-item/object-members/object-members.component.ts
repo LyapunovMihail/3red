@@ -34,6 +34,7 @@ export class ObjectMembersComponent implements OnInit {
     public getContent() {
         this.membersService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
+            console.log('members: ', this.snippet);
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;
             }

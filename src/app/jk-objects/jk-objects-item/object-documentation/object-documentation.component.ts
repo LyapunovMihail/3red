@@ -36,6 +36,7 @@ export class ObjectDocumentationComponent implements OnInit {
     ngOnInit() {
         this.documentationService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
+            console.log('documentation: ', this.snippet);
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;
             }

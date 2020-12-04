@@ -19,17 +19,17 @@ export class ObjectsMembersModel {
 
     async updateSnippet(parameters) {
         const options: IObjectMembersSnippet = parameters;
-        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId, async () => {
+        return await this.errorParamsCatcher(this.valuesReview(options), options.objectId,async () => {
             // удаление _id из параметров если он там есть
             if ( '_id' in options ) { delete options._id; }
-            await this.collection.update({}, { $set : options }, {upsert: true});
+            await this.collection.update({ objectId : options.objectId }, { $set : options }, { upsert: true });
         });
     }
 
     async errorParamsCatcher(val, objectId, fn) {
         if ( val ) {
             await fn();
-            return await this.getSnippet();
+            return await this.getSnippet(objectId);
         } else {
             throw new Error(ErrorNotCorrectArguments);
         }

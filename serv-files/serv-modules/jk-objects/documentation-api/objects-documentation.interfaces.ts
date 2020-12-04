@@ -1,4 +1,4 @@
-export const DOCUMENTATION_COLLECTION_NAME = 'documentation';
+export const DOCUMENTATION_COLLECTION_NAME = 'objectDocumentation';
 
 export const FILEUPLOADS_UPLOADS_PATH = 'uploads/object-files/';
 

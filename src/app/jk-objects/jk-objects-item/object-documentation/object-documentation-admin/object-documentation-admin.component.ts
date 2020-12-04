@@ -60,42 +60,55 @@ export class ObjectDocumentationAdminComponent implements OnInit {
     }
 
     private setFormFromSnippet() {
-        let block;
-        if (this.snippet.block.length) {
-            block = this.parseBlockArray();
-        } else {
-            block = this.formBuilder.array([]);
-        }
-
         this.form = this.formBuilder.group({
             objectId: this.snippet.objectId,
             switchOn: this.snippet.switchOn,
-            created_at : this.snippet.created_at,
-            last_modifyed : new Date(),
-            block
+            created_at: this.snippet.created_at,
+            last_modifyed: new Date(),
+            block: this.parseBlockArray()
         });
     }
 
     private parseBlockArray() {
-        return this.formBuilder.array(this.snippet.block.map((blockItem) => this.formBuilder.group({blockTitle: [blockItem.blockTitle, Validators.required], uploads : this.parseUploadsArray(blockItem.uploads)})));
+        return this.formBuilder.array(
+            this.snippet.block.map((blockItem) => {
+                return this.formBuilder.group({
+                    blockTitle: [ blockItem.blockTitle, Validators.required ],
+                    uploads : this.parseUploadsArray(blockItem.uploads)
+                });
+            }));
     }
     private parseUploadsArray(uploadsArray) {
-        return this.formBuilder.array(uploadsArray.map((uploadsItem) => this.formBuilder.group({name: uploadsItem.name, originalName: uploadsItem.originalName, ext: uploadsItem.ext, date: uploadsItem.date})));
+        return this.formBuilder.array(uploadsArray.map((uploadsItem) => {
+            return this.formBuilder.group({
+                name: uploadsItem.name,
+                originalName: uploadsItem.originalName,
+                ext: uploadsItem.ext,
+                date: uploadsItem.date
+            });
+        }));
     }
 
     public pushBlock() {
-        (this.form.get('block') as FormArray).push(this.formBuilder.group( {blockTitle: ['', Validators.required], uploads : this.formBuilder.array([])}));
+        (this.form.get('block') as FormArray).push(this.formBuilder.group({
+            blockTitle: ['', Validators.required],
+            uploads : this.formBuilder.array([])
+        }));
     }
 
     public popBlock(i) {
         (this.form.get('block') as FormArray).removeAt(i);
     }
 
-    pushDoc(data, i) {
-        (this.form.get(['block', i, 'uploads']) as FormArray).push(this.formBuilder.group({name: data.name, originalName: data.originalName, date: data.date}));
+    public pushDoc(data, i) {
+        (this.form.get(['block', i, 'uploads']) as FormArray).push(this.formBuilder.group({
+            name: data.name,
+            originalName: data.originalName,
+            date: data.date
+        }));
     }
 
-    popDoc(i, j) {
+    public popDoc(i, j) {
         (this.form.get(['block', i, 'uploads']) as FormArray).removeAt(j);
     }
 

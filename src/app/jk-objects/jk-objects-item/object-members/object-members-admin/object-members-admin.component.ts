@@ -50,6 +50,7 @@ export class ObjectMembersAdminComponent implements OnInit {
     private setFormFromSnippet() {
         this.form = this.formBuilder.group({
             objectId: this.snippet.objectId,
+            switchOn: this.snippet.switchOn,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
             data: this.parseDataArray()

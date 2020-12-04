@@ -14,9 +14,9 @@
                 <button class="btn__admin-setting" (click)="closeModal = false">Настройки</button>
             </div>
 
-            <ul class="object-documentation__list">
+            <ul class="object-documentation__list" *ngIf="snippet?.block.length">
 
-                <li class="object-documentation__list-item" *ngFor="let item of snippet?.block">
+                <li class="object-documentation__list-item" *ngFor="let item of snippet.block">
                     <h3 class="object-documentation__list-title">{{item.blockTitle}}</h3>
                     <div class="object-documentation__list-wrap">
                         <div class="object-documentation__list-wrap object-documentation__list-wrap_file" *ngFor="let doc of item.uploads">
