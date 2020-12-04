@@ -65,7 +65,7 @@
                         <span>Загрузить фото</span>
                         <input [style.display]="'none'"
                             type="file"
-                            accept=".jpg"
+                            accept=".jpg, .jpeg"
                             #mainImgPicker
                             (change)="onImagePicked($event, 'main-image')">
                     </div>
@@ -122,7 +122,7 @@
                             <span>Загрузить фото</span>
                             <input [style.display]="'none'"
                                 type="file"
-                                accept=".jpg"
+                                accept=".jpg, jpeg"
                                 (change)="onImagePicked($event, 'change-image', i)"
                                 #mainImgPicker>
                         </div>
@@ -156,7 +156,7 @@
                 <input #singleImgPicker
                        [style.display]="'none'"
                        type="file"
-                       accept=".jpg"
+                       accept=".jpg, jpeg"
                        (change)="onImagePicked($event, 'single-image')">
             </li>
             <li class="create-shares__btn create-shares__btn_flats" (click)="addFlats()" *ngIf="objectId && objectName">Квартиры по акции</li>

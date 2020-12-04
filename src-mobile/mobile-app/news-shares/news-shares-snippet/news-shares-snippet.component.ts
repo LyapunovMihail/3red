@@ -10,7 +10,7 @@ import * as moment from 'moment';
 })
 export class NewsSharesSnippetComponent implements OnInit {
 
-    @Input() public snippet: INewsSnippet | Share;
+    @Input() public snippet: INewsSnippet | Share | any;
 
     public newsUploadsPath = `/${NEWS_UPLOADS_PATH}`;
     public sharesUploadsPath = `/${SHARES_UPLOADS_PATH}`;

@@ -85,14 +85,12 @@ export class SharesModel {
     }
 
     public async uploadImage(req) {
-        if (
-            fileExtension(req.files['file'].originalFilename) === '.jpg'
-            || fileExtension(req.files['file'].originalFilename) === '.jpeg'
-            || fileExtension(req.files['file'].originalFilename) === '.png'
-        ) {
+        const ext = fileExtension(req.files.file.originalFilename);
+
+        if (ext === '.jpg' || ext === '.jpeg') {
             let path = SHARES_UPLOADS_PATH;
             let image = await imageSaver(req, path, 50);
-            let thumbnail = await thumbnailSaver(req, path, {width: '352', height: '264'});
+            let thumbnail = await thumbnailSaver(req, path, {width: '450', height: '300'});
             return ({
                 image,
                 thumbnail

@@ -57,7 +57,7 @@
                     <div class="create-form__form-img">
                         <label class="create-form__form-btn create-form__form-btn_preview-image">
                             <span>Загрузить фото</span>
-                            <input style='display: none;' type="file" (change)="imageUpload($event, 'main-image')" placeholder="Upload file" accept=".jpg">
+                            <input style='display: none;' type="file" (change)="imageUpload($event, 'main-image')" placeholder="Upload file" accept=".jpg, .jpeg">
                         </label>
 
                         <div class="create-form__form-wrap create-form__form-wrap_image-preview" *ngIf="form.get('thumbnail').value">
@@ -111,7 +111,7 @@
                             (remove)="removeBlock(i)">
                             <label class="create-form__form-btn create-form__form-btn_preview-image">
                                 <span>Загрузить фото</span>
-                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image', i)" placeholder="Upload file" accept=".jpg">
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image', i)" placeholder="Upload file"  accept=".jpg, .jpeg">
                             </label>
                         </app-news-edit-image>
 
@@ -124,11 +124,11 @@
                             (remove)="removeBlock(i)">
                             <label class="create-form__form-btn create-form__form-btn_preview-image">
                                 <span>Загрузить фото</span>
-                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image2', i, true)" placeholder="Upload file" accept=".jpg">
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image2', i, true)" placeholder="Upload file" accept=".jpg, .jpeg">
                             </label>
                             <label class="create-form__form-btn create-form__form-btn_preview-image">
                                 <span>Загрузить фото</span>
-                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image2', i)" placeholder="Upload file" accept=".jpg">
+                                <input style='display: none;' type="file" (change)="imageUpload($event, 'change-image2', i)" placeholder="Upload file" accept=".jpg, .jpeg">
                             </label>
                         </app-news-edit-image2>
 
@@ -153,7 +153,7 @@
                     <input #singleImgPicker
                         [style.display]="'none'"
                         type="file"
-                        accept=".jpg"
+                        accept=".jpg, .jpeg"
                         (change)="imageUpload($event, 'single-image')">
                     Изображение
                 </button>

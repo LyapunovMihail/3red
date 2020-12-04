@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class NewsSharesSnippetComponent implements OnInit {
 
     @Input() public isAuthorizated = false;
-    @Input() public snippet: INewsSnippet | Share;
+    @Input() public snippet: INewsSnippet | Share | any;
 
     @Output() public deleteShareSnippet = new EventEmitter();
     @Output() public redactShareSnippet = new EventEmitter();

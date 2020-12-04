@@ -77,10 +77,12 @@ export class NewsModel {
     }
 
     async uploadImage(req) {
-        if (fileExtension(req.files.file.originalFilename) === '.jpg' ) {
+        const ext = fileExtension(req.files.file.originalFilename);
+
+        if (ext === '.jpg' || ext === '.jpeg') {
             const path = NEWS_UPLOADS_PATH;
             const image = await imageSaver(req, path, 50);
-            const thumbnail = await thumbnailSaver(req, path, {width: '352', height: '264'});
+            const thumbnail = await thumbnailSaver(req, path, {width: '450', height: '300'});
             return ({
                 image,
                 thumbnail,

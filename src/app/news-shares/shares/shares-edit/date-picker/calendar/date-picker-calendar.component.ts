@@ -6,9 +6,9 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    Input,
+    Input, OnChanges,
     OnInit,
-    Output
+    Output, SimpleChanges
 } from '@angular/core';
 import { DatePickerReviewService } from '../services/date-picker.review.service';
 
@@ -31,7 +31,7 @@ import { DatePickerReviewService } from '../services/date-picker.review.service'
     `
 })
 
-export class DatePickerCalendarComponent implements OnInit {
+export class DatePickerCalendarComponent implements OnInit, OnChanges {
 
     @Input() public selectedYear: number;
     @Input() public selectedMonth: number;
@@ -50,13 +50,9 @@ export class DatePickerCalendarComponent implements OnInit {
 
     ngOnInit() {
         this.date = new Date();
-        this.selectedDate = this.selectedDate = {
-            day: this.date.getDate(),
-            month: this.date.getMonth(),
-            year: this.date.getFullYear(),
-            full: this.date
-        };
+    }
 
+    ngOnChanges(changes: SimpleChanges): void {
         this.daysArray = this.datePickerService.getDaysArray(this.selectedMonth, this.selectedYear);
     }
 
