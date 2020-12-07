@@ -6,12 +6,18 @@ export interface IObjectProjectSnippet {
     _id?: any;
     objectId: string;
     switchOn: boolean;
+    link?: IObjectProjectLink;
     socials?: IObjectProjectSocialsUrls;
     description?: string;
     indicators?: IObjectProjectIndicator[];
     createdIndicators?: IObjectProjectCreatedIndicator[];
     created_at: any;
     last_modifyed: any;
+}
+
+export interface IObjectProjectLink {
+    name: string;
+    url: string;
 }
 
 export interface IObjectProjectSocialsUrls {

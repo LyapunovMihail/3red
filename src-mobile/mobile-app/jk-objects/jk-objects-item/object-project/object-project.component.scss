@@ -4,7 +4,7 @@
     margin: 96px 0;
 }
 
-.object-builder {
+.object-project {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -14,27 +14,58 @@
         margin: 16px 0 0;
     }
 
-    &__social {
-        margin: 24px 0 16px;
+}
 
-        &-item {
-            display: inline-block;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            margin-right: 13px;
-            background-color: rgba(216, 216, 216, .3);
-            transition: background-color .2s linear;
-            &:last-child { margin-right: 0; }
-            &:hover {
-                background-color: $col-red_hover;
-                .object-builder__social-item_for-hover {
-                    fill: $col-white;
-                }
+.project__wrap {
+    display: flex;
+    align-items: center;
+    margin: 40px 0 16px;
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+        align-items: unset;
+        margin: 30px 0 24px;
+    }
+}
+
+.project__link {
+    margin-right: 24px;
+    font: 24px/24px $font-proba;
+    text-decoration: underline;
+    order: 1;
+
+    @media (max-width: 767px) {
+        order: 2;
+        margin-top: 24px;
+        font: 16px/22px $font-proba;
+    }
+}
+
+.project__social {
+    order: 2;
+    vertical-align: middle;
+
+    @media (max-width: 767px) {
+        order: 1;
+    }
+
+    &-item {
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        margin-right: 13px;
+        background-color: rgba(216, 216, 216, .3);
+        transition: background-color .2s linear;
+        &:last-child { margin-right: 0; }
+        &:hover {
+            background-color: $col-red_hover;
+            .object-builder__social-item_for-hover {
+                fill: $col-white;
             }
-
-            &_for-hover { transition: fill .2s linear; }
         }
+
+        &_for-hover { transition: fill .2s linear; }
     }
 }
 
@@ -68,13 +99,13 @@
 }
 
 @media (max-width: 767px) {
-    .object-builder--margin {margin: 64px 0 0; }
+    .object-project--margin {margin: 64px 0 0; }
     .indicators__grid-container { display: block; }
     .indicators__grid-item {
         margin: 0 0 24px;
         &:last-child { margin: 0; }
     }
-    
+
     .project__description { @include font-size(16px,22px); }
     .project-indicators__title { @include font-size(28px,34px); }
     .project-indicators__key {

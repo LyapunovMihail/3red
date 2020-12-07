@@ -4,20 +4,42 @@
 
     <form [formGroup]="form">
 
-        <div class="socials__info">
-            <h2 class="info-title">Социальные сети</h2>
-            <div class="form" formGroupName="socials">
-                <div class="form-item form-item--pleft form-item--icon1 ">
-                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="vk">
-                    <label class="form-label info-suptitle form-label--left">Ссылка</label>
+        <div class="project-link">
+            <div class="project-link__info">
+                <h2 class="project-link__title">Ссылка на сайт проекта</h2>
+                <div class="form">
+                    <div class="form__wrap">
+                        <div class="form-item form-item--flex" formGroupName="link">
+                            <div class="form-item form-item--wrap">
+                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="name">
+                                <label class="form-label info-suptitle">Название</label>
+                            </div>
+                            <div class="form-item form-item--wrap">
+                                <input type="text" class="form-input info-input" appSlideTopLabel formControlName="url">
+                                <label class="form-label info-suptitle">Url</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-item form-item--pleft form-item--icon2">
-                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="inst">
-                    <label class="form-label info-suptitle form-label--left">Ссылка</label>
-                </div>
-                <div class="form-item form-item--pleft form-item--icon3">
-                    <input type="text" class="form-input info-input" appSlideTopLabel formControlName="fb">
-                    <label class="form-label info-suptitle form-label--left">Ссылка</label>
+            </div>
+        </div>
+
+        <div class="socials">
+            <div class="socials__info">
+                <h2 class="info-title">Социальные сети</h2>
+                <div class="form" formGroupName="socials">
+                    <div class="form-item form-item--pleft form-item--icon1 ">
+                        <input type="text" class="form-input info-input" appSlideTopLabel formControlName="vk">
+                        <label class="form-label info-suptitle form-label--left">Ссылка</label>
+                    </div>
+                    <div class="form-item form-item--pleft form-item--icon2">
+                        <input type="text" class="form-input info-input" appSlideTopLabel formControlName="inst">
+                        <label class="form-label info-suptitle form-label--left">Ссылка</label>
+                    </div>
+                    <div class="form-item form-item--pleft form-item--icon3">
+                        <input type="text" class="form-input info-input" appSlideTopLabel formControlName="fb">
+                        <label class="form-label info-suptitle form-label--left">Ссылка</label>
+                    </div>
                 </div>
             </div>
         </div>

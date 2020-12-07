@@ -45,6 +45,10 @@ export class ObjectProjectAdminComponent implements OnInit {
             switchOn: true,
             created_at : new Date(),
             last_modifyed : new Date(),
+            link: this.formBuilder.group({
+                name: '',
+                url: '',
+            }),
             socials: this.formBuilder.group({
                 vk: '',
                 inst: '',
@@ -63,6 +67,10 @@ export class ObjectProjectAdminComponent implements OnInit {
             switchOn: this.snippet.switchOn,
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
+            link: this.formBuilder.group({
+                name: this.snippet.link ? this.snippet.link.name : '',
+                url: this.snippet.link ? this.snippet.link.url : ''
+            }),
             socials: this.formBuilder.group({
                 vk: this.snippet.socials.vk,
                 inst: this.snippet.socials.inst,
