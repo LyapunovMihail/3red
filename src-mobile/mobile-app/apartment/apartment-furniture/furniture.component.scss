@@ -1,0 +1,45 @@
+@import "../../../styles/modules/mixins/mixin";
+
+.furniture {
+    background-color: $col-white;
+    padding: 24px;
+    @media (max-width: 767px) {
+        padding: 16px;
+    }
+
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title {
+        font: $font-24;
+    }
+
+    &__switch {
+        @include big-switch();
+        @media (max-width: 767px) {
+            @include small-switch();
+        }
+    }
+
+    &__toggle-content {
+        margin: 16px 0 0;
+        overflow: hidden;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__examples {
+        flex: 100% 1 1;
+        margin: 0 0 24px;
+    }
+
+    &__list {
+        flex: 100% 1 1;
+    }
+}

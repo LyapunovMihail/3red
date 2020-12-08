@@ -32,6 +32,7 @@ import { JkObjectsModule } from './jk-objects/jk-objects.module';
 import { PartnersModule } from './partners/partners.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { FavoritesModule } from './favorites/favorites.module';
+import { ApartmentModule } from './apartment/apartment.module';
 
 import { AuthorizationModule } from './authorization/authorization.module';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
@@ -68,6 +69,7 @@ const APP_MODULES = [
     PartnersModule,
     ContactsModule,
     FavoritesModule,
+    ApartmentModule,
 
     BrowserModule,
     BrowserAnimationsModule,
