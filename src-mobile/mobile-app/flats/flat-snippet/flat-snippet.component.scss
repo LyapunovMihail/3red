@@ -6,7 +6,9 @@
 
         &--col {
             flex-flow: column nowrap;
-
+            &-decor {
+                align-items: flex-start;
+            }
             &-price {
                 @media (max-width: 400px) {
                     margin-top: -15px;
