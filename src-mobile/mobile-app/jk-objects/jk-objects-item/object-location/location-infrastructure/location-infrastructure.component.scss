@@ -77,41 +77,10 @@
 
                 .location__infrastructure-checkbox { opacity: 1; }
             }
-
-            &_active {
-
-                .location__infrastructure-checkbox {
-                    background-image: url(/assets/img/check.svg);
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: 63%;
-                    opacity: 1;
-                }
-            }
         }
     }
     &-text {
         @include fw14-20;
         cursor: pointer;
-    }
-    &-checkbox {
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        opacity: .5;
-        margin: 1px 5px 0 0;
-        cursor: pointer;
-        transition: opacity $transition;
-        &:hover { opacity: 1; }
-
-        &_school       { background-color: #ae6bf8; }
-        &_kindergarten { background-color: #ffcb0d; }
-        &_shop         { background-color: #2095d2; }
-        &_cafe         { background-color: #f2883d; }
-        &_hospital     { background-color: #fa9191; }
-        &_pharmacy     { background-color: #ec1f27; }
-        &_sport        { background-color: #1da600; }
-        &_recreation   { background-color: #aaab22; }
-        &_transport    { background-color: #297acc; }
     }
 }

@@ -22,8 +22,8 @@ export class ContactsComponent implements OnInit {
 
         ymaps.ready(() => {
             const myMap = new ymaps.Map('map', {
-                center: [55.669894, 37.871373],
-                zoom: 14,
+                center: [55.671094, 37.868373],
+                zoom: 16,
                 controls: ['zoomControl']
             });
 

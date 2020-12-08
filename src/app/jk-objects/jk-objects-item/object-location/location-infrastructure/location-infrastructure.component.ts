@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/platform-browser';
 import { navList } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
-import { Component, Inject, Input, OnChanges, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnChanges, OnDestroy } from '@angular/core';
 import { IObjectLocationSnippet, OBJECTS_LOCATION_UPLOADS_PATH } from '../../../../../../serv-files/serv-modules/jk-objects/location-api/objects-location.interfaces';
 import { IObjectLocationTab } from '../../../../../../serv-files/serv-modules/jk-objects/tabs-api/objects-tabs.interfaces';
 declare let ymaps: any;
@@ -38,6 +38,7 @@ export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
     public uploadsPath = `/${OBJECTS_LOCATION_UPLOADS_PATH}`;
 
     constructor(
+        private ref: ChangeDetectorRef,
         private platform: PlatformDetectService,
         @Inject(DOCUMENT) private document: any
     ) { }
@@ -193,6 +194,10 @@ export class LocationInfrastructureComponent implements OnDestroy, OnChanges {
                     }
                 });
             });
+
+            if (that.markers.length > 1) {
+                that.map.setBounds(that.map.geoObjects.getBounds(), {checkZoomRange: true}); // Если есть маркеры кроме объекта, устанавливаем zoom в пределах маркеров
+            }
 
         });
 

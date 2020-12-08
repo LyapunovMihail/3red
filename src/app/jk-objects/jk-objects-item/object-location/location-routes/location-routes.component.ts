@@ -238,12 +238,13 @@ export class LocationRoutesComponent implements OnDestroy, OnChanges {
                 }
             });
 
+            if (that.markers.length > 1) {
+                that.map.setBounds(that.map.geoObjects.getBounds(), {checkZoomRange: true}); // Если есть маркеры кроме объекта, устанавливаем zoom в пределах маркеров
+            }
             // после инициализации надо обновить состояние компонента принудительно
             // иначе не создается боковая навигация по новому массиву маркеров/маршрутов
             that.ref.detectChanges();
-            that.map.setBounds(that.map.geoObjects.getBounds(), {checkZoomRange: true});
         });
-
     }
 
     // вызывается при клике на все маркеры кроме главного
