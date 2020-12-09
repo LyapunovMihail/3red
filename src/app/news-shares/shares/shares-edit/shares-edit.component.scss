@@ -161,6 +161,7 @@
         }
         &_preview {
             flex-flow: row nowrap;
+            align-items: center;
             margin: 0 0 25px;
         }
         &_btn {
@@ -219,7 +220,7 @@
 
         &_photo-preview {
             background: url(/assets/img3red/news_shares/camera.svg) 16px 9px no-repeat #454545;
-            margin: 0 8px 16px 0;
+            margin-right: 8px;
         }
         &_path-controll {
             padding: 0;

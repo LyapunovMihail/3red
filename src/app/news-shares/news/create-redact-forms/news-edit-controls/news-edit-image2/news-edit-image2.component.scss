@@ -5,8 +5,7 @@
 
 .share-view {
     &__blocks-img {
-        height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         padding-right: 24px;
     }
 

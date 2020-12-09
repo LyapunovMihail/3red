@@ -65,18 +65,21 @@ export const thumbnailSaver = ( req: IFileRequest,  path: string, size: IThumbna
     let fullName = `${name}${fileFormat}`;
     // чтение файла из реквеста
     let data = fs.readFileSync(req.files['file'].path);
-
+    console.log('path: ', path);
+    console.log('req.files[\'file\']: ', req.files['file']);
+    console.log('req.files[\'file\'].path: ', req.files['file'].path);
     return new Promise((resolve, reject) => {
         // запись файла
         writeFile(`${path}${fullName}`, data, (err: any) => {
             if (err) { reject(err); }
 
             // обработка файла утилитой graphicsmagic
-            gm(`${path}${fullName}`).thumb(size.width, size.height, `${path}/${fullName}`, 100, async (error: any) => {
-                if (error) { reject(error); }
+            gm(`${path}${fullName}`).resize(size.width, size.height, '@')
+                .write(`${path}/${fullName}`, async (error: any) => {
+                    if (error) { reject(error); }
 
-                resolve(fullName);
-            });
+                    resolve(fullName);
+                });
         });
     });
 };

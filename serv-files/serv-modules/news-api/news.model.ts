@@ -82,7 +82,7 @@ export class NewsModel {
         if (ext === '.jpg' || ext === '.jpeg') {
             const path = NEWS_UPLOADS_PATH;
             const image = await imageSaver(req, path, 50);
-            const thumbnail = await thumbnailSaver(req, path, {width: '450', height: '300'});
+            const thumbnail = await thumbnailSaver(req, path, {width: '400', height: '267'});
             return ({
                 image,
                 thumbnail,

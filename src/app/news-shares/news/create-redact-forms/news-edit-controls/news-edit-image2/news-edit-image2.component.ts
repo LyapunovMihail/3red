@@ -17,10 +17,10 @@ import { NEWS_UPLOADS_PATH, NewsBodyBlock } from '../../../../../../../serv-file
                 <a class="create-shares__btn create-shares__btn_path-controll" *ngIf="!isLast" (click)="move.emit(1)">Вниз</a>
             </div>
             <div class="create-shares__wrap_path-img2">
-                <img class="share-view__blocks-img" width="352" height="234" [src]="uploadsPath + conf.blockImg2.thumbnail" *ngIf="conf.blockImg2.thumbnail">
-                <img class="share-view__blocks-img" width="352" height="234" src="/assets/img/news/default.svg" *ngIf="!conf.blockImg2.thumbnail">
-                <img class="share-view__blocks-img" width="352" height="234" [src]="uploadsPath + conf.blockImg2.thumbnail2" *ngIf="conf.blockImg2.thumbnail2">
-                <img class="share-view__blocks-img" width="352" height="234" src="/assets/img/news/default.svg" *ngIf="!conf.blockImg2.thumbnail2">
+                <img class="share-view__blocks-img" width="352" height="264" [src]="uploadsPath + conf.blockImg2.thumbnail" *ngIf="conf.blockImg2.thumbnail">
+                <img class="share-view__blocks-img" width="352" height="264" src="/assets/img/news/default.svg" *ngIf="!conf.blockImg2.thumbnail">
+                <img class="share-view__blocks-img" width="352" height="264" [src]="uploadsPath + conf.blockImg2.thumbnail2" *ngIf="conf.blockImg2.thumbnail2">
+                <img class="share-view__blocks-img" width="352" height="264" src="/assets/img/news/default.svg" *ngIf="!conf.blockImg2.thumbnail2">
             </div>
         </div>
     `,

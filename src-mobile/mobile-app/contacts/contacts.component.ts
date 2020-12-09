@@ -99,6 +99,8 @@ export class ContactsComponent implements OnInit {
                 .add(polyline)
                 .add(myPlacemarkWithContent2);
 
+
+
         });
     }
 }

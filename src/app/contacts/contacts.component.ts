@@ -22,7 +22,7 @@ export class ContactsComponent implements OnInit {
 
         ymaps.ready(() => {
             const myMap = new ymaps.Map('map', {
-                center: [55.671094, 37.868373],
+                center: [55.671894, 37.868373],
                 zoom: 16,
                 controls: ['zoomControl']
             });
@@ -98,6 +98,7 @@ export class ContactsComponent implements OnInit {
                 .add(myPlacemarkWithContent)
                 .add(polyline)
                 .add(myPlacemarkWithContent2);
+
 
         });
     }

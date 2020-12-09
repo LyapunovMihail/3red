@@ -90,7 +90,7 @@ export class SharesModel {
         if (ext === '.jpg' || ext === '.jpeg') {
             let path = SHARES_UPLOADS_PATH;
             let image = await imageSaver(req, path, 50);
-            let thumbnail = await thumbnailSaver(req, path, {width: '450', height: '300'});
+            let thumbnail = await thumbnailSaver(req, path, {width: '400', height: '267'});
             return ({
                 image,
                 thumbnail

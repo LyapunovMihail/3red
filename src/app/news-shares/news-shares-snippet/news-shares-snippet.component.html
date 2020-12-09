@@ -2,7 +2,7 @@
     <a [routerLink]="['/news-shares/news/list/' + snippet._id]" class="news__item" *ngIf="snippet.title">
         <div class="news__category" [class.news__category--exist]="snippet.objectName">{{snippet.objectName}}</div>
         <div class="news__img-wrap">
-            <img [src]="newsUploadsPath + snippet.thumbnail" height="264" alt="news" class="news__image">
+            <img [src]="newsUploadsPath + snippet.thumbnail" width="352" height="264" alt="news" class="news__image">
         </div>
         <p class="news__list-title">{{snippet.title}}</p>
         <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
@@ -19,7 +19,7 @@
                 </div>
                 <p class="news__propose" *ngIf="countDown(snippet.finish_date) < 0"> Акция закончилась</p>
             </ng-container>
-            <img [src]="sharesUploadsPath + snippet.mainThumbnail" height="264" alt="news" class="news__image">
+            <img [src]="sharesUploadsPath + snippet.mainThumbnail" width="352" height="264" alt="news" class="news__image">
         </div>
         <p class="news__list-title">{{snippet.name}}</p>
         <div class="news__date">{{parseCreatedAtDate(snippet.created_at)}}</div>
