@@ -31,9 +31,9 @@
             </div>
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_select create-shares__wrap_w3">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Квартира</p>
-                <select [(ngModel)]="conf.blockFlat.number"
+                <select [(ngModel)]="conf.blockFlat.flat"
                         (ngModelChange)="changeFlat($event)"
-                        [value]="conf.blockFlat.number"
+                        [value]="conf.blockFlat.flat"
                         class="create-shares__input create-shares__input_status">
                     <option *ngFor="let flat of flatsOptions"
                             [value]="flat">Квартира {{flat}}</option>

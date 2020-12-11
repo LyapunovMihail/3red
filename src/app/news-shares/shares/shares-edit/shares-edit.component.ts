@@ -91,7 +91,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
         });
     }
 
-    // tslint:disable-next-line:member-access
+    // ToDo Создать селект с названиями-айдишниками объектов жк из modsBtnList
 
     ngOnInit() {
         if (this.redactId === SHARES_CREATE_ID) {
@@ -158,15 +158,16 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     jkName: this.objectName,
                     deliveryDate: null,
                     house: null,
-                    number: null,
+                    flat: null,
                     section: null,
                     floor: null,
                     space: null,
-                    room: null,
+                    rooms: null,
                     decoration: null,
+                    decorationName: null,
                     scheme: null,
                     price: null,
-                    discount: null,
+                    discount: '',
                     discountType: ShareFlatDiscountType.SUM
                 }
         }));

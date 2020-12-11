@@ -32,7 +32,7 @@
                                     <div *ngIf="img.style.display === 'none'" class="news__assets-img-error g-3red"></div>
                                 </div>
                                 <div class="news__assets-wrap">
-                                    <p class="news__assets-title">{{b.blockFlat.room}}-комнатная, №{{b.blockFlat.number}}</p>
+                                    <p class="news__assets-title">{{(b.blockFlat.rooms === 0) ? 'Студия, ' : b.blockFlat.rooms + '-комнатная, '}}, №{{b.blockFlat.flat}}</p>
                                     <p class="news__assets-subtitle">ЖК {{b.blockFlat.jkName}}</p>
                                 </div>
                                 <div class="news__assets-square">{{b.blockFlat.space}} м²</div>

@@ -45,7 +45,7 @@
                 <p class="apartment__info-subtitle">Стоимость</p>
                 <p class="apartment__info-value"
                     [class.apartment__info-value--sale]="flatData.discount">
-                    {{ (flatData.discount ?  (flatData.price - flatData.discount) : flatData.price) | myBitNumberPipe }} &#8381;
+                    {{ (flatData.discount ?  (flatData.price - getDiscount(flatData)) : flatData.price) | myBitNumberPipe }} &#8381;
                 </p>
             </div>
             <!--<div class="apartment__info-item">-->

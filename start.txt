@@ -7,5 +7,5 @@ cd /var/www/dev.3-red.com/dist/server
 nvm use 10.15.3
 yarn --production --modules-folder '../node_modules'
 cd /var/www/dev.3-red.com/dist
-PORT=8006 BASE_NAME='novotomilino' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid 'novotomilino' server/server.js
-PORT=8010 BASE_NAME='3-red_dev' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid '3-red_dev' server/server.js
+PORT=8013 BASE_NAME='3-red_dev' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid '3-red_dev' server/server.js
+PORT=8010 BASE_NAME='3-red' /root/.nvm/versions/node/v10.15.3/bin/node /usr/bin/forever -a start --uid '3-red' server/server.js

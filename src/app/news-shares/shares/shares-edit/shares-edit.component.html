@@ -140,7 +140,7 @@
 
                     <app-shares-edit-flats
                         [formControlName]="i"
-                        [objectId]="objectId"
+                        [objectId]="form.get('objectId').value"
                         *ngSwitchCase="'flats'"
                         (remove)="removeBlock(i)">
                     </app-shares-edit-flats>

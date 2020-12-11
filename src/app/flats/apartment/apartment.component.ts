@@ -37,7 +37,8 @@ export class ApartmentComponent implements OnInit {
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
+        console.log('this.flatsList: ', this.flatsList);
+
         console.log('this.flatData: ', this.flatData);
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
         this.searchService.getObjects().subscribe(
@@ -55,12 +56,10 @@ export class ApartmentComponent implements OnInit {
 
     public prevFlat() {
         this.flatData = this.flatsList[--this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
     }
 
     public nextFlat() {
         this.flatData = this.flatsList[++this.flatIndex];
-        this.flatData.discount = this.getDiscount(this.flatData);
     }
 
     public getDiscount(flat): number {

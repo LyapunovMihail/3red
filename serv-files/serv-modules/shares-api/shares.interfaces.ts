@@ -15,14 +15,6 @@ export enum ShareBodyEnum {
     IMAGE = 'image',
     FLATS = 'flats'
 }
-
-export enum ShareFlatRoomEnum {
-    STUDIO = 'Студия',
-    ONE_ROOM = '1-комн.',
-    TWO_ROOM = '2-комн.',
-    THREE_ROOM = '3-комн.'
-}
-
 export enum ShareFlatDecorationEnum {
     WITHOUT = 'Без отделки',
     ROUGHING = 'Черновая отделка',
@@ -38,11 +30,11 @@ export interface ShareFlat {
     jkName: string;
     deliveryDate: string;
     house: string;
-    number: string;
+    flat: string;
     section: string;
     floor: string;
     space: string;
-    room: ShareFlatRoomEnum;
+    rooms: number;
     decoration: ShareFlatDecorationEnum;
     decorationName: ShareFlatDecorationEnum;
     scheme: string;

@@ -38,7 +38,7 @@
                                     <!--<div class="client-share__flats__house">Этаж {{flat.floor}}</div>-->
                                 <!--</div>-->
                                 <!--<div class="client-share__number">№ {{flat.number}}</div>-->
-                                <!--<div class="client-share__room">{{flat.room}}, {{flat.space}} м&#178;</div>-->
+                                <!--<div class="client-share__room">{{(b.blockFlat.rooms === 0) ? 'Студия, ' : b.blockFlat.rooms + '-комнатная, '}}, {{flat.space}} м&#178;</div>-->
                                 <!--<div class="client-share__decoration">{{flat.decoration}}</div>-->
                                 <!--<img [src]="flat.scheme" class="client-share__image">-->
                                 <!--<div class="client-share__total">{{+flat.price - getDiscount(flat) | bitNumber}} &#8381;</div>-->

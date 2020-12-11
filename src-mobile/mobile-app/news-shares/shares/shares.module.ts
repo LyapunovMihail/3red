@@ -9,11 +9,13 @@ import { NgModule } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 import { NewsSharesSnippetModule } from '../news-shares-snippet/news-shares-snippet.module';
+import { BitNumberPipe } from './bit-number.pipe';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
     SharesListComponent,
-    SharesItemComponent
+    SharesItemComponent,
+    BitNumberPipe
 ];
 
 @NgModule({
