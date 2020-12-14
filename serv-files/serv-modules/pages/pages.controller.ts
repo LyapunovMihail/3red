@@ -17,8 +17,31 @@ export class PagesController {
         res.json({result: 'ok'});
     }
 
-    @Get('*')
+    @Get(
+        '/' ||
+        '/about' ||
+        '/partners' ||
+        '/contacts' ||
+        '/news-shares/all' ||
+        '/news-shares/news/list' ||
+        '/news-shares/news/list/:id' ||
+        '/news-shares/shares/list' ||
+        '/news-shares/shares/list/:id' ||
+        '/flats/search' ||
+        '/objects/list' ||
+        '/objects/list/:id' ||
+        '/objects/list/:id/dynamic/:year/:month' ||
+        '/objects/list/:id/flats' ||
+        '/objects/list/:id/flats/house/:house' ||
+        '/objects/list/:id/flats/house/:house/section/:section/floor/:floor' ||
+        '/objects/list/:id/flats/house/:house/section/:section/floor/:floor/apartment/:apartment' ||
+        '/favorites')
     renderPage(@Req() req, @Res() res, @Session() session) {
         clientRender(req, res, 200, session);
+    }
+
+    @Get('*')
+    render404Page(@Req() req, @Res() res, @Session() session) {
+        clientRender(req, res, 404, session);
     }
 }
