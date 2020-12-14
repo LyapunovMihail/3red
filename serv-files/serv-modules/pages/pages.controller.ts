@@ -42,6 +42,7 @@ export class PagesController {
 
     @Get('*')
     render404Page(@Req() req, @Res() res, @Session() session) {
+        console.log('req.url: ', req.url);
         clientRender(req, res, 404, session);
     }
 }

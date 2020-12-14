@@ -50,6 +50,34 @@
                             <!--</div>-->
                         <!--</div>-->
                     <!--</div>-->
+
+                    <div *ngSwitchCase="'flats'" class="news__assets">
+                        <div class="news__assets-container" [class.news__assets-container--margin]="(snippet.body.length > i + 1) && snippet.body[i + 1].blockType === 'flats'">
+                            <div class="news__assets-wrapper">
+                                <a class="news__assets-item">
+                                    <div class="news__assets-img">
+                                        <img (error)="img.style.display = 'none'"
+                                             [src]="b.blockFlat.scheme" alt="" #img>
+                                        <div *ngIf="img.style.display === 'none'" class="news__assets-img-error g-3red"></div>
+                                    </div>
+                                    <div class="news__assets-wrap">
+                                        <p class="news__assets-title">{{(b.blockFlat.rooms === 0) ? 'Студия, ' : b.blockFlat.rooms + '-комнатная, '}}, №{{b.blockFlat.flat}}</p>
+                                        <p class="news__assets-subtitle">ЖК {{b.blockFlat.jkName}}</p>
+                                    </div>
+                                    <div class="news__assets-square">{{b.blockFlat.space}} м²</div>
+                                    <div class="news__assets-flat">Этаж {{b.blockFlat.floor}}</div>
+                                    <div class="news__assets-date">{{b.blockFlat.deliveryDate}}</div>
+                                    <div class="news__assets-decoration">{{b.blockFlat.decorationName}}</div>
+                                    <div class="news__assets-num">Дом {{b.blockFlat.house}}</div>
+                                    <div class="news__assets-price">
+                                        <div class="news__price-new">{{(b.blockFlat.price - getDiscount(b.blockFlat)).toFixed(2) | bitNumber}} ₽</div>
+                                        <div class="news__price-old">{{b.blockFlat.price | bitNumber}} ₽</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </li>
             </ul>
         </div>
