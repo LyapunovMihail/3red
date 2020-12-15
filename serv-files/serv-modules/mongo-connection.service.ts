@@ -13,7 +13,7 @@ export class MongoConnectionService {
         return MongoConnectionService.db;
     }
 
-    public getDb(): Mongoose {
+    public static getDb(): Mongoose {
         return MongoConnectionService.db;
     }
 }

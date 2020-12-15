@@ -30,7 +30,7 @@ export class AuthorizationController {
     constructor(
         private mongoConnectionService: MongoConnectionService,
     ) {
-        this.db = this.mongoConnectionService.getDb();
+        this.db = MongoConnectionService.getDb();
         this.model = this.db.model(AUTHORIZATION_COLLECTION_NAME, userSchema);
     }
 

@@ -17,7 +17,7 @@ export class AboutDocumentationController extends AboutDocumentationModel {
       private mongoConnectionService: MongoConnectionService,
       private expressAppService: ExpressAppService
     ) {
-        super(mongoConnectionService.getDb().connection.db);
+        super(MongoConnectionService.getDb().connection.db);
         this.routing();
     }
 

@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType, ShareFlat } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../shares.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -36,6 +36,7 @@ export class SharesItemComponent implements OnInit, OnDestroy {
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
+        private router: Router,
         private sharesService: SharesService,
         private activatedRoute: ActivatedRoute,
         public location: Location,
@@ -69,11 +70,16 @@ export class SharesItemComponent implements OnInit, OnDestroy {
     public getSnippet(id) {
         this.sharesService.getShareById(id)
             .subscribe((share: Share[]) => {
-                this.snippet = share[0];
-                this.setShareFlats();
-                this.checkPrevAndNext(id);
-                this.setMetaTags();
+                if ( share.length === 1 ) {
+                    this.snippet = share[0];
+                    this.setShareFlats();
+                    this.checkPrevAndNext(id);
+                    this.setMetaTags();
+                } else {
+                    this.router.navigate(['/error-404'], { skipLocationChange: true });
+                }
             }, (err) => {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
                 console.error(err);
             });
     }

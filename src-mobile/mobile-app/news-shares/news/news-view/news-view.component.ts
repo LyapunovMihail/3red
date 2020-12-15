@@ -82,7 +82,7 @@ export class NewsViewComponent implements OnInit, OnDestroy {
                 }
             },
             (err) => {
-               // this.router.navigate(['/error-404'], { skipLocationChange: true });
+               this.router.navigate(['/error-404'], { skipLocationChange: true });
                 console.error(err);
             }
         );

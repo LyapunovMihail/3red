@@ -9,6 +9,8 @@ import { join } from 'path';
 import * as bodyParser from 'body-parser';
 import { DbCronUpdate } from './utilits/db-cron-update.utils';
 import * as session from 'express-session';
+import { ROUTES } from './pages/rendering.routes';
+import { clientRender } from './utilits/client-render';
 
 async function bootstrap() {
     const appExpress: Express = express();
@@ -26,6 +28,15 @@ async function bootstrap() {
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop'), { index: false });
     setTimeout(() => {
         new DbCronUpdate(db.connection);
+    });
+
+    ROUTES.forEach((route: any) => {
+        if (route.handle) {
+            appExpress.get(route.url, route.handle);
+        }
+        appExpress.get(route.url || route, (req: any, res) => {
+            clientRender(req, res, 200, req.session);
+        });
     });
     await app.listen(SERVER_CONFIGURATIONS.PORT);
 }

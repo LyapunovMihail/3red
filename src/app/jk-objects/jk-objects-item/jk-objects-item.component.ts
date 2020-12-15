@@ -60,8 +60,12 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
         this.jkObjectsItemService.getSnippets(this.objectId)
             .subscribe(
                 (data) => {
-                    this.jk = data[0];
-                    this.getFlats(this.jk.mod);
+                    if (data.length === 1) {
+                        this.jk = data[0];
+                        this.getFlats(this.jk.mod);
+                    } else {
+                        this.router.navigate(['/error-404'], { skipLocationChange: true });
+                    }
                 },
                 (err) => {
                     console.error(err);

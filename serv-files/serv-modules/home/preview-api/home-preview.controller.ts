@@ -15,7 +15,7 @@ export class HomePreviewController extends HomePreviewModel {
         private mongoConnectionService: MongoConnectionService,
         private expressAppService: ExpressAppService,
     ) {
-        super(mongoConnectionService.getDb().connection.db);
+        super(MongoConnectionService.getDb().connection.db);
         this.routing();
     }
 

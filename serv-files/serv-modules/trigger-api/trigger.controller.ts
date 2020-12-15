@@ -13,7 +13,7 @@ export class TriggerController extends TriggerModel {
 
     constructor(private expressAppService: ExpressAppService,
                 private mongoConnectionService: MongoConnectionService) {
-        super(mongoConnectionService.getDb().connection.db);
+        super(MongoConnectionService.getDb().connection.db);
         this.routing();
     }
 

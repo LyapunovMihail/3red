@@ -15,7 +15,7 @@ export class ContactsController extends ContactsModel {
         private expressAppService: ExpressAppService,
         private mongoConnectionService: MongoConnectionService
     ) {
-        super(mongoConnectionService.getDb().connection.db);
+        super(MongoConnectionService.getDb().connection.db);
         this.routing();
     }
 

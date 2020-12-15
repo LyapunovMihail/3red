@@ -73,6 +73,7 @@ export class NewsViewComponent implements OnInit, OnDestroy {
         this.newsService.getSnippetById(id).subscribe(
             (data) => {
                 if ( data.length === 1 ) {
+                    console.log('data: ', data);
                     this.snippet = data[0];
                     this.checkPrevAndNext(id);
                     this.setMetaTags();
@@ -81,7 +82,7 @@ export class NewsViewComponent implements OnInit, OnDestroy {
                 }
             },
             (err) => {
-               // this.router.navigate(['/error-404'], { skipLocationChange: true });
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
                 console.error(err);
             }
         );
