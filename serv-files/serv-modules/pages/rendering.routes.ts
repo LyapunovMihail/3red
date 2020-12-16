@@ -3,7 +3,7 @@ import { Response, Request } from 'express-serve-static-core';
 import { NEWS_COLLECTION_NAME } from '../news-api/news.interfaces';
 import { MongoConnectionService } from '../mongo-connection.service';
 import { SHARES_COLLECTION_NAME } from '../shares-api/shares.interfaces';
-import { OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
+import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME } from '../jk-objects/object-api/objects.interfaces';
 import { AddressesModel } from '../addresses-api/addresses.model';
 const ObjectId = require('mongodb').ObjectID;
 
@@ -36,8 +36,38 @@ export const ROUTES: any[] = [
     {
         url: '/objects/list/:id',
         handle: async (req: any, res: Response, next) => {
-            console.log('CHECK');
             await checkJkObject(req, res, next);
+        },
+    },
+    {
+        url: '/objects/list/:id/flats',
+        handle: async (req: any, res: Response, next) => {
+            await checkJkObject(req, res, next);
+        },
+    },
+    {
+        url: '/objects/list/:id/flats/house/:house',
+        handle: async (req: any, res: Response, next) => {
+            const jkObject = await await checkJkObject(req, res, next);
+            if (!jkObject) { return; }
+            await checkFlatsHouse(req, res);
+        },
+    },
+    {
+        url: '/objects/list/:id/flats/house/:house/section/:section/floor/:floor',
+        handle: async (req: any, res: Response, next) => {
+            const jkObject = await checkJkObject(req, res, next);
+            if (!jkObject) { return; }
+            await checkFlatsHouseSectionFloor(req, res);
+        },
+    },
+    {
+        url: '/objects/list/:id/flats/house/:house/section/:section/floor/:floor/apartment/:apartment',
+        handle: async (req: any, res: Response, next) => {
+            const jkObject =  await checkJkObject(req, res, next);
+            if (!jkObject) { return; }
+            await checkFlatsHouseSectionFloor(req, res);
+            await checkFlatsApartment(req, res);
         },
     },
     '/objects/list/:id/dynamic/:year/:month',
@@ -46,36 +76,6 @@ export const ROUTES: any[] = [
         handle: async (req: any, res: Response, next) => {
             await checkJkObject(req, res, next);
             await checkDynamicMonthAndYear(req, res, next);
-        },
-    },
-    {
-        url: '/objects/list/:id/flats',
-        handle: async (req: any, res: Response, next) => {
-            console.log('CHECK');
-            await checkJkObject(req, res, next);
-        },
-    },
-    {
-        url: '/objects/list/:id/flats/house/:house',
-        handle: async (req: any, res: Response, next) => {
-            await checkJkObject(req, res, next);
-            await checkFlatsHouse(req, res);
-        },
-    },
-    {
-        url: '/objects/list/:id/flats/house/:house/section/:section/floor/:floor',
-        handle: async (req: any, res: Response, next) => {
-            console.log('CHECK');
-            await checkJkObject(req, res, next);
-            await checkFlatsHouseSectionFloor(req, res);
-        },
-    },
-    {
-        url: '/objects/list/:id/flats/house/:house/section/:section/floor/:floor/apartment/:apartment',
-        handle: async (req: any, res: Response, next) => {
-            await checkJkObject(req, res, next);
-            await checkFlatsHouseSectionFloor(req, res);
-            await checkFlatsApartment(req, res);
         },
     },
     '/favorites',
@@ -106,10 +106,11 @@ function checkDynamicMonthAndYear(req: any, res: Response, next) {
     }
 }
 
-async function checkJkObject(req: any, res: Response, next) {
+async function checkJkObject(req: any, res: Response, next): Promise<IObjectSnippet> {
     const validId =  ObjectId.isValid(req.params['id']);
     const jkObject = (validId) ? await MongoConnectionService.getDb().connection.db.collection(OBJECTS_OBJECT_COLLECTION_NAME).findOne({ _id: ObjectId(req.params['id']) }) : null;
     (jkObject) ? next() : clientRender(req, res, 404, req.session);
+    return jkObject;
 }
 
 async function getFlatsData(objectId) {
@@ -117,6 +118,7 @@ async function getFlatsData(objectId) {
     const data = addressesModel.getObjectFlatsData(objectId);
     return data;
 }
+
 async function checkFlatsHouse(req: any, res: Response) {
     const data = await getFlatsData(req.params.id);
     const houseNumbers = req.params.house === 'all' ? Object.keys(data.floorCount) : req.params.house.split(',');
@@ -130,6 +132,7 @@ async function checkFlatsHouse(req: any, res: Response) {
 async function checkFlatsHouseSectionFloor(req: any, res: Response) {
     const data = await getFlatsData(req.params.id);
     const floorCount = data.floorCount;
+    console.log('floorCount: ', floorCount);
     if (!floorCount[req.params.house] || !floorCount[req.params.house][req.params.section]
         && !floorCount[req.params.house][req.params.section].some((floor) => floor === Number(req.params.floor))) {
         clientRender(req, res, 404, req.session);

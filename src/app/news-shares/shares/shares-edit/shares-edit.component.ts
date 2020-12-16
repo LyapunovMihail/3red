@@ -92,6 +92,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     }
 
     // ToDo Создать селект с названиями-айдишниками объектов жк из modsBtnList
+    public getModBtns() {
+
+    }
 
     ngOnInit() {
         if (this.redactId === SHARES_CREATE_ID) {

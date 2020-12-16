@@ -14,7 +14,6 @@ export function ShouldSendMobileVersion(req, session) {
 
 export function clientRender(req: Request, res: Response, status: number, session) {
     console.log('status: ', status);
-    console.log('session: ', session);
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
             res.status(status).sendFile(

@@ -60,6 +60,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                 this.routerEvents = this.routerChange();
             },
             (err) => {
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
                 console.log(err);
             }
         );
@@ -107,6 +108,7 @@ export class FloorComponent implements OnInit, OnDestroy {
                     }
                 );
             } else {
+                console.log('CHECK');
                 this.router.navigate(['/error-404'], { skipLocationChange: true });
             }
         });
