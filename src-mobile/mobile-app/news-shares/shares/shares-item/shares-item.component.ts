@@ -40,6 +40,8 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         price: 0
     };
 
+    public i: number;
+
     constructor(
         public windowScrollLocker: WindowScrollLocker,
         private router: Router,
