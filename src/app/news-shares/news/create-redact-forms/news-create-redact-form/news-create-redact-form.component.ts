@@ -5,6 +5,7 @@ import { INewsSnippet, NEWS_UPLOADS_PATH, NewsBodyBlock } from '../../../../../.
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-news-create-redact-form',
@@ -64,6 +65,8 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
     public showModal = false;
     public modalAnchorData;
 
+    public modsBtnList: IObjectSnippet | any;
+
     constructor(
         private formBuilder: FormBuilder,
         private authorization: AuthorizationObserverService,
@@ -76,6 +79,8 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
         this.AuthorizationEvent = this.authorization.getAuthorization().subscribe((val) => {
             this.isAuthorizated = val;
         });
+
+        this.getModBtns();
 
         moment.locale('ru');
         this.dateNow = moment(Date.now()).format('LL').slice(0, -3);
@@ -115,6 +120,23 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
             shareCount: this.snippet.shareCount,
             body: this.formBuilder.array([])
         });
+    }
+
+    public getModBtns() {
+        this.newsCreateService.getSnippets()
+            .subscribe(
+                (data) => {
+                    this.modsBtnList = data;
+                    this.modsBtnList.unshift({name: '', mod: '', _id: ''});
+                },
+                (err) => console.error(err)
+            );
+    }
+
+    public changeMod(e) {
+        const selectedValue = this.modsBtnList[e.target.selectedIndex];
+        this.form.get('objectId').setValue(selectedValue._id);
+        this.form.get('objectName').setValue(selectedValue.name);
     }
 
     ngOnDestroy() {
@@ -215,7 +237,7 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
     }
 
     public moveBlock(array, i, dir) {
-        let arr = this.form.value.body;
+        const arr = this.form.value.body;
 
         array[i] = array.splice((i + dir), 1, array[i])[0];
         arr[i] = arr.splice((i + dir), 1, arr[i])[0];

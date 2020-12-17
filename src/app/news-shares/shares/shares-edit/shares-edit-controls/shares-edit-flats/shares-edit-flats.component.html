@@ -10,6 +10,16 @@
                 <button class="create-shares__btn create-shares__btn_path-controll">Вниз</button>
             </div>
 
+            <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_select create-shares__wrap_full">
+                <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Жилой комплекс</p>
+                <select [(ngModel)]="conf.blockFlat.jkId"
+                        (change)="changeMod($event)"
+                        class="create-shares__input create-shares__input_status">
+                    <option *ngFor="let jkObject of modsBtnList"
+                        [value]="jkObject.objectId">{{ jkObject.name }}</option>
+                </select>
+            </div>
+
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_select create-shares__wrap_w3">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Дом</p>
                 <select [(ngModel)]="conf.blockFlat.house"

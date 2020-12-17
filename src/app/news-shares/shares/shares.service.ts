@@ -54,6 +54,15 @@ export class SharesService {
         return this.http.get<{jk: IObjectSnippet, housesBtnList, floorCount, config}>(`/api/search/object-data/${id}`);
     }
 
+    public getFlatsData(options): Observable<{modsBtnList, housesBtnList, config}>  {
+        console.log('options: ', options);
+        return this.http.get<{modsBtnList, housesBtnList, config}>('/api/search/common-data', {params: options});
+    }
+
+    public getSnippets(objectID?): Observable<IObjectSnippet[]> {
+        return this.http.get<IObjectSnippet[]>(`/api/jk-object/object/id/${objectID}`);
+    }
+
     public imageUpload(file) {
 
         return new Promise((resolve, reject) => {

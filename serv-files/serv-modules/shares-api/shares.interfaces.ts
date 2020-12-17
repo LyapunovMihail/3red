@@ -28,6 +28,7 @@ export enum ShareFlatDecorationEnum {
 export interface ShareFlat {
     mod: string;
     jkName: string;
+    jkId: string;
     deliveryDate: string;
     house: string;
     flat: string;
@@ -69,6 +70,7 @@ export interface Share {
     body: ShareBodyBlock[];
     objectId?: string;
     objectName?: string;
+    objectMod?: string;
     shareCount: ShareCount;
 }
 

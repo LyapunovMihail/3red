@@ -200,7 +200,8 @@ $required-input : #ffb3b3;
                 color: $col-red;
             }
             &_for-photo,
-            &_for-datepicker {
+            &_for-datepicker,
+            &_for-select {
                 @extend .create-form__form-title_for-input;
                 position: static;
             }

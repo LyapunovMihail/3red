@@ -39,6 +39,13 @@
                     [ngClass]="{'create-form__form-title_placeholder': text.value.length > 0}">Краткое описание</p>
                 </div>
 
+                <div class="create-form__form-wrap create-form__form-wrap_select create-shares__wrap_input create-form__form-wrap_full">
+                    <p class="create-form__form-title create-form__form-title_for-select">Жилой комплекс</p>
+                    <select name="objectId" class="create-form__form-select create-form__form-select_type" [formControl]="form.controls['objectId']" (change)="changeMod($event)">>
+                        <option [value]="jkObject._id" *ngFor="let jkObject of modsBtnList; let i = index">{{ i === 0 ? 'Все комплексы' : jkObject.name }}</option>
+                    </select>
+                </div>
+
                 <div class="create-form__form-wrap create-form__form-wrap_datepicker create-form__form-wrap_w2">
                     <p class="create-form__form-title create-form__form-title_for-datepicker">Дата публикации</p>
                     <div class="create-form__form-area create-form__form-area_datepicker">

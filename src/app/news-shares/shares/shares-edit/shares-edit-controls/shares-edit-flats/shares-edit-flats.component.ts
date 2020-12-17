@@ -28,7 +28,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     @Output() public remove: EventEmitter<any> = new EventEmitter();
     @Input() public objectId: string;
-    // @Input() public modsBtnList; // в addresses.controller добавить свойство objectId в modsBtnsList
+    public modsBtnList: {name: string, value: string, objectId: string}[];
     // Сделать селект из modsBtnList
     public housesOptions = [];
     public sectionsOptions = [];
@@ -52,10 +52,11 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.conf = value;
         if (this.conf.blockFlat) {
             // if (this.objectId)
-            this.getConfig();
+            this.getMods();
             console.log('this.conf: ', this.conf);
         }
     }
+
 
     propagateChange = (_: any) => {};
 
@@ -65,8 +66,35 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     registerOnTouched() {}
 
+    public getMods() {
+        this.sharesService.getFlatsData({})
+            .subscribe((data) => {
+                    data.modsBtnList.shift();
+                    this.modsBtnList = data.modsBtnList;
+                    console.log('this.conf.blockFlat: ', this.conf.blockFlat);
+                    if (this.conf.blockFlat.jkId) {
+                        console.log('this.conf.blockFlat: ', this.conf.blockFlat);
+                        this.getConfig();
+                    }
+                },
+                (err) => console.error(err)
+            );
+    }
+
+    public changeMod(e) {
+        const selectedValue = this.modsBtnList[e.target.selectedIndex];
+        this.conf.blockFlat.jkId = selectedValue.objectId;
+        this.conf.blockFlat.mod = selectedValue.value;
+        this.conf.blockFlat.jkName = selectedValue.name;
+        console.log('selectedValue: ', selectedValue);
+        console.log('this.conf.blockFlat: ', this.conf.blockFlat);
+        this.resetFlat(false, false);
+        this.flatsOptions = [];
+        this.getConfig();
+    }
+
     public getConfig() {
-        this.sharesService.getFlatsDataByObjectId(this.objectId)
+        this.sharesService.getFlatsDataByObjectId(this.conf.blockFlat.jkId)
             .subscribe((data) => {
                     this.config = data;
                     this.initHousesOptions();
@@ -82,17 +110,13 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         }
     }
     changeHouse(house, changeByClick = true) {
+        this.resetFlat(true, false);
+        this.flatsOptions = [];
         this.initSectionsOptions(house, changeByClick);
     }
 
     initSectionsOptions(house, changeByClick = true) {
         this.sectionsOptions = Object.keys(this.config.floorCount[house]);
-
-        if (changeByClick) {
-            this.conf.blockFlat.section = null;
-            this.resetFlat(true, false);
-            this.flatsOptions = [];
-        }
 
         if (this.conf.blockFlat.section) {
             this.changeSection(this.conf.blockFlat.section, changeByClick);
@@ -100,30 +124,33 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         console.log('this.conf: ', this.conf);
     }
     changeSection(section, changeByClick = true) {
-        this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section})
-            .subscribe((data) => {
-                this.flats = data;
-                this.initFlatsOptions(changeByClick);
-            },
-                (err) => console.error(err)
-            );
+        this.resetFlat(true, false);
+        this.flatsOptions = [];
+        this.initFlatsOptions(section, changeByClick);
     }
 
-    initFlatsOptions(changeByClick = true) {
-        if (!this.flats.length) {
-            return;
-        }
+    initFlatsOptions(section, changeByClick = true) {
+        this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section, status: '4'})
+            .subscribe((data) => {
+                    this.flats = data;
+                    if (!this.flats.length) {
+                        return;
+                    }
+                    this.flatsOptions = this.flats.map((flat) => flat.flat);
+                    // if (changeByClick) {
+                    //     this.resetFlat(true, true);
+                    // }
+                },
+                (err) => console.error(err)
+            );
 
-        this.flatsOptions = this.flats.map((flat) => flat.flat);
-        if (changeByClick) {
-            this.resetFlat(true, true);
-        }
     }
 
     resetFlat(saveHouse, saveSection) {
         this.conf.blockFlat = {
                 mod: this.conf.blockFlat.mod,
                 jkName: this.conf.blockFlat.jkName,
+                jkId: this.conf.blockFlat.jkId,
                 deliveryDate: null,
                 house: saveHouse ? this.conf.blockFlat.house : null,
                 flat: null,

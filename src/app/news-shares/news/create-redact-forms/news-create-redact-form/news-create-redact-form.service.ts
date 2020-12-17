@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Uploader } from 'angular2-http-file-upload';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { IObjectSnippet } from '../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Injectable()
 
@@ -32,6 +33,10 @@ export class NewsCreateRedactFormService {
     public updateSnippet(id, form) {
         let message = JSON.stringify({ id, form });
         return this.http.post('/api/admin/news/update', message, adminHeaders());
+    }
+
+    public getSnippets(objectID?): Observable<IObjectSnippet[]> {
+        return this.http.get<IObjectSnippet[]>(`/api/jk-object/object/id/${objectID}`);
     }
 
     public imageUpload(e) {

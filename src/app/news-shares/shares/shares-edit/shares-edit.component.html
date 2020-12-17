@@ -30,7 +30,14 @@
                 </ghm-textarea>
                 <p class="create-shares__typografy-error">Поле обязательно для заполнения</p>
             </div>
-            
+
+            <div class="create-shares__wrap create-shares__wrap_select create-shares__wrap_input create-shares__wrap_full">
+                <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Жилой комплекс</p>
+                <select name="objectId" class="create-shares__input create-shares__input_status" [formControlName]="'objectId'" (change)="changeMod($event)">
+                    <option [value]="jkObject._id" *ngFor="let jkObject of modsBtnList; let i = index">{{ i === 0 ? 'Все комплексы' : jkObject.name }}</option>
+                </select>
+            </div>
+
             <div class="create-shares__wrap create-shares__wrap_input create-shares__wrap_w2">
                 <p class="create-shares__typografy-subtitle create-shares__typografy-subtitle_placeholder">Дата публикации</p>
                 <div class="create-shares__input create-shares__input_datepicker">
@@ -140,7 +147,6 @@
 
                     <app-shares-edit-flats
                         [formControlName]="i"
-                        [objectId]="form.get('objectId').value"
                         *ngSwitchCase="'flats'"
                         (remove)="removeBlock(i)">
                     </app-shares-edit-flats>
@@ -159,7 +165,7 @@
                        accept=".jpg, jpeg"
                        (change)="onImagePicked($event, 'single-image')">
             </li>
-            <li class="create-shares__btn create-shares__btn_flats" (click)="addFlats()" *ngIf="objectId && objectName">Квартиры по акции</li>
+            <li class="create-shares__btn create-shares__btn_flats" (click)="addFlats()">Квартиры по акции</li>
         </ul>
 
         <div class="create-shares__wrap create-shares__wrap_upld">

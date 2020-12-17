@@ -13,6 +13,7 @@ import {
 } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
+import { IObjectSnippet } from '../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
 @Component({
     selector: 'app-shares-edit',
@@ -36,6 +37,8 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     @Input() objectId = '';
     @Input() objectName = '';
     @Input() objectMod = '';
+
+    public modsBtnList: IObjectSnippet | any;
 
     // вызывается при изменении сниппета
     @Output() snippetsChange = new EventEmitter();
@@ -66,6 +69,7 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             finish_date: new FormControl('', Validators.required),
             objectId: new FormControl(''),
             objectName: new FormControl(''),
+            objectMod: new FormControl(''),
             shareCount: new FormControl({vk: 0, fb: 0, ok: 0}),
             body: new FormArray([])
         });
@@ -87,16 +91,16 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             body: [],
             objectId: this.objectId,
             objectName: this.objectName,
+            objectMod: this.objectMod,
             shareCount: {vk: 0, fb: 0, ok: 0}
         });
     }
 
     // ToDo Создать селект с названиями-айдишниками объектов жк из modsBtnList
-    public getModBtns() {
-
-    }
 
     ngOnInit() {
+        this.getModBtns();
+
         if (this.redactId === SHARES_CREATE_ID) {
             this.form.reset(this.createDynamicNewsObj());
         } else {
@@ -111,6 +115,24 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     // tslint:disable-next-line:member-access
     ngOnDestroy() {
         this.unsubscribe();
+    }
+
+    public getModBtns() {
+        this.sharesService.getSnippets()
+            .subscribe(
+                (data) => {
+                    this.modsBtnList = data;
+                    this.modsBtnList.unshift({name: '', mod: '', _id: ''});
+                },
+                (err) => console.error(err)
+            );
+    }
+
+    public changeMod(e) {
+        const selectedValue = this.modsBtnList[e.target.selectedIndex];
+        this.form.get('objectId').setValue(selectedValue._id);
+        this.form.get('objectName').setValue(selectedValue.name);
+        this.form.get('objectMod').setValue(selectedValue.mod);
     }
 
     showModalFunc(obj, i) {
@@ -157,8 +179,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
             blockFlat: value
                 ? value
                 : {
-                    mod: this.objectMod,
-                    jkName: this.objectName,
+                    mod: null,
+                    jkName: null,
+                    jkId: null,
                     deliveryDate: null,
                     house: null,
                     flat: null,

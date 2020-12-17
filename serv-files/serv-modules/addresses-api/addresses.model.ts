@@ -217,7 +217,7 @@ export class AddressesModel {
                 const flatsCount = await this.collection.find({mod: item.mod}).count();
                 if (flatSnippet && flatSnippet.switchOn && flatsCount) {
                     if (!modsBtnList.some((btn) => btn.value === item.mod)) {
-                        modsBtnList.push({name: item.name, value: item.mod});
+                        modsBtnList.push({name: item.name, value: item.mod, objectId: item._id.toString()});
                     }
                 }
             }
