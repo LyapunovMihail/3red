@@ -5,7 +5,7 @@ import {
     ShareFlatDiscountType,
     SHARES_UPLOADS_PATH
 } from '../../../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
-import { Component, forwardRef, Output, EventEmitter, Input } from '@angular/core';
+import { Component, forwardRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IObjectSnippet } from '../../../../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
 
@@ -45,7 +45,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
     uploadsPath = `/${SHARES_UPLOADS_PATH}`;
 
     constructor(
-        private sharesService: SharesService
+        private sharesService: SharesService,
+        private ref: ChangeDetectorRef
     ) {}
 
     writeValue(value: any) {
@@ -75,6 +76,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
                     if (this.conf.blockFlat.jkId) {
                         console.log('this.conf.blockFlat: ', this.conf.blockFlat);
                         this.getConfig();
+
                     }
                 },
                 (err) => console.error(err)
@@ -89,6 +91,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         console.log('selectedValue: ', selectedValue);
         console.log('this.conf.blockFlat: ', this.conf.blockFlat);
         this.resetFlat(false, false);
+        this.housesOptions = [];
+        this.sectionsOptions = [];
         this.flatsOptions = [];
         this.getConfig();
     }
@@ -105,32 +109,33 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     initHousesOptions() {
         this.housesOptions = Object.keys(this.config.floorCount);
+        console.log('this.housesOptions: ', this.housesOptions);
         if (this.conf.blockFlat.house) {
             this.changeHouse(this.conf.blockFlat.house, false);
         }
     }
     changeHouse(house, changeByClick = true) {
         this.resetFlat(true, false);
+        this.sectionsOptions = [];
         this.flatsOptions = [];
         this.initSectionsOptions(house, changeByClick);
     }
 
     initSectionsOptions(house, changeByClick = true) {
+        console.log('this.sectionsOptions: ', this.sectionsOptions);
         this.sectionsOptions = Object.keys(this.config.floorCount[house]);
-
         if (this.conf.blockFlat.section) {
             this.changeSection(this.conf.blockFlat.section, changeByClick);
         }
-        console.log('this.conf: ', this.conf);
     }
     changeSection(section, changeByClick = true) {
-        this.resetFlat(true, false);
+        this.resetFlat(true, true);
         this.flatsOptions = [];
         this.initFlatsOptions(section, changeByClick);
     }
 
     initFlatsOptions(section, changeByClick = true) {
-        this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section, status: '4'})
+        this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section})
             .subscribe((data) => {
                     this.flats = data;
                     if (!this.flats.length) {
