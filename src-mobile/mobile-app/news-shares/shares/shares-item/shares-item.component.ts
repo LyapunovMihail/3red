@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
+import { Share, SHARES_UPLOADS_PATH, ShareFlatDiscountType, ShareFlat } from '../../../../../serv-files/serv-modules/shares-api/shares.interfaces';
 import { SharesService } from '../shares.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
@@ -18,6 +18,7 @@ import { Meta } from '@angular/platform-browser';
 export class SharesItemComponent implements OnInit, OnDestroy {
 
     public sharesList: Share[];
+    public shareFlats: ShareFlat[];
 
     public snippet: Share;
 
@@ -40,7 +41,8 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         price: 0
     };
 
-    public i: number;
+    public showApartmentWindow = false;
+    public selectedFlatIndex: number;
 
     constructor(
         public windowScrollLocker: WindowScrollLocker,
@@ -81,6 +83,7 @@ export class SharesItemComponent implements OnInit, OnDestroy {
             .subscribe((share: Share[]) => {
                 if ( share.length === 1 ) {
                     this.snippet = share[0];
+                    this.setShareFlats();
                     this.checkPrevAndNext(id);
                     this.setMetaTags();
                 } else {
@@ -90,6 +93,15 @@ export class SharesItemComponent implements OnInit, OnDestroy {
                 this.router.navigate(['/error-404'], { skipLocationChange: true });
                 console.error(err);
             });
+    }
+
+    private setShareFlats() {
+        this.shareFlats = this.snippet.body.map((item) => {
+            if (item.blockType === 'flats') {
+                return item.blockFlat;
+            }
+        });
+        console.log('this.shareFlats: ', this.shareFlats);
     }
 
     public checkPrevAndNext(id) {
@@ -167,6 +179,12 @@ export class SharesItemComponent implements OnInit, OnDestroy {
         this.meta.updateTag({property : 'og:title', content: this.snippet.name});
         this.meta.updateTag({property : 'og:description', content: this.snippet.text});
         this.meta.updateTag({property : 'og:image', content: this.snippet.mainImage});
+    }
+
+    public openApartmentModal(index) {
+        this.selectedFlatIndex = index;
+        this.windowScrollLocker.block();
+        this.showApartmentWindow = true;
     }
 
     public ngOnDestroy() {

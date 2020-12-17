@@ -42,6 +42,9 @@ export interface ShareFlat {
     price: string;
     discountType: ShareFlatDiscountType;
     discount: string;
+    article: string;
+    articleId: string;
+    inFavorite?: boolean;
 }
 
 export interface ShareBodyBlock {

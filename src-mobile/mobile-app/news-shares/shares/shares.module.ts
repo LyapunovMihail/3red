@@ -10,6 +10,8 @@ import { Uploader } from 'angular2-http-file-upload';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
 import { NewsSharesSnippetModule } from '../news-shares-snippet/news-shares-snippet.module';
 import { BitNumberPipe } from './bit-number.pipe';
+import { ApartmentModule } from '../../flats/apartment/apartment.module';
+import { FlatSnippetModule } from '../../flats/flat-snippet/flat-snippet.module';
 
 const SHARES_COMPONENTS = [
     SharesComponent,
@@ -26,6 +28,8 @@ const SHARES_COMPONENTS = [
         NavMenuModule,
         FormsRequestModule,
         NewsSharesSnippetModule,
+        ApartmentModule,
+        FlatSnippetModule,
         RouterModule.forChild([
             {
                 path: '', component: SharesComponent,

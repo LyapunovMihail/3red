@@ -54,7 +54,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         if (this.conf.blockFlat) {
             // if (this.objectId)
             this.getMods();
-            console.log('this.conf: ', this.conf);
         }
     }
 
@@ -72,11 +71,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
             .subscribe((data) => {
                     data.modsBtnList.shift();
                     this.modsBtnList = data.modsBtnList;
-                    console.log('this.conf.blockFlat: ', this.conf.blockFlat);
                     if (this.conf.blockFlat.jkId) {
-                        console.log('this.conf.blockFlat: ', this.conf.blockFlat);
                         this.getConfig();
-
                     }
                 },
                 (err) => console.error(err)
@@ -88,8 +84,6 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.conf.blockFlat.jkId = selectedValue.objectId;
         this.conf.blockFlat.mod = selectedValue.value;
         this.conf.blockFlat.jkName = selectedValue.name;
-        console.log('selectedValue: ', selectedValue);
-        console.log('this.conf.blockFlat: ', this.conf.blockFlat);
         this.resetFlat(false, false);
         this.housesOptions = [];
         this.sectionsOptions = [];
@@ -109,32 +103,35 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
 
     initHousesOptions() {
         this.housesOptions = Object.keys(this.config.floorCount);
-        console.log('this.housesOptions: ', this.housesOptions);
         if (this.conf.blockFlat.house) {
-            this.changeHouse(this.conf.blockFlat.house, false);
+            this.initSectionsOptions(this.conf.blockFlat.house);
         }
     }
-    changeHouse(house, changeByClick = true) {
+    changeHouse(house) {
         this.resetFlat(true, false);
         this.sectionsOptions = [];
         this.flatsOptions = [];
-        this.initSectionsOptions(house, changeByClick);
+        this.initSectionsOptions(house);
     }
 
-    initSectionsOptions(house, changeByClick = true) {
-        console.log('this.sectionsOptions: ', this.sectionsOptions);
+    initSectionsOptions(house) {
+
         this.sectionsOptions = Object.keys(this.config.floorCount[house]);
+        if (this.sectionsOptions.length === 1) {
+            this.conf.blockFlat.section = this.sectionsOptions[0];
+        }
+        this.ref.detectChanges();
         if (this.conf.blockFlat.section) {
-            this.changeSection(this.conf.blockFlat.section, changeByClick);
+            this.initFlatsOptions(this.conf.blockFlat.section);
         }
     }
-    changeSection(section, changeByClick = true) {
+    changeSection(section) {
         this.resetFlat(true, true);
         this.flatsOptions = [];
-        this.initFlatsOptions(section, changeByClick);
+        this.initFlatsOptions(section);
     }
 
-    initFlatsOptions(section, changeByClick = true) {
+    initFlatsOptions(section) {
         this.sharesService.getFlats({mod: this.conf.blockFlat.mod, houses: this.conf.blockFlat.house, sections: section})
             .subscribe((data) => {
                     this.flats = data;
@@ -142,9 +139,9 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
                         return;
                     }
                     this.flatsOptions = this.flats.map((flat) => flat.flat);
-                    // if (changeByClick) {
-                    //     this.resetFlat(true, true);
-                    // }
+                    if (this.flatsOptions.length === 1) {
+                        this.changeFlat(this.flatsOptions[0]);
+                    }
                 },
                 (err) => console.error(err)
             );
@@ -168,7 +165,9 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
                 scheme: null,
                 price: null,
                 discount: '',
-                discountType: ShareFlatDiscountType.SUM
+                discountType: ShareFlatDiscountType.SUM,
+                article: null,
+                articleId: null
             };
     }
 
@@ -181,6 +180,7 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.conf.blockFlat.floor = flat.floor;
         this.conf.blockFlat.space = flat.space;
         this.conf.blockFlat.rooms = flat.rooms;
+        this.conf.blockFlat.flat = flat.flat;
 
         switch (flat.decoration) {
             case '00':
@@ -216,6 +216,8 @@ export class SharesEditFlatsComponent implements ControlValueAccessor {
         this.conf.blockFlat.deliveryDate = flat.deliveryDate;
         this.conf.blockFlat.scheme = `/assets/floor-plans/jk_${flat.mod}/house_${flat.house}/section_${flat.section}/floor_${flat.floor}/${flat.floor}floor_${flat.flat}flat.svg`;
         this.conf.blockFlat.price = flat.price;
+        this.conf.blockFlat.article = flat.article;
+        this.conf.blockFlat.articleId = flat.articleId;
     }
 
 

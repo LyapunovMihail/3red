@@ -109,7 +109,6 @@
     color: $col-red;
 }
 
-
 .news-view__category {
     color: #000;
     font-size: 14px;
@@ -119,7 +118,6 @@
         content: url(/assets/img/build.svg);
         margin-right: 5px;
     }
-
 }
 
 .news-view__date {
@@ -153,7 +151,6 @@
 .flat {
     position: relative;
     background-color: $col-white;
-    padding: 16px 24px;
     margin: 0 0 4px;
     @media (max-width: 767px) {
         padding: 12px 20px;

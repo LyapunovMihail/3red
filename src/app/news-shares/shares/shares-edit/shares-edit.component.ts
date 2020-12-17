@@ -194,7 +194,9 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                     scheme: null,
                     price: null,
                     discount: '',
-                    discountType: ShareFlatDiscountType.SUM
+                    discountType: ShareFlatDiscountType.SUM,
+                    article: null,
+                    articleId: null
                 }
         }));
     }
