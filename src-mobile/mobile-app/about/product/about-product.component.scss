@@ -4,7 +4,6 @@ p { line-height: normal; }
 
 .product {
     max-width: 704px;
-    padding: 0 32px;
     margin: auto;
     padding-top: 120px;
     position: relative;
@@ -53,9 +52,61 @@ p { line-height: normal; }
 
 }
 .product__image {
+    position: relative;
     width: 280px;
     height: 379px;
     margin-top: 140px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    &-title,
+    &-desc {
+        color: $col-white;
+    }
+
+    &-title {
+        font: 32px/120% $font-formular;
+    }
+
+    &-desc {
+        font: $font-14;
+    }
+
+    &-square,
+    &-projects,
+    &-years {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-square {
+        width: 180px;
+        top: 30px;
+        right: -4px;
+    }
+
+    &-projects {
+        width: 64px;
+        top: 204px;
+        left: 150px;
+    }
+
+    &-years {
+        width: 64px;
+        top: 10px;
+        left: 10px;
+
+        & > * {
+            color: $col-black;
+        }
+    }
+
 }
 .product__parallax-index1,
 .product__parallax-index2,
@@ -192,8 +243,6 @@ p { line-height: normal; }
     }
 
     .product__image {
-        width: 100%;
-        height: 100%;
         margin-bottom: 64px;
         margin-top: 0;
 

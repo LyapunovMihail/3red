@@ -1,0 +1,73 @@
+@import "../../../../styles/modules/mixins/mixin";
+
+.tabs {
+    display: flex;
+    align-items: center;
+    margin: 0 0 24px;
+
+    &-title {
+        display: inline-block;
+        font: $font-14;
+        margin: 0 0 8px;
+    }
+
+    &-scroll {
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    &__tab {
+        display: flex;
+        margin-right: 8px;
+        padding: 5px 8px 4px;
+        border: 1px solid $col-border;
+        border-radius: 16px;
+        cursor: pointer;
+
+        &-name,
+        &-price {
+            font: $font-14;
+            display: block;
+            width: max-content;
+        }
+
+        &-name {
+            position: relative;
+            padding-right: 8px;
+            margin-right: 8px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 1px;
+                height: 12px;
+                background-color: $col-border;
+                right: 0;
+                top: 2px;
+            }
+        }
+
+        &-price {
+            color: $col-black-5;
+        }
+
+        &--active {
+            border-color: $col-red;
+            background-color: $col-red;
+
+            .tabs__tab-name,
+            .tabs__tab-price {
+                color: $col-white;
+            }
+
+            &:hover {
+                cursor: default;
+            }
+        }
+
+        &:hover {
+            border-color: $col-red_hover;
+        }
+    }
+}

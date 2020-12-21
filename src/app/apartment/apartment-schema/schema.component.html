@@ -1,0 +1,38 @@
+<div class="schema">
+    <!--
+        Табы НЕ рендерятся, если у квартиры только 1 уровень
+    -->
+    <div class="schema__tabs">
+        <h3 class="schema__tabs-title">Двухуровневые</h3>
+        <ul class="schema__tabs-list">
+            <!--
+                на активный таб вешается класс « schema__tabs-item--active »
+            -->
+            <li class="schema__tabs-item schema__tabs-item--active">
+                <button class="schema__tabs-btn">1 уровень</button>
+            </li>
+            <li class="schema__tabs-item">
+                <button class="schema__tabs-btn">2 уровень</button>
+            </li>
+        </ul>
+    </div>
+    <div class="schema__image-wrap">
+        <!--
+            для двухуровневых квартир выводим 2 изображения,
+            показываем одно и переключаем табами.
+            Изображению тоже вешаем класс active (для анимации)
+        -->
+        <img
+            class="schema__image schema__image--active"
+            src="http://95.142.35.16:8010/assets/floor-plans/jk_%D0%9D%D0%9A/house_5/section_14/floor_1/1floor_823flat.svg"
+            alt=""
+        >
+        <img
+            class="schema__image"
+            src="http://95.142.35.16:8010/assets/floor-plans/jk_%D0%9D%D0%9A/house_5/section_14/floor_1/1floor_823flat.svg"
+            alt=""
+        >
+        <!-- Заглушка, если планировки нет -->
+        <!--<div class="schema__image-error g-3red"></div>-->
+    </div>
+</div>
