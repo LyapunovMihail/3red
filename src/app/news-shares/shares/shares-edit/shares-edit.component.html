@@ -97,6 +97,14 @@
                     <span>Показать акцию на главной</span>
                 </label>
             </div>
+            <div class="create-shares__wrap create-shares__wrap_margin">
+                <label [class.create-shares__wrap_checkbox--disabled]="(publish.value === 'false' || publish.value === false) || countdown.value && countdownDays < 0"
+                       class="g-checkbox">
+                    <input type="checkbox" name="public" id="public" style="display: none;" [formControlName]="'show_on_promo'">
+                    <div></div>
+                    <span>Промо</span>
+                </label>
+            </div>
         </div>
 
         <h3 class="create-shares__typografy-title create-shares__typografy-title_out-path">Основная информация</h3>

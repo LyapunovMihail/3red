@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit {
 
     public getNewsAndSharesSnippets() {
         combineLatest(
-            this.homeService.getMainShares(),
-            this.homeService.getMainNews()
+            this.homeService.getPromoShares(),
+            this.homeService.getPromoNews()
         ).pipe(map(([shares, news]) => {
                 return [...shares, ...news];
             })

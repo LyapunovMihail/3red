@@ -50,8 +50,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     public getNewsAndSharesSnippets() {
         combineLatest(
-            this.homeService.getMainShares(),
-            this.homeService.getMainNews()
+            this.homeService.getPromoShares(),
+            this.homeService.getPromoNews()
         ).pipe(map(([shares, news]) => {
                 return [...shares, ...news];
             })

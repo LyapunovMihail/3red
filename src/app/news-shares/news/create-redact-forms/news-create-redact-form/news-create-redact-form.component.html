@@ -81,12 +81,21 @@
                 </div>
     
                 <div class="create-form__form-wrap create-form__form-wrap_full">
-                    <label *ngIf="publishVal" class="g-checkbox">
+                    <label [class.create-form__form-wrap_checkbox--disabled]="(publish.value === 'false' || publish.value === false)" class="g-checkbox">
                         <input class="admin-news_checkbox_content"
                             [formControl]="form.controls['show_on_main']"
                             type="checkbox" name="show_on_main">
                         <div></div>
                         <span>Показать новость на главной</span>
+                    </label>
+                </div>
+                <div class="create-form__form-wrap create-form__form-wrap_margin">
+                    <label [class.create-form__form-wrap_checkbox--disabled]="(publish.value === 'false' || publish.value === false)" class="g-checkbox">
+                        <input class="admin-news_checkbox_content"
+                            [formControl]="form.controls['show_on_promo']"
+                            type="checkbox" name="show_on_promo">
+                        <div></div>
+                        <span>Промо</span>
                     </label>
                 </div>
             </div>

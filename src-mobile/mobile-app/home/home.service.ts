@@ -10,12 +10,11 @@ export class HomeService {
 
     constructor( private http: HttpClient ) { }
 
-    public getMainNews(): Observable<INewsSnippet[]> {
-        return this.http.get<INewsSnippet[]>('/api/news/main');
+    public getPromoNews(): Observable<INewsSnippet[]> {
+        return this.http.get<INewsSnippet[]>('/api/news/promo');
     }
 
-    public getMainShares(): Observable<Share[]> {
-        return this.http.get<Share[]>(`/api/shares/main`);
+    public getPromoShares(): Observable<Share[]> {
+        return this.http.get<Share[]>(`/api/shares/promo`);
     }
-
 }
