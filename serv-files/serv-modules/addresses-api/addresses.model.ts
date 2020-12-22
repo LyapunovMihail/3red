@@ -182,7 +182,6 @@ export class AddressesModel {
     }
 
     public async getCommonFlatsData(query) {
-        console.log('query: ', query);
         const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
         const mods = modsBtnList.map((item, i) => {
             if (i > 0) {

@@ -38,7 +38,6 @@ export class PartnersModel {
     }
 
     async uploadImage(req) {
-        console.log('req: ', req.files);
         if (fileExtension(req.files.file.originalFilename) === '.png'  || fileExtension(req.files.file.originalFilename) === '.svg') {
             const path = PARTNERS_UPLOADS_PATH;
             const icon = await iconSaver(req, path);

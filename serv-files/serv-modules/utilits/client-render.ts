@@ -13,14 +13,12 @@ export function ShouldSendMobileVersion(req, session) {
 }
 
 export function clientRender(req: Request, res: Response, status: number, session) {
-    console.log('status: ', status);
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
             res.status(status).sendFile(
               join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'index-mobile.html'),
             );
         } else {
-            console.log('status: ', status);
             res.status(status).sendFile(
                 join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'index.html'), {
                   req,

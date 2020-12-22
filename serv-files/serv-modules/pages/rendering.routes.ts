@@ -132,7 +132,6 @@ async function checkFlatsHouse(req: any, res: Response) {
 async function checkFlatsHouseSectionFloor(req: any, res: Response) {
     const data = await getFlatsData(req.params.id);
     const floorCount = data.floorCount;
-    console.log('floorCount: ', floorCount);
     if (!floorCount[req.params.house] || !floorCount[req.params.house][req.params.section]
         && !floorCount[req.params.house][req.params.section].some((floor) => floor === Number(req.params.floor))) {
         clientRender(req, res, 404, req.session);
