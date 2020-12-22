@@ -35,6 +35,11 @@ export class NewsController extends NewsModel {
             return await this.getMainSnippet();
         }));
 
+        this.router.get('/news/promo', responseHandler(async (req) => {
+            return await this.getPromoSnippet();
+        }));
+
+
         this.router.get('/news/object/:id', responseHandler(async (req) => {
             return await this.getObjectSnippet(req.params.id);
         }));

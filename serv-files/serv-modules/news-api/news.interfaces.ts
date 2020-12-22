@@ -11,6 +11,7 @@ export interface INewsSnippet {
     title: string ;
     description: string ;
     show_on_main: boolean ;
+    show_on_promo: boolean;
     publish: boolean;
     image: string ;
     thumbnail: string ;

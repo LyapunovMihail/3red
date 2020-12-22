@@ -70,6 +70,7 @@ export interface Share {
     created_at: string;
     finish_date: string;
     show_on_main: boolean;
+    show_on_promo: boolean;
     body: ShareBodyBlock[];
     objectId?: string;
     objectName?: string;

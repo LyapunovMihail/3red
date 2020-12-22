@@ -43,6 +43,10 @@ export class SharesController extends SharesModel {
             return await this.getMainSnippet();
         }));
 
+        this.router.get('/shares/promo', responseHandler(async (req) => {
+            return await this.getPromoSnippet();
+        }));
+
         this.router.get('/shares/object/:id', responseHandler(async (req) => {
             return await this.getObjectSnippet(req.params.id);
         }));

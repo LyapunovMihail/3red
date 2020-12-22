@@ -37,6 +37,12 @@ export class SharesModel {
         return filteredSnippets;
     }
 
+    public async getPromoSnippet() {
+        const snippets =  await this.collection.find({ show_on_promo: true }).sort({ created_at: -1 }).toArray();
+        const filteredSnippets = SharesModel.filterExpiredShares(snippets);
+        return filteredSnippets;
+    }
+
     public async getObjectSnippet(objectId) {
         return await this.collection.find({ objectId }).toArray();
     }

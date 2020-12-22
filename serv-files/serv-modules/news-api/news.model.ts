@@ -23,6 +23,11 @@ export class NewsModel {
         return await this.collection.find({ show_on_main: true }).sort({ created_at: -1 }).toArray();
     }
 
+    // новость для промо
+    async getPromoSnippet() {
+        return await this.collection.find({ show_on_promo: true }).sort({ created_at: -1 }).toArray();
+    }
+
     // новости жилищного комплекса
     async getObjectSnippet(objectId) {
         return await this.collection.find({ objectId }).sort({ created_at: -1 }).toArray();
