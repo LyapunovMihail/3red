@@ -22,17 +22,22 @@
         }
     }
     
-    &__item:nth-child(1) {
+    &__item {
         max-width: 431px;
         margin-right: 24px;
     }
-    &__address {
+    &__address,
+    &__time {
+        display: block;
         font: 24px/29px $font-proba;
         margin: 0 0 12px;
         @media (max-width: 767px) {
             @include font-size(16px,22px);
             margin: 0 0 8px;
         }
+    }
+    &__time {
+        color: $col-black-5;
     }
     &__route {
         font: 18px/24px $font-proba;
@@ -50,9 +55,11 @@
             margin: 0 0 16px;
         }
     }
-    &__phone,
-    &__email {
+    &__links {
         font: 24px/29px $font-proba;
+        &:not(:last-child) {
+            margin: 0 0 8px;
+        }
         @media (max-width: 767px) {
             @include font-size(16px,22px);
         }

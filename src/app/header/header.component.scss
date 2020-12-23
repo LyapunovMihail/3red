@@ -68,8 +68,14 @@
     }
 
     &__another-nav {
-        align-self: center;
         display: flex;
+        align-self: center;
+        align-items: flex-end;
+        flex-direction: column;
+
+        .nav__link {
+            font-size: 20px;
+        }
     }
 
     &__phone,
@@ -82,7 +88,7 @@
     }
 
     &__phone {
-        margin-right: 16px;
+        margin: 0 0 4px;
     }
 
     &__enter {

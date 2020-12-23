@@ -2,11 +2,11 @@
     <div class="objects-container" [class.objects-container--main]="isMainPage">
         <div class="objects-wrap">
             <div class="objects__title-wrap">
-                <h1 class="objects__title" *ngIf="!isMainPage">Объекты</h1>
-                <h2 class="objects__title-main" *ngIf="isMainPage">Объекты</h2>
+                <h1 class="objects__title" *ngIf="!isMainPage">Проекты</h1>
+                <h2 class="objects__title-main" *ngIf="isMainPage">Проекты</h2>
             </div>
 
-            <a routerLink="/objects/list" class="g-all-object" *ngIf="isMainPage">Все объекты</a>
+            <a routerLink="/objects/list" class="g-all-object" *ngIf="isMainPage">Все проекты</a>
         </div>
 
         <div class="objects__label_flex-container">
@@ -41,7 +41,7 @@
 
     <div class="objects-container" *ngIf="isMainPage">
         <a routerLink="/objects/list" class="objects__link">
-            <span class="g-all-object">Все объекты</span>
+            <span class="g-all-object">Все проекты</span>
         </a>
     </div>
 
