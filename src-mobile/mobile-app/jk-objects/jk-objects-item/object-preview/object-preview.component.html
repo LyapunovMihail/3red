@@ -3,7 +3,7 @@
     <img [src]="uploadsPath + snippet.mainInfo.image" class="object-preview__background-image" alt="background-image" *ngIf="snippet">
 
     <div class="object-preview__wrapper object-preview__wrapper_top">
-        <a [routerLink]="['/objects/list']" class="object-preview__back-btn">Назад</a>
+        <a [routerLink]="['/objects/list']" class="object-preview__back-btn">К списку проектов</a>
 
         <div class="object-preview__wrap" *ngIf="snippet">
             <div class="object-preview__item">
@@ -43,7 +43,7 @@
 
         <div class="object-preview__btns">
             <a *ngIf="hasPhotos" [routerLink]="'/objects/list/' + objectId +  '/dynamic/' + lastYearWithPhotos + '/' + lastMothWithPhotos" class="object-preview__btns-dynamic btn_var-3"><span>Фотоотчет</span></a>
-            <a class="object-preview__btns-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'" *ngIf="hasFlats">Выбрать квартиру</a>
+            <a class="object-preview__btns-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'" *ngIf="hasFlats">Подбор квартиры</a>
         </div>
     </div>
 </section>

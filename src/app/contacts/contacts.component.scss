@@ -1,3 +1,5 @@
+@import "../../styles/modules/mixins/mixin";
+
 .contacts {
     height: calc(100vh - 150px);
 }
@@ -10,13 +12,17 @@
     //height: 160px;
     box-sizing: border-box;
 }
-.contacts__item:nth-child(1) {
+.contacts__item {
     width: 446px;
     padding-right: 88px;
 }
 .contacts__address {
-    font-size: 24px;
-    line-height: 1.25;
+    font: $font-24;
+    margin: 0 0 4px;
+}
+.contacts__time {
+    font: $font-18;
+    color: $col-black-5;
 }
 .contacts__route {
     font-size: 18px;
@@ -32,10 +38,19 @@
 
     }
 }
-.contacts__phone,
-.contacts__email {
-    font-size: 24px;
-    line-height: 1.25;
+.contacts__links {
+    display: flex;
+    flex-direction: column;
+}
+.contacts__link {
+    font: $font-24;
+    transition: color $transition;
+    &:hover {
+        color: $col-red_hover;
+    }
+    &:not(:last-child) {
+        margin: 0 0 8px;
+    }
 }
 
 .contacts__map {
