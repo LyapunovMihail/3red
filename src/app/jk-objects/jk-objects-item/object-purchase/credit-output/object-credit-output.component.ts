@@ -25,7 +25,6 @@ export class ObjectCreditOutputComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.activeBanksLength = this.bankList.filter((item) => item.show).length;
-        console.log('BANKS', this.bankList);
     }
 
     ngOnChanges(changes) {

@@ -143,5 +143,53 @@ export const banks = [
         date: '30',
         payment: '8',
         isNew: false
+    }, {
+        name: 'Ак Барс Банк',
+        cssclass: 'akbars',
+        image: '/assets/img/purchase/credit/ak_bars.png',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
+    }, {
+        name: 'Московский Кредитный Банк',
+        cssclass: 'mcb',
+        image: '/assets/img/purchase/credit/mcb.png',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
+    }, {
+        name: 'Почта России',
+        cssclass: 'pochta',
+        image: '/assets/img/purchase/credit/pochta.png',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
+    }, {
+        name: 'Банк Россия',
+        cssclass: 'russia',
+        image: '/assets/img/purchase/credit/russia.png',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
+    }, {
+        name: 'СМП Банк',
+        cssclass: 'smp',
+        image: '/assets/img/purchase/credit/smp.png',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
+    }, {
+        name: 'Тинькофф',
+        cssclass: 'tinkoff',
+        image: '/assets/img/purchase/credit/tinkoff.png',
+        rate: '0%',
+        date: '30',
+        payment: '8',
+        isNew: false
     }
 ];

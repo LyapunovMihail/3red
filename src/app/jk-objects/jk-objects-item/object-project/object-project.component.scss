@@ -18,12 +18,14 @@
 
 .project__link {
     display: inline-block;
+    margin-top: 24px;
     margin-right: 24px;
     font: 24px/24px $font-proba;
-    text-decoration: underline;
+    color: #E52628;
 
     &:hover {
         color: #E52628;
+        text-decoration: underline;
     }
 }
 

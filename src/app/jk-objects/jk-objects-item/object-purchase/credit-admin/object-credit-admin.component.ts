@@ -36,7 +36,7 @@ export class ObjectCreditAdminComponent implements OnInit {
         public formBuilder: FormBuilder,
         public ref: ChangeDetectorRef,
         private projectService: ObjectCreditAdminService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.form = this.formBuilder.group({

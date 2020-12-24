@@ -45,6 +45,7 @@ export class JkObjectsListComponent implements OnInit {
         this.objectService.getSnippets()
             .subscribe((data) => {
                 this.snippets = data;
+                this.filterSnippets();
                 this.getDistricts();
 
                 this.objectService.getFlats({type: 'КВ,АП', status: '4'})

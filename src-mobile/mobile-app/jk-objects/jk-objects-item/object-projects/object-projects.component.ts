@@ -43,6 +43,7 @@ export class ObjectProjectsComponent implements OnInit {
             .subscribe((data) => {
                 const tempObjects = data.filter(item => item._id !== this.objectId && item.publish);
                 this.snippets = tempObjects.length && tempObjects.length > 5 ? this.getRandomObjects(tempObjects) : tempObjects;
+                this.filterSnippets();
                 this.getFlatsMinPrice(this.snippets);
             });
     }
@@ -53,6 +54,18 @@ export class ObjectProjectsComponent implements OnInit {
 
     public prevBtn() {
         this.currentSlide = ( this.currentSlide > 0 ) ? this.currentSlide - 1 : this.mockProject.length - 1 ;
+    }
+
+    public filterSnippets() {
+        const filteredSnippets: IObjectSnippet[] = [];
+        if (this.snippets && this.snippets.length > 0) {
+            this.snippets.forEach((item) => {
+                if (item.publish) {
+                    filteredSnippets.push(item);
+                }
+            });
+        }
+        this.snippets = filteredSnippets;
     }
 
     private getFlatsMinPrice(objects) {
