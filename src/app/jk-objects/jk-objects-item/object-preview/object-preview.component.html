@@ -3,7 +3,7 @@
     <img [src]="uploadsPath + snippet.mainInfo.image" class="object-preview__background-image" alt="background-image" *ngIf="snippet">
 
     <div class="object-preview__wrapper object-preview__wrapper_top">
-        <a *ngIf="!isAuthorizated" [routerLink]="['/objects/list']" class="object-preview__back-btn">К списку объектов</a>
+        <a *ngIf="!isAuthorizated" [routerLink]="['/objects/list']" class="object-preview__back-btn">К списку проектов</a>
         <button class="object-preview__admin-btn btn__admin-content btn_var-2" *ngIf="isAuthorizated" (click)="closeModal = false">Контент</button>
 
         <div class="object-preview__wrap" *ngIf="snippet">
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <a *ngIf="!isAuthorizated && hasFlats" class="object-preview__change-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'">Выбрать квартиру</a>
+        <a *ngIf="!isAuthorizated && hasFlats" class="object-preview__change-flats btn_var-1" [routerLink]="'/objects/list/' + objectId + '/flats'">Подбор квартиры</a>
     </div>
 </section>
 

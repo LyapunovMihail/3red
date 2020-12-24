@@ -33,14 +33,11 @@ export class HeaderService {
                 name: 'О компании',
                 url: '/about'
             }, {
-                name: 'Объекты',
+                name: 'Проекты',
                 url: `/objects/list`
             }, {
                 name: 'Квартиры',
                 url: `/flats/search`
-            }, {
-                name: 'Контакты',
-                url: '/contacts'
             }, {
                 name: 'Новости',
                 url: '/news-shares'
@@ -50,7 +47,10 @@ export class HeaderService {
             }, {
                 name: 'Избранное',
                 url: '/favorites'
-            }
+            }, {
+                name: 'Контакты',
+                url: '/contacts'
+            },
         ];
     }
 }
