@@ -108,7 +108,7 @@ export class DbCronUpdate {
             twolevel: (object['2level'] === '1'),
             isEuro: object.IsEuro === '1',
             space: Number(object.Quantity),
-            price: Number(object.Sum),
+            price: Number(object.Sum) + 30000,
             deliveryDate: object.DeliveryPeriodDate,
             article: object.Article,
             articleId: object.ArticleID,
