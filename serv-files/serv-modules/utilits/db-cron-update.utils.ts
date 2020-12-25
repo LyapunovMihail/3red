@@ -88,6 +88,9 @@ export class DbCronUpdate {
         if (('Article' in object) && !this.objects.some((jk) => jk.mod === object.Article.split('-')[0])) { // Если жилой комплекс этой квартиры создан, она добавляется в бд
             return;
         }
+        if (object.Article.split('-')[0] === 'ЯР' && object.StatusCode === '1') { // Если жилой комплекс этой квартиры создан, она добавляется в бд
+            return;
+        }
         const {mod, house, section, floor, flat} = this.parseArticle(object.Article);
         const type = this.parseType(object.ArticleTypeCode, object.articleSubTypeCode);
         const itemflat: IAddressItemFlat = {

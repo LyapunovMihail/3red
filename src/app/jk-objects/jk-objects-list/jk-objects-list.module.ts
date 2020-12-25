@@ -12,6 +12,7 @@ import { CheckboxListComponent } from './objects-form/checkbox-list/checkbox-lis
 import { JkObjectsNumberPipe } from './jk-objects-number.pipe';
 import { ObjectsFormComponent } from './objects-form/objects-form.component';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
+import { DragNDropDirective } from '../../UI/drag-n-drop/drag-n-drop.directive';
 
 @NgModule({
   exports: [
@@ -30,7 +31,8 @@ import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
       ObjectsAdminComponent,
       CheckboxListComponent,
       JkObjectsNumberPipe,
-      ObjectsFormComponent
+      ObjectsFormComponent,
+      DragNDropDirective
   ],
   imports: [
       CommonModule,

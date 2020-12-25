@@ -9,7 +9,8 @@ export interface IPartnersSnippet {
     created_at: any;
     last_modifyed: any;
     blackPart: string;
-    greyPart: string;
+    greyPart?: string;
+    paragraf: string;
     uk: IPartnersUk[];
 }
 

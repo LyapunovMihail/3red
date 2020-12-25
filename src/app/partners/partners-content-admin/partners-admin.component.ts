@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { PartnersAdminService } from './partners-admin.service';
 import { IPartnersJk, IPartnersSnippet, PARTNERS_UPLOADS_PATH } from '../../../../serv-files/serv-modules/partners/partners-api/partners.interfaces';
 import { IPartnersTabsSnippet } from '../../../../serv-files/serv-modules/partners/tabs-api/partners-tabs.interfaces';
@@ -66,7 +66,8 @@ export class PartnersAdminComponent implements OnInit {
             created_at: new Date(),
             last_modifyed: new Date(),
             blackPart: '',
-            greyPart: '',
+            // greyPart: '',
+            paragraf: '',
             uk: this.formBuilder.array([])
         });
     }
@@ -76,7 +77,8 @@ export class PartnersAdminComponent implements OnInit {
             created_at : this.snippet.created_at,
             last_modifyed : new Date(),
             blackPart: this.snippet.blackPart,
-            greyPart: this.snippet.greyPart,
+            // greyPart: this.snippet.greyPart,
+            paragraf: this.snippet.paragraf,
             uk: this.parseUkArray()
         });
     }
