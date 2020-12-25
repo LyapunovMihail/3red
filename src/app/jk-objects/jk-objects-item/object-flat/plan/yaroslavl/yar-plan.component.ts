@@ -31,7 +31,6 @@ export class YarPlanComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-
         combineLatest(
             this.planService.getHouse('1', this.mod),
             this.planService.getHouse('2', this.mod)
@@ -54,6 +53,7 @@ export class YarPlanComponent implements OnInit {
             });
             this.houses[i].rooms = this.houses[i].rooms.filter(item => item.minPrice !== 0);
         }
+        console.log('this.houses: ', this.houses);
     }
 
     public svgRouterLink(event: Event, url, house) {

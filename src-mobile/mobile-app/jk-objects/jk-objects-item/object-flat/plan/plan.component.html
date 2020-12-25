@@ -1,4 +1,5 @@
-<section class="object-flat" [class.object-item--margin]="switchOn">
+<section class="object-flat" [class.object-item--margin]="
+    switchOn && (mod === 'ЯР' || mod === 'ВБ2' || mod === 'БР' || mod === 'НТМ' || mod === 'ОБ' || mod === 'НК' || mod === 'МКВ' || mod === 'МАЙ' || mod === 'АИБ')">
 
     <ng-container *ngIf="switchOn">
 
@@ -6,7 +7,9 @@
 
             <div class="object-flat__head">
                 <div class="object-flat__head-wrap">
-                    <h2 class="object-flat__head-title">Выберите дом</h2>
+                    <h2 class="object-flat__head-title" *ngIf="mod === 'ЯР' || mod === 'ВБ2' || mod === 'БР' || mod === 'НТМ' || mod === 'ОБ' || mod === 'НК' || mod === 'МКВ' || mod === 'МАЙ' || mod === 'АИБ'">
+                        Выберите дом
+                    </h2>
         
                     <!-- <div class="object-flat__scheme">
                         <p class="object-flat__scheme-icon" (click)="openTooltipSchema()">Схема</p>
@@ -29,7 +32,7 @@
                 <!--</nav>-->
             </div>
             
-            <div class="object-flat__house" *ngIf="mod !== 'СЯ' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'МКВ' && mod !== 'НК' && mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'МАЙ' && mod !== 'АИБ'">
+            <div class="object-flat__house" *ngIf="mod !== 'ЯР' && mod !== 'ВБ2' && mod !== 'БР' && mod !== 'МКВ' && mod !== 'НК' && mod !== 'НТМ' && mod !== 'ОБ' && mod !== 'МАЙ' && mod !== 'АИБ'">
                 <div class="object-flat__house-item object-flat__house-item_house-{{house.houseNumber}}" *ngFor="let house of tempHouse">
                     <h3 class="object-flat__house-title">Дом №{{house.houseNumber}}</h3>
                     <p class="object-flat__house-flats">{{house.freeFlats}} квартир</p>
@@ -47,7 +50,7 @@
                 [mod]="mod">
             </app-flats-mkv-plan-page>
 
-            <app-flats-yar-plan-page *ngIf="mod === 'СЯ'"
+            <app-flats-yar-plan-page *ngIf="mod === 'ЯР'"
                 [objectId]="objectId"
                 [mod]="mod">
             </app-flats-yar-plan-page>
