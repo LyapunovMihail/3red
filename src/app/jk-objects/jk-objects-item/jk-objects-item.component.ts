@@ -60,6 +60,7 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
         this.jkObjectsItemService.getSnippets(this.objectId)
             .subscribe(
                 (data) => {
+                    console.log('data: ', data);
                     if (data.length === 1) {
                         this.jk = data[0];
                         this.getFlats(this.jk.mod);

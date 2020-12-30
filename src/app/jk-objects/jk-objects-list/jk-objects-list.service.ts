@@ -41,6 +41,11 @@ export class JkObjectsListService {
         return this.http.post<IObjectSnippet[]>('/api/admin/jk-object/object/delete', message, adminHeaders());
     }
 
+    public updateCollection(snippets): Observable<IObjectSnippet[]> {
+        const message = JSON.stringify({ snippets });
+        return this.http.post<IObjectSnippet[]>('/api/admin/jk-object/object/update-collection', message, adminHeaders());
+    }
+
     public getFlats(options): Observable<IAddressItemFlat[]> {
         return this.http.post<IAddressItemFlat[]>('/api/search/object', { search: options });
     }

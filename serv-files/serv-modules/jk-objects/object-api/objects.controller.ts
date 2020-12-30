@@ -42,6 +42,10 @@ export class ObjectsController extends ObjectsModel {
             return await this.deleteSnippet(req.body.id);
         }));
 
+        this.router.post('/admin/jk-object/object/update-collection', responseHandler(async (req) => {
+            return await this.updateCollection(req.body.snippets);
+        }));
+
         const multipartMiddleware = multipart();
         this.router.post('/admin/jk-object/object/image', multipartMiddleware, responseHandler(async (req: IFileRequest) => {
             return await this.uploadImage(req);

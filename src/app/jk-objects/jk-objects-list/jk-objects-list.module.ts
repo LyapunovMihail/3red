@@ -12,12 +12,13 @@ import { CheckboxListComponent } from './objects-form/checkbox-list/checkbox-lis
 import { JkObjectsNumberPipe } from './jk-objects-number.pipe';
 import { ObjectsFormComponent } from './objects-form/objects-form.component';
 import { NavMenuModule } from '../../UI/nav-menu/nav-menu.module';
-import { DragNDropDirective } from '../../UI/drag-n-drop/drag-n-drop.directive';
+import { DragNDropJkDirective } from './objects-items/drag-n-drop-jk.directive';
 
 @NgModule({
   exports: [
       JkObjectsListComponent,
       ObjectsItemsComponent,
+      DragNDropJkDirective,
       ObjectsMapComponent,
       ObjectsAdminComponent,
       CheckboxListComponent,
@@ -27,12 +28,12 @@ import { DragNDropDirective } from '../../UI/drag-n-drop/drag-n-drop.directive';
   declarations: [
       JkObjectsListComponent,
       ObjectsItemsComponent,
+      DragNDropJkDirective,
       ObjectsMapComponent,
       ObjectsAdminComponent,
       CheckboxListComponent,
       JkObjectsNumberPipe,
       ObjectsFormComponent,
-      DragNDropDirective
   ],
   imports: [
       CommonModule,
@@ -41,6 +42,7 @@ import { DragNDropDirective } from '../../UI/drag-n-drop/drag-n-drop.directive';
       AdminModalModule,
       SlideTopLabelModule,
       NavMenuModule
+
   ]
 })
 

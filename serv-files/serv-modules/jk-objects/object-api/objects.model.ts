@@ -18,6 +18,8 @@ export class ObjectsModel {
 
     async getSnippet(objectId?) {
         const findCriteria = objectId && objectId !== 'undefined' ? { _id : ObjectId(objectId)} : {};
+        console.log('objectId: ', objectId);
+        console.log('findCriteria: ', findCriteria);
         return await this.collection.find(findCriteria).toArray();
     }
 
@@ -72,6 +74,18 @@ export class ObjectsModel {
         return await this.errorParamsCatcher(ObjectId.isValid(id), async () => {
             await this.collection.deleteOne({ _id : ObjectId(id) });
         });
+    }
+
+    async updateCollection(parameters) {
+        const snippets: IObjectSnippet[] = parameters;
+        for (const snippet of snippets) {
+            snippet._id = ObjectId(snippet._id);
+            if (!this.valuesReview(snippet)) {
+                throw new Error(ErrorNotCorrectArguments);
+            }
+        }
+        await this.collection.remove({});
+        await this.collection.insert(snippets);
     }
 
     async uploadImage(req) {
