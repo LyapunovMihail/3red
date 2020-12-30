@@ -22,6 +22,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public sort: string;
     public decorList = FormConfig.decorationList;
     public statusList = FormConfig.statusList;
+    public euroList = FormConfig.euroList;
 
     @Input()
     public config: any = {};
@@ -46,7 +47,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         });
         setTimeout( () => {
         }, 1000);
-        console.log('housesBtnList: ', this.housesBtnList);
     }
 
     public buildForm(params) {
@@ -68,7 +68,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             }
             return arr.map((item) => (new FormControl(item)));
         })());
-
+        console.log('params: ', params);
         this.form = this.formBuilder.group({
             space: {
                 min: Number(params.spaceMin) || this.config.space.min,
@@ -117,7 +117,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     return [];
                 })(params.housesMods)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON
             ],
-            mod: params.mod || ''                   // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
+            mod: params.mod || '', // mod используется только для составления массива домов housesBtnList, а в него уже записываются моды
+            isEuro: [
+                ((isEuro) => {
+                    if (isEuro && isEuro.split(',').every((item) => this.euroList.some((i) => item === i.value))) {
+                        return isEuro.split(',');
+                    }
+                    return [];
+                })(params.isEuro)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON
+            ],
         });
 
         this.formChange.emit(this.form.value);

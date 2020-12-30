@@ -41,7 +41,7 @@ export class SearchComponent implements OnDestroy {
         this.searchService.setLoadingIndicator(true);
         this.form = form;
 
-        const params = {
+        const params: any = {
             spaceMin: form.space.min,
             spaceMax: form.space.max,
             priceMin: form.price.min,
@@ -78,6 +78,10 @@ export class SearchComponent implements OnDestroy {
 
         if ('mod' in form) {
             params['mod'] = form.mod;
+        }
+
+        if ( 'isEuro' in form && form.isEuro.length) {
+            params['isEuro'] = (form.isEuro).join(',');
         }
 
         this.params = params;

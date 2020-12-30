@@ -23,6 +23,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public hideCorpus = false;
     public decorList = FormConfig.decorationList;
     public statusList = FormConfig.statusList;
+    public euroList = FormConfig.euroList;
     public sort: string;
     public housesBtnList: any[] = [];
 
@@ -119,7 +120,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                     return [];
                 })(params.houses)
             ],
-            mod: this.objectFlatsService.getData().jk.mod || ''
+            mod: this.objectFlatsService.getData().jk.mod || '',
+            isEuro: [
+                ((isEuro) => {
+                    if (isEuro && isEuro.split(',').every((item) => this.euroList.some((i) => item === i.value))) {
+                        return isEuro.split(',');
+                    }
+                    return [];
+                })(params.isEuro)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON
+            ],
         });
 
         this.formChange.emit(this.form.value);

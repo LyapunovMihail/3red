@@ -113,14 +113,19 @@
 
                 <div class="search-form__wrap-checkboxes">
                     <app-search-checkbox-list
-                            [btnList]="statusList"
-                            [formControl]="form.controls['status']"
-                            [name]="'status'">
+                        [btnList]="euroList"
+                        [formControl]="form.controls['isEuro']"
+                        [name]="'isEuro'">
                     </app-search-checkbox-list>
                     <app-search-checkbox-list
-                            [btnList]="decorList"
-                            [formControl]="form.controls['decoration']"
-                            [name]="'decoration'">
+                        [btnList]="statusList"
+                        [formControl]="form.controls['status']"
+                        [name]="'status'">
+                    </app-search-checkbox-list>
+                    <app-search-checkbox-list
+                        [btnList]="decorList"
+                        [formControl]="form.controls['decoration']"
+                        [name]="'decoration'">
                     </app-search-checkbox-list>
                 </div>
 

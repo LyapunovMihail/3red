@@ -75,6 +75,8 @@ export class CheckboxListComponent {
     public writeValue(control) {
         if (control) {
             this.activeList = control;
+            console.log('name: ', this.name);
+            console.log('this.activeList: ', this.activeList);
         }
     }
 

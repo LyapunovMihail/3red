@@ -326,6 +326,9 @@ export class AddressesModel {
         if ('status' in query && query.status.split(',').every((item) => FormConfig.statusList.some((i) => item === i.value))) {
             request.status = {$in: query.status.split(',')};
         }
+        if ('isEuro' in query) {
+            request.isEuro = true;
+        }
 
         let parameters = {};
 
@@ -379,6 +382,25 @@ export class AddressesModel {
             parameters
         };
     }
+
+    // setTomilinoRooms(request) {
+    //     const hasTomilinoMod = request.mod.$in.some((mod) => mod === 'НТ');
+    //     if (hasTomilinoMod) {
+    //         const rooms = request.rooms.$in;
+    //         if (request.isEuro) {
+    //             rooms.map((room) => {
+    //                 return room + 1;
+    //             });
+    //         } else {
+    //             const newRooms = [];
+    //             for (const room of rooms) {
+    //                 newRooms.push(room);
+    //                 newRooms.push(room + 1);
+    //             }
+    //         }
+    //     }
+    //
+    // }
 
     public async getFavorites(session) {
         return session.favoriteFlats ? session.favoriteFlats : [];

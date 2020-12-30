@@ -63,6 +63,11 @@ export const FormConfig = {
             name: 'Тип дома 2Б',
             value: '2b'
         }
+    ],
+    euroList: [
+        {
+            name: 'Евро',
+            value: 'true'
+        }
     ]
-
 };

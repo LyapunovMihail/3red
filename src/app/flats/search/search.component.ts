@@ -43,6 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     public getData(params, firstBoot) {
+        console.log('params: ', params)
         this.searchService.getFlatsData({mod: params.mod || '', type: 'КВ, АП'}).subscribe(
             (data) => {
                 this.modsBtnList = data.modsBtnList;
@@ -112,6 +113,10 @@ export class SearchComponent implements OnInit, OnDestroy {
             params.mod = form.mod;
         }
 
+        if ( 'isEuro' in form && form.isEuro.length) {
+            params.isEuro = (form.isEuro).join(',');
+        }
+
         if (this.params && this.params.mod !== params.mod) {
             delete params.housesMods;
             this.getData(params, false); // При смене таба подгружаем конфиг с параметрами
@@ -131,6 +136,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
     public getFlats(params) {
+        console.log('params: ', params);
         this.searchService.getFlatsMultiple({ modsBtnList: this.modsBtnList, params }).subscribe(
             (flats) => {
                 flats = flats.filter((flat) => flat.status !== '8');
