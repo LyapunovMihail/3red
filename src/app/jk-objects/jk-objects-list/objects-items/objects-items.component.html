@@ -28,7 +28,7 @@
                             <path d="M49.3819 8.77293V10.2351H52.7972V12.9872H49.3819V14.626H54.0593V17.8464H45.8694V5.55261H54.0593V8.77293H49.3819Z" fill="white"/>
                         </svg>
                     </a>
-                    <p class="objects__item-title">{{snippet.name}}</p>
+                    <a class="objects__item-title" routerLink="/objects/list/{{snippet._id}}">{{snippet.name}}</a>
                 </div>
                 <p class="objects__item-status">{{snippet.subtext}}</p>
             </div>
