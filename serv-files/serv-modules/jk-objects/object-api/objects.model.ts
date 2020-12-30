@@ -18,8 +18,6 @@ export class ObjectsModel {
 
     async getSnippet(objectId?) {
         const findCriteria = objectId && objectId !== 'undefined' ? { _id : ObjectId(objectId)} : {};
-        console.log('objectId: ', objectId);
-        console.log('findCriteria: ', findCriteria);
         return await this.collection.find(findCriteria).toArray();
     }
 
