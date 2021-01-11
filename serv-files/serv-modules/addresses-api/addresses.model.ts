@@ -101,7 +101,7 @@ export class AddressesModel {
         if (!section) {
             section = new Array(flat.floorsInSection).fill([]); // Заполняем секцию этажами и этажи мок квартирами
             section.forEach((floor, i) => {
-                const mockFlat = {status: '-1', house: flat.house, section: flat.section, floor: section.length - i};
+                const mockFlat = {status: '-1', house: flat.house, section: flat.section, floor: section.length - i, flat: 99999};
                 section[i] = new Array(flat.flatsInFloor).fill(mockFlat);
             });
             chess[flat.house][flat.section] = section;
@@ -110,6 +110,7 @@ export class AddressesModel {
         const floor = section[section.length - flat.floor];
         const firstMockFlat = floor.findIndex((mockFlat) => mockFlat.status === '-1');  // Находим первую мок квартиру на этаже и меняем на настоящую
         floor[firstMockFlat] = flat;
+        floor.sort((a, b) => a.flat - b.flat);
     }
 
     private setMinMaxParams(flats) {
