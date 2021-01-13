@@ -13,7 +13,7 @@
                 <a class="btn btn--settings" (click)="closeTabsModal = false">Настройки</a>
             </div>
 
-            <div class="team__divisions" *ngFor="let tab of tabSnippet.team; let i = index">
+            <div class="team__divisions" *ngFor="let tab of tabSnippet?.team; let i = index">
                 <ng-container *ngIf="tab.show">
                     <div class="team__item-title" *ngIf="isAuthorizated">{{tab.name}}</div>
 
@@ -30,7 +30,7 @@
                                         <div class="team__list-item">
                                             <div class="team__list-image"><img [src]="uploadsPath + employee.thumbnail" alt="photo"></div>
                                             <div class="team__list-name">{{employee.fio}}</div>
-                                            <div class="team__list-prof">{{employee.position}}</div>
+                                            <div class="team__list-prof" *ngIf="employee.position">{{employee.position}}</div>
                                         </div>
                                     </div>
                                 </ng-container> 
