@@ -14,7 +14,7 @@
                         <div class="swiper-team" id="swiper-team-{{i}}">
                             <div class="swiper-wrapper swiper-team__wrap">
     
-                                <ng-container *ngFor="let employee of teams[tab.name].team.data; let j = index">
+                                <ng-container *ngFor="let employee of teams[tab.name].team?.data; let j = index">
                                     <div class="swiper-slide swiper-team__slide">
                                         <div class="swiper-team__slide-image">
                                             <img [src]="uploadsPath + employee.thumbnail" alt="photo">

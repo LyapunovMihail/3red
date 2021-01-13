@@ -34,6 +34,8 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     public isLoaded = false;
     // открытие формы редактирования-создания
     public redactId: any;
+    
+    public minPriceByMod = {};
 
     constructor(
         public router: Router,
@@ -51,6 +53,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             .subscribe((data) => {
                 this.snippets = data;
                 this.getDistricts();
+                this.getMinPrice(data);
             });
 
         this.objectService.getFlats({type: 'КВ,АП', status: '4'})
@@ -177,5 +180,23 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         setTimeout( () => {
             this.showMap = !this.showMap;
         }, 300);
+    }
+
+    private getMinPrice(jkList: IObjectSnippet[]) {
+        const objects = jkList.filter(jk => !jk.subtext);
+        const params = {
+            mod: objects.map(jk => jk.mod).join(','),
+            type: 'КВ,АП',
+            status: '4',
+        }
+        this.objectService.getFlats(params)
+            .subscribe( data => {
+                objects.forEach( jk => {
+                    const price = data.filter(flat => flat.mod === jk.mod).map(flat => flat.price);
+                    if (!price.length) { return; }
+                    const minPrice = ( Math.min(...price) / 1000000 ).toFixed(2);
+                    this.minPriceByMod[jk.mod] = `Квартиры от ${minPrice} млн. руб.`;
+                });
+        });
     }
 }

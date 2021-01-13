@@ -98,6 +98,14 @@ export class ObjectProjectsComponent implements OnInit {
         return jkMas;
     }
 
+    public getSubtextContent(obj, i) {
+        return this.objects[i] && this.objects[i].minPrice
+            ? this.objects[i].minPrice === 'Полностью распродан!'
+                ? this.objects[i].minPrice
+                : `Квартиры от ${this.objects[i].minPrice} млн. руб.`
+            : obj.status;
+    }
+
    private getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }

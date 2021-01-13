@@ -123,4 +123,12 @@ export class ObjectProjectsComponent implements OnInit {
             },
         });
     }
+
+    public getSubtextContent(obj, i) {
+        return this.objects[i] && this.objects[i].minPrice
+            ? this.objects[i].minPrice === 'Полностью распродан!'
+                ? this.objects[i].minPrice
+                : `Квартиры от ${this.objects[i].minPrice} млн. руб.`
+            : obj.status;
+    }
 }

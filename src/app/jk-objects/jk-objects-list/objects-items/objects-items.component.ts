@@ -21,6 +21,8 @@ export class ObjectsItemsComponent implements OnInit {
     public snippets: IObjectSnippet[];
     @Input()
     public isMainPage = false;
+    @Input()
+    public minPriceByMod;
 
     @Output() public deleteSnippet = new EventEmitter();
     @Output() public redactSnippet = new EventEmitter();
@@ -30,12 +32,8 @@ export class ObjectsItemsComponent implements OnInit {
 
     public activeTooltip: string;
 
-    constructor(
-    ) {
-    }
-
-    ngOnInit() {
-    }
+    constructor() {}
+    ngOnInit() {}
 
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
@@ -44,5 +42,11 @@ export class ObjectsItemsComponent implements OnInit {
     public setIlike(ev, snippet) {
         snippet.ilike = ev.target.checked;
         this.updateSnippet.emit(snippet);
+    }
+
+    public getSubtextContent(obj: IObjectSnippet) {
+        return obj.subtext
+            ? obj.subtext
+            : this.minPriceByMod[obj.mod];
     }
 }

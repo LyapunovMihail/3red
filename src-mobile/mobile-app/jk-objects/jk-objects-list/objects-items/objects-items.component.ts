@@ -9,25 +9,24 @@ import {
     templateUrl: './objects-items.component.html',
     styleUrls: ['./objects-items.component.scss']
 })
-export class ObjectsItemsComponent implements OnInit {
+export class ObjectsItemsComponent {
 
     @Input()
     public isMainPage = false;
     @Input()
     public snippets: IObjectSnippet[];
+    @Input() public minPriceByMod;
 
-    uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
-
+    public uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
     public activeTooltip: string;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-
-    }
 
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
+    }
+
+    public getSubtextContent(obj: IObjectSnippet) {
+        return obj.subtext
+            ? obj.subtext
+            : this.minPriceByMod[obj.mod];
     }
 }
