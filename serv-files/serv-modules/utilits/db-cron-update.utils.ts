@@ -110,6 +110,7 @@ export class DbCronUpdate {
             roofexit: (object.RoofExit === '1'),
             twolevel: (object['2level'] === '1'),
             isEuro: object.IsEuro === '1',
+            eRooms: mod === 'НТМ' && object.IsEuro === '1' ? Number(object.Rooms) - 1 : Number(object.Rooms), // Теже самые номера квартир, но с поправкой для евро квартир Томилино
             space: Number(object.Quantity),
             price: Number(object.Sum) + 30000,
             deliveryDate: object.DeliveryPeriodDate,

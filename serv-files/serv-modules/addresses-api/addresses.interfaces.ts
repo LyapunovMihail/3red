@@ -52,6 +52,7 @@ export interface IAddressItemFlat {
     decoration: string;
     decorationName: string;
     rooms: number;
+    eRooms: number;
     separateentrance: boolean;
     terrasescount: boolean;
     roofexit: boolean;

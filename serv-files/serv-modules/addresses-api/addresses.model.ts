@@ -297,7 +297,7 @@ export class AddressesModel {
             if ((/[3]/).exec(query.rooms)) {
                 query.rooms = query.rooms + ',4,5,6'; // если выбраны 3+, то добавляем квартиры большей комнатности
             }
-            request.rooms = {$in: query.rooms.split(',').map(Number)};
+            request.eRooms = {$in: query.rooms.split(',').map(Number)};
         }
         if ('priceMin' in query && 'priceMax' in query) {
             request.price = {$gte: Number(query.priceMin), $lte: Number(query.priceMax)};
