@@ -12,12 +12,12 @@ body {
     position: relative;
     background-color: #F5F5F5;
     margin: 0;
-    padding: 86px 0 93px;
+    padding: 86px 0 0;
     overflow-x: hidden;
     box-sizing: border-box;
-    @media (max-width: 564px) {
-        padding-bottom: 93px;
-    }
+    //@media (max-width: 564px) {
+    //    padding-bottom: 93px;
+    //}
 }
 
 a {
