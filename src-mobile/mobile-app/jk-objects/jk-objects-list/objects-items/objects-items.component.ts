@@ -15,7 +15,6 @@ export class ObjectsItemsComponent {
     public isMainPage = false;
     @Input()
     public snippets: IObjectSnippet[];
-    @Input() public minPriceByMod;
 
     public uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
     public activeTooltip: string;

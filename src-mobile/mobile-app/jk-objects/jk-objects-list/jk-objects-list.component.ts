@@ -33,8 +33,6 @@ export class JkObjectsListComponent implements OnInit {
     // открытие формы редактирования-создания
     public redactId: any;
 
-    public minPriceByMod = {};
-
     constructor(
         public router: Router,
         private objectService: JkObjectsListService,
