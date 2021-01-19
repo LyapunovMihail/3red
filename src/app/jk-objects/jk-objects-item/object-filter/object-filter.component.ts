@@ -98,7 +98,6 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
         this.service.getFlats(this.params).subscribe(
             (data: IAddressItemFlat[]) => {
                 this.flatsLength = data.length;
-                console.log(data);
             },
             (err) => {
                 console.log(err);

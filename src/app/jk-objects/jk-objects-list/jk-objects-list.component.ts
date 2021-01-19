@@ -35,6 +35,8 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     // открытие формы редактирования-создания
     public redactId: any;
 
+    public minPriceByMod = {};
+
     constructor(
         public router: Router,
         private authorization: AuthorizationObserverService,
@@ -51,11 +53,13 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             .subscribe((data) => {
                 this.snippets = data;
                 this.getDistricts();
-            });
-
-        this.objectService.getFlats({type: 'КВ,АП', status: '4'})
-            .subscribe((data) => {
-                this.getMinMaxPrice(data);
+                // this.getMinPrice(data);
+                this.objectService.getFlats({type: 'КВ,АП', status: '4'})
+                    .subscribe((flats) => {
+                        this.flats = flats;
+                        this.getMinMaxPrice(flats);
+                        this.getMinPrice(this.snippets, flats);
+                    });
             });
     }
 
@@ -76,6 +80,9 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
                 (data) => {
                     this.snippets = data;
                     this.filterSnippets();
+                    setTimeout(() => {
+                        this.getMinPrice(this.snippets, this.flats);
+                    }, 800);
                 },
                 (err) => console.log(err)
             );
@@ -84,6 +91,9 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
                 (data) => {
                     this.snippets = data;
                     this.filterSnippets();
+                    setTimeout(() => {
+                        this.getMinPrice(this.snippets, this.flats);
+                    }, 800);
                 },
                 (err) => console.log(err)
             );
@@ -177,5 +187,18 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
         setTimeout( () => {
             this.showMap = !this.showMap;
         }, 300);
+    }
+
+    private getMinPrice(jkList: IObjectSnippet[], flats) {
+        console.log('jkList: ', jkList);
+        console.log('flats: ', flats);
+        jkList.forEach( jk => {
+            if (jk.subtext) { return; }
+            const price = flats.filter(flat => flat.mod === jk.mod).map(flat => flat.price);
+            if (!price.length) { return; }
+            const minPrice = ( Math.min(...price) / 1000000 ).toFixed(2);
+            jk.subtext = `Квартиры от ${minPrice} млн. руб.`;
+        });
+        console.log('this.minPriceByMod: ', this.minPriceByMod);
     }
 }

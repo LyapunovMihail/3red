@@ -30,7 +30,7 @@
                     </a>
                     <a class="objects__item-title" routerLink="/objects/list/{{snippet._id}}">{{snippet.name}}</a>
                 </div>
-                <p class="objects__item-status">{{snippet.subtext}}</p>
+                <p class="objects__item-status">{{ snippet.subtext }}</p>
             </div>
             <div class="objects__item__edit" *ngIf="isAuthorizated">
                 <button class="objects__item__edit-item" (click)="onSelectItem(snippet._id)"

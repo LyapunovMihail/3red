@@ -44,7 +44,7 @@ export class ObjectProjectsComponent implements OnInit {
                 const tempObjects = data.filter(item => item._id !== this.objectId && item.publish);
                 this.snippets = tempObjects.length && tempObjects.length > 5 ? this.getRandomObjects(tempObjects) : tempObjects;
                 this.filterSnippets();
-                this.getFlatsMinPrice(this.snippets);
+                this.getFlatsMinPrice();
             });
     }
 
@@ -68,24 +68,22 @@ export class ObjectProjectsComponent implements OnInit {
         this.snippets = filteredSnippets;
     }
 
-    private getFlatsMinPrice(objects) {
-        objects.forEach((item, i) => {
-            this.objectService.getFlats({mod: item.mod, type: 'КВ,АП'})
-                .subscribe(
-                    data => this.getMinPrice(item, data, i),
-                    error => console.log(error)
-                );
-        });
+    private getFlatsMinPrice() {
+        this.objectService.getFlats({type: 'КВ,АП', status: '4'})
+            .subscribe(
+                data => this.getMinPrice(this.snippets, data),
+                error => console.log(error)
+            );
     }
 
-    private getMinPrice(obj, flats, i) {
-        const price = flats.map((el) => el.price);
-
-        this.objects[i] = {
-            status: obj.status,
-            minPrice: price.length > 0 ? Number(Math.min(...price) / 1000000).toFixed(2) : obj.status === 'Готовые' ? 'Полностью распродан!' : false
-        };
-
+    private getMinPrice(jkList, flats) {
+        jkList.forEach( jk => {
+            if (jk.subtext) { return; }
+            const price = flats.filter(flat => flat.mod === jk.mod).map(flat => flat.price);
+            if (!price.length) { return; }
+            const minPrice = ( Math.min(...price) / 1000000 ).toFixed(2);
+            jk.subtext = `Квартиры от ${minPrice} млн. руб.`;
+        });
         setTimeout( () => this.sliderInit(), 1000);
     }
 

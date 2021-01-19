@@ -32,12 +32,7 @@
                                 <img [src]="uploadsPath + snippet.image" alt="news-image">
                             </div>
                             <p class="swiper-projects__slide-title">{{snippet.name}}</p>
-                            <!--<p *ngIf="objects[i]" class="swiper-projects__slide-price">-->
-                                <!--{{objects[i].minPrice && objects[i].minPrice !== 'Полностью распродан!' ? -->
-                                  <!--'Квартиры от ' + objects[i].minPrice + ' млн. руб' :-->
-                                  <!--objects[i].minPrice === 'Полностью распродан!' ? objects[i].minPrice : -->
-                                  <!--snippet.status}}-->
-                            <!--</p>-->
+                            <p *ngIf="snippet" class="swiper-projects__slide-price">{{ snippet.subtext }}</p>
                         </a>
                     </div>
                 </ng-container>

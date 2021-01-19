@@ -65,6 +65,7 @@ export class AboutTeamComponent implements OnInit {
 
     private setTeams() {
         this.teams = {};
+        if (!this.tabSnippet || !this.tabSnippet.team) { return; }
         this.tabSnippet.team.forEach((item) => {
            this.teams[item.name] = { unlimit: false, team: this.contentSnippets.find((team) => team.tab === item.name ) };
         });

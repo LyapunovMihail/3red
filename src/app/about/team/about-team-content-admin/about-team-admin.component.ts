@@ -75,7 +75,7 @@ export class AboutTeamAdminComponent implements OnInit {
             image: ['', Validators.required],
             thumbnail: ['', Validators.required],
             fio:  ['', Validators.required],
-            position: ['', Validators.required]
+            position: ''
         }));
     }
 
