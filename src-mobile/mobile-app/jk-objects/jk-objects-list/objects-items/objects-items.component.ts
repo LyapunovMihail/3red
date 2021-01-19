@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
     IObjectSnippet,
     OBJECTS_UPLOADS_PATH
@@ -20,13 +20,9 @@ export class ObjectsItemsComponent {
     public uploadsPath = `/${OBJECTS_UPLOADS_PATH}`;
     public activeTooltip: string;
 
+    constructor() { }
+
     public onSelectItem(item: string): void {
         this.activeTooltip = this.activeTooltip === item ? '' : item;
-    }
-
-    public getSubtextContent(obj: IObjectSnippet) {
-        return obj.subtext
-            ? obj.subtext
-            : this.minPriceByMod[obj.mod];
     }
 }

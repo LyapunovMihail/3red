@@ -40,7 +40,7 @@
                                 <img [src]="uploadsPath + snippet.image" alt="news-image">
                             </div>
                             <p class="slider-list__title">{{snippet.name}}</p>
-                            <p *ngIf="snippet" class="slider-list__info">{{ getSubtextContent(snippet, i) }}</p>
+                            <p *ngIf="snippet" class="slider-list__info">{{ snippet.subtext }}</p>
                         </a>
                     </div>
                 </ng-container>

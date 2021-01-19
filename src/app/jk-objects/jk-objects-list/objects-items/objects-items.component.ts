@@ -43,10 +43,4 @@ export class ObjectsItemsComponent implements OnInit {
         snippet.ilike = ev.target.checked;
         this.updateSnippet.emit(snippet);
     }
-
-    public getSubtextContent(obj: IObjectSnippet) {
-        return obj.subtext
-            ? obj.subtext
-            : this.minPriceByMod[obj.mod];
-    }
 }
