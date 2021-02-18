@@ -13,7 +13,7 @@ import { PlatformDetectService } from '../platform-detect.service';
 
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    @ViewChild('container', { static: false })
+    @ViewChild('container')
     public container: ElementRef;
     // @ViewChild('helper')
     // public helper: ElementRef;

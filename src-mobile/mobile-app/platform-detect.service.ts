@@ -1,6 +1,7 @@
-import { PLATFORM_ID, Inject } from '@angular/core';
+import { PLATFORM_ID, Inject, Injectable } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
+@Injectable()
 export class PlatformDetectService {
 
     isBrowser = false;

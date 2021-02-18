@@ -31,7 +31,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     public hideMods = false;
     public isExpanded = false;
     public availableFlats: IAddressItemFlat[];
-    @ViewChild('myDiv', { static: false }) myDivElementRef: ElementRef;
+    @ViewChild('myDiv') myDivElementRef: ElementRef;
 
     constructor(
         public formBuilder: FormBuilder,

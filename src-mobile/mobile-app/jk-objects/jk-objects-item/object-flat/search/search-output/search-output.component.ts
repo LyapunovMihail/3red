@@ -27,7 +27,7 @@ export class SearchOutputComponent implements OnInit {
     @Input() public showMore: boolean;
     @Output() public loadMore = new EventEmitter<boolean>();
 
-    @ViewChild('container', { static: false })
+    @ViewChild('container')
     public container: ElementRef;
 
     constructor(

@@ -57,8 +57,8 @@ export class GHMTextAreaComponent implements ControlValueAccessor, AfterViewInit
 
     @Output() public addLink: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild('fakeTextArea', { static: false }) public fakeTextArea: ElementRef;
-    @ViewChild('area', { static: false }) public area: ElementRef;
+    @ViewChild('fakeTextArea') public fakeTextArea: ElementRef;
+    @ViewChild('area') public area: ElementRef;
 
     public showLink = false;
 

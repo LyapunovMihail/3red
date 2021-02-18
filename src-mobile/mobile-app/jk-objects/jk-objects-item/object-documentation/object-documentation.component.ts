@@ -28,7 +28,7 @@ export class ObjectDocumentationComponent implements OnInit {
     public maxHeight: any = 'auto';
     public startHeight: any = 'auto';
     public showAllDocs = false;
-    @ViewChild('fileList', { static: false })
+    @ViewChild('fileList')
         public fileList: ElementRef;
 
     constructor(

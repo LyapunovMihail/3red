@@ -55,9 +55,9 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
         top: 100
     };
 
-    @ViewChild('chess', { static: false })
+    @ViewChild('chess')
     public chess: ElementRef;
-    @ViewChild('chessContainer', { static: false })
+    @ViewChild('chessContainer')
     public chessContainer: ElementRef;
 
     constructor(

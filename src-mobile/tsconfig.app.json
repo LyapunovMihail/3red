@@ -5,10 +5,10 @@
         "baseUrl": "./",
         "types": []
     },
-    "exclude": [
-        "test.ts",
-        "**/*.spec.ts"
-    ],
+  "files": [
+    "main-mobile.ts",
+    "polyfills.ts"
+  ],
     "include": [
         "./../src-mobile/**/*",
         "./../node_modules/angular2-http-file-upload/**/*"
