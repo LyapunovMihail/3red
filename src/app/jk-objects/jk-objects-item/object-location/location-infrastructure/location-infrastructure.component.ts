@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from "@angular/common";
 import { navList } from './config';
 import { PlatformDetectService } from '../../../../platform-detect.service';
 import { ChangeDetectorRef, Component, Inject, Input, OnChanges, OnDestroy } from '@angular/core';

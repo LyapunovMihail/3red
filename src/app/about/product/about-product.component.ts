@@ -13,11 +13,11 @@ export class AboutProductComponent implements OnInit, OnDestroy, AfterViewInit {
     public windowScrollEvent;
     public scrollTop;
 
-    @ViewChild('year1')
+    @ViewChild('year1', { static: false })
     public year1: ElementRef;
-    @ViewChild('year2')
+    @ViewChild('year2', { static: false })
     public year2: ElementRef;
-    @ViewChild('year3')
+    @ViewChild('year3', { static: false })
     public year3: ElementRef;
 
     constructor(

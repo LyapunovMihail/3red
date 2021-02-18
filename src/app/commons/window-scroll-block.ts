@@ -1,8 +1,8 @@
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { PLATFORM_ID, Inject, Injectable } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { DOCUMENT } from '@angular/platform-browser';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+
 
 @Injectable ()
 

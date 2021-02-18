@@ -22,7 +22,7 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit {
     public jk: IObjectSnippet;
     public flats: IAddressItemFlat[];
 
-    @ViewChild('container')
+    @ViewChild('container', { static: false })
     public container: ElementRef;
 
     constructor(

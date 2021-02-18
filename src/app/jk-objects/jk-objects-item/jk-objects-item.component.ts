@@ -26,7 +26,7 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
     public jk: IObjectSnippet;
     public flats: IAddressItemFlat[];
 
-    @ViewChild('container')
+    @ViewChild('container', { static: false })
     public container: ElementRef;
 
     constructor(

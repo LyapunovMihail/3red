@@ -7,28 +7,28 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
         <div class="textarea__container">
             <!--<div [innerHTML]="value + '\r\n' | ghmTextAreaPipe"-->
             <div
-                class="textarea__fake"
-                 [class.white-placeholder]="whitePlaceholder"
-                 #fakeTextArea
+                    class="textarea__fake"
+                    [class.white-placeholder]="whitePlaceholder"
+                    #fakeTextArea
             >
             </div>
             <textarea [(ngModel)]="value"
-                (input)="input($event.target.value)"
-                (focus)="showLink = true"
-                spellcheck="false" class="textarea__input"
-                [ngClass]="{
+                      (input)="input($event.target.value)"
+                      (focus)="showLink = true"
+                      spellcheck="false" class="textarea__input"
+                      [ngClass]="{
                     'invalid-value': invalid,
                     'white-placeholder': whitePlaceholder
                 }"
-                rows="1"
-                appAutoResizeTextarea
-                #area
+                      rows="1"
+                      appAutoResizeTextarea
+                      #area
             >
             </textarea>
             <p class="textarea__placeholder" *ngIf="placeholder.length > 0"
-                [class.textarea__placeholder_top]="area.value.length > 0">{{placeholder}}</p>
+               [class.textarea__placeholder_top]="area.value.length > 0">{{placeholder}}</p>
             <p class="textarea__add-link" *ngIf="link"
-                [class.textarea__add-link_show]="showLink" (click)="addLink.emit({textArea: area})">Вставить ссылку</p>
+               [class.textarea__add-link_show]="showLink" (click)="addLink.emit({textArea: area})">Вставить ссылку</p>
         </div>
     `,
     styleUrls: ['./ghm-textarea.component.css'],
@@ -57,13 +57,13 @@ export class GHMTextAreaComponent implements ControlValueAccessor, AfterViewInit
 
     @Output() public addLink: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild('fakeTextArea') public fakeTextArea: ElementRef;
-    @ViewChild('area') public area: ElementRef;
+    @ViewChild('fakeTextArea', { static: false }) public fakeTextArea: ElementRef;
+    @ViewChild('area', { static: false }) public area: ElementRef;
 
     public showLink = false;
 
-    constructor(
-    ) {}
+    constructor() {
+    }
 
     ngAfterViewInit() {
         setTimeout(() => {
@@ -81,7 +81,8 @@ export class GHMTextAreaComponent implements ControlValueAccessor, AfterViewInit
         }
     }
 
-    public propagateChange(_: any) {}
+    public propagateChange(_: any) {
+    }
 
     public registerOnChange(fn) {
         this.propagateChange = fn;
@@ -91,7 +92,9 @@ export class GHMTextAreaComponent implements ControlValueAccessor, AfterViewInit
         this.fakeTextArea.nativeElement.style.height = this.area.nativeElement.style.height;
         this.propagateChange(val);
     }
-    public registerOnTouched() {}
+
+    public registerOnTouched() {
+    }
 
 
 }

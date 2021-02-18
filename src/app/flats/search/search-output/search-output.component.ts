@@ -19,9 +19,9 @@ export class SearchOutputComponent implements OnInit {
     @Input() public showMore: boolean;
     @Output() public loadMore = new EventEmitter<boolean>();
 
-    @ViewChild('container')
+    @ViewChild('container', { static: false })
     public container: ElementRef;
-    @ViewChild('result')
+    @ViewChild('result', { static: false })
     public result: ElementRef;
 
     public isLoading = true;

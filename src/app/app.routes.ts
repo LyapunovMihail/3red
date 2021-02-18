@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
-    { path: '', loadChildren : './home/home.module#HomeModule' },
-    { path: 'about', loadChildren: './about/about.module#AboutModule' },
-    { path: 'partners', loadChildren: './partners/partners.module#PartnersModule' },
-    { path: 'contacts', loadChildren: './contacts/contacts.module#ContactsModule' },
-    { path: 'news-shares', loadChildren: './news-shares/news-shares.module#NewsSharesModule' },
-    { path: 'flats', loadChildren: './flats/flats.module#FlatsModule' },
-    { path: 'objects', loadChildren: './jk-objects/jk-objects.module#JkObjectsModule' },
-    { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesModule' },
-    { path: 'apartment', loadChildren: './apartment/apartment.module#ApartmentModule' },
+    { path: '', loadChildren : () => import('./home/home.module').then(m => m.HomeModule) },
+    { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
+    { path: 'partners', loadChildren: () => import('./partners/partners.module').then(m => m.PartnersModule) },
+    { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },
+    { path: 'news-shares', loadChildren: () => import('./news-shares/news-shares.module').then(m => m.NewsSharesModule) },
+    { path: 'flats', loadChildren: () => import('./flats/flats.module').then(m => m.FlatsModule) },
+    { path: 'objects', loadChildren: () => import('./jk-objects/jk-objects.module').then(m => m.JkObjectsModule) },
+    { path: 'favorites', loadChildren: () => import('./favorites/favorites.module').then(m => m.FavoritesModule) },
+    { path: 'apartment', loadChildren: () => import('./apartment/apartment.module').then(m => m.ApartmentModule) },
 
-    { path: 'error-404', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' },
-    { path: '**', loadChildren: '../app/error-page/error-page.module#ErrorPageModule' }
+    { path: 'error-404', loadChildren: () => import('../app/error-page/error-page.module').then(m => m.ErrorPageModule) },
+    { path: '**', loadChildren: () => import('../app/error-page/error-page.module').then(m => m.ErrorPageModule) }
 ];

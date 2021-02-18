@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // для фиксации хедера
     private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-    @ViewChild('header')
+    @ViewChild('header', { static: true })
     public header: ElementRef;
 
     constructor(

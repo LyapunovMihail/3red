@@ -19,7 +19,7 @@ export class SearchOutputComponent implements OnInit {
     public showApartmentWindow = false;
     public selectedFlatIndex: number;
 
-    @ViewChild('container')
+    @ViewChild('container', { static: false })
     public container: ElementRef;
 
     public isLoading = true;

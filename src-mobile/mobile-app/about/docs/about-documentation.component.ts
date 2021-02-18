@@ -25,7 +25,7 @@ export class AboutDocumentationComponent implements OnInit {
     public maxHeight: any = 'auto';
     public startHeight: any = 'auto';
     public showAllDocs = false;
-    @ViewChild('fileList')
+    @ViewChild('fileList', { static: false })
         public fileList: ElementRef;
 
     constructor(

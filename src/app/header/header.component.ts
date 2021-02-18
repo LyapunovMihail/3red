@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     public preloader = false;
 
-    @ViewChild('header')
+    @ViewChild('header', { static: true })
     public header: ElementRef;
 
     constructor(
@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.router.events
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((event) => {
+                console.log('this.router.events: ', this.router.events);
                 if (event instanceof NavigationStart) { this.preloader = true; }
                 if (event instanceof NavigationEnd) {
                     setTimeout( () => this.preloader = false, 2000);
@@ -70,9 +71,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 }
             });
 
-
+        console.log('check header');
         this.links = this.headerService.links();
-
+        console.log('this.links: ', this.links);
     }
 
     public ngOnDestroy() {

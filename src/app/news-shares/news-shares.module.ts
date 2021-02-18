@@ -34,8 +34,8 @@ import { NewsSharesSnippetModule } from './news-shares-snippet/news-shares-snipp
                 , children : [
                     { path: '', redirectTo: 'all', pathMatch: 'full'},
                     { path: 'all', component: NewsSharesAllComponent},
-                    { path: 'news', loadChildren: './news/news.module#NewsModule'},
-                    { path: 'shares', loadChildren: './shares/shares.module#SharesModule'},
+                    { path: 'news', loadChildren: () => import('./news/news.module').then(m => m.NewsModule)},
+                    { path: 'shares', loadChildren: () => import('./shares/shares.module').then(m => m.SharesModule)},
                 ]
             }
         ])
