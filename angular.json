@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-                "src/styles/styles.scss"
+              "src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -35,9 +35,8 @@
               ]
             },
             "scripts": [
-                "src/assets/js/jquery-3.3.1.js"
-            ],
-            "es5BrowserSupport": true
+              "src/assets/js/jquery-3.3.1.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -144,7 +143,7 @@
               "src-mobile/assets"
             ],
             "styles": [
-                "src-mobile/styles/styles.scss"
+              "src-mobile/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -152,10 +151,9 @@
               ]
             },
             "scripts": [
-                "src-mobile/assets/js/jquery-3.3.1.js",
-                "src-mobile/assets/js/swiper.min.js"
-            ],
-            "es5BrowserSupport": true
+              "src-mobile/assets/js/jquery-3.3.1.js",
+              "src-mobile/assets/js/swiper.min.js"
+            ]
           },
           "configurations": {
             "production": {
