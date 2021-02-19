@@ -41,7 +41,6 @@
     "angular2-http-file-upload": "^1.0.8",
     "angular2-template-loader": "^0.6.2",
     "angular2-text-mask": "^9.0.0",
-    "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
