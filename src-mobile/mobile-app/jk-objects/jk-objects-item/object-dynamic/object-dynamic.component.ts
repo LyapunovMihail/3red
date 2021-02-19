@@ -69,9 +69,16 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
     public getJk() {
         this.dynamicService.getJk(this.objectId).subscribe(
             (data) => {
-                this.jk = data[0];
+                if (data.length === 1) {
+                    this.jk = data[0];
+                } else {
+                    this.router.navigate(['/error-404'], { skipLocationChange: true });
+                }
             },
-            (err) => console.error(err)
+            (err) => {
+                console.error(err);
+                this.router.navigate(['/error-404'], { skipLocationChange: true });
+            }
         );
     }
 

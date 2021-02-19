@@ -9,7 +9,7 @@ import { join } from 'path';
 import * as bodyParser from 'body-parser';
 import { DbCronUpdate } from './utilits/db-cron-update.utils';
 import * as session from 'express-session';
-import { ROUTES } from './pages/rendering.routes';
+import { ROUTES } from './rendering.routes';
 import { clientRender } from './utilits/client-render';
 
 async function bootstrap() {

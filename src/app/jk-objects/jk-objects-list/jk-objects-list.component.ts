@@ -65,7 +65,7 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
 
     public getObjects(params) {
         if (!this.isMainPage) {
-            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params, preserveQueryParams: false, skipLocationChange: true});
+            this.router.navigate([this.router.url.split('?')[0]], { queryParams: params, skipLocationChange: true });
         }
 
         if (params.priceMin === '') {

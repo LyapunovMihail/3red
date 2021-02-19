@@ -58,8 +58,8 @@ export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueA
     public firstLeft: number;
     public secondLeft: number;
     private value: any;
-    private firstValue = this.min;
-    private secondValue = this.max;
+    private firstValue;
+    private secondValue;
     private sliderCoords: any;
     private buttonCoords: any;
     private shiftX: any;
@@ -80,7 +80,8 @@ export class GHMRangeNumberComponent implements OnInit, OnChanges, ControlValueA
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
-
+        this.firstValue = this.min;
+        this.secondValue = this.max;
         this.ref.detectChanges();
     }
 

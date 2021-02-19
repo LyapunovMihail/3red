@@ -54,12 +54,12 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
     @Input( ) public min: number;
     @Input( ) public max: number;
     @Input( ) public toFixed: boolean = false;
-    @Output( ) public move = new EventEmitter ();
+    @Output( ) public move = new EventEmitter();
     public firstLeft: number;
     public secondLeft: number;
     private value: any;
-    private firstValue = this.min;
-    private secondValue = this.max;
+    private firstValue;
+    private secondValue;
     private sliderCoords: any;
     private buttonCoords: any;
     private shiftX: any;
@@ -79,10 +79,12 @@ export class GHMRangeNumberComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    // public ngOnChanges(changes: SimpleChanges): void {
-    //     this.start(changes.min.currentValue, changes.max.currentValue);
-    //     this.mouseUp(0);
-    // }
+    public ngOnChanges(changes: SimpleChanges): void {
+        // this.start(changes.min.currentValue, changes.max.currentValue);
+        // this.mouseUp(0);
+        this.firstValue = this.min;
+        this.secondValue = this.max;
+    }
 
     public writeValue(control) {
         if (control) {
