@@ -29,7 +29,8 @@ export class DbCronUpdate {
 
     public start() {
         this.requestBase();
-        const task = new CronJob('0 8,13,19,23 * * *', () => {
+        // const task = new CronJob('0 8,13,19,23 * * *', () => {
+        const task = new CronJob('0 * * * *', () => {
             this.requestBase();
         }, false);
         task.start();
@@ -112,7 +113,7 @@ export class DbCronUpdate {
             isEuro: object.IsEuro === '1',
             eRooms: mod === 'НТМ' && object.IsEuro === '1' ? Number(object.Rooms) - 1 : Number(object.Rooms), // Теже самые номера квартир, но с поправкой для евро квартир Томилино
             space: Number(object.Quantity),
-            price: Number(object.Sum) + 30000,
+            price: mod === 'ЯР' ? Number(object.Sum) + 30000 : Number(object.Sum),
             deliveryDate: object.DeliveryPeriodDate,
             article: object.Article,
             articleId: object.ArticleID,
