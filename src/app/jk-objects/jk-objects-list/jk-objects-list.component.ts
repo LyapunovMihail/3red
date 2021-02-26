@@ -119,7 +119,9 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.authorizationEvent.unsubscribe();
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
     }
 
     public createSnippet() {

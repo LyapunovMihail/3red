@@ -47,7 +47,9 @@ export class AdminContactsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     updatePhone(event) {

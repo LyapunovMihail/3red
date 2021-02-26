@@ -40,7 +40,9 @@ export class NewsDeleteFormComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     public ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public ngOnChanges(changes: SimpleChanges) {

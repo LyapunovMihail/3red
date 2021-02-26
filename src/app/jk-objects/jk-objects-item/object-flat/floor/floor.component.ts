@@ -115,7 +115,9 @@ export class FloorComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.routerEvents.unsubscribe();
+        if (this.routerEvents) {
+            this.routerEvents.unsubscribe();
+        }
     }
 
     public getFloorSvg(url): Observable<string> {

@@ -73,7 +73,9 @@ export class SharesListComponent implements OnInit, OnDestroy {
     }
 
     public unsubscribe() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public createSnippet() {

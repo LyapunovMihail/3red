@@ -10,7 +10,7 @@ export const ROOT_SELECTOR = 'app-root';
   selector: ROOT_SELECTOR,
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.component.css'
+    './app.component.scss'
   ],
   template: `
       <section>

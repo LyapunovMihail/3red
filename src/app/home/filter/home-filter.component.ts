@@ -157,7 +157,9 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.formEvents.unsubscribe();
+        if (this.formEvents) {
+            this.formEvents.unsubscribe();
+        }
     }
 
     // public switchPopup() {

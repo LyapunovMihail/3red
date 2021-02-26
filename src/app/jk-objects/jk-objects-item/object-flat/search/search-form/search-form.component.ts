@@ -152,8 +152,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.formEvents.unsubscribe();
-        this.routerEvents.unsubscribe();
+        if (this.routerEvents && this.formEvents) {
+            this.formEvents.unsubscribe();
+            this.routerEvents.unsubscribe();
+        }
     }
 
     // public get houseName() {

@@ -74,6 +74,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.authorizationEvent.unsubscribe();
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
     }
 }

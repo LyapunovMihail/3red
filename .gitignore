@@ -12,6 +12,7 @@
 /node_modules
 /serv-files/node_modules
 /serv-files/uploads
+/uploads
 
 # profiling files
 chrome-profiler-events.json

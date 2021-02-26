@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
-// import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
+import { UniversalInterceptor } from './universalInterceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
-  imports: [
-    AppModule,
-    ServerModule,
-    // ModuleMapLoaderModule
-  ],
-  providers: [
-    // Add universal-only providers here
-  ],
-  bootstrap: [ AppComponent ],
+    imports: [
+        AppModule,
+        ServerModule,
+    ],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: UniversalInterceptor,
+        /* Multi is important or you will delete all the other interceptors */
+        multi: true
+    }],
+    bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule {
+}

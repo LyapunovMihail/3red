@@ -40,7 +40,9 @@ export class SharesDeleteComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     public onSubmit() {

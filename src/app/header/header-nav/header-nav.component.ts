@@ -181,8 +181,11 @@ export class HeaderNavComponent implements OnInit, OnChanges, AfterViewInit, OnD
             return false;
         }
 
-        this.windowScrollEvent.unsubscribe();
-        this.pageResizeEvent.unsubscribe();
+        if (this.windowScrollEvent && this.pageResizeEvent) {
+            this.windowScrollEvent.unsubscribe();
+            this.pageResizeEvent.unsubscribe();
+        }
+
         this.subs.forEach(item => item.unsubscribe());
     }
 }

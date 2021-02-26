@@ -53,7 +53,9 @@ export class JkObjectsItemComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     ngOnDestroy() {
-        this.authorizationEvent.unsubscribe();
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
     }
 
     public getJkObject() {

@@ -142,7 +142,9 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
     }
 
     ngOnDestroy() {
-        this.AuthorizationEvent.unsubscribe();
+        if (this.AuthorizationEvent) {
+            this.AuthorizationEvent.unsubscribe();
+        }
     }
 
     showModalFunc(obj, i) {

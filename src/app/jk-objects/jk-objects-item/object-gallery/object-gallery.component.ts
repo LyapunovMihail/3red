@@ -110,7 +110,9 @@ export class ObjectGalleryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.clearInt();
+        if (this.interval) {
+            this.clearInt();
+        }
     }
 
     public switchBlock($event) {

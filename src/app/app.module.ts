@@ -71,12 +71,11 @@ const APP_MODULES = [
     FavoritesModule,
     ApartmentModule,
 
-    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
-    useHash: Boolean(history.pushState) === false,
+    // useHash: Boolean(history.pushState) === false,
     preloadingStrategy: PreloadAllModules,
     anchorScrolling: 'enabled',
     onSameUrlNavigation: 'reload',
@@ -98,7 +97,8 @@ interface StoreType {
       AppComponent
   ],
   imports: [
-    ...APP_MODULES
+    ...APP_MODULES,
+      BrowserModule.withServerTransition({ appId: 'serverApp' })
   ],
   providers: [
     ...APP_PROVIDERS

@@ -72,7 +72,9 @@ export class NewsSharesAllComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.authorizationEvent.unsubscribe();
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
     }
 
     public getAllSnippets() {

@@ -7,6 +7,8 @@ import {
     Request,
     Response,
 } from 'express';
+import { APP_BASE_HREF } from '@angular/common';
+import { existsSync } from 'fs';
 
 export function ShouldSendMobileVersion(req, session) {
     return !(session && session.onlyDesktop) && (new mobileDetect(req.headers['user-agent'])).mobile();
@@ -15,17 +17,16 @@ export function ShouldSendMobileVersion(req, session) {
 export function clientRender(req: Request, res: Response, status: number, session) {
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
-            res.status(status).sendFile(
-              join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'mobile', 'index-mobile.html'),
+            const distFolder = join(process.cwd(), 'dist/mobile');
+            const indexHtml = existsSync(join(distFolder, 'index-mobile.original.html')) ? 'index-mobile.original.html' : 'index-mobile';
+            res.status(status).render(
+                indexHtml, { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
             );
         } else {
-            res.status(status).sendFile(
-                join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'index.html'), {
-                  req,
-                  res,
-                  async: true,
-                  preboot: true,
-                },
+            const distFolder = join(process.cwd(), 'dist/desktop');
+            const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+            res.status(status).render(
+                indexHtml, { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
             );
         }
     } else {

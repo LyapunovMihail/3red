@@ -63,8 +63,9 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public ngOnDestroy() {
         if (!this.platform.isBrowser) { return; }
-
-        this.authorizationEvent.unsubscribe();
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
         if (this.intervalTimer) {
             clearInterval(this.intervalTimer);
         }
