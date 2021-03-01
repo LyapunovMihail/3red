@@ -2,7 +2,7 @@
 
     <div class="search-output__result-item-img">
         <img (error)="img.style.display = 'none'"
-             [src]="'/assets/floor-plans/jk_' + flatData.mod + 'house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flatData + 'flatData.svg'"
+             [src]="'/assets/floor-plans/jk_' + flatData.mod + 'house_' + flatData.house + '/section_' + flatData.section + '/floor_' + flatData.floor + '/' + flatData.floor + 'floor_' + flatData.flat + 'flatData.svg'"
              #img>
         <div *ngIf="img.style.display === 'none'" class="search-output__result-item-img-error g-3red"></div>
     </div>

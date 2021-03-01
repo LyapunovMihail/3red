@@ -19,7 +19,6 @@ export class HouseService {
     }
 
     public getConfig(options): Observable<{config}> {
-        console.log('options: ', options);
         return this.http.get<{config}>(`/api/search/config`, {params: options});
     }
 }

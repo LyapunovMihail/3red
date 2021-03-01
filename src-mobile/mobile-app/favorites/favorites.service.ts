@@ -40,7 +40,6 @@ export class FavoritesService {
             .subscribe(
                 (data) => {
                         this.favoriteFlats = data;
-                        console.log('this.favoriteFlats: ', this.favoriteFlats);
                         localStorage.setItem('favorite', JSON.stringify(this.favoriteFlats));
                         this.setFavoriteCount();
                     },

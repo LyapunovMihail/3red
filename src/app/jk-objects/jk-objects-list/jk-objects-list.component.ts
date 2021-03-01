@@ -192,8 +192,6 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     }
 
     private getMinPrice(jkList: IObjectSnippet[], flats) {
-        console.log('jkList: ', jkList);
-        console.log('flats: ', flats);
         jkList.forEach( jk => {
             if (jk.subtext) { return; }
             const price = flats.filter(flat => flat.mod === jk.mod).map(flat => flat.price);
@@ -201,6 +199,5 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
             const minPrice = ( Math.min(...price) / 1000000 ).toFixed(2);
             jk.subtext = `Квартиры от ${minPrice} млн. руб.`;
         });
-        console.log('this.minPriceByMod: ', this.minPriceByMod);
     }
 }

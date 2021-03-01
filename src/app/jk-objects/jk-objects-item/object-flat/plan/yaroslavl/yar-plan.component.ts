@@ -53,7 +53,6 @@ export class YarPlanComponent implements OnInit {
             });
             this.houses[i].rooms = this.houses[i].rooms.filter(item => item.minPrice !== 0);
         }
-        console.log('this.houses: ', this.houses);
     }
 
     public svgRouterLink(event: Event, url, house) {

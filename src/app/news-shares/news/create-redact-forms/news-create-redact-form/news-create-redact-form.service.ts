@@ -44,7 +44,6 @@ export class NewsCreateRedactFormService {
 
             const fileList: FileList = e.target.files;
             const uploadFile: File = fileList[0];
-            console.log('e.target.files: ', e.target.files);
             const myUploadItem = new NewsCreateRedactFormUpload(uploadFile);
             myUploadItem.formData = { FormDataKey: 'Form Data Value' };
 

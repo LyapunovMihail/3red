@@ -37,7 +37,6 @@ export class ObjectPurchaseComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.creditService.getSnippetById(this.objectId).subscribe((data) => {
             this.snippet = data;
-            console.log('banks: ', this.snippet);
             if (this.snippet) {
                 this.switchOn = this.snippet.switchOn;
             }

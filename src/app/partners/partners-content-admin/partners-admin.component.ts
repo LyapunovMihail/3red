@@ -129,7 +129,6 @@ export class PartnersAdminComponent implements OnInit {
                 id: this.jkArray[0]._id
             })
         );
-        console.log('this.form.value: ', this.form.value);
     }
 
     public popJk(i, j) {
@@ -139,7 +138,6 @@ export class PartnersAdminComponent implements OnInit {
     public setJkValue(val, item) {
         const jk = this.jkArray.find((tempJk) => tempJk._id === val);
         item.setValue({ name: jk.name, id: jk._id });
-        console.log('this.form.value: ', this.form.value);
     }
 
     imageUpload(e, i) {
@@ -154,7 +152,6 @@ export class PartnersAdminComponent implements OnInit {
                 this.imageUploadEvent.unsubscribe();
             }
         );
-        console.log('event: ', e);
         this.partnersAdminService.imageUpload(e)
             .then( (data: any) => {
                 this.isLoad = false;

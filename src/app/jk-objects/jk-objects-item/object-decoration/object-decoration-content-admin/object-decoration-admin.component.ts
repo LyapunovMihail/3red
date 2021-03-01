@@ -46,7 +46,6 @@ export class ObjectDecorationAdminComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('this.contentSnippet: ', this.contentSnippet);
         if (this.contentSnippet) {
             this.setFormFromSnippet();
         } else {

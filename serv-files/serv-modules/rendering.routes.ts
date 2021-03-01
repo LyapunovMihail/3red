@@ -5,8 +5,8 @@ import { MongoConnectionService } from './mongo-connection.service';
 import { SHARES_COLLECTION_NAME } from './shares-api/shares.interfaces';
 import { IObjectSnippet, OBJECTS_OBJECT_COLLECTION_NAME } from './jk-objects/object-api/objects.interfaces';
 import { AddressesModel } from './addresses-api/addresses.model';
-import { join } from "path";
-import * as fs from "fs";
+import { join } from 'path';
+import * as fs from 'fs';
 import { SERVER_CONFIGURATIONS } from './configuration';
 const ObjectId = require('mongodb').ObjectID;
 
@@ -20,8 +20,8 @@ export const ROUTES: any[] = [
     {
         url: '/news-shares/news/list/:id',
         handle: async (req: any, res: Response, next) => {
-            const validId =  ObjectId.isValid(req.params['id']);
-            const news = (validId) ? await MongoConnectionService.getDb().connection.db.collection(NEWS_COLLECTION_NAME).findOne({ _id: ObjectId(req.params['id']) }) : null;
+            const validId =  ObjectId.isValid(req.params.id);
+            const news = (validId) ? await MongoConnectionService.getDb().connection.db.collection(NEWS_COLLECTION_NAME).findOne({ _id: ObjectId(req.params.id) }) : null;
             (news) ? next() : clientRender(req, res, 404, req.session);
         },
     },
@@ -29,8 +29,8 @@ export const ROUTES: any[] = [
     {
         url: '/news-shares/shares/list/:id',
         handle: async (req: any, res: Response, next) => {
-            const validId =  ObjectId.isValid(req.params['id']);
-            const share = (validId) ? await MongoConnectionService.getDb().connection.db.collection(SHARES_COLLECTION_NAME).findOne({ _id: ObjectId(req.params['id']) }) : null;
+            const validId =  ObjectId.isValid(req.params.id);
+            const share = (validId) ? await MongoConnectionService.getDb().connection.db.collection(SHARES_COLLECTION_NAME).findOne({ _id: ObjectId(req.params.id) }) : null;
             (share) ? next() : clientRender(req, res, 404, req.session);
         },
     },
@@ -128,23 +128,20 @@ function checkDynamicMonthAndYear(req: any, res: Response, next) {
             && Number(year) >= 2017 && Number(year) <= Number(new Date().getFullYear())
             // проверяем 'month' на соответствие диапазону от 1 до 12
             && Number(month) >= 1 && Number(month) <= 12 ) {
-            console.log('CHECK OK');
             next();
 
             // иначе 404 статус
         } else {
-            console.log('CHECK1');
             clientRender(req, res, 404, req.session);
         }
     } else {
-        console.log('CHECK2');
         clientRender(req, res, 404, req.session);
     }
 }
 
 async function checkJkObject(req: any, res: Response, next): Promise<IObjectSnippet> {
-    const validId =  ObjectId.isValid(req.params['id']);
-    const jkObject = (validId) ? await MongoConnectionService.getDb().connection.db.collection(OBJECTS_OBJECT_COLLECTION_NAME).findOne({ _id: ObjectId(req.params['id']) }) : null;
+    const validId =  ObjectId.isValid(req.params.id);
+    const jkObject = (validId) ? await MongoConnectionService.getDb().connection.db.collection(OBJECTS_OBJECT_COLLECTION_NAME).findOne({ _id: ObjectId(req.params.id) }) : null;
     if (!jkObject) {
         clientRender(req, res, 404, req.session);
     } else {
@@ -181,7 +178,7 @@ async function checkFlatsHouseSectionFloor(req: any, res: Response, jkObject) {
         return false;
     }
 
-    const dir = join(SERVER_CONFIGURATIONS.DIST_FOLDER, '../', 'dist', 'desktop', 'assets', 'floor-plans', `jk_${jkObject.mod}`, `house_${req.params.house}`,
+    const dir = join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'desktop', 'assets', 'floor-plans', `jk_${jkObject.mod}`, `house_${req.params.house}`,
         `section_${req.params.section}`, `floor_${req.params.floor}`, `sect_${req.params.section}_fl_${req.params.floor}.svg`);
 
     const floorSchemeExist = fs.existsSync(dir);

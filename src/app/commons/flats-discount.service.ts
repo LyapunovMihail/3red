@@ -27,10 +27,7 @@ export class FlatsDiscountService {
     }
 
     public getDiscount(flat): number {
-        console.log('shareFlats: ', this.shareFLats);
-        console.log('flat: ', flat);
         const shareFlat = this.shareFLats.find((sFlat) => sFlat.flat === flat.flat && sFlat.mod === flat.mod);
-        console.log('shareFlat: ', shareFlat);
         if (shareFlat) {
             if (shareFlat.discountType === ShareFlatDiscountType.PERCENT) {
                 const discount = +shareFlat.price * (+shareFlat.discount / 100);

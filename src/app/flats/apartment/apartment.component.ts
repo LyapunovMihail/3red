@@ -37,9 +37,7 @@ export class ApartmentComponent implements OnInit {
 
     public ngOnInit() {
         this.flatData = this.flatsList[this.flatIndex];
-        console.log('this.flatsList: ', this.flatsList);
 
-        console.log('this.flatData: ', this.flatData);
         this.pdfLink = `/api/pdf?id=${this.flatData['_id']}`;
         this.searchService.getObjects().subscribe(
             (data) => {

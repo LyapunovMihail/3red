@@ -49,7 +49,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     public buildForm(params) {
-        console.log('housesBtnList: ', this.housesBtnList);
         const roomsFormArray = ((() => {
             /**
              * if there are rooms in the url's params,

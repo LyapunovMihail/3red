@@ -46,7 +46,6 @@ export class PartnersComponent implements OnInit, OnDestroy {
 
     private setTabs() {
         this.navList = [{ name: 'Все', link: 'null', show: true }, ...this.tabSnippet.tab];
-        console.log('this.navList: ', this.navList);
     }
 
     public getTabsThanContent() {
@@ -78,7 +77,6 @@ export class PartnersComponent implements OnInit, OnDestroy {
 
     public changeTab(tab) {
         this.currentTab = tab;
-        console.log('this.currentTab: ', this.currentTab);
         this.getContent();
     }
 

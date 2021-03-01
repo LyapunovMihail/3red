@@ -20,7 +20,7 @@ export function clientRender(req: Request, res: Response, status: number, sessio
             const distFolder = join(process.cwd(), 'dist/mobile');
             const indexHtml = existsSync(join(distFolder, 'index-mobile.original.html')) ? 'index-mobile.original.html' : 'index-mobile';
             res.status(status).render(
-                indexHtml, { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
+                join(distFolder, indexHtml), { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
             );
         } else {
             const distFolder = join(process.cwd(), 'dist/desktop');

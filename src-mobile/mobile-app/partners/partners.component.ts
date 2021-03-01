@@ -38,7 +38,6 @@ export class PartnersComponent implements OnInit {
 
     private setTabs() {
         this.navList = [{ name: 'Все', link: 'null', show: true }, ...this.tabSnippet.tab];
-        console.log('this.navList: ', this.navList);
     }
 
     public getTabsThanContent() {

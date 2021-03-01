@@ -82,7 +82,6 @@ export class FloorComponent implements OnInit, OnDestroy {
                                     type: 'ММ',
                                 }).subscribe(
                                     (flats: IAddressItemFlat[]) => {
-                                        console.log('parks: ', flats);
                                         if ( this.platform.isBrowser ) {
                                             this.parkingService.flatsHover(flats, {
                                                 hover: (flat) => this.infoWindow = flat,

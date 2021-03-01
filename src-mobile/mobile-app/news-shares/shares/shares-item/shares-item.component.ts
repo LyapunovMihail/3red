@@ -101,7 +101,6 @@ export class SharesItemComponent implements OnInit, OnDestroy {
                 return item.blockFlat;
             }
         });
-        console.log('this.shareFlats: ', this.shareFlats);
     }
 
     public checkPrevAndNext(id) {
@@ -143,7 +142,6 @@ export class SharesItemComponent implements OnInit, OnDestroy {
     }
 
     public clickShare(item) {
-        console.log('item: ', item);
         this.sharesService.updateShareCount(this.id, this.snippet, item)
             .subscribe(
                 (data) => this.snippet = data[0],

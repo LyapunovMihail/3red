@@ -82,7 +82,6 @@ export class HouseComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.floorCount = data.floorCount;
                 this.chess = data.chess;
                 this.routerEvent = this.routerChange();
-                console.log('this.chess: ', this.chess);
 
                 this.service.getFlats({ // запрос кладовых
                     mod: this.jk.mod,

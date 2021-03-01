@@ -230,7 +230,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
     public getObjectById() {
         this.sharesService.getShareById(this.redactId).subscribe((data: Share[]) => {
             this.form.reset(data[0]);
-            console.log('start');
             (data[0].body as ShareBodyBlock[]).forEach((body: ShareBodyBlock) => {
                 if (body.blockType === 'flats') {
                     this.addFlats(body.blockOrderNumber, body.blockFlat);
@@ -243,7 +242,6 @@ export class SharesEditComponent implements OnInit, OnDestroy {
                 }
             });
             this.setShowOnMain({ isFinishDateChange: true });
-            console.log('form.value: ', this.form.value);
         });
     }
 

@@ -26,7 +26,6 @@ export class SearchService {
     }
 
     public getFlatsData(options): Observable<{modsBtnList, housesBtnList, config}>  {
-        console.log('options: ', options);
         return this.http.get<{modsBtnList, housesBtnList, config}>('/api/search/common-data', {params: options});
     }
 

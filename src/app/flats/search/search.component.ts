@@ -43,7 +43,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     public getData(params, firstBoot) {
-        console.log('params: ', params)
         this.searchService.getFlatsData({mod: params.mod || '', type: 'КВ, АП'}).subscribe(
             (data) => {
                 this.modsBtnList = data.modsBtnList;
@@ -136,7 +135,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
     public getFlats(params) {
-        console.log('params: ', params);
         this.searchService.getFlatsMultiple({ modsBtnList: this.modsBtnList, params }).subscribe(
             (flats) => {
                 flats = flats.filter((flat) => flat.status !== '8');

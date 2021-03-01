@@ -14,7 +14,6 @@ export class FormConfirmComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log('changes: ', changes);
         if ( 'isOpen' in changes && this.isOpen === true ) {
             setTimeout(() => {
                this.isOpen = false;

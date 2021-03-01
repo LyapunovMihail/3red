@@ -249,7 +249,6 @@ export class NewsCreateRedactFormComponent implements OnInit, OnDestroy, OnChang
 
     ngOnChanges(changes: SimpleChanges) {
         // при открытии формы
-        console.log('this.redactId: ', this.redactId);
         if (this.isForm) {
             // при открытии формы расставляются значения редактируемого сниппета
             this.snippet = this.snippetsArray.find((item) => item._id === this.redactId);

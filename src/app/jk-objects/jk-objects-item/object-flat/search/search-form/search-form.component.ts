@@ -44,7 +44,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public ngOnInit() {
         setTimeout(() => {
             this.housesBtnList = this.objectFlatsService.getData().housesBtnList;
-            console.log('this.housesBtnList: ', this.housesBtnList);
             this.config = this.objectFlatsService.getData().config;
             this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
                 this.buildForm(queryParams);

@@ -91,11 +91,9 @@ export class ObjectDecorationAdminService {
                         });
                     }
                 });
-                console.log('masTabsWithNewTypes: ', masTabsWithTypes);
                 newFormValue.data.push(...masTabsWithTypes);
             }
         });
-        console.log('newFormValue2: ', newFormValue);
         return newFormValue;
     }
 }
