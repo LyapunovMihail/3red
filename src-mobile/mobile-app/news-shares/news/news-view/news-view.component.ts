@@ -148,6 +148,8 @@ export class NewsViewComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         // this.removeMetaTags();
-        this.routerEvent.unsubscribe();
+        if (this.routerEvent) {
+            this.routerEvent.unsubscribe();
+        }
     }
 }

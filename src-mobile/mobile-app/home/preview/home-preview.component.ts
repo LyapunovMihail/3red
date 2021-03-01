@@ -50,7 +50,9 @@ export class HomePreviewComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnDestroy() {
-        this.windowScrollEvent.unsubscribe();
+        if (this.windowScrollEvent) {
+            this.windowScrollEvent.unsubscribe();
+        }
         if (this.newsInterval) {
             clearInterval(this.newsInterval);
         }

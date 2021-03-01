@@ -105,7 +105,9 @@ export class ObjectDynamicComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if ( this.platform.isBrowser ) {
-            this.routerEvent.unsubscribe();
+            if (this.routerEvent) {
+                this.routerEvent.unsubscribe();
+            }
         }
     }
 

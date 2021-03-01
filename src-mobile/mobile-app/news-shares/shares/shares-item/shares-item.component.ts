@@ -188,6 +188,8 @@ export class SharesItemComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.routerEvent.unsubscribe();
+        if (this.routerEvent) {
+            this.routerEvent.unsubscribe();
+        }
     }
 }

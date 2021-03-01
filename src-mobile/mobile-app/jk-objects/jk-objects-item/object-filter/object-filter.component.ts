@@ -105,7 +105,8 @@ export class ObjectFilterComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.formEvents.unsubscribe();
+        if (this.formEvents) {
+            this.formEvents.unsubscribe();
+        }
     }
-
 }
