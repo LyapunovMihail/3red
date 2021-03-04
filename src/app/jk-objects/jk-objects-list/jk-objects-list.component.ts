@@ -44,6 +44,8 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.showFooterInfo();
+
         this.authorizationEvent = this.authorization.getAuthorization().subscribe( (val) => {
             this.isAuthorizated = val;
             this.getObjects([]);
@@ -186,7 +188,17 @@ export class JkObjectsListComponent implements OnInit, OnDestroy {
     public isShowMap() {
         setTimeout( () => {
             this.showMap = !this.showMap;
+            this.showFooterInfo();
         }, 300);
+    }
+
+    private showFooterInfo() {
+        const footerInfo = document.querySelector('.footer__info');
+        if (this.showMap && !this.isMainPage) {
+            footerInfo.classList.add('footer__info--hidden');
+        } else {
+            footerInfo.classList.remove('footer__info--hidden');
+        }
     }
 
     private getMinPrice(jkList: IObjectSnippet[], flats) {
