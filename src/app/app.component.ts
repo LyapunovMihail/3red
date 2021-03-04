@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
@@ -10,6 +10,7 @@ import {
     style,
     query
   } from '@angular/animations';
+import { MetaTagsRenderService } from './seo/meta-tags-render.service';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -23,7 +24,7 @@ export const ROOT_SELECTOR = 'app-root';
       <app-authorization></app-authorization>
       <app-admin-contacts></app-admin-contacts>
 
-      <section>
+      <section #container>
 
           <app-header></app-header>
 
@@ -54,6 +55,9 @@ export const ROOT_SELECTOR = 'app-root';
 })
 export class AppComponent implements OnInit {
 
+    @ViewChild('container')
+    public container: ElementRef;
+
     public previousUrl: string;
     public currentUrl: string;
 
@@ -61,7 +65,8 @@ export class AppComponent implements OnInit {
         public appState: AppState,
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
-        public favoritesService: FavoritesService
+        public favoritesService: FavoritesService,
+        private metaTagsRenderService: MetaTagsRenderService
     ) {}
 
     public ngOnInit() {
@@ -72,6 +77,11 @@ export class AppComponent implements OnInit {
             if (!(event instanceof NavigationEnd)) {
                 return;
             }
+
+            setTimeout(() => {
+                this.metaTagsRenderService.render(this.router.url, this.container);
+            }, 500);
+
             this.previousUrl = this.currentUrl;
             this.currentUrl = this.router.url;
             if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется

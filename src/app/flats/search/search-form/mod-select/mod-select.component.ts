@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
     ]
 })
 
-export class ModSelectComponent implements OnInit, OnDestroy {
+export class ModSelectComponent implements OnInit, OnChanges {
 
     @Input() public modList: { name: string, value: string }[];
     @Input() public value;
@@ -30,11 +30,17 @@ export class ModSelectComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
 
-        this.route.queryParams.subscribe((params) => {
-            if (params && params.mod) {
-            this.selectedMods = params.mod.split(',');
-            }
-        });
+        // this.route.queryParams.subscribe((params) => {
+        //     if (params && params.mod) {
+        //     this.selectedMods = params.mod.split(',');
+        //     }
+        // });
+    }
+
+    public ngOnChanges(changes: SimpleChanges) {
+        if ('value' in changes) {
+            this.selectedMods = changes.value.currentValue.split(',');
+        }
     }
 
     public checkButtonActivate(value) {
@@ -72,7 +78,4 @@ export class ModSelectComponent implements OnInit, OnDestroy {
     public registerOnTouched() {
     }
 
-    ngOnDestroy(): void {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    }
 }

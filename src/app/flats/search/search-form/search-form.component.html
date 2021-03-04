@@ -1,6 +1,6 @@
 <div class="search-form__container" [ngClass]="{'search-form__container--slide' : moreFilter}">
 
-    <form [formGroup]="form" class="search-form">
+    <form [formGroup]="form" class="search-form" *ngIf="form">
 
         <h1 class="search-form__title">Подбор квартиры</h1>
 

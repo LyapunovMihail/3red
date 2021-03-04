@@ -24,10 +24,33 @@
 //}
 
 .search {
+    position: relative;
     width: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
+
+    &_meta-open {
+        position: absolute;
+        top: 155px;
+        right: 75px;
+        height: 44px;
+        padding: 0 30px;
+        border-radius: 50px;
+        background: #1A1A1A;
+        font: 15px/44px $font-proba;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: .2s;
+        z-index: 10;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 17px rgba(0,0,0,.2);
+        }
+    }
 
     &__main {
         width: 100%;

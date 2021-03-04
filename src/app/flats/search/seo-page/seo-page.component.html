@@ -1,0 +1,42 @@
+<section class="meta">
+
+    <div class="meta_overlay"></div>
+
+    <form [formGroup]="form" (ngSubmit)="modalClose.emit(false); createOrUpdateTag(form.value)" class="meta_form">
+
+        <a (click)="modalClose.emit(false)" class="meta_cls-btn"></a>
+
+        <div class="meta_wrapper2">
+            <div class="meta_wrapper2__field">
+
+                <label class="meta_wrapper2__field_label">Url
+                    <input [formControl]="form.controls['url']" type="text" class="meta_wrapper2__field_item">
+                </label>
+                <label class="meta_wrapper2__field_label">Title
+                    <input [formControl]="form.controls['title']" type="text" class="meta_wrapper2__field_item">
+                </label>
+                <label class="meta_wrapper2__field_label">H1
+                    <input [formControl]="form.controls['h1']" type="text" class="meta_wrapper2__field_item">
+                </label>
+
+                <div formArrayName="meta" *ngFor="let meta of form.controls['meta']['controls']; let i = index" class="meta_wrapper2__field_meta">
+                    <label class="meta_wrapper2__field_label">Name
+                        <input [formControl]="meta.controls['name']" type="text" class="meta_wrapper2__field_item">
+                    </label>
+                    <label class="meta_wrapper2__field_label">Content
+                        <input [formControl]="meta.controls['content']"  type="text" class="meta_wrapper2__field_item">
+                    </label>
+                    <button *ngIf="i == form.controls['meta'].length-1 && form.controls['meta'].length > 1" (click)="popTag(i)" class="meta_wrapper2__field_meta_button">-</button>
+                    <button *ngIf="i == form.controls['meta'].length-1" (click)="pushTag()" class="meta_wrapper2__field_meta_button meta_wrapper2__field_meta_button--add">+</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+         <button type="submit" class="meta_add">Добавить </button>
+
+    </form>
+
+</section>

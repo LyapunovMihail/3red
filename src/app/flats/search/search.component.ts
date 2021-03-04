@@ -1,10 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { FormConfig } from './search-form/search-form.config';
 import { SearchService } from './search.service';
 import { PlatformDetectService } from '../../platform-detect.service';
 import { WindowScrollLocker } from '../../commons/window-scroll-block';
+import { AuthorizationObserverService } from '../../authorization/authorization.observer.service';
+import { IFlatsSearchParams } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
+import { SearchFormComponent } from './search-form/search-form.component';
 
 @Component({
     selector: 'app-flats-search',
@@ -18,6 +21,9 @@ import { WindowScrollLocker } from '../../commons/window-scroll-block';
 
 export class SearchComponent implements OnInit, OnDestroy {
 
+    public authorizationEvent;
+    public isAuthorizated = false;
+
     public outputFlatsList: IAddressItemFlat[] = [];
     public searchFlats: IAddressItemFlat[] = [];
     public count: number;
@@ -30,7 +36,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     public housesBtnList: any = [];
     public modsBtnList: any = [];
 
+    public isSeoPageModalOpen = false;
+    public seoPageParams: IFlatsSearchParams;
+
+    @ViewChild(SearchFormComponent)
+    private formComponent: SearchFormComponent;
+
     constructor(
+        private authorization: AuthorizationObserverService,
         public router: Router,
         public searchService: SearchService,
         public platform: PlatformDetectService,
@@ -39,6 +52,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     ) {}
 
     public ngOnInit() {
+        this.authorizationEvent = this.authorization.getAuthorization()
+            .subscribe((val) => {
+                this.isAuthorizated = val;
+            });
+
         this.getData(this.route.snapshot.queryParams, true);
     }
 
@@ -58,10 +76,17 @@ export class SearchComponent implements OnInit, OnDestroy {
                     floorMax: this.config.floor.max,
                 };
 
-                this.router.navigate([this.router.url.split('?')[0]], {queryParams: newParams});
-                // if (firstBoot) { // Если первая загрузка - после подгрузки конфига перевбиваем параметры запроса
-                this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
-                // }
+                if (!this.seoPageParams) {
+                    this.router.navigate([this.router.url.split('?')[0]], {queryParams: newParams});
+                    // if (firstBoot) { // Если первая загрузка - после подгрузки конфига перевбиваем параметры запроса
+                    this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+                    // }
+                } else {
+                    this.formComponent.buildForm(newParams);
+                    this.formComponent.buildForm(params);
+                }
+
+
             },
             (err) => {
                 console.log(err);
@@ -69,9 +94,11 @@ export class SearchComponent implements OnInit, OnDestroy {
         );
     }
 
-    public formChange(form) {
+    public formChange(changedForm) {
         this.searchService.setLoadingIndicator(true);
-        this.form = form;
+        this.form = changedForm.form;
+
+        const { form, isSeoPageParamsLoaded, isEmptySeoPageParams } = changedForm;
 
         const params: any = {
             spaceMin: form.space.min,
@@ -127,12 +154,14 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.skip = 0;
         this.outputFlatsList = [];
 
+        this.seoPageParams = params;
 
-        this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        if (isSeoPageParamsLoaded && isEmptySeoPageParams) {
+            this.router.navigate([this.router.url.split('?')[0]], {queryParams: params});
+        }
 
         this.getFlats(params);
     }
-
 
     public getFlats(params) {
         this.searchService.getFlatsMultiple({ modsBtnList: this.modsBtnList, params }).subscribe(
@@ -171,6 +200,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
+        if (this.authorizationEvent) {
+            this.authorizationEvent.unsubscribe();
+        }
         this.windowScrollLocker.unblock();
     }
 }

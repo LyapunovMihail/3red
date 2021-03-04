@@ -1,0 +1,45 @@
+<section *ngIf='isAuthorizated' class="meta">
+
+    <div class="meta_wrapper1">
+        <h1 class="meta_wrapper1__title">Мета теги</h1>
+        <button (click)="setTag()" class="meta_wrapper1__add">Добавить </button>
+        <a routerLink="/flats/search" class="meta_wrapper1__add-seo-page">Добавить страницу для продвижения</a>
+    </div>
+
+    <div *ngFor="let tag of tagsArray" class="meta_wrapper2">
+        <div class="meta_wrapper2__field">
+
+            <label class="meta_wrapper2__field_label"><a [routerLink]="tag.url" [ngClass]="{'meta_wrapper2__field_link--with-flats-search-params' : tag.flatsSearchParams, 'meta_wrapper2__field_link--with-no-params' : !tag.flatsSearchParams}">Url</a>
+                <input [disabled]='isDisabled' (blur)="updateTag({_id: tag._id, meta: tag.meta, url: $event, title: tag.title, h1: tag.h1}, 'url')" type="text" [value]="tag.url" class="meta_wrapper2__field_item">
+            </label>
+            <label class="meta_wrapper2__field_label">Title
+                <input [disabled]='isDisabled' (blur)="updateTag({_id: tag._id, meta: tag.meta, url: tag.url, title: $event, h1: tag.h1}, 'title')" type="text" [value]="tag.title" class="meta_wrapper2__field_item">
+            </label>
+            <label class="meta_wrapper2__field_label">H1
+                <input [disabled]='isDisabled' (blur)="updateTag({_id: tag._id, meta: tag.meta, url: tag.url, title: tag.title, h1: $event}, 'h1')" type="text" [value]="tag.h1" class="meta_wrapper2__field_item">
+            </label>
+
+            <div *ngFor="let meta of tag.meta; let i = index" class="meta_wrapper2__field_meta">
+                <label class="meta_wrapper2__field_label">Name
+                    <input [disabled]='isDisabled' (blur)="updateTag({_id: tag._id, meta: tag.meta, url: tag.url, title: tag.title, h1: tag.h1, name: $event, ind: i }, 'name')" type="text" [value]="meta.name" class="meta_wrapper2__field_item">
+                </label>
+                <label class="meta_wrapper2__field_label">Content
+                    <input [disabled]='isDisabled' (blur)="updateTag({_id: tag._id, meta: tag.meta, url: tag.url, title: tag.title, h1: tag.h1, content: $event, ind: i }, 'content')" type="text" [value]="meta.content" class="meta_wrapper2__field_item">
+                </label>
+                <button *ngIf="i == tag.meta.length-1 && tag.meta.length > 1" (click)="popTag({_id: tag._id})" class="meta_wrapper2__field_meta_button">-</button>
+                <button *ngIf="i == tag.meta.length-1" (click)="pushTag({_id: tag._id})" class="meta_wrapper2__field_meta_button meta_wrapper2__field_meta_button--add">+</button>
+            </div>
+
+        </div>
+
+        <div>
+            <button (click)="removeTag(tag._id)" class="meta_wrapper2__delete">Удалить</button>
+            <br>
+            <label *ngIf="tag.flatsSearchParams" class="meta_wrapper2__field_label-checkbox">
+                <input type="checkbox" [checked]="tag.flatsPopularCategory" [value]="tag.flatsPopularCategory" (change)="updateTag({_id: tag._id, meta: tag.meta, url: tag.url, title: tag.title, h1: tag.h1, flatsSearchParams: tag.flatsSearchParams, flatsPopularCategory: !tag.flatsPopularCategory}, 'flatsPopularCategory', tag)" class="meta_wrapper2__field_item-checkbox">
+                <span class="meta_wrapper2__field_span-checkbox">Готовый фильтр</span>
+            </label>
+        </div>
+    </div>
+
+</section>

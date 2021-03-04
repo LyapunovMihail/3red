@@ -184,15 +184,15 @@ export class AddressesModel {
 
     public async getCommonFlatsData(query) {
         const modsBtnList = await this.setModBtns(); // утсанавливаем список табов жилищных комплексов
-        const mods = modsBtnList.map((item, i) => {
+        const allMods = modsBtnList.map((item, i) => {
             if (i > 0) {
                 return item.value;
             }
         });
 
         const findCriteria: any = {};
-        if (query.mod || mods.length) {
-            findCriteria.mod = query.mod ? {$in: query.mod.split(',')} : {$in: mods};
+        if (query.mod || allMods.length) {
+            findCriteria.mod = query.mod ? {$in: query.mod.split(',')} : {$in: allMods};
         }
         if (query.status) {
             findCriteria.status = {$in: query.status.split(',')};
@@ -226,37 +226,35 @@ export class AddressesModel {
         return modsBtnList;
     }
 
-    private async setHousesBtns(mod, flatsOfMod, modsBtnList) { // Устанавливаем спсиок домов жилищных комплексов
+    private async setHousesBtns(queryMods, flatsOfMod, modsBtnList) { // Устанавливаем спсиок домов жилищных комплексов
         const housesBtnList = [];
         housesBtnList.push({name: 'Все корпуса', value: 'all'}); // Добавляем название жк в массив
-        if (mod && mod.split(',').length === 1) {
-            const jk = modsBtnList.find((item) => item.value === mod);
-            housesBtnList.push({jk: jk.name});
-
-            const flats = flatsOfMod.filter((flat) => flat.mod === jk.value);
-            flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1); // сортировка по возрастанию номера дома
-
+        // if (mod && mod.split(',').length === 1) {
+        //     const jk = modsBtnList.find((item) => item.value === mod);
+        //     housesBtnList.push({jk: jk.name});
+        //
+        //     const flats = flatsOfMod.filter((flat) => flat.mod === jk.value);
+        //     flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1); // сортировка по возрастанию номера дома
+        //
+        //     flats.forEach((item) => {
+        //         if (!housesBtnList.some((btn) => btn.value === item.house)) {
+        //             housesBtnList.push({name: 'Корпус № ' + item.house, value: item.house, mod: jk.value});
+        //         }
+        //     });
+        // } else {
+        const mods = queryMods.split(',');
+        mods.forEach((mod) => {
+            const flats = flatsOfMod.filter((flat) => flat.mod === mod);
+            flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1);   // сортировка по возрастанию номера дома
+            const jk = modsBtnList.find((jkBtn) => jkBtn.value === mod);
+            housesBtnList.push({jk: jk.name});        // При появлении нового жк, добавлять его название в массив
             flats.forEach((item) => {
-                if (!housesBtnList.some((btn) => btn.value === item.house)) {
+                if (!housesBtnList.some((btn) => btn.value === item.house && btn.mod === item.mod)) {
                     housesBtnList.push({name: 'Корпус № ' + item.house, value: item.house, mod: jk.value});
                 }
             });
-        } else {
-            modsBtnList.forEach((jk, i) => {
-                if (i > 0) {
-                    const flats = flatsOfMod.filter((flat) => flat.mod === jk.value);
-                    flats.sort((flat1, flat2) => flat1.house > flat2.house ? 1 : -1);   // сортировка по возрастанию номера дома
-                    if (flats.length) {
-                        housesBtnList.push({jk: jk.name});        // При появлении нового жк, добавлять его название в массив
-                        flats.forEach((item) => {
-                            if (!housesBtnList.some((btn) => btn.value === item.house && btn.mod === item.mod)) {
-                                housesBtnList.push({name: 'Корпус № ' + item.house, value: item.house, mod: jk.value});
-                            }
-                        });
-                    }
-                }
-            });
-        }
+        });
+        // }
         return housesBtnList;
     }
 

@@ -3,6 +3,8 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angu
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { GHMNumberPipe } from './ghm-range-number/ghm-number.pipe';
 import { FormConfig } from './search-form.config';
+import { IFlatsSearchParams } from '../../../../../serv-files/serv-modules/seo-api/seo.interfaces';
+import { MetaTagsRenderService } from '../../../seo/meta-tags-render.service';
 
 @Component({
     selector: 'app-search-form',
@@ -24,6 +26,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     public statusList = FormConfig.statusList;
     public euroList = FormConfig.euroList;
 
+    public seoPageParams: IFlatsSearchParams;
+    public isSeoPageParamsLoaded = false;
+    public seoPageEvent: any;
+
     @Input()
     public config: any = {};
     @Input()
@@ -38,15 +44,36 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         public formBuilder: FormBuilder,
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        public parseNumberPipe: GHMNumberPipe
+        public parseNumberPipe: GHMNumberPipe,
+        private metaTagsRenderService: MetaTagsRenderService
     ) {}
 
     public ngOnInit() {
+        this.getSeoPageParams();
         this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
-            this.buildForm(queryParams);
+            setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
+                console.log('this.seoPageParams: ', this.seoPageParams);
+                if (!this.seoPageParams) {
+                    console.log('CHECK');
+
+                    this.buildForm(queryParams);
+                }
+            }, 500);
         });
-        setTimeout( () => {
-        }, 1000);
+    }
+
+    private getSeoPageParams() {
+        console.log('CHECK seo subscribe');
+        this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
+            .subscribe(params => {
+                this.seoPageParams = params;
+                this.isSeoPageParamsLoaded = true;
+                if (!this.seoPageParams) {
+                    return;
+                }
+                console.log('CHECK seo subscribe 2');
+                this.buildForm(params);
+            });
     }
 
     public buildForm(params) {
@@ -123,14 +150,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                         return isEuro.split(',');
                     }
                     return [];
-                })(params.isEuro)               // houses - застрингифаенные объекты, разделённые символами 'nzt;', поэтому сплитим по 'nzt;' и парсим массив с JSON
+                })(params.isEuro)
             ],
         });
 
-        this.formChange.emit(this.form.value);
+        console.log('this.form.value: ', this.form.value);
+        this.formChange.emit({ form: this.form.value, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {
-            this.formChange.emit(form);
+            this.formChange.emit({ form, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
         });
 
         function parseQueryParams(val: string): string[] {

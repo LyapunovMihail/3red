@@ -6,6 +6,7 @@ import { SearchSortingComponent } from './search-form/sorting/sorting.component'
 import { SearchFormPipe } from './search-form/search-form.pipe';
 import { ModSelectComponent } from './search-form/mod-select/mod-select.component';
 import { CheckboxListComponent } from './search-form/checkbox-list/checkbox-list.component';
+import { SeoPageComponent } from './seo-page/seo-page.component';
 
 export const SearchComponents = [
     SearchComponent,
@@ -16,5 +17,5 @@ export const SearchComponents = [
     SearchFormPipe,
     CheckboxListPopupComponent,
     CheckboxListComponent,
-
+    SeoPageComponent
 ];

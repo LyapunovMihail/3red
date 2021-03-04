@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
     { path: '', loadChildren : () => import('./home/home.module').then(m => m.HomeModule) },
+    { path: 'seo', loadChildren: () => import('./seo/seo.module').then(m => m.SeoModule) },
     { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
     { path: 'partners', loadChildren: () => import('./partners/partners.module').then(m => m.PartnersModule) },
     { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },

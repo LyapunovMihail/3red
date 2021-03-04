@@ -1,4 +1,7 @@
 <div class="search" *ngIf="this.config">
+
+    <a *ngIf="isAuthorizated" (click)="isSeoPageModalOpen = true; windowScrollLocker.block()" class="search_meta-open">Добавить страницу продвижения</a>
+
     <app-search-form
         [config]="config"
         [housesBtnList]="housesBtnList"
@@ -19,3 +22,7 @@
     </div>
 </div>
 
+<app-seo-page *ngIf="isAuthorizated && isSeoPageModalOpen"
+    (modalClose)="isSeoPageModalOpen = $event; windowScrollLocker.unblock()"
+    [searchParams]="seoPageParams">
+</app-seo-page>

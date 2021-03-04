@@ -1,5 +1,5 @@
 <button *ngIf="isAuthorizated" (click)='isShowModal = true; windowScrollLocker.block();' class='admin-contacts_open-btn'></button>
-<!--<a *ngIf="isAuthorizated" routerLink="/seo"  class='admin-meta_open-btn'>m</a>-->
+<a *ngIf="isAuthorizated" routerLink="/seo"  class='admin-meta_open-btn'>m</a>
 
 <section id="admin-contacts-form" class="formWrapper" *ngIf="isShowModal && isAuthorizated">
 

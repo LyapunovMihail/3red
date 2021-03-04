@@ -35,7 +35,8 @@ const FlatsComponents = [
         RouterModule.forChild([
             { path: '', component: FlatsComponent,
                 children: [
-                    { path: 'search', component: SearchComponent}
+                    { path: 'search', component: SearchComponent},
+                    { path: 'flats/_search', component: SearchComponent, children: [{path: '**', component: SearchComponent}]},
                 ]
             }
         ])

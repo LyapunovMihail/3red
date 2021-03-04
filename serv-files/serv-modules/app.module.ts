@@ -17,6 +17,7 @@ import { objectControllers } from './jk-objects/object-controllers';
 import { homeControllers } from './home/home-controllers';
 import { aboutControllers } from './about/about-controllers';
 import { partnersControllers } from './partners/partners-controllers';
+import { SeoController } from './seo-api/seo.controller';
 
 @Module({
     imports: [],
@@ -33,6 +34,7 @@ import { partnersControllers } from './partners/partners-controllers';
         TriggerController,
         GalleryController,
         ContactsController,
+        SeoController,
 
         ...objectControllers,
         ...homeControllers,

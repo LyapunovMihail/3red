@@ -39,6 +39,8 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
+import { SeoModule } from './seo/seo.module';
+import { MetaTagsRenderService } from './seo/meta-tags-render.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -52,7 +54,8 @@ const APP_PROVIDERS = [
     PhoneObserverService,
     WindowScrollLocker,
     JkService,
-    FavoritesService
+    FavoritesService,
+    MetaTagsRenderService
 ];
 
 const APP_MODULES = [
@@ -70,6 +73,7 @@ const APP_MODULES = [
     ContactsModule,
     FavoritesModule,
     ApartmentModule,
+    SeoModule,
 
     BrowserAnimationsModule,
     FormsModule,
