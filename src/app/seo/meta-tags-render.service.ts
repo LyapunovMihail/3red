@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Renderer2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { IFlatsSearchParams } from '../../../serv-files/serv-modules/seo-api/seo.interfaces';
 

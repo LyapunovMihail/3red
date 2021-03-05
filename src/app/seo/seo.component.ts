@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { SeoService } from './seo.service';
 import { AuthorizationObserverService } from '../authorization/authorization.observer.service';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-seo',
