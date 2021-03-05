@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { IObjectSnippet } from '../../../../serv-files/serv-modules/jk-objects/object-api/objects.interfaces';
+import { TagInterface } from '../../../../serv-files/serv-modules/seo-api/seo.interfaces';
 
 @Injectable()
 
@@ -27,6 +28,10 @@ export class SearchService {
 
     public getFlatsData(options): Observable<{modsBtnList, housesBtnList, config}>  {
         return this.http.get<{modsBtnList, housesBtnList, config}>('/api/search/common-data', {params: options});
+    }
+
+    public getMetaTags(): Observable<TagInterface[]> {
+        return this.http.get<TagInterface[]>('/api/meta_get_flats-search-tag');
     }
 
     public getOutputFlatsChanged() {

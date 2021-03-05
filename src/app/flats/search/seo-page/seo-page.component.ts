@@ -31,7 +31,6 @@ export class SeoPageComponent implements OnInit, OnChanges {
 
         this.metaTagsRenderService.getMetaTags(this.router.url)
             .subscribe((seoObj: TagInterface) => {
-                    console.log('seoObj: ', seoObj);
                 if (seoObj._id) {
                     this.setFormFromTag(seoObj);
                 }
@@ -65,7 +64,6 @@ export class SeoPageComponent implements OnInit, OnChanges {
             flatsSearchParams: this.searchParams,
             flatsPopularCategory: true
         });
-        console.log('this.searchParams: ', this.searchParams);
     }
 
     public ngOnChanges() {

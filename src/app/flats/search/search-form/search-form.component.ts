@@ -39,6 +39,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     @Output() public formChange: EventEmitter<any> = new EventEmitter();
     @Output() public sortChange: EventEmitter<any> = new EventEmitter();
+    @Output() public showPopular: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
         public formBuilder: FormBuilder,
@@ -52,10 +53,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.getSeoPageParams();
         this.routerEvents = this.activatedRoute.queryParams.subscribe((queryParams) => {
             setTimeout(() => { // Дожидаемся параметров из "SearchFlatsLinkHandlerService", при переходе с триггеров на главной
-                console.log('this.seoPageParams: ', this.seoPageParams);
                 if (!this.seoPageParams) {
-                    console.log('CHECK');
-
                     this.buildForm(queryParams);
                 }
             }, 500);
@@ -63,7 +61,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
 
     private getSeoPageParams() {
-        console.log('CHECK seo subscribe');
         this.seoPageEvent = this.metaTagsRenderService.getFlatsSearchParams()
             .subscribe(params => {
                 this.seoPageParams = params;
@@ -71,7 +68,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 if (!this.seoPageParams) {
                     return;
                 }
-                console.log('CHECK seo subscribe 2');
                 this.buildForm(params);
             });
     }
@@ -154,7 +150,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             ],
         });
 
-        console.log('this.form.value: ', this.form.value);
         this.formChange.emit({ form: this.form.value, isSeoPageParamsLoaded: this.isSeoPageParamsLoaded, isEmptySeoPageParams: !this.seoPageParams });
 
         this.formEvents = this.form.valueChanges.subscribe((form) => {

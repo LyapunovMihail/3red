@@ -17,5 +17,5 @@ export const SearchComponents = [
     SearchFormPipe,
     CheckboxListPopupComponent,
     CheckboxListComponent,
-    SeoPageComponent
+    SeoPageComponent,
 ];

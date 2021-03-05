@@ -38,6 +38,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     public isSeoPageModalOpen = false;
     public seoPageParams: IFlatsSearchParams;
+    public showPopular = false;
 
     @ViewChild(SearchFormComponent)
     private formComponent: SearchFormComponent;

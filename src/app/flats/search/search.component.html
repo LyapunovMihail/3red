@@ -7,7 +7,8 @@
         [housesBtnList]="housesBtnList"
         [modsBtnList]="modsBtnList"
         (formChange)="formChange($event)"
-        (sortChange)="sortChange($event)">
+        (sortChange)="sortChange($event)"
+        (showPopular)="showPopular = $event">
     </app-search-form>
 
     <ng-content></ng-content>
@@ -26,3 +27,8 @@
     (modalClose)="isSeoPageModalOpen = $event; windowScrollLocker.unblock()"
     [searchParams]="seoPageParams">
 </app-seo-page>
+
+<app-popular
+    *ngIf="showPopular"
+    (close)="showPopular = false">
+</app-popular>

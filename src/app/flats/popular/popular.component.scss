@@ -1,0 +1,46 @@
+@import "~styles/modules/mixins/mixin";
+
+.popular-query {
+    //position: fixed;
+    //width: 100%;
+    //top: 0; left: 0;
+    //bottom: 0;
+    //background-color: $col-bg-secondary;
+    //z-index: 100;
+    //display: flex;
+    //justify-content: center;
+    //align-items: flex-start;
+    //padding: 64px 0;
+    //overflow-x: hidden;
+    //overflow-y: scroll;
+
+    &__container {
+        width: 964px;
+        background: #fff;
+        position: relative;
+        box-sizing: border-box;
+        padding: 48px 94px;
+        z-index: 1000;
+    }
+
+    &__btn-close {
+        //width: 40px;
+        //height: 40px;
+        //position: fixed;
+        //top: 64px; right: calc((100% - 928px) / 2 + (-24px - 24px));
+        position: fixed;
+        top: 64px;
+        right: calc(((100% - 964px) / 2) - (22px + 48px));
+        pointer-events: all;
+    }
+
+    &__title {
+        font: 36px/43px $font-proba;
+        margin: 0 0 40px;
+    }
+    &__list {
+        font: $font-18;
+        color: $col-red;
+        &> li + li { margin-top: 16px; }
+    }
+}

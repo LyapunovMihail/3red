@@ -1,0 +1,13 @@
+<section class="g-modal-bg popular-query">
+
+    <div class="popular-query__container">
+
+        <button class="popular-query__btn-close btn-cls" (click)="close.emit(false)"><span></span></button>
+
+        <h1 class="popular-query__title">Популярные категории</h1>
+
+        <ul class="popular-query__list">
+            <li *ngFor="let metaLink of metaTags"><a [routerLink]="metaLink.url" (click)="close.emit(false)">{{metaLink.title}}</a></li>
+        </ul>
+    </div>
+</section>
