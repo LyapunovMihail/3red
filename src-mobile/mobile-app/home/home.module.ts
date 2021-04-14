@@ -13,7 +13,7 @@ import { HomeFilterModule } from './filter/home-filter.module';
 import { JkObjectsListModule } from '../jk-objects/jk-objects-list/jk-objects-list.module';
 import { HomeNewsModule } from './news/home-news.module';
 import { HomeInfoComponent } from './info/home-info.component';
-import { HomeIlikeComponent } from './ilike/home-ilike.component';
+// import { HomeIlikeComponent } from './ilike/home-ilike.component';
 
 @NgModule({
     exports: [
@@ -23,7 +23,7 @@ import { HomeIlikeComponent } from './ilike/home-ilike.component';
         HomeComponent,
         HomePreviewComponent,
         HomeInfoComponent,
-        HomeIlikeComponent,
+        // HomeIlikeComponent,
         SharesDayPipe,
         LineBreakPipe
     ],
