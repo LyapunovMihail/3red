@@ -61,27 +61,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.links = this.headerService.links();
 
-        setTimeout(() => {
-            this.getDynamicLink();
-        }, 50);
+        // setTimeout(() => {
+        //     this.getDynamicLink();
+        // }, 50);
     }
 
-    private getDynamicLink() {
-        this.headerService.getDynamicLink()
-            .subscribe(
-                (data) => {
-                    const date = new Date();
-                    this.year = data.year ? data.year : date.getFullYear();
-                    this.month = data.month ? data.month : ( date.getMonth() + 1 );
-                },
-                (err) => {
-                    console.error(err);
-                    const date = new Date();
-                    this.year = date.getFullYear();
-                    this.month = date.getMonth() + 1;
-                }
-            );
-    }
+    // private getDynamicLink() {
+    //     this.headerService.getDynamicLink()
+    //         .subscribe(
+    //             (data) => {
+    //                 const date = new Date();
+    //                 this.year = data.year ? data.year : date.getFullYear();
+    //                 this.month = data.month ? data.month : ( date.getMonth() + 1 );
+    //             },
+    //             (err) => {
+    //                 console.error(err);
+    //                 const date = new Date();
+    //                 this.year = date.getFullYear();
+    //                 this.month = date.getMonth() + 1;
+    //             }
+    //         );
+    // }
 
     public ngOnDestroy() {
         this.ngUnsubscribe.next();

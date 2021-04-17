@@ -21,8 +21,8 @@ export async function bootstrap(appExpress) {
     ExpressAppService.app = appExpress;
     const db = await MongoConnectionService.connect();
     const app: any = await NestFactory.create(AppModule, appExpress);
-    app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'mobile'), { index: false });
     app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'desktop'), { index: false });
+    app.useStaticAssets(join(SERVER_CONFIGURATIONS.DIST_FOLDER, 'dist', 'mobile'), { index: false });
 
     ROUTES.forEach((route: any) => {
         if (route.handle) {

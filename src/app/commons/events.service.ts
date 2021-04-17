@@ -26,7 +26,6 @@ export class EventsService {
                 this.setResizeEvent();
                 prevContainerHeight = container.nativeElement.clientHeight;
             }
-
         }, 400);
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
 import { FormConfig } from '../../flats/search/search-form/search-form.config';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { IAddressItemFlat } from '../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
@@ -14,9 +14,6 @@ import { Router } from '@angular/router';
         HomeFilterService,
         GHMNumberPipe
     ],
-    host: {
-        '(document:click)': 'onClick($event)',
-    }
 })
 
 export class HomeFilterComponent implements OnInit, OnDestroy {
@@ -31,7 +28,8 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     public hideMods = false;
     public isExpanded = false;
     public availableFlats: IAddressItemFlat[];
-    @ViewChild('myDiv') myDivElementRef: ElementRef;
+    @ViewChild('myDiv')
+    public myDivElementRef: ElementRef;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -42,7 +40,7 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.getConfig({type: 'КВ, АП', status: '4'}).subscribe(
+        this.getConfig({type: 'КВ, АП', status: '4', mod: ''}).subscribe(
             (data) => {
                 this.config = data.config;
                 this.modsBtnList = data.modsBtnList;
@@ -52,7 +50,9 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
         );
     }
 
+    @HostListener('document:click', ['$event'])
     onClick(event) {
+        console.log('this.myDivElementRef: ', this.myDivElementRef);
         if (!this.myDivElementRef.nativeElement.contains(event.target)) {
             this.isExpanded = null;
         }
@@ -126,34 +126,6 @@ export class HomeFilterComponent implements OnInit, OnDestroy {
                 console.log(err);
             }
         );
-    }
-
-    public getHousesAndRout() {
-        if (this.params.mod) {
-            this.getConfig(this.params)
-                .subscribe(
-                    (data) => {
-                        const housesMods = [];
-                        data.housesBtnList.forEach((item, i) => { // приходится создавать массив со всеми домами разных модов, так как на странице квартир предусмотрен поиск только по одному моду или по домам разных модов
-                            if (i > 0) {
-                                if (!item.jk) {
-                                    housesMods.push(JSON.stringify({value: item.value, mod: item.mod}));
-                                }
-                            }
-                        });
-                        // delete this.params.mod;
-                        this.router.navigate(['/flats/search'], {
-                            queryParams: {
-                                ...this.params,
-                                housesMods: housesMods.join('nzt;')
-                            }
-                        });
-                    },
-                    (err) => console.error(err)
-                );
-        } else {
-            this.router.navigate(['/flats/search'], {queryParams: this.params});
-        }
     }
 
     ngOnDestroy() {

@@ -18,16 +18,22 @@ export function clientRender(req: Request, res: Response, status: number, sessio
     if (!SERVER_CONFIGURATIONS.IS_DEVELOPMENT_MODE) {
         if (ShouldSendMobileVersion(req, session)) {
             const distFolder = join(process.cwd(), 'dist/mobile');
-            const indexHtml = existsSync(join(distFolder, 'index-mobile.original.html')) ? 'index-mobile.original.html' : 'index-mobile';
-            res.status(status).render(
-                join(distFolder, indexHtml), { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
-            );
+            const indexHtml = existsSync(join(distFolder, 'index-mobile.original.html')) ? 'index-mobile.original.html' : 'index-mobile.html';
+            if (req.url === '/') {
+                res.status(status).sendFile(
+                    join(distFolder, 'index-mobile.html'), { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
+                );
+            } else {
+                res.status(status).render(
+                    join(distFolder, 'index-mobile.html'), { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
+                );
+            }
         } else {
             const distFolder = join(process.cwd(), 'dist/desktop');
             const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
-            res.status(status).render(
-                indexHtml, { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
-            );
+                res.status(status).render(
+                    join(distFolder, 'index.html'), { req, providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl }]}
+                );
         }
     } else {
         res.sendStatus(404);

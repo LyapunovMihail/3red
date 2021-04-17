@@ -55,7 +55,8 @@
         </div>
         <a class="object-filter__btn-link btn_var-2"
            [class.object-filter__btn-link--disabled]="!flatsLength"
-            (click)="getHousesAndRout()">
+            routerLink="/flats/search"
+            [queryParams]="params">
             {{ flatsLength ? flatsLength + ' ' + parseText(flatsLength) : 'Нет предложений'}}
         </a>
     </div>

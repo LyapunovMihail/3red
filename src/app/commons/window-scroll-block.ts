@@ -3,7 +3,6 @@ import { debounceTime } from 'rxjs/operators';
 import { PLATFORM_ID, Inject, Injectable } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
-
 @Injectable ()
 
 export class WindowScrollLocker {

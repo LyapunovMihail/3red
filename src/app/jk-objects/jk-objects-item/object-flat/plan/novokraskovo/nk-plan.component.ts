@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { PLAN_SVG, IHousePlanItem } from './nk-plan-svg';
 import { NkPlanService } from './nk-plan.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { combineLatest } from 'rxjs';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { PlanService } from '../plan.service';
 
@@ -37,7 +37,6 @@ export class NkPlanComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-
         combineLatest(
             this.planService.getHouse('1', this.mod),
             this.planService.getHouse('2', this.mod),

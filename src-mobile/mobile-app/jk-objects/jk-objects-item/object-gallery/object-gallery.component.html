@@ -6,7 +6,7 @@
 
             <h2 class="object-gallery__title">Галерея</h2>
 
-            <nav class="object-gallery__nav" *ngIf="tabSnippet?.gallery">
+            <nav class="object-gallery__nav" *ngIf="tabSnippet && tabSnippet.gallery">
                 <div class="object-gallery__nav-wrap">
                     <div class="object-gallery__nav-wrap--scroll">
                         <nav-menu
@@ -20,7 +20,7 @@
 
             <div class="object-gallery__slider swiper-gallery">
 
-                <div class="swiper-wrapper swiper-gallery__wrap" *ngIf="contentSnippet?.image_data?.length; else elseBlock">
+                <div class="swiper-wrapper swiper-gallery__wrap" *ngIf="contentSnippet && contentSnippet.image_data && contentSnippet.image_data.length; else elseBlock">
                     <div class="swiper-gallery__slide swiper-slide" *ngFor="let slide of contentSnippet.image_data; let i = index">
 
                         <div class="swiper-gallery__slide-image">

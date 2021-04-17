@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppState } from './app.service';
 import { FlatsDiscountService } from './commons/flats-discount.service';
@@ -11,6 +11,7 @@ import {
     query
   } from '@angular/animations';
 import { MetaTagsRenderService } from './seo/meta-tags-render.service';
+import { isPlatformBrowser } from '@angular/common';
 
 export const ROOT_SELECTOR = 'app-root';
 
@@ -66,7 +67,8 @@ export class AppComponent implements OnInit {
         private router: Router,
         public flatsDiscountService: FlatsDiscountService,
         public favoritesService: FavoritesService,
-        private metaTagsRenderService: MetaTagsRenderService
+        private metaTagsRenderService: MetaTagsRenderService,
+        @Inject(PLATFORM_ID) private platformId: Object
     ) {}
 
     public ngOnInit() {
@@ -87,7 +89,9 @@ export class AppComponent implements OnInit {
             if ((this.previousUrl && this.previousUrl.startsWith('/flats/house')) && this.currentUrl.startsWith('/flats/house')) { // и пресекаем скролл если маршрут сменяется
                 return;                                                   // на одной и той же странице дома (переключаются параметры поиска)
             }
-            window.scrollTo(0, 0);
+            if ( isPlatformBrowser(this.platformId) ) {
+                window.scrollTo(0, 0);
+            }
         });
 
         // Загружаем акции для дальнейшего вычисления скидки по квартирам

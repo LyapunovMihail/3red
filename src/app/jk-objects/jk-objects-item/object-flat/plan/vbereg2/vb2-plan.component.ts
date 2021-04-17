@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { PLAN_SVG, IHousePlanItem } from './vb2-plan-svg';
 import { Vb2PlanService } from './vb2-plan.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { combineLatest } from 'rxjs';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { PlanService } from '../plan.service';
 

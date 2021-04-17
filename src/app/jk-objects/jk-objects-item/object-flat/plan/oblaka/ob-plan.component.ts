@@ -12,7 +12,7 @@ import {
     Component, Input,
     OnInit
 } from '@angular/core';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { combineLatest } from 'rxjs';
 import { IAddressItemFlat } from '../../../../../../../serv-files/serv-modules/addresses-api/addresses.interfaces';
 import { PlanService } from '../plan.service';
 

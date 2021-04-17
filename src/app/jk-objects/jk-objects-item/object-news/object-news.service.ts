@@ -25,11 +25,11 @@ export class ObjectNewsService {
     }
 
     public getObjectShares(objectId): Observable<Share[]> {
-        return this.http.get<Share[]>(`api/shares/object/${objectId}`);
+        return this.http.get<Share[]>(`/api/shares/object/${objectId}`);
     }
 
     public getObjectNews(objectId): Observable<INewsSnippet[]> {
-        return this.http.get<INewsSnippet[]>(`api/news/object/${objectId}`);
+        return this.http.get<INewsSnippet[]>(`/api/news/object/${objectId}`);
     }
 
     public updateNewsSnippet(id, form) {

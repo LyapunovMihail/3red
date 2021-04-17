@@ -49,6 +49,7 @@ export class DbCronUpdate {
         const processingStream = new Writable({
             write: async (object, encoding, callback) => {
                 const item = this.transformFlatItem(object);
+                // console.log('item: ', item);
                 if (item != null) {
                     await collectionAddresses.insert(item);
                 }
@@ -89,7 +90,7 @@ export class DbCronUpdate {
         if (('Article' in object) && !this.objects.some((jk) => jk.mod === object.Article.split('-')[0])) { // Если жилой комплекс этой квартиры создан, она добавляется в бд
             return;
         }
-        if (object.Article.split('-')[0] === 'ЯР' && object.StatusCode === '1') { // Если жилой комплекс этой квартиры создан, она добавляется в бд
+        if (object.Article.split('-')[0] === 'ЯР' && object.StatusCode === '1') {
             return;
         }
         const {mod, house, section, floor, flat} = this.parseArticle(object.Article);
